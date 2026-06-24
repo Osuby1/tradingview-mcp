@@ -2,6 +2,7 @@
  * Core data access logic.
  */
 import { evaluate, evaluateAsync, KNOWN_PATHS, safeString } from '../connection.js';
+import { setSymbol } from './chart.js';
 
 const MAX_OHLCV_BARS = 500;
 const MAX_TRADES = 20;
@@ -243,6 +244,20 @@ export async function getEquity() {
 }
 
 export async function getQuote({ symbol } = {}) {
+  // The quote is read from the ACTIVE chart's bars. If a specific symbol is
+  // requested we must switch the chart to it first — previously the `symbol`
+  // arg was used only as a label, so passing a symbol returned the currently
+  // loaded chart's data mislabeled as the requested symbol.
+  if (symbol) {
+    let current = '';
+    try {
+      current = await evaluate(`(function(){ try { return ${CHART_API}.symbol(); } catch(e){ return ''; } })()`);
+    } catch (e) { /* fall through and just switch */ }
+    const norm = (s) => String(s == null ? '' : s).split(':').pop().trim().toUpperCase();
+    if (norm(current) !== norm(symbol)) {
+      await setSymbol({ symbol });
+    }
+  }
   const data = await evaluate(`
     (function() {
       var api = ${CHART_API};
