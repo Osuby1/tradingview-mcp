@@ -1,0 +1,68 @@
+//@version=6
+strategy("ZLSMA-Filtered Chandelier", overlay=true, initial_capital=10000,
+     default_qty_type=strategy.percent_of_equity, default_qty_value=20,
+     commission_type=strategy.commission.percent, commission_value=0.05,
+     pyramiding=0, calc_on_every_tick=false, process_orders_on_close=true)
+
+// ===== Inputs =====
+ceLen       = input.int(22,  "Chandelier ATR period",          group="Chandelier Exit")
+ceMult      = input.float(3.0, "Chandelier ATR multiplier",    group="Chandelier Exit", step=0.1)
+zlen        = input.int(50,  "ZLSMA length",                   group="ZLSMA Filter")
+useSlope    = input.bool(true, "Require ZLSMA slope agreement", group="ZLSMA Filter")
+allowShorts = input.bool(true, "Allow short trades",           group="Strategy")
+
+// ===== Chandelier Exit (Everget logic) =====
+atr = ceMult * ta.atr(ceLen)
+longStop = ta.highest(close, ceLen) - atr
+longStopPrev = nz(longStop[1], longStop)
+longStop := close[1] > longStopPrev ? math.max(longStop, longStopPrev) : longStop
+shortStop = ta.lowest(close, ceLen) + atr
+shortStopPrev = nz(shortStop[1], shortStop)
+shortStop := close[1] < shortStopPrev ? math.min(shortStop, shortStopPrev) : shortStop
+var int dir = 1
+dir := close > shortStopPrev ? 1 : close < longStopPrev ? -1 : dir
+buySignal  = dir ==  1 and dir[1] == -1
+sellSignal = dir == -1 and dir[1] ==  1
+
+// ===== ZLSMA (Zero Lag LSMA) =====
+lsma  = ta.linreg(close, zlen, 0)
+lsma2 = ta.linreg(lsma,  zlen, 0)
+zlsma = lsma + (lsma - lsma2)
+
+// ===== Filter: your rule — buys only above (rising) ZLSMA, sells only below (falling) =====
+zUp     = zlsma > zlsma[1]
+zDown   = zlsma < zlsma[1]
+longOK  = close > zlsma and (not useSlope or zUp)
+shortOK = close < zlsma and (not useSlope or zDown)
+
+// ===== Orders (chandelier flip = trailing exit) =====
+if buySignal and longOK
+    strategy.entry("Long", strategy.long)
+if sellSignal
+    strategy.close("Long")
+if allowShorts
+    if sellSignal and shortOK
+        strategy.entry("Short", strategy.short)
+    if buySignal
+        strategy.close("Short")
+
+// ===== Plots =====
+plot(zlsma, "ZLSMA", color=color.new(color.white, 0), linewidth=2)
+plotshape(buySignal  and longOK,  "Buy",  style=shape.labelup,   location=location.belowbar, color=color.new(color.green,0), text="L", textcolor=color.white, size=size.tiny)
+plotshape(sellSignal and shortOK, "Sell", style=shape.labeldown, location=location.abovebar, color=color.new(color.red,0),   text="S", textcolor=color.white, size=size.tiny)
+
+// ===== Stats table =====
+var table t = table.new(position.top_right, 2, 5, frame_color=color.gray, frame_width=1)
+if barstate.islast
+    pf = strategy.grossloss != 0 ? strategy.grossprofit / math.abs(strategy.grossloss) : na
+    wr = strategy.closedtrades > 0 ? strategy.wintrades / strategy.closedtrades * 100 : 0
+    table.cell(t, 0, 0, "Metric", text_color=color.white, bgcolor=color.new(color.gray,30))
+    table.cell(t, 1, 0, "Value",  text_color=color.white, bgcolor=color.new(color.gray,30))
+    table.cell(t, 0, 1, "Net P/L %")
+    table.cell(t, 1, 1, str.tostring(strategy.netprofit / strategy.initial_capital * 100, "#.#"))
+    table.cell(t, 0, 2, "Trades")
+    table.cell(t, 1, 2, str.tostring(strategy.closedtrades))
+    table.cell(t, 0, 3, "Win %")
+    table.cell(t, 1, 3, str.tostring(wr, "#.#"))
+    table.cell(t, 0, 4, "Profit Factor")
+    table.cell(t, 1, 4, na(pf) ? "-" : str.tostring(pf, "#.##"))

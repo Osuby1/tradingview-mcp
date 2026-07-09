@@ -1,0 +1,171 @@
+//@version=6
+strategy("Sector Rotation Breakout Strategy 7-Criteria",
+     overlay=true, initial_capital=10000,
+     default_qty_type=strategy.percent_of_equity, default_qty_value=20,
+     commission_type=strategy.commission.percent, commission_value=0.05,
+     pyramiding=0, calc_on_every_tick=false, process_orders_on_close=true)
+
+benchmark    = input.symbol("AMEX:SPY",   "Benchmark",      group="Reference Symbols")
+sectorLeader = input.symbol("NASDAQ:SMH", "Current Leader", group="Reference Symbols")
+dxySym       = input.symbol("TVC:DXY",    "Dollar Index",   group="Reference Symbols")
+tnxSym       = input.symbol("TVC:TNX",    "10-Year Yield",  group="Reference Symbols")
+vixSym       = input.symbol("CBOE:VIX",   "VIX",            group="Reference Symbols")
+
+rsLookback   = input.int(45, "RS lookback",                group="Detector")
+volMult      = input.float(2.0,  "Vol multiplier",         group="Detector", step=0.1)
+volMA        = input.int(50, "Vol MA len",                 group="Detector")
+closeTop     = input.float(0.75, "Close-pos floor",        group="Detector", step=0.05)
+nearLowPct   = input.float(15.0, "Near 6mo low pct",       group="Detector")
+sixMonthBars = input.int(120, "6mo bars",                  group="Detector")
+fastLen      = input.int(50, "Fast EMA",                   group="Detector")
+slowLen      = input.int(200, "Slow EMA",                  group="Detector")
+maWindow     = input.int(60, "MA reclaim lookback",        group="Detector")
+baseLen      = input.int(7,  "Base length",                group="Detector")
+tightMult    = input.float(0.7, "Tight ATR mult",          group="Detector", step=0.05)
+expandMult   = input.float(1.5, "Expansion ATR mult",      group="Detector", step=0.1)
+peer1 = input.string("NYSE:GM",     "Peer 1", group="Peers")
+peer2 = input.string("NYSE:STLA",   "Peer 2", group="Peers")
+peer3 = input.string("NASDAQ:RIVN", "Peer 3", group="Peers")
+peer4 = input.string("NYSE:NIO",    "Peer 4", group="Peers")
+peer5 = input.string("NASDAQ:LCID", "Peer 5", group="Peers")
+breadthMin   = input.float(0.60, "Min breadth",            group="Detector", step=0.05)
+tiredWindow  = input.int(7, "Tired window",                group="Detector")
+tiredCount   = input.int(3, "Tired count",                 group="Detector")
+vixThreshold = input.float(20.0, "Max VIX",                group="Detector")
+macroMA      = input.int(50, "Macro MA",                   group="Detector")
+fireScore    = input.int(5, "Entry score required", minval=1, maxval=7, group="Strategy")
+
+useATRStop    = input.bool(true,  "Use ATR initial stop",            group="Risk")
+stopATRmult   = input.float(1.5,  "Initial stop = X x ATR(14)",      group="Risk", step=0.1)
+useTrail      = input.bool(true,  "Use ATR trailing stop",           group="Risk")
+trailATRmult  = input.float(3.0,  "Trail = X x ATR(14)",             group="Risk", step=0.1)
+useScoreExit  = input.bool(true,  "Exit on score deterioration",     group="Risk")
+exitScore     = input.int(3, "Exit if score below", minval=0, maxval=7, group="Risk")
+useTimeStop   = input.bool(true,  "Time stop on max bars in trade",  group="Risk")
+maxBars       = input.int(60, "Max bars in trade",                   group="Risk")
+useTakeProfit = input.bool(false, "Use fixed take-profit (R-mult)",  group="Risk")
+tpRmult       = input.float(3.0,  "TP = X x initial risk",           group="Risk", step=0.1)
+
+safeSymbol(s) => s == "" ? syminfo.tickerid : s
+peerUsed(s) => s != "" ? 1 : 0
+peerGreen(c, o, used) => used == 1 and not na(c) and not na(o) and c > o ? 1 : 0
+
+benchClose  = request.security(benchmark,    timeframe.period, close)
+leaderClose = request.security(sectorLeader, timeframe.period, close)
+dxyClose    = request.security(dxySym,       timeframe.period, close)
+tnxClose    = request.security(tnxSym,       timeframe.period, close)
+vixClose    = request.security(vixSym,       timeframe.period, close)
+[p1c, p1o]  = request.security(safeSymbol(peer1), timeframe.period, [close, open])
+[p2c, p2o]  = request.security(safeSymbol(peer2), timeframe.period, [close, open])
+[p3c, p3o]  = request.security(safeSymbol(peer3), timeframe.period, [close, open])
+[p4c, p4o]  = request.security(safeSymbol(peer4), timeframe.period, [close, open])
+[p5c, p5o]  = request.security(safeSymbol(peer5), timeframe.period, [close, open])
+
+ratio    = close / benchClose
+priorMax = ta.highest(ratio[1], rsLookback)
+c1       = ratio > priorMax
+volAvg   = ta.sma(volume, volMA)
+barRange = high - low
+closePos = barRange > 0 ? (close - low) / barRange : 0.5
+sixMoLow = ta.lowest(low, sixMonthBars)
+nearLow  = (close - sixMoLow) / sixMoLow <= nearLowPct / 100.0
+c2 = volume > volMult * volAvg and closePos >= closeTop and nearLow
+fastMA      = ta.ema(close, fastLen)
+slowMA      = ta.ema(close, slowLen)
+reclaim50   = ta.crossover(close, fastMA)
+goldenCross = ta.crossover(fastMA, slowMA)
+heldAbove   = close > fastMA
+bsG = ta.barssince(goldenCross)
+bsR = ta.barssince(reclaim50)
+c3 = heldAbove and bsG <= maWindow and bsR <= maWindow
+atrShort  = ta.atr(baseLen)
+atrLong   = ta.atr(baseLen * 4)
+tight     = atrShort < atrLong * tightMult
+expansion = barRange > atrShort[1] * expandMult
+c4 = tight[1] and expansion
+selfGreen  = close > open ? 1 : 0
+totalGreen = selfGreen + peerGreen(p1c, p1o, peerUsed(peer1)) + peerGreen(p2c, p2o, peerUsed(peer2)) + peerGreen(p3c, p3o, peerUsed(peer3)) + peerGreen(p4c, p4o, peerUsed(peer4)) + peerGreen(p5c, p5o, peerUsed(peer5))
+totalPeers = 1 + peerUsed(peer1) + peerUsed(peer2) + peerUsed(peer3) + peerUsed(peer4) + peerUsed(peer5)
+breadthPct = totalGreen / totalPeers
+c5 = totalPeers >= 3 and breadthPct >= breadthMin
+benchUp    = benchClose > benchClose[1]
+leaderDown = leaderClose < leaderClose[1]
+divergent  = benchUp and leaderDown ? 1 : 0
+divCount   = math.sum(divergent, tiredWindow)
+c6 = divCount >= tiredCount
+dxyMA   = ta.sma(dxyClose, macroMA)
+tnxMA   = ta.sma(tnxClose, macroMA)
+dxyDown = dxyClose < dxyMA
+tnxDown = tnxClose < tnxMA
+vixOk   = vixClose < vixThreshold
+c7 = (dxyDown or tnxDown) and vixOk
+
+score = (c1?1:0)+(c2?1:0)+(c3?1:0)+(c4?1:0)+(c5?1:0)+(c6?1:0)+(c7?1:0)
+masterSignal = score >= fireScore and score > nz(score[1])
+
+atr14 = ta.atr(14)
+var float entryPrice  = na
+var float initStop    = na
+var float trailStop   = na
+var float tpPrice     = na
+var int   entryBar    = na
+
+if masterSignal and strategy.position_size == 0
+    initStopCalc = useATRStop ? close - stopATRmult * atr14 : na
+    tpCalc       = useTakeProfit and useATRStop ? close + tpRmult * (close - initStopCalc) : na
+    strategy.entry("L", strategy.long, comment="BO " + str.tostring(score))
+    entryPrice := close
+    initStop   := initStopCalc
+    trailStop  := initStopCalc
+    tpPrice    := tpCalc
+    entryBar   := bar_index
+
+if strategy.position_size > 0 and useTrail
+    candidate = close - trailATRmult * atr14
+    trailStop := math.max(nz(trailStop, candidate), candidate)
+
+inTrade = strategy.position_size > 0
+barsInTrade = inTrade ? bar_index - entryBar : 0
+stopHit  = useATRStop   and inTrade and low <= nz(trailStop, initStop)
+scoreOut = useScoreExit and inTrade and score < exitScore
+timeOut  = useTimeStop  and inTrade and barsInTrade >= maxBars
+tpHit    = useTakeProfit and inTrade and not na(tpPrice) and high >= tpPrice
+
+if inTrade
+    if stopHit
+        strategy.close("L", comment="Trail")
+    else if tpHit
+        strategy.close("L", comment="TP")
+    else if scoreOut
+        strategy.close("L", comment="ScoreDown")
+    else if timeOut
+        strategy.close("L", comment="Time")
+
+if strategy.position_size == 0
+    entryPrice := na
+    initStop   := na
+    trailStop  := na
+    tpPrice    := na
+    entryBar   := na
+
+plot(fastMA, "50 EMA", color=color.orange)
+plot(slowMA, "200 EMA", color=color.new(color.blue, 30))
+plot(strategy.position_size > 0 ? trailStop : na, "Trail Stop", color=color.red, style=plot.style_linebr, linewidth=2)
+plotshape(masterSignal, "Entry", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, text="BO", size=size.small)
+bgcolor(strategy.position_size > 0 ? color.new(color.green, 92) : na)
+
+var table stats = table.new(position.top_right, 2, 5, frame_color=color.gray, frame_width=1)
+if barstate.islast
+    netPL    = strategy.netprofit
+    winrate  = strategy.wintrades + strategy.losstrades > 0 ? strategy.wintrades / (strategy.wintrades + strategy.losstrades) * 100 : 0
+    pf       = strategy.grossloss != 0 ? strategy.grossprofit / math.abs(strategy.grossloss) : na
+    table.cell(stats, 0, 0, "Metric", bgcolor=color.new(color.gray, 30), text_color=color.white)
+    table.cell(stats, 1, 0, "Value",  bgcolor=color.new(color.gray, 30), text_color=color.white)
+    table.cell(stats, 0, 1, "Net P/L $")
+    table.cell(stats, 1, 1, str.tostring(netPL, "#.##"))
+    table.cell(stats, 0, 2, "Trades")
+    table.cell(stats, 1, 2, str.tostring(strategy.closedtrades))
+    table.cell(stats, 0, 3, "Win-rate %")
+    table.cell(stats, 1, 3, str.tostring(winrate, "#.#"))
+    table.cell(stats, 0, 4, "Profit Factor")
+    table.cell(stats, 1, 4, na(pf) ? "-" : str.tostring(pf, "#.##"))

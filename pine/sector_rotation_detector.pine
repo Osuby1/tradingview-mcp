@@ -1,0 +1,141 @@
+//@version=6
+indicator("Sector Rotation Breakout Detector 7-Criteria", overlay=true, max_labels_count=500)
+
+benchmark    = input.symbol("AMEX:SPY",   "Benchmark (RS denominator)", group="Reference Symbols")
+sectorLeader = input.symbol("NASDAQ:SMH", "Current Sector Leader",      group="Reference Symbols")
+dxySym       = input.symbol("TVC:DXY",    "Dollar Index",               group="Reference Symbols")
+tnxSym       = input.symbol("TVC:TNX",    "10-Year Yield",              group="Reference Symbols")
+vixSym       = input.symbol("CBOE:VIX",   "VIX",                        group="Reference Symbols")
+
+rsLookback   = input.int(45, "Lookback for higher-high (~2mo daily)", group="1. Relative Strength")
+volMult      = input.float(2.0,  "Volume multiplier",        group="2. Stealth Volume", step=0.1)
+volMA        = input.int(50,     "Volume MA length",         group="2. Stealth Volume")
+closeTop     = input.float(0.75, "Close in top X of range",  group="2. Stealth Volume", step=0.05, minval=0.5, maxval=0.95)
+nearLowPct   = input.float(15.0, "Within X pct of 6-mo low", group="2. Stealth Volume", step=1.0)
+sixMonthBars = input.int(120,    "6-month lookback bars",    group="2. Stealth Volume")
+fastLen   = input.int(50,  "Fast EMA",                       group="3. MA Reclaim")
+slowLen   = input.int(200, "Slow EMA",                       group="3. MA Reclaim")
+maWindow  = input.int(60,  "Reclaim/golden-cross lookback",  group="3. MA Reclaim")
+baseLen    = input.int(7,     "Base length (days)",       group="4. Base Structure")
+tightMult  = input.float(0.7, "Tight ATR multiplier",     group="4. Base Structure", step=0.05)
+expandMult = input.float(1.5, "Expansion ATR multiplier", group="4. Base Structure", step=0.1)
+peer1 = input.string("NYSE:GM",     "Peer 1 (blank = skip)", group="5. Breadth Confirmation")
+peer2 = input.string("NYSE:STLA",   "Peer 2 (blank = skip)", group="5. Breadth Confirmation")
+peer3 = input.string("NASDAQ:RIVN", "Peer 3 (blank = skip)", group="5. Breadth Confirmation")
+peer4 = input.string("NYSE:NIO",    "Peer 4 (blank = skip)", group="5. Breadth Confirmation")
+peer5 = input.string("NASDAQ:LCID", "Peer 5 (blank = skip)", group="5. Breadth Confirmation")
+breadthMin = input.float(0.60, "Min green-bar fraction", group="5. Breadth Confirmation", step=0.05)
+tiredWindow = input.int(7, "Tired-leader window (bars)",           group="6. Tired Leader")
+tiredCount  = input.int(3, "Min red-leader/green-bench day count", group="6. Tired Leader")
+vixThreshold = input.float(20.0, "Max VIX for risk-on", group="7. Macro Overlay")
+macroMA      = input.int(50,     "DXY/TNX MA length",   group="7. Macro Overlay")
+fireScore = input.int(5, "Score required to fire MASTER alert", minval=1, maxval=7, group="Alert")
+
+safeSymbol(s) => s == "" ? syminfo.tickerid : s
+yes(b) => b ? "YES" : "no"
+bg(b) => b ? color.new(color.green, 30) : color.new(color.red, 60)
+peerUsed(s) => s != "" ? 1 : 0
+peerGreen(c, o, used) => used == 1 and not na(c) and not na(o) and c > o ? 1 : 0
+
+benchClose  = request.security(benchmark,    timeframe.period, close)
+leaderClose = request.security(sectorLeader, timeframe.period, close)
+dxyClose    = request.security(dxySym,       timeframe.period, close)
+tnxClose    = request.security(tnxSym,       timeframe.period, close)
+vixClose    = request.security(vixSym,       timeframe.period, close)
+[p1c, p1o] = request.security(safeSymbol(peer1), timeframe.period, [close, open])
+[p2c, p2o] = request.security(safeSymbol(peer2), timeframe.period, [close, open])
+[p3c, p3o] = request.security(safeSymbol(peer3), timeframe.period, [close, open])
+[p4c, p4o] = request.security(safeSymbol(peer4), timeframe.period, [close, open])
+[p5c, p5o] = request.security(safeSymbol(peer5), timeframe.period, [close, open])
+
+ratio    = close / benchClose
+priorMax = ta.highest(ratio[1], rsLookback)
+c1       = ratio > priorMax
+
+volAvg   = ta.sma(volume, volMA)
+barRange = high - low
+closePos = barRange > 0 ? (close - low) / barRange : 0.5
+sixMoLow = ta.lowest(low, sixMonthBars)
+nearLow  = (close - sixMoLow) / sixMoLow <= nearLowPct / 100.0
+c2       = volume > volMult * volAvg and closePos >= closeTop and nearLow
+
+fastMA           = ta.ema(close, fastLen)
+slowMA           = ta.ema(close, slowLen)
+reclaim50        = ta.crossover(close, fastMA)
+goldenCross      = ta.crossover(fastMA, slowMA)
+heldAbove        = close > fastMA
+barsSinceGolden  = ta.barssince(goldenCross)
+barsSinceReclaim = ta.barssince(reclaim50)
+c3 = heldAbove and barsSinceGolden <= maWindow and barsSinceReclaim <= maWindow
+
+atrShort  = ta.atr(baseLen)
+atrLong   = ta.atr(baseLen * 4)
+tight     = atrShort < atrLong * tightMult
+expansion = barRange > atrShort[1] * expandMult
+c4 = tight[1] and expansion
+
+selfGreen  = close > open ? 1 : 0
+totalGreen = selfGreen + peerGreen(p1c, p1o, peerUsed(peer1)) + peerGreen(p2c, p2o, peerUsed(peer2)) + peerGreen(p3c, p3o, peerUsed(peer3)) + peerGreen(p4c, p4o, peerUsed(peer4)) + peerGreen(p5c, p5o, peerUsed(peer5))
+totalPeers = 1 + peerUsed(peer1) + peerUsed(peer2) + peerUsed(peer3) + peerUsed(peer4) + peerUsed(peer5)
+breadthPct = totalGreen / totalPeers
+c5 = totalPeers >= 3 and breadthPct >= breadthMin
+
+benchUp    = benchClose > benchClose[1]
+leaderDown = leaderClose < leaderClose[1]
+divergent  = benchUp and leaderDown ? 1 : 0
+divCount   = math.sum(divergent, tiredWindow)
+c6 = divCount >= tiredCount
+
+dxyMA   = ta.sma(dxyClose, macroMA)
+tnxMA   = ta.sma(tnxClose, macroMA)
+dxyDown = dxyClose < dxyMA
+tnxDown = tnxClose < tnxMA
+vixOk   = vixClose < vixThreshold
+c7 = (dxyDown or tnxDown) and vixOk
+
+score = (c1?1:0) + (c2?1:0) + (c3?1:0) + (c4?1:0) + (c5?1:0) + (c6?1:0) + (c7?1:0)
+masterSignal = score >= fireScore and score > nz(score[1])
+
+plot(fastMA, "50 EMA", color=color.orange, linewidth=1)
+plot(slowMA, "200 EMA", color=color.new(color.blue, 30), linewidth=1)
+plotshape(c2, "Stealth Vol", style=shape.triangleup, location=location.belowbar, color=color.aqua, size=size.tiny)
+plotshape(c3 and not c3[1], "MA Reclaim", style=shape.circle, location=location.belowbar, color=color.green, size=size.tiny)
+plotshape(c4, "Base Expand", style=shape.diamond, location=location.belowbar, color=color.yellow, size=size.tiny)
+plotshape(masterSignal, "MASTER", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, text="BO", size=size.normal)
+bgcolor(masterSignal ? color.new(color.lime, 75) : na)
+
+var table dash = table.new(position.top_right, 2, 10, frame_color=color.gray, frame_width=1)
+if barstate.islast
+    table.cell(dash, 0, 0, "Criterion", bgcolor=color.new(color.gray, 30), text_color=color.white)
+    table.cell(dash, 1, 0, "Status",    bgcolor=color.new(color.gray, 30), text_color=color.white)
+    table.cell(dash, 0, 1, "1. RS Higher High")
+    table.cell(dash, 1, 1, yes(c1), bgcolor=bg(c1), text_color=color.white)
+    table.cell(dash, 0, 2, "2. Stealth Volume")
+    table.cell(dash, 1, 2, yes(c2), bgcolor=bg(c2), text_color=color.white)
+    table.cell(dash, 0, 3, "3. MA Reclaim+Golden")
+    table.cell(dash, 1, 3, yes(c3), bgcolor=bg(c3), text_color=color.white)
+    table.cell(dash, 0, 4, "4. Base to Expansion")
+    table.cell(dash, 1, 4, yes(c4), bgcolor=bg(c4), text_color=color.white)
+    table.cell(dash, 0, 5, "5. Peer Breadth")
+    table.cell(dash, 1, 5, yes(c5), bgcolor=bg(c5), text_color=color.white)
+    table.cell(dash, 0, 6, "6. Tired Leader")
+    table.cell(dash, 1, 6, yes(c6), bgcolor=bg(c6), text_color=color.white)
+    table.cell(dash, 0, 7, "7. Macro Risk-On")
+    table.cell(dash, 1, 7, yes(c7), bgcolor=bg(c7), text_color=color.white)
+    scoreColor = score >= fireScore ? color.lime : score >= 3 ? color.orange : color.new(color.red, 30)
+    table.cell(dash, 0, 8, "SCORE", bgcolor=color.new(color.gray, 30), text_color=color.white)
+    table.cell(dash, 1, 8, str.tostring(score) + " / 7", bgcolor=scoreColor, text_color=color.black)
+    table.cell(dash, 0, 9, "Trigger >=", bgcolor=color.new(color.gray, 30), text_color=color.white)
+    table.cell(dash, 1, 9, str.tostring(fireScore), bgcolor=color.new(color.gray, 30), text_color=color.white)
+
+alertcondition(c1, "1. RS Flip",         "{{ticker}}: First higher RS-vs-benchmark high in 2+ months")
+alertcondition(c2, "2. Stealth Volume",  "{{ticker}}: 2x volume close near top of range, near 6mo low")
+alertcondition(c3 and not c3[1], "3. MA Reclaim", "{{ticker}}: 50 EMA reclaimed + golden cross active")
+alertcondition(c4, "4. Base Expansion",  "{{ticker}}: Tight base broken with range expansion")
+alertcondition(c5, "5. Breadth",         "{{ticker}}: Peer breadth confirms move")
+alertcondition(c6, "6. Tired Leader",    "{{ticker}}: Sector leader red on benchmark up days")
+alertcondition(c7, "7. Macro Risk-On",   "{{ticker}}: DXY/TNX rolling, VIX contained")
+alertcondition(masterSignal, "MASTER Breakout", "{{ticker}}: Rotation breakout score crossed threshold")
+
+if masterSignal
+    alert("ROTATION BREAKOUT - " + syminfo.ticker + " - Score " + str.tostring(score) + "/7", alert.freq_once_per_bar_close)

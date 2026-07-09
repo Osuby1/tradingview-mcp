@@ -1,0 +1,67 @@
+//@version=5
+// Early Ignition — flags the EARLY-acceleration phase of potential multi-baggers.
+// Tier 1 (Quality): base breakout + volume explosion + RS new high inside a stage-2 uptrend.
+// Tier 2 (Speculative): parabolic ROC + huge relative volume + mean detachment (higher risk).
+// Saved slot id: USER;880970efce4545df850f228bc652f60b. Backed up 2026-06-24 after a backtest
+// session overwrote this slot with the HQ Swing v2 strategy; restored via TV version history.
+indicator("Early Ignition", overlay=true, max_bars_back=300)
+
+baseLen = input.int(60,  "Base breakout lookback")
+hi52    = input.int(252, "52-week high lookback")
+volLen  = input.int(50,  "Volume avg length")
+rvolQ   = input.float(3.0, "Quality min RVOL x")
+rvolS   = input.float(5.0, "Speculative min RVOL x")
+rsLen   = input.int(126, "Relative-strength lookback")
+rocLen  = input.int(21,  "ROC length")
+rocSpec = input.float(50, "Speculative min ROC %")
+extSpec = input.float(30, "Speculative min % above 50MA")
+
+sma50  = ta.sma(close, 50)
+sma200 = ta.sma(close, 200)
+rising200 = sma200 > sma200[20]
+[dp, dm, adx] = ta.dmi(14, 14)
+adxRising = adx > adx[5]
+atr = ta.atr(14)
+volAvg = ta.sma(volume, volLen)
+rvol = volAvg > 0 ? volume / volAvg : 0.0
+roc = ta.roc(close, rocLen)
+extPct = (close - sma50) / sma50 * 100
+
+// relative strength vs SPY
+spyClose = request.security("AMEX:SPY", timeframe.period, close)
+spyRet   = request.security("AMEX:SPY", timeframe.period, close / close[rsLen] - 1)
+stkRet   = close / close[rsLen] - 1
+rsBeat   = not na(spyRet) and stkRet > spyRet
+rsLine   = (not na(spyClose) and spyClose != 0) ? close / spyClose : na
+rsNewHigh = not na(rsLine) and rsLine >= ta.highest(rsLine, rsLen)
+
+baseBreak = close > ta.highest(close, baseLen)[1]
+new52     = close >= ta.highest(high, hi52) * 0.99
+
+// TIER 1 — quality momentum ignition
+quality = close > sma200 and rising200 and baseBreak and new52 and rvol > rvolQ and rsBeat and rsNewHigh and adx > 20
+qFire = quality and not quality[1]
+
+// TIER 2 — speculative moonshot ignition
+spec  = roc > rocSpec and rvol > rvolS and extPct > extSpec and close > sma50 and adxRising
+sFire = spec and not spec[1]
+
+plot(sma200, "200MA", color = rising200 ? color.new(color.teal,0) : color.new(color.gray,40), linewidth=2)
+plotshape(qFire, "Quality Ignition", shape.triangleup, location.belowbar, color.new(color.lime,0), size=size.normal, text="IGNITE", textcolor=color.lime)
+plotshape(sFire, "Spec Ignition", shape.diamond, location.abovebar, color.new(color.orange,0), size=size.small, text="SPEC", textcolor=color.orange)
+bgcolor(quality ? color.new(color.green, 88) : na)
+
+plot(rvol,   "RVOL",        display=display.data_window)
+plot(roc,    "ROC",         display=display.data_window)
+plot(extPct, "PctAbove50",  display=display.data_window)
+plot(adx,    "ADX",         display=display.data_window)
+plot(quality ? 1 : 0, "QualityFlag", display=display.data_window)
+plot(spec ? 1 : 0,    "SpecFlag",    display=display.data_window)
+plot(rsBeat ? 1 : 0,  "RSbeat",      display=display.data_window)
+
+alertcondition(qFire, "Quality Ignition", "{{ticker}} QUALITY IGNITION: base breakout + volume surge + RS new high")
+alertcondition(sFire, "Speculative Ignition", "{{ticker}} SPEC IGNITION: parabolic move + huge volume")
+if qFire
+    alert(syminfo.ticker + " QUALITY IGNITION - base breakout, " + str.tostring(rvol, "#.#") + "x vol, RS new high", alert.freq_once_per_bar_close)
+if sFire
+    alert(syminfo.ticker + " SPEC IGNITION - ROC " + str.tostring(roc, "#") + "%, " + str.tostring(rvol, "#.#") + "x vol", alert.freq_once_per_bar_close)

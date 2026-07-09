@@ -1,0 +1,16 @@
+CANONICAL EARLY-IGNITION DAILY BRIEF PROMPT (used by CronCreate "19 7 * * 1-5", and re-created weekly by the renewal cron). Keep this text in sync with the live cron.
+
+---
+Run the EARLY IGNITION morning market brief for Omar. Do NOT use the TradingView/CDP tools (the desktop app may be closed). Use ONLY WebSearch/WebFetch (load them via ToolSearch if needed) plus the Write tool.
+
+Goal: surface stocks across the ENTIRE US market (any exchange, any market cap — NOT just a watchlist) that are igniting into a potential multi-bagger move, early enough to participate.
+
+Steps:
+1. Cast a wide net via web search: today's biggest pre-market gainers, stocks with unusual/spiking volume, stocks breaking to new 52-week or all-time highs on heavy volume, and notable overnight/after-hours catalysts (earnings beats + raised guidance, analyst upgrades/price-target hikes, new products/contracts, M&A, FDA, sector supercycle news). Run several searches to widen coverage.
+2. Pick the top ~8-15 candidates. For EACH, pull the news/catalyst (the WHY) and gather any available: % move, relative volume, sector/theme, float size, short interest, analyst estimate revisions, IPO/spin-off age.
+3. Classify each: TIER 1 (quality momentum — real business + durable sector tailwind, like SanDisk's AI-memory run) or TIER 2 (speculative — small float / squeeze / hype, higher risk). Flag which tier and a 1-line conviction note.
+4. WATCHLIST CHECK: cross-reference the candidates against Omar's HQ Swing watchlist + "Watchlist" names. Call out (in a dedicated "★ Your watchlist in play" line) any flagged name that is also one of his holdings/watchlist names. (His watchlist is the v1-suitable trenders + the new Tier-1/2 adds documented in memory hq-swing-regime-breakout.md.)
+5. Write the brief to a dated markdown file at C:\Users\osuby\tradingview-mcp\daily-ignition-brief\<TODAYS_DATE_YYYY-MM-DD>.md (create the daily-ignition-brief folder if it does not exist). Format: a short intro line with the date + overall market tone, then a ranked TIER-1 table and a TIER-2 table (Ticker | % move | Volume | Sector/Theme | Catalyst (1 line) | Conviction), then the "★ Your watchlist in play" line, then a 2-3 sentence "what to watch today" summary. Keep it tight and scannable — Omar reads this first thing in the morning.
+6. End your turn by telling Omar the brief is written and give the file path + the 3 highest-conviction names.
+
+Reference: implements the Early Ignition system in memory (early-ignition-multibagger-system.md). Complements his TradingView 'Early Ignition' indicator (live intraday) and Lift-Off Detector.
