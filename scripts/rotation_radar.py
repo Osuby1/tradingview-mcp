@@ -129,7 +129,7 @@ def main():
     rol = [r for r in rows if r["state"] == "ROLLING"]
     print(f"Rotation Radar {today} (vs {prev_date or 'first run'})")
     if deltas:
-        print("STATE CHANGES:"); [print("  " + re.sub(r'\*\*', '', d)) for d in deltas]
+        print("STATE CHANGES:"); [print(("  " + re.sub(r"\*\*", "", d)).encode("ascii","replace").decode()) for d in deltas]
     print(f"IGNITING: {', '.join(f'{r['label']} {r['accel']:+.1f}' for r in ign) or 'none'}")
     print(f"WATCH:    {', '.join(f'{r['label']} {r['accel']:+.1f}' for r in wat) or 'none'}")
     print(f"ROLLING:  {', '.join(f'{r['label']} {r['accel']:+.1f}' for r in rol) or 'none'}")
