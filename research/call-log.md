@@ -64,3 +64,8 @@ Every call logged BEFORE outcome. Columns: date · name · call · ref price · 
 - TODAY-suitable calls: NEE half on close >89.10 (ref 89.54; earnings 7/24 + Dominion-deal overhang flagged) - IBKR starter (ref 95.47, earnings 7/21 trim rule) - ECO spec half (ref 56.38, Hormuz tanker).
 - EXCLUSIONS flagged in messages: D = merger arb (NEE $67B all-stock, verified) - SLAB data anomaly - BG under CE at flag - PRAX spec rules.
 - THESIS pre-registered: if post-CPI rate relief holds, the 130 ZLSMA-fails = reclaim-trigger farm; graded by how many of the 28 fire+gate-pass within 3 weeks vs whipsaw.
+
+## 07-14 evening screen (193 tickers, Omar list #3): 33 full-PASS (137 ZLSMA-fails)
+- 27 repeats already covered by the 28-trigger grid. NEW passes wired: GKOS 154.80 - ROKU 143.10 - VTR 94.40 - AHR 55.50 (all 60d-high triggers, vol-gated, auto-deactivate). Skipped: LPG (16% off high), SION (thin, red day), SLAB (data anomaly stands).
+- CLUSTER THESIS pre-registered: healthcare REITs WELL/VTR/AHR ALL full-PASS within 2% of highs (ADX 28-36) = rate-relief x healthcare-services rotation intersection; graded by whether >=2 of 3 fire+hold within 2 weeks.
+- Verdict to Omar: NO new strong-buy tonight; TXN/NEE/HELE-tier calls stand; everything else = triggers.
