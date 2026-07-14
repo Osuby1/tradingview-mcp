@@ -47,3 +47,14 @@ Every call logged BEFORE outcome. Columns: date · name · call · ref price · 
 | 07-13 | ARMK/MSM/PGNY/TDOC/WKC | sweep LOADED (misc quality) | — | LOADED | PASS | 1 |
 | 07-13 | HG/PRVA/PSNL | sweep LOADED but ZLSMA FAIL | — | LOADED | FAIL | 2 |
 | 07-13 | THESIS: financials LOADED-cluster now 7 names deep (RY/VOYA/DAVE + ALL/MET/NTRS/HG) night before bank earnings; healthcare rotating INTERNALLY spec-biotech -> services/insurers (MOH/PGNY/TDOC/PRVA/PSNL/TOI); refiner complex broadening to tier-2 (DK/DINO join MPC/PBF/PARR) | | | | |
+
+## 07-14 study-list reclaim triggers (pre-registered; from Omar's 28-ticker list; alerts wired auto-deactivate + volume-gated)
+| Date | Name | Call | Ref px | Screen | ZLSMA | Cell |
+|------|------|------|--------|--------|-------|------|
+| 07-14 | TXN | BUY half-starter ~306 (only today-suitable name; semis tape), stop ~285, TRIM before 7/22 AMC print | 306.02 | PASS pullback-turned | PASS | 1 |
+| 07-14 | HELE | reclaim trigger 28 (earnings cleared 7/8) | 27.21 | pullback | PASS | 1 |
+| 07-14 | CORT | reclaim trigger 95 | 90.66 | pullback | FAIL at flag | 2-watch |
+| 07-14 | COCO | reclaim trigger 76.2 (earnings 7/23 = starter/skip) | 74.55 | pullback | PASS | 1 |
+| 07-14 | SEZL | reclaim trigger 181 (spec-lean, +10% day NOT chased) | 176.45 | pullback | FAIL at flag | 2-watch |
+| 07-14 | TWST | reclaim trigger 96 | 92.49 | pullback | FAIL at flag | 2-watch |
+| 07-14 | REJECTED from list: VISN (broken), CARE/WRLD/GTX (CE short), AAL (RS neg), LLY (ZLSMA FAIL + XLV weakest, timing) + 11 mid-pullback FAILs | | | | |
