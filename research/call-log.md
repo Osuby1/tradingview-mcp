@@ -58,3 +58,9 @@ Every call logged BEFORE outcome. Columns: date · name · call · ref price · 
 | 07-14 | SEZL | reclaim trigger 181 (spec-lean, +10% day NOT chased) | 176.45 | pullback | FAIL at flag | 2-watch |
 | 07-14 | TWST | reclaim trigger 96 | 92.49 | pullback | FAIL at flag | 2-watch |
 | 07-14 | REJECTED from list: VISN (broken), CARE/WRLD/GTX (CE short), AAL (RS neg), LLY (ZLSMA FAIL + XLV weakest, timing) + 11 mid-pullback FAILs | | | | |
+
+## 07-14 rate-sensitive screen (179 tickers, Omar-provided): 28 PASS all four gates (regime+CE+ZLSMA+RS; 130 failed ZLSMA = complex still mid-downtrend)
+- 28 reclaim/breakout triggers WIRED (auto-deactivate, volume-gated, context messages incl. per-name caveats). Levels = 60d-high reclaims except NEE 90.10 (CE flip).
+- TODAY-suitable calls: NEE half on close >89.10 (ref 89.54; earnings 7/24 + Dominion-deal overhang flagged) - IBKR starter (ref 95.47, earnings 7/21 trim rule) - ECO spec half (ref 56.38, Hormuz tanker).
+- EXCLUSIONS flagged in messages: D = merger arb (NEE $67B all-stock, verified) - SLAB data anomaly - BG under CE at flag - PRAX spec rules.
+- THESIS pre-registered: if post-CPI rate relief holds, the 130 ZLSMA-fails = reclaim-trigger farm; graded by how many of the 28 fire+gate-pass within 3 weeks vs whipsaw.
