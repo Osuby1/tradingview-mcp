@@ -31,3 +31,19 @@ Every call logged BEFORE outcome. Columns: date · name · call · ref price · 
 - 07-13: Biotech ignition cooling → distribution phase for spec names (radar downgrade + broken parabola tails) — graded by XBI vs SPY over 2 weeks.
 - 07-13: Refiner crack-spread thesis (MPC/PBF/PARR) alive while Hormuz disrupted — dies on ceasefire.
 - 07-11: Mega-cap rotation hypothesis (META/NVDA/AAPL absorption) — graded by XLK accel + AAPL breakout holding post-CPI.
+
+## 07-13 EOD sweep additions (pre-registered night before CPI; both verdicts at call time)
+| Date | Name | Call | Ref px | Screen | ZLSMA | Cell |
+|------|------|------|--------|--------|-------|------|
+| 07-13 | ALL | sweep LOADED (insurance) | 256.45 | LOADED | PASS | 1 |
+| 07-13 | MET | sweep LOADED (insurance) | 93.03 | LOADED | PASS | 1 |
+| 07-13 | NTRS | sweep LOADED (trust bank) | 184.10 | LOADED | PASS | 1 |
+| 07-13 | MOH | sweep LOADED (managed care) | 242.88 | LOADED | PASS | 1 |
+| 07-13 | DK | sweep LOADED (refiner #4) | 58.01 | LOADED | PASS | 1 |
+| 07-13 | DINO | sweep LOADED (refiner #5) | 81.70 | LOADED | PASS | 1 |
+| 07-13 | CNI | sweep LOADED (rail) | 125.31 | LOADED | PASS | 1 |
+| 07-13 | CSX | sweep LOADED (rail) | 49.64 | LOADED | PASS | 1 |
+| 07-13 | AAPL | sweep LOADED (independent confirm of coil) | 317.31 | LOADED | PASS | 1 |
+| 07-13 | ARMK/MSM/PGNY/TDOC/WKC | sweep LOADED (misc quality) | — | LOADED | PASS | 1 |
+| 07-13 | HG/PRVA/PSNL | sweep LOADED but ZLSMA FAIL | — | LOADED | FAIL | 2 |
+| 07-13 | THESIS: financials LOADED-cluster now 7 names deep (RY/VOYA/DAVE + ALL/MET/NTRS/HG) night before bank earnings; healthcare rotating INTERNALLY spec-biotech -> services/insurers (MOH/PGNY/TDOC/PRVA/PSNL/TOI); refiner complex broadening to tier-2 (DK/DINO join MPC/PBF/PARR) | | | | |
