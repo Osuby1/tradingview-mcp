@@ -31,3 +31,7 @@ Pre-registered 2026-07-14 evening (git timestamp = proof). Omar traveling Wed–
 
 ## LEDGER ENTRIES
 - 2026-07-14 8:00 PM ET: **C1 TRIGGERED — ETH daily close 1,890.63 > 1,809 (attack #8 after 7 traps; CPI catalyst, BTC confirming).** PAPER ENTRY per reconstruction rule: first print of new UTC day = **1,890.72** · notional ~$57k · stop 1,809 (−4.3%) · risk ~$2,470. Full regime flip per the original plan is a daily close >1,809 = DONE; BTC 65,250 flip = still pending, would be the add-confirmation signal.
+- 2026-07-15 ~10 AM ET: **C3 AAPL 317.50 FIRED but projected RVOL 0.88 < 1.5 gate -> NOT ENTERED (gate-reject, logged for ablation grading; ref 317.50, AAPL 327.37 at 2:15 PM = the gate cost +3.1% so far on this instance).**
+- 2026-07-15: **C2 NVDA never fired — high 213.81 vs 214 trigger (19 cents), then reversed to 206 on the AI-hardware selloff = the trigger discipline saved a same-day -3.7% entry.**
+- 2026-07-15 intraday: **BTC crossed 65,250 (high 65,559) = FULL regime-flip alert fired = market-wide confirmation for C1 ETH** (no BTC position per plan — confirmation signal only). C1 mark 2:15 PM: 1,929 = +2.0% (+$1,165).
+- 2026-07-15 2:15 PM marks: P1 NEE 88.69 (-1.3%, -$660) · P2 TXN 299.74 (-3.9% vs its +2% gap-up open 312.01 = the paper book just demonstrated the buy-the-open-after-a-green-day lesson, -$1,570) · P3 IBKR 97.10 (+$65) · P4 ECO flat · C1 ETH +$1,165. Net open ~-$1,000 vs SPY +0.3%. NOT in book: DELL (door fired pre-registration) -11% today on AI-demand fears = the exclusion saved -$5,600 paper.
