@@ -28,3 +28,6 @@ Pre-registered 2026-07-14 evening (git timestamp = proof). Omar traveling Wed–
 
 ## LEDGER (filled in daily / on reconstruction)
 (entries, fills, exits, P&L to be appended — never edited retroactively)
+
+## LEDGER ENTRIES
+- 2026-07-14 8:00 PM ET: **C1 TRIGGERED — ETH daily close 1,890.63 > 1,809 (attack #8 after 7 traps; CPI catalyst, BTC confirming).** PAPER ENTRY per reconstruction rule: first print of new UTC day = **1,890.72** · notional ~$57k · stop 1,809 (−4.3%) · risk ~$2,470. Full regime flip per the original plan is a daily close >1,809 = DONE; BTC 65,250 flip = still pending, would be the add-confirmation signal.
