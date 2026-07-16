@@ -25,8 +25,10 @@ Every call logged BEFORE outcome. Columns: date · name · call · ref price · 
 | 07-13 | TGTX | DROP from spec candidates (below+falling ZLSMA, group cooling) | 55.14 | was PASS | FAIL | 2→drop | | |
 | 07-13 | CRWD | STAND DOWN (zone 185-188 broke) | 184.18 | zone-fail | above/rolling | — | | |
 | 07-13 | — | Omar deliberate SKIP of NET (271.00) + AAPL (320.04) fires, waiting for 7/14 CPI | — | — | — | — | grade the wait vs these refs | |
+| 07-16 | SMH/KRE | **PAIR (Omar-approved 7/16 eve): SHORT SMH $50k (~88sh) / LONG KRE $50k (~642sh)**, limits at plan level Fri open. Exits: SMH >615 (invalidation) OR KRE <73.90 (long-leg CE break) OR spread −5% (ratio >7.67); tighten exit to SMH 600 if 555 breaks; KILL before NVDA earnings late-Aug. Alerts 5166922694/713/722/735/757. Fills = Omar's to report — not assumed filled | SMH 568.92 / KRE 77.92 (ratio 7.301) | SMH ROLLING −18.5 + CE SHORT 651.30; KRE WATCH +4.7 + CE LONG 73.89, sweep Finance-LOADED wall | n/a (pair) | — | | |
 
 ## Open theses (pre-registered)
+- 07-16: AI-hardware distribution (2 days of beats-getting-sold: TSM −3.2% on +77%, SNDK −26% off flag, DELL demand fears) + rotation INTO regional banks = the SMH/KRE pair's engine — graded by the SMH/KRE ratio (7.301 at call) over 2-4 weeks; thesis dies on SMH >615 or a semi capex/demand re-acceleration headline that sticks (green close on the news).
 - 07-13: Financials = freshest asymmetric group setup IF CPI benign + banks deliver (XLF accel +6.2 from flat base; sweep LOADED cluster) — graded by whether XLF graduates to IGNITING within 2 weeks.
 - 07-13: Biotech ignition cooling → distribution phase for spec names (radar downgrade + broken parabola tails) — graded by XBI vs SPY over 2 weeks.
 - 07-13: Refiner crack-spread thesis (MPC/PBF/PARR) alive while Hormuz disrupted — dies on ceasefire.
