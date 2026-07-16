@@ -7,7 +7,40 @@ Scan stack (chart method): HQ Swing v1 - Regime Breakout, ADX 14 + 20 Threshold,
 
 **METHOD NOTE 2026-07-08:** `TradingViewApi.activeChart().exportData()` now returns "Data export is not supported" — bars are read instead via the MCP server's own internal path (`window.TradingViewApi._activeChartWidgetWV.value()._chartWidget.model().mainSeries().bars()`, `valueAt()` loop — same live feed, synchronous). Intraday runs drop today's partial bar; indicator values = last COMPLETED close, with the live price reported separately. "Close" column is the chart-feed close (Cboe One can miss the closing auction — e.g. DTE chart 153.53 vs official 154.28 on 7/7).
 
-## Latest — 2026-07-08 ~10:05 ET (indicators = 2026-07-07 completed close; Live = ~10:00 ET print)
+## Latest — 2026-07-16 ~17:15 ET (values = 2026-07-16 daily close, live feed via ui_evaluate; RS base = SPY 126d +8.21%)
+
+| Symbol | Close 7/16 | 200SMA | % vs 200d | ADX | Chandelier | RSbeat | Flags | Verdict |
+|--------|-----------|--------|-----------|-----|------------|--------|-------|---------|
+| CB | 343.70 | 314.65 | +9.2% | 23.4 ↓ | **SHORT 345.71** | 1 | — | **⚠ FLIPPED SELL — first Tier-1 casualty (359.87 on 7/8 → 343.70)** |
+| DTE | 148.91 | 141.32 | +5.4% | 14.6 ↓ | LONG 146.75 | 1 | — | PASS but tight (+1.5% over stop); ADX collapsed 30→15 |
+| AMGN | 371.58 | 339.19 | +9.5% | 13.6 ↓ | LONG 349.57 | 1 | — | PASS |
+| KRE | 77.92 | 67.19 | +16.0% | 30.1 | LONG 73.89 | 1 | RVOL 1.4 | **PASS strong — best on board; radar WATCH + sweep Finance-LOADED convergence** |
+| XLI | 180.15 | 165.84 | +8.6% | 13.1 ↓ | LONG 176.39 | 1 | — | PASS, trendless |
+| JNJ | 249.97 | 222.56 | +12.3% | 28.8 ↓ | LONG 249.76 | 1 | — | **21 CENTS above stop — post-earnings slide from 266 record; flip-watch** |
+| KO | 84.92 | 75.09 | +13.1% | 18.1 ↑ | LONG 80.05 | 1 | — | PASS |
+| DAL | 86.70 | 69.38 | +25.0% | 30.8 ↓ | LONG 85.46 | 1 | — | PASS but tight (+1.4%), still deteriorating |
+| NEE | 89.35 | 87.27 | +2.4% | 15.2 | **LONG 84.57** | 1 | — | **CE FLIPPED LONG + RSbeat 1 = full PASS (was FAIL→improving). Flip ratcheted in BELOW the 90.10 alert — that alert is now a stale proxy** |
+| HOPE | 13.98 | 11.71 | +19.4% | 25.0 | LONG 13.12 | 1 | RVOL 1.37 | PASS strong (⚠ earnings 7/21 — no full size) |
+| SPY | 750.72 | 696.29 | +7.8% | 17.8 ↓ | **LONG 730.73** | — | — | CE repaired from the 7/8 SHORT 758.52 |
+| QQQ | 705.94 | 640.36 | +10.2% | 16.3 ↓ | LONG 705.21 | 1 | — | **0.1% above the flip line — one red day = two-flip character change (SMH already SHORT)** |
+| IWM | 295.59 | 263.17 | +12.3% | 11.3 ⚠ | LONG 285.81 | 1 | — | PASS (trendless chop) |
+| SMH | 568.92 | 438.55 | +29.7% | 17.7 ↑ | SHORT 651.30 | 1 | — | short regime confirmed (−4.0% on 7/16, TSMC sell-the-news) |
+| NET | 272.46 | 210.43 | +29.5% | 23.3 ↑ | LONG 241.24 | 1 | — | PASS, base intact, no chase |
+| TXN† | 291.22 | 220.92 | +31.8% | 13.9 | SHORT 320.88 | 1 | — | paper P2 is counter-CE by design (unfilled-call test) |
+| IBKR† | 92.21 | 74.86 | +23.2% | 18.8 ↑ | LONG 86.95 | 1 | — | PASS; −4.8% day, paper stop 91.50 sits above the CE line (low 91.58 = 8-cent survival) |
+| ECO† | 56.77 | 43.71 | +29.9% | 14.8 ↑ | LONG 49.97 | 1 | — | PASS |
+
+† paper-book adds (vacation-week book). No Quality/Spec-Ignition fires on scanned names (max RVOL = KRE 1.4).
+
+### Deltas vs 2026-07-08 snapshot
+- **CB Chandelier FLIPPED SELL** — first Tier-1 regime casualty; insurance leg of the financials split. The 6/30 entry-zone fire was never confirmed as a fill; the 323 stop alert is moot/stale either way.
+- **NEE Chandelier FLIPPED LONG** (short stop ratcheted down through ~89.5 and the 7/14 close crossed it) → NEE = full PASS. **The 90.10 "CE-flip" alert never fired and now sits ABOVE the actual flip — stale proxy; paper C4 add-condition treated as NOT met.**
+- **SPY CE repaired to LONG 730.73** (7/8 snapshot had it SHORT 758.52 — that short died in the CPI rally).
+- **Two flip-watches for Fri 7/17: QQQ < 705.21 and JNJ < 249.76 daily closes.** JNJ's slide is the earnings reaction (266 → 250 in 6 sessions); if it flips, the 245 dip alert = knife signal, not entry.
+- DTE ADX collapsed 30.1 → 14.6 (trend died; 154-gate saga closed). DAL still bleeding inside a PASS.
+- ADX column is method-sensitive vs the 7/8 run — trust flips and the >20 verdict, not level diffs.
+
+## Prior — 2026-07-08 ~10:05 ET (indicators = 2026-07-07 completed close; Live = ~10:00 ET print)
 
 | Symbol | Close 7/7 | Live | 200SMA | % vs 200d | ADX | Chandelier | RSbeat | Flags | Verdict |
 |--------|-----------|------|--------|-----------|-----|------------|--------|-------|---------|
@@ -39,36 +72,4 @@ No Quality-Ignition / Spec-Ignition conditions met on any scanned name (max RVOL
 - Stop-alert staleness (CE lines ratcheted again): **CB alert 323 vs CE 334.74 — worst on the board, −3.3% of protection given up**; AMGN 336 vs 340.90 stale-low; **JNJ 243 vs 245.20 — newly stale-low** (line crossed above the alert since 7/6); XLI 174.50 vs 175.20 marginal; KRE 71.30 vs 71.23 aligned; DTE 146.50 / KO 79 / DAL 85 sit at-or-above their lines (fire early — conservative, OK).
 - ADX firming across defensives (CB 27.5, KO 25.4, JNJ/KRE 35.7 — all rising); IWM still trendless (13.7).
 
-## Prior — 2026-07-06 ~16:45 ET (values = 2026-07-06 daily close, live feed via ui_evaluate)
-
-| Symbol | Close | 200SMA | % vs 200d | ADX | Chandelier | RSbeat | Flags | Verdict |
-|--------|-------|--------|-----------|-----|------------|--------|-------|---------|
-| CB | 357.43 | 311.61 | +14.7% | 24.9 | LONG 332.75 | 1 | — | PASS strong |
-| DTE | 152.69 | 140.86 | +8.4% | 29.0 | LONG 145.01 | 1 | — | PASS strong (probed 154.41 intraday) |
-| AMGN | 367.90 | 335.58 | +9.6% | 20.2 | LONG 339.73 | 1 | — | PASS |
-| KRE | 75.23 | 66.75 | +12.7% | 34.0 | LONG 71.14 | 1 | — | PASS strong |
-| XLI | 185.35 | 164.69 | +12.5% | 24.4 | LONG 175.20 | 1 | — | PASS strong |
-| JNJ | 259.22 | 219.13 | +18.3% | 33.0 | LONG 238.68 | 1 | — | PASS strong |
-| KO | 83.48 | 74.39 | +12.2% | 23.4 | LONG 78.03 | 1 | — | PASS strong |
-| DAL | 92.91 | 68.24 | +36.2% | 52.9 | LONG 83.44 | 1 | — | PASS strongest (extended) |
-| NEE | 87.83 | 86.64 | **+1.4%** | 22.7 | SHORT 90.10 | 0 | — | **FAIL→improving: crossed ABOVE 200d** |
-| HOPE | 13.54 | 11.60 | +16.8% | 33.0 | LONG 12.83 | 1 | — | PASS strong (earnings 7/21) |
-| QQQ | 721.82 | 635.40 | +13.6% | 22.9 | LONG 697.43 | 1 | — | PASS (ROC-21 −3.1%, still cooling) |
-| IWM | 298.67 | 260.95 | +14.5% | 14.7 ⚠ | LONG 283.08 | 1 | — | PASS (trendless chop) |
-| SMH | 608.40 | 427.25 | +42.4% | 23.8 | **LONG 585.98** | 1 | — | PASS — see correction below |
-| BMNR† | 15.08 | 29.21 | −48.4% | 30.9 | SHORT **17.29** | 0 | — | FAIL regime (open book position — counter-trend ETH proxy) |
-
-† BMNR added 7/6 (Omar's 7,500 @ 15.75 position). CE flip line per this method = 17.29, slightly above the 16.93 alert wired at entry.
-
-No Quality-Ignition / Spec-Ignition conditions met on any scanned name. No Chandelier flips today.
-
-### ⚠ CORRECTION — the 7/2 "SMH Chandelier SELL flip" was FALSE (bad data)
-The 7/2 EOD addendum recorded SMH 655.89 (6/30) → 620.46 (7/1) → 592.29 (7/2, "flip SELL"). The real NASDAQ series (verified 7/6 on-chart legend: 7/6 close 608.40 **+0.35%**) is **646.57 → 628.33 → 606.29 → 608.40**. The −9.7%/two-day crash never happened (real two-day was −6.2%) and the 22/3 Chandelier **never flipped — SMH has been LONG throughout** (stop now 585.98, last flip ~3 months ago). The 7/2 session's own warning about contaminated `data_get_study_values` applied to the screenshot reads too. Consequences: the SOXS tactical was armed on a phantom signal (correctly never taken — now stood down); the "QQQ second-flip = character change" watch is moot. Index chart feeds (DJ_DLY:DJI, SP:SPX) are DELAYED — their "last" lags the official close by ~15 min right after the bell (7/6: chart DJI 52,898 vs official close 53,055.91). Use the symbol-details pane / official quote for closes pulled within ~20 min of the bell.
-
-### Deltas vs 2026-07-02 snapshot
-- **NEE crossed ABOVE its 200SMA** (−0.1% → +1.4%) — first regime improvement since it went FAIL. Chandelier still SHORT; computed flip ≈ 90.10, so Omar's NEE 89.10 breakout-confirmation alert sits just UNDER the flip line (fires slightly early — fine).
-- All Tier-1 names still PASS; no flips; broad up-day (KO/JNJ/CB/AMGN defensives strong).
-- Chandelier stops ratcheted up again — stop-alert staleness check: **CB alert 323 vs CE 332.75 (very stale-low, worst on the board)**, AMGN 336 vs 339.73 (stale-low), XLI 174.50 vs 175.20 (marginal), KRE 71.30 vs 71.14 (now aligned), DTE 146.50 / JNJ 243 / KO 79 / DAL 85 all sit at-or-above their CE lines (fire early — conservative, OK).
-- ADX column re-baselined (see method note) — treat 7/6 as the new baseline for trend-strength diffs.
-
-(7/2 snapshot table removed 7/8 — two generations old; its lasting lesson lives in the correction note above.)
+(7/6 snapshot table removed 7/16 — two generations old. Its lasting lessons, preserved: **(1)** the 7/2 "SMH Chandelier SELL flip @ 592.29" was FALSE — contaminated reads; SMH's real first flip was 7/7. **(2)** Index chart feeds (DJ_DLY:DJI, SP:SPX) are ~15-min DELAYED right after the bell — use the symbol-details pane / official quote for closes pulled within ~20 min of the close. **(3)** BMNR CE flip line computed 17.29 vs the 16.93 alert wired at entry — alerts drift from ratcheting CE lines; recompute before trusting an old flip alert (same failure mode as NEE 90.10 on 7/16).)
