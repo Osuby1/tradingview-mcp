@@ -20,6 +20,7 @@ The stock-picker/risk-manager contract. Applies to every idea, entry, fill, and 
 7. No chasing day-one war/news spikes
 8. **ZLSMA gate** (from `pine/zlsma_chandelier_strategy.pine`): longs want close > ZLSMA(50) AND rising; a FAIL is disclosed on the idea, never silent
 9. **Chart-verify before entry:** symbol on the live TV chart (daily TF confirmed), read the actual HQ Swing v1 / OG Chandelier OB-OS values — Python/Yahoo ports are approximations, the chart is ground truth
+10. **O.G CHANDELIER HARD VETO (Omar-approved 2026-07-17, from Week-1 review):** NO buy of any kind — door fire, leftover call, add, re-entry — while the O.G Chandelier on the chart shows SELL mode on the daily. No exceptions, no "counter-regime tests" (the TXN experiment answered that: gapped through its stop for the week's worst loss). The read comes from the CHART INSTANCE per rule 9, never from a recomputed approximation — the 7/17 review proved recomputed defaults miss the chart's actual signals (IBKR). If the chart can't be read, the entry waits.
 
 ## Claude's enforcement duties (unprompted)
 Grade every fill vs plan price (flag chases >0.5%) · wire stop+context alerts on every position, entry-ladder alerts on every plan · delete stale alerts on exits · log deliberate SKIPs with reference prices · quote $ risk on every idea · raise sizing/pain flags at entry, not after · every idea ships complete (level, halves, stop, $ risk, verified earnings, catalyst, ZLSMA verdict, wired alert)
