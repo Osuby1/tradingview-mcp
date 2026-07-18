@@ -1,0 +1,28 @@
+{
+  "date": "2026-07-18",
+  "variant": "test",
+  "universe_size": 26,
+  "combined_risk": 0,
+  "notes": "SMOKE TEST of the autonomous chain (Omar-directed): origination Buy Zone (19) + Fresh Ignitions (7) tabs only; Coiled and the three watchlists deliberately skipped. Origination tabs exported 2026-07-18 but xlsx basis is 2026-07-16 15:50 (Wed close) - tab membership is 2 sessions stale. Market closed (Sat); latest bar = Fri 2026-07-17 as expected. Chain health: TV feed up, layout_switch to O.G Chandelier id 91698392 verified via chart_get_state (Volume/ZLSMA/Chandelier/Magical), all 26 symbols resolved to correct US listings (LTC = LTC Properties NYSE, not Litecoin; GGB = Gerdau NYSE ADR), no blockers, no user input needed. Broad-tape read: 14 of 26 names in CE sell mode with deep negative Magical readings (AMD -190, AMBQ -247, MEC -220, DELL -148) - Thu/Fri pullback washed out most of the Buy Zone tab. Near-miss: COCO buy ~2026-07-09 (~6 sessions, just outside the 5-session window), long stop 64.72, last 73.01, still long mode. Gates run LIGHT per test directive: earnings via one web check on the single hit; HQ Swing regime scanner call NOT run. BLOCKER (logged per autonomous-run rule): git commit DENIED by session permission mode (dont-ask) - git status/add worked, commit refused on 3 attempts; JSON + reports/universe_2026-07-18.xlsx left STAGED on branch add-watchlist-files for Omar to commit. Also note: compile_daily_report.py ran fine via Bash but PowerShell tool was denied - the real EOD chain runs it from the bat, so no chain impact.",
+  "hits": [
+    {
+      "sym": "FNB",
+      "source": "Fresh Ignitions",
+      "fresh": "~2026-07-15 (2-3 sessions old)",
+      "last": 18.99,
+      "entry": null,
+      "dist_pct": null,
+      "stop": 18.51,
+      "size": 0,
+      "risk": 0,
+      "targets": null,
+      "earnings": "REPORTED Q2 2026-07-16 AMC - beat (EPS $0.42 +17% y/y, record revenue $462.7M) but shares slipped on the print; no upcoming binary",
+      "magical": 19.3,
+      "regime": "not run (test mode - light gates)",
+      "verdict": "watch",
+      "note": "ZLSMA gate FAIL: last 18.99 < ZLSMA(50) 19.71. Friday was a high-volume post-earnings fade (-1.6% on 19M shares vs ~7M avg) despite the beat. CE long stop 18.51 held (Fri low 18.80). No plan, no alert - reassess if price reclaims ZLSMA ~19.7."
+    }
+  ],
+  "blocked": [],
+  "sell_mode": ["AMD", "EXTR", "VISN", "DELL", "NWPX", "AMBQ", "MEC", "TXN", "RAL", "GTX", "WRLD", "CSCO", "MS", "NVST"]
+}
