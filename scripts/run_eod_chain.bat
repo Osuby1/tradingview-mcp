@@ -34,9 +34,16 @@ if errorlevel 1 (
     echo [3/4] SKIPPED: TradingView CDP feed not reachable on :9222 >> "%LOG%"
     goto report
 )
+if /I "%~1"=="test" goto testrun
 echo [3/4] claude run-the-universe... >> "%LOG%"
-claude -p "run the universe (autonomous EOD chain run: Mon-Thu use the fast convergence variant, Friday run the FULL universe; write the machine-readable results JSON for the report compiler; commit everything; if anything blocks, log it in the results file instead of waiting for input)" >> "%LOG%" 2>&1
+claude -p "run the universe - autonomous EOD chain run: Mon-Thu use the fast convergence variant, Friday run the FULL universe; write the machine-readable results JSON for the report compiler; commit everything; if anything blocks, log it in the results file instead of waiting for input" >> "%LOG%" 2>&1
 if errorlevel 1 echo WARNING: claude universe run exited nonzero >> "%LOG%"
+goto report
+
+:testrun
+echo [3/4] claude run-the-universe TEST MODE... >> "%LOG%"
+claude -p "run the universe TEST MODE - smoke test of the autonomous chain: scan ONLY the origination Buy Zone and Fresh Ignitions tabs from watchlists/origination-tabs.md, about 26 names, through the O.G Chandelier chart per the run-the-universe memory; skip Coiled and the watchlists this time; run the protocol gates lightly on any fresh hits; you MUST write watchlists/universe-results-<date>.json in the schema from memory rule 8 with variant set to test, even if hits are empty, and commit it; never wait for user input - log any blocker into the JSON notes field; market is closed so Friday's bars are expected" >> "%LOG%" 2>&1
+if errorlevel 1 echo WARNING: claude test run exited nonzero >> "%LOG%"
 
 :report
 rem -- 4. Compile the daily Excel report ------------------------
