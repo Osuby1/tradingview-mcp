@@ -36,7 +36,7 @@ if errorlevel 1 (
 )
 if /I "%~1"=="test" goto testrun
 echo [3/4] claude run-the-universe... >> "%LOG%"
-claude -p "run the universe - autonomous EOD chain run: Mon-Thu use the fast convergence variant, Friday run the FULL universe; write the machine-readable results JSON for the report compiler; commit everything; if anything blocks, log it in the results file instead of waiting for input" >> "%LOG%" 2>&1
+claude -p "run the universe - autonomous EOD chain run: on MONDAY and WEDNESDAY run the FULL universe, on Tue/Thu/Fri use the fast convergence variant; write the machine-readable results JSON for the report compiler; commit everything via the PowerShell tool; if anything blocks, log it in the results file instead of waiting for input" >> "%LOG%" 2>&1
 if errorlevel 1 echo WARNING: claude universe run exited nonzero >> "%LOG%"
 goto report
 
