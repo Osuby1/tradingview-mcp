@@ -18,7 +18,7 @@ echo ===== EOD chain start %date% %time% ===== >> "%LOG%"
 rem -- 1. Origination scan --------------------------------------
 cd /d "%USERPROFILE%\Documents\Equities_Scanner"
 echo [1/4] origination scan... >> "%LOG%"
-python stage2_leader_scanner_v3.py >> "%LOG%" 2>&1
+python stage2_leader_scanner_v3.py --universe russell3000.csv --no-open >> "%LOG%" 2>&1
 if errorlevel 1 echo WARNING: origination scan exited nonzero >> "%LOG%"
 
 rem -- 2. Export tabs into the repo -----------------------------
