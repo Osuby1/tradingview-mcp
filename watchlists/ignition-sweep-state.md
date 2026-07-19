@@ -1,141 +1,184 @@
-# Ignition Sweep — 2026-07-17 (market-wide, 400 pre-filtered)
+# Ignition Sweep — 2026-07-19 (market-wide, 400 pre-filtered)
 
-Prev state: 2026-07-16. FIRED = early_ignition.pine signal in last 5 sessions; LOADED = all structure lit except the RVOL>3 bar.
-
-⚠ CAVEAT: this run executed ~4:45 PM ET Friday — the script dropped 7/17's bar as "today's partial", so the analysis is based on THURSDAY 7/16 closes. Only diff vs prior: NEW CLBK (Columbia Financial — Finance) LOADED. Re-run after 8 PM ET (or Monday) for the settled-Friday sweep.
+Prev state: 2026-07-17. FIRED = early_ignition.pine signal in last 5 sessions; LOADED = all structure lit except the RVOL>3 bar.
 
 ## 🔥 NEW since prior run
-- **CLBK** LOADED @ 22.95 (Finance) — d60 +4.3%, ADX 23
+- **MAX** LOADED @ 14.12 (Technology Services) — d60 -0.5%, ADX 65
+- **BMO** LOADED @ 181.97 (Finance) — d60 -0.9%, ADX 61
+- **ADPT** LOADED @ 22.92 (Health Technology) — d60 +0.1%, ADX 56
+- **CRNX** LOADED @ 83.86 (Health Technology) — d60 -0.1%, ADX 53
+- **RY** LOADED @ 215.43 (Finance) — d60 -1.1%, ADX 51
+- **TD** LOADED @ 123.60 (Finance) — d60 -1.0%, ADX 49
+- **ZD** LOADED @ 53.98 (Technology Services) — d60 +0.4%, ADX 49
+- **PTGX** LOADED @ 140.91 (Health Technology) — d60 +0.0%, ADX 46
+- **PANW** LOADED @ 358.68 (Technology Services) — d60 +0.3%, ADX 45
+- **LFST** LOADED @ 11.58 (Health Services) — d60 +1.3%, ADX 45
+- **ACRS** LOADED @ 5.68 (Health Technology) — d60 -0.5%, ADX 43
+- **BNS** LOADED @ 89.43 (Finance) — d60 -1.0%, ADX 43
+- **HCSG** LOADED @ 25.31 (Commercial Services) — d60 +0.6%, ADX 42
+- **GL** LOADED @ 184.76 (Finance) — d60 +0.1%, ADX 42
+- **RDN** LOADED @ 39.38 (Finance) — d60 +0.6%, ADX 42
+- **URGN** LOADED @ 40.23 (Health Technology) — d60 +0.0%, ADX 42
+- **XNCR** LOADED @ 17.47 (Health Technology) — d60 +6.1%, ADX 36
+- **DVA** LOADED @ 236.97 (Health Services) — d60 +0.5%, ADX 36
+- **PBI** LOADED @ 18.51 (Technology Services) — d60 +0.0%, ADX 36
+- **CLMT** LOADED @ 42.83 (Energy Minerals) — d60 +4.3%, ADX 34
+- **CNO** LOADED @ 53.59 (Finance) — d60 +0.1%, ADX 33
+- **ELVN** LOADED @ 53.20 (Health Technology) — d60 +0.1%, ADX 33
+- **TRV** LOADED @ 368.98 (Finance) — d60 +7.3%, ADX 31
+- **ROKU** LOADED @ 144.43 (Technology Services) — d60 +0.4%, ADX 30
+- **SKT** LOADED @ 41.78 (Finance) — d60 +0.2%, ADX 30
+- **CYRX** LOADED @ 16.51 (Transportation) — d60 -0.4%, ADX 29
+- **VLO** LOADED @ 309.65 (Energy Minerals) — d60 +2.7%, ADX 28
+- **SION** LOADED @ 49.41 (Health Technology) — d60 +7.5%, ADX 26
+- **CVS** LOADED @ 107.47 (Retail Trade) — d60 +0.9%, ADX 22
+- **DRTS** LOADED @ 13.55 (Health Technology) — d60 -0.2%, ADX 22
+- **PECO** LOADED @ 44.01 (Finance) — d60 +0.6%, ADX 21
+- **VSTS** LOADED @ 16.50 (Consumer Non-Durables) — d60 +0.5%, ADX 21
 
 | Sym | State | Close | vs60dHi | ADX | fired | Sector |
 |-----|-------|-------|---------|-----|-------|--------|
-| CDNA | FIRED-Q | 40.34 | +35.6% | 54 | 07-16 | Health Technology |
-| TCBK | FIRED-Q | 61.62 | +2.6% | 32 | 07-13 | Finance |
-| ATAI | FIRED-Q | 7.15 | +26.1% | 28 | 07-16 | Health Technology |
-| CHEF | FIRED-Q | 102.36 | +3.6% | 23 | 07-16 | Distribution Service |
-| WKC | LOADED | 36.95 | +0.1% | 65 |  | Distribution Service |
-| CAKE | LOADED | 83.31 | +0.7% | 59 |  | Consumer Services |
-| MRVI | LOADED | 7.09 | +0.7% | 51 |  | Health Technology |
-| SN | LOADED | 154.21 | +1.0% | 51 |  | Consumer Durables |
-| BLFS | LOADED | 30.26 | +3.8% | 48 |  | Health Technology |
-| FBRX | LOADED | 44.99 | +1.9% | 47 |  | Health Technology |
-| FBP | LOADED | 27.84 | +2.8% | 47 |  | Finance |
-| SLF | LOADED | 81.62 | +0.5% | 46 |  | Finance |
-| BPOP | LOADED | 173.86 | +1.7% | 46 |  | Finance |
-| VOYA | LOADED | 100.59 | +1.6% | 45 |  | Finance |
-| FA | LOADED | 22.31 | +5.4% | 45 |  | Technology Services |
-| ACIW | LOADED | 58.67 | +2.9% | 43 |  | Technology Services |
-| FCF | LOADED | 21.34 | +2.8% | 43 |  | Finance |
-| BBY | LOADED | 85.29 | -0.1% | 42 |  | Retail Trade |
-| MNST | LOADED | 99.94 | +2.0% | 42 |  | Consumer Non-Durable |
-| IART | LOADED | 19.85 | +5.6% | 42 |  | Health Technology |
-| LTH | LOADED | 42.84 | +2.0% | 42 |  | Consumer Services |
-| ZION | LOADED | 73.31 | +2.5% | 41 |  | Finance |
-| TFSL | LOADED | 18.44 | +3.2% | 40 |  | Finance |
-| CFG | LOADED | 74.40 | +3.2% | 40 |  | Finance |
-| KRNY | LOADED | 9.69 | +1.6% | 39 |  | Finance |
-| FFBC | LOADED | 36.18 | +3.9% | 39 |  | Finance |
-| DK | LOADED | 61.59 | +1.1% | 39 |  | Energy Minerals |
-| PBF | LOADED | 60.94 | +0.1% | 39 |  | Energy Minerals |
-| BZH | LOADED | 33.30 | +1.7% | 38 |  | Consumer Durables |
-| EPC | LOADED | 29.18 | +4.8% | 37 |  | Consumer Non-Durable |
-| WERN | LOADED | 45.99 | +2.7% | 36 |  | Transportation |
-| AMRX | LOADED | 18.04 | +4.2% | 36 |  | Health Technology |
-| CNI | LOADED | 128.22 | +2.3% | 35 |  | Transportation |
-| BNL | LOADED | 22.79 | +3.9% | 34 |  | Finance |
-| CROX | LOADED | 138.91 | +4.2% | 34 |  | Consumer Non-Durable |
-| RELY | LOADED | 25.23 | +1.1% | 34 |  | Commercial Services |
-| DOC | LOADED | 22.33 | +1.8% | 34 |  | Finance |
-| NWBI | LOADED | 15.67 | +2.1% | 34 |  | Finance |
-| BVS | LOADED | 12.43 | +1.7% | 33 |  | Health Technology |
-| DINO | LOADED | 86.84 | +3.5% | 33 |  | Energy Minerals |
-| MET | LOADED | 93.70 | +0.7% | 33 |  | Finance |
-| UNP | LOADED | 299.42 | +3.6% | 32 |  | Transportation |
-| MSM | LOADED | 125.63 | +1.2% | 31 |  | Distribution Service |
-| MPC | LOADED | 305.85 | +0.8% | 31 |  | Energy Minerals |
-| SIRI | LOADED | 31.22 | +1.5% | 30 |  | Consumer Services |
-| CFFN | LOADED | 8.79 | +1.6% | 30 |  | Finance |
-| STT | LOADED | 185.66 | -0.5% | 30 |  | Finance |
-| ACHC | LOADED | 33.61 | +4.2% | 29 |  | Health Services |
-| FULT | LOADED | 25.19 | +3.0% | 29 |  | Finance |
-| WELL | LOADED | 241.49 | +1.6% | 28 |  | Finance |
-| MTCH | LOADED | 40.29 | +0.4% | 28 |  | Technology Services |
-| CUZ | LOADED | 32.05 | +2.3% | 28 |  | Finance |
-| GNW | LOADED | 10.02 | +2.9% | 27 |  | Finance |
-| CSX | LOADED | 50.89 | +1.9% | 24 |  | Transportation |
-| LAMR | LOADED | 162.38 | +0.1% | 24 |  | Finance |
-| XYZ | LOADED | 81.52 | -0.4% | 24 |  | Commercial Services |
-| WT | LOADED | 20.16 | +0.7% | 23 |  | Miscellaneous |
-| AAPL | LOADED | 333.26 | +1.8% | 23 |  | Electronic Technolog |
-| TRNO | LOADED | 75.08 | +4.5% | 23 |  | Finance |
-| CLBK | LOADED | 22.95 | +4.3% | 23 |  | Finance |
-| JBHT | LOADED | 298.41 | +2.9% | 22 |  | Transportation |
+| CDNA | FIRED-Q | 39.73 | -1.5% | 55 | 07-16 | Health Technology |
+| TCBK | FIRED-Q | 60.52 | -1.8% | 33 | 07-13 | Finance |
+| ATAI | FIRED-Q | 7.22 | +1.0% | 31 | 07-16 | Health Technology |
+| CHEF | FIRED-Q | 97.09 | -5.1% | 20 | 07-16 | Distribution Service |
+| MAX | LOADED | 14.12 | -0.5% | 65 |  | Technology Services |
+| BMO | LOADED | 181.97 | -0.9% | 61 |  | Finance |
+| CAKE | LOADED | 85.77 | +3.0% | 60 |  | Consumer Services |
+| MRVI | LOADED | 7.24 | +2.1% | 57 |  | Health Technology |
+| ADPT | LOADED | 22.92 | +0.1% | 56 |  | Health Technology |
+| CRNX | LOADED | 83.86 | -0.1% | 53 |  | Health Technology |
+| RY | LOADED | 215.43 | -1.1% | 51 |  | Finance |
+| SN | LOADED | 154.53 | +0.2% | 50 |  | Consumer Durables |
+| FBRX | LOADED | 48.86 | +8.6% | 49 |  | Health Technology |
+| TD | LOADED | 123.60 | -1.0% | 49 |  | Finance |
+| ZD | LOADED | 53.98 | +0.4% | 49 |  | Technology Services |
+| EPC | LOADED | 29.66 | +1.6% | 48 |  | Consumer Non-Durable |
+| VOYA | LOADED | 99.73 | -0.9% | 46 |  | Finance |
+| PTGX | LOADED | 140.91 | +0.0% | 46 |  | Health Technology |
+| PANW | LOADED | 358.68 | +0.3% | 45 |  | Technology Services |
+| LFST | LOADED | 11.58 | +1.3% | 45 |  | Health Services |
+| SLF | LOADED | 81.78 | +0.2% | 45 |  | Finance |
+| FA | LOADED | 22.35 | +0.2% | 44 |  | Technology Services |
+| ACRS | LOADED | 5.68 | -0.5% | 43 |  | Health Technology |
+| BNS | LOADED | 89.43 | -1.0% | 43 |  | Finance |
+| BBY | LOADED | 85.41 | +0.0% | 42 |  | Retail Trade |
+| PBF | LOADED | 62.75 | +3.0% | 42 |  | Energy Minerals |
+| HCSG | LOADED | 25.31 | +0.6% | 42 |  | Commercial Services |
+| GL | LOADED | 184.76 | +0.1% | 42 |  | Finance |
+| RDN | LOADED | 39.38 | +0.6% | 42 |  | Finance |
+| URGN | LOADED | 40.23 | +0.0% | 42 |  | Health Technology |
+| DK | LOADED | 63.25 | +2.7% | 41 |  | Energy Minerals |
+| TFSL | LOADED | 18.28 | -0.9% | 38 |  | Finance |
+| BNL | LOADED | 22.80 | +0.0% | 36 |  | Finance |
+| XNCR | LOADED | 17.47 | +6.1% | 36 |  | Health Technology |
+| DVA | LOADED | 236.97 | +0.5% | 36 |  | Health Services |
+| DINO | LOADED | 88.59 | +2.0% | 36 |  | Energy Minerals |
+| PBI | LOADED | 18.51 | +0.0% | 36 |  | Technology Services |
+| CNI | LOADED | 129.03 | +0.6% | 36 |  | Transportation |
+| NWBI | LOADED | 15.53 | -0.9% | 34 |  | Finance |
+| CLMT | LOADED | 42.83 | +4.3% | 34 |  | Energy Minerals |
+| DOC | LOADED | 22.51 | +0.8% | 34 |  | Finance |
+| CNO | LOADED | 53.59 | +0.1% | 33 |  | Finance |
+| UNP | LOADED | 301.75 | +0.8% | 33 |  | Transportation |
+| ELVN | LOADED | 53.20 | +0.1% | 33 |  | Health Technology |
+| MPC | LOADED | 312.60 | +2.2% | 32 |  | Energy Minerals |
+| MET | LOADED | 94.00 | +0.3% | 32 |  | Finance |
+| TRV | LOADED | 368.98 | +7.3% | 31 |  | Finance |
+| MSM | LOADED | 124.77 | -0.7% | 30 |  | Distribution Service |
+| ROKU | LOADED | 144.43 | +0.4% | 30 |  | Technology Services |
+| SKT | LOADED | 41.78 | +0.2% | 30 |  | Finance |
+| ACHC | LOADED | 34.50 | +2.6% | 30 |  | Health Services |
+| WERN | LOADED | 46.04 | +0.1% | 30 |  | Transportation |
+| CYRX | LOADED | 16.51 | -0.4% | 29 |  | Transportation |
+| VLO | LOADED | 309.65 | +2.7% | 28 |  | Energy Minerals |
+| CUZ | LOADED | 31.76 | -0.9% | 28 |  | Finance |
+| WELL | LOADED | 243.25 | +0.7% | 28 |  | Finance |
+| GNW | LOADED | 10.09 | +0.7% | 28 |  | Finance |
+| SION | LOADED | 49.41 | +7.5% | 26 |  | Health Technology |
+| TRNO | LOADED | 75.06 | -0.0% | 26 |  | Finance |
+| LAMR | LOADED | 162.32 | -0.0% | 24 |  | Finance |
+| AAPL | LOADED | 333.74 | +0.1% | 24 |  | Electronic Technolog |
+| WT | LOADED | 20.05 | -0.5% | 23 |  | Miscellaneous |
+| CLBK | LOADED | 23.42 | +2.0% | 23 |  | Finance |
+| CSX | LOADED | 50.75 | -0.3% | 22 |  | Transportation |
+| CVS | LOADED | 107.47 | +0.9% | 22 |  | Retail Trade |
+| DRTS | LOADED | 13.55 | -0.2% | 22 |  | Health Technology |
+| PECO | LOADED | 44.01 | +0.6% | 21 |  | Finance |
+| VSTS | LOADED | 16.50 | +0.5% | 21 |  | Consumer Non-Durable |
 
 ```json
 {
- "date": "2026-07-17",
+ "date": "2026-07-19",
  "states": {
   "CDNA": "FIRED-Q",
   "TCBK": "FIRED-Q",
   "ATAI": "FIRED-Q",
   "CHEF": "FIRED-Q",
-  "WKC": "LOADED",
+  "MAX": "LOADED",
+  "BMO": "LOADED",
   "CAKE": "LOADED",
   "MRVI": "LOADED",
+  "ADPT": "LOADED",
+  "CRNX": "LOADED",
+  "RY": "LOADED",
   "SN": "LOADED",
-  "BLFS": "LOADED",
   "FBRX": "LOADED",
-  "FBP": "LOADED",
-  "SLF": "LOADED",
-  "BPOP": "LOADED",
-  "VOYA": "LOADED",
-  "FA": "LOADED",
-  "ACIW": "LOADED",
-  "FCF": "LOADED",
-  "BBY": "LOADED",
-  "MNST": "LOADED",
-  "IART": "LOADED",
-  "LTH": "LOADED",
-  "ZION": "LOADED",
-  "TFSL": "LOADED",
-  "CFG": "LOADED",
-  "KRNY": "LOADED",
-  "FFBC": "LOADED",
-  "DK": "LOADED",
-  "PBF": "LOADED",
-  "BZH": "LOADED",
+  "TD": "LOADED",
+  "ZD": "LOADED",
   "EPC": "LOADED",
-  "WERN": "LOADED",
-  "AMRX": "LOADED",
-  "CNI": "LOADED",
+  "VOYA": "LOADED",
+  "PTGX": "LOADED",
+  "PANW": "LOADED",
+  "LFST": "LOADED",
+  "SLF": "LOADED",
+  "FA": "LOADED",
+  "ACRS": "LOADED",
+  "BNS": "LOADED",
+  "BBY": "LOADED",
+  "PBF": "LOADED",
+  "HCSG": "LOADED",
+  "GL": "LOADED",
+  "RDN": "LOADED",
+  "URGN": "LOADED",
+  "DK": "LOADED",
+  "TFSL": "LOADED",
   "BNL": "LOADED",
-  "CROX": "LOADED",
-  "RELY": "LOADED",
-  "DOC": "LOADED",
-  "NWBI": "LOADED",
-  "BVS": "LOADED",
+  "XNCR": "LOADED",
+  "DVA": "LOADED",
   "DINO": "LOADED",
-  "MET": "LOADED",
+  "PBI": "LOADED",
+  "CNI": "LOADED",
+  "NWBI": "LOADED",
+  "CLMT": "LOADED",
+  "DOC": "LOADED",
+  "CNO": "LOADED",
   "UNP": "LOADED",
-  "MSM": "LOADED",
+  "ELVN": "LOADED",
   "MPC": "LOADED",
-  "SIRI": "LOADED",
-  "CFFN": "LOADED",
-  "STT": "LOADED",
+  "MET": "LOADED",
+  "TRV": "LOADED",
+  "MSM": "LOADED",
+  "ROKU": "LOADED",
+  "SKT": "LOADED",
   "ACHC": "LOADED",
-  "FULT": "LOADED",
-  "WELL": "LOADED",
-  "MTCH": "LOADED",
+  "WERN": "LOADED",
+  "CYRX": "LOADED",
+  "VLO": "LOADED",
   "CUZ": "LOADED",
+  "WELL": "LOADED",
   "GNW": "LOADED",
-  "CSX": "LOADED",
-  "LAMR": "LOADED",
-  "XYZ": "LOADED",
-  "WT": "LOADED",
-  "AAPL": "LOADED",
+  "SION": "LOADED",
   "TRNO": "LOADED",
+  "LAMR": "LOADED",
+  "AAPL": "LOADED",
+  "WT": "LOADED",
   "CLBK": "LOADED",
-  "JBHT": "LOADED"
+  "CSX": "LOADED",
+  "CVS": "LOADED",
+  "DRTS": "LOADED",
+  "PECO": "LOADED",
+  "VSTS": "LOADED"
  }
 }
 ```

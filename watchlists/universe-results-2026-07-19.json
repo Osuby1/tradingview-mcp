@@ -1,0 +1,34 @@
+{
+  "date": "2026-07-19",
+  "variant": "run-watch",
+  "universe_size": 295,
+  "combined_risk": 0,
+  "notes": "First execution of the RUN-WATCH + EXIT-WATCH layers (Sunday, Friday 7/17 settled closes; watchlist scan results from 7/17-18 carried, not re-run). Tracker math: 294/295 recos priced (NUVL unresolved - likely delisted, Omar to confirm). 12 recos crossed rec+10% within ~5 sessions; 15 winners >=+10% chart-verified: ALL in buy mode (zero broken - no bank-it flags), 14/15 Magical >+100 = too hot to chase -> pullback alerts wired at ZLSMA per name; NET the lone plannable runner (Magical +70, at ZLSMA) -> reclaim alert 274. 9 run-start alerts wired at coil tops for recommended sweep-LOADED pre-breakout names. 69 young recos broken <=-5% listed for pruning review (modes unverified tonight). DATA FLAG: AGL row anomalous (rec 115.7 vs Jefferies PT 48 vs chart label 5.81) - possible ticker collision in recommendations_log; VERIFY before trusting any AGL number. Earnings cluster: nearly all runners report 7/28-8/12 - the runs are pre-earnings momentum; binary rules bind (CAKE/ACHC 7/28 = no fresh entry after 7/24).",
+  "hits": [],
+  "blocked": [],
+  "sell_mode": [],
+  "tracker_running": [
+    {"sym": "CDNA", "rec": 29.06, "close": 39.7, "pct": 36.7, "magical": 332, "action": "pullback alert 35 (wired 7/19); earnings 7/30 AMC"},
+    {"sym": "PBF", "rec": 48.0, "close": 62.8, "pct": 30.6, "magical": 141, "action": "pullback alert 59; earnings 7/30 BMO"},
+    {"sym": "DK", "rec": 53.1, "close": 63.3, "pct": 19.0, "magical": 138, "action": "pullback alert 59.50; earnings 8/5 BMO"},
+    {"sym": "MRVI", "rec": 6.1, "close": 7.2, "pct": 18.9, "magical": 172, "action": "pullback alert 6.60; earnings ~8/10 est"},
+    {"sym": "ACHC", "rec": 29.5, "close": 34.5, "pct": 16.8, "magical": 105, "action": "pullback alert 35; earnings 7/28 AMC - tight window"},
+    {"sym": "VSTS", "rec": 14.4, "close": 16.5, "pct": 15.0, "magical": 207, "action": "pullback alert 15.20 spec-size; earnings ~8/12 est"},
+    {"sym": "BJRI", "rec": 59.2, "close": 67.5, "pct": 14.0, "magical": 178, "action": "pullback alert 65.50; earnings 7/30 AMC"},
+    {"sym": "PNTG", "rec": 37.4, "close": 42.0, "pct": 12.3, "magical": 111, "action": "pullback alert 39.80 thin/spec; earnings ~8/10 est"},
+    {"sym": "AGL", "rec": 115.7, "close": 129.8, "pct": 12.3, "magical": 170, "action": "DATA ANOMALY - verify ticker identity before anything"},
+    {"sym": "NET", "rec": 247.6, "close": 277.7, "pct": 12.2, "magical": 70, "action": "RECLAIM alert 274 - the one plannable runner; earnings 8/6 AMC"},
+    {"sym": "CAKE", "rec": 76.9, "close": 85.8, "pct": 11.5, "magical": 205, "action": "pullback alert 87; earnings 7/28 AMC - tight window"},
+    {"sym": "ETON", "rec": 38.0, "close": 42.3, "pct": 11.3, "magical": 159, "action": "pullback alert 38.10 spec; earnings ~8/6 est"},
+    {"sym": "EPC", "rec": 26.7, "close": 29.7, "pct": 11.2, "magical": 181, "action": "pullback alert 32.80; M&A floor ~30; earnings 8/5 BMO"},
+    {"sym": "DAVE", "rec": 396.0, "close": 440.4, "pct": 11.2, "magical": 111, "action": "pullback alert 458; earnings ~8/5 est"},
+    {"sym": "PSX", "rec": 187.8, "close": 206.9, "pct": 10.1, "magical": 144, "action": "pullback alert 190; earnings 8/5 BMO"}
+  ],
+  "tracker_broken": [],
+  "run_start_alerts": [
+    {"sym": "ADPT", "trigger": 22.95}, {"sym": "PTGX", "trigger": 141.0}, {"sym": "VOYA", "trigger": 100.65},
+    {"sym": "URGN", "trigger": 40.25}, {"sym": "PBI", "trigger": 18.55}, {"sym": "DRTS", "trigger": 13.6},
+    {"sym": "CYRX", "trigger": 16.6}, {"sym": "MSM", "trigger": 125.7}, {"sym": "AAPL", "trigger": 334.0}
+  ],
+  "broken_early_pruning_review": ["ABSI -28.1", "MRNA -24.4", "CRDO -23.7", "PENG -23.0", "BEAM -22.1", "MRCY -21.9", "SLDB -21.2", "LINC -20.6", "WLFC -20.1", "AVR -20.1", "TTI -18.3", "ICHR -17.4", "MPTI -16.5", "ALHC -16.1", "VSEC -16.1", "NUTX -15.8", "DSGN -15.4", "EVC -15.0", "CEVA -14.8", "IMMX -14.7", "APEI -14.5", "CDNS -14.5", "ANAB -13.8", "BLZE -13.6", "FDMT -13.6", "DGII -12.7", "ALGT -12.7", "ABUS -12.6", "ELV -12.2", "PGEN -11.6", "CMPS -11.6", "AMBQ -11.6", "IRDM -11.2", "MGTX -10.4", "SHLS -10.4", "MEC -10.1", "and 33 more between -5 and -10"]
+}
