@@ -68,8 +68,25 @@ def main():
             continue
         tabs[label] = sheet_tickers(wb[match])
 
-    tracker_match = next((n for n in wb.sheetnames if TRACKER_PATTERN in n.lower()), None)
-    tracker = sheet_tickers(wb[tracker_match]) if tracker_match else []
+    # Tracker source = recommendations_log.csv (clean header) - the xlsx TRACKER
+    # tab has a decorative layout that defeats column sniffing (learned 7/19).
+    tracker, tracker_note = [], ""
+    reco_csv = os.path.join(os.path.dirname(XLSX), "recommendations_log.csv")
+    if os.path.exists(reco_csv):
+        import csv
+        with open(reco_csv, newline="", encoding="utf-8-sig", errors="replace") as f:
+            reader = csv.DictReader(f)
+            fields = reader.fieldnames or []
+            tick_col = next((c for c in fields if c and ("ticker" in c.lower() or "symbol" in c.lower())), None)
+            if tick_col:
+                for row in reader:
+                    val = str(row.get(tick_col) or "").strip().upper().split(":")[-1]
+                    if TICKER_RE.match(val) and val not in tracker:
+                        tracker.append(val)
+            else:
+                tracker_note = f"(no ticker column found in recommendations_log.csv - headers: {', '.join(map(str, fields))})"
+    else:
+        tracker_note = "(recommendations_log.csv not found)"
 
     all_syms = sorted({s for syms in tabs.values() for s in syms})
     lines = [
@@ -85,9 +102,8 @@ def main():
         lines.append(f"## {label} ({len(syms)})")
         lines.append(", ".join(syms) if syms else "(tab not found)" if label in missing else "(empty)")
         lines.append("")
-    lines.append(f"## Tracker — open recommendations, exit-watch only ({len(tracker)})")
-    lines.append(", ".join(tracker) if tracker else
-                 "(Tracker tab not found)" if tracker_match is None else "(empty)")
+    lines.append(f"## Tracker — logged recommendations, exit-watch only ({len(tracker)})")
+    lines.append(", ".join(tracker) if tracker else (tracker_note or "(empty)"))
     lines.append("")
     lines += [
         "```json",
@@ -116,6 +132,7 @@ def main():
 
     print(f"Exported {len(all_syms)} unique tickers "
           f"({', '.join(f'{k}: {len(v)}' for k, v in tabs.items())})")
+    print(f"Tracker (exit-watch): {len(tracker)} tickers {tracker_note}".rstrip())
     if missing:
         print(f"WARNING — tabs not found in xlsx: {', '.join(missing)} "
               f"(available sheets: {', '.join(wb.sheetnames)})")
