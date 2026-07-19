@@ -21,11 +21,13 @@ echo [1/4] origination scan... >> "%LOG%"
 python stage2_leader_scanner_v3.py --universe russell3000.csv --no-open >> "%LOG%" 2>&1
 if errorlevel 1 echo WARNING: origination scan exited nonzero >> "%LOG%"
 
-rem -- 2. Export tabs into the repo -----------------------------
+rem -- 2. Export tabs into the repo + archive a dated xlsx copy --
 cd /d "%REPO%"
 echo [2/4] export tabs... >> "%LOG%"
 python scripts\export_origination_tabs.py >> "%LOG%" 2>&1
 if errorlevel 1 echo WARNING: tab export failed - universe will run watchlists-only >> "%LOG%"
+powershell -NoProfile -Command "Copy-Item \"$env:USERPROFILE\Documents\Equities_Scanner\origination_scan.xlsx\" (\"%REPO%\reports\origination_scan_\" + (Get-Date -Format yyyy-MM-dd) + \".xlsx\") -Force" >> "%LOG%" 2>&1
+if errorlevel 1 echo WARNING: dated origination xlsx archive failed >> "%LOG%"
 
 rem -- 3. Universe scan via headless Claude ---------------------
 rem Requires TradingView desktop open with CDP on :9222.
