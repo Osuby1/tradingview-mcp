@@ -94,6 +94,17 @@ def main():
     with open(OUT, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
+    # dated archive of the scanner's xlsx (it overwrites itself daily)
+    import shutil
+    arch_dir = os.path.join(REPO, "reports")
+    os.makedirs(arch_dir, exist_ok=True)
+    arch = os.path.join(arch_dir, f"origination_scan_{datetime.date.today().isoformat()}.xlsx")
+    try:
+        shutil.copy2(XLSX, arch)
+        print(f"Archived: {arch}")
+    except OSError as e:
+        print(f"WARNING: dated xlsx archive failed: {e}")
+
     print(f"Exported {len(all_syms)} unique tickers "
           f"({', '.join(f'{k}: {len(v)}' for k, v in tabs.items())})")
     if missing:

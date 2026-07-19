@@ -26,8 +26,7 @@ cd /d "%REPO%"
 echo [2/4] export tabs... >> "%LOG%"
 python scripts\export_origination_tabs.py >> "%LOG%" 2>&1
 if errorlevel 1 echo WARNING: tab export failed - universe will run watchlists-only >> "%LOG%"
-powershell -NoProfile -Command "Copy-Item \"$env:USERPROFILE\Documents\Equities_Scanner\origination_scan.xlsx\" (\"%REPO%\reports\origination_scan_\" + (Get-Date -Format yyyy-MM-dd) + \".xlsx\") -Force" >> "%LOG%" 2>&1
-if errorlevel 1 echo WARNING: dated origination xlsx archive failed >> "%LOG%"
+rem (dated origination_scan_<date>.xlsx archive is done inside export_origination_tabs.py)
 
 rem -- 3. Universe scan via headless Claude ---------------------
 rem Requires TradingView desktop open with CDP on :9222.
@@ -42,12 +41,13 @@ if %TRIES% geq 30 (
     echo [3/4] SKIPPED: TradingView CDP feed not reachable after 15 min of waiting >> "%LOG%"
     goto report
 )
-timeout /t 30 /nobreak >nul
+rem ping-based 30s sleep - reliable in non-interactive Task Scheduler context (timeout.exe is not)
+ping -n 31 127.0.0.1 >nul
 goto feedcheck
 :feedup
 if /I "%~1"=="test" goto testrun
 echo [3/4] claude run-the-universe... >> "%LOG%"
-claude -p "run the universe - autonomous EOD chain run: on MONDAY and WEDNESDAY run the FULL universe, on Tue/Thu/Fri use the fast convergence variant; write the machine-readable results JSON for the report compiler; commit everything via the PowerShell tool; if anything blocks, log it in the results file instead of waiting for input" >> "%LOG%" 2>&1
+claude -p "run the universe - autonomous EOD chain run: on MONDAY and WEDNESDAY run the FULL universe, on Tue/Thu/Fri use the fast convergence variant; if today is SATURDAY or SUNDAY this is a catch-up run of a missed weekday - use the FAST variant on the latest settled data and say so in the results notes; write the machine-readable results JSON for the report compiler; commit everything via the PowerShell tool; if anything blocks, log it in the results file instead of waiting for input" >> "%LOG%" 2>&1
 if errorlevel 1 echo WARNING: claude universe run exited nonzero >> "%LOG%"
 goto report
 
