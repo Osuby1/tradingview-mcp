@@ -23,6 +23,8 @@ OUT = os.path.join(REPO, "watchlists", "origination-tabs.md")
 
 # case-insensitive substring match per target tab
 TAB_PATTERNS = {"Buy Zone": "buy", "Fresh Ignitions": "ignit", "Coiled": "coil"}
+# tracked past recommendations - exported separately (exit-watch, NOT merged into the buy-scan universe)
+TRACKER_PATTERN = "track"
 TICKER_RE = re.compile(r"^[A-Z][A-Z0-9.\-]{0,6}$")
 
 
@@ -66,6 +68,9 @@ def main():
             continue
         tabs[label] = sheet_tickers(wb[match])
 
+    tracker_match = next((n for n in wb.sheetnames if TRACKER_PATTERN in n.lower()), None)
+    tracker = sheet_tickers(wb[tracker_match]) if tracker_match else []
+
     all_syms = sorted({s for syms in tabs.values() for s in syms})
     lines = [
         f"# Origination scan tabs — exported {datetime.date.today().isoformat()}",
@@ -80,12 +85,16 @@ def main():
         lines.append(f"## {label} ({len(syms)})")
         lines.append(", ".join(syms) if syms else "(tab not found)" if label in missing else "(empty)")
         lines.append("")
+    lines.append(f"## Tracker — open recommendations, exit-watch only ({len(tracker)})")
+    lines.append(", ".join(tracker) if tracker else
+                 "(Tracker tab not found)" if tracker_match is None else "(empty)")
+    lines.append("")
     lines += [
         "```json",
         json.dumps(
             {"exported": datetime.date.today().isoformat(),
              "xlsx_modified": mtime.strftime("%Y-%m-%d %H:%M"),
-             "tabs": tabs, "all": all_syms},
+             "tabs": tabs, "all": all_syms, "tracker": tracker},
             indent=1),
         "```",
         "",
