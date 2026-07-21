@@ -1,0 +1,35 @@
+{
+ "market_lines": [
+  ["SPY 746.13 pre-market Tue (+0.2%)", "TAPE OK", "Above rising 200-day; Monday's bounce attempt failed late but futures green Tuesday"],
+  ["Breadth: 50% of 1,168 names in Stage 2; 62% above 200-day", "MIXED", "Half the market trending, half broken — a picky tape, not a buy-everything tape"],
+  ["VIX 17.53 (falling Tue pre)", "WATCH", "Close to the 20 abort line for the put-spread plan (entry week starts Mon 7/27)"],
+  ["Brent $90.10 — new war-cycle high", "RISK", "Oil feeding inflation; 8th+ night of US-Iran strikes, Houthi blockade of Saudi Arabia declared Mon"],
+  ["Polymarket: July FOMC 86.9% hold / 11.65% HIKE; zero 2026 cuts 84.65%", "HEADWIND", "Hike tail TRIPLED since the weekend (4% -> 12%) — pressures rate-sensitive groups (REITs, banks, utilities)"],
+  ["46% of the 415-name universe is in sell mode; 29% of July tracker recs broke within 30 days", "DEFENSIVE", "Fresh signals are failing at a high rate — demand extra confirmation, prefer starter sizes"]
+ ],
+ "rotation_commentary": [
+  "",
+  "WHERE MONEY IS FLOWING (plain English):",
+  "OUT of semis (deepest negative reading, -17.8), broad tech, and oil services.",
+  "INTO China internet (only IGNITING group, day 5 - KWEB), energy producers/refiners (XLE + Oil E&P newly on watch),",
+  "biotech (both cap-weighted and equal-weighted flavors on watch - a real cluster with healthcare), and retail.",
+  "The scan's mall-REIT fresh-buy cluster (MAC + SPG + M, all 7/16-17) matches Retail's WATCH state - two systems, same signal.",
+  "Inside energy: own the producers/refiners (MPC/PBF wall still LOADED), not the drillers (oil services ROLLING).",
+  "Tension to respect: rate-sensitive groups are waking up INTO a tripling Fed-hike tail; FOMC 7/28-29 resolves it.",
+  "Software dropped off watch Tuesday (CRWD/NET complex cooling). Semis coherently bearish: SMH + SOXL sell-mode,",
+  "inverse SOXS long, QQQ sell (-147 Magical) while SPXL (3x S&P) recovers = big-caps-ex-tech holding the tape up.",
+  "Wednesday's GOOGL print (with TSLA + IBM) is the AI-capex referendum that decides the tech side."
+ ],
+ "plans": [
+  ["BHP", "ACTIVE (new)", 80.00, 76.60, "half $50k (~625sh)", 2100, "86.30 -> 88", "FY results 8/17-18 (clear runway)", 5195389330, "Fresh 7/15, regime PASS +13.7% vs 200d. Record FY26 iron ore + ~2Mt copper already reported. NYSE ADR in USD (ASX line shows ~AUD 58 = same value, 2:1 ratio)"],
+  ["ECVT", "ACTIVE (new)", 12.35, 11.55, "half $40k (~3,240sh)", 2600, "13.07 -> 14", "8/5 BMO - trim 8/4", 5195389391, "Fresh 7/16-17 six-week base breakout, regime PASS, ADX 29. Cleanest new chart of the run"],
+  ["GS", "TRIGGER (reclaim)", 1078, 1025, "half $50k (~46sh)", 2400, "1154 -> 1190", "behind (Q2 beat 7/14); next ~10/14", 5195389473, "Fresh 7/15, regime PASS, record quarter behind it; chart-verified below ZLSMA - buy the reclaim only"],
+  ["MAC", "TRIGGER (reclaim)", 26.20, 24.40, "starter $25k (~950sh)", 1700, "28", "8/4 AMC - trim 8/3", 5195389644, "Mall-REIT cluster vehicle (MAC+SPG+M all fresh 7/16-17). Rate-sensitive: FOMC risk 7/28-29"],
+  ["TLN", "TRIGGER (watch)", 389, null, "starter, re-gate on fire", null, "", "8/5 AMC", 5195389568, "PJM $1.21B capacity catalyst confirmed; below ZLSMA + regime REPAIR = reclaim first"],
+  ["HAS", "POST-PRINT (pending Omar)", "~84-85 retest", "79.90", "starter (repair regime)", null, "", "Q2 BEAT+RAISE reported 7/21 BMO", null, "Beat $1.28 vs $1.17, MTG record $545M qtr, FY guidance raised; gapped +7% pre = no chase; awaiting Omar's call on wiring the retest alert"],
+  ["COCO", "POST-PRINT (Thu)", null, null, null, null, "", "7/23 BMO", null, "Best regime of the entire scan (+29.2% vs 200d) - the one to be ready for after the print"],
+  ["NUE", "SKIPPED by Omar 7/21", null, null, null, null, "", "Q2 7/27 AMC", 5189401855, "GO'd 7/20, passed 7/21 AM - graded as skip vs ref 231.00. Stop alert now informational"],
+  ["PFE", "SKIPPED by Omar 7/21", null, null, null, null, "", "8/4 BMO + PDUFA 8/17", 5189401903, "GO'd 7/20, passed 7/21 AM - graded as skip vs ref 24.86. Stop alert now informational"],
+  ["CEG", "OMAR DECISION PENDING", 245, 227, "half $34k (carried)", 2500, "266 -> 285", "8/6 BMO", null, "Live 245 alert vs regime DEEP-FAIL (-18.9% below 200d; frozen rules say watch-only). Keep or pull?"]
+ ]
+}
