@@ -2,17 +2,24 @@
  "date": "2026-07-22",
  "variant": "full - O.G Chandelier + HQ Swing v1 regime filter",
  "system_version": "gate-stack-v1-2026-07-22",
- "universe_size": 156,
- "scanned": 155,
- "fresh_count": 29,
- "combined_risk_new_actives": "$0 - no name passed the full gate stack",
- "run_note": "Full universe read on candles. 29 fresh BUY signals culled to 0 by the regime + ADX + DI + ZLSMA stack.",
+ "universe_size": 439,
+ "scanned": 437,
+ "fresh_count": 76,
+ "combined_risk_new_actives": "$2,670 if CTRE is taken (1 name); $0 otherwise",
+ "run_note": "EXTENDED EOD run: 439-name universe (3 watchlists + origination tabs), 437 read clean on candles. 76 fresh Chandelier BUY signals -> 3 pass the scan gate stack -> 1 (CTRE) also clears the execution protocol. Rotation radar and ignition sweep both ran.",
  "data_quality": [
   {
    "severity": "BLOCKER",
    "area": "Gate stack",
-   "finding": "29 fresh Chandelier BUY signals culled to 0. Funnel: fresh signals 29 -> regime PASS 15 -> ADX >= 20 6 -> +DI > -DI 4 -> above ZLSMA 1 -> liquid enough 0.",
-   "impact": "Zero passing names means zero trades - that is the honest output, not a failure of the scan.",
+   "finding": "The ATR floor and 2:1 reward gates are NOT in gate_stack.py - they were applied by hand. FRT and DELL passed the automated stack and both fail execution (FRT stop 0.82x ATR + earnings in 9 days; DELL needs +40.7% for 2:1).",
+   "impact": "The automated PASSING list overstates by 2 of 3. Do not act on gate-stack output alone until ATR is captured in the sweep and wired in.",
+   "action": "Add ATR14 to og_sweep_runner.js capture and add an atr_floor gate to gate_stack.py, exactly as was done for liquidity."
+  },
+  {
+   "severity": "INFO",
+   "area": "Gate stack",
+   "finding": "76 fresh Chandelier BUY signals culled to 3. Funnel: fresh signals 76 -> regime PASS 49 -> ADX >= 20 25 -> +DI > -DI 21 -> above ZLSMA 4 -> liquid enough 3.",
+   "impact": "",
    "action": "Do not manufacture a candidate to have something to say."
   },
   {
@@ -28,100 +35,567 @@
    "finding": "Read on CANDLES on the live chart, per the 2026-07-22 standard.",
    "impact": "",
    "action": ""
+  },
+  {
+   "severity": "WARNING",
+   "area": "Rotation",
+   "finding": "Rotation radar: Oil E&P WATCH->IGNITING (+10.2), China internet +9.7. Tech broad -10.7 and Semis -20.2 ROLLING. Ignition sweep LOADED names cluster in Health Technology (9) and Energy Minerals (6) - independent confirmation of the same rotation.",
+   "impact": "Long exposure to tech/semis is against the prevailing rotation.",
+   "action": "Favour energy and healthcare setups; treat semi bounces as counter-trend."
   }
  ],
  "hits": [
   {
-   "sym": "BHP",
+   "sym": "ACTG",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-21",
    "bars_back": 1,
-   "last": 84.53,
-   "zlsma": 77.5604,
-   "magical": 116.2822,
-   "ce_label": 80.9,
+   "last": 4.57,
+   "zlsma": 4.6178,
+   "magical": 20.5718,
+   "ce_label": 4.3768,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: ADX 13.3 below 20",
+   "verdict": "BLOCKED: ADX 19.0054 below 20",
    "gates": {
     "regime": "REPAIR",
-    "pct_vs_200": 18.77,
-    "adx": 13.3,
-    "plus_di": 35.7,
-    "minus_di": 32.3,
-    "above_zlsma": true,
-    "avg_dollar_vol": 214709826,
-    "max_position": 21470983
+    "pct_vs_200": 8.0998,
+    "adx": 19.0054,
+    "plus_di": 27.664,
+    "minus_di": 13.9376,
+    "above_zlsma": false,
+    "avg_dollar_vol": 1287026,
+    "max_position": 128703
    },
-   "note": "ADX 13.3 below 20 - no trend to ride"
+   "note": "ADX 19.0054 below 20 - no trend to ride; price 4.57 at/below ZLSMA 4.6178 - structure has not turned"
+  },
+  {
+   "sym": "AMCR",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 43.21,
+   "zlsma": 45.5691,
+   "magical": -12.5031,
+   "ce_label": 41.76,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 19.5057 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 3.2556,
+    "adx": 19.5057,
+    "plus_di": 24.2035,
+    "minus_di": 20.1295,
+    "above_zlsma": false,
+    "avg_dollar_vol": 137599402,
+    "max_position": 13759940
+   },
+   "note": "ADX 19.5057 below 20 - no trend to ride; price 43.21 at/below ZLSMA 45.5691 - structure has not turned"
+  },
+  {
+   "sym": "AMGN",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 366.05,
+   "zlsma": 374.3464,
+   "magical": 45.4211,
+   "ce_label": 353.77,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 18.0368 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 7.427,
+    "adx": 18.0368,
+    "plus_di": 26.8665,
+    "minus_di": 14.04,
+    "above_zlsma": false,
+    "avg_dollar_vol": 838600362,
+    "max_position": 83860036
+   },
+   "note": "ADX 18.0368 below 20 - no trend to ride; price 366.05 at/below ZLSMA 374.3464 - structure has not turned"
+  },
+  {
+   "sym": "ASB",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 30.7,
+   "zlsma": 32.4243,
+   "magical": -29.7097,
+   "ce_label": 30.03,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 30.7 at/below ZLSMA 32.4243",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 13.1672,
+    "adx": 27.2786,
+    "plus_di": 22.5064,
+    "minus_di": 18.0473,
+    "above_zlsma": false,
+    "avg_dollar_vol": 70118536,
+    "max_position": 7011854
+   },
+   "note": "price 30.7 at/below ZLSMA 32.4243 - structure has not turned"
+  },
+  {
+   "sym": "BCBP",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 10.29,
+   "zlsma": 10.2611,
+   "magical": -29.3147,
+   "ce_label": 10.01,
+   "regime": "REPAIR",
+   "verdict": "BLOCKED: -DI 25.4212 >= +DI 18.4009",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": 15.2919,
+    "adx": 21.1293,
+    "plus_di": 18.4009,
+    "minus_di": 25.4212,
+    "above_zlsma": true,
+    "avg_dollar_vol": 2006265,
+    "max_position": 200626
+   },
+   "note": "-DI 25.4212 >= +DI 18.4009 - sellers in control"
+  },
+  {
+   "sym": "BHP",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-14",
+   "bars_back": 5,
+   "last": 59.76,
+   "zlsma": 55.9746,
+   "magical": 66.0469,
+   "ce_label": 56.99,
+   "regime": "REPAIR",
+   "verdict": "BLOCKED: ADX 13.723 below 20",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": 15.8793,
+    "adx": 13.723,
+    "plus_di": 34.1875,
+    "minus_di": 34.2233,
+    "above_zlsma": true,
+    "avg_dollar_vol": 420635494,
+    "max_position": 42063549
+   },
+   "note": "ADX 13.723 below 20 - no trend to ride; -DI 34.2233 >= +DI 34.1875 - sellers in control"
+  },
+  {
+   "sym": "BHRB",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 71.01,
+   "zlsma": 74.412,
+   "magical": 23.593,
+   "ce_label": 68.56,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 71.01 at/below ZLSMA 74.412",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 10.0337,
+    "adx": 22.928,
+    "plus_di": 24.3995,
+    "minus_di": 16.4289,
+    "above_zlsma": false,
+    "avg_dollar_vol": 13794498,
+    "max_position": 1379450
+   },
+   "note": "price 71.01 at/below ZLSMA 74.412 - structure has not turned"
+  },
+  {
+   "sym": "BX",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-15",
+   "bars_back": 5,
+   "last": 122.82,
+   "zlsma": 129.2888,
+   "magical": 28.3101,
+   "ce_label": 121.5318,
+   "regime": "REPAIR",
+   "verdict": "BLOCKED: ADX 12.3735 below 20",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -7.7497,
+    "adx": 12.3735,
+    "plus_di": 28.1038,
+    "minus_di": 24.4181,
+    "above_zlsma": false,
+    "avg_dollar_vol": 586495947,
+    "max_position": 58649595
+   },
+   "note": "ADX 12.3735 below 20 - no trend to ride; price 122.82 at/below ZLSMA 129.2888 - structure has not turned"
+  },
+  {
+   "sym": "BY",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 37.75,
+   "zlsma": 39.5378,
+   "magical": 40.6179,
+   "ce_label": 37.07,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 37.75 at/below ZLSMA 39.5378",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 19.7341,
+    "adx": 49.4321,
+    "plus_di": 26.9579,
+    "minus_di": 11.066,
+    "above_zlsma": false,
+    "avg_dollar_vol": 14115858,
+    "max_position": 1411586
+   },
+   "note": "price 37.75 at/below ZLSMA 39.5378 - structure has not turned"
+  },
+  {
+   "sym": "CBSH",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 58.7,
+   "zlsma": 60.8872,
+   "magical": 58.8985,
+   "ce_label": 57.37,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 58.7 at/below ZLSMA 60.8872",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 11.468,
+    "adx": 28.5525,
+    "plus_di": 24.7811,
+    "minus_di": 16.4613,
+    "above_zlsma": false,
+    "avg_dollar_vol": 75801473,
+    "max_position": 7580147
+   },
+   "note": "price 58.7 at/below ZLSMA 60.8872 - structure has not turned"
+  },
+  {
+   "sym": "CCJ",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-21",
+   "bars_back": 1,
+   "last": 90.37,
+   "zlsma": 90.072,
+   "magical": -60.6893,
+   "ce_label": 83.61,
+   "regime": "DEEP-FAIL",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-13.5648% vs 200-day)",
+   "gates": {
+    "regime": "DEEP-FAIL",
+    "pct_vs_200": -13.5648,
+    "adx": 30.5554,
+    "plus_di": 18.9773,
+    "minus_di": 31.009,
+    "above_zlsma": true,
+    "avg_dollar_vol": 331654195,
+    "max_position": 33165420
+   },
+   "note": "regime DEEP-FAIL (-13.5648% vs 200-day) - watch only, no size; -DI 31.009 >= +DI 18.9773 - sellers in control"
+  },
+  {
+   "sym": "CMP",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-22",
+   "bars_back": 0,
+   "last": 30.14,
+   "zlsma": 27.5666,
+   "magical": 37.6179,
+   "ce_label": 28.47,
+   "regime": "REPAIR",
+   "verdict": "BLOCKED: ADX 10.1067 below 20",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": 26.117,
+    "adx": 10.1067,
+    "plus_di": 21.0684,
+    "minus_di": 20.2006,
+    "above_zlsma": true,
+    "avg_dollar_vol": 12622475,
+    "max_position": 1262248
+   },
+   "note": "ADX 10.1067 below 20 - no trend to ride"
+  },
+  {
+   "sym": "CNOB",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-15",
+   "bars_back": 5,
+   "last": 33,
+   "zlsma": 33.9222,
+   "magical": 10.2927,
+   "ce_label": 32.52,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 17.7011 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 18.608,
+    "adx": 17.7011,
+    "plus_di": 22.016,
+    "minus_di": 21.0471,
+    "above_zlsma": false,
+    "avg_dollar_vol": 17432524,
+    "max_position": 1743252
+   },
+   "note": "ADX 17.7011 below 20 - no trend to ride; price 33 at/below ZLSMA 33.9222 - structure has not turned"
+  },
+  {
+   "sym": "COKE",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-22",
+   "bars_back": 0,
+   "last": 184.36,
+   "zlsma": 193.0137,
+   "magical": 18.2514,
+   "ce_label": 177.96,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 13.2389 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 8.0957,
+    "adx": 13.2389,
+    "plus_di": 20.1118,
+    "minus_di": 20.9686,
+    "above_zlsma": false,
+    "avg_dollar_vol": 110082997,
+    "max_position": 11008300
+   },
+   "note": "ADX 13.2389 below 20 - no trend to ride; -DI 20.9686 >= +DI 20.1118 - sellers in control; price 184.36 at/below ZLSMA 193.0137 - structure has not turned"
+  },
+  {
+   "sym": "COLB",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 32.63,
+   "zlsma": 33.8888,
+   "magical": 55.4104,
+   "ce_label": 31.85,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 32.63 at/below ZLSMA 33.8888",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 13.0753,
+    "adx": 21.527,
+    "plus_di": 25.095,
+    "minus_di": 17.3109,
+    "above_zlsma": false,
+    "avg_dollar_vol": 91487611,
+    "max_position": 9148761
+   },
+   "note": "price 32.63 at/below ZLSMA 33.8888 - structure has not turned"
   },
   {
    "sym": "COST",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-16",
    "bars_back": 4,
-   "last": 923.74,
-   "zlsma": 901.9816,
-   "magical": -69.5832,
+   "last": 927.31,
+   "zlsma": 902.5145,
+   "magical": -52.1492,
    "ce_label": 906.5,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: ADX 12.0 below 20",
+   "verdict": "BLOCKED: ADX 11.964 below 20",
    "gates": {
     "regime": "REPAIR",
-    "pct_vs_200": -3.16,
-    "adx": 12.0,
-    "plus_di": 24.5,
-    "minus_di": 25.1,
+    "pct_vs_200": -3.0928,
+    "adx": 11.964,
+    "plus_di": 24.4636,
+    "minus_di": 25.1067,
     "above_zlsma": true,
-    "avg_dollar_vol": 2534609870,
-    "max_position": 253460987
+    "avg_dollar_vol": 2534063329,
+    "max_position": 253406333
    },
-   "note": "ADX 12.0 below 20 - no trend to ride; -DI 25.1 >= +DI 24.5 - sellers in control"
+   "note": "ADX 11.964 below 20 - no trend to ride; -DI 25.1067 >= +DI 24.4636 - sellers in control"
+  },
+  {
+   "sym": "CRCL",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-21",
+   "bars_back": 1,
+   "last": 66.16,
+   "zlsma": 47.6229,
+   "magical": 1.9886,
+   "ce_label": 58.44,
+   "regime": "DEEP-FAIL",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-28.5129% vs 200-day)",
+   "gates": {
+    "regime": "DEEP-FAIL",
+    "pct_vs_200": -28.5129,
+    "adx": 19.1804,
+    "plus_di": 27.6652,
+    "minus_di": 28.441,
+    "above_zlsma": true,
+    "avg_dollar_vol": 1004434521,
+    "max_position": 100443452
+   },
+   "note": "regime DEEP-FAIL (-28.5129% vs 200-day) - watch only, no size; ADX 19.1804 below 20 - no trend to ride; -DI 28.441 >= +DI 27.6652 - sellers in control"
+  },
+  {
+   "sym": "CTRE",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 42.38,
+   "zlsma": 41.7875,
+   "magical": 91.0105,
+   "ce_label": 41.25,
+   "regime": "PASS",
+   "verdict": "CANDIDATE - passes every gate",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 11.1639,
+    "adx": 25.1098,
+    "plus_di": 29.9121,
+    "minus_di": 12.3975,
+    "above_zlsma": true,
+    "avg_dollar_vol": 119795563,
+    "max_position": 11979556
+   },
+   "note": "ONLY name to clear both the scan gate stack and the execution protocol. Stop 41.25 = 1.13 risk = 1.18x ATR14 (0.96), clears the floor. $100k position (capped) = $2,670 risk. 2:1 target 44.64 is only +5.3%. Regime PASS +11.2% vs 200-day, ADX 25.1, +DI 29.9 vs -DI 12.4. ADV $120M. OPEN ITEM: Q2 earnings date unconfirmed, likely early August - verify before entry. WHIPSAW WARNING: sold 7/15, bought 7/16."
   },
   {
    "sym": "DE",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-16",
    "bars_back": 4,
-   "last": 608.24,
-   "zlsma": 620.8376,
-   "magical": 12.5019,
+   "last": 607.33,
+   "zlsma": 620.7018,
+   "magical": 8.8055,
    "ce_label": 574,
    "regime": "PASS",
-   "verdict": "BLOCKED: price 608.24 at/below ZLSMA 620.8376",
+   "verdict": "BLOCKED: price 607.33 at/below ZLSMA 620.7018",
    "gates": {
     "regime": "PASS",
-    "pct_vs_200": 12.23,
-    "adx": 20.3,
-    "plus_di": 27.7,
-    "minus_di": 17.2,
+    "pct_vs_200": 12.0058,
+    "adx": 20.3348,
+    "plus_di": 27.6656,
+    "minus_di": 17.2235,
     "above_zlsma": false,
-    "avg_dollar_vol": 729247874,
-    "max_position": 72924787
+    "avg_dollar_vol": 728839849,
+    "max_position": 72883985
    },
-   "note": "price 608.24 at/below ZLSMA 620.8376 - structure has not turned"
+   "note": "price 607.33 at/below ZLSMA 620.7018 - structure has not turned"
+  },
+  {
+   "sym": "DELL",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-22",
+   "bars_back": 0,
+   "last": 441.8,
+   "zlsma": 408.0946,
+   "magical": 92.4163,
+   "ce_label": 351.95,
+   "regime": "PASS",
+   "verdict": "BLOCKED: execution gates",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 115.2161,
+    "adx": 21.6282,
+    "plus_di": 27.2977,
+    "minus_di": 21.076,
+    "above_zlsma": true,
+    "avg_dollar_vol": 3292615540,
+    "max_position": 329261554
+   },
+   "note": "Passes the scan gate stack, then FAILS EXECUTION: Chandelier stop 351.95 against 441.80 is 20.3% risk, so a $5k risk unit buys only $24.6k - a token position. 2:1 needs 621.50 (+40.7%) after the stock is already +115% above its 200-day. Also flipped TODAY (0 bars) so the signal can still repaint. Earnings 8/27 is clear."
   },
   {
    "sym": "DIS",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-16",
    "bars_back": 4,
-   "last": 96.18,
-   "zlsma": 95.5168,
-   "magical": -61.6806,
+   "last": 95.87,
+   "zlsma": 95.4705,
+   "magical": -76.6421,
    "ce_label": 94.32,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: ADX 13.4 below 20",
+   "verdict": "BLOCKED: ADX 13.3947 below 20",
    "gates": {
     "regime": "REPAIR",
-    "pct_vs_200": -8.97,
-    "adx": 13.4,
-    "plus_di": 18.4,
-    "minus_di": 19.4,
+    "pct_vs_200": -8.8883,
+    "adx": 13.3947,
+    "plus_di": 18.4263,
+    "minus_di": 19.3495,
     "above_zlsma": true,
-    "avg_dollar_vol": 1028898610,
-    "max_position": 102889861
+    "avg_dollar_vol": 1027772959,
+    "max_position": 102777296
    },
-   "note": "ADX 13.4 below 20 - no trend to ride; -DI 19.4 >= +DI 18.4 - sellers in control"
+   "note": "ADX 13.3947 below 20 - no trend to ride; -DI 19.3495 >= +DI 18.4263 - sellers in control"
+  },
+  {
+   "sym": "EQR",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-19",
+   "bars_back": 2,
+   "last": 0.265,
+   "zlsma": 0.2962,
+   "magical": -42.8241,
+   "ce_label": 0.23,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 12.3247 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 38.5947,
+    "adx": 12.3247,
+    "plus_di": 26.1373,
+    "minus_di": 23.7542,
+    "above_zlsma": false,
+    "avg_dollar_vol": 6836421,
+    "max_position": 683642
+   },
+   "note": "ADX 12.3247 below 20 - no trend to ride; price 0.265 at/below ZLSMA 0.2962 - structure has not turned"
+  },
+  {
+   "sym": "F",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-15",
+   "bars_back": 5,
+   "last": 14.42,
+   "zlsma": 12.7436,
+   "magical": 144.5695,
+   "ce_label": 13.66,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 13.2666 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 8.8678,
+    "adx": 13.2666,
+    "plus_di": 28.3773,
+    "minus_di": 16.2724,
+    "above_zlsma": true,
+    "avg_dollar_vol": 711590237,
+    "max_position": 71159024
+   },
+   "note": "ADX 13.2666 below 20 - no trend to ride"
+  },
+  {
+   "sym": "FCX",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-21",
+   "bars_back": 1,
+   "last": 65,
+   "zlsma": 58.1162,
+   "magical": 191.4642,
+   "ce_label": 59.97,
+   "regime": "PASS",
+   "verdict": "BLOCKED: -DI 27.8993 >= +DI 27.0114",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 15.3071,
+    "adx": 21.2223,
+    "plus_di": 27.0114,
+    "minus_di": 27.8993,
+    "above_zlsma": true,
+    "avg_dollar_vol": 1021520578,
+    "max_position": 102152058
+   },
+   "note": "-DI 27.8993 >= +DI 27.0114 - sellers in control"
   },
   {
    "sym": "FHB",
@@ -133,1280 +607,1899 @@
    "magical": -91.1736,
    "ce_label": 28.32,
    "regime": "PASS",
-   "verdict": "BLOCKED: -DI 28.8 >= +DI 20.5",
+   "verdict": "BLOCKED: -DI 28.7545 >= +DI 20.4786",
    "gates": {
     "regime": "PASS",
-    "pct_vs_200": 9.89,
-    "adx": 26.1,
-    "plus_di": 20.5,
-    "minus_di": 28.8,
+    "pct_vs_200": 9.9246,
+    "adx": 26.1322,
+    "plus_di": 20.4786,
+    "minus_di": 28.7545,
     "above_zlsma": false,
-    "avg_dollar_vol": 80249152,
-    "max_position": 8024915
+    "avg_dollar_vol": 80277017,
+    "max_position": 8027702
    },
-   "note": "-DI 28.8 >= +DI 20.5 - sellers in control; price 28.81 at/below ZLSMA 30.4577 - structure has not turned"
+   "note": "-DI 28.7545 >= +DI 20.4786 - sellers in control; price 28.81 at/below ZLSMA 30.4577 - structure has not turned"
   },
   {
-   "sym": "HON",
-   "source": "og-chandelier",
-   "signal_date_est": "2026-07-21",
-   "bars_back": 1,
-   "last": 232.07,
-   "zlsma": 220.2299,
-   "magical": 52.6886,
-   "ce_label": 217.81,
-   "regime": "PASS",
-   "verdict": "BLOCKED: ADX 10.5 below 20",
-   "gates": {
-    "regime": "PASS",
-    "pct_vs_200": 2.9,
-    "adx": 10.5,
-    "plus_di": 27.1,
-    "minus_di": 16.0,
-    "above_zlsma": true,
-    "avg_dollar_vol": 1165445017,
-    "max_position": 116544502
-   },
-   "note": "ADX 10.5 below 20 - no trend to ride"
-  },
-  {
-   "sym": "KRE",
+   "sym": "FITB",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-16",
    "bars_back": 4,
-   "last": 75.475,
-   "zlsma": 78.8225,
-   "magical": 15.7062,
-   "ce_label": 73.9,
+   "last": 57.67,
+   "zlsma": 61.1497,
+   "magical": 49.2954,
+   "ce_label": 56.715,
    "regime": "PASS",
-   "verdict": "BLOCKED: price 75.475 at/below ZLSMA 78.8225",
+   "verdict": "BLOCKED: -DI 25.0542 >= +DI 24.1532",
    "gates": {
     "regime": "PASS",
-    "pct_vs_200": 11.96,
-    "adx": 30.6,
-    "plus_di": 26.2,
-    "minus_di": 15.9,
+    "pct_vs_200": 18.4283,
+    "adx": 24.3378,
+    "plus_di": 24.1532,
+    "minus_di": 25.0542,
     "above_zlsma": false,
-    "avg_dollar_vol": 1043583013,
-    "max_position": 104358301
+    "avg_dollar_vol": 411452953,
+    "max_position": 41145295
    },
-   "note": "price 75.475 at/below ZLSMA 78.8225 - structure has not turned"
-  },
-  {
-   "sym": "MU",
-   "source": "og-chandelier",
-   "signal_date_est": "2026-07-21",
-   "bars_back": 1,
-   "last": 968.63,
-   "zlsma": 836.0569,
-   "magical": -21.9865,
-   "ce_label": 875.51,
-   "regime": "PASS",
-   "verdict": "BLOCKED: ADX 19.5 below 20",
-   "gates": {
-    "regime": "PASS",
-    "pct_vs_200": 96.71,
-    "adx": 19.5,
-    "plus_di": 24.7,
-    "minus_di": 32.1,
-    "above_zlsma": true,
-    "avg_dollar_vol": 49896376965,
-    "max_position": 4989637696
-   },
-   "note": "ADX 19.5 below 20 - no trend to ride; -DI 32.1 >= +DI 24.7 - sellers in control"
-  },
-  {
-   "sym": "NEM",
-   "source": "og-chandelier",
-   "signal_date_est": "2026-07-22",
-   "bars_back": 0,
-   "last": 95.215,
-   "zlsma": 89.7312,
-   "magical": 45.7301,
-   "ce_label": 86.315,
-   "regime": "REPAIR",
-   "verdict": "BLOCKED: ADX 15.5 below 20",
-   "gates": {
-    "regime": "REPAIR",
-    "pct_vs_200": -8.05,
-    "adx": 15.5,
-    "plus_di": 28.7,
-    "minus_di": 27.3,
-    "above_zlsma": true,
-    "avg_dollar_vol": 769433577,
-    "max_position": 76943358
-   },
-   "note": "ADX 15.5 below 20 - no trend to ride"
-  },
-  {
-   "sym": "PFE",
-   "source": "og-chandelier",
-   "signal_date_est": "2026-07-15",
-   "bars_back": 5,
-   "last": 24.895,
-   "zlsma": 24.4833,
-   "magical": 100.1126,
-   "ce_label": 24.295,
-   "regime": "REPAIR",
-   "verdict": "STARTER ONLY - regime REPAIR",
-   "gates": {
-    "regime": "REPAIR",
-    "pct_vs_200": -3.93,
-    "adx": 21.2,
-    "plus_di": 25.7,
-    "minus_di": 20.1,
-    "above_zlsma": true,
-    "avg_dollar_vol": 1210409263,
-    "max_position": 121040926
-   },
-   "note": "regime REPAIR (-3.93% vs 200-day) - starter size only"
-  },
-  {
-   "sym": "PM",
-   "source": "og-chandelier",
-   "signal_date_est": "2026-07-16",
-   "bars_back": 4,
-   "last": 193.61,
-   "zlsma": 178.193,
-   "magical": 142.3628,
-   "ce_label": 185.24,
-   "regime": "PASS",
-   "verdict": "BLOCKED: ADX 14.9 below 20",
-   "gates": {
-    "regime": "PASS",
-    "pct_vs_200": 15.39,
-    "adx": 14.9,
-    "plus_di": 33.4,
-    "minus_di": 18.7,
-    "above_zlsma": true,
-    "avg_dollar_vol": 972831735,
-    "max_position": 97283174
-   },
-   "note": "ADX 14.9 below 20 - no trend to ride"
-  },
-  {
-   "sym": "AMCR",
-   "source": "og-chandelier",
-   "signal_date_est": "2026-07-16",
-   "bars_back": 4,
-   "last": 43.39,
-   "zlsma": 45.596,
-   "magical": 4.6254,
-   "ce_label": 41.76,
-   "regime": "PASS",
-   "verdict": "BLOCKED: ADX 19.5 below 20",
-   "gates": {
-    "regime": "PASS",
-    "pct_vs_200": 3.33,
-    "adx": 19.5,
-    "plus_di": 24.2,
-    "minus_di": 20.1,
-    "above_zlsma": false,
-    "avg_dollar_vol": 137663090,
-    "max_position": 13766309
-   },
-   "note": "ADX 19.5 below 20 - no trend to ride; price 43.39 at/below ZLSMA 45.596 - structure has not turned"
-  },
-  {
-   "sym": "AMD",
-   "source": "og-chandelier",
-   "signal_date_est": "2026-07-22",
-   "bars_back": 0,
-   "last": 556.98,
-   "zlsma": 499.0121,
-   "magical": 92.7508,
-   "ce_label": 493.34,
-   "regime": "PASS",
-   "verdict": "BLOCKED: ADX 16.3 below 20",
-   "gates": {
-    "regime": "PASS",
-    "pct_vs_200": 83.51,
-    "adx": 16.3,
-    "plus_di": 29.1,
-    "minus_di": 24.4,
-    "above_zlsma": true,
-    "avg_dollar_vol": 15740837309,
-    "max_position": 1574083731
-   },
-   "note": "ADX 16.3 below 20 - no trend to ride"
-  },
-  {
-   "sym": "AMGN",
-   "source": "og-chandelier",
-   "signal_date_est": "2026-07-16",
-   "bars_back": 4,
-   "last": 367.235,
-   "zlsma": 374.5233,
-   "magical": 61.1033,
-   "ce_label": 357.715,
-   "regime": "PASS",
-   "verdict": "BLOCKED: ADX 18.0 below 20",
-   "gates": {
-    "regime": "PASS",
-    "pct_vs_200": 7.27,
-    "adx": 18.0,
-    "plus_di": 26.9,
-    "minus_di": 14.0,
-    "above_zlsma": false,
-    "avg_dollar_vol": 839562559,
-    "max_position": 83956256
-   },
-   "note": "ADX 18.0 below 20 - no trend to ride; price 367.235 at/below ZLSMA 374.5233 - structure has not turned"
-  },
-  {
-   "sym": "BCBP",
-   "source": "og-chandelier",
-   "signal_date_est": "2026-07-16",
-   "bars_back": 4,
-   "last": 10.235,
-   "zlsma": 10.2529,
-   "magical": -49.1299,
-   "ce_label": 10.01,
-   "regime": "REPAIR",
-   "verdict": "BLOCKED: -DI 25.4 >= +DI 18.4",
-   "gates": {
-    "regime": "REPAIR",
-    "pct_vs_200": 15.29,
-    "adx": 21.1,
-    "plus_di": 18.4,
-    "minus_di": 25.4,
-    "above_zlsma": false,
-    "avg_dollar_vol": 2005290,
-    "max_position": 200529
-   },
-   "note": "-DI 25.4 >= +DI 18.4 - sellers in control; price 10.235 at/below ZLSMA 10.2529 - structure has not turned"
-  },
-  {
-   "sym": "CRCL",
-   "source": "og-chandelier",
-   "signal_date_est": "2026-07-21",
-   "bars_back": 1,
-   "last": 65.71,
-   "zlsma": 47.5557,
-   "magical": -6.6741,
-   "ce_label": 58.44,
-   "regime": "DEEP-FAIL",
-   "verdict": "BLOCKED: regime DEEP-FAIL (-29.26% vs 200-day)",
-   "gates": {
-    "regime": "DEEP-FAIL",
-    "pct_vs_200": -29.26,
-    "adx": 19.2,
-    "plus_di": 27.7,
-    "minus_di": 28.3,
-    "above_zlsma": true,
-    "avg_dollar_vol": 1004282702,
-    "max_position": 100428270
-   },
-   "note": "regime DEEP-FAIL (-29.26% vs 200-day) - watch only, no size; ADX 19.2 below 20 - no trend to ride; -DI 28.3 >= +DI 27.7 - sellers in control"
-  },
-  {
-   "sym": "F",
-   "source": "og-chandelier",
-   "signal_date_est": "2026-07-15",
-   "bars_back": 5,
-   "last": 14.38,
-   "zlsma": 12.7376,
-   "magical": 134.46,
-   "ce_label": 13.66,
-   "regime": "PASS",
-   "verdict": "BLOCKED: ADX 13.3 below 20",
-   "gates": {
-    "regime": "PASS",
-    "pct_vs_200": 8.79,
-    "adx": 13.3,
-    "plus_di": 28.4,
-    "minus_di": 16.3,
-    "above_zlsma": true,
-    "avg_dollar_vol": 711343500,
-    "max_position": 71134350
-   },
-   "note": "ADX 13.3 below 20 - no trend to ride"
-  },
-  {
-   "sym": "FCX",
-   "source": "og-chandelier",
-   "signal_date_est": "2026-07-21",
-   "bars_back": 1,
-   "last": 64.325,
-   "zlsma": 58.0155,
-   "magical": 164.2398,
-   "ce_label": 59.295,
-   "regime": "PASS",
-   "verdict": "BLOCKED: -DI 27.9 >= +DI 27.0",
-   "gates": {
-    "regime": "PASS",
-    "pct_vs_200": 14.73,
-    "adx": 21.2,
-    "plus_di": 27.0,
-    "minus_di": 27.9,
-    "above_zlsma": true,
-    "avg_dollar_vol": 1019634694,
-    "max_position": 101963469
-   },
-   "note": "-DI 27.9 >= +DI 27.0 - sellers in control"
+   "note": "-DI 25.0542 >= +DI 24.1532 - sellers in control; price 57.67 at/below ZLSMA 61.1497 - structure has not turned"
   },
   {
    "sym": "FLEX",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-21",
    "bars_back": 1,
-   "last": 128.05,
-   "zlsma": 106.9951,
-   "magical": -59.1547,
-   "ce_label": 116.55,
+   "last": 127,
+   "zlsma": 106.8384,
+   "magical": -64.9532,
+   "ce_label": 115.5,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: -DI 32.7 >= +DI 21.5",
+   "verdict": "BLOCKED: -DI 32.7323 >= +DI 21.5319",
    "gates": {
     "regime": "REPAIR",
-    "pct_vs_200": 48.67,
-    "adx": 24.7,
-    "plus_di": 21.5,
-    "minus_di": 32.7,
+    "pct_vs_200": 47.3946,
+    "adx": 24.7243,
+    "plus_di": 21.5319,
+    "minus_di": 32.7323,
     "above_zlsma": true,
-    "avg_dollar_vol": 652335578,
-    "max_position": 65233558
+    "avg_dollar_vol": 651873620,
+    "max_position": 65187362
    },
-   "note": "-DI 32.7 >= +DI 21.5 - sellers in control"
+   "note": "-DI 32.7323 >= +DI 21.5319 - sellers in control"
+  },
+  {
+   "sym": "FLG",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 14.88,
+   "zlsma": 15.555,
+   "magical": -23.2558,
+   "ce_label": 14.5,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 18.2246 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 12.584,
+    "adx": 18.2246,
+    "plus_di": 22.5678,
+    "minus_di": 19.0534,
+    "above_zlsma": false,
+    "avg_dollar_vol": 68884162,
+    "max_position": 6888416
+   },
+   "note": "ADX 18.2246 below 20 - no trend to ride; price 14.88 at/below ZLSMA 15.555 - structure has not turned"
+  },
+  {
+   "sym": "FNB",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 18.86,
+   "zlsma": 19.8158,
+   "magical": -57.3477,
+   "ce_label": 18.59,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 18.86 at/below ZLSMA 19.8158",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 9.138,
+    "adx": 22.8592,
+    "plus_di": 20.6833,
+    "minus_di": 17.6867,
+    "above_zlsma": false,
+    "avg_dollar_vol": 118979086,
+    "max_position": 11897909
+   },
+   "note": "price 18.86 at/below ZLSMA 19.8158 - structure has not turned"
+  },
+  {
+   "sym": "FRT",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 125.05,
+   "zlsma": 123.1081,
+   "magical": 65.8878,
+   "ce_label": 123.42,
+   "regime": "PASS",
+   "verdict": "BLOCKED: execution gates",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 16.144,
+    "adx": 22.5153,
+    "plus_di": 26.6964,
+    "minus_di": 15.2087,
+    "above_zlsma": true,
+    "avg_dollar_vol": 100131368,
+    "max_position": 10013137
+   },
+   "note": "Passes the scan gate stack, then FAILS EXECUTION: stop 123.42 is only 1.63 from 125.05 = 0.82x ATR14 (1.99) - BELOW the ATR floor, so it gets noise-stopped. AND earnings 2026-07-31 is 9 days out, inside the 10-day size-down window. Two independent execution failures."
+  },
+  {
+   "sym": "GBCI",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 51.17,
+   "zlsma": 55.224,
+   "magical": -71.9438,
+   "ce_label": 50.78,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 51.17 at/below ZLSMA 55.224",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 9.234,
+    "adx": 26.0111,
+    "plus_di": 23.8037,
+    "minus_di": 18.9783,
+    "above_zlsma": false,
+    "avg_dollar_vol": 69379604,
+    "max_position": 6937960
+   },
+   "note": "price 51.17 at/below ZLSMA 55.224 - structure has not turned"
   },
   {
    "sym": "GDX",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-21",
    "bars_back": 1,
-   "last": 76.33,
-   "zlsma": 71.5239,
-   "magical": 61.3061,
-   "ce_label": 68.73,
+   "last": 76.68,
+   "zlsma": 71.5762,
+   "magical": 74.5881,
+   "ce_label": 69.08,
    "regime": "DEEP-FAIL",
-   "verdict": "BLOCKED: regime DEEP-FAIL (-12.4% vs 200-day)",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-12.4082% vs 200-day)",
    "gates": {
     "regime": "DEEP-FAIL",
-    "pct_vs_200": -12.4,
-    "adx": 17.5,
-    "plus_di": 30.9,
-    "minus_di": 29.4,
+    "pct_vs_200": -12.4082,
+    "adx": 17.4613,
+    "plus_di": 30.9422,
+    "minus_di": 29.4067,
     "above_zlsma": true,
-    "avg_dollar_vol": 1568991347,
-    "max_position": 156899135
+    "avg_dollar_vol": 1569400684,
+    "max_position": 156940068
    },
-   "note": "regime DEEP-FAIL (-12.4% vs 200-day) - watch only, no size; ADX 17.5 below 20 - no trend to ride"
+   "note": "regime DEEP-FAIL (-12.4082% vs 200-day) - watch only, no size; ADX 17.4613 below 20 - no trend to ride"
   },
   {
    "sym": "GLD",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-21",
    "bars_back": 1,
-   "last": 379.325,
-   "zlsma": 363.0775,
-   "magical": 106.9106,
-   "ce_label": 364.505,
+   "last": 379.12,
+   "zlsma": 363.0469,
+   "magical": 104.1215,
+   "ce_label": 364.3,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: -DI 31.6 >= +DI 28.1",
+   "verdict": "BLOCKED: -DI 31.5709 >= +DI 28.0853",
    "gates": {
     "regime": "REPAIR",
-    "pct_vs_200": -7.86,
-    "adx": 28.3,
-    "plus_di": 28.1,
-    "minus_di": 31.6,
+    "pct_vs_200": -7.9119,
+    "adx": 28.3031,
+    "plus_di": 28.0853,
+    "minus_di": 31.5709,
     "above_zlsma": true,
-    "avg_dollar_vol": 2562558513,
-    "max_position": 256255851
+    "avg_dollar_vol": 2562490922,
+    "max_position": 256249092
    },
-   "note": "-DI 31.6 >= +DI 28.1 - sellers in control"
+   "note": "-DI 31.5709 >= +DI 28.0853 - sellers in control"
+  },
+  {
+   "sym": "GM",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-21",
+   "bars_back": 1,
+   "last": 82.13,
+   "zlsma": 76.4977,
+   "magical": 274.4514,
+   "ce_label": 75.01,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 11.9067 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 7.5686,
+    "adx": 11.9067,
+    "plus_di": 33.3304,
+    "minus_di": 17.2988,
+    "above_zlsma": true,
+    "avg_dollar_vol": 593247604,
+    "max_position": 59324760
+   },
+   "note": "ADX 11.9067 below 20 - no trend to ride"
+  },
+  {
+   "sym": "HBNC",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 20.21,
+   "zlsma": 20.643,
+   "magical": 58.6866,
+   "ce_label": 19.73,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 20.21 at/below ZLSMA 20.643",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 15.0774,
+    "adx": 23.6826,
+    "plus_di": 24.4543,
+    "minus_di": 10.9065,
+    "above_zlsma": false,
+    "avg_dollar_vol": 17306402,
+    "max_position": 1730640
+   },
+   "note": "price 20.21 at/below ZLSMA 20.643 - structure has not turned"
+  },
+  {
+   "sym": "HON",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-21",
+   "bars_back": 1,
+   "last": 232.99,
+   "zlsma": 220.3672,
+   "magical": 63.4205,
+   "ce_label": 217.81,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 10.4864 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 3.136,
+    "adx": 10.4864,
+    "plus_di": 27.1437,
+    "minus_di": 15.9946,
+    "above_zlsma": true,
+    "avg_dollar_vol": 1165845325,
+    "max_position": 116584532
+   },
+   "note": "ADX 10.4864 below 20 - no trend to ride"
+  },
+  {
+   "sym": "HOPE",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 13.54,
+   "zlsma": 14.2137,
+   "magical": -7.7193,
+   "ce_label": 13.21,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 13.54 at/below ZLSMA 14.2137",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 15.0808,
+    "adx": 26.3193,
+    "plus_di": 24.1711,
+    "minus_di": 14.359,
+    "above_zlsma": false,
+    "avg_dollar_vol": 16570358,
+    "max_position": 1657036
+   },
+   "note": "price 13.54 at/below ZLSMA 14.2137 - structure has not turned"
+  },
+  {
+   "sym": "HSIC",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 84.81,
+   "zlsma": 90.3855,
+   "magical": -28.2153,
+   "ce_label": 84.57,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 84.81 at/below ZLSMA 90.3855",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 12.2475,
+    "adx": 37.4008,
+    "plus_di": 27.2138,
+    "minus_di": 20.8707,
+    "above_zlsma": false,
+    "avg_dollar_vol": 114290172,
+    "max_position": 11429017
+   },
+   "note": "price 84.81 at/below ZLSMA 90.3855 - structure has not turned"
   },
   {
    "sym": "HTZ",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-22",
    "bars_back": 0,
-   "last": 1.94,
-   "zlsma": 1.2566,
-   "magical": -48.2726,
+   "last": 1.93,
+   "zlsma": 1.2551,
+   "magical": -50.7839,
    "ce_label": 1.62,
    "regime": "DEEP-FAIL",
-   "verdict": "BLOCKED: regime DEEP-FAIL (-60.96% vs 200-day)",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-61.3569% vs 200-day)",
    "gates": {
     "regime": "DEEP-FAIL",
-    "pct_vs_200": -60.96,
-    "adx": 46.6,
-    "plus_di": 17.5,
-    "minus_di": 39.3,
+    "pct_vs_200": -61.3569,
+    "adx": 46.5825,
+    "plus_di": 17.4578,
+    "minus_di": 39.3133,
     "above_zlsma": true,
-    "avg_dollar_vol": 62221936,
-    "max_position": 6222194
+    "avg_dollar_vol": 62383551,
+    "max_position": 6238355
    },
-   "note": "regime DEEP-FAIL (-60.96% vs 200-day) - watch only, no size; -DI 39.3 >= +DI 17.5 - sellers in control"
+   "note": "regime DEEP-FAIL (-61.3569% vs 200-day) - watch only, no size; -DI 39.3133 >= +DI 17.4578 - sellers in control"
+  },
+  {
+   "sym": "KRE",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 75.6,
+   "zlsma": 78.8411,
+   "magical": 26.7402,
+   "ce_label": 73.9,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 75.6 at/below ZLSMA 78.8411",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 12.0805,
+    "adx": 30.5677,
+    "plus_di": 26.246,
+    "minus_di": 15.8759,
+    "above_zlsma": false,
+    "avg_dollar_vol": 1043513997,
+    "max_position": 104351400
+   },
+   "note": "price 75.6 at/below ZLSMA 78.8411 - structure has not turned"
   },
   {
    "sym": "LCID",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-15",
    "bars_back": 5,
-   "last": 6.925,
-   "zlsma": 6.6898,
-   "magical": 81.9334,
+   "last": 6.78,
+   "zlsma": 6.6681,
+   "magical": 68.0427,
    "ce_label": 6.2,
    "regime": "DEEP-FAIL",
-   "verdict": "BLOCKED: regime DEEP-FAIL (-35.68% vs 200-day)",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-35.4915% vs 200-day)",
    "gates": {
     "regime": "DEEP-FAIL",
-    "pct_vs_200": -35.68,
-    "adx": 18.9,
-    "plus_di": 23.3,
-    "minus_di": 26.3,
+    "pct_vs_200": -35.4915,
+    "adx": 18.9165,
+    "plus_di": 23.2631,
+    "minus_di": 26.3313,
     "above_zlsma": true,
-    "avg_dollar_vol": 181158997,
-    "max_position": 18115900
+    "avg_dollar_vol": 181560680,
+    "max_position": 18156068
    },
-   "note": "regime DEEP-FAIL (-35.68% vs 200-day) - watch only, no size; ADX 18.9 below 20 - no trend to ride; -DI 26.3 >= +DI 23.3 - sellers in control"
+   "note": "regime DEEP-FAIL (-35.4915% vs 200-day) - watch only, no size; ADX 18.9165 below 20 - no trend to ride; -DI 26.3313 >= +DI 23.2631 - sellers in control"
+  },
+  {
+   "sym": "LZB",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 39.3,
+   "zlsma": 40.3622,
+   "magical": -46.102,
+   "ce_label": 38.09,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 18.0712 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 9.0128,
+    "adx": 18.0712,
+    "plus_di": 25.7626,
+    "minus_di": 21.5011,
+    "above_zlsma": false,
+    "avg_dollar_vol": 22484420,
+    "max_position": 2248442
+   },
+   "note": "ADX 18.0712 below 20 - no trend to ride; price 39.3 at/below ZLSMA 40.3622 - structure has not turned"
+  },
+  {
+   "sym": "M",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-15",
+   "bars_back": 5,
+   "last": 24.33,
+   "zlsma": 24.0951,
+   "magical": 50.7679,
+   "ce_label": 22.72,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 19.235 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 17.0461,
+    "adx": 19.235,
+    "plus_di": 31.6892,
+    "minus_di": 20.5205,
+    "above_zlsma": true,
+    "avg_dollar_vol": 126230899,
+    "max_position": 12623090
+   },
+   "note": "ADX 19.235 below 20 - no trend to ride"
+  },
+  {
+   "sym": "MFA",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 9.29,
+   "zlsma": 9.7166,
+   "magical": -98.5401,
+   "ce_label": 9.26,
+   "regime": "REPAIR",
+   "verdict": "BLOCKED: ADX 14.8428 below 20",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -3.3042,
+    "adx": 14.8428,
+    "plus_di": 14.2992,
+    "minus_di": 21.0925,
+    "above_zlsma": false,
+    "avg_dollar_vol": 15599173,
+    "max_position": 1559917
+   },
+   "note": "ADX 14.8428 below 20 - no trend to ride; -DI 21.0925 >= +DI 14.2992 - sellers in control; price 9.29 at/below ZLSMA 9.7166 - structure has not turned"
+  },
+  {
+   "sym": "MU",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-21",
+   "bars_back": 1,
+   "last": 959.48,
+   "zlsma": 834.6911,
+   "magical": -29.4715,
+   "ce_label": 866.36,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 19.4673 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 94.0702,
+    "adx": 19.4673,
+    "plus_di": 24.6654,
+    "minus_di": 32.1229,
+    "above_zlsma": true,
+    "avg_dollar_vol": 49810200149,
+    "max_position": 4981020015
+   },
+   "note": "ADX 19.4673 below 20 - no trend to ride; -DI 32.1229 >= +DI 24.6654 - sellers in control"
   },
   {
    "sym": "NEE",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-22",
    "bars_back": 0,
-   "last": 89.62,
-   "zlsma": 91.2402,
-   "magical": 139.6096,
+   "last": 89.41,
+   "zlsma": 91.2088,
+   "magical": 121.7871,
    "ce_label": 86.83,
    "regime": "PASS",
-   "verdict": "BLOCKED: ADX 13.9 below 20",
+   "verdict": "BLOCKED: ADX 13.9157 below 20",
    "gates": {
     "regime": "PASS",
-    "pct_vs_200": 2.44,
-    "adx": 13.9,
-    "plus_di": 23.7,
-    "minus_di": 15.9,
+    "pct_vs_200": 2.188,
+    "adx": 13.9157,
+    "plus_di": 23.7853,
+    "minus_di": 15.8828,
     "above_zlsma": false,
-    "avg_dollar_vol": 1009522464,
-    "max_position": 100952246
+    "avg_dollar_vol": 1008169367,
+    "max_position": 100816937
    },
-   "note": "ADX 13.9 below 20 - no trend to ride; price 89.62 at/below ZLSMA 91.2402 - structure has not turned"
+   "note": "ADX 13.9157 below 20 - no trend to ride; price 89.41 at/below ZLSMA 91.2088 - structure has not turned"
+  },
+  {
+   "sym": "NEM",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-22",
+   "bars_back": 0,
+   "last": 95.75,
+   "zlsma": 89.8111,
+   "magical": 64.6227,
+   "ce_label": 86.85,
+   "regime": "REPAIR",
+   "verdict": "BLOCKED: ADX 15.4625 below 20",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -7.9485,
+    "adx": 15.4625,
+    "plus_di": 28.6993,
+    "minus_di": 27.2678,
+    "above_zlsma": true,
+    "avg_dollar_vol": 768390332,
+    "max_position": 76839033
+   },
+   "note": "ADX 15.4625 below 20 - no trend to ride"
+  },
+  {
+   "sym": "OCFC",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-15",
+   "bars_back": 5,
+   "last": 19.67,
+   "zlsma": 20.2979,
+   "magical": 57.7961,
+   "ce_label": 19.35,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 19.1515 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 5.436,
+    "adx": 19.1515,
+    "plus_di": 25.5216,
+    "minus_di": 17.9056,
+    "above_zlsma": false,
+    "avg_dollar_vol": 22153916,
+    "max_position": 2215392
+   },
+   "note": "ADX 19.1515 below 20 - no trend to ride; price 19.67 at/below ZLSMA 20.2979 - structure has not turned"
   },
   {
    "sym": "PANW",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-17",
    "bars_back": 3,
-   "last": 335.11,
-   "zlsma": 341.7563,
-   "magical": -1.8263,
+   "last": 335.28,
+   "zlsma": 341.7817,
+   "magical": -1.1451,
    "ce_label": 334.38,
    "regime": "PASS",
-   "verdict": "BLOCKED: price 335.11 at/below ZLSMA 341.7563",
+   "verdict": "BLOCKED: price 335.28 at/below ZLSMA 341.7817",
    "gates": {
     "regime": "PASS",
-    "pct_vs_200": 58.89,
-    "adx": 43.8,
-    "plus_di": 28.5,
-    "minus_di": 18.8,
+    "pct_vs_200": 59.3136,
+    "adx": 43.8114,
+    "plus_di": 28.5078,
+    "minus_di": 18.7689,
     "above_zlsma": false,
-    "avg_dollar_vol": 2462878316,
-    "max_position": 246287832
+    "avg_dollar_vol": 2460383296,
+    "max_position": 246038330
    },
-   "note": "price 335.11 at/below ZLSMA 341.7563 - structure has not turned"
+   "note": "price 335.28 at/below ZLSMA 341.7817 - structure has not turned"
+  },
+  {
+   "sym": "PB",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 73.06,
+   "zlsma": 74.8711,
+   "magical": 31.2586,
+   "ce_label": 71.16,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 12.0514 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 5.422,
+    "adx": 12.0514,
+    "plus_di": 22.8276,
+    "minus_di": 19.9909,
+    "above_zlsma": false,
+    "avg_dollar_vol": 114687670,
+    "max_position": 11468767
+   },
+   "note": "ADX 12.0514 below 20 - no trend to ride; price 73.06 at/below ZLSMA 74.8711 - structure has not turned"
+  },
+  {
+   "sym": "PFE",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-15",
+   "bars_back": 5,
+   "last": 24.82,
+   "zlsma": 24.4721,
+   "magical": 87.8494,
+   "ce_label": 24.22,
+   "regime": "REPAIR",
+   "verdict": "STARTER ONLY - regime REPAIR",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -4.0252,
+    "adx": 21.1753,
+    "plus_di": 25.6716,
+    "minus_di": 20.0783,
+    "above_zlsma": true,
+    "avg_dollar_vol": 1208948004,
+    "max_position": 120894800
+   },
+   "note": "regime REPAIR (-4.0252% vs 200-day) - starter size only"
+  },
+  {
+   "sym": "PM",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 194.3,
+   "zlsma": 178.296,
+   "magical": 150.6377,
+   "ce_label": 185.24,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 14.9278 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 15.2208,
+    "adx": 14.9278,
+    "plus_di": 33.3527,
+    "minus_di": 18.7338,
+    "above_zlsma": true,
+    "avg_dollar_vol": 970683542,
+    "max_position": 97068354
+   },
+   "note": "ADX 14.9278 below 20 - no trend to ride"
+  },
+  {
+   "sym": "POWL",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-15",
+   "bars_back": 5,
+   "last": 240.68,
+   "zlsma": 218.6016,
+   "magical": -35.6673,
+   "ce_label": 221.47,
+   "regime": "REPAIR",
+   "verdict": "BLOCKED: -DI 25.2158 >= +DI 14.6256",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": 28.8738,
+    "adx": 29.4855,
+    "plus_di": 14.6256,
+    "minus_di": 25.2158,
+    "above_zlsma": true,
+    "avg_dollar_vol": 221689698,
+    "max_position": 22168970
+   },
+   "note": "-DI 25.2158 >= +DI 14.6256 - sellers in control"
+  },
+  {
+   "sym": "PRLB",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-21",
+   "bars_back": 1,
+   "last": 79.73,
+   "zlsma": 75.4629,
+   "magical": 65.2764,
+   "ce_label": 74.33,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 13.6361 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 30.4274,
+    "adx": 13.6361,
+    "plus_di": 24.3888,
+    "minus_di": 19.486,
+    "above_zlsma": true,
+    "avg_dollar_vol": 19578455,
+    "max_position": 1957846
+   },
+   "note": "ADX 13.6361 below 20 - no trend to ride"
+  },
+  {
+   "sym": "RACE",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 371.61,
+   "zlsma": 391.3817,
+   "magical": -16.2846,
+   "ce_label": 368.14,
+   "regime": "REPAIR",
+   "verdict": "BLOCKED: ADX 17.2143 below 20",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": 1.5632,
+    "adx": 17.2143,
+    "plus_di": 33.8541,
+    "minus_di": 27.3351,
+    "above_zlsma": false,
+    "avg_dollar_vol": 173136388,
+    "max_position": 17313639
+   },
+   "note": "ADX 17.2143 below 20 - no trend to ride; price 371.61 at/below ZLSMA 391.3817 - structure has not turned"
+  },
+  {
+   "sym": "RCL",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-15",
+   "bars_back": 5,
+   "last": 285.85,
+   "zlsma": 295.2983,
+   "magical": -56.4229,
+   "ce_label": 280.07,
+   "regime": "REPAIR",
+   "verdict": "BLOCKED: ADX 11.8091 below 20",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -0.1815,
+    "adx": 11.8091,
+    "plus_di": 19.8466,
+    "minus_di": 24.6858,
+    "above_zlsma": false,
+    "avg_dollar_vol": 710400080,
+    "max_position": 71040008
+   },
+   "note": "ADX 11.8091 below 20 - no trend to ride; -DI 24.6858 >= +DI 19.8466 - sellers in control; price 285.85 at/below ZLSMA 295.2983 - structure has not turned"
   },
   {
    "sym": "RSPU",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-22",
    "bars_back": 0,
-   "last": 81.62,
-   "zlsma": 82.7919,
-   "magical": 47.7051,
+   "last": 81.85,
+   "zlsma": 82.8262,
+   "magical": 72.3729,
    "ce_label": 79.075,
    "regime": "PASS",
-   "verdict": "BLOCKED: ADX 15.2 below 20",
+   "verdict": "BLOCKED: ADX 15.2027 below 20",
    "gates": {
     "regime": "PASS",
-    "pct_vs_200": 3.32,
-    "adx": 15.2,
-    "plus_di": 35.2,
-    "minus_di": 19.6,
+    "pct_vs_200": 3.5762,
+    "adx": 15.2027,
+    "plus_di": 35.2499,
+    "minus_di": 19.6211,
     "above_zlsma": false,
-    "avg_dollar_vol": 2684612,
-    "max_position": 268461
+    "avg_dollar_vol": 2683301,
+    "max_position": 268330
    },
-   "note": "ADX 15.2 below 20 - no trend to ride; price 81.62 at/below ZLSMA 82.7919 - structure has not turned"
+   "note": "ADX 15.2027 below 20 - no trend to ride; price 81.85 at/below ZLSMA 82.8262 - structure has not turned"
+  },
+  {
+   "sym": "SAIC",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-22",
+   "bars_back": 0,
+   "last": 115.95,
+   "zlsma": 114.147,
+   "magical": 107.7455,
+   "ce_label": 110.52,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 12.7752 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 16.7759,
+    "adx": 12.7752,
+    "plus_di": 27.5215,
+    "minus_di": 22.7807,
+    "above_zlsma": true,
+    "avg_dollar_vol": 60491701,
+    "max_position": 6049170
+   },
+   "note": "ADX 12.7752 below 20 - no trend to ride"
+  },
+  {
+   "sym": "SJM",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 118.05,
+   "zlsma": 112.437,
+   "magical": 170.4156,
+   "ce_label": 113.27,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 17.0338 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 13.5437,
+    "adx": 17.0338,
+    "plus_di": 36.5159,
+    "minus_di": 18.2269,
+    "above_zlsma": true,
+    "avg_dollar_vol": 180956153,
+    "max_position": 18095615
+   },
+   "note": "ADX 17.0338 below 20 - no trend to ride"
   },
   {
    "sym": "SKK",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-20",
    "bars_back": 2,
-   "last": 5.0801,
-   "zlsma": 4.8602,
-   "magical": 127.4777,
-   "ce_label": 4.7601,
+   "last": 5.22,
+   "zlsma": 4.8811,
+   "magical": 188.8413,
+   "ce_label": 4.9,
    "regime": "PASS",
    "verdict": "BLOCKED: illiquid",
    "gates": {
     "regime": "PASS",
-    "pct_vs_200": 46.16,
-    "adx": 52.4,
-    "plus_di": 35.8,
-    "minus_di": 8.0,
+    "pct_vs_200": 49.8662,
+    "adx": 52.4207,
+    "plus_di": 35.7642,
+    "minus_di": 8.0376,
     "above_zlsma": true,
-    "avg_dollar_vol": 84360,
-    "max_position": 8436
+    "avg_dollar_vol": 86683,
+    "max_position": 8668
    },
-   "note": "illiquid - $84,360 avg daily dollar volume; a $85,000 position is 101% of a day's turnover (max $8,436)"
+   "note": "illiquid - $86,683 avg daily dollar volume; a $85,000 position is 98% of a day's turnover (max $8,668)"
   },
   {
    "sym": "SMCI",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-21",
    "bars_back": 1,
-   "last": 30.68,
-   "zlsma": 19.0297,
-   "magical": 110.4105,
+   "last": 30.56,
+   "zlsma": 19.0118,
+   "magical": 106.4205,
    "ce_label": 22.2942,
    "regime": "REPAIR",
    "verdict": "STARTER ONLY - regime REPAIR",
    "gates": {
     "regime": "REPAIR",
-    "pct_vs_200": -8.74,
-    "adx": 24.4,
-    "plus_di": 34.4,
-    "minus_di": 26.9,
+    "pct_vs_200": -9.3138,
+    "adx": 24.3811,
+    "plus_di": 34.4178,
+    "minus_di": 26.8758,
     "above_zlsma": true,
-    "avg_dollar_vol": 1270904783,
-    "max_position": 127090478
+    "avg_dollar_vol": 1269036111,
+    "max_position": 126903611
    },
-   "note": "regime REPAIR (-8.74% vs 200-day) - starter size only"
+   "note": "regime REPAIR (-9.3138% vs 200-day) - starter size only"
   },
   {
-   "sym": "SOXL",
+   "sym": "SON",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 55.15,
+   "zlsma": 58.9167,
+   "magical": -8.0508,
+   "ce_label": 54.07,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 55.15 at/below ZLSMA 58.9167",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 13.5192,
+    "adx": 21.9308,
+    "plus_di": 22.4687,
+    "minus_di": 19.9793,
+    "above_zlsma": false,
+    "avg_dollar_vol": 64685366,
+    "max_position": 6468537
+   },
+   "note": "price 55.15 at/below ZLSMA 58.9167 - structure has not turned"
+  },
+  {
+   "sym": "SPG",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 226.22,
+   "zlsma": 231.8185,
+   "magical": 43.8011,
+   "ce_label": 221.26,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 226.22 at/below ZLSMA 231.8185",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 15.9905,
+    "adx": 20.1266,
+    "plus_di": 27.6687,
+    "minus_di": 20.342,
+    "above_zlsma": false,
+    "avg_dollar_vol": 512918017,
+    "max_position": 51291802
+   },
+   "note": "price 226.22 at/below ZLSMA 231.8185 - structure has not turned"
+  },
+  {
+   "sym": "SSB",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 102.19,
+   "zlsma": 106.1987,
+   "magical": 79.05,
+   "ce_label": 99.79,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 102.19 at/below ZLSMA 106.1987",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 6.4191,
+    "adx": 22.8856,
+    "plus_di": 24.8213,
+    "minus_di": 16.3082,
+    "above_zlsma": false,
+    "avg_dollar_vol": 89067511,
+    "max_position": 8906751
+   },
+   "note": "price 102.19 at/below ZLSMA 106.1987 - structure has not turned"
+  },
+  {
+   "sym": "STRL",
    "source": "og-chandelier",
    "signal_date_est": "2026-07-22",
    "bars_back": 0,
-   "last": 163.6,
-   "zlsma": 122.9918,
-   "magical": -53.9204,
-   "ce_label": 126.1,
+   "last": 719.34,
+   "zlsma": 527.0121,
+   "magical": -4.7687,
+   "ce_label": 627.2502,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: -DI 35.0 >= +DI 21.2",
+   "verdict": "BLOCKED: -DI 27.3387 >= +DI 22.322",
    "gates": {
     "regime": "REPAIR",
-    "pct_vs_200": 70.2,
-    "adx": 23.1,
-    "plus_di": 21.2,
-    "minus_di": 35.0,
+    "pct_vs_200": 45.3186,
+    "adx": 23.9682,
+    "plus_di": 22.322,
+    "minus_di": 27.3387,
     "above_zlsma": true,
-    "avg_dollar_vol": 9785616471,
-    "max_position": 978561647
+    "avg_dollar_vol": 649336169,
+    "max_position": 64933617
    },
-   "note": "-DI 35.0 >= +DI 21.2 - sellers in control"
+   "note": "-DI 27.3387 >= +DI 22.322 - sellers in control"
+  },
+  {
+   "sym": "STX",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-21",
+   "bars_back": 1,
+   "last": 908.1,
+   "zlsma": 788.8024,
+   "magical": 31.566,
+   "ce_label": 775.72,
+   "regime": "PASS",
+   "verdict": "BLOCKED: -DI 28.7714 >= +DI 24.433",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 82.5999,
+    "adx": 22.1547,
+    "plus_di": 24.433,
+    "minus_di": 28.7714,
+    "above_zlsma": true,
+    "avg_dollar_vol": 4621180008,
+    "max_position": 462118001
+   },
+   "note": "-DI 28.7714 >= +DI 24.433 - sellers in control"
+  },
+  {
+   "sym": "TDY",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-21",
+   "bars_back": 1,
+   "last": 650.5,
+   "zlsma": 653.1325,
+   "magical": 73.4042,
+   "ce_label": 599.73,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 16.1938 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 9.0736,
+    "adx": 16.1938,
+    "plus_di": 22.0275,
+    "minus_di": 10.2817,
+    "above_zlsma": false,
+    "avg_dollar_vol": 251765292,
+    "max_position": 25176529
+   },
+   "note": "ADX 16.1938 below 20 - no trend to ride; price 650.5 at/below ZLSMA 653.1325 - structure has not turned"
+  },
+  {
+   "sym": "TJX",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 155.41,
+   "zlsma": 152.9636,
+   "magical": 51.2506,
+   "ce_label": 151.26,
+   "regime": "REPAIR",
+   "verdict": "STARTER ONLY - regime REPAIR",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": 0.9995,
+    "adx": 21.2384,
+    "plus_di": 27.1112,
+    "minus_di": 18.573,
+    "above_zlsma": true,
+    "avg_dollar_vol": 915047211,
+    "max_position": 91504721
+   },
+   "note": "regime REPAIR (0.9995% vs 200-day) - starter size only"
+  },
+  {
+   "sym": "TPL",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-21",
+   "bars_back": 1,
+   "last": 433.1,
+   "zlsma": 427.1622,
+   "magical": 146.2022,
+   "ce_label": 400.28,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 17.1388 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 13.3845,
+    "adx": 17.1388,
+    "plus_di": 28.3452,
+    "minus_di": 14.9501,
+    "above_zlsma": true,
+    "avg_dollar_vol": 159663636,
+    "max_position": 15966364
+   },
+   "note": "ADX 17.1388 below 20 - no trend to ride"
+  },
+  {
+   "sym": "TPR",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 143.73,
+   "zlsma": 146.1286,
+   "magical": 16.5315,
+   "ce_label": 135.79,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 10.1802 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 7.497,
+    "adx": 10.1802,
+    "plus_di": 17.6602,
+    "minus_di": 18.0118,
+    "above_zlsma": false,
+    "avg_dollar_vol": 383729405,
+    "max_position": 38372940
+   },
+   "note": "ADX 10.1802 below 20 - no trend to ride; -DI 18.0118 >= +DI 17.6602 - sellers in control; price 143.73 at/below ZLSMA 146.1286 - structure has not turned"
+  },
+  {
+   "sym": "TXNM",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 58.3,
+   "zlsma": 56.724,
+   "magical": 186.2036,
+   "ce_label": 57.61,
+   "regime": "REPAIR",
+   "verdict": "STARTER ONLY - regime REPAIR",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -0.0688,
+    "adx": 37.3362,
+    "plus_di": 20.3019,
+    "minus_di": 17.4282,
+    "above_zlsma": true,
+    "avg_dollar_vol": 96932932,
+    "max_position": 9693293
+   },
+   "note": "regime REPAIR (-0.0688% vs 200-day) - starter size only"
+  },
+  {
+   "sym": "URA",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-21",
+   "bars_back": 1,
+   "last": 40.97,
+   "zlsma": 40.4599,
+   "magical": -43.6029,
+   "ce_label": 38.41,
+   "regime": "DEEP-FAIL",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-17.5061% vs 200-day)",
+   "gates": {
+    "regime": "DEEP-FAIL",
+    "pct_vs_200": -17.5061,
+    "adx": 30.4894,
+    "plus_di": 21.016,
+    "minus_di": 33.2798,
+    "above_zlsma": true,
+    "avg_dollar_vol": 115745443,
+    "max_position": 11574544
+   },
+   "note": "regime DEEP-FAIL (-17.5061% vs 200-day) - watch only, no size; -DI 33.2798 >= +DI 21.016 - sellers in control"
+  },
+  {
+   "sym": "USB",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 64.47,
+   "zlsma": 67.0557,
+   "magical": 154.704,
+   "ce_label": 62.33,
+   "regime": "PASS",
+   "verdict": "BLOCKED: price 64.47 at/below ZLSMA 67.0557",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 19.1811,
+    "adx": 35.4914,
+    "plus_di": 30.0093,
+    "minus_di": 12.2497,
+    "above_zlsma": false,
+    "avg_dollar_vol": 589542237,
+    "max_position": 58954224
+   },
+   "note": "price 64.47 at/below ZLSMA 67.0557 - structure has not turned"
+  },
+  {
+   "sym": "VST",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-22",
+   "bars_back": 0,
+   "last": 166.74,
+   "zlsma": 165.7238,
+   "magical": 154.294,
+   "ce_label": 151.73,
+   "regime": "REPAIR",
+   "verdict": "BLOCKED: ADX 11.7063 below 20",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": 0.7301,
+    "adx": 11.7063,
+    "plus_di": 28.0471,
+    "minus_di": 19.5996,
+    "above_zlsma": true,
+    "avg_dollar_vol": 683632199,
+    "max_position": 68363220
+   },
+   "note": "ADX 11.7063 below 20 - no trend to ride"
+  },
+  {
+   "sym": "VVV",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 39.03,
+   "zlsma": 40.71,
+   "magical": -12.1467,
+   "ce_label": 37.69,
+   "regime": "PASS",
+   "verdict": "BLOCKED: ADX 14.1308 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 14.2519,
+    "adx": 14.1308,
+    "plus_di": 22.9067,
+    "minus_di": 21.2237,
+    "above_zlsma": false,
+    "avg_dollar_vol": 79474962,
+    "max_position": 7947496
+   },
+   "note": "ADX 14.1308 below 20 - no trend to ride; price 39.03 at/below ZLSMA 40.71 - structure has not turned"
+  },
+  {
+   "sym": "VZ",
+   "source": "og-chandelier",
+   "signal_date_est": "2026-07-16",
+   "bars_back": 4,
+   "last": 44.29,
+   "zlsma": 41.1765,
+   "magical": 54.6498,
+   "ce_label": 42.47,
+   "regime": "REPAIR",
+   "verdict": "STARTER ONLY - regime REPAIR",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -0.3313,
+    "adx": 27.5533,
+    "plus_di": 24.127,
+    "minus_di": 21.1275,
+    "above_zlsma": true,
+    "avg_dollar_vol": 1480327172,
+    "max_position": 148032717
+   },
+   "note": "regime REPAIR (-0.3313% vs 200-day) - starter size only"
   }
  ],
  "sell_mode": [
-  "BBAI",
-  "C",
-  "CB",
-  "CENX",
-  "CTM",
-  "DTE",
-  "GD",
-  "GOOG",
-  "GS",
-  "HD",
-  "INTC",
-  "JNJ",
-  "KO",
-  "LAES",
-  "MCD",
-  "MDT",
-  "MP",
-  "NFLX",
-  "NVAX",
-  "NVTS",
-  "PEP",
-  "RIVN",
-  "TDOC",
-  "TGTX",
-  "UAVS",
-  "UBER",
   "ABNB",
+  "ACGL",
+  "ADI",
+  "AEE",
+  "AEP",
+  "AGNC",
   "AI",
   "ALB",
+  "ALGN",
   "AMAT",
+  "AMBQ",
+  "AMD",
+  "AMLX",
+  "AMT",
+  "ANET",
+  "APH",
   "APP",
+  "ARI",
   "ARM",
   "AROC",
+  "ASML",
+  "ASTH",
+  "ASTS",
+  "ATLC",
   "AXON",
   "BB",
+  "BBAI",
+  "BCAX",
+  "BIOA",
+  "BKR",
+  "BOTZ",
   "BROS",
+  "BSTZ",
+  "BSX",
   "BTBT",
   "BTCS",
+  "BWXT",
+  "C",
+  "CACC",
+  "CASH",
+  "CAT",
+  "CB",
+  "CCL",
+  "CDNS",
+  "CENX",
+  "CHTR",
+  "CMG",
+  "COGT",
+  "COLD",
+  "CPRT",
+  "CPT",
   "CRWD",
   "CRWV",
   "CSCO",
+  "CTM",
+  "CTS",
   "CVNA",
+  "CZR",
   "DAL",
+  "DASH",
   "DGX",
+  "DHI",
+  "DLR",
+  "DUOL",
+  "EFC",
+  "EIG",
+  "EME",
+  "ENVA",
+  "EPC",
+  "ERIE",
+  "ESE",
+  "ETN",
+  "ETR",
   "EVGO",
+  "EXC",
+  "EXTR",
+  "FCFS",
+  "FDX",
+  "FFIV",
+  "FIX",
+  "FLR",
+  "FLYW",
   "FSLR",
+  "FTAI",
+  "FTDR",
+  "GD",
+  "GE",
+  "GEV",
+  "GH",
+  "GOOG",
+  "GOOGL",
+  "GRMN",
+  "GS",
+  "GTX",
+  "HALO",
+  "HCSG",
+  "HD",
+  "HELE",
   "HIMX",
+  "HLT",
   "HOOD",
+  "HUBB",
   "HUT",
+  "HWM",
+  "IBKR",
   "IBM",
+  "IDA",
   "IGV",
   "INOD",
+  "INTC",
+  "IRMD",
   "IWM",
+  "JETS",
+  "JNJ",
+  "KMI",
+  "KO",
+  "KURA",
+  "LAES",
+  "LEN",
+  "LHX",
+  "LLY",
+  "LOW",
   "LUNR",
+  "LUV",
+  "LYV",
+  "MAR",
   "MBLY",
+  "MCB",
+  "MCD",
   "MCHP",
+  "MCO",
+  "MDT",
+  "MIDD",
+  "MIRM",
+  "MITK",
+  "MLAB",
+  "MNST",
+  "MP",
+  "MRK",
+  "MRX",
   "MSCI",
+  "MSGS",
+  "MSI",
+  "MTCH",
+  "MTRN",
+  "MTZ",
+  "NCLH",
+  "NFLX",
   "NIO",
+  "NLY",
   "NMAX",
+  "NOV",
   "NOW",
+  "NPKI",
+  "NTRA",
   "NTRS",
+  "NVAX",
+  "NVST",
+  "NVTS",
+  "NWPX",
   "OILD",
+  "OKLO",
+  "OKTA",
   "ORCL",
+  "PCVX",
+  "PEP",
+  "PGR",
+  "PH",
+  "PL",
   "PLTR",
+  "PNC",
+  "PRAX",
+  "PRSU",
+  "PSA",
+  "PTCT",
+  "PVLA",
+  "PWR",
+  "QCOM",
+  "QLYS",
   "QQQ",
+  "RELY",
   "RGTI",
-  "SHAK",
+  "RIVN",
+  "RKLB",
+  "RMD",
+  "ROBO",
+  "ROP",
+  "SENEA",
+  "SEPN",
+  "SFM",
+  "SHW",
   "SKYY",
+  "SLAB",
   "SMH",
   "SMMT",
+  "SMR",
+  "SNDA",
+  "SNDX",
+  "SO",
   "SOFI",
+  "SOXL",
+  "SPGI",
   "SPXL",
+  "SRRK",
+  "ST",
+  "STGW",
+  "TBLA",
+  "TDOC",
+  "TGTX",
+  "TKR",
+  "TLN",
+  "TRIN",
   "TSLA",
+  "TT",
+  "TXN",
+  "TYL",
+  "UAL",
+  "UAVS",
+  "UBER",
+  "UDR",
+  "URI",
+  "VISN",
   "VMI",
+  "VRSN",
+  "VRT",
+  "VRTX",
+  "WMS",
+  "WST",
+  "WWD",
+  "XEL",
   "XLK",
+  "XLY",
+  "YOU",
   "ZETA"
  ],
  "all_names": [
   {
-   "sym": "BBAI",
-   "last": 2.855,
-   "magical": -112.2404,
-   "zlsma": 2.421,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "BHP",
-   "last": 84.53,
-   "magical": 116.2822,
-   "zlsma": 77.5604,
-   "ce_mode": "BUY",
-   "ce_label": 80.9
-  },
-  {
-   "sym": "C",
-   "last": 132.77,
-   "magical": -80.9808,
-   "zlsma": 139.9544,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "CB",
-   "last": 341.33,
-   "magical": -61.3789,
-   "zlsma": 361.1718,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "CENX",
-   "last": 45.16,
-   "magical": 24.6869,
-   "zlsma": 37.6062,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "CHYM",
-   "last": 21.79,
-   "magical": 67.8807,
-   "zlsma": 24.943,
-   "ce_mode": "BUY",
-   "ce_label": 20.43
-  },
-  {
-   "sym": "CLX",
-   "last": 95.75,
-   "magical": -22.2755,
-   "zlsma": 97.0463,
-   "ce_mode": "BUY",
-   "ce_label": 93.129
-  },
-  {
-   "sym": "COST",
-   "last": 923.74,
-   "magical": -69.5832,
-   "zlsma": 901.9816,
-   "ce_mode": "BUY",
-   "ce_label": 906.5
-  },
-  {
-   "sym": "CTM",
-   "last": 0.6507,
-   "magical": -46.1458,
-   "zlsma": 0.5862,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "CVX",
-   "last": 193.11,
-   "magical": 144.8117,
-   "zlsma": 179.0789,
-   "ce_mode": "BUY",
-   "ce_label": 187.85
-  },
-  {
-   "sym": "DE",
-   "last": 608.24,
-   "magical": 12.5019,
-   "zlsma": 620.8376,
-   "ce_mode": "BUY",
-   "ce_label": 574
-  },
-  {
-   "sym": "DFDV",
-   "last": 3.065,
-   "magical": 34.7397,
-   "zlsma": 2.8608,
-   "ce_mode": "BUY",
-   "ce_label": 2.78
-  },
-  {
-   "sym": "DIS",
-   "last": 96.18,
-   "magical": -61.6806,
-   "zlsma": 95.5168,
-   "ce_mode": "BUY",
-   "ce_label": 94.32
-  },
-  {
-   "sym": "DTE",
-   "last": 147.66,
-   "magical": -81.9307,
-   "zlsma": 152.2353,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "DVN",
-   "last": 44.95,
-   "magical": 158.0054,
-   "zlsma": 42.7405,
-   "ce_mode": "BUY",
-   "ce_label": 42.99
-  },
-  {
-   "sym": "DOW",
-   "last": 31.25,
-   "magical": 152.6241,
-   "zlsma": 28.7075,
-   "ce_mode": "BUY",
-   "ce_label": 29.02
-  },
-  {
-   "sym": "FHB",
-   "last": 28.81,
-   "magical": -91.1736,
-   "zlsma": 30.4577,
-   "ce_mode": "BUY",
-   "ce_label": 28.32
-  },
-  {
-   "sym": "FUTU",
-   "last": 105.93,
-   "magical": 267.49,
-   "zlsma": 114.0578,
-   "ce_mode": "BUY",
-   "ce_label": 92.69
-  },
-  {
-   "sym": "GD",
-   "last": 372.12,
-   "magical": 50.1834,
-   "zlsma": 374.6916,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "GOOG",
-   "last": 345.71,
-   "magical": -76.2395,
-   "zlsma": 339.301,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "GS",
-   "last": 1098.74,
-   "magical": 86.407,
-   "zlsma": 1074.2078,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "HAS",
-   "last": 89.27,
-   "magical": 181.4352,
-   "zlsma": 82.0864,
-   "ce_mode": "BUY",
-   "ce_label": 84.85
-  },
-  {
-   "sym": "HD",
-   "last": 332.63,
-   "magical": -114.2718,
-   "zlsma": 357.9276,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "HON",
-   "last": 232.07,
-   "magical": 52.6886,
-   "zlsma": 220.2299,
-   "ce_mode": "BUY",
-   "ce_label": 217.81
-  },
-  {
-   "sym": "INTC",
-   "last": 104.55,
-   "magical": -56.1966,
-   "zlsma": 94.7028,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "JNJ",
-   "last": 254.58,
-   "magical": -0.1026,
-   "zlsma": 262.5297,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "JPM",
-   "last": 347.77,
-   "magical": 145.8361,
-   "zlsma": 358.9503,
-   "ce_mode": "BUY",
-   "ce_label": 338.1302
-  },
-  {
-   "sym": "KO",
-   "last": 82.505,
-   "magical": -8.113,
-   "zlsma": 82.4035,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "KRE",
-   "last": 75.475,
-   "magical": 15.7062,
-   "zlsma": 78.8225,
-   "ce_mode": "BUY",
-   "ce_label": 73.9
-  },
-  {
-   "sym": "KWEB",
-   "last": 26.485,
-   "magical": 45.3425,
-   "zlsma": 26.5081,
-   "ce_mode": "BUY",
-   "ce_label": 26.14
-  },
-  {
-   "sym": "LAES",
-   "last": 2.585,
-   "magical": -83.1896,
-   "zlsma": 2.2655,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "MCD",
-   "last": 262.71,
-   "magical": -119.3767,
-   "zlsma": 270.8267,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "MDT",
-   "last": 81.77,
-   "magical": -1.0504,
-   "zlsma": 85.2484,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "MELI",
-   "last": 1801.76,
-   "magical": 20.6984,
-   "zlsma": 1983.5722,
-   "ce_mode": "BUY",
-   "ce_label": 1777.22
-  },
-  {
-   "sym": "META",
-   "last": 626.3,
-   "magical": 18.8931,
-   "zlsma": 664.6108,
-   "ce_mode": "BUY",
-   "ce_label": 626.14
-  },
-  {
-   "sym": "MP",
-   "last": 45.73,
-   "magical": -114.0743,
-   "zlsma": 45.1046,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "MSFT",
-   "last": 388.59,
-   "magical": 29.3636,
-   "zlsma": 378.8248,
-   "ce_mode": "BUY",
-   "ce_label": 385.81
-  },
-  {
-   "sym": "MU",
-   "last": 968.63,
-   "magical": -21.9865,
-   "zlsma": 836.0569,
-   "ce_mode": "BUY",
-   "ce_label": 875.51
-  },
-  {
-   "sym": "NEM",
-   "last": 95.215,
-   "magical": 45.7301,
-   "zlsma": 89.7312,
-   "ce_mode": "BUY",
-   "ce_label": 86.315
-  },
-  {
-   "sym": "NET",
-   "last": 270.23,
-   "magical": 44.2651,
-   "zlsma": 282.1843,
-   "ce_mode": "BUY",
-   "ce_label": 255.7636
-  },
-  {
-   "sym": "NFLX",
-   "last": 68.575,
-   "magical": -128.2071,
-   "zlsma": 70.2003,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "NKE",
-   "last": 42.045,
-   "magical": -57.087,
-   "zlsma": 42.0174,
-   "ce_mode": "BUY",
-   "ce_label": 41.4476
-  },
-  {
-   "sym": "NSRGY",
-   "last": 105.75,
-   "magical": 137.3933,
-   "zlsma": 106.5197,
-   "ce_mode": "BUY",
-   "ce_label": 103.572
-  },
-  {
-   "sym": "NVAX",
-   "last": 7.96,
-   "magical": -117.1739,
-   "zlsma": 7.5507,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "NVTS",
-   "last": 12.94,
-   "magical": -53.9184,
-   "zlsma": 5.123,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "PBF",
-   "last": 64.85,
-   "magical": 111.412,
-   "zlsma": 64.8533,
-   "ce_mode": "BUY",
-   "ce_label": 60.2
-  },
-  {
-   "sym": "PBR",
-   "last": 18.94,
-   "magical": 152.8455,
-   "zlsma": 18.1991,
-   "ce_mode": "BUY",
-   "ce_label": 17.81
-  },
-  {
-   "sym": "PEP",
-   "last": 135.875,
-   "magical": -77.1903,
-   "zlsma": 138.6162,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "PFE",
-   "last": 24.895,
-   "magical": 100.1126,
-   "zlsma": 24.4833,
-   "ce_mode": "BUY",
-   "ce_label": 24.295
-  },
-  {
-   "sym": "PM",
-   "last": 193.61,
-   "magical": 142.3628,
-   "zlsma": 178.193,
-   "ce_mode": "BUY",
-   "ce_label": 185.24
-  },
-  {
-   "sym": "RIVN",
-   "last": 17.125,
-   "magical": -3.2071,
-   "zlsma": 18.595,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "ROKU",
-   "last": 143.2,
-   "magical": 65.5009,
-   "zlsma": 146.4197,
-   "ce_mode": "BUY",
-   "ce_label": 142.3702
-  },
-  {
-   "sym": "SBUX",
-   "last": 103.47,
-   "magical": -60.2208,
-   "zlsma": 106.5958,
-   "ce_mode": "BUY",
-   "ce_label": 102.76
-  },
-  {
-   "sym": "SNOW",
-   "last": 267.66,
-   "magical": 48.5434,
-   "zlsma": 264.3813,
-   "ce_mode": "BUY",
-   "ce_label": 254.14
-  },
-  {
-   "sym": "TDOC",
-   "last": 8.865,
-   "magical": -33.5595,
-   "zlsma": 9.9758,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "TGTX",
-   "last": 53.33,
-   "magical": -98.3236,
-   "zlsma": 59.5079,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "UAVS",
-   "last": 0.7173,
-   "magical": -133.7549,
-   "zlsma": 0.696,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
-   "sym": "UBER",
-   "last": 70.29,
-   "magical": -164.029,
-   "zlsma": 74.1008,
-   "ce_mode": "SELL",
-   "ce_label": null
-  },
-  {
    "sym": "AAPL",
-   "last": 324.385,
-   "magical": 66.7493,
-   "zlsma": 314.5814,
+   "last": 325.89,
+   "magical": 73.1102,
+   "zlsma": 314.8061,
    "ce_mode": "BUY",
    "ce_label": 321.7612
   },
   {
+   "sym": "ABBV",
+   "last": 253.3,
+   "magical": 36.7152,
+   "zlsma": 259.8081,
+   "ce_mode": "BUY",
+   "ce_label": 247.1802
+  },
+  {
    "sym": "ABNB",
-   "last": 140.41,
-   "magical": -184.8215,
-   "zlsma": 153.7088,
+   "last": 140.05,
+   "magical": -194.2386,
+   "zlsma": 153.655,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ACA",
+   "last": 145.13,
+   "magical": 67.5883,
+   "zlsma": 152.4518,
+   "ce_mode": "BUY",
+   "ce_label": 144.5
+  },
+  {
+   "sym": "ACGL",
+   "last": 98.63,
+   "magical": -38.9392,
+   "zlsma": 105.3259,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ACTG",
+   "last": 4.57,
+   "magical": 20.5718,
+   "zlsma": 4.6178,
+   "ce_mode": "BUY",
+   "ce_label": 4.3768
+  },
+  {
+   "sym": "ADI",
+   "last": 386.73,
+   "magical": -20.3369,
+   "zlsma": 368.202,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "AEE",
+   "last": 112.01,
+   "magical": -56.0718,
+   "zlsma": 115.1027,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "AEP",
+   "last": 133.07,
+   "magical": -68.236,
+   "zlsma": 138.9596,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "AGNC",
+   "last": 10.72,
+   "magical": -97.9358,
+   "zlsma": 11.5369,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "AI",
-   "last": 8.045,
-   "magical": -278.3585,
-   "zlsma": 8.0936,
+   "last": 8.19,
+   "magical": -243.793,
+   "zlsma": 8.1153,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "ALB",
-   "last": 117.77,
-   "magical": -122.0011,
-   "zlsma": 115.549,
+   "last": 117.45,
+   "magical": -124.981,
+   "zlsma": 115.5012,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ALGN",
+   "last": 172.46,
+   "magical": -100.3739,
+   "zlsma": 189.2919,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "AMAT",
-   "last": 560.98,
-   "magical": -63.9688,
-   "zlsma": 598.4519,
+   "last": 553.92,
+   "magical": -75.1269,
+   "zlsma": 597.3981,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "AMBQ",
+   "last": 77.55,
+   "magical": -66.501,
+   "zlsma": 63.5171,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "AMCR",
-   "last": 43.39,
-   "magical": 4.6254,
-   "zlsma": 45.596,
+   "last": 43.21,
+   "magical": -12.5031,
+   "zlsma": 45.5691,
    "ce_mode": "BUY",
    "ce_label": 41.76
   },
   {
    "sym": "AMD",
-   "last": 556.98,
-   "magical": 92.7508,
-   "zlsma": 499.0121,
-   "ce_mode": "BUY",
-   "ce_label": 493.34
+   "last": 552.33,
+   "magical": 76.8169,
+   "zlsma": 498.318,
+   "ce_mode": "SELL",
+   "ce_label": null
   },
   {
    "sym": "AMGN",
-   "last": 367.235,
-   "magical": 61.1033,
-   "zlsma": 374.5233,
+   "last": 366.05,
+   "magical": 45.4211,
+   "zlsma": 374.3464,
    "ce_mode": "BUY",
-   "ce_label": 357.715
+   "ce_label": 353.77
+  },
+  {
+   "sym": "AMLX",
+   "last": 17.7,
+   "magical": -29.9854,
+   "zlsma": 20.8608,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "AMT",
+   "last": 166.06,
+   "magical": -38.6407,
+   "zlsma": 158.1108,
+   "ce_mode": "SELL",
+   "ce_label": null
   },
   {
    "sym": "AMZN",
-   "last": 243.89,
-   "magical": 4.523,
-   "zlsma": 245.0837,
+   "last": 244.85,
+   "magical": 17.0379,
+   "zlsma": 245.227,
    "ce_mode": "BUY",
    "ce_label": 240.41
   },
   {
+   "sym": "ANET",
+   "last": 174.87,
+   "magical": 33.4039,
+   "zlsma": 188.2141,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ANF",
+   "last": 96.04,
+   "magical": 115.5143,
+   "zlsma": 103.8913,
+   "ce_mode": "BUY",
+   "ce_label": 88.11
+  },
+  {
+   "sym": "AON",
+   "last": 352.33,
+   "magical": 9.6924,
+   "zlsma": 370.6321,
+   "ce_mode": "BUY",
+   "ce_label": 350.58
+  },
+  {
+   "sym": "APD",
+   "last": 297,
+   "magical": 14.8947,
+   "zlsma": 307.6217,
+   "ce_mode": "BUY",
+   "ce_label": 293.29
+  },
+  {
+   "sym": "APH",
+   "last": 157.51,
+   "magical": -43.0435,
+   "zlsma": 170.0088,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
    "sym": "APP",
-   "last": 415.399,
-   "magical": -103.3126,
-   "zlsma": 407.4679,
+   "last": 412.48,
+   "magical": -107.4496,
+   "zlsma": 407.0322,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ARI",
+   "last": 6.78,
+   "magical": -139.1898,
+   "zlsma": 8.028,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "ARM",
-   "last": 285.37,
-   "magical": -61.183,
-   "zlsma": 246.9831,
+   "last": 283.4,
+   "magical": -65.6163,
+   "zlsma": 246.6891,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "AROC",
-   "last": 38.245,
-   "magical": -19.5454,
-   "zlsma": 39.5912,
+   "last": 38.36,
+   "magical": -13.2788,
+   "zlsma": 39.6083,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "ARQT",
-   "last": 27.96,
-   "magical": 58.489,
-   "zlsma": 30.8657,
+   "last": 27.9,
+   "magical": 53.5778,
+   "zlsma": 30.8567,
    "ce_mode": "BUY",
-   "ce_label": 26.4186
+   "ce_label": 26.3586
+  },
+  {
+   "sym": "ASB",
+   "last": 30.7,
+   "magical": -29.7097,
+   "zlsma": 32.4243,
+   "ce_mode": "BUY",
+   "ce_label": 30.03
+  },
+  {
+   "sym": "ASML",
+   "last": 1801.86,
+   "magical": 1.6267,
+   "zlsma": 1775.631,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ASTH",
+   "last": 41.94,
+   "magical": -161.4052,
+   "zlsma": 47.5335,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ASTS",
+   "last": 61.95,
+   "magical": -76.7493,
+   "zlsma": 44.4012,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ATEN",
+   "last": 35.54,
+   "magical": -73.7071,
+   "zlsma": 38.3676,
+   "ce_mode": "BUY",
+   "ce_label": 35.4
+  },
+  {
+   "sym": "ATLC",
+   "last": 95.17,
+   "magical": -88.5171,
+   "zlsma": 102.854,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "AVT",
+   "last": 90.13,
+   "magical": 128.6729,
+   "zlsma": 83.7516,
+   "ce_mode": "BUY",
+   "ce_label": 85.75
   },
   {
    "sym": "AXON",
-   "last": 491.71,
-   "magical": -79.6431,
-   "zlsma": 565.9792,
+   "last": 491.49,
+   "magical": -79.9481,
+   "zlsma": 565.9464,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "BABA",
-   "last": 116.425,
-   "magical": 73.3685,
-   "zlsma": 107.9405,
+   "last": 116.56,
+   "magical": 74.282,
+   "zlsma": 107.9606,
    "ce_mode": "BUY",
    "ce_label": 112.59
   },
   {
    "sym": "BAC",
-   "last": 61.58,
-   "magical": 110.6097,
-   "zlsma": 64.4883,
+   "last": 61.62,
+   "magical": 112.4698,
+   "zlsma": 64.4943,
    "ce_mode": "BUY",
-   "ce_label": 60.09
+   "ce_label": 60.13
+  },
+  {
+   "sym": "BALL",
+   "last": 62.35,
+   "magical": 40.6222,
+   "zlsma": 67.0666,
+   "ce_mode": "BUY",
+   "ce_label": 60.69
   },
   {
    "sym": "BB",
-   "last": 8.98,
-   "magical": -104.4432,
-   "zlsma": 9.9696,
+   "last": 8.95,
+   "magical": -106.0408,
+   "zlsma": 9.9651,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "BBAI",
+   "last": 2.88,
+   "magical": -106.4562,
+   "zlsma": 2.4247,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "BCAX",
+   "last": 27.96,
+   "magical": -23.8945,
+   "zlsma": 32.3457,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "BCBP",
-   "last": 10.235,
-   "magical": -49.1299,
-   "zlsma": 10.2529,
+   "last": 10.29,
+   "magical": -29.3147,
+   "zlsma": 10.2611,
    "ce_mode": "BUY",
    "ce_label": 10.01
   },
   {
+   "sym": "BFC",
+   "last": 146.37,
+   "magical": -53.1519,
+   "zlsma": 151.5883,
+   "ce_mode": "BUY",
+   "ce_label": 144.75
+  },
+  {
+   "sym": "BG",
+   "last": 123.88,
+   "magical": 154.7134,
+   "zlsma": 113.99,
+   "ce_mode": "BUY",
+   "ce_label": 118.12
+  },
+  {
+   "sym": "BHP",
+   "last": 59.76,
+   "magical": 66.0469,
+   "zlsma": 55.9746,
+   "ce_mode": "BUY",
+   "ce_label": 56.99
+  },
+  {
+   "sym": "BHRB",
+   "last": 71.01,
+   "magical": 23.593,
+   "zlsma": 74.412,
+   "ce_mode": "BUY",
+   "ce_label": 68.56
+  },
+  {
+   "sym": "BIOA",
+   "last": 21.94,
+   "magical": -101.1534,
+   "zlsma": 25.481,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "BKR",
+   "last": 56.6,
+   "magical": 29.5759,
+   "zlsma": 53.8024,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "BLK",
+   "last": 1056.63,
+   "magical": 76.6001,
+   "zlsma": 1040.293,
+   "ce_mode": "BUY",
+   "ce_label": 1012.07
+  },
+  {
    "sym": "BMNR",
-   "last": 17.72,
-   "magical": 178.2721,
-   "zlsma": 16.0245,
+   "last": 17.74,
+   "magical": 179.3211,
+   "zlsma": 16.0275,
    "ce_mode": "BUY",
    "ce_label": 16.01
   },
   {
+   "sym": "BOTZ",
+   "last": 34.89,
+   "magical": -102.3599,
+   "zlsma": 33.5589,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
    "sym": "BROS",
-   "last": 64.86,
-   "magical": -76.8658,
-   "zlsma": 71.4763,
+   "last": 64.95,
+   "magical": -74.5823,
+   "zlsma": 71.4897,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "BSTZ",
+   "last": 28.73,
+   "magical": -30.9977,
+   "zlsma": 27.4896,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "BSX",
+   "last": 42.97,
+   "magical": -95.2125,
+   "zlsma": 43.1486,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "BTBT",
-   "last": 1.57,
-   "magical": -66.8934,
-   "zlsma": 1.3499,
+   "last": 1.56,
+   "magical": -72.0339,
+   "zlsma": 1.3484,
    "ce_mode": "SELL",
    "ce_label": null
   },
@@ -1419,786 +2512,3052 @@
    "ce_label": null
   },
   {
-   "sym": "CAR",
-   "last": 164.37,
-   "magical": 74.2794,
-   "zlsma": 217.2533,
+   "sym": "BWXT",
+   "last": 175.17,
+   "magical": -77.557,
+   "zlsma": 183.2249,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "BX",
+   "last": 122.82,
+   "magical": 28.3101,
+   "zlsma": 129.2888,
    "ce_mode": "BUY",
-   "ce_label": 153.97
+   "ce_label": 121.5318
+  },
+  {
+   "sym": "BY",
+   "last": 37.75,
+   "magical": 40.6179,
+   "zlsma": 39.5378,
+   "ce_mode": "BUY",
+   "ce_label": 37.07
+  },
+  {
+   "sym": "BYD",
+   "last": 86.66,
+   "magical": -78.6254,
+   "zlsma": 91.1894,
+   "ce_mode": "BUY",
+   "ce_label": 85.37
+  },
+  {
+   "sym": "C",
+   "last": 132.25,
+   "magical": -88.0237,
+   "zlsma": 139.8768,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CACC",
+   "last": 606.22,
+   "magical": -127.0054,
+   "zlsma": 643.9827,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CAR",
+   "last": 164.36,
+   "magical": 74.1515,
+   "zlsma": 217.2518,
+   "ce_mode": "BUY",
+   "ce_label": 153.96
+  },
+  {
+   "sym": "CASH",
+   "last": 88.67,
+   "magical": -22.3853,
+   "zlsma": 97.0103,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CAT",
+   "last": 889.31,
+   "magical": -90.1395,
+   "zlsma": 916.8407,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CB",
+   "last": 343.23,
+   "magical": -44.6358,
+   "zlsma": 361.4554,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CBL",
+   "last": 56.91,
+   "magical": 190.1423,
+   "zlsma": 55.6163,
+   "ce_mode": "BUY",
+   "ce_label": 52.8538
+  },
+  {
+   "sym": "CBSH",
+   "last": 58.7,
+   "magical": 58.8985,
+   "zlsma": 60.8872,
+   "ce_mode": "BUY",
+   "ce_label": 57.37
+  },
+  {
+   "sym": "CCEP",
+   "last": 105.88,
+   "magical": 47.0901,
+   "zlsma": 110.8295,
+   "ce_mode": "BUY",
+   "ce_label": 103.4
+  },
+  {
+   "sym": "CCJ",
+   "last": 90.37,
+   "magical": -60.6893,
+   "zlsma": 90.072,
+   "ce_mode": "BUY",
+   "ce_label": 83.61
+  },
+  {
+   "sym": "CCL",
+   "last": 26.1,
+   "magical": -77.3833,
+   "zlsma": 27.0157,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CDNS",
+   "last": 337.01,
+   "magical": -155.3804,
+   "zlsma": 337.3453,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CEG",
+   "last": 274.9,
+   "magical": 169.0588,
+   "zlsma": 260.6602,
+   "ce_mode": "BUY",
+   "ce_label": 247.5
+  },
+  {
+   "sym": "CENX",
+   "last": 45.33,
+   "magical": 34.1066,
+   "zlsma": 37.6315,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CGON",
+   "last": 69.31,
+   "magical": -89.9607,
+   "zlsma": 77.9873,
+   "ce_mode": "BUY",
+   "ce_label": 67.58
+  },
+  {
+   "sym": "CHCO",
+   "last": 139.17,
+   "magical": 212.4011,
+   "zlsma": 139.7083,
+   "ce_mode": "BUY",
+   "ce_label": 130.62
+  },
+  {
+   "sym": "CHTR",
+   "last": 129.22,
+   "magical": -79.3524,
+   "zlsma": 147.3344,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CHYM",
+   "last": 21.82,
+   "magical": 70.2091,
+   "zlsma": 24.9475,
+   "ce_mode": "BUY",
+   "ce_label": 20.43
+  },
+  {
+   "sym": "CLX",
+   "last": 95.76,
+   "magical": -21.6914,
+   "zlsma": 97.0478,
+   "ce_mode": "BUY",
+   "ce_label": 93.129
+  },
+  {
+   "sym": "CMG",
+   "last": 32.2,
+   "magical": -120.6997,
+   "zlsma": 36.072,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CMP",
+   "last": 30.14,
+   "magical": 37.6179,
+   "zlsma": 27.5666,
+   "ce_mode": "BUY",
+   "ce_label": 28.47
+  },
+  {
+   "sym": "CNOB",
+   "last": 33,
+   "magical": 10.2927,
+   "zlsma": 33.9222,
+   "ce_mode": "BUY",
+   "ce_label": 32.52
+  },
+  {
+   "sym": "COCO",
+   "last": 135,
+   "magical": -1.5845,
+   "zlsma": 173.2094,
+   "ce_mode": "BUY",
+   "ce_label": 128.518
+  },
+  {
+   "sym": "COGT",
+   "last": 39.54,
+   "magical": 68.6202,
+   "zlsma": 42.7723,
+   "ce_mode": "SELL",
+   "ce_label": null
   },
   {
    "sym": "COIN",
-   "last": 167.26,
-   "magical": 91.6288,
-   "zlsma": 158.8525,
+   "last": 166.12,
+   "magical": 80.1727,
+   "zlsma": 158.6824,
    "ce_mode": "BUY",
    "ce_label": 151.47
   },
   {
-   "sym": "COP",
-   "last": 119.325,
-   "magical": 159.3307,
-   "zlsma": 111.4195,
+   "sym": "COKE",
+   "last": 184.36,
+   "magical": 18.2514,
+   "zlsma": 193.0137,
    "ce_mode": "BUY",
-   "ce_label": 114.845
+   "ce_label": 177.96
+  },
+  {
+   "sym": "COLB",
+   "last": 32.63,
+   "magical": 55.4104,
+   "zlsma": 33.8888,
+   "ce_mode": "BUY",
+   "ce_label": 31.85
+  },
+  {
+   "sym": "COLD",
+   "last": 15.3,
+   "magical": -75.0193,
+   "zlsma": 15.1678,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "COP",
+   "last": 118.79,
+   "magical": 152.1247,
+   "zlsma": 111.3396,
+   "ce_mode": "BUY",
+   "ce_label": 114.31
+  },
+  {
+   "sym": "COST",
+   "last": 927.31,
+   "magical": -52.1492,
+   "zlsma": 902.5145,
+   "ce_mode": "BUY",
+   "ce_label": 906.5
+  },
+  {
+   "sym": "CPRT",
+   "last": 27.17,
+   "magical": -91.8316,
+   "zlsma": 26.4617,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CPT",
+   "last": 112.01,
+   "magical": -89.7436,
+   "zlsma": 113.9291,
+   "ce_mode": "SELL",
+   "ce_label": null
   },
   {
    "sym": "CRCL",
-   "last": 65.71,
-   "magical": -6.6741,
-   "zlsma": 47.5557,
+   "last": 66.16,
+   "magical": 1.9886,
+   "zlsma": 47.6229,
    "ce_mode": "BUY",
    "ce_label": 58.44
   },
   {
    "sym": "CRWD",
-   "last": 187.55,
-   "magical": -34.1742,
-   "zlsma": 186.1591,
+   "last": 188.42,
+   "magical": -27.7501,
+   "zlsma": 186.2889,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "CRWV",
-   "last": 82.85,
-   "magical": -28.5626,
-   "zlsma": 79.0054,
+   "last": 82.64,
+   "magical": -30.3539,
+   "zlsma": 78.974,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "CSCO",
-   "last": 112.56,
-   "magical": -54.1689,
-   "zlsma": 100.5478,
+   "last": 112.21,
+   "magical": -60.9942,
+   "zlsma": 100.4955,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
+   "sym": "CSX",
+   "last": 49.93,
+   "magical": 66.5291,
+   "zlsma": 50.6434,
+   "ce_mode": "BUY",
+   "ce_label": 48.79
+  },
+  {
+   "sym": "CTM",
+   "last": 0.65,
+   "magical": -47.3721,
+   "zlsma": 0.5861,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CTRE",
+   "last": 42.38,
+   "magical": 91.0105,
+   "zlsma": 41.7875,
+   "ce_mode": "BUY",
+   "ce_label": 41.25
+  },
+  {
+   "sym": "CTS",
+   "last": 60.15,
+   "magical": -39.6258,
+   "zlsma": 57.294,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CTVA",
+   "last": 88.53,
+   "magical": 141.0249,
+   "zlsma": 89.8355,
+   "ce_mode": "BUY",
+   "ce_label": 85.27
+  },
+  {
    "sym": "CVNA",
-   "last": 63.63,
-   "magical": -108.0228,
-   "zlsma": 71.714,
+   "last": 62.75,
+   "magical": -133.1363,
+   "zlsma": 71.5826,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "CVX",
+   "last": 192.98,
+   "magical": 143.8436,
+   "zlsma": 179.0595,
+   "ce_mode": "BUY",
+   "ce_label": 187.72
+  },
+  {
+   "sym": "CZR",
+   "last": 29.94,
+   "magical": -19.8322,
+   "zlsma": 30.3184,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "DAL",
-   "last": 83.74,
-   "magical": -107.3373,
-   "zlsma": 88.3143,
+   "last": 83.52,
+   "magical": -111.5271,
+   "zlsma": 88.2815,
    "ce_mode": "SELL",
    "ce_label": null
+  },
+  {
+   "sym": "DASH",
+   "last": 177.73,
+   "magical": -153.5529,
+   "zlsma": 206.3838,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "DDOG",
+   "last": 245.77,
+   "magical": -62.6785,
+   "zlsma": 233.2976,
+   "ce_mode": "BUY",
+   "ce_label": 242.68
+  },
+  {
+   "sym": "DE",
+   "last": 607.33,
+   "magical": 8.8055,
+   "zlsma": 620.7018,
+   "ce_mode": "BUY",
+   "ce_label": 574
+  },
+  {
+   "sym": "DELL",
+   "last": 441.8,
+   "magical": 92.4163,
+   "zlsma": 408.0946,
+   "ce_mode": "BUY",
+   "ce_label": 351.95
+  },
+  {
+   "sym": "DFDV",
+   "last": 3.1,
+   "magical": 48.273,
+   "zlsma": 2.866,
+   "ce_mode": "BUY",
+   "ce_label": 2.7806
   },
   {
    "sym": "DGX",
-   "last": 207.02,
-   "magical": -45.55,
-   "zlsma": 213.3569,
+   "last": 209.83,
+   "magical": 13.4593,
+   "zlsma": 213.7764,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
-   "sym": "ET",
-   "last": 20.405,
-   "magical": 106.4771,
-   "zlsma": 20.0674,
+   "sym": "DHI",
+   "last": 142.52,
+   "magical": -123.3217,
+   "zlsma": 156.2318,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "DIS",
+   "last": 95.87,
+   "magical": -76.6421,
+   "zlsma": 95.4705,
    "ce_mode": "BUY",
-   "ce_label": 19.832
+   "ce_label": 94.32
+  },
+  {
+   "sym": "DLR",
+   "last": 178.41,
+   "magical": -15.0062,
+   "zlsma": 177.6899,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "DNTH",
+   "last": 102.76,
+   "magical": 98.6946,
+   "zlsma": 108.049,
+   "ce_mode": "BUY",
+   "ce_label": 95.76
+  },
+  {
+   "sym": "DOW",
+   "last": 31.25,
+   "magical": 152.6241,
+   "zlsma": 28.7075,
+   "ce_mode": "BUY",
+   "ce_label": 29.02
+  },
+  {
+   "sym": "DPZ",
+   "last": 319.83,
+   "magical": 76.8723,
+   "zlsma": 328.3283,
+   "ce_mode": "BUY",
+   "ce_label": 299.39
+  },
+  {
+   "sym": "DTE",
+   "last": 27.23,
+   "magical": 107.1656,
+   "zlsma": 24.8035,
+   "ce_mode": "BUY",
+   "ce_label": 26.29
+  },
+  {
+   "sym": "DUK",
+   "last": 127.95,
+   "magical": 86.0884,
+   "zlsma": 128.8824,
+   "ce_mode": "BUY",
+   "ce_label": 123.81
+  },
+  {
+   "sym": "DUOL",
+   "last": 119.51,
+   "magical": -93.3625,
+   "zlsma": 131.5933,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "DVN",
+   "last": 44.88,
+   "magical": 154.0522,
+   "zlsma": 42.7301,
+   "ce_mode": "BUY",
+   "ce_label": 42.99
+  },
+  {
+   "sym": "EFC",
+   "last": 13.45,
+   "magical": -87.631,
+   "zlsma": 13.4897,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "EFX",
+   "last": 170.45,
+   "magical": 26.6584,
+   "zlsma": 178.758,
+   "ce_mode": "BUY",
+   "ce_label": 165.28
+  },
+  {
+   "sym": "EIG",
+   "last": 49.39,
+   "magical": -93.4185,
+   "zlsma": 52.4341,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "EME",
+   "last": 755.15,
+   "magical": -76.129,
+   "zlsma": 750.0328,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ENVA",
+   "last": 222.49,
+   "magical": -125.8815,
+   "zlsma": 260.0643,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "EPC",
+   "last": 27.65,
+   "magical": 27.8019,
+   "zlsma": 33.419,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "EQIX",
+   "last": 1028.74,
+   "magical": -21.798,
+   "zlsma": 1024.5622,
+   "ce_mode": "BUY",
+   "ce_label": 1006.91
+  },
+  {
+   "sym": "EQR",
+   "last": 0.265,
+   "magical": -42.8241,
+   "zlsma": 0.2962,
+   "ce_mode": "BUY",
+   "ce_label": 0.23
+  },
+  {
+   "sym": "ERIE",
+   "last": 210.86,
+   "magical": -141.7939,
+   "zlsma": 241.4124,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ESE",
+   "last": 325.96,
+   "magical": -60.7853,
+   "zlsma": 354.4834,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ESNT",
+   "last": 65.06,
+   "magical": 39.7732,
+   "zlsma": 68.9334,
+   "ce_mode": "BUY",
+   "ce_label": 64.45
+  },
+  {
+   "sym": "ESQ",
+   "last": 121.01,
+   "magical": 33.78,
+   "zlsma": 125.9574,
+   "ce_mode": "BUY",
+   "ce_label": 118.42
+  },
+  {
+   "sym": "ET",
+   "last": 20.37,
+   "magical": 101.8727,
+   "zlsma": 20.0621,
+   "ce_mode": "BUY",
+   "ce_label": 19.8
+  },
+  {
+   "sym": "ETN",
+   "last": 406.91,
+   "magical": 2.8258,
+   "zlsma": 417.6261,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ETR",
+   "last": 114.88,
+   "magical": 31.2891,
+   "zlsma": 118.2347,
+   "ce_mode": "SELL",
+   "ce_label": null
   },
   {
    "sym": "EVGO",
-   "last": 1.545,
-   "magical": -201.726,
-   "zlsma": 1.626,
+   "last": 1.58,
+   "magical": -177.0419,
+   "zlsma": 1.6312,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "EXC",
+   "last": 46.7,
+   "magical": -10.6135,
+   "zlsma": 47.6123,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "EXTR",
+   "last": 30.27,
+   "magical": -69.611,
+   "zlsma": 30.574,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "F",
-   "last": 14.38,
-   "magical": 134.46,
-   "zlsma": 12.7376,
+   "last": 14.42,
+   "magical": 144.5695,
+   "zlsma": 12.7436,
    "ce_mode": "BUY",
    "ce_label": 13.66
   },
   {
+   "sym": "FCFS",
+   "last": 208.74,
+   "magical": -142.786,
+   "zlsma": 208.6097,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
    "sym": "FCX",
-   "last": 64.325,
-   "magical": 164.2398,
-   "zlsma": 58.0155,
+   "last": 65,
+   "magical": 191.4642,
+   "zlsma": 58.1162,
    "ce_mode": "BUY",
-   "ce_label": 59.295
+   "ce_label": 59.97
+  },
+  {
+   "sym": "FDX",
+   "last": 321.02,
+   "magical": 101.4727,
+   "zlsma": 308.3694,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "FFIV",
+   "last": 400.61,
+   "magical": -74.0215,
+   "zlsma": 399.2683,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "FHB",
+   "last": 28.81,
+   "magical": -91.1736,
+   "zlsma": 30.4577,
+   "ce_mode": "BUY",
+   "ce_label": 28.32
+  },
+  {
+   "sym": "FICO",
+   "last": 1221.47,
+   "magical": -14.9448,
+   "zlsma": 1179.7395,
+   "ce_mode": "BUY",
+   "ce_label": 1202.07
+  },
+  {
+   "sym": "FITB",
+   "last": 57.67,
+   "magical": 49.2954,
+   "zlsma": 61.1497,
+   "ce_mode": "BUY",
+   "ce_label": 56.715
+  },
+  {
+   "sym": "FIX",
+   "last": 1791.06,
+   "magical": -4.6115,
+   "zlsma": 1689.8535,
+   "ce_mode": "SELL",
+   "ce_label": null
   },
   {
    "sym": "FLEX",
-   "last": 128.05,
-   "magical": -59.1547,
-   "zlsma": 106.9951,
+   "last": 127,
+   "magical": -64.9532,
+   "zlsma": 106.8384,
    "ce_mode": "BUY",
-   "ce_label": 116.55
+   "ce_label": 115.5
+  },
+  {
+   "sym": "FLG",
+   "last": 14.88,
+   "magical": -23.2558,
+   "zlsma": 15.555,
+   "ce_mode": "BUY",
+   "ce_label": 14.5
+  },
+  {
+   "sym": "FLR",
+   "last": 51.59,
+   "magical": 30.8046,
+   "zlsma": 54.0955,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "FLYW",
+   "last": 16.54,
+   "magical": -160.149,
+   "zlsma": 18.2692,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "FNB",
+   "last": 18.86,
+   "magical": -57.3477,
+   "zlsma": 19.8158,
+   "ce_mode": "BUY",
+   "ce_label": 18.59
+  },
+  {
+   "sym": "FRT",
+   "last": 125.05,
+   "magical": 65.8878,
+   "zlsma": 123.1081,
+   "ce_mode": "BUY",
+   "ce_label": 123.42
   },
   {
    "sym": "FSLR",
-   "last": 209.44,
-   "magical": -110.8513,
-   "zlsma": 173.1181,
+   "last": 208.86,
+   "magical": -114.2789,
+   "zlsma": 173.0315,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "FTAI",
+   "last": 222.49,
+   "magical": -31.2711,
+   "zlsma": 207.416,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "FTDR",
+   "last": 72.04,
+   "magical": -142.8358,
+   "zlsma": 79.6962,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "FTNT",
+   "last": 155.05,
+   "magical": -47.4218,
+   "zlsma": 149.8977,
+   "ce_mode": "BUY",
+   "ce_label": 151.81
+  },
+  {
+   "sym": "FUTU",
+   "last": 106.09,
+   "magical": 271.2713,
+   "zlsma": 114.0817,
+   "ce_mode": "BUY",
+   "ce_label": 92.69
+  },
+  {
+   "sym": "GBCI",
+   "last": 51.17,
+   "magical": -71.9438,
+   "zlsma": 55.224,
+   "ce_mode": "BUY",
+   "ce_label": 50.78
+  },
+  {
+   "sym": "GD",
+   "last": 373.16,
+   "magical": 57.2402,
+   "zlsma": 374.8468,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "GDX",
-   "last": 76.33,
-   "magical": 61.3061,
-   "zlsma": 71.5239,
+   "last": 76.68,
+   "magical": 74.5881,
+   "zlsma": 71.5762,
    "ce_mode": "BUY",
-   "ce_label": 68.73
+   "ce_label": 69.08
+  },
+  {
+   "sym": "GE",
+   "last": 341.19,
+   "magical": -121.113,
+   "zlsma": 361.5259,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "GEV",
+   "last": 985.03,
+   "magical": -208.4655,
+   "zlsma": 1133.9641,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "GH",
+   "last": 150.75,
+   "magical": -54.2623,
+   "zlsma": 159.5306,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "GKOS",
+   "last": 152.86,
+   "magical": 42.4764,
+   "zlsma": 165.8009,
+   "ce_mode": "BUY",
+   "ce_label": 149.26
   },
   {
    "sym": "GLD",
-   "last": 379.325,
-   "magical": 106.9106,
-   "zlsma": 363.0775,
+   "last": 379.12,
+   "magical": 104.1215,
+   "zlsma": 363.0469,
    "ce_mode": "BUY",
-   "ce_label": 364.505
+   "ce_label": 364.3
+  },
+  {
+   "sym": "GM",
+   "last": 82.13,
+   "magical": 274.4514,
+   "zlsma": 76.4977,
+   "ce_mode": "BUY",
+   "ce_label": 75.01
   },
   {
    "sym": "GME",
-   "last": 21.61,
-   "magical": -75.0447,
-   "zlsma": 23.2986,
+   "last": 21.6,
+   "magical": -76.8278,
+   "zlsma": 23.2971,
    "ce_mode": "BUY",
    "ce_label": 21.43
   },
   {
-   "sym": "HIMX",
-   "last": 13.68,
-   "magical": -51.9979,
-   "zlsma": 7.8705,
+   "sym": "GOOG",
+   "last": 341.91,
+   "magical": -110.2592,
+   "zlsma": 338.7338,
    "ce_mode": "SELL",
    "ce_label": null
+  },
+  {
+   "sym": "GOOGL",
+   "last": 342.09,
+   "magical": -116.2895,
+   "zlsma": 339.3893,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "GRMN",
+   "last": 240.51,
+   "magical": -17.5561,
+   "zlsma": 254.1938,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "GS",
+   "last": 1098.2,
+   "magical": 85.3403,
+   "zlsma": 1074.1272,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "GTX",
+   "last": 31.87,
+   "magical": -52.8387,
+   "zlsma": 28.4684,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "HALO",
+   "last": 77.82,
+   "magical": 21.9092,
+   "zlsma": 79.5516,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "HAS",
+   "last": 89.04,
+   "magical": 177.0237,
+   "zlsma": 82.052,
+   "ce_mode": "BUY",
+   "ce_label": 84.62
+  },
+  {
+   "sym": "HBNC",
+   "last": 20.21,
+   "magical": 58.6866,
+   "zlsma": 20.643,
+   "ce_mode": "BUY",
+   "ce_label": 19.73
+  },
+  {
+   "sym": "HCSG",
+   "last": 23.56,
+   "magical": -120.41,
+   "zlsma": 25.9639,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "HD",
+   "last": 331.45,
+   "magical": -125.2187,
+   "zlsma": 357.7515,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "HELE",
+   "last": 28.19,
+   "magical": 35.3648,
+   "zlsma": 27.7151,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "HIMX",
+   "last": 13.62,
+   "magical": -57.0396,
+   "zlsma": 7.8615,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "HLT",
+   "last": 324.23,
+   "magical": -80.6144,
+   "zlsma": 329.062,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "HOMB",
+   "last": 30.39,
+   "magical": 115.2146,
+   "zlsma": 31.0021,
+   "ce_mode": "BUY",
+   "ce_label": 29.77
+  },
+  {
+   "sym": "HON",
+   "last": 232.99,
+   "magical": 63.4205,
+   "zlsma": 220.3672,
+   "ce_mode": "BUY",
+   "ce_label": 217.81
   },
   {
    "sym": "HOOD",
-   "last": 105.14,
-   "magical": -19.8857,
-   "zlsma": 117.0337,
+   "last": 104.48,
+   "magical": -26.5363,
+   "zlsma": 116.9352,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
+   "sym": "HOPE",
+   "last": 13.54,
+   "magical": -7.7193,
+   "zlsma": 14.2137,
+   "ce_mode": "BUY",
+   "ce_label": 13.21
+  },
+  {
+   "sym": "HSIC",
+   "last": 84.81,
+   "magical": -28.2153,
+   "zlsma": 90.3855,
+   "ce_mode": "BUY",
+   "ce_label": 84.57
+  },
+  {
    "sym": "HTZ",
-   "last": 1.94,
-   "magical": -48.2726,
-   "zlsma": 1.2566,
+   "last": 1.93,
+   "magical": -50.7839,
+   "zlsma": 1.2551,
    "ce_mode": "BUY",
    "ce_label": 1.62
   },
   {
+   "sym": "HUBB",
+   "last": 476.84,
+   "magical": -77.6617,
+   "zlsma": 515.2503,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
    "sym": "HUT",
-   "last": 110.09,
-   "magical": 41.6745,
-   "zlsma": 86.1506,
+   "last": 109.86,
+   "magical": 39.7012,
+   "zlsma": 86.1163,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "HWC",
+   "last": 76.4,
+   "magical": 42.8037,
+   "zlsma": 80.2596,
+   "ce_mode": "BUY",
+   "ce_label": 75.94
+  },
+  {
+   "sym": "HWM",
+   "last": 280.7,
+   "magical": 151.3891,
+   "zlsma": 275.6123,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "IBIT",
-   "last": 37.29,
-   "magical": 101.8311,
-   "zlsma": 35.7892,
+   "last": 37.34,
+   "magical": 104.3555,
+   "zlsma": 35.7967,
    "ce_mode": "BUY",
-   "ce_label": 36.21
+   "ce_label": 36.26
+  },
+  {
+   "sym": "IBKR",
+   "last": 93.5,
+   "magical": 22.1348,
+   "zlsma": 94.6737,
+   "ce_mode": "SELL",
+   "ce_label": null
   },
   {
    "sym": "IBM",
-   "last": 205.67,
-   "magical": -108.9776,
-   "zlsma": 226.4619,
+   "last": 205.77,
+   "magical": -108.8063,
+   "zlsma": 226.4768,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "IDA",
+   "last": 148.74,
+   "magical": -52.5531,
+   "zlsma": 155.4596,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "IGV",
-   "last": 88.94,
-   "magical": -85.289,
-   "zlsma": 87.6021,
+   "last": 89.02,
+   "magical": -83.1843,
+   "zlsma": 87.6141,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
+   "sym": "IIPR",
+   "last": 62.31,
+   "magical": -56.028,
+   "zlsma": 64.8911,
+   "ce_mode": "BUY",
+   "ce_label": 62.07
+  },
+  {
    "sym": "INOD",
-   "last": 61.87,
-   "magical": -109.1868,
-   "zlsma": 28.0656,
+   "last": 61.41,
+   "magical": -115.277,
+   "zlsma": 27.9969,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "INTC",
+   "last": 102.62,
+   "magical": -66.1334,
+   "zlsma": 94.4148,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "IRM",
+   "last": 124.51,
+   "magical": 20.4772,
+   "zlsma": 119.6462,
+   "ce_mode": "BUY",
+   "ce_label": 119.982
+  },
+  {
+   "sym": "IRMD",
+   "last": 94.08,
+   "magical": -72.6994,
+   "zlsma": 96.476,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "IWM",
-   "last": 293.92,
-   "magical": -87.3734,
-   "zlsma": 297.5341,
+   "last": 293.79,
+   "magical": -91.2763,
+   "zlsma": 297.5147,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "JBHT",
+   "last": 292.24,
+   "magical": 86.5529,
+   "zlsma": 286.144,
+   "ce_mode": "BUY",
+   "ce_label": 285.06
+  },
+  {
+   "sym": "JCI",
+   "last": 142.49,
+   "magical": 12.8807,
+   "zlsma": 143.5897,
+   "ce_mode": "BUY",
+   "ce_label": 137.63
+  },
+  {
+   "sym": "JETS",
+   "last": 30.1,
+   "magical": -127.2003,
+   "zlsma": 32.4251,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "JNJ",
+   "last": 255.63,
+   "magical": 13.3983,
+   "zlsma": 262.6864,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "JPM",
+   "last": 348.21,
+   "magical": 150.8204,
+   "zlsma": 359.0159,
+   "ce_mode": "BUY",
+   "ce_label": 338.5702
+  },
+  {
+   "sym": "KMI",
+   "last": 32.49,
+   "magical": 31.305,
+   "zlsma": 31.9921,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "KO",
+   "last": 82.2,
+   "magical": -28.1847,
+   "zlsma": 82.358,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "KRE",
+   "last": 75.6,
+   "magical": 26.7402,
+   "zlsma": 78.8411,
+   "ce_mode": "BUY",
+   "ce_label": 73.9
+  },
+  {
+   "sym": "KURA",
+   "last": 10.54,
+   "magical": -98.1661,
+   "zlsma": 11.5402,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "KWEB",
+   "last": 26.44,
+   "magical": 42.6448,
+   "zlsma": 26.5014,
+   "ce_mode": "BUY",
+   "ce_label": 26.14
+  },
+  {
+   "sym": "LAES",
+   "last": 2.6,
+   "magical": -79.0648,
+   "zlsma": 2.2677,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "LCID",
-   "last": 6.925,
-   "magical": 81.9334,
-   "zlsma": 6.6898,
+   "last": 6.78,
+   "magical": 68.0427,
+   "zlsma": 6.6681,
    "ce_mode": "BUY",
    "ce_label": 6.2
   },
   {
+   "sym": "LDOS",
+   "last": 107.26,
+   "magical": 44.5756,
+   "zlsma": 106.6739,
+   "ce_mode": "BUY",
+   "ce_label": 103.5102
+  },
+  {
+   "sym": "LEN",
+   "last": 82.15,
+   "magical": -94.24,
+   "zlsma": 83.2945,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "LEVI",
+   "last": 24.74,
+   "magical": 86.4979,
+   "zlsma": 25.4999,
+   "ce_mode": "BUY",
+   "ce_label": 23.8
+  },
+  {
+   "sym": "LHX",
+   "last": 285.16,
+   "magical": -65.0181,
+   "zlsma": 282.7005,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "LLY",
+   "last": 1163.01,
+   "magical": -51.4589,
+   "zlsma": 1159.7352,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "LNG",
+   "last": 267.4,
+   "magical": 96.2224,
+   "zlsma": 278.2772,
+   "ce_mode": "BUY",
+   "ce_label": 254.17
+  },
+  {
+   "sym": "LOW",
+   "last": 204.35,
+   "magical": -107.2586,
+   "zlsma": 218.6517,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "LSTR",
+   "last": 210.07,
+   "magical": 34.5401,
+   "zlsma": 207.3992,
+   "ce_mode": "BUY",
+   "ce_label": 206.25
+  },
+  {
    "sym": "LUNR",
-   "last": 14.04,
-   "magical": -86.8686,
-   "zlsma": 4.8125,
+   "last": 14.09,
+   "magical": -85.5798,
+   "zlsma": 4.82,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "LUV",
+   "last": 47.66,
+   "magical": -102.8565,
+   "zlsma": 51.0335,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "LYV",
+   "last": 177.92,
+   "magical": -70.7069,
+   "zlsma": 182.8033,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "LZB",
+   "last": 39.3,
+   "magical": -46.102,
+   "zlsma": 40.3622,
+   "ce_mode": "BUY",
+   "ce_label": 38.09
+  },
+  {
+   "sym": "M",
+   "last": 24.33,
+   "magical": 50.7679,
+   "zlsma": 24.0951,
+   "ce_mode": "BUY",
+   "ce_label": 22.72
+  },
+  {
+   "sym": "MAC",
+   "last": 25.36,
+   "magical": 3.8002,
+   "zlsma": 26.129,
+   "ce_mode": "BUY",
+   "ce_label": 25
+  },
+  {
+   "sym": "MAR",
+   "last": 369.8,
+   "magical": -33.9048,
+   "zlsma": 365.5275,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "MBLY",
-   "last": 8.675,
-   "magical": -52.9968,
-   "zlsma": 8.3576,
+   "last": 8.78,
+   "magical": -41.6816,
+   "zlsma": 8.3733,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MCB",
+   "last": 90.19,
+   "magical": -358.904,
+   "zlsma": 101.0729,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MCD",
+   "last": 263.57,
+   "magical": -109.0691,
+   "zlsma": 270.9551,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "MCHP",
-   "last": 84.92,
-   "magical": -37.2386,
-   "zlsma": 80.3456,
+   "last": 85.02,
+   "magical": -35.1445,
+   "zlsma": 80.3605,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MCO",
+   "last": 489.7,
+   "magical": 21.4227,
+   "zlsma": 516.8409,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MDT",
+   "last": 81.89,
+   "magical": 4.149,
+   "zlsma": 85.2663,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MELI",
+   "last": 1799.21,
+   "magical": 18.1785,
+   "zlsma": 1983.1916,
+   "ce_mode": "BUY",
+   "ce_label": 1777.22
+  },
+  {
+   "sym": "META",
+   "last": 627.17,
+   "magical": 20.3687,
+   "zlsma": 664.7406,
+   "ce_mode": "BUY",
+   "ce_label": 626.14
+  },
+  {
+   "sym": "MFA",
+   "last": 9.29,
+   "magical": -98.5401,
+   "zlsma": 9.7166,
+   "ce_mode": "BUY",
+   "ce_label": 9.26
+  },
+  {
+   "sym": "MIDD",
+   "last": 130.99,
+   "magical": -107.9826,
+   "zlsma": 136.2707,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MIRM",
+   "last": 114.48,
+   "magical": -120.9912,
+   "zlsma": 128.8066,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MITK",
+   "last": 17.16,
+   "magical": -193.475,
+   "zlsma": 19.7849,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MLAB",
+   "last": 98.57,
+   "magical": 13.9699,
+   "zlsma": 95.4645,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MLI",
+   "last": 62.66,
+   "magical": 71.485,
+   "zlsma": 56.1499,
+   "ce_mode": "BUY",
+   "ce_label": 58.64
+  },
+  {
+   "sym": "MLKN",
+   "last": 21.895,
+   "magical": 110.4913,
+   "zlsma": 23.6271,
+   "ce_mode": "BUY",
+   "ce_label": 20.37
+  },
+  {
+   "sym": "MNST",
+   "last": 95.67,
+   "magical": -68.8907,
+   "zlsma": 95.1719,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MP",
+   "last": 45.68,
+   "magical": -114.9744,
+   "zlsma": 45.0971,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MPC",
+   "last": 315.82,
+   "magical": 105.5481,
+   "zlsma": 304.6446,
+   "ce_mode": "BUY",
+   "ce_label": 308.228
+  },
+  {
+   "sym": "MRK",
+   "last": 127.47,
+   "magical": 47.7877,
+   "zlsma": 128.1457,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MRX",
+   "last": 65.85,
+   "magical": 47.4141,
+   "zlsma": 67.8853,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "MSCI",
-   "last": 566.875,
-   "magical": -73.4441,
-   "zlsma": 599.254,
+   "last": 570.95,
+   "magical": -63.7268,
+   "zlsma": 599.8622,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MSFT",
+   "last": 390.34,
+   "magical": 41.1476,
+   "zlsma": 379.086,
+   "ce_mode": "BUY",
+   "ce_label": 385.81
+  },
+  {
+   "sym": "MSGS",
+   "last": 397.25,
+   "magical": 69.1824,
+   "zlsma": 390.1001,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MSI",
+   "last": 404.33,
+   "magical": -91.9318,
+   "zlsma": 427.473,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "MSTR",
-   "last": 100.175,
-   "magical": 99.4357,
-   "zlsma": 82.4019,
+   "last": 100.01,
+   "magical": 96.8526,
+   "zlsma": 82.3773,
    "ce_mode": "BUY",
-   "ce_label": 92.515
+   "ce_label": 92.35
+  },
+  {
+   "sym": "MTCH",
+   "last": 38.03,
+   "magical": -19.9175,
+   "zlsma": 40.951,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MTN",
+   "last": 144.93,
+   "magical": 19.2808,
+   "zlsma": 150.4509,
+   "ce_mode": "BUY",
+   "ce_label": 142.59
+  },
+  {
+   "sym": "MTRN",
+   "last": 250.66,
+   "magical": -51.114,
+   "zlsma": 254.5672,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MTZ",
+   "last": 357.35,
+   "magical": -52.8632,
+   "zlsma": 362.0487,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "MU",
+   "last": 959.48,
+   "magical": -29.4715,
+   "zlsma": 834.6911,
+   "ce_mode": "BUY",
+   "ce_label": 866.36
+  },
+  {
+   "sym": "NAT",
+   "last": 6.36,
+   "magical": 95.4545,
+   "zlsma": 6.6129,
+   "ce_mode": "BUY",
+   "ce_label": 6.02
+  },
+  {
+   "sym": "NBN",
+   "last": 128.61,
+   "magical": -117.9627,
+   "zlsma": 137.9754,
+   "ce_mode": "BUY",
+   "ce_label": 127.9
+  },
+  {
+   "sym": "NCLH",
+   "last": 19.33,
+   "magical": -55.7842,
+   "zlsma": 20.9354,
+   "ce_mode": "SELL",
+   "ce_label": null
   },
   {
    "sym": "NEE",
-   "last": 89.62,
-   "magical": 139.6096,
-   "zlsma": 91.2402,
+   "last": 89.41,
+   "magical": 121.7871,
+   "zlsma": 91.2088,
    "ce_mode": "BUY",
    "ce_label": 86.83
   },
   {
+   "sym": "NEM",
+   "last": 95.75,
+   "magical": 64.6227,
+   "zlsma": 89.8111,
+   "ce_mode": "BUY",
+   "ce_label": 86.85
+  },
+  {
+   "sym": "NET",
+   "last": 268.98,
+   "magical": 39.5215,
+   "zlsma": 281.9977,
+   "ce_mode": "BUY",
+   "ce_label": 255.7636
+  },
+  {
+   "sym": "NFLX",
+   "last": 68.53,
+   "magical": -129.2889,
+   "zlsma": 70.1936,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
    "sym": "NIO",
-   "last": 4.68,
-   "magical": -155.0562,
-   "zlsma": 4.8597,
+   "last": 4.67,
+   "magical": -161.2663,
+   "zlsma": 4.8582,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "NKE",
+   "last": 42.21,
+   "magical": -45.6989,
+   "zlsma": 42.0421,
+   "ce_mode": "BUY",
+   "ce_label": 41.4476
+  },
+  {
+   "sym": "NLY",
+   "last": 22.42,
+   "magical": -80.8656,
+   "zlsma": 23.6657,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "NMAX",
-   "last": 8,
-   "magical": -37.1205,
-   "zlsma": 7.7758,
+   "last": 8.01,
+   "magical": -35.7412,
+   "zlsma": 7.7773,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "NOV",
+   "last": 42.815,
+   "magical": -42.7325,
+   "zlsma": 45.3186,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "NOW",
-   "last": 95.6,
-   "magical": -114.9895,
-   "zlsma": 95.5768,
+   "last": 95.46,
+   "magical": -116.7506,
+   "zlsma": 95.5559,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "NPKI",
+   "last": 14.82,
+   "magical": 24.8605,
+   "zlsma": 14.4735,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "NSRGY",
+   "last": 104.1,
+   "magical": 26.8755,
+   "zlsma": 106.2734,
+   "ce_mode": "BUY",
+   "ce_label": 103.572
+  },
+  {
+   "sym": "NTAP",
+   "last": 166.54,
+   "magical": 60.4324,
+   "zlsma": 156.3187,
+   "ce_mode": "BUY",
+   "ce_label": 159.74
+  },
+  {
+   "sym": "NTRA",
+   "last": 264.22,
+   "magical": -86.8332,
+   "zlsma": 297.0183,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "NTRS",
-   "last": 178.21,
-   "magical": -38.3387,
-   "zlsma": 188.8832,
+   "last": 178.66,
+   "magical": -32.0156,
+   "zlsma": 188.9504,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "NUE",
+   "last": 235.9,
+   "magical": 50.0386,
+   "zlsma": 219.457,
+   "ce_mode": "BUY",
+   "ce_label": 228.09
+  },
+  {
+   "sym": "NVAX",
+   "last": 7.91,
+   "magical": -122.5991,
+   "zlsma": 7.5433,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "NVDA",
-   "last": 213.83,
-   "magical": 140.9792,
-   "zlsma": 195.9332,
+   "last": 212.06,
+   "magical": 122.078,
+   "zlsma": 195.669,
    "ce_mode": "BUY",
    "ce_label": 196.96
   },
   {
+   "sym": "NVRI",
+   "last": 22.97,
+   "magical": 63.5538,
+   "zlsma": 23.7635,
+   "ce_mode": "BUY",
+   "ce_label": 21.77
+  },
+  {
+   "sym": "NVST",
+   "last": 26.43,
+   "magical": -29.3,
+   "zlsma": 29.064,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "NVTS",
+   "last": 12.67,
+   "magical": -62.4914,
+   "zlsma": 5.0827,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "NWPX",
+   "last": 133.98,
+   "magical": -70.4926,
+   "zlsma": 136.2429,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "OCFC",
+   "last": 19.67,
+   "magical": 57.7961,
+   "zlsma": 20.2979,
+   "ce_mode": "BUY",
+   "ce_label": 19.35
+  },
+  {
+   "sym": "ODFL",
+   "last": 232.8,
+   "magical": 84.4897,
+   "zlsma": 229.7211,
+   "ce_mode": "BUY",
+   "ce_label": 226.096
+  },
+  {
+   "sym": "OGE",
+   "last": 49.3,
+   "magical": 81.2396,
+   "zlsma": 49.5812,
+   "ce_mode": "BUY",
+   "ce_label": 47.96
+  },
+  {
    "sym": "OILD",
-   "last": 36.95,
-   "magical": -134.0211,
-   "zlsma": 44.8781,
+   "last": 37.15,
+   "magical": -131.6281,
+   "zlsma": 44.908,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "OILU",
-   "last": 44.33,
-   "magical": 155.3636,
-   "zlsma": 36.8946,
+   "last": 44.14,
+   "magical": 152.2265,
+   "zlsma": 36.8662,
    "ce_mode": "BUY",
-   "ce_label": 39.71
+   "ce_label": 39.52
+  },
+  {
+   "sym": "OKLO",
+   "last": 44.5,
+   "magical": -68.3464,
+   "zlsma": 40.691,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "OKTA",
+   "last": 136.69,
+   "magical": -32.4934,
+   "zlsma": 149.2898,
+   "ce_mode": "SELL",
+   "ce_label": null
   },
   {
    "sym": "OPEN",
-   "last": 4.42,
-   "magical": -70.5636,
-   "zlsma": 4.8927,
+   "last": 4.38,
+   "magical": -81.7537,
+   "zlsma": 4.8867,
    "ce_mode": "BUY",
    "ce_label": 4.21
   },
   {
    "sym": "ORCL",
-   "last": 124.85,
-   "magical": -99.3161,
-   "zlsma": 93.9765,
+   "last": 125.84,
+   "magical": -92.8913,
+   "zlsma": 94.1243,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "OXY",
-   "last": 57.45,
-   "magical": 142.7693,
-   "zlsma": 52.1654,
+   "last": 57.5,
+   "magical": 143.9464,
+   "zlsma": 52.1728,
    "ce_mode": "BUY",
-   "ce_label": 54.81
+   "ce_label": 54.86
   },
   {
    "sym": "PANW",
-   "last": 335.11,
-   "magical": -1.8263,
-   "zlsma": 341.7563,
+   "last": 335.28,
+   "magical": -1.1451,
+   "zlsma": 341.7817,
    "ce_mode": "BUY",
    "ce_label": 334.38
   },
   {
+   "sym": "PB",
+   "last": 73.06,
+   "magical": 31.2586,
+   "zlsma": 74.8711,
+   "ce_mode": "BUY",
+   "ce_label": 71.16
+  },
+  {
+   "sym": "PBF",
+   "last": 64.33,
+   "magical": 107.0866,
+   "zlsma": 64.7757,
+   "ce_mode": "BUY",
+   "ce_label": 60.2
+  },
+  {
+   "sym": "PBR",
+   "last": 18.89,
+   "magical": 149.2595,
+   "zlsma": 18.1916,
+   "ce_mode": "BUY",
+   "ce_label": 17.81
+  },
+  {
+   "sym": "PCVX",
+   "last": 56,
+   "magical": -50.7233,
+   "zlsma": 64.224,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "PEP",
+   "last": 135.65,
+   "magical": -82.0927,
+   "zlsma": 138.5826,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "PFE",
+   "last": 24.82,
+   "magical": 87.8494,
+   "zlsma": 24.4721,
+   "ce_mode": "BUY",
+   "ce_label": 24.22
+  },
+  {
+   "sym": "PGR",
+   "last": 204.54,
+   "magical": -117.2308,
+   "zlsma": 224.8778,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "PH",
+   "last": 970.77,
+   "magical": 76.6333,
+   "zlsma": 1025.1295,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "PL",
+   "last": 22.6,
+   "magical": -102.7443,
+   "zlsma": 17.2394,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
    "sym": "PLTR",
-   "last": 123.89,
-   "magical": -25.5537,
-   "zlsma": 126.8351,
+   "last": 124.57,
+   "magical": -19.5625,
+   "zlsma": 126.9366,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "PM",
+   "last": 194.3,
+   "magical": 150.6377,
+   "zlsma": 178.296,
+   "ce_mode": "BUY",
+   "ce_label": 185.24
+  },
+  {
+   "sym": "PNC",
+   "last": 252.51,
+   "magical": 52.9801,
+   "zlsma": 266.0883,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "POWL",
+   "last": 240.68,
+   "magical": -35.6673,
+   "zlsma": 218.6016,
+   "ce_mode": "BUY",
+   "ce_label": 221.47
+  },
+  {
+   "sym": "PRAX",
+   "last": 312.1,
+   "magical": -72.5826,
+   "zlsma": 329.9726,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "PRLB",
+   "last": 79.73,
+   "magical": 65.2764,
+   "zlsma": 75.4629,
+   "ce_mode": "BUY",
+   "ce_label": 74.33
+  },
+  {
+   "sym": "PRSU",
+   "last": 51.72,
+   "magical": -124.5829,
+   "zlsma": 55.788,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "PSA",
+   "last": 311.7,
+   "magical": -148.2196,
+   "zlsma": 322.7314,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "PSX",
-   "last": 212.37,
-   "magical": 120.8733,
-   "zlsma": 200.3089,
+   "last": 211.41,
+   "magical": 116.7177,
+   "zlsma": 200.1657,
    "ce_mode": "BUY",
    "ce_label": 205.09
   },
   {
+   "sym": "PTCT",
+   "last": 78.4,
+   "magical": -83.8209,
+   "zlsma": 83.5434,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "PVLA",
+   "last": 142.18,
+   "magical": -30.0483,
+   "zlsma": 163.195,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "PWR",
+   "last": 643.14,
+   "magical": -70.4688,
+   "zlsma": 608.2624,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "QCOM",
+   "last": 175.63,
+   "magical": -69.2322,
+   "zlsma": 136.6789,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "QLYS",
+   "last": 140.23,
+   "magical": -33.069,
+   "zlsma": 163.7829,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
    "sym": "QQQ",
-   "last": 707.1,
-   "magical": -58.8692,
-   "zlsma": 685.9786,
+   "last": 705.35,
+   "magical": -71.6968,
+   "zlsma": 685.7174,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "RACE",
+   "last": 371.61,
+   "magical": -16.2846,
+   "zlsma": 391.3817,
+   "ce_mode": "BUY",
+   "ce_label": 368.14
+  },
+  {
+   "sym": "RCL",
+   "last": 285.85,
+   "magical": -56.4229,
+   "zlsma": 295.2983,
+   "ce_mode": "BUY",
+   "ce_label": 280.07
+  },
+  {
+   "sym": "REG",
+   "last": 82.22,
+   "magical": 101.6639,
+   "zlsma": 83.213,
+   "ce_mode": "BUY",
+   "ce_label": 80.42
+  },
+  {
+   "sym": "RELY",
+   "last": 23.11,
+   "magical": -28.2809,
+   "zlsma": 25.621,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "RGTI",
-   "last": 15.22,
-   "magical": -69.1358,
-   "zlsma": 11.7829,
+   "last": 15.23,
+   "magical": -68.7466,
+   "zlsma": 11.7844,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
+   "sym": "RIVN",
+   "last": 17.18,
+   "magical": 1.1482,
+   "zlsma": 18.6032,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "RKLB",
+   "last": 69.75,
+   "magical": -93.0748,
+   "zlsma": 38.0095,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "RMD",
+   "last": 192.91,
+   "magical": -104.2631,
+   "zlsma": 207.0475,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ROBO",
+   "last": 79.4,
+   "magical": -80.3433,
+   "zlsma": 76.3295,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ROKU",
+   "last": 143.08,
+   "magical": 62.6117,
+   "zlsma": 146.4018,
+   "ce_mode": "BUY",
+   "ce_label": 142.3702
+  },
+  {
+   "sym": "ROP",
+   "last": 336.71,
+   "magical": -94.1759,
+   "zlsma": 377.39,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "RSG",
+   "last": 216.52,
+   "magical": -30.0706,
+   "zlsma": 222.4195,
+   "ce_mode": "BUY",
+   "ce_label": 213.36
+  },
+  {
    "sym": "RSPU",
-   "last": 81.62,
-   "magical": 47.7051,
-   "zlsma": 82.7919,
+   "last": 81.85,
+   "magical": 72.3729,
+   "zlsma": 82.8262,
    "ce_mode": "BUY",
    "ce_label": 79.075
   },
   {
+   "sym": "SAIC",
+   "last": 115.95,
+   "magical": 107.7455,
+   "zlsma": 114.147,
+   "ce_mode": "BUY",
+   "ce_label": 110.52
+  },
+  {
    "sym": "SBET",
-   "last": 6.22,
-   "magical": 123.1845,
-   "zlsma": 6.054,
+   "last": 6.32,
+   "magical": 136.7143,
+   "zlsma": 6.0689,
    "ce_mode": "BUY",
    "ce_label": 5.79
   },
   {
-   "sym": "SHAK",
-   "last": 55.46,
-   "magical": -55.8576,
-   "zlsma": 72.7597,
+   "sym": "SBUX",
+   "last": 103.98,
+   "magical": -35.4389,
+   "zlsma": 106.6719,
+   "ce_mode": "BUY",
+   "ce_label": 102.76
+  },
+  {
+   "sym": "SCCO",
+   "last": 195.48,
+   "magical": 287.4189,
+   "zlsma": 172.9674,
+   "ce_mode": "BUY",
+   "ce_label": 178.38
+  },
+  {
+   "sym": "SCHL",
+   "last": 46.36,
+   "magical": 35.7298,
+   "zlsma": 48.247,
+   "ce_mode": "BUY",
+   "ce_label": 44.93
+  },
+  {
+   "sym": "SE",
+   "last": 104.88,
+   "magical": 22.7736,
+   "zlsma": 111.3143,
+   "ce_mode": "BUY",
+   "ce_label": 102.35
+  },
+  {
+   "sym": "SENEA",
+   "last": 165,
+   "magical": -93.3207,
+   "zlsma": 180.0146,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
-   "sym": "SKK",
-   "last": 5.0801,
-   "magical": 127.4777,
-   "zlsma": 4.8602,
+   "sym": "SEPN",
+   "last": 34.2,
+   "magical": -23.3332,
+   "zlsma": 33.9572,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "SFM",
+   "last": 73.94,
+   "magical": -102.3874,
+   "zlsma": 70.7065,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "SHAK",
+   "last": 55.94,
+   "magical": -38.2748,
+   "zlsma": 72.8314,
    "ce_mode": "BUY",
-   "ce_label": 4.7601
+   "ce_label": 55.9
+  },
+  {
+   "sym": "SHW",
+   "last": 319.91,
+   "magical": -132.3901,
+   "zlsma": 351.0702,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "SION",
+   "last": 45.03,
+   "magical": 37.9863,
+   "zlsma": 48.2597,
+   "ce_mode": "BUY",
+   "ce_label": 41.69
+  },
+  {
+   "sym": "SJM",
+   "last": 118.05,
+   "magical": 170.4156,
+   "zlsma": 112.437,
+   "ce_mode": "BUY",
+   "ce_label": 113.27
+  },
+  {
+   "sym": "SKK",
+   "last": 5.22,
+   "magical": 188.8413,
+   "zlsma": 4.8811,
+   "ce_mode": "BUY",
+   "ce_label": 4.9
   },
   {
    "sym": "SKYY",
-   "last": 132.79,
-   "magical": -65.8796,
-   "zlsma": 131.681,
+   "last": 133.19,
+   "magical": -57.9391,
+   "zlsma": 131.7407,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "SLAB",
+   "last": 217.17,
+   "magical": -146.2281,
+   "zlsma": 217.8868,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "SMCI",
-   "last": 30.68,
-   "magical": 110.4105,
-   "zlsma": 19.0297,
+   "last": 30.56,
+   "magical": 106.4205,
+   "zlsma": 19.0118,
    "ce_mode": "BUY",
    "ce_label": 22.2942
   },
   {
    "sym": "SMH",
-   "last": 590.34,
-   "magical": -32.5782,
-   "zlsma": 556.4236,
+   "last": 586.91,
+   "magical": -43.1418,
+   "zlsma": 555.9116,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "SMMT",
-   "last": 14.79,
-   "magical": 0.5698,
-   "zlsma": 16.3805,
+   "last": 14.74,
+   "magical": -4.3397,
+   "zlsma": 16.373,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "SMR",
+   "last": 8.68,
+   "magical": -37.889,
+   "zlsma": 7.7389,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "SNDA",
+   "last": 40,
+   "magical": -33.4855,
+   "zlsma": 42.3815,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "SNDX",
+   "last": 22.05,
+   "magical": -24.7113,
+   "zlsma": 25.1692,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "SNOW",
+   "last": 267.8,
+   "magical": 49.447,
+   "zlsma": 264.4022,
+   "ce_mode": "BUY",
+   "ce_label": 254.14
+  },
+  {
+   "sym": "SO",
+   "last": 95.8,
+   "magical": -6.2271,
+   "zlsma": 97.1159,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "SOFI",
-   "last": 17.045,
-   "magical": -122.2923,
-   "zlsma": 18.6595,
+   "last": 17.07,
+   "magical": -119.1131,
+   "zlsma": 18.6632,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
+   "sym": "SON",
+   "last": 55.15,
+   "magical": -8.0508,
+   "zlsma": 58.9167,
+   "ce_mode": "BUY",
+   "ce_label": 54.07
+  },
+  {
    "sym": "SOUN",
-   "last": 6.44,
-   "magical": -33.447,
-   "zlsma": 6.0165,
+   "last": 6.46,
+   "magical": -25.3688,
+   "zlsma": 6.0195,
    "ce_mode": "BUY",
    "ce_label": 6.13
   },
   {
    "sym": "SOXL",
-   "last": 163.6,
-   "magical": -53.9204,
-   "zlsma": 122.9918,
-   "ce_mode": "BUY",
-   "ce_label": 126.1
+   "last": 160.99,
+   "magical": -59.1272,
+   "zlsma": 122.6023,
+   "ce_mode": "SELL",
+   "ce_label": null
   },
   {
    "sym": "SOXS",
-   "last": 43.71,
-   "magical": 0.1694,
-   "zlsma": 52.1458,
+   "last": 44.52,
+   "magical": 11.9083,
+   "zlsma": 52.2667,
    "ce_mode": "BUY",
    "ce_label": 42.51
   },
   {
+   "sym": "SPG",
+   "last": 226.22,
+   "magical": 43.8011,
+   "zlsma": 231.8185,
+   "ce_mode": "BUY",
+   "ce_label": 221.26
+  },
+  {
+   "sym": "SPGI",
+   "last": 429.06,
+   "magical": 13.8355,
+   "zlsma": 458.7724,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
    "sym": "SPOT",
-   "last": 479.13,
-   "magical": 16.3589,
-   "zlsma": 476.6425,
+   "last": 474.16,
+   "magical": -12.4908,
+   "zlsma": 475.9007,
    "ce_mode": "BUY",
    "ce_label": 473.33
   },
   {
    "sym": "SPXL",
-   "last": 270.77,
-   "magical": 18.0938,
-   "zlsma": 260.1055,
+   "last": 269.97,
+   "magical": 8.8794,
+   "zlsma": 259.9861,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
-   "sym": "TALO",
-   "last": 15.25,
-   "magical": 188.0699,
-   "zlsma": 13.8161,
+   "sym": "SRRK",
+   "last": 48.3,
+   "magical": -207.8478,
+   "zlsma": 55.6759,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "SSB",
+   "last": 102.19,
+   "magical": 79.05,
+   "zlsma": 106.1987,
    "ce_mode": "BUY",
-   "ce_label": 14
+   "ce_label": 99.79
+  },
+  {
+   "sym": "ST",
+   "last": 45.95,
+   "magical": 9.9502,
+   "zlsma": 40.9354,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "STGW",
+   "last": 7.06,
+   "magical": -99.7543,
+   "zlsma": 7.9867,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "STNG",
+   "last": 78.46,
+   "magical": 67.6742,
+   "zlsma": 77.3374,
+   "ce_mode": "BUY",
+   "ce_label": 74.48
+  },
+  {
+   "sym": "STRL",
+   "last": 719.34,
+   "magical": -4.7687,
+   "zlsma": 527.0121,
+   "ce_mode": "BUY",
+   "ce_label": 627.2502
+  },
+  {
+   "sym": "STX",
+   "last": 908.1,
+   "magical": 31.566,
+   "zlsma": 788.8024,
+   "ce_mode": "BUY",
+   "ce_label": 775.72
+  },
+  {
+   "sym": "SYM",
+   "last": 42.46,
+   "magical": 1.7825,
+   "zlsma": 45.6113,
+   "ce_mode": "BUY",
+   "ce_label": 40.81
+  },
+  {
+   "sym": "TALO",
+   "last": 15.27,
+   "magical": 190.2778,
+   "zlsma": 13.8191,
+   "ce_mode": "BUY",
+   "ce_label": 14.02
+  },
+  {
+   "sym": "TBLA",
+   "last": 4.92,
+   "magical": -72.1425,
+   "zlsma": 5.1025,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "TDOC",
+   "last": 8.92,
+   "magical": -25.8267,
+   "zlsma": 9.984,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "TDY",
+   "last": 650.5,
+   "magical": 73.4042,
+   "zlsma": 653.1325,
+   "ce_mode": "BUY",
+   "ce_label": 599.73
+  },
+  {
+   "sym": "TFIN",
+   "last": 81.08,
+   "magical": 162.4049,
+   "zlsma": 82.5669,
+   "ce_mode": "BUY",
+   "ce_label": 74.94
+  },
+  {
+   "sym": "TGTX",
+   "last": 52.68,
+   "magical": -127.5207,
+   "zlsma": 59.4109,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "TIGO",
+   "last": 97.86,
+   "magical": 91.3187,
+   "zlsma": 100.7333,
+   "ce_mode": "BUY",
+   "ce_label": 93.88
+  },
+  {
+   "sym": "TJX",
+   "last": 155.41,
+   "magical": 51.2506,
+   "zlsma": 152.9636,
+   "ce_mode": "BUY",
+   "ce_label": 151.26
+  },
+  {
+   "sym": "TKR",
+   "last": 141.64,
+   "magical": 59.1428,
+   "zlsma": 138.6019,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "TLN",
+   "last": 377.41,
+   "magical": -24.7178,
+   "zlsma": 387.5853,
+   "ce_mode": "SELL",
+   "ce_label": null
   },
   {
    "sym": "TOST",
-   "last": 29.38,
-   "magical": 24.319,
-   "zlsma": 33.7355,
+   "last": 29.21,
+   "magical": 14.6386,
+   "zlsma": 33.7102,
    "ce_mode": "BUY",
    "ce_label": 28.921
   },
   {
+   "sym": "TPL",
+   "last": 433.1,
+   "magical": 146.2022,
+   "zlsma": 427.1622,
+   "ce_mode": "BUY",
+   "ce_label": 400.28
+  },
+  {
+   "sym": "TPR",
+   "last": 143.73,
+   "magical": 16.5315,
+   "zlsma": 146.1286,
+   "ce_mode": "BUY",
+   "ce_label": 135.79
+  },
+  {
+   "sym": "TRIN",
+   "last": 17.595,
+   "magical": 7.376,
+   "zlsma": 17.845,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
    "sym": "TSLA",
-   "last": 375.32,
-   "magical": -96.7135,
-   "zlsma": 361.5474,
+   "last": 374.01,
+   "magical": -102.4761,
+   "zlsma": 361.3519,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "TT",
+   "last": 473.6,
+   "magical": -62.9964,
+   "zlsma": 494.3511,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "TVTX",
+   "last": 56.26,
+   "magical": -67.7427,
+   "zlsma": 60.328,
+   "ce_mode": "BUY",
+   "ce_label": 55.14
+  },
+  {
+   "sym": "TXN",
+   "last": 294.19,
+   "magical": -27.4824,
+   "zlsma": 279.3465,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "TXNM",
+   "last": 58.3,
+   "magical": 186.2036,
+   "zlsma": 56.724,
+   "ce_mode": "BUY",
+   "ce_label": 57.61
+  },
+  {
+   "sym": "TYL",
+   "last": 284.32,
+   "magical": -120.9877,
+   "zlsma": 316.5288,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "UAL",
+   "last": 117.26,
+   "magical": -96.3547,
+   "zlsma": 126.1249,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "UAVS",
+   "last": 0.7162,
+   "magical": -135.1603,
+   "zlsma": 0.6958,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "UBER",
+   "last": 70.33,
+   "magical": -162.2177,
+   "zlsma": 74.1067,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "UDR",
+   "last": 39.54,
+   "magical": -58.0088,
+   "zlsma": 39.8557,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "UNP",
-   "last": 292.51,
-   "magical": 69.9331,
-   "zlsma": 296.4186,
+   "last": 292.56,
+   "magical": 70.278,
+   "zlsma": 296.4261,
    "ce_mode": "BUY",
    "ce_label": 291.65
   },
   {
-   "sym": "USO",
-   "last": 132.63,
-   "magical": 158.005,
-   "zlsma": 111.9918,
+   "sym": "URA",
+   "last": 40.97,
+   "magical": -43.6029,
+   "zlsma": 40.4599,
    "ce_mode": "BUY",
-   "ce_label": 124.51
+   "ce_label": 38.41
   },
   {
-   "sym": "VLO",
-   "last": 313.01,
-   "magical": 111.5531,
-   "zlsma": 308.7035,
-   "ce_mode": "BUY",
-   "ce_label": 298.38
-  },
-  {
-   "sym": "VMI",
-   "last": 487.57,
-   "magical": -230.6359,
-   "zlsma": 525.8828,
+   "sym": "URI",
+   "last": 1035.06,
+   "magical": -99.5598,
+   "zlsma": 1056.2847,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
+   "sym": "USB",
+   "last": 64.47,
+   "magical": 154.704,
+   "zlsma": 67.0557,
+   "ce_mode": "BUY",
+   "ce_label": 62.33
+  },
+  {
+   "sym": "USO",
+   "last": 131.68,
+   "magical": 151.5427,
+   "zlsma": 111.85,
+   "ce_mode": "BUY",
+   "ce_label": 123.56
+  },
+  {
+   "sym": "V",
+   "last": 353.42,
+   "magical": 23.7724,
+   "zlsma": 363.9589,
+   "ce_mode": "BUY",
+   "ce_label": 347.43
+  },
+  {
+   "sym": "VISN",
+   "last": 12.08,
+   "magical": -82.0605,
+   "zlsma": 13.5654,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "VLO",
+   "last": 310.92,
+   "magical": 105.0296,
+   "zlsma": 308.3915,
+   "ce_mode": "BUY",
+   "ce_label": 298.38
+  },
+  {
+   "sym": "VLY",
+   "last": 14.52,
+   "magical": -101.1146,
+   "zlsma": 15.272,
+   "ce_mode": "BUY",
+   "ce_label": 14.43
+  },
+  {
+   "sym": "VMI",
+   "last": 487.5,
+   "magical": -230.8525,
+   "zlsma": 525.8724,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "VRSK",
+   "last": 192.28,
+   "magical": 36.7062,
+   "zlsma": 200.1261,
+   "ce_mode": "BUY",
+   "ce_label": 192.02
+  },
+  {
+   "sym": "VRSN",
+   "last": 262.59,
+   "magical": -10.9223,
+   "zlsma": 250.9078,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "VRT",
+   "last": 301.16,
+   "magical": -54.4684,
+   "zlsma": 296.122,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "VRTX",
+   "last": 472.57,
+   "magical": -98.1739,
+   "zlsma": 499.5931,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "VST",
+   "last": 166.74,
+   "magical": 154.294,
+   "zlsma": 165.7238,
+   "ce_mode": "BUY",
+   "ce_label": 151.73
+  },
+  {
+   "sym": "VVV",
+   "last": 39.03,
+   "magical": -12.1467,
+   "zlsma": 40.71,
+   "ce_mode": "BUY",
+   "ce_label": 37.69
+  },
+  {
+   "sym": "VZ",
+   "last": 44.29,
+   "magical": 54.6498,
+   "zlsma": 41.1765,
+   "ce_mode": "BUY",
+   "ce_label": 42.47
+  },
+  {
+   "sym": "WCN",
+   "last": 167.9,
+   "magical": -43.9024,
+   "zlsma": 178.7189,
+   "ce_mode": "BUY",
+   "ce_label": 167.73
+  },
+  {
+   "sym": "WM",
+   "last": 236.38,
+   "magical": 62.5799,
+   "zlsma": 244.3828,
+   "ce_mode": "BUY",
+   "ce_label": 231.3304
+  },
+  {
+   "sym": "WMB",
+   "last": 74.49,
+   "magical": -17.448,
+   "zlsma": 73.629,
+   "ce_mode": "BUY",
+   "ce_label": 72.99
+  },
+  {
+   "sym": "WMS",
+   "last": 141.75,
+   "magical": -145.2413,
+   "zlsma": 157.8347,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "WST",
+   "last": 358.41,
+   "magical": 31.2175,
+   "zlsma": 370.1039,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "WWD",
+   "last": 404.59,
+   "magical": -31.6203,
+   "zlsma": 426.1636,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "XEL",
+   "last": 80.19,
+   "magical": -5.9104,
+   "zlsma": 80.5605,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "XENE",
+   "last": 66.18,
+   "magical": 32.3451,
+   "zlsma": 72.8077,
+   "ce_mode": "BUY",
+   "ce_label": 64.59
+  },
+  {
    "sym": "XLF",
-   "last": 55.975,
-   "magical": 44.1541,
-   "zlsma": 57.7298,
+   "last": 56.05,
+   "magical": 48.9838,
+   "zlsma": 57.741,
    "ce_mode": "BUY",
    "ce_label": 55.84
   },
   {
    "sym": "XLK",
-   "last": 180.739,
-   "magical": -33.3748,
-   "zlsma": 171.0752,
+   "last": 180.27,
+   "magical": -43.5983,
+   "zlsma": 171.0052,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "XLY",
+   "last": 114.02,
+   "magical": -114.4531,
+   "zlsma": 115.6308,
    "ce_mode": "SELL",
    "ce_label": null
   },
   {
    "sym": "XOM",
-   "last": 154.51,
-   "magical": 177.0192,
-   "zlsma": 141.4402,
+   "last": 154.45,
+   "magical": 176.3613,
+   "zlsma": 141.4312,
    "ce_mode": "BUY",
-   "ce_label": 148.33
+   "ce_label": 148.27
+  },
+  {
+   "sym": "XPO",
+   "last": 213.65,
+   "magical": 100.7991,
+   "zlsma": 213.9688,
+   "ce_mode": "BUY",
+   "ce_label": 206.02
+  },
+  {
+   "sym": "XYZ",
+   "last": 77.46,
+   "magical": -32.9202,
+   "zlsma": 82.5119,
+   "ce_mode": "BUY",
+   "ce_label": 77.44
+  },
+  {
+   "sym": "YOU",
+   "last": 52.3,
+   "magical": -148.8115,
+   "zlsma": 54.0561,
+   "ce_mode": "SELL",
+   "ce_label": null
+  },
+  {
+   "sym": "ZD",
+   "last": 52.22,
+   "magical": 5.6803,
+   "zlsma": 57.4245,
+   "ce_mode": "BUY",
+   "ce_label": 51.76
   },
   {
    "sym": "ZETA",
-   "last": 20.01,
-   "magical": -56.1283,
-   "zlsma": 20.8589,
+   "last": 20.18,
+   "magical": -46.3017,
+   "zlsma": 20.8843,
    "ce_mode": "SELL",
    "ce_label": null
+  },
+  {
+   "sym": "ZTS",
+   "last": 74.19,
+   "magical": -59.3342,
+   "zlsma": 89.0664,
+   "ce_mode": "BUY",
+   "ce_label": 72.38
   }
  ],
  "scanner_enrich": {
-  "BBAI": {
-   "description": "BigBear.ai Holdings, Inc."
-  },
-  "BHP": {
-   "description": "BHP Group Ltd Sponsored American Depositary Receipt Repr 2 Shs"
-  },
-  "C": {
-   "description": "Citigroup Inc."
-  },
-  "CB": {
-   "description": "Chubb Limited"
-  },
-  "CENX": {
-   "description": "Century Aluminum Company"
-  },
-  "CHYM": {
-   "description": "Chime Financial, Inc. Class A"
-  },
-  "CLX": {
-   "description": "Clorox Company"
-  },
-  "COST": {
-   "description": "Costco Wholesale Corporation"
-  },
-  "CTM": {
-   "description": "Castellum, Inc."
-  },
-  "CVX": {
-   "description": "Chevron Corporation"
-  },
-  "DE": {
-   "description": "Deere & Company"
-  },
-  "DFDV": {
-   "description": "DeFi Development Corporation"
-  },
-  "DIS": {
-   "description": "Walt Disney Company"
-  },
-  "DTE": {
-   "description": "DTE Energy Company"
-  },
-  "DVN": {
-   "description": "Devon Energy Corporation"
-  },
-  "DOW": {
-   "description": "Dow, Inc."
-  },
-  "FHB": {
-   "description": "First Hawaiian, Inc."
-  },
-  "FUTU": {
-   "description": "Futu Holdings Ltd. Sponsored ADR Class A"
-  },
-  "GD": {
-   "description": "General Dynamics Corporation"
-  },
-  "GOOG": {
-   "description": "Alphabet Inc. Class C"
-  },
-  "GS": {
-   "description": "Goldman Sachs Group, Inc."
-  },
-  "HAS": {
-   "description": "Hasbro, Inc."
-  },
-  "HD": {
-   "description": "Home Depot, Inc."
-  },
-  "HON": {
-   "description": "Honeywell International Inc."
-  },
-  "INTC": {
-   "description": "Intel Corporation"
-  },
-  "JNJ": {
-   "description": "Johnson & Johnson"
-  },
-  "JPM": {
-   "description": "JPMorgan Chase & Co."
-  },
-  "KO": {
-   "description": "Coca-Cola Company"
-  },
-  "KRE": {
-   "description": "State Street SPDR S&P Regional Banking ETF"
-  },
-  "KWEB": {
-   "description": "KraneShares CSI China Internet ETF"
-  },
-  "LAES": {
-   "description": "SEALSQ Corp."
-  },
-  "MCD": {
-   "description": "McDonald's Corporation"
-  },
-  "MDT": {
-   "description": "Medtronic Plc"
-  },
-  "MELI": {
-   "description": "MercadoLibre, Inc."
-  },
-  "META": {
-   "description": "Meta Platforms Inc Class A"
-  },
-  "MP": {
-   "description": "MP Materials Corp Class A"
-  },
-  "MSFT": {
-   "description": "Microsoft Corporation"
-  },
-  "MU": {
-   "description": "Micron Technology, Inc."
-  },
-  "NEM": {
-   "description": "Newmont Corporation"
-  },
-  "NET": {
-   "description": "Cloudflare Inc Class A"
-  },
-  "NFLX": {
-   "description": "Netflix, Inc."
-  },
-  "NKE": {
-   "description": "NIKE, Inc. Class B"
-  },
-  "NSRGY": {
-   "description": "Nestle S.A. Sponsored ADR"
-  },
-  "NVAX": {
-   "description": "Novavax, Inc."
-  },
-  "NVTS": {
-   "description": "Navitas Semiconductor Corporation"
-  },
-  "PBF": {
-   "description": "PBF Energy, Inc. Class A"
-  },
-  "PBR": {
-   "description": "Petroleo Brasileiro SA Sponsored ADR"
-  },
-  "PEP": {
-   "description": "PepsiCo, Inc."
-  },
-  "PFE": {
-   "description": "Pfizer Inc."
-  },
-  "PM": {
-   "description": "Philip Morris International Inc."
-  },
-  "RIVN": {
-   "description": "Rivian Automotive, Inc. Class A"
-  },
-  "ROKU": {
-   "description": "Roku, Inc. Class A"
-  },
-  "SBUX": {
-   "description": "Starbucks Corporation"
-  },
-  "SNOW": {
-   "description": "Snowflake, Inc."
-  },
-  "TDOC": {
-   "description": "Teladoc Health, Inc."
-  },
-  "TGTX": {
-   "description": "TG Therapeutics, Inc."
-  },
-  "UAVS": {
-   "description": "AgEagle Aerial Systems, Inc."
-  },
-  "UBER": {
-   "description": "Uber Technologies, Inc."
-  },
   "AAPL": {
    "description": "Apple Inc."
   },
+  "ABBV": {
+   "description": "AbbVie, Inc."
+  },
   "ABNB": {
    "description": "Airbnb, Inc. Class A"
+  },
+  "ACA": {
+   "description": "Arcosa, Inc."
+  },
+  "ACGL": {
+   "description": "Arch Capital Group Ltd."
+  },
+  "ACTG": {
+   "description": "Acacia Research Corporation"
+  },
+  "ADI": {
+   "description": "Analog Devices, Inc."
+  },
+  "AEE": {
+   "description": "Ameren Corporation"
+  },
+  "AEP": {
+   "description": "American Electric Power Company, Inc."
+  },
+  "AGNC": {
+   "description": "AGNC Investment Corp."
   },
   "AI": {
    "description": "C3.ai, Inc. Class A"
@@ -2206,8 +5565,14 @@
   "ALB": {
    "description": "Albemarle Corporation"
   },
+  "ALGN": {
+   "description": "Align Technology, Inc."
+  },
   "AMAT": {
    "description": "Applied Materials, Inc."
+  },
+  "AMBQ": {
+   "description": "Ambiq Micro, Inc."
   },
   "AMCR": {
    "description": "Amcor PLC"
@@ -2218,11 +5583,35 @@
   "AMGN": {
    "description": "Amgen Inc."
   },
+  "AMLX": {
+   "description": "Amylyx Pharmaceuticals, Inc."
+  },
+  "AMT": {
+   "description": "American Tower Corporation"
+  },
   "AMZN": {
    "description": "Amazon.com, Inc."
   },
+  "ANET": {
+   "description": "Arista Networks Inc"
+  },
+  "ANF": {
+   "description": "Abercrombie & Fitch Co. Class A"
+  },
+  "AON": {
+   "description": "Aon Plc Class A"
+  },
+  "APD": {
+   "description": "Air Products and Chemicals, Inc."
+  },
+  "APH": {
+   "description": "Amphenol Corporation Class A"
+  },
   "APP": {
    "description": "AppLovin Corp. Class A"
+  },
+  "ARI": {
+   "description": "Apollo Commercial Real Estate Finance, Inc."
   },
   "ARM": {
    "description": "ARM Holdings PLC Sponsored ADR"
@@ -2233,6 +5622,27 @@
   "ARQT": {
    "description": "Arcutis Biotherapeutics Inc"
   },
+  "ASB": {
+   "description": "Associated Banc-Corp"
+  },
+  "ASML": {
+   "description": "ASML Holding NV Sponsored ADR"
+  },
+  "ASTH": {
+   "description": "Astrana Health Inc."
+  },
+  "ASTS": {
+   "description": "AST SpaceMobile, Inc. Class A"
+  },
+  "ATEN": {
+   "description": "A10 Networks, Inc."
+  },
+  "ATLC": {
+   "description": "Atlanticus Holdings Corp."
+  },
+  "AVT": {
+   "description": "Avnet, Inc."
+  },
   "AXON": {
    "description": "Axon Enterprise Inc"
   },
@@ -2242,17 +5652,56 @@
   "BAC": {
    "description": "Bank of America Corp"
   },
+  "BALL": {
+   "description": "Ball Corporation"
+  },
   "BB": {
    "description": "BlackBerry Limited"
+  },
+  "BBAI": {
+   "description": "BigBear.ai Holdings, Inc."
+  },
+  "BCAX": {
+   "description": "Bicara Therapeutics Inc."
   },
   "BCBP": {
    "description": "BCB Bancorp, Inc."
   },
+  "BFC": {
+   "description": "Bank First Corp"
+  },
+  "BG": {
+   "description": "Bunge Global SA"
+  },
+  "BHP": {
+   "description": "BHP Group Ltd"
+  },
+  "BHRB": {
+   "description": "Burke Herbert Financial Services Corp"
+  },
+  "BIOA": {
+   "description": "BioAge Labs, Inc."
+  },
+  "BKR": {
+   "description": "Baker Hughes Company Class A"
+  },
+  "BLK": {
+   "description": "BlackRock, Inc."
+  },
   "BMNR": {
    "description": "BitMine Immersion Technologies Inc"
   },
+  "BOTZ": {
+   "description": "Global X Robotics & Artificial Intelligence ETF"
+  },
   "BROS": {
    "description": "Dutch Bros, Inc. Class A"
+  },
+  "BSTZ": {
+   "description": "BlackRock Science and Technology Term Trust of Benef Interest"
+  },
+  "BSX": {
+   "description": "Boston Scientific Corporation"
   },
   "BTBT": {
    "description": "Bit Digital, Inc."
@@ -2260,14 +5709,113 @@
   "BTCS": {
    "description": "BTCS, Inc."
   },
+  "BWXT": {
+   "description": "BWX Technologies, Inc."
+  },
+  "BX": {
+   "description": "Blackstone Inc."
+  },
+  "BY": {
+   "description": "Byline Bancorp, Inc."
+  },
+  "BYD": {
+   "description": "Boyd Gaming Corporation"
+  },
+  "C": {
+   "description": "Citigroup Inc."
+  },
+  "CACC": {
+   "description": "Credit Acceptance Corporation"
+  },
   "CAR": {
    "description": "Avis Budget Group, Inc."
+  },
+  "CASH": {
+   "description": "Pathward Financial, Inc."
+  },
+  "CAT": {
+   "description": "Caterpillar Inc."
+  },
+  "CB": {
+   "description": "Chubb Limited"
+  },
+  "CBL": {
+   "description": "CBL & Associates Properties, Inc."
+  },
+  "CBSH": {
+   "description": "Commerce Bancshares, Inc."
+  },
+  "CCEP": {
+   "description": "Coca-Cola Europacific Partners plc"
+  },
+  "CCJ": {
+   "description": "Cameco Corporation"
+  },
+  "CCL": {
+   "description": "Carnival Corporation Ltd."
+  },
+  "CDNS": {
+   "description": "Cadence Design Systems, Inc."
+  },
+  "CEG": {
+   "description": "Constellation Energy Corporation"
+  },
+  "CENX": {
+   "description": "Century Aluminum Company"
+  },
+  "CGON": {
+   "description": "CG Oncology, Inc."
+  },
+  "CHCO": {
+   "description": "City Holding Company"
+  },
+  "CHTR": {
+   "description": "Charter Communications, Inc. Class A"
+  },
+  "CHYM": {
+   "description": "Chime Financial, Inc. Class A"
+  },
+  "CLX": {
+   "description": "Clorox Company"
+  },
+  "CMG": {
+   "description": "Chipotle Mexican Grill, Inc."
+  },
+  "CMP": {
+   "description": "Compass Minerals International, Inc."
+  },
+  "CNOB": {
+   "description": "ConnectOne Bancorp, Inc."
+  },
+  "COCO": {
+   "description": "PT Wahana Interfood Nusantara Tbk"
+  },
+  "COGT": {
+   "description": "Cogent Biosciences, Inc."
   },
   "COIN": {
    "description": "Coinbase Global, Inc. Class A"
   },
+  "COKE": {
+   "description": "Coca-Cola Consolidated, Inc."
+  },
+  "COLB": {
+   "description": "Columbia Banking System, Inc."
+  },
+  "COLD": {
+   "description": "Americold Realty Trust, Inc."
+  },
   "COP": {
    "description": "ConocoPhillips"
+  },
+  "COST": {
+   "description": "Costco Wholesale Corporation"
+  },
+  "CPRT": {
+   "description": "Copart, Inc."
+  },
+  "CPT": {
+   "description": "Camden Property Trust"
   },
   "CRCL": {
    "description": "Circle Internet Group, Inc. Class A"
@@ -2281,110 +5829,593 @@
   "CSCO": {
    "description": "Cisco Systems, Inc."
   },
+  "CSX": {
+   "description": "CSX Corporation"
+  },
+  "CTM": {
+   "description": "Castellum, Inc."
+  },
+  "CTRE": {
+   "description": "CareTrust REIT, Inc."
+  },
+  "CTS": {
+   "description": "CTS Corporation"
+  },
+  "CTVA": {
+   "description": "Corteva Inc"
+  },
   "CVNA": {
    "description": "Carvana Co. Class A"
+  },
+  "CVX": {
+   "description": "Chevron Corporation"
+  },
+  "CZR": {
+   "description": "Caesars Entertainment, Inc."
   },
   "DAL": {
    "description": "Delta Air Lines, Inc."
   },
+  "DASH": {
+   "description": "DoorDash, Inc. Class A"
+  },
+  "DDOG": {
+   "description": "Datadog, Inc. Class A"
+  },
+  "DE": {
+   "description": "Deere & Company"
+  },
+  "DELL": {
+   "description": "Dell Technologies, Inc. Class C"
+  },
+  "DFDV": {
+   "description": "DeFi Development Corporation"
+  },
   "DGX": {
    "description": "Quest Diagnostics Incorporated"
+  },
+  "DHI": {
+   "description": "D.R. Horton, Inc."
+  },
+  "DIS": {
+   "description": "Walt Disney Company"
+  },
+  "DLR": {
+   "description": "Digital Realty Trust, Inc."
+  },
+  "DNTH": {
+   "description": "Dianthus Therapeutics, Inc."
+  },
+  "DOW": {
+   "description": "Dow, Inc."
+  },
+  "DPZ": {
+   "description": "Domino's Pizza, Inc."
+  },
+  "DTE": {
+   "description": "Deutsche Telekom AG"
+  },
+  "DUK": {
+   "description": "Duke Energy Corporation"
+  },
+  "DUOL": {
+   "description": "Duolingo, Inc. Class A"
+  },
+  "DVN": {
+   "description": "Devon Energy Corporation"
+  },
+  "EFC": {
+   "description": "Ellington Financial Inc."
+  },
+  "EFX": {
+   "description": "Equifax Inc."
+  },
+  "EIG": {
+   "description": "Employers Holdings, Inc."
+  },
+  "EME": {
+   "description": "EMCOR Group, Inc."
+  },
+  "ENVA": {
+   "description": "Enova International Inc"
+  },
+  "EPC": {
+   "description": "Edgewell Personal Care Co."
+  },
+  "EQIX": {
+   "description": "Equinix, Inc."
+  },
+  "EQR": {
+   "description": "EQ Resources Limited"
+  },
+  "ERIE": {
+   "description": "Erie Indemnity Company Class A"
+  },
+  "ESE": {
+   "description": "ESCO Technologies Inc."
+  },
+  "ESNT": {
+   "description": "Essent Group Ltd."
+  },
+  "ESQ": {
+   "description": "Esquire Financial Holdings, Inc."
   },
   "ET": {
    "description": "Energy Transfer LP"
   },
+  "ETN": {
+   "description": "Eaton Corp. Plc"
+  },
+  "ETR": {
+   "description": "Entergy Corporation"
+  },
   "EVGO": {
    "description": "EVgo, Inc. Class A"
+  },
+  "EXC": {
+   "description": "Exelon Corporation"
+  },
+  "EXTR": {
+   "description": "Extreme Networks, Inc."
   },
   "F": {
    "description": "Ford Motor Company"
   },
+  "FCFS": {
+   "description": "FirstCash Holdings, Inc."
+  },
   "FCX": {
    "description": "Freeport-McMoRan, Inc."
+  },
+  "FDX": {
+   "description": "FedEx Corporation"
+  },
+  "FFIV": {
+   "description": "F5, Inc."
+  },
+  "FHB": {
+   "description": "First Hawaiian, Inc."
+  },
+  "FICO": {
+   "description": "Fair Isaac Corporation"
+  },
+  "FITB": {
+   "description": "Fifth Third Bancorp"
+  },
+  "FIX": {
+   "description": "Comfort Systems USA, Inc."
   },
   "FLEX": {
    "description": "Flex Ltd"
   },
+  "FLG": {
+   "description": "Flagstar Bank, National Association"
+  },
+  "FLR": {
+   "description": "Fluor Corporation"
+  },
+  "FLYW": {
+   "description": "Flywire Corp."
+  },
+  "FNB": {
+   "description": "F.N.B. Corporation"
+  },
+  "FRT": {
+   "description": "Federal Realty Investment Trust"
+  },
   "FSLR": {
    "description": "First Solar, Inc."
+  },
+  "FTAI": {
+   "description": "FTAI Aviation Ltd."
+  },
+  "FTDR": {
+   "description": "Frontdoor, Inc."
+  },
+  "FTNT": {
+   "description": "Fortinet, Inc."
+  },
+  "FUTU": {
+   "description": "Futu Holdings Ltd. Sponsored ADR Class A"
+  },
+  "GBCI": {
+   "description": "Glacier Bancorp, Inc."
+  },
+  "GD": {
+   "description": "General Dynamics Corporation"
   },
   "GDX": {
    "description": "VanEck Gold Miners ETF"
   },
+  "GE": {
+   "description": "GE Aerospace"
+  },
+  "GEV": {
+   "description": "GE Vernova Inc."
+  },
+  "GH": {
+   "description": "Guardant Health, Inc."
+  },
+  "GKOS": {
+   "description": "Glaukos Corp"
+  },
   "GLD": {
    "description": "SPDR Gold Shares"
+  },
+  "GM": {
+   "description": "General Motors Company"
   },
   "GME": {
    "description": "GameStop Corp. Class A"
   },
+  "GOOG": {
+   "description": "Alphabet Inc. Class C"
+  },
+  "GOOGL": {
+   "description": "Alphabet Inc. Class A"
+  },
+  "GRMN": {
+   "description": "Garmin Ltd."
+  },
+  "GS": {
+   "description": "Goldman Sachs Group, Inc."
+  },
+  "GTX": {
+   "description": "Garrett Motion Inc"
+  },
+  "HALO": {
+   "description": "Halozyme Therapeutics, Inc."
+  },
+  "HAS": {
+   "description": "Hasbro, Inc."
+  },
+  "HBNC": {
+   "description": "Horizon Bancorp, Inc."
+  },
+  "HCSG": {
+   "description": "Healthcare Services Group, Inc."
+  },
+  "HD": {
+   "description": "Home Depot, Inc."
+  },
+  "HELE": {
+   "description": "Helen of Troy Limited"
+  },
   "HIMX": {
    "description": "Himax Technologies, Inc. Sponsored ADR"
+  },
+  "HLT": {
+   "description": "Hilton Worldwide Holdings Inc."
+  },
+  "HOMB": {
+   "description": "Home BancShares, Inc."
+  },
+  "HON": {
+   "description": "Honeywell International Inc."
   },
   "HOOD": {
    "description": "Robinhood Markets, Inc. Class A"
   },
+  "HOPE": {
+   "description": "Hope Bancorp, Inc."
+  },
+  "HSIC": {
+   "description": "Henry Schein, Inc."
+  },
   "HTZ": {
    "description": "Hertz Global Holdings Inc"
+  },
+  "HUBB": {
+   "description": "Hubbell Incorporated"
   },
   "HUT": {
    "description": "Hut 8 Corp."
   },
+  "HWC": {
+   "description": "Hancock Whitney Corporation"
+  },
+  "HWM": {
+   "description": "Howmet Aerospace Inc."
+  },
   "IBIT": {
    "description": "iShares Bitcoin Trust ETF"
+  },
+  "IBKR": {
+   "description": "Interactive Brokers Group, Inc. Class A"
   },
   "IBM": {
    "description": "International Business Machines Corporation"
   },
+  "IDA": {
+   "description": "IDACORP, Inc."
+  },
   "IGV": {
    "description": "iShares Expanded Tech-Software Sector ETF"
+  },
+  "IIPR": {
+   "description": "Innovative Industrial Properties Inc"
   },
   "INOD": {
    "description": "Innodata Inc."
   },
+  "INTC": {
+   "description": "Intel Corporation"
+  },
+  "IRM": {
+   "description": "Iron Mountain, Inc."
+  },
+  "IRMD": {
+   "description": "IRadimed Corp."
+  },
   "IWM": {
    "description": "iShares Russell 2000 ETF"
+  },
+  "JBHT": {
+   "description": "J.B. Hunt Transport Services, Inc."
+  },
+  "JCI": {
+   "description": "Johnson Controls International plc"
+  },
+  "JETS": {
+   "description": "U.S. Global Jets ETF"
+  },
+  "JNJ": {
+   "description": "Johnson & Johnson"
+  },
+  "JPM": {
+   "description": "JPMorgan Chase & Co."
+  },
+  "KMI": {
+   "description": "Kinder Morgan Inc Class P"
+  },
+  "KO": {
+   "description": "Coca-Cola Company"
+  },
+  "KRE": {
+   "description": "State Street SPDR S&P Regional Banking ETF"
+  },
+  "KURA": {
+   "description": "Kura Oncology, Inc."
+  },
+  "KWEB": {
+   "description": "KraneShares CSI China Internet ETF"
+  },
+  "LAES": {
+   "description": "SEALSQ Corp."
   },
   "LCID": {
    "description": "Lucid Group, Inc."
   },
+  "LDOS": {
+   "description": "Leidos Holdings, Inc."
+  },
+  "LEN": {
+   "description": "Lennar Corporation Class A"
+  },
+  "LEVI": {
+   "description": "Levi Strauss & Co. Class A"
+  },
+  "LHX": {
+   "description": "L3Harris Technologies Inc"
+  },
+  "LLY": {
+   "description": "Eli Lilly and Company"
+  },
+  "LNG": {
+   "description": "Cheniere Energy, Inc."
+  },
+  "LOW": {
+   "description": "Lowe's Companies, Inc."
+  },
+  "LSTR": {
+   "description": "Landstar System, Inc."
+  },
   "LUNR": {
    "description": "Intuitive Machines, Inc. Class A"
+  },
+  "LUV": {
+   "description": "Southwest Airlines Co."
+  },
+  "LYV": {
+   "description": "Live Nation Entertainment, Inc."
+  },
+  "LZB": {
+   "description": "La-Z-Boy Incorporated"
+  },
+  "M": {
+   "description": "Macy's, Inc."
+  },
+  "MAC": {
+   "description": "Macerich Company"
+  },
+  "MAR": {
+   "description": "Marriott International, Inc. Class A"
   },
   "MBLY": {
    "description": "Mobileye Global, Inc. Class A"
   },
+  "MCB": {
+   "description": "Metropolitan Bank Holding Corp."
+  },
+  "MCD": {
+   "description": "McDonald's Corporation"
+  },
   "MCHP": {
    "description": "Microchip Technology Incorporated"
+  },
+  "MCO": {
+   "description": "Moody's Corporation"
+  },
+  "MDT": {
+   "description": "Medtronic Plc"
+  },
+  "MELI": {
+   "description": "MercadoLibre, Inc."
+  },
+  "META": {
+   "description": "Meta Platforms Inc Class A"
+  },
+  "MFA": {
+   "description": "MFA Financial, Inc."
+  },
+  "MIDD": {
+   "description": "Middleby Corporation"
+  },
+  "MIRM": {
+   "description": "Mirum Pharmaceuticals, Inc."
+  },
+  "MITK": {
+   "description": "Mitek Systems, Inc."
+  },
+  "MLAB": {
+   "description": "Mesa Laboratories, Inc."
+  },
+  "MLI": {
+   "description": "Mueller Industries, Inc."
+  },
+  "MLKN": {
+   "description": "MillerKnoll, Inc."
+  },
+  "MNST": {
+   "description": "Monster Beverage Corporation"
+  },
+  "MP": {
+   "description": "MP Materials Corp Class A"
+  },
+  "MPC": {
+   "description": "Marathon Petroleum Corporation"
+  },
+  "MRK": {
+   "description": "Merck & Co., Inc."
+  },
+  "MRX": {
+   "description": "Marex Group Limited"
   },
   "MSCI": {
    "description": "MSCI Inc. Class A"
   },
+  "MSFT": {
+   "description": "Microsoft Corporation"
+  },
+  "MSGS": {
+   "description": "Madison Square Garden Sports Corp. Class A"
+  },
+  "MSI": {
+   "description": "Motorola Solutions, Inc."
+  },
   "MSTR": {
    "description": "Strategy Inc Class A"
+  },
+  "MTCH": {
+   "description": "Match Group, Inc."
+  },
+  "MTN": {
+   "description": "Vail Resorts, Inc."
+  },
+  "MTRN": {
+   "description": "Materion Corporation"
+  },
+  "MTZ": {
+   "description": "MasTec, Inc."
+  },
+  "MU": {
+   "description": "Micron Technology, Inc."
+  },
+  "NAT": {
+   "description": "Nordic American Tankers Limited"
+  },
+  "NBN": {
+   "description": "Northeast Bank"
+  },
+  "NCLH": {
+   "description": "Norwegian Cruise Line Holdings Ltd."
   },
   "NEE": {
    "description": "NextEra Energy, Inc."
   },
+  "NEM": {
+   "description": "Newmont Corporation"
+  },
+  "NET": {
+   "description": "Cloudflare Inc Class A"
+  },
+  "NFLX": {
+   "description": "Netflix, Inc."
+  },
   "NIO": {
    "description": "NIO Inc. Sponsored ADR Class A"
+  },
+  "NKE": {
+   "description": "NIKE, Inc. Class B"
+  },
+  "NLY": {
+   "description": "Annaly Capital Management, Inc."
   },
   "NMAX": {
    "description": "Newsmax Inc. Class B"
   },
+  "NOV": {
+   "description": "Novo Nordisk A/S Class B"
+  },
   "NOW": {
    "description": "ServiceNow, Inc."
+  },
+  "NPKI": {
+   "description": "NPK International Inc."
+  },
+  "NSRGY": {
+   "description": "Nestle S.A. Sponsored ADR"
+  },
+  "NTAP": {
+   "description": "NetApp, Inc."
+  },
+  "NTRA": {
+   "description": "Natera, Inc."
   },
   "NTRS": {
    "description": "Northern Trust Corporation"
   },
+  "NUE": {
+   "description": "Nucor Corporation"
+  },
+  "NVAX": {
+   "description": "Novavax, Inc."
+  },
   "NVDA": {
    "description": "NVIDIA Corporation"
+  },
+  "NVRI": {
+   "description": "Enviri Corporation"
+  },
+  "NVST": {
+   "description": "Envista Holdings Corp."
+  },
+  "NVTS": {
+   "description": "Navitas Semiconductor Corporation"
+  },
+  "NWPX": {
+   "description": "NWPX Infrastructure Inc."
+  },
+  "OCFC": {
+   "description": "OceanFirst Financial Corp."
+  },
+  "ODFL": {
+   "description": "Old Dominion Freight Line, Inc."
+  },
+  "OGE": {
+   "description": "OGE Energy Corp."
   },
   "OILD": {
    "description": "MicroSectors Oil & Gas Exp. & Prod. -3x Inverse Leveraged ETN"
   },
   "OILU": {
    "description": "MicroSectors Oil & Gas Exp. & Prod. 3x Leveraged ETN"
+  },
+  "OKLO": {
+   "description": "Oklo Inc. Class A"
+  },
+  "OKTA": {
+   "description": "Okta, Inc. Class A"
   },
   "OPEN": {
    "description": "Opendoor Technologies Inc"
@@ -2398,32 +6429,164 @@
   "PANW": {
    "description": "Palo Alto Networks, Inc."
   },
+  "PB": {
+   "description": "Prosperity Bancshares, Inc.(R)"
+  },
+  "PBF": {
+   "description": "PBF Energy, Inc. Class A"
+  },
+  "PBR": {
+   "description": "Petroleo Brasileiro SA Sponsored ADR"
+  },
+  "PCVX": {
+   "description": "Vaxcyte, Inc."
+  },
+  "PEP": {
+   "description": "PepsiCo, Inc."
+  },
+  "PFE": {
+   "description": "Pfizer Inc."
+  },
+  "PGR": {
+   "description": "Progressive Corporation"
+  },
+  "PH": {
+   "description": "Parker-Hannifin Corporation"
+  },
+  "PL": {
+   "description": "Planet Labs PBC Class A"
+  },
   "PLTR": {
    "description": "Palantir Technologies Inc. Class A"
+  },
+  "PM": {
+   "description": "Philip Morris International Inc."
+  },
+  "PNC": {
+   "description": "PNC Financial Services Group, Inc."
+  },
+  "POWL": {
+   "description": "Powell Industries, Inc."
+  },
+  "PRAX": {
+   "description": "Praxis Precision Medicines, Inc."
+  },
+  "PRLB": {
+   "description": "Proto Labs, Inc."
+  },
+  "PRSU": {
+   "description": "Pursuit Attractions and Hospitality, Inc."
+  },
+  "PSA": {
+   "description": "Public Storage"
   },
   "PSX": {
    "description": "Phillips 66"
   },
+  "PTCT": {
+   "description": "PTC Therapeutics, Inc."
+  },
+  "PVLA": {
+   "description": "Palvella Therapeutics, Inc."
+  },
+  "PWR": {
+   "description": "Quanta Services, Inc."
+  },
+  "QCOM": {
+   "description": "QUALCOMM Incorporated"
+  },
+  "QLYS": {
+   "description": "Qualys, Inc."
+  },
   "QQQ": {
    "description": "Invesco QQQ Trust Series I"
+  },
+  "RACE": {
+   "description": "Ferrari NV"
+  },
+  "RCL": {
+   "description": "Royal Caribbean Group"
+  },
+  "REG": {
+   "description": "Regency Centers Corporation"
+  },
+  "RELY": {
+   "description": "Remitly Global, Inc."
   },
   "RGTI": {
    "description": "Rigetti Computing, Inc."
   },
+  "RIVN": {
+   "description": "Rivian Automotive, Inc. Class A"
+  },
+  "RKLB": {
+   "description": "Rocket Lab Corporation"
+  },
+  "RMD": {
+   "description": "ResMed Inc."
+  },
+  "ROBO": {
+   "description": "ROBO Global Robotics & Automation Index ETF"
+  },
+  "ROKU": {
+   "description": "Roku, Inc. Class A"
+  },
+  "ROP": {
+   "description": "Roper Technologies, Inc."
+  },
+  "RSG": {
+   "description": "Republic Services, Inc."
+  },
   "RSPU": {
    "description": "Invesco S&P 500 Equal Weight Utilities ETF"
+  },
+  "SAIC": {
+   "description": "Science Applications International Corp."
   },
   "SBET": {
    "description": "Sharplink, Inc."
   },
+  "SBUX": {
+   "description": "Starbucks Corporation"
+  },
+  "SCCO": {
+   "description": "Southern Copper Corporation"
+  },
+  "SCHL": {
+   "description": "Scholastic Corporation"
+  },
+  "SE": {
+   "description": "Sea Limited Sponsored ADR Class A"
+  },
+  "SENEA": {
+   "description": "Seneca Foods Corporation Class A"
+  },
+  "SEPN": {
+   "description": "Septerna, Inc."
+  },
+  "SFM": {
+   "description": "Sprouts Farmers Market, Inc."
+  },
   "SHAK": {
    "description": "Shake Shack, Inc. Class A"
+  },
+  "SHW": {
+   "description": "Sherwin-Williams Company"
+  },
+  "SION": {
+   "description": "Sionna Therapeutics, Inc."
+  },
+  "SJM": {
+   "description": "J.M. Smucker Company"
   },
   "SKK": {
    "description": "SKK Holdings Limited Class A"
   },
   "SKYY": {
    "description": "First Trust Cloud Computing ETF"
+  },
+  "SLAB": {
+   "description": "Silicon Laboratories Inc."
   },
   "SMCI": {
    "description": "Super Micro Computer, Inc."
@@ -2434,8 +6597,26 @@
   "SMMT": {
    "description": "Summit Therapeutics Inc"
   },
+  "SMR": {
+   "description": "NuScale Power Corporation Class A"
+  },
+  "SNDA": {
+   "description": "Sonida Senior Living, Inc."
+  },
+  "SNDX": {
+   "description": "Syndax Pharmaceuticals Inc"
+  },
+  "SNOW": {
+   "description": "Snowflake, Inc."
+  },
+  "SO": {
+   "description": "Southern Company"
+  },
   "SOFI": {
    "description": "SoFi Technologies Inc"
+  },
+  "SON": {
+   "description": "Sonoco Products Company"
   },
   "SOUN": {
    "description": "SoundHound AI, Inc Class A"
@@ -2446,32 +6627,188 @@
   "SOXS": {
    "description": "Direxion Daily Semiconductor Bear 3X ETF"
   },
+  "SPG": {
+   "description": "Simon Property Group, Inc."
+  },
+  "SPGI": {
+   "description": "S&P Global, Inc."
+  },
   "SPOT": {
    "description": "Spotify Technology SA"
   },
   "SPXL": {
    "description": "Direxion Daily S&P 500 Bull 3X ETF"
   },
+  "SRRK": {
+   "description": "Scholar Rock Holding Corp."
+  },
+  "SSB": {
+   "description": "SouthState Bank Corporation"
+  },
+  "ST": {
+   "description": "Sensata Technologies Holding PLC"
+  },
+  "STGW": {
+   "description": "Stagwell, Inc. Class A"
+  },
+  "STNG": {
+   "description": "Scorpio Tankers Inc."
+  },
+  "STRL": {
+   "description": "Sterling Infrastructure, Inc."
+  },
+  "STX": {
+   "description": "Seagate Technology Holdings PLC"
+  },
+  "SYM": {
+   "description": "Symbotic, Inc. Class A"
+  },
   "TALO": {
    "description": "Talos Energy, Inc."
+  },
+  "TBLA": {
+   "description": "Taboola.com Ltd."
+  },
+  "TDOC": {
+   "description": "Teladoc Health, Inc."
+  },
+  "TDY": {
+   "description": "Teledyne Technologies Incorporated"
+  },
+  "TFIN": {
+   "description": "Triumph Financial, Inc."
+  },
+  "TGTX": {
+   "description": "TG Therapeutics, Inc."
+  },
+  "TIGO": {
+   "description": "Millicom International Cellular SA"
+  },
+  "TJX": {
+   "description": "TJX Companies Inc"
+  },
+  "TKR": {
+   "description": "Timken Company"
+  },
+  "TLN": {
+   "description": "Talen Energy Corp"
   },
   "TOST": {
    "description": "Toast, Inc. Class A"
   },
+  "TPL": {
+   "description": "Texas Pacific Land Corporation"
+  },
+  "TPR": {
+   "description": "Tapestry, Inc."
+  },
+  "TRIN": {
+   "description": "Trinity Capital, Inc."
+  },
   "TSLA": {
    "description": "Tesla, Inc."
+  },
+  "TT": {
+   "description": "Trane Technologies plc"
+  },
+  "TVTX": {
+   "description": "Travere Therapeutics, Inc."
+  },
+  "TXN": {
+   "description": "Texas Instruments Incorporated"
+  },
+  "TXNM": {
+   "description": "TXNM Energy, Inc."
+  },
+  "TYL": {
+   "description": "Tyler Technologies, Inc."
+  },
+  "UAL": {
+   "description": "United Airlines Holdings, Inc."
+  },
+  "UAVS": {
+   "description": "AgEagle Aerial Systems, Inc."
+  },
+  "UBER": {
+   "description": "Uber Technologies, Inc."
+  },
+  "UDR": {
+   "description": "UDR, Inc."
   },
   "UNP": {
    "description": "Union Pacific Corporation"
   },
+  "URA": {
+   "description": "Global X Uranium ETF"
+  },
+  "URI": {
+   "description": "United Rentals, Inc."
+  },
+  "USB": {
+   "description": "U.S. Bancorp"
+  },
   "USO": {
    "description": "United States Oil Fund LP"
+  },
+  "V": {
+   "description": "Visa Inc. Class A"
+  },
+  "VISN": {
+   "description": "Vistance Networks, Inc."
   },
   "VLO": {
    "description": "Valero Energy Corporation"
   },
+  "VLY": {
+   "description": "Valley National Bancorp"
+  },
   "VMI": {
    "description": "Valmont Industries, Inc."
+  },
+  "VRSK": {
+   "description": "Verisk Analytics, Inc."
+  },
+  "VRSN": {
+   "description": "VeriSign, Inc."
+  },
+  "VRT": {
+   "description": "Vertiv Holdings Co. Class A"
+  },
+  "VRTX": {
+   "description": "Vertex Pharmaceuticals Incorporated"
+  },
+  "VST": {
+   "description": "Vistra Corp."
+  },
+  "VVV": {
+   "description": "Valvoline, Inc."
+  },
+  "VZ": {
+   "description": "Verizon Communications Inc."
+  },
+  "WCN": {
+   "description": "Waste Connections, Inc."
+  },
+  "WM": {
+   "description": "Waste Management, Inc."
+  },
+  "WMB": {
+   "description": "Williams Companies, Inc."
+  },
+  "WMS": {
+   "description": "Advanced Drainage Systems, Inc."
+  },
+  "WST": {
+   "description": "West Pharmaceutical Services, Inc."
+  },
+  "WWD": {
+   "description": "Woodward, Inc."
+  },
+  "XEL": {
+   "description": "Xcel Energy Inc."
+  },
+  "XENE": {
+   "description": "Xenon Pharmaceuticals Inc."
   },
   "XLF": {
    "description": "State Street Financial Select Sector SPDR ETF"
@@ -2479,11 +6816,29 @@
   "XLK": {
    "description": "State Street Technology Select Sector SPDR ETF"
   },
+  "XLY": {
+   "description": "State Street Consumer Discretionary Select Sector SPDR ETF"
+  },
   "XOM": {
    "description": "Exxonmobil Holdings Corporation"
   },
+  "XPO": {
+   "description": "XPO, Inc."
+  },
+  "XYZ": {
+   "description": "Block, Inc. Class A"
+  },
+  "YOU": {
+   "description": "Clear Secure, Inc. Class A"
+  },
+  "ZD": {
+   "description": "Ziff Davis, Inc."
+  },
   "ZETA": {
    "description": "Zeta Global Holdings Corp. Class A"
+  },
+  "ZTS": {
+   "description": "Zoetis, Inc. Class A"
   }
  },
  "scanner_enrich_asof": "n/a (chart reads only)",
