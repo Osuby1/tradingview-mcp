@@ -95,6 +95,16 @@ ENRICH_AS_OF = res.get("scanner_enrich_asof", "n/a")
 wb = Workbook()
 
 
+def _fmt_cap(x):
+    """Money in human units: 19770000000 -> '$19.8B'."""
+    if not x:
+        return None
+    for suf, div in (("B", 1e9), ("M", 1e6), ("K", 1e3)):
+        if abs(x) >= div:
+            return f"${x/div:.1f}{suf}"
+    return f"${x:.0f}"
+
+
 def classify(note):
     """Legacy data-quality strings are plain prose. Rank them so the dangerous
     ones cannot hide. The 7/21 watchlist-truncation bug was recorded and still
@@ -146,12 +156,14 @@ readme_sheet(
         ("6 - Tracker Broken", "Past recommendations whose trend has broken. Exit / bank-it flags."),
         ("7 - Notes & Decisions", "The full reasoning per name, with room to actually read it.",
          "Anything that reversed or was downgraded since the last run is flagged here."),
-        ("8 - Data Quality", "What was broken or partial in this run, ranked by severity.",
+        ("8 - Market Movers", "The day's biggest gainers/losers in the WHOLE market, each screened.",
+         "Almost all are microcap SKIPs; the few liquid movers get a real buy/short call."),
+        ("9 - Data Quality", "What was broken or partial in this run, ranked by severity.",
          "READ THE RED ROWS. A BLOCKER means conclusions in this file may be wrong."),
-        ("9 - Run Summary", "Counts and run metadata."),
+        ("10 - Run Summary", "Counts and run metadata."),
     ],
     how_to_act=[
-        "1. Check tab 8 for BLOCKERS first. If coverage was partial, absence of a name",
+        "1. Check tab 9 for BLOCKERS first. If coverage was partial, absence of a name",
         "   proves nothing - it may simply never have been scanned.",
         "2. Read the regime on tab 1. It sets your size for everything else.",
         "3. Work tab 2 top-down. Only green Verdicts are candidates.",
@@ -616,9 +628,105 @@ for sym, h in hits.items():
 note_rows.sort(key=lambda r: (r["rank"] is None, r["rank"] or 999))
 notes_sheet(wb.create_sheet("7 - Notes & Decisions"), note_rows)
 
-# ----------------------------------------------------------- 8 Data Quality ---
+# ---------------------------------------------------------- 8 Market Movers ---
+# The day's biggest gainers/losers across the ENTIRE market, each run through the
+# protocol. Requested by Omar 2026-07-22. Data from watchlists/market-movers-
+# <date>.json (fetched from stockanalysis.com). Key honesty: the raw biggest
+# movers are almost always microcaps you cannot trade, so each carries a SKIP
+# reason, and only names clearing the liquidity screen get the full protocol.
+from market_movers import parse_num, screen, classify_untradeable  # noqa: E402
+
+MOVER_COLS = [
+    Col("side", "Gainer / Loser", 13, "Which list the stock topped today."),
+    Col("sym", "Ticker", 9, "The stock symbol."),
+    Col("company", "Company", 30, "Company name."),
+    Col("price", "Price", 10, "Price at the close.", FMT_PRICE),
+    Col("pct", "Day Change %", 12, "The move that put it on the list.", FMT_PCT),
+    Col("mcap", "Market Cap", 13,
+        "Company size. Under ~$2B = microcap: it gaps, halts, and cannot absorb a "
+        "$100k order. The single biggest reason most movers are untradeable."),
+    Col("dvol", "$ Traded Today", 14,
+        "Price x volume. A $100k order needs this to be large, or you move the "
+        "price against yourself getting in and out."),
+    Col("verdict", "PROTOCOL VERDICT", 24,
+        "What to do. SKIP = untradeable at your size (almost all of them). The few "
+        "that clear the screen get a real buy/short call."),
+    Col("why", "Reasoning", 78,
+        "Plain-English why. For SKIPs, the specific disqualifier. For survivors, "
+        "the full gate-stack read."),
+]
+
+
+def _load_movers():
+    path = os.path.join(REPO, "watchlists", f"market-movers-{DATE}.json")
+    if not os.path.exists(path):
+        return None
+    return json.load(open(path))
+
+
+mv_data = _load_movers()
+ws = wb.create_sheet("8 - Market Movers")
+if not mv_data:
+    style_header_row(ws, ["Market Movers"], ["No movers file for this date."],
+                     [40], freeze=None, autofilter=False)
+    ws.append([safe(f"No watchlists/market-movers-{DATE}.json found. Fetch the day's "
+                    "gainers/losers (stockanalysis.com) and re-run.")])
+else:
+    mrows = []
+    # liquid movers first (they got full protocol), then the raw microcap movers
+    for lm in mv_data.get("liquid_movers", []):
+        mrows.append({
+            "side": lm.get("side", "gainer").upper() + " (liquid)",
+            "sym": lm["sym"], "company": lm.get("company"), "price": lm.get("price"),
+            "pct": lm.get("pct_change"), "mcap": _fmt_cap(lm.get("market_cap")),
+            "dvol": _fmt_cap(lm.get("avg_dollar_vol")),
+            "verdict": lm.get("protocol", "NEEDS CHART"),
+            "why": lm.get("protocol_why", ""),
+        })
+    for side_key in ("gainers", "losers"):
+        for m in mv_data.get(side_key, []):
+            side = m.get("side", side_key[:-1])
+            if m.get("tradeable"):
+                verdict, why = "TRADEABLE - see chart", \
+                    "Cleared the liquidity screen; chart it and run the gate stack."
+            else:
+                verdict, why = classify_untradeable(m, side)
+                why = f"{m.get('skip_reason','')}. {why}"
+            mrows.append({
+                "side": side.upper(), "sym": m["sym"], "company": m.get("company"),
+                "price": m.get("price"), "pct": m.get("pct_change"),
+                "mcap": _fmt_cap(m.get("market_cap")),
+                "dvol": _fmt_cap((m.get("price") or 0) * (m.get("volume") or 0)),
+                "verdict": verdict, "why": why,
+            })
+
+    def _mv_fill(r):
+        v = str(r.get("verdict") or "")
+        if v.startswith(("BUY", "STARTER")):
+            return GREEN
+        if "SHORT" in v or "TRADEABLE" in v:
+            return AMBER
+        return GREY   # the SKIPs - visually recede so the tradeable rows pop
+
+    write_table(ws, MOVER_COLS, mrows, autofilter=True, row_fill=_mv_fill)
+    for n in range(2, ws.max_row + 1):
+        ws.row_dimensions[n].height = 44
+    ws.append([])
+    ws.append([safe(f"Source: {mv_data.get('source','?')}, captured {mv_data.get('captured','?')}.")])
+    ws.append([safe("WHY ALMOST EVERYTHING HERE IS 'SKIP': the biggest raw percentage "
+                    "movers in the whole market are nearly always microcaps and penny "
+                    "stocks - pumps, post-halt spikes, Chinese small-caps. They cannot "
+                    "absorb a $100k order and are not shortable (no borrow, squeeze "
+                    "risk). Only names clearing the liquidity screen (price >= $5, cap "
+                    ">= $2B, decent $ volume) get a real buy/short call.")])
+    ws.cell(row=ws.max_row, column=1).font = BOLD
+    ws.append([safe("For the big LIQUID movers that reflect real rotation, the "
+                    "'1 - Market & Rotation' tab and the ranked buy list are the "
+                    "actionable views - this tab is the raw market-wide scan.")])
+
+# ----------------------------------------------------------- 9 Data Quality ---
 dq = [classify(q) if isinstance(q, str) else q for q in res.get("data_quality", [])]
-data_quality_sheet(wb.create_sheet("8 - Data Quality"), dq)
+data_quality_sheet(wb.create_sheet("9 - Data Quality"), dq)
 
 # ------------------------------------------------------------ 9 Run Summary ---
 SUM_COLS = [
@@ -640,7 +748,7 @@ sum_rows = [
         sum(1 for d in dq if str(d.get("severity")).upper() == "BLOCKER")},
     {"field": "Run note", "value": res.get("run_note", "")},
 ]
-ws = wb.create_sheet("9 - Run Summary")
+ws = wb.create_sheet("10 - Run Summary")
 write_table(ws, SUM_COLS, sum_rows, autofilter=False)
 for n in range(2, ws.max_row + 1):
     ws.row_dimensions[n].height = 44
