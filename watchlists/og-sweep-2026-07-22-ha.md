@@ -1,11 +1,11 @@
 # O.G Chandelier sweep - ha
 
 **Data as of** live feed, bar date 2026-07-22 (session in progress if intraday)  
-**Written at** 2026-07-22 10:30 local  
+**Written at** 2026-07-22 10:36 local  
 **Chart type** ha  
 **Scanned** 155/156 clean, 1 unreadable
 
-> Magical gate is PROVISIONAL (cut at 100; true line unknown inside 79-113). Verdicts marked UNCALIBRATED are not decisions.
+> Magical = 20-period CCI on close. The 100 cut is the indicator's own Overbought Level input, not an invented threshold. Still untested: whether +/-100 is the right cut FOR RETURNS. Readings in 79-113 are flagged so a borderline number is never the sole rejection reason.
 
 ## Fresh BUY flips (<= 5 bars back): 14
 

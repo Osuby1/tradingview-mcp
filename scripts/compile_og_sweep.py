@@ -6,20 +6,29 @@ straight off the live chart, produced by the in-page __ogSweep runner)
 Output: markdown summary + json, split into fresh BUY flips, gate verdicts,
 SELL-mode names, and data-quality flags.
 
-GATE CALIBRATION WARNING
-------------------------
-The Magical OB/OS "too hot" threshold is NOT calibrated. Observed on 2026-07-21:
-passes ran -68 to +79, fails at 113.6 / 176.1 / 233.2. The true line sits
-somewhere in the untested 79-113 gap. This script uses 100 as a PROVISIONAL
-divider and labels every verdict near it as UNCALIBRATED. Do not treat a
-borderline Magical verdict as a decision.
+WHAT "MAGICAL" IS
+-----------------
+Verified 2026-07-22 by reading the study's inputs on the live chart: the Magical
+Overbought & Oversold Indicator is a **20-period CCI on close**, with its own
+Overbought Level = +100 and Oversold Level = -100. Its "Topology Map" plot reads
+identically to its "CCI Overlay" plot.
+
+So the 100 cut below is the indicator's OWN declared overbought band, not an
+invented threshold. It matches 2026-07-21 outcomes exactly: every gate pass sat
+inside +/-100 (MU -22.8, GDX -30.4, FLEX -68.1, HON +22.7, PM +79.1) and every
+fail sat outside (PFE 113.6, CTRE 176.1, SKK 233.2).
+
+What remains genuinely untested is whether +/-100 is the right cut FOR RETURNS
+rather than just the indicator default. Until that is measured in the shadow
+lane, readings in the 79-113 band are still flagged so a borderline number is
+never the sole reason a name is rejected.
 """
 import json
 import sys
 from datetime import datetime
 
-MAGICAL_HOT = 100.0          # PROVISIONAL - see warning above
-MAGICAL_UNCERTAIN = (79.0, 113.0)
+MAGICAL_HOT = 100.0          # the indicator's own Overbought Level input
+MAGICAL_UNCERTAIN = (79.0, 113.0)   # band with no return data either side yet
 FRESH_BARS = 5
 
 
@@ -71,9 +80,11 @@ def main():
     out.append(f'**Scanned** {len(ok)}/{len(rows)} clean'
                + (f', {len(bad)} unreadable' if bad else ''))
     out.append('')
-    out.append(f'> Magical gate is PROVISIONAL (cut at {MAGICAL_HOT:.0f}; true line unknown '
-               f'inside {MAGICAL_UNCERTAIN[0]:.0f}-{MAGICAL_UNCERTAIN[1]:.0f}). '
-               f'Verdicts marked UNCALIBRATED are not decisions.')
+    out.append(f'> Magical = 20-period CCI on close. The {MAGICAL_HOT:.0f} cut is the '
+               f"indicator's own Overbought Level input, not an invented threshold. "
+               f'Still untested: whether +/-{MAGICAL_HOT:.0f} is the right cut FOR RETURNS. '
+               f'Readings in {MAGICAL_UNCERTAIN[0]:.0f}-{MAGICAL_UNCERTAIN[1]:.0f} are flagged '
+               f'so a borderline number is never the sole rejection reason.')
     out.append('')
     out.append(f'## Fresh BUY flips (<= {FRESH_BARS} bars back): {len(fresh)}')
     out.append('')
