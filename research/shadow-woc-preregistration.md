@@ -91,12 +91,28 @@ Stage 2, applied 7/20 → 7/21, fired on **1 name**: ACHR, 4.44 → 5.31 (+19.6%
 
 ## The uncomfortable result — recorded before it can be forgotten
 
-**SMCI does not trigger on 7/21.** Its volume that day was 0.55x normal. It appears
-on the stage-1 watch list and nowhere else.
+**SMCI does not trigger on 7/21.** It appears on the stage-1 watch list and nowhere
+else.
 
-The ignition bar came the *next* session, 7/22, on ~83M shares. So a volume-confirmed
+> **CORRECTION 2026-07-22.** The first version of this document said "volume was
+> 0.55x normal" on 7/21 and put the 7/21 close at $23.83. Both were wrong, because
+> **the origination workbook runs one session behind its own filename** - the file
+> named `2026-07-21` contains 7/20 data. Verified against the live TV feed:
+>
+> | Session | Close | Volume | RelVol (50d) |
+> |---|---|---|---|
+> | 7/20 | 23.83 | 24.9M | 0.45 |
+> | 7/21 | **25.50** | 51.2M | **0.96** |
+> | 7/22 | 30.93 | 131.9M | **2.48** |
+>
+> The conclusion survives - 0.96x is still far below the 2.0 trigger, so the
+> detector still does not fire on 7/21 - but it survives on different numbers than
+> originally claimed. SMCI's real 7/21 session (+7% on rising volume, before the
+> after-hours announcement) was never visible to the scan at all.
+
+The ignition bar came the *next* session, 7/22, at 2.48x volume. So a volume-confirmed
 version of this detector would have bought SMCI on **7/22 near $30**, not on 7/21 at
-$23.83.
+$25.50.
 
 That matters for how the original miss gets scored. The honest accounting:
 
@@ -138,6 +154,12 @@ pre-registration exists to prevent.
 
 - **One session of real out-of-sample data** (7/20 → 7/21). Four workbooks exist but
   only two are distinct trading days. Everything above is provisional.
+- **The input data lags one session.** Confirmed 2026-07-22: workbooks are named
+  for the day they were generated but contain the PREVIOUS completed session. The
+  stage-1 -> stage-2 comparison is still between consecutive sessions so the logic
+  holds, but every date label in this document is one session ahead of the data
+  behind it. Fix the generator or rename the files before grading starts, or the
+  ledger will be permanently off by one.
 - **Survivorship/selection:** the Excluded tab's composition depends on the
   origination scanner's own gates, which sit outside this repo
   (`Documents\Equities_Scanner\stage2_leader_scanner_v3.py`). If those gates change,
