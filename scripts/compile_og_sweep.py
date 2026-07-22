@@ -64,6 +64,26 @@ def main():
     ok = [r for r in rows if r.get('ok')]
     bad = [r for r in rows if not r.get('ok')]
 
+    # Verify the chart type from the data itself. Standing decision 2026-07-22:
+    # candles. Rows written before style capture existed have no 'style_name'.
+    styles = {r.get('style_name') for r in ok if r.get('style_name')}
+    style_note = ''
+    if styles:
+        if len(styles) > 1:
+            style_note = (f'**MIXED CHART TYPES IN ONE SWEEP: {sorted(styles)} - '
+                          f'these readings are not comparable.**')
+        else:
+            actual = styles.pop()
+            if actual != 'Candles':
+                style_note = (f'**Read on {actual}, NOT Candles. Standing decision '
+                              f'2026-07-22 is candles; this run is off-standard.**')
+            elif chart_type != 'candles':
+                style_note = (f'label says "{chart_type}" but data was read on Candles - '
+                              f'trust the data.')
+    else:
+        style_note = ('chart type not captured in this dump (pre-dates style capture); '
+                      f'label "{chart_type}" is unverified.')
+
     buys = [r for r in ok if r.get('ce_mode') == 'BUY']
     sells = [r for r in ok if r.get('ce_mode') == 'SELL']
     fresh = sorted([r for r in buys if (r.get('bars_back') is not None
@@ -76,7 +96,7 @@ def main():
     out.append(f'**Data as of** live feed, bar date {ok[0].get("bar_date") if ok else "?"} '
                f'(session in progress if intraday)  ')
     out.append(f'**Written at** {stamp}  ')
-    out.append(f'**Chart type** {chart_type}  ')
+    out.append(f'**Chart type** {chart_type} - {style_note}  ')
     out.append(f'**Scanned** {len(ok)}/{len(rows)} clean'
                + (f', {len(bad)} unreadable' if bad else ''))
     out.append('')
@@ -119,11 +139,11 @@ def main():
 
     date = datetime.now().strftime('%Y-%m-%d')
     md = f'watchlists/og-sweep-{date}-{chart_type}.md'
-    with open(md, 'w') as fh:
+    with open(md, 'w', encoding='utf-8') as fh:
         fh.write('\n'.join(out) + '\n')
 
     js = f'watchlists/og-sweep-{date}-{chart_type}.json'
-    with open(js, 'w') as fh:
+    with open(js, 'w', encoding='utf-8') as fh:
         json.dump({'written_at': stamp, 'chart_type': chart_type,
                    'scanned': len(ok), 'unreadable': len(bad),
                    'fresh': fresh, 'buys': len(buys), 'sells': len(sells),
