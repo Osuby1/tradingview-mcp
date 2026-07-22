@@ -390,6 +390,33 @@ PLAN_COLS = [
 # work done" rather than "no name qualified". Now it is always populated: either
 # with real sized plans, or with an explicit statement of why there are none.
 ACCOUNT, RISK_UNIT, MAX_ORDER = 1_000_000.0, 5_000.0, 100_000.0
+
+
+def _earn_txt(h):
+    """Earnings cell - never leave it as a bare 'verify', say what is known."""
+    e = h.get("earnings") or {}
+    if not e:
+        return "NOT CHECKED - verify before entry; the scan cannot see earnings"
+    est = e.get("estimate", "?")
+    tag = "CONFIRMED" if e.get("confirmed") else "ESTIMATED"
+    days = e.get("days_out")
+    out = f"{est} ({tag}"
+    if days is not None:
+        out += f", ~{days}d out"
+    out += ")"
+    if e.get("rule"):
+        out += f" - {e['rule']}"
+    return out
+
+
+def _alert_txt(h):
+    """Alert cell - show the armed IDs so the plan and the alert board agree."""
+    a = h.get("alerts") or {}
+    if not a:
+        return "NOT ARMED"
+    return "; ".join(f"{k} {v.get('level')} (id {v.get('id')})" for k, v in a.items())
+
+
 plan_rows = []
 for r in _fresh:
     v = str(r.get("verdict") or "")
@@ -412,8 +439,8 @@ for r in _fresh:
         "e": f"${dollars:,.0f} ({shares:,} sh)",
         "f": round(shares * risk_ps, 0),
         "g": f"{target:.2f} @ 2:1",
-        "h": "VERIFY before entry - not captured by the scan",
-        "i": "not yet armed",
+        "h": _earn_txt(hits.get(r["sym"], {})),
+        "i": _alert_txt(hits.get(r["sym"], {})),
         "j": (f"Rank #{r['rank']} of {len(_fresh)}, buy score {r['buy_score']}. "
               f"Stop is the Chandelier level ({r.get('risk_pct')}% away). "
               + ("HALF SIZE: regime REPAIR. " if starter else "")
@@ -618,15 +645,26 @@ write_table(ws, SUM_COLS, sum_rows, autofilter=False)
 for n in range(2, ws.max_row + 1):
     ws.row_dimensions[n].height = 44
 
-out = os.path.join(REPO, "reports", f"universe_{DATE}.xlsx")
-try:
-    wb.save(out)
-except PermissionError:
-    # The workbook is almost always open in Excel while being reviewed.
-    # Write beside it instead of failing the whole run.
-    out = os.path.join(REPO, "reports", f"universe_{DATE}_new.xlsx")
-    wb.save(out)
-    print("NOTE: original was locked (open in Excel) - wrote a copy instead.")
+# Save, stepping around whatever is currently open in Excel. The first fallback
+# was a single "_new" name, which broke the moment BOTH files were open - the
+# fallback itself raised. Keep trying until something lands.
+_stamp = datetime.datetime.now().strftime("%H%M%S")
+_candidates = [f"universe_{DATE}.xlsx", f"universe_{DATE}_new.xlsx",
+               f"universe_{DATE}_{_stamp}.xlsx"]
+out, _err = None, None
+for _name in _candidates:
+    _path = os.path.join(REPO, "reports", _name)
+    try:
+        wb.save(_path)
+        out = _path
+        break
+    except PermissionError as exc:
+        _err = exc
+        continue
+if out is None:
+    raise SystemExit(f"could not write any workbook - all candidates locked: {_err}")
+if out != os.path.join(REPO, "reports", _candidates[0]):
+    print(f"NOTE: earlier filename(s) locked in Excel - wrote {os.path.basename(out)} instead.")
 print(f"written {out}")
 print(f"  sheets: {len(wb.sheetnames)} | fresh {len(hits)} | blocked {len(block_rows)} "
       f"| notes {len(note_rows)} | dq {len(dq)} "

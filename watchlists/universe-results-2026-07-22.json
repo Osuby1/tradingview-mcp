@@ -479,7 +479,24 @@
     "atr": 0.9591,
     "stop_x_atr": 1.18
    },
-   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position."
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "alerts": {
+    "stop": {
+     "id": 5208570859,
+     "level": 41.25
+    },
+    "target": {
+     "id": 5208572497,
+     "level": 44.64
+    }
+   },
+   "earnings": {
+    "estimate": "2026-08-05/06",
+    "confirmed": false,
+    "basis": "Q2-25 Aug 6, Q3-25 Nov 5, Q4-25 Feb 12, Q1-26 May 7",
+    "days_out": 14,
+    "rule": "outside the 10-day size-down window, but be flat or half size by Aug 4"
+   }
   },
   {
    "sym": "DE",
