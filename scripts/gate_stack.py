@@ -30,13 +30,17 @@ ADX_MIN = 20.0
 DEEP_FAIL_PCT = -10.0
 ADV_MULTIPLE = 10.0          # position must be <= ADV / this
 DEFAULT_POSITION = 85_000.0  # sizing assumption for the liquidity test
+ATR_FLOOR = 1.0              # stop must be at least this many ATRs from entry
+ATR_CEILING = 4.0            # a stop this far out makes the position a token
+MAX_STOP_PCT = 12.0          # absolute cap: beyond this, 2:1 needs an implausible move
 
 
 class MissingGateData(Exception):
     """Raised when a gate cannot be evaluated. Never silently pass instead."""
 
 
-REQUIRED = ("last", "zlsma", "regime", "adx", "plus_di", "minus_di", "avg_dollar_vol")
+REQUIRED = ("last", "zlsma", "regime", "adx", "plus_di", "minus_di",
+            "avg_dollar_vol", "atr")
 
 
 def evaluate(row, position_size=DEFAULT_POSITION, strict=True):
@@ -78,7 +82,45 @@ def evaluate(row, position_size=DEFAULT_POSITION, strict=True):
     if last <= zl:
         fails.append(f"price {last} at/below ZLSMA {zl} - structure has not turned")
 
-    # 5. liquidity
+    # 5. ATR floor - the stop must sit outside normal daily noise.
+    #
+    # Wired 2026-07-22 at Omar's instruction. FRT was the case that forced it:
+    # stop 1.63 against ATR 1.99 = 0.82x, so ordinary daily range would have
+    # stopped it out with nothing happening. It passed the automated stack and
+    # had to be caught by hand - the same failure as SKK and liquidity.
+    atr, stop = row.get("atr"), row.get("long_stop") or row.get("stop")
+    if atr and stop and last and last > stop:
+        x_atr = (last - stop) / atr
+        detail_atr = round(x_atr, 2)
+        if x_atr < ATR_FLOOR:
+            fails.append(
+                f"stop is {x_atr:.2f}x ATR ({atr}) - inside daily noise, it gets "
+                f"hit by nothing happening (floor {ATR_FLOOR:.1f}x)")
+        elif x_atr > ATR_CEILING:
+            fails.append(
+                f"stop is {x_atr:.2f}x ATR - so wide the position shrinks to a "
+                f"token (ceiling {ATR_CEILING:.1f}x)")
+    else:
+        detail_atr = None
+        if not atr:
+            fails.append("no ATR available - cannot check the stop against noise")
+
+    # 5b. Absolute stop cap -> the 2:1 gate, expressed as arithmetic.
+    #
+    # A stop N% away needs a 2N% move to make 2:1. Past ~12% that target stops
+    # being a base case. DELL on 2026-07-22 was the trigger: a 20.3% stop is a
+    # perfectly reasonable 2.78x ATR, so the ATR gate passed it, but 2:1 then
+    # required +40.7% on a name already 115% above its 200-day. This is the
+    # only form of the 2:1 gate that can be automated - whether a specific
+    # target is REACHABLE still needs a human looking at the chart.
+    if last and stop and last > stop:
+        stop_pct = (last - stop) / last * 100
+        if stop_pct > MAX_STOP_PCT:
+            fails.append(
+                f"stop is {stop_pct:.1f}% away - 2:1 would need +{2*stop_pct:.1f}%, "
+                f"and the position shrinks to a token (cap {MAX_STOP_PCT:.0f}%)")
+
+    # 6. liquidity
     max_pos = adv / ADV_MULTIPLE
     if position_size > max_pos:
         pct = position_size / adv * 100 if adv else float("inf")
@@ -88,7 +130,8 @@ def evaluate(row, position_size=DEFAULT_POSITION, strict=True):
 
     detail = {"regime": regime, "pct_vs_200": pct200, "adx": adx,
               "plus_di": pdi, "minus_di": ndi, "above_zlsma": last > zl,
-              "avg_dollar_vol": adv, "max_position": round(max_pos)}
+              "avg_dollar_vol": adv, "max_position": round(max_pos),
+              "atr": atr, "stop_x_atr": detail_atr}
 
     if fails:
         head = fails[0].split(" - ")[0]
@@ -105,6 +148,9 @@ def funnel(rows, position_size=DEFAULT_POSITION):
               (f"ADX >= {ADX_MIN:.0f}", lambda r: (r.get("adx") or 0) >= ADX_MIN),
               ("+DI > -DI", lambda r: (r.get("plus_di") or 0) > (r.get("minus_di") or 0)),
               ("above ZLSMA", lambda r: (r.get("last") or 0) > (r.get("zlsma") or 0)),
+              (f"stop >= {ATR_FLOOR:.0f}x ATR",
+               lambda r: bool(r.get("atr")) and bool(r.get("long_stop"))
+               and (r["last"] - r["long_stop"]) / r["atr"] >= ATR_FLOOR),
               ("liquid enough",
                lambda r: (r.get("avg_dollar_vol") or 0) / ADV_MULTIPLE >= position_size)]
     out, cur = [], list(rows)

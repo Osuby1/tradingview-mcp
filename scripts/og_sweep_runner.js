@@ -127,6 +127,27 @@
       }
       var n = A.length;
 
+      // ATR(14) on COMPLETED bars only (excludes the forming bar, which would
+      // understate range mid-session). Feeds the atr_floor gate: a stop closer
+      // than 1x ATR sits inside normal daily noise and gets hit by nothing
+      // happening. FRT on 2026-07-22 was the case that forced this - a 0.82x
+      // ATR stop passed the automated stack and had to be caught by hand.
+      if (n >= 17) {
+        var end2 = n - 1, trs = [];
+        for (var a = end2 - 14; a < end2; a++) {
+          if (a < 1) continue;
+          trs.push(Math.max(A[a].h - A[a].l,
+                            Math.abs(A[a].h - A[a - 1].c),
+                            Math.abs(A[a].l - A[a - 1].c)));
+        }
+        if (trs.length) {
+          var sum2 = 0;
+          for (var b2 = 0; b2 < trs.length; b2++) sum2 += trs[b2];
+          r.atr = f(sum2 / trs.length);
+          r.atr_pct = f(r.atr / A[n - 1].c * 100);
+        }
+      }
+
       // average dollar volume over the last 20 COMPLETED bars (excl. today)
       if (n >= 22) {
         var s = 0, k = 0;
