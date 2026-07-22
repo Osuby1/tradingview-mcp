@@ -1,0 +1,1397 @@
+[
+ {
+  "sym": "CTRE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SMCI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MAC",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "TLN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "GS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ECVT",
+  "active": false,
+  "last_fire": "2026-07-21T00:00:00Z"
+ },
+ {
+  "sym": "BHP",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PFE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NUE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "STNG",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NAT",
+  "active": false,
+  "last_fire": "2026-07-21T00:00:00Z"
+ },
+ {
+  "sym": "NET",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DAVE",
+  "active": false,
+  "last_fire": "2026-07-21T00:00:00Z"
+ },
+ {
+  "sym": "EPC",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ETON",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PNTG",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "VSTS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MRVI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BJRI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CAKE",
+  "active": false,
+  "last_fire": "2026-07-20T00:00:00Z"
+ },
+ {
+  "sym": "PSX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DK",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PBF",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AAPL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MSM",
+  "active": false,
+  "last_fire": "2026-07-20T00:00:00Z"
+ },
+ {
+  "sym": "CYRX",
+  "active": false,
+  "last_fire": "2026-07-20T00:00:00Z"
+ },
+ {
+  "sym": "DRTS",
+  "active": false,
+  "last_fire": "2026-07-20T00:00:00Z"
+ },
+ {
+  "sym": "PBI",
+  "active": false,
+  "last_fire": "2026-07-20T00:00:00Z"
+ },
+ {
+  "sym": "URGN",
+  "active": false,
+  "last_fire": "2026-07-20T00:00:00Z"
+ },
+ {
+  "sym": "VOYA",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PTGX",
+  "active": false,
+  "last_fire": "2026-07-20T00:00:00Z"
+ },
+ {
+  "sym": "ADPT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CDNA",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "XPO",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AMT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "COST",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "KRE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SMH",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AHR",
+  "active": false,
+  "last_fire": "2026-07-16T00:00:00Z"
+ },
+ {
+  "sym": "VTR",
+  "active": false,
+  "last_fire": "2026-07-15T00:00:00Z"
+ },
+ {
+  "sym": "ROKU",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "GKOS",
+  "active": false,
+  "last_fire": "2026-07-15T00:00:00Z"
+ },
+ {
+  "sym": "SLAB",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "XEL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PRAX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PLD",
+  "active": false,
+  "last_fire": "2026-07-16T00:00:00Z"
+ },
+ {
+  "sym": "TRIN",
+  "active": false,
+  "last_fire": "2026-07-21T00:00:00Z"
+ },
+ {
+  "sym": "CVX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "GGB",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "FAF",
+  "active": false,
+  "last_fire": "2026-07-16T00:00:00Z"
+ },
+ {
+  "sym": "BG",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BP",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SBUX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "D",
+  "active": false,
+  "last_fire": "2026-07-17T00:00:00Z"
+ },
+ {
+  "sym": "WMB",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SNDA",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CTVA",
+  "active": false,
+  "last_fire": "2026-07-16T00:00:00Z"
+ },
+ {
+  "sym": "LYV",
+  "active": false,
+  "last_fire": "2026-07-15T00:00:00Z"
+ },
+ {
+  "sym": "WELL",
+  "active": false,
+  "last_fire": "2026-07-16T00:00:00Z"
+ },
+ {
+  "sym": "JCI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "FANG",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ADM",
+  "active": false,
+  "last_fire": "2026-07-17T00:00:00Z"
+ },
+ {
+  "sym": "IBKR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "EOG",
+  "active": false,
+  "last_fire": "2026-07-21T00:00:00Z"
+ },
+ {
+  "sym": "SFL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "HLX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "LSTR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ECO",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "RELY",
+  "active": false,
+  "last_fire": "2026-07-15T00:00:00Z"
+ },
+ {
+  "sym": "NEE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DELL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CDNS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "KO",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "TWST",
+  "active": false,
+  "last_fire": "2026-07-20T00:00:00Z"
+ },
+ {
+  "sym": "SEZL",
+  "active": false,
+  "last_fire": "2026-07-14T00:00:00Z"
+ },
+ {
+  "sym": "COCO",
+  "active": false,
+  "last_fire": "2026-07-15T00:00:00Z"
+ },
+ {
+  "sym": "CORT",
+  "active": false,
+  "last_fire": "2026-07-21T00:00:00Z"
+ },
+ {
+  "sym": "HELE",
+  "active": false,
+  "last_fire": "2026-07-15T00:00:00Z"
+ },
+ {
+  "sym": "NFLX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NVTS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CB",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DTE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AMGN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "XLI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "JNJ",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DAL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MSFT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DPZ",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "IMVT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NBIX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ALKS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MIRM",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NVDA",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "META",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "TSLA",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AXON",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BB",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "RKLB",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CAT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "STRL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "VMI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "APH",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AMD",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ZTS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ZETA",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "XOM",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "WST",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "WMS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "WCN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "VST",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "VRT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "VRSN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "VRSK",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "VLO",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "URI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "UNP",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "UBER",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "UAVS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "TYL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "TT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "TPR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "TPL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "TOST",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "TGTX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "TDY",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "TDOC",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "TALO",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "STX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SPOT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SPGI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SPCX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SOUN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SOFI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SNOW",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SMMT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SKK",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SHW",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SHAK",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SFM",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SBET",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "RSG",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ROP",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "RMD",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "RIVN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "RGTI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "RACE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "QCOM",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "POWL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PM",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PLTR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PH",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PGR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PEP",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PBR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "PANW",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "OXY",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ORCL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "OPEN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NVAX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NTRS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NTAP",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NOW",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NMAX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NKE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NIO",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "NEM",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MU",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MTZ",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MSTR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MSI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MSCI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MP",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MELI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MCHP",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MCD",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MBLY",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "LUNR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "LEN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "LDOS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "LCID",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "LAES",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "JPM",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "INTC",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "INOD",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "IBM",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "HWM",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "HUT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "HTZ",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "HOOD",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "HON",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "HIMX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "HAS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "GRMN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "GOOG",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "GME",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "GD",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "FUTU",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "FSLR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "FLEX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "FIX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "FHB",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "FCX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "F",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "EVGO",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ET",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ERIE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "EFX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DVN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DOW",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DIS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DGX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DFDV",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CVNA",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CTM",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CSCO",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CRWV",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CRWD",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CRCL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "COP",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "COIN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CLX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CHYM",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CENX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CEG",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CAR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "C",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BTCS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BTBT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BROS",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BMNR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BLK",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BKR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BCBP",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BBAI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BAC",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BABA",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ARQT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AROC",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ARM",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "APP",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AMZN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AMCR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AMAT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ALGN",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ALB",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ABNB",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MPC",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MLI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MDT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MCO",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "MAR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "LOW",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "LLY",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "HD",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "GE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "FTAI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "FICO",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "EME",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DUOL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DHI",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "DASH",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CPRT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "COKE",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CMG",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "CHTR",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BWXT",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BSX",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "BALL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AON",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ANF",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "AJG",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ACGL",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "ABBV",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "SNDK",
+  "active": true,
+  "last_fire": null
+ },
+ {
+  "sym": "XLE",
+  "active": true,
+  "last_fire": null
+ }
+]

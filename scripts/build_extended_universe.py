@@ -14,8 +14,12 @@ Usage:
     python scripts/build_extended_universe.py 2026-07-22 --no-coiled
 """
 import json
+import os
 import re
 import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from tracked_symbols import tracked  # noqa: E402
 
 # Non-equity instruments the O.G equity/ETF scan does not apply to, plus tickers
 # known bad (GOLD = Gold.com Inc not Barrick; NUVL delisted).
@@ -96,11 +100,27 @@ def main():
     for k, v in orig_tabs.items():
         src[f'origination:{k}'] = v
 
+    # Names we have ACTED on must never fall out of the universe, even after the
+    # origination scanner demotes them or they leave every watchlist. ECVT was
+    # recommended 7/20 with a sized plan and an armed alert, then vanished from
+    # the scan on 7/21 when the scanner moved it to Excluded - while the plan was
+    # still live and the trade was working. See scripts/tracked_symbols.py.
+    tracked_syms, tracked_why = tracked(repo='.')
+    src['TRACKED (alerts + plans)'] = tracked_syms
+
     everything = set()
     for v in src.values():
         everything |= v
     equities = sorted(t for t in everything if t not in NON_EQUITY)
     symbols = [FORCE_PREFIX.get(t, t) for t in equities]
+
+    # Which tracked names would have been MISSED without the tracked source -
+    # the ones no watchlist or origination tab covers. This is the ECVT set.
+    from_lists = set()
+    for k, v in src.items():
+        if not k.startswith('TRACKED'):
+            from_lists |= v
+    tracked_only = sorted((tracked_syms - from_lists) - NON_EQUITY)
 
     out = {
         'date': date,
@@ -108,6 +128,8 @@ def main():
         'origination_data_as_of': orig_asof,
         'include_coiled': include_coiled,
         'sources': {k: len(v) for k, v in src.items()},
+        'tracked_only_rescued': tracked_only,
+        'tracked_reasons': {s: tracked_why.get(s) for s in tracked_only},
         'dropped_non_equity': sorted(everything & NON_EQUITY),
         'symbols': symbols,
     }
@@ -119,6 +141,10 @@ def main():
         print(f'  {k:28} {len(v):>4}')
     print(f'  {"(dropped non-equity)":28} {len(everything & NON_EQUITY):>4}')
     print(f'\norigination data as of: {orig_asof or "UNKNOWN"}')
+    if tracked_only:
+        print(f'\nRESCUED by the tracked source ({len(tracked_only)} names no list '
+              f'covers):')
+        print('  ' + ', '.join(f'{s} ({tracked_why.get(s)})' for s in tracked_only))
     print(f'wrote {path}')
 
 
