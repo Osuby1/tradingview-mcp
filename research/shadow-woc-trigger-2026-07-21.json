@@ -1,0 +1,23 @@
+{
+ "trigger": {
+  "version": "woc-trigger-v1",
+  "relvol_min": 2.0,
+  "require_price_up": true
+ },
+ "prior": "2026-07-20",
+ "today": "2026-07-21",
+ "watch_count": 41,
+ "fired": [
+  {
+   "ticker": "ACHR",
+   "price_prior": 4.44,
+   "price_today": 5.31,
+   "pct_move": 19.6,
+   "relvol_today": 2.83,
+   "pct_of_52wk_high": 36.3,
+   "adx": 23.1
+  }
+ ],
+ "quiet": 40,
+ "missing": 0
+}
