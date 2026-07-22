@@ -2,11 +2,16 @@
 """Compile the day's run-the-universe results into a formatted Excel workbook.
 
 Reads watchlists/universe-results-<date>.json (written by the run-the-universe
-command; falls back to the newest one present) and writes
-reports/universe_<date>.xlsx with four sheets:
+command) and writes reports/universe_<date>.xlsx with four sheets:
   Fresh Buys & Plans | Blocked | Sell Mode | Summary
-Safe to run any time; exits quietly (code 0) if no results file exists yet.
+
+Freshness rule: only the requested date (default today) is compiled. If that
+file is missing - e.g. the universe leg died on credits - the compiler exits 2
+rather than silently republishing an older run, so a failed scan can never
+masquerade as a fresh report. Pass --allow-stale to compile the newest file
+anyway; the workbook is then stamped STALE on the Summary sheet.
 """
+import argparse
 import datetime
 import glob
 import json
@@ -16,22 +21,49 @@ import sys
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+def results_for(date):
+    path = os.path.join(REPO, "watchlists", f"universe-results-{date}.json")
+    return path if os.path.exists(path) else None
+
+
 def newest_results():
     files = sorted(glob.glob(os.path.join(REPO, "watchlists", "universe-results-*.json")))
     return files[-1] if files else None
 
 
 def main():
+    ap = argparse.ArgumentParser(description="Compile run-the-universe results into Excel.")
+    ap.add_argument("--date", default=datetime.date.today().isoformat(),
+                    help="scan date to compile, YYYY-MM-DD (default: today)")
+    ap.add_argument("--allow-stale", action="store_true",
+                    help="compile the newest results file even if it is older than --date")
+    args = ap.parse_args()
+
     try:
         from openpyxl import Workbook
         from openpyxl.styles import Font, PatternFill
     except ImportError:
         sys.exit("openpyxl not installed - pip install openpyxl")
 
-    path = newest_results()
+    path = results_for(args.date)
+    requested = None
     if not path:
-        print("No universe-results-*.json yet - nothing to compile (ok).")
-        return
+        newest = newest_results()
+        if not args.allow_stale:
+            have = f"newest is {os.path.basename(newest)}" if newest else "none exist at all"
+            print(f"SKIPPED: no universe-results-{args.date}.json ({have}). The universe leg did not "
+                  f"write results for {args.date}; refusing to republish an older report. "
+                  f"Re-run the universe leg, or pass --allow-stale to compile the older file anyway.",
+                  file=sys.stderr)
+            sys.exit(2)
+        if not newest:
+            print("SKIPPED: --allow-stale given but no universe-results-*.json exists at all.",
+                  file=sys.stderr)
+            sys.exit(2)
+        path = newest
+        requested = args.date
+        print(f"WARNING: no results for {requested} - compiling STALE {os.path.basename(path)}.")
+
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
     date = data.get("date") or os.path.basename(path)[17:27] or datetime.date.today().isoformat()
@@ -77,6 +109,10 @@ def main():
         "Summary",
         ["Field", "Value"],
         [["Scan date", date],
+         ["Data as of", date],
+         ["Written at", datetime.datetime.now().astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")],
+         ["Freshness", f"STALE - {requested} was requested but the newest results were {date}"
+                       if requested else "fresh"],
          ["Variant", data.get("variant", "?")],
          ["Universe size", data.get("universe_size", "?")],
          ["Fresh buys", len(hits)],
