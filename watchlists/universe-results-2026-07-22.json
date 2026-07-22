@@ -5,21 +5,14 @@
  "universe_size": 156,
  "scanned": 155,
  "fresh_count": 29,
- "combined_risk_new_actives": "$0 - no tradeable name",
- "run_note": "Full universe read on candles, 155/156 clean. 29 fresh BUY signals culled to 1 by the regime + ADX + DI + ZLSMA stack (SKK), and that one fails liquidity. Net: ZERO tradeable names. Omar stays flat.",
+ "combined_risk_new_actives": "$0 - no name passed the full gate stack",
+ "run_note": "Full universe read on candles. 29 fresh BUY signals culled to 0 by the regime + ADX + DI + ZLSMA stack.",
  "data_quality": [
   {
    "severity": "BLOCKER",
    "area": "Gate stack",
-   "finding": "ZERO tradeable names. 29 fresh signals -> 15 regime PASS -> 6 with ADX>=20 -> 4 DI-bullish -> 1 above ZLSMA (SKK) -> 0 after liquidity.",
-   "impact": "No trades tomorrow. This is the honest output of the scan, not a gap in it.",
-   "action": "Stay flat. Do not relax a gate to produce a candidate."
-  },
-  {
-   "severity": "INFO",
-   "area": "Gate stack",
-   "finding": "29 fresh Chandelier BUY signals were culled to 1 that pass the full gate stack.",
-   "impact": "",
+   "finding": "29 fresh Chandelier BUY signals culled to 0. Funnel: fresh signals 29 -> regime PASS 15 -> ADX >= 20 6 -> +DI > -DI 4 -> above ZLSMA 1 -> liquid enough 0.",
+   "impact": "Zero passing names means zero trades - that is the honest output, not a failure of the scan.",
    "action": "Do not manufacture a candidate to have something to say."
   },
   {
@@ -35,13 +28,6 @@
    "finding": "Read on CANDLES on the live chart, per the 2026-07-22 standard.",
    "impact": "",
    "action": ""
-  },
-  {
-   "severity": "WARNING",
-   "area": "Pipeline",
-   "finding": "The liquidity gate in build_universe_results.py is defined but NOT wired - MIN_ADV_MULTIPLE is unused because average dollar volume is not in the sweep.",
-   "impact": "SKK was auto-scored as PASSING and had to be disqualified by hand.",
-   "action": "Add average-dollar-volume capture to the sweep reader, then enforce the gate."
   }
  ],
  "hits": [
@@ -55,8 +41,18 @@
    "magical": 116.2822,
    "ce_label": 80.9,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: regime REPAIR (18.77% vs 200-day)",
-   "note": "regime REPAIR (18.77% vs 200-day) - starter size only; ADX 13.3 below 20 - no trend to ride"
+   "verdict": "BLOCKED: ADX 13.3 below 20",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": 18.77,
+    "adx": 13.3,
+    "plus_di": 35.7,
+    "minus_di": 32.3,
+    "above_zlsma": true,
+    "avg_dollar_vol": 214709826,
+    "max_position": 21470983
+   },
+   "note": "ADX 13.3 below 20 - no trend to ride"
   },
   {
    "sym": "COST",
@@ -68,8 +64,18 @@
    "magical": -69.5832,
    "ce_label": 906.5,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: regime REPAIR (-3.16% vs 200-day)",
-   "note": "regime REPAIR (-3.16% vs 200-day) - starter size only; ADX 12.0 below 20 - no trend to ride; -DI 25.1 >= +DI 24.5 - bears in control"
+   "verdict": "BLOCKED: ADX 12.0 below 20",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -3.16,
+    "adx": 12.0,
+    "plus_di": 24.5,
+    "minus_di": 25.1,
+    "above_zlsma": true,
+    "avg_dollar_vol": 2534609870,
+    "max_position": 253460987
+   },
+   "note": "ADX 12.0 below 20 - no trend to ride; -DI 25.1 >= +DI 24.5 - sellers in control"
   },
   {
    "sym": "DE",
@@ -81,8 +87,18 @@
    "magical": 12.5019,
    "ce_label": 574,
    "regime": "PASS",
-   "verdict": "BLOCKED: price 608.24 below ZLSMA 620.8376",
-   "note": "price 608.24 below ZLSMA 620.8376 - structure has not turned"
+   "verdict": "BLOCKED: price 608.24 at/below ZLSMA 620.8376",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 12.23,
+    "adx": 20.3,
+    "plus_di": 27.7,
+    "minus_di": 17.2,
+    "above_zlsma": false,
+    "avg_dollar_vol": 729247874,
+    "max_position": 72924787
+   },
+   "note": "price 608.24 at/below ZLSMA 620.8376 - structure has not turned"
   },
   {
    "sym": "DIS",
@@ -94,8 +110,18 @@
    "magical": -61.6806,
    "ce_label": 94.32,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: regime REPAIR (-8.97% vs 200-day)",
-   "note": "regime REPAIR (-8.97% vs 200-day) - starter size only; ADX 13.4 below 20 - no trend to ride; -DI 19.4 >= +DI 18.4 - bears in control"
+   "verdict": "BLOCKED: ADX 13.4 below 20",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -8.97,
+    "adx": 13.4,
+    "plus_di": 18.4,
+    "minus_di": 19.4,
+    "above_zlsma": true,
+    "avg_dollar_vol": 1028898610,
+    "max_position": 102889861
+   },
+   "note": "ADX 13.4 below 20 - no trend to ride; -DI 19.4 >= +DI 18.4 - sellers in control"
   },
   {
    "sym": "FHB",
@@ -108,7 +134,17 @@
    "ce_label": 28.32,
    "regime": "PASS",
    "verdict": "BLOCKED: -DI 28.8 >= +DI 20.5",
-   "note": "-DI 28.8 >= +DI 20.5 - bears in control; price 28.81 below ZLSMA 30.4577 - structure has not turned"
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 9.89,
+    "adx": 26.1,
+    "plus_di": 20.5,
+    "minus_di": 28.8,
+    "above_zlsma": false,
+    "avg_dollar_vol": 80249152,
+    "max_position": 8024915
+   },
+   "note": "-DI 28.8 >= +DI 20.5 - sellers in control; price 28.81 at/below ZLSMA 30.4577 - structure has not turned"
   },
   {
    "sym": "HON",
@@ -121,6 +157,16 @@
    "ce_label": 217.81,
    "regime": "PASS",
    "verdict": "BLOCKED: ADX 10.5 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 2.9,
+    "adx": 10.5,
+    "plus_di": 27.1,
+    "minus_di": 16.0,
+    "above_zlsma": true,
+    "avg_dollar_vol": 1165445017,
+    "max_position": 116544502
+   },
    "note": "ADX 10.5 below 20 - no trend to ride"
   },
   {
@@ -133,8 +179,18 @@
    "magical": 15.7062,
    "ce_label": 73.9,
    "regime": "PASS",
-   "verdict": "BLOCKED: price 75.475 below ZLSMA 78.8225",
-   "note": "price 75.475 below ZLSMA 78.8225 - structure has not turned"
+   "verdict": "BLOCKED: price 75.475 at/below ZLSMA 78.8225",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 11.96,
+    "adx": 30.6,
+    "plus_di": 26.2,
+    "minus_di": 15.9,
+    "above_zlsma": false,
+    "avg_dollar_vol": 1043583013,
+    "max_position": 104358301
+   },
+   "note": "price 75.475 at/below ZLSMA 78.8225 - structure has not turned"
   },
   {
    "sym": "MU",
@@ -147,7 +203,17 @@
    "ce_label": 875.51,
    "regime": "PASS",
    "verdict": "BLOCKED: ADX 19.5 below 20",
-   "note": "ADX 19.5 below 20 - no trend to ride; -DI 32.1 >= +DI 24.7 - bears in control"
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 96.71,
+    "adx": 19.5,
+    "plus_di": 24.7,
+    "minus_di": 32.1,
+    "above_zlsma": true,
+    "avg_dollar_vol": 49896376965,
+    "max_position": 4989637696
+   },
+   "note": "ADX 19.5 below 20 - no trend to ride; -DI 32.1 >= +DI 24.7 - sellers in control"
   },
   {
    "sym": "NEM",
@@ -159,8 +225,18 @@
    "magical": 45.7301,
    "ce_label": 86.315,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: regime REPAIR (-8.05% vs 200-day)",
-   "note": "regime REPAIR (-8.05% vs 200-day) - starter size only; ADX 15.5 below 20 - no trend to ride"
+   "verdict": "BLOCKED: ADX 15.5 below 20",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -8.05,
+    "adx": 15.5,
+    "plus_di": 28.7,
+    "minus_di": 27.3,
+    "above_zlsma": true,
+    "avg_dollar_vol": 769433577,
+    "max_position": 76943358
+   },
+   "note": "ADX 15.5 below 20 - no trend to ride"
   },
   {
    "sym": "PFE",
@@ -173,6 +249,16 @@
    "ce_label": 24.295,
    "regime": "REPAIR",
    "verdict": "STARTER ONLY - regime REPAIR",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -3.93,
+    "adx": 21.2,
+    "plus_di": 25.7,
+    "minus_di": 20.1,
+    "above_zlsma": true,
+    "avg_dollar_vol": 1210409263,
+    "max_position": 121040926
+   },
    "note": "regime REPAIR (-3.93% vs 200-day) - starter size only"
   },
   {
@@ -186,6 +272,16 @@
    "ce_label": 185.24,
    "regime": "PASS",
    "verdict": "BLOCKED: ADX 14.9 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 15.39,
+    "adx": 14.9,
+    "plus_di": 33.4,
+    "minus_di": 18.7,
+    "above_zlsma": true,
+    "avg_dollar_vol": 972831735,
+    "max_position": 97283174
+   },
    "note": "ADX 14.9 below 20 - no trend to ride"
   },
   {
@@ -199,7 +295,17 @@
    "ce_label": 41.76,
    "regime": "PASS",
    "verdict": "BLOCKED: ADX 19.5 below 20",
-   "note": "ADX 19.5 below 20 - no trend to ride; price 43.39 below ZLSMA 45.596 - structure has not turned"
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 3.33,
+    "adx": 19.5,
+    "plus_di": 24.2,
+    "minus_di": 20.1,
+    "above_zlsma": false,
+    "avg_dollar_vol": 137663090,
+    "max_position": 13766309
+   },
+   "note": "ADX 19.5 below 20 - no trend to ride; price 43.39 at/below ZLSMA 45.596 - structure has not turned"
   },
   {
    "sym": "AMD",
@@ -212,6 +318,16 @@
    "ce_label": 493.34,
    "regime": "PASS",
    "verdict": "BLOCKED: ADX 16.3 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 83.51,
+    "adx": 16.3,
+    "plus_di": 29.1,
+    "minus_di": 24.4,
+    "above_zlsma": true,
+    "avg_dollar_vol": 15740837309,
+    "max_position": 1574083731
+   },
    "note": "ADX 16.3 below 20 - no trend to ride"
   },
   {
@@ -225,7 +341,17 @@
    "ce_label": 357.715,
    "regime": "PASS",
    "verdict": "BLOCKED: ADX 18.0 below 20",
-   "note": "ADX 18.0 below 20 - no trend to ride; price 367.235 below ZLSMA 374.5233 - structure has not turned"
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 7.27,
+    "adx": 18.0,
+    "plus_di": 26.9,
+    "minus_di": 14.0,
+    "above_zlsma": false,
+    "avg_dollar_vol": 839562559,
+    "max_position": 83956256
+   },
+   "note": "ADX 18.0 below 20 - no trend to ride; price 367.235 at/below ZLSMA 374.5233 - structure has not turned"
   },
   {
    "sym": "BCBP",
@@ -237,8 +363,18 @@
    "magical": -49.1299,
    "ce_label": 10.01,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: regime REPAIR (15.29% vs 200-day)",
-   "note": "regime REPAIR (15.29% vs 200-day) - starter size only; -DI 25.4 >= +DI 18.4 - bears in control; price 10.235 below ZLSMA 10.2529 - structure has not turned"
+   "verdict": "BLOCKED: -DI 25.4 >= +DI 18.4",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": 15.29,
+    "adx": 21.1,
+    "plus_di": 18.4,
+    "minus_di": 25.4,
+    "above_zlsma": false,
+    "avg_dollar_vol": 2005290,
+    "max_position": 200529
+   },
+   "note": "-DI 25.4 >= +DI 18.4 - sellers in control; price 10.235 at/below ZLSMA 10.2529 - structure has not turned"
   },
   {
    "sym": "CRCL",
@@ -250,8 +386,18 @@
    "magical": -6.6741,
    "ce_label": 58.44,
    "regime": "DEEP-FAIL",
-   "verdict": "BLOCKED: regime DEEP-FAIL",
-   "note": "regime DEEP-FAIL (-29.26% vs 200-day) - watch only, no size; ADX 19.2 below 20 - no trend to ride; -DI 28.3 >= +DI 27.7 - bears in control"
+   "verdict": "BLOCKED: regime DEEP-FAIL (-29.26% vs 200-day)",
+   "gates": {
+    "regime": "DEEP-FAIL",
+    "pct_vs_200": -29.26,
+    "adx": 19.2,
+    "plus_di": 27.7,
+    "minus_di": 28.3,
+    "above_zlsma": true,
+    "avg_dollar_vol": 1004282702,
+    "max_position": 100428270
+   },
+   "note": "regime DEEP-FAIL (-29.26% vs 200-day) - watch only, no size; ADX 19.2 below 20 - no trend to ride; -DI 28.3 >= +DI 27.7 - sellers in control"
   },
   {
    "sym": "F",
@@ -264,6 +410,16 @@
    "ce_label": 13.66,
    "regime": "PASS",
    "verdict": "BLOCKED: ADX 13.3 below 20",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 8.79,
+    "adx": 13.3,
+    "plus_di": 28.4,
+    "minus_di": 16.3,
+    "above_zlsma": true,
+    "avg_dollar_vol": 711343500,
+    "max_position": 71134350
+   },
    "note": "ADX 13.3 below 20 - no trend to ride"
   },
   {
@@ -277,7 +433,17 @@
    "ce_label": 59.295,
    "regime": "PASS",
    "verdict": "BLOCKED: -DI 27.9 >= +DI 27.0",
-   "note": "-DI 27.9 >= +DI 27.0 - bears in control"
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 14.73,
+    "adx": 21.2,
+    "plus_di": 27.0,
+    "minus_di": 27.9,
+    "above_zlsma": true,
+    "avg_dollar_vol": 1019634694,
+    "max_position": 101963469
+   },
+   "note": "-DI 27.9 >= +DI 27.0 - sellers in control"
   },
   {
    "sym": "FLEX",
@@ -289,8 +455,18 @@
    "magical": -59.1547,
    "ce_label": 116.55,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: regime REPAIR (48.67% vs 200-day)",
-   "note": "regime REPAIR (48.67% vs 200-day) - starter size only; -DI 32.7 >= +DI 21.5 - bears in control"
+   "verdict": "BLOCKED: -DI 32.7 >= +DI 21.5",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": 48.67,
+    "adx": 24.7,
+    "plus_di": 21.5,
+    "minus_di": 32.7,
+    "above_zlsma": true,
+    "avg_dollar_vol": 652335578,
+    "max_position": 65233558
+   },
+   "note": "-DI 32.7 >= +DI 21.5 - sellers in control"
   },
   {
    "sym": "GDX",
@@ -302,7 +478,17 @@
    "magical": 61.3061,
    "ce_label": 68.73,
    "regime": "DEEP-FAIL",
-   "verdict": "BLOCKED: regime DEEP-FAIL",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-12.4% vs 200-day)",
+   "gates": {
+    "regime": "DEEP-FAIL",
+    "pct_vs_200": -12.4,
+    "adx": 17.5,
+    "plus_di": 30.9,
+    "minus_di": 29.4,
+    "above_zlsma": true,
+    "avg_dollar_vol": 1568991347,
+    "max_position": 156899135
+   },
    "note": "regime DEEP-FAIL (-12.4% vs 200-day) - watch only, no size; ADX 17.5 below 20 - no trend to ride"
   },
   {
@@ -315,8 +501,18 @@
    "magical": 106.9106,
    "ce_label": 364.505,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: regime REPAIR (-7.86% vs 200-day)",
-   "note": "regime REPAIR (-7.86% vs 200-day) - starter size only; -DI 31.6 >= +DI 28.1 - bears in control"
+   "verdict": "BLOCKED: -DI 31.6 >= +DI 28.1",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -7.86,
+    "adx": 28.3,
+    "plus_di": 28.1,
+    "minus_di": 31.6,
+    "above_zlsma": true,
+    "avg_dollar_vol": 2562558513,
+    "max_position": 256255851
+   },
+   "note": "-DI 31.6 >= +DI 28.1 - sellers in control"
   },
   {
    "sym": "HTZ",
@@ -328,8 +524,18 @@
    "magical": -48.2726,
    "ce_label": 1.62,
    "regime": "DEEP-FAIL",
-   "verdict": "BLOCKED: regime DEEP-FAIL",
-   "note": "regime DEEP-FAIL (-60.96% vs 200-day) - watch only, no size; -DI 39.3 >= +DI 17.5 - bears in control"
+   "verdict": "BLOCKED: regime DEEP-FAIL (-60.96% vs 200-day)",
+   "gates": {
+    "regime": "DEEP-FAIL",
+    "pct_vs_200": -60.96,
+    "adx": 46.6,
+    "plus_di": 17.5,
+    "minus_di": 39.3,
+    "above_zlsma": true,
+    "avg_dollar_vol": 62221936,
+    "max_position": 6222194
+   },
+   "note": "regime DEEP-FAIL (-60.96% vs 200-day) - watch only, no size; -DI 39.3 >= +DI 17.5 - sellers in control"
   },
   {
    "sym": "LCID",
@@ -341,8 +547,18 @@
    "magical": 81.9334,
    "ce_label": 6.2,
    "regime": "DEEP-FAIL",
-   "verdict": "BLOCKED: regime DEEP-FAIL",
-   "note": "regime DEEP-FAIL (-35.68% vs 200-day) - watch only, no size; ADX 18.9 below 20 - no trend to ride; -DI 26.3 >= +DI 23.3 - bears in control"
+   "verdict": "BLOCKED: regime DEEP-FAIL (-35.68% vs 200-day)",
+   "gates": {
+    "regime": "DEEP-FAIL",
+    "pct_vs_200": -35.68,
+    "adx": 18.9,
+    "plus_di": 23.3,
+    "minus_di": 26.3,
+    "above_zlsma": true,
+    "avg_dollar_vol": 181158997,
+    "max_position": 18115900
+   },
+   "note": "regime DEEP-FAIL (-35.68% vs 200-day) - watch only, no size; ADX 18.9 below 20 - no trend to ride; -DI 26.3 >= +DI 23.3 - sellers in control"
   },
   {
    "sym": "NEE",
@@ -355,7 +571,17 @@
    "ce_label": 86.83,
    "regime": "PASS",
    "verdict": "BLOCKED: ADX 13.9 below 20",
-   "note": "ADX 13.9 below 20 - no trend to ride; price 89.62 below ZLSMA 91.2402 - structure has not turned"
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 2.44,
+    "adx": 13.9,
+    "plus_di": 23.7,
+    "minus_di": 15.9,
+    "above_zlsma": false,
+    "avg_dollar_vol": 1009522464,
+    "max_position": 100952246
+   },
+   "note": "ADX 13.9 below 20 - no trend to ride; price 89.62 at/below ZLSMA 91.2402 - structure has not turned"
   },
   {
    "sym": "PANW",
@@ -367,8 +593,18 @@
    "magical": -1.8263,
    "ce_label": 334.38,
    "regime": "PASS",
-   "verdict": "BLOCKED: price 335.11 below ZLSMA 341.7563",
-   "note": "price 335.11 below ZLSMA 341.7563 - structure has not turned"
+   "verdict": "BLOCKED: price 335.11 at/below ZLSMA 341.7563",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 58.89,
+    "adx": 43.8,
+    "plus_di": 28.5,
+    "minus_di": 18.8,
+    "above_zlsma": false,
+    "avg_dollar_vol": 2462878316,
+    "max_position": 246287832
+   },
+   "note": "price 335.11 at/below ZLSMA 341.7563 - structure has not turned"
   },
   {
    "sym": "RSPU",
@@ -381,7 +617,17 @@
    "ce_label": 79.075,
    "regime": "PASS",
    "verdict": "BLOCKED: ADX 15.2 below 20",
-   "note": "ADX 15.2 below 20 - no trend to ride; price 81.62 below ZLSMA 82.7919 - structure has not turned"
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 3.32,
+    "adx": 15.2,
+    "plus_di": 35.2,
+    "minus_di": 19.6,
+    "above_zlsma": false,
+    "avg_dollar_vol": 2684612,
+    "max_position": 268461
+   },
+   "note": "ADX 15.2 below 20 - no trend to ride; price 81.62 at/below ZLSMA 82.7919 - structure has not turned"
   },
   {
    "sym": "SKK",
@@ -393,8 +639,18 @@
    "magical": 127.4777,
    "ce_label": 4.7601,
    "regime": "PASS",
-   "verdict": "BLOCKED: liquidity",
-   "note": "Passes regime, ADX 52.4, DI bullish and ZLSMA - the only name to clear the technical stack. DISQUALIFIED ON LIQUIDITY: 20-day average dollar volume is only $84,524. An $85k position would be 100.6% of an entire day's turnover. Today it traded 1,816 shares. Untradeable at this account size regardless of how good the chart looks."
+   "verdict": "BLOCKED: illiquid",
+   "gates": {
+    "regime": "PASS",
+    "pct_vs_200": 46.16,
+    "adx": 52.4,
+    "plus_di": 35.8,
+    "minus_di": 8.0,
+    "above_zlsma": true,
+    "avg_dollar_vol": 84360,
+    "max_position": 8436
+   },
+   "note": "illiquid - $84,360 avg daily dollar volume; a $85,000 position is 101% of a day's turnover (max $8,436)"
   },
   {
    "sym": "SMCI",
@@ -407,6 +663,16 @@
    "ce_label": 22.2942,
    "regime": "REPAIR",
    "verdict": "STARTER ONLY - regime REPAIR",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": -8.74,
+    "adx": 24.4,
+    "plus_di": 34.4,
+    "minus_di": 26.9,
+    "above_zlsma": true,
+    "avg_dollar_vol": 1270904783,
+    "max_position": 127090478
+   },
    "note": "regime REPAIR (-8.74% vs 200-day) - starter size only"
   },
   {
@@ -419,8 +685,18 @@
    "magical": -53.9204,
    "ce_label": 126.1,
    "regime": "REPAIR",
-   "verdict": "BLOCKED: regime REPAIR (70.2% vs 200-day)",
-   "note": "regime REPAIR (70.2% vs 200-day) - starter size only; -DI 35.0 >= +DI 21.2 - bears in control"
+   "verdict": "BLOCKED: -DI 35.0 >= +DI 21.2",
+   "gates": {
+    "regime": "REPAIR",
+    "pct_vs_200": 70.2,
+    "adx": 23.1,
+    "plus_di": 21.2,
+    "minus_di": 35.0,
+    "above_zlsma": true,
+    "avg_dollar_vol": 9785616471,
+    "max_position": 978561647
+   },
+   "note": "-DI 35.0 >= +DI 21.2 - sellers in control"
   }
  ],
  "sell_mode": [

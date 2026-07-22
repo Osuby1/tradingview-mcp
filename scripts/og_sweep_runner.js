@@ -113,7 +113,77 @@
       r.last = f(lv[4]);
       r.bar_date = new Date(lv[0] * 1000).toISOString().slice(0, 10);
       r.bar_count = b.size();
-    } catch (e) {}
+
+      // ------------------------------------------------------------------
+      // REGIME + LIQUIDITY - captured on every sweep since 2026-07-22.
+      // The Chandelier stack is blind to long-term trend; the regime filter
+      // (HQ Swing v1's actual edge) is a MANDATORY gate, so it is measured
+      // here rather than in a second pass that can be forgotten.
+      // ------------------------------------------------------------------
+      var A = [];
+      for (var i = b.firstIndex(); i <= b.lastIndex(); i++) {
+        var v = b.valueAt(i);
+        if (v) A.push({h: v[2], l: v[3], c: v[4], v: v[5]});
+      }
+      var n = A.length;
+
+      // average dollar volume over the last 20 COMPLETED bars (excl. today)
+      if (n >= 22) {
+        var s = 0, k = 0;
+        for (var j = n - 21; j < n - 1; j++) { if (A[j].v) { s += A[j].v; k++; } }
+        if (k) {
+          r.avg_vol_20d = Math.round(s / k);
+          r.avg_dollar_vol = Math.round((s / k) * A[n - 1].c);
+        }
+      }
+
+      if (n >= 210) {
+        var sma = function (kk, off) {
+          off = off || 0; var t = 0;
+          for (var i2 = n - kk - off; i2 < n - off; i2++) t += A[i2].c;
+          return t / kk;
+        };
+        var per = 14, tr = [], pdm = [], ndm = [];
+        for (var i3 = 1; i3 < n; i3++) {
+          var up = A[i3].h - A[i3 - 1].h, dn = A[i3 - 1].l - A[i3].l;
+          pdm.push(up > dn && up > 0 ? up : 0);
+          ndm.push(dn > up && dn > 0 ? dn : 0);
+          tr.push(Math.max(A[i3].h - A[i3].l,
+                           Math.abs(A[i3].h - A[i3 - 1].c),
+                           Math.abs(A[i3].l - A[i3 - 1].c)));
+        }
+        var wil = function (arr) {
+          var t = 0; for (var q = 0; q < per; q++) t += arr[q];
+          var o = [t];
+          for (var q2 = per; q2 < arr.length; q2++) { t = t - t / per + arr[q2]; o.push(t); }
+          return o;
+        };
+        var TR = wil(tr), PD = wil(pdm), ND = wil(ndm), dxa = [];
+        for (var i4 = 0; i4 < TR.length; i4++) {
+          var pp = 100 * PD[i4] / TR[i4], qq = 100 * ND[i4] / TR[i4];
+          dxa.push(100 * Math.abs(pp - qq) / (pp + qq));
+        }
+        var t2 = 0; for (var i5 = 0; i5 < per; i5++) t2 += dxa[i5];
+        var adxa = [t2 / per];
+        for (var i6 = per; i6 < dxa.length; i6++) {
+          adxa.push((adxa[adxa.length - 1] * (per - 1) + dxa[i6]) / per);
+        }
+        var s200 = sma(200), s200p = sma(200, 20), s50 = sma(50), px = A[n - 1].c;
+        r.sma200 = f(s200);
+        r.sma50 = f(s50);
+        r.sma200_rising = s200 > s200p;
+        r.pct_vs_200 = f((px / s200 - 1) * 100);
+        r.above_50 = px > s50;
+        r.adx = f(adxa[adxa.length - 1]);
+        r.plus_di = f(100 * PD[PD.length - 1] / TR[TR.length - 1]);
+        r.minus_di = f(100 * ND[ND.length - 1] / TR[TR.length - 1]);
+        r.regime = (r.pct_vs_200 < -10) ? 'DEEP-FAIL'
+                 : (r.pct_vs_200 < 0) ? 'REPAIR'
+                 : (r.sma200_rising && r.above_50) ? 'PASS' : 'REPAIR';
+      } else {
+        r.regime = null;   // not enough history - gate treats this as a FAIL
+      }
+    } catch (e) { r.regimeErr = String(e); }
 
     try {
       var msi = cw.model().model().mainSeries().symbolInfo();

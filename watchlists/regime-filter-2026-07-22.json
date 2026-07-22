@@ -20,7 +20,8 @@
    "pct200": -8.05,
    "last": 95.215,
    "zlsma": 89.7312,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 769433577
   },
   {
    "sym": "AMD",
@@ -31,7 +32,8 @@
    "pct200": 83.51,
    "last": 556.98,
    "zlsma": 499.0121,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 15740837309
   },
   {
    "sym": "HTZ",
@@ -42,7 +44,8 @@
    "pct200": -60.96,
    "last": 1.94,
    "zlsma": 1.2566,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 62221936
   },
   {
    "sym": "NEE",
@@ -53,7 +56,8 @@
    "pct200": 2.44,
    "last": 89.62,
    "zlsma": 91.2402,
-   "above_zlsma": false
+   "above_zlsma": false,
+   "avg_dollar_vol": 1009522464
   },
   {
    "sym": "RSPU",
@@ -64,7 +68,8 @@
    "pct200": 3.32,
    "last": 81.62,
    "zlsma": 82.7919,
-   "above_zlsma": false
+   "above_zlsma": false,
+   "avg_dollar_vol": 2684612
   },
   {
    "sym": "SOXL",
@@ -75,7 +80,8 @@
    "pct200": 70.2,
    "last": 163.6,
    "zlsma": 122.9918,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 9785616471
   },
   {
    "sym": "BHP",
@@ -86,7 +92,8 @@
    "pct200": 18.77,
    "last": 84.53,
    "zlsma": 77.5604,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 214709826
   },
   {
    "sym": "HON",
@@ -97,7 +104,8 @@
    "pct200": 2.9,
    "last": 232.07,
    "zlsma": 220.2299,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 1165445017
   },
   {
    "sym": "MU",
@@ -108,7 +116,8 @@
    "pct200": 96.71,
    "last": 968.63,
    "zlsma": 836.0569,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 49896376965
   },
   {
    "sym": "CRCL",
@@ -119,7 +128,8 @@
    "pct200": -29.26,
    "last": 65.71,
    "zlsma": 47.5557,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 1004282702
   },
   {
    "sym": "FCX",
@@ -130,7 +140,8 @@
    "pct200": 14.73,
    "last": 64.325,
    "zlsma": 58.0155,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 1019634694
   },
   {
    "sym": "FLEX",
@@ -141,7 +152,8 @@
    "pct200": 48.67,
    "last": 128.05,
    "zlsma": 106.9951,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 652335578
   },
   {
    "sym": "GDX",
@@ -152,7 +164,8 @@
    "pct200": -12.4,
    "last": 76.33,
    "zlsma": 71.5239,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 1568991347
   },
   {
    "sym": "GLD",
@@ -163,7 +176,8 @@
    "pct200": -7.86,
    "last": 379.325,
    "zlsma": 363.0775,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 2562558513
   },
   {
    "sym": "SMCI",
@@ -174,7 +188,8 @@
    "pct200": -8.74,
    "last": 30.68,
    "zlsma": 19.0297,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 1270904783
   },
   {
    "sym": "SKK",
@@ -185,7 +200,8 @@
    "pct200": 46.16,
    "last": 5.0801,
    "zlsma": 4.8602,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 84360
   },
   {
    "sym": "PANW",
@@ -196,7 +212,8 @@
    "pct200": 58.89,
    "last": 335.11,
    "zlsma": 341.7563,
-   "above_zlsma": false
+   "above_zlsma": false,
+   "avg_dollar_vol": 2462878316
   },
   {
    "sym": "COST",
@@ -207,7 +224,8 @@
    "pct200": -3.16,
    "last": 923.74,
    "zlsma": 901.9816,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 2534609870
   },
   {
    "sym": "DE",
@@ -218,7 +236,8 @@
    "pct200": 12.23,
    "last": 608.24,
    "zlsma": 620.8376,
-   "above_zlsma": false
+   "above_zlsma": false,
+   "avg_dollar_vol": 729247874
   },
   {
    "sym": "DIS",
@@ -229,7 +248,8 @@
    "pct200": -8.97,
    "last": 96.18,
    "zlsma": 95.5168,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 1028898610
   },
   {
    "sym": "FHB",
@@ -240,7 +260,8 @@
    "pct200": 9.89,
    "last": 28.81,
    "zlsma": 30.4577,
-   "above_zlsma": false
+   "above_zlsma": false,
+   "avg_dollar_vol": 80249152
   },
   {
    "sym": "KRE",
@@ -251,7 +272,8 @@
    "pct200": 11.96,
    "last": 75.475,
    "zlsma": 78.8225,
-   "above_zlsma": false
+   "above_zlsma": false,
+   "avg_dollar_vol": 1043583013
   },
   {
    "sym": "PM",
@@ -262,7 +284,8 @@
    "pct200": 15.39,
    "last": 193.61,
    "zlsma": 178.193,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 972831735
   },
   {
    "sym": "AMCR",
@@ -273,7 +296,8 @@
    "pct200": 3.33,
    "last": 43.39,
    "zlsma": 45.596,
-   "above_zlsma": false
+   "above_zlsma": false,
+   "avg_dollar_vol": 137663090
   },
   {
    "sym": "AMGN",
@@ -284,7 +308,8 @@
    "pct200": 7.27,
    "last": 367.235,
    "zlsma": 374.5233,
-   "above_zlsma": false
+   "above_zlsma": false,
+   "avg_dollar_vol": 839562559
   },
   {
    "sym": "BCBP",
@@ -295,7 +320,8 @@
    "pct200": 15.29,
    "last": 10.235,
    "zlsma": 10.2529,
-   "above_zlsma": false
+   "above_zlsma": false,
+   "avg_dollar_vol": 2005290
   },
   {
    "sym": "PFE",
@@ -306,7 +332,8 @@
    "pct200": -3.93,
    "last": 24.895,
    "zlsma": 24.4833,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 1210409263
   },
   {
    "sym": "F",
@@ -317,7 +344,8 @@
    "pct200": 8.79,
    "last": 14.38,
    "zlsma": 12.7376,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 711343500
   },
   {
    "sym": "LCID",
@@ -328,7 +356,8 @@
    "pct200": -35.68,
    "last": 6.925,
    "zlsma": 6.6898,
-   "above_zlsma": true
+   "above_zlsma": true,
+   "avg_dollar_vol": 181158997
   }
  ]
 }

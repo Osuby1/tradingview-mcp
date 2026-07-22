@@ -20,7 +20,8 @@ import os
 import sys
 from datetime import datetime
 
-MIN_ADV_MULTIPLE = 10.0   # position must be <= 1/10th of a day's dollar volume
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from gate_stack import evaluate, funnel, MissingGateData, DEFAULT_POSITION  # noqa: E402
 
 
 def load_sweep(path):
@@ -47,51 +48,55 @@ def main():
     sells = [r["rname"] for r in ok if r.get("ce_mode") == "SELL"]
     fresh = [r for r in buys if r.get("bars_back") is not None and r["bars_back"] <= 5]
 
-    hits, dq = {}, []
+    # Backfill regime/liquidity from a separate pass ONLY for legacy sweeps that
+    # predate og_sweep_runner.js capturing them inline. New sweeps carry them.
+    for r in fresh:
+        g = reg.get(r["rname"])
+        if not g:
+            continue
+        for src, dst in (("regime", "regime"), ("pct200", "pct_vs_200"),
+                         ("adx", "adx"), ("pdi", "plus_di"), ("ndi", "minus_di"),
+                         ("avg_dollar_vol", "avg_dollar_vol")):
+            if r.get(dst) is None:
+                r[dst] = g.get(src)
+
+    hits, dq, ungated = {}, [], []
     for r in fresh:
         sym = r["rname"]
-        g = reg.get(sym, {})
-        last, zl = r.get("last"), r.get("zlsma")
-        above_zl = (last is not None and zl is not None and last > zl)
-        regime = g.get("regime")
-        adx, pdi, ndi = g.get("adx"), g.get("pdi"), g.get("ndi")
-
-        fails = []
-        if regime == "DEEP-FAIL":
-            fails.append(f"regime DEEP-FAIL ({g.get('pct200')}% vs 200-day) - watch only, no size")
-        elif regime == "REPAIR":
-            fails.append(f"regime REPAIR ({g.get('pct200')}% vs 200-day) - starter size only")
-        if adx is not None and adx < 20:
-            fails.append(f"ADX {adx} below 20 - no trend to ride")
-        if pdi is not None and ndi is not None and pdi <= ndi:
-            fails.append(f"-DI {ndi} >= +DI {pdi} - bears in control")
-        if not above_zl:
-            fails.append(f"price {last} below ZLSMA {zl} - structure has not turned")
-
-        if not fails:
-            verdict = "CANDIDATE - passes regime + trend + structure"
-        elif regime == "DEEP-FAIL":
-            verdict = "BLOCKED: regime DEEP-FAIL"
-        elif len(fails) == 1 and regime == "REPAIR":
-            verdict = "STARTER ONLY - regime REPAIR"
-        else:
-            verdict = "BLOCKED: " + fails[0].split(" - ")[0]
+        try:
+            verdict, reasons, detail = evaluate(r, position_size=DEFAULT_POSITION)
+        except MissingGateData as exc:
+            # A gate that cannot run must BLOCK, never silently pass.
+            ungated.append(str(exc))
+            verdict, reasons, detail = "BLOCKED: gate data missing", [str(exc)], {}
 
         hits[sym] = {
             "sym": sym, "source": "og-chandelier", "signal_date_est": r.get("flip_date"),
-            "bars_back": r.get("bars_back"), "last": last, "zlsma": zl,
+            "bars_back": r.get("bars_back"), "last": r.get("last"), "zlsma": r.get("zlsma"),
             "magical": r.get("magical"), "ce_label": r.get("long_stop"),
-            "regime": regime, "verdict": verdict,
-            "note": ("; ".join(fails) if fails else
-                     "Passes every gate: regime, ADX, DI direction and ZLSMA."),
+            "regime": r.get("regime"), "verdict": verdict, "gates": detail,
+            "note": ("; ".join(reasons) if reasons else
+                     "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid "
+                     f"enough for a ${DEFAULT_POSITION:,.0f} position."),
         }
+
+    if ungated:
+        dq.append({"severity": "BLOCKER", "area": "Gate stack",
+                   "finding": f"{len(ungated)} name(s) could not be gate-evaluated: "
+                              + "; ".join(ungated[:3]),
+                   "impact": "They were BLOCKED rather than passed. A gate that cannot "
+                             "run must never let a name through.",
+                   "action": "Re-run the sweep with og_sweep_runner.js, which captures "
+                             "regime and average dollar volume inline."})
 
     enrich = {r["rname"]: {"description": r.get("rdesc")} for r in ok}
 
     passing = [s for s, h in hits.items() if h["verdict"].startswith("CANDIDATE")]
+    stages, _ = funnel(fresh, position_size=DEFAULT_POSITION)
+    funnel_txt = " -> ".join(f"{name} {cnt}" for name, cnt in stages)
     dq.append({"severity": "BLOCKER" if not passing else "INFO", "area": "Gate stack",
-               "finding": f"{len(fresh)} fresh Chandelier BUY signals were culled to "
-                          f"{len(passing)} that pass the full gate stack.",
+               "finding": f"{len(fresh)} fresh Chandelier BUY signals culled to "
+                          f"{len(passing)}. Funnel: {funnel_txt}.",
                "impact": "Zero passing names means zero trades - that is the honest "
                          "output, not a failure of the scan."
                          if not passing else "",
