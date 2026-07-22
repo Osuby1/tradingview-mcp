@@ -288,20 +288,30 @@ def notes_sheet(ws, rows):
     rows: dicts with sym / verdict / changed / reasoning.
     """
     cols = [
+        Col("rank", "Rank", 7,
+            "Buy-score rank from the Fresh Buys tab, so the two tabs read in the "
+            "same order."),
         Col("sym", "Ticker", 10, "The stock symbol."),
-        Col("verdict", "Verdict", 26,
+        Col("verdict", "Verdict", 24,
             "What the frozen rule set says to do with this name."),
-        Col("changed", "What Changed", 30,
+        Col("changed", "What Changed", 24,
             "How this differs from the previous run - REVERSAL, DOWNGRADED, "
             "UPGRADED, or NEW. Blank means unchanged."),
-        Col("reasoning", "Full Reasoning", 100,
+        Col("pros", "PROS - what argues FOR it", 54,
+            "Every gate this name passed and how strongly. Derived from the same "
+            "components as the buy score, so it cannot drift from the ranking."),
+        Col("cons", "CONS - what argues AGAINST it", 54,
+            "Every gate it failed or only marginally passed. If this column is "
+            "empty the name is genuinely clean; if it is long, the rank is "
+            "flattering it."),
+        Col("reasoning", "Full Reasoning", 80,
             "The complete argument: which gates passed, which failed, and the "
             "judgement call. This is the detail that used to be crushed into "
             "the Notes column on the data tabs."),
     ]
     write_table(ws, cols, rows, row_fill=verdict_fill)
     for n in range(2, ws.max_row + 1):
-        ws.row_dimensions[n].height = 76
+        ws.row_dimensions[n].height = 92
     return ws
 
 

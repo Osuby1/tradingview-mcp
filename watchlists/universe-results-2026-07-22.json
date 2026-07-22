@@ -5,15 +5,15 @@
  "universe_size": 439,
  "scanned": 437,
  "fresh_count": 76,
- "combined_risk_new_actives": "$2,670 if CTRE is taken (1 name); $0 otherwise",
- "run_note": "EXTENDED EOD run: 439-name universe (3 watchlists + origination tabs), 437 read clean on candles. 76 fresh Chandelier BUY signals -> 3 pass the scan gate stack -> 1 (CTRE) also clears the execution protocol. Rotation radar and ignition sweep both ran.",
+ "combined_risk_new_actives": "",
+ "run_note": "Full universe read on candles. 76 fresh BUY signals culled to 3 by the regime + ADX + DI + ZLSMA stack.",
  "data_quality": [
   {
    "severity": "BLOCKER",
    "area": "Gate stack",
-   "finding": "The ATR floor and 2:1 reward gates are NOT in gate_stack.py - they were applied by hand. FRT and DELL passed the automated stack and both fail execution (FRT stop 0.82x ATR + earnings in 9 days; DELL needs +40.7% for 2:1).",
-   "impact": "The automated PASSING list overstates by 2 of 3. Do not act on gate-stack output alone until ATR is captured in the sweep and wired in.",
-   "action": "Add ATR14 to og_sweep_runner.js capture and add an atr_floor gate to gate_stack.py, exactly as was done for liquidity."
+   "finding": "ATR floor and 2:1 gates are NOT in gate_stack.py - applied by hand. FRT and DELL passed the automated stack and fail execution.",
+   "impact": "Automated PASSING list overstates. Verify ATR and 2:1 by hand until wired.",
+   "action": "Capture ATR14 in og_sweep_runner.js and add an atr_floor gate, as was done for liquidity."
   },
   {
    "severity": "INFO",
@@ -38,10 +38,17 @@
   },
   {
    "severity": "WARNING",
-   "area": "Rotation",
-   "finding": "Rotation radar: Oil E&P WATCH->IGNITING (+10.2), China internet +9.7. Tech broad -10.7 and Semis -20.2 ROLLING. Ignition sweep LOADED names cluster in Health Technology (9) and Energy Minerals (6) - independent confirmation of the same rotation.",
-   "impact": "Long exposure to tech/semis is against the prevailing rotation.",
-   "action": "Favour energy and healthcare setups; treat semi bounces as counter-trend."
+   "area": "Ranking",
+   "finding": "BUY SCORE, SHORT SCORE and blocked severity are UNCALIBRATED heuristics, never tested against forward returns.",
+   "impact": "Ranks tell you what to LOOK AT first. They are not evidence a trade works.",
+   "action": "Grade ranked picks against outcomes before trusting the ordering."
+  },
+  {
+   "severity": "WARNING",
+   "area": "Sell Mode / shorts",
+   "finding": "The SHORT RANK has no stop levels: this run's raw dump omitted the short_stop field, so every short row reads 'no Chandelier short stop available' and stop_quality scores 0 for all of them.",
+   "impact": "Short scores are comparable to each other but understated in absolute terms, and no short can be sized from this tab as it stands.",
+   "action": "Add short_stop to the sweep dump. Until then treat SHORT RANK as ordering only, not as a sizeable plan."
   }
  ],
  "hits": [
@@ -457,7 +464,7 @@
     "avg_dollar_vol": 119795563,
     "max_position": 11979556
    },
-   "note": "ONLY name to clear both the scan gate stack and the execution protocol. Stop 41.25 = 1.13 risk = 1.18x ATR14 (0.96), clears the floor. $100k position (capped) = $2,670 risk. 2:1 target 44.64 is only +5.3%. Regime PASS +11.2% vs 200-day, ADX 25.1, +DI 29.9 vs -DI 12.4. ADV $120M. OPEN ITEM: Q2 earnings date unconfirmed, likely early August - verify before entry. WHIPSAW WARNING: sold 7/15, bought 7/16."
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position."
   },
   {
    "sym": "DE",
@@ -503,7 +510,7 @@
     "avg_dollar_vol": 3292615540,
     "max_position": 329261554
    },
-   "note": "Passes the scan gate stack, then FAILS EXECUTION: Chandelier stop 351.95 against 441.80 is 20.3% risk, so a $5k risk unit buys only $24.6k - a token position. 2:1 needs 621.50 (+40.7%) after the stock is already +115% above its 200-day. Also flipped TODAY (0 bars) so the signal can still repaint. Earnings 8/27 is clear."
+   "note": "Passes the scan gate stack then FAILS EXECUTION: 20.3% stop means a $5k risk unit buys only $24.6k. 2:1 needs 621.50 (+40.7%) on a stock already +115% vs its 200-day. Also flipped TODAY so it can repaint."
   },
   {
    "sym": "DIS",
@@ -733,7 +740,7 @@
     "avg_dollar_vol": 100131368,
     "max_position": 10013137
    },
-   "note": "Passes the scan gate stack, then FAILS EXECUTION: stop 123.42 is only 1.63 from 125.05 = 0.82x ATR14 (1.99) - BELOW the ATR floor, so it gets noise-stopped. AND earnings 2026-07-31 is 9 days out, inside the 10-day size-down window. Two independent execution failures."
+   "note": "Passes the scan gate stack then FAILS EXECUTION: stop 1.63 from 125.05 = 0.82x ATR14 (1.99), below the floor, so noise stops it out. AND earnings 2026-07-31 is 9 days away, inside the size-down window."
   },
   {
    "sym": "GBCI",
@@ -2037,7 +2044,14 @@
    "magical": 73.1102,
    "zlsma": 314.8061,
    "ce_mode": "BUY",
-   "ce_label": 321.7612
+   "ce_label": 321.7612,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 18.3846,
+   "adx": 27.0899,
+   "plus_di": 29.7364,
+   "minus_di": 17.0117,
+   "avg_dollar_vol": 21388340917
   },
   {
    "sym": "ABBV",
@@ -2045,7 +2059,14 @@
    "magical": 36.7152,
    "zlsma": 259.8081,
    "ce_mode": "BUY",
-   "ce_label": 247.1802
+   "ce_label": 247.1802,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 13.2082,
+   "adx": 33.8326,
+   "plus_di": 32.1423,
+   "minus_di": 13.3897,
+   "avg_dollar_vol": 2311788905
   },
   {
    "sym": "ABNB",
@@ -2053,7 +2074,14 @@
    "magical": -194.2386,
    "zlsma": 153.655,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 6.4544,
+   "adx": 15.6566,
+   "plus_di": 18.1889,
+   "minus_di": 26.1612,
+   "avg_dollar_vol": 495897366
   },
   {
    "sym": "ACA",
@@ -2061,7 +2089,14 @@
    "magical": 67.5883,
    "zlsma": 152.4518,
    "ce_mode": "BUY",
-   "ce_label": 144.5
+   "ce_label": 144.5,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 25.7269,
+   "adx": 41.7056,
+   "plus_di": 31.2182,
+   "minus_di": 12.7527,
+   "avg_dollar_vol": 156867730
   },
   {
    "sym": "ACGL",
@@ -2069,7 +2104,14 @@
    "magical": -38.9392,
    "zlsma": 105.3259,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 4.48,
+   "adx": 28.8319,
+   "plus_di": 27.3347,
+   "minus_di": 23.3845,
+   "avg_dollar_vol": 178998241
   },
   {
    "sym": "ACTG",
@@ -2077,7 +2119,14 @@
    "magical": 20.5718,
    "zlsma": 4.6178,
    "ce_mode": "BUY",
-   "ce_label": 4.3768
+   "ce_label": 4.3768,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 8.0998,
+   "adx": 19.0054,
+   "plus_di": 27.664,
+   "minus_di": 13.9376,
+   "avg_dollar_vol": 1287026
   },
   {
    "sym": "ADI",
@@ -2085,7 +2134,14 @@
    "magical": -20.3369,
    "zlsma": 368.202,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 18.404,
+   "adx": 18.9428,
+   "plus_di": 19.1592,
+   "minus_di": 28.2701,
+   "avg_dollar_vol": 1868663639
   },
   {
    "sym": "AEE",
@@ -2093,7 +2149,14 @@
    "magical": -56.0718,
    "zlsma": 115.1027,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 4.6015,
+   "adx": 19.0773,
+   "plus_di": 29.1336,
+   "minus_di": 20.4842,
+   "avg_dollar_vol": 212428427
   },
   {
    "sym": "AEP",
@@ -2101,7 +2164,14 @@
    "magical": -68.236,
    "zlsma": 138.9596,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 5.832,
+   "adx": 12.4623,
+   "plus_di": 24.8113,
+   "minus_di": 24.7056,
+   "avg_dollar_vol": 705549110
   },
   {
    "sym": "AGNC",
@@ -2109,7 +2179,14 @@
    "magical": -97.9358,
    "zlsma": 11.5369,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 0.5888,
+   "adx": 22.8862,
+   "plus_di": 20.045,
+   "minus_di": 25.6723,
+   "avg_dollar_vol": 189602140
   },
   {
    "sym": "AI",
@@ -2117,7 +2194,14 @@
    "magical": -243.793,
    "zlsma": 8.1153,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -30.6646,
+   "adx": 19.2778,
+   "plus_di": 14.2034,
+   "minus_di": 27.1867,
+   "avg_dollar_vol": 44739860
   },
   {
    "sym": "ALB",
@@ -2125,7 +2209,14 @@
    "magical": -124.981,
    "zlsma": 115.5012,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -22.5611,
+   "adx": 37.525,
+   "plus_di": 14.4634,
+   "minus_di": 32.1044,
+   "avg_dollar_vol": 274451534
   },
   {
    "sym": "ALGN",
@@ -2133,7 +2224,14 @@
    "magical": -100.3739,
    "zlsma": 189.2919,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 4.3502,
+   "adx": 10.6892,
+   "plus_di": 16.506,
+   "minus_di": 21.1029,
+   "avg_dollar_vol": 177235788
   },
   {
    "sym": "AMAT",
@@ -2141,7 +2239,14 @@
    "magical": -75.1269,
    "zlsma": 597.3981,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 52.4373,
+   "adx": 16.5309,
+   "plus_di": 24.7095,
+   "minus_di": 27.442,
+   "avg_dollar_vol": 6475316325
   },
   {
    "sym": "AMBQ",
@@ -2149,7 +2254,14 @@
    "magical": -66.501,
    "zlsma": 63.5171,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 82.9857,
+   "adx": 19.954,
+   "plus_di": 19.5608,
+   "minus_di": 26.7846,
+   "avg_dollar_vol": 51304823
   },
   {
    "sym": "AMCR",
@@ -2157,7 +2269,14 @@
    "magical": -12.5031,
    "zlsma": 45.5691,
    "ce_mode": "BUY",
-   "ce_label": 41.76
+   "ce_label": 41.76,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 3.2556,
+   "adx": 19.5057,
+   "plus_di": 24.2035,
+   "minus_di": 20.1295,
+   "avg_dollar_vol": 137599402
   },
   {
    "sym": "AMD",
@@ -2165,7 +2284,14 @@
    "magical": 76.8169,
    "zlsma": 498.318,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 82.7636,
+   "adx": 16.3245,
+   "plus_di": 29.1189,
+   "minus_di": 24.3838,
+   "avg_dollar_vol": 15718923650
   },
   {
    "sym": "AMGN",
@@ -2173,7 +2299,14 @@
    "magical": 45.4211,
    "zlsma": 374.3464,
    "ce_mode": "BUY",
-   "ce_label": 353.77
+   "ce_label": 353.77,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.427,
+   "adx": 18.0368,
+   "plus_di": 26.8665,
+   "minus_di": 14.04,
+   "avg_dollar_vol": 838600362
   },
   {
    "sym": "AMLX",
@@ -2181,7 +2314,14 @@
    "magical": -29.9854,
    "zlsma": 20.8608,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 20.9401,
+   "adx": 33.3492,
+   "plus_di": 21.5996,
+   "minus_di": 12.3742,
+   "avg_dollar_vol": 31514444
   },
   {
    "sym": "AMT",
@@ -2189,7 +2329,14 @@
    "magical": -38.6407,
    "zlsma": 158.1108,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -7.484,
+   "adx": 33.0489,
+   "plus_di": 16.4613,
+   "minus_di": 30.8372,
+   "avg_dollar_vol": 574130580
   },
   {
    "sym": "AMZN",
@@ -2197,7 +2344,14 @@
    "magical": 17.0379,
    "zlsma": 245.227,
    "ce_mode": "BUY",
-   "ce_label": 240.41
+   "ce_label": 240.41,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 4.4308,
+   "adx": 20.3907,
+   "plus_di": 23.8053,
+   "minus_di": 21.5268,
+   "avg_dollar_vol": 13981460571
   },
   {
    "sym": "ANET",
@@ -2205,7 +2359,14 @@
    "magical": 33.4039,
    "zlsma": 188.2141,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 20.4916,
+   "adx": 15.2848,
+   "plus_di": 22.9015,
+   "minus_di": 21.9192,
+   "avg_dollar_vol": 1486247698
   },
   {
    "sym": "ANF",
@@ -2213,7 +2374,14 @@
    "magical": 115.5143,
    "zlsma": 103.8913,
    "ce_mode": "BUY",
-   "ce_label": 88.11
+   "ce_label": 88.11,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 6.6846,
+   "adx": 19.381,
+   "plus_di": 28.3925,
+   "minus_di": 20.1518,
+   "avg_dollar_vol": 107439986
   },
   {
    "sym": "AON",
@@ -2221,7 +2389,14 @@
    "magical": 9.6924,
    "zlsma": 370.6321,
    "ce_mode": "BUY",
-   "ce_label": 350.58
+   "ce_label": 350.58,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 4.7382,
+   "adx": 28.8347,
+   "plus_di": 30.4326,
+   "minus_di": 22.649,
+   "avg_dollar_vol": 549059850
   },
   {
    "sym": "APD",
@@ -2229,7 +2404,14 @@
    "magical": 14.8947,
    "zlsma": 307.6217,
    "ce_mode": "BUY",
-   "ce_label": 293.29
+   "ce_label": 293.29,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.9226,
+   "adx": 13.6899,
+   "plus_di": 25.259,
+   "minus_di": 20.1494,
+   "avg_dollar_vol": 429371370
   },
   {
    "sym": "APH",
@@ -2237,7 +2419,14 @@
    "magical": -43.0435,
    "zlsma": 170.0088,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 11.6306,
+   "adx": 17.7335,
+   "plus_di": 22.6195,
+   "minus_di": 25.2352,
+   "avg_dollar_vol": 1172868225
   },
   {
    "sym": "APP",
@@ -2245,7 +2434,14 @@
    "magical": -107.4496,
    "zlsma": 407.0322,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -21.8247,
+   "adx": 20.314,
+   "plus_di": 17.046,
+   "minus_di": 32.455,
+   "avg_dollar_vol": 2209081477
   },
   {
    "sym": "ARI",
@@ -2253,7 +2449,14 @@
    "magical": -139.1898,
    "zlsma": 8.028,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -34.4418,
+   "adx": 42.7271,
+   "plus_di": 7.3538,
+   "minus_di": 59.8583,
+   "avg_dollar_vol": 50937808
   },
   {
    "sym": "ARM",
@@ -2261,7 +2464,14 @@
    "magical": -65.6163,
    "zlsma": 246.6891,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 51.7652,
+   "adx": 25.1308,
+   "plus_di": 19.4066,
+   "minus_di": 30.2556,
+   "avg_dollar_vol": 1951660810
   },
   {
    "sym": "AROC",
@@ -2269,7 +2479,14 @@
    "magical": -13.2788,
    "zlsma": 39.6083,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 21.0526,
+   "adx": 13.2665,
+   "plus_di": 25.834,
+   "minus_di": 22.2085,
+   "avg_dollar_vol": 89973342
   },
   {
    "sym": "ARQT",
@@ -2277,7 +2494,14 @@
    "magical": 53.5778,
    "zlsma": 30.8567,
    "ce_mode": "BUY",
-   "ce_label": 26.3586
+   "ce_label": 26.3586,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 11.3639,
+   "adx": 36.5999,
+   "plus_di": 26.7345,
+   "minus_di": 12.4126,
+   "avg_dollar_vol": 45274887
   },
   {
    "sym": "ASB",
@@ -2285,7 +2509,14 @@
    "magical": -29.7097,
    "zlsma": 32.4243,
    "ce_mode": "BUY",
-   "ce_label": 30.03
+   "ce_label": 30.03,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 13.1672,
+   "adx": 27.2786,
+   "plus_di": 22.5064,
+   "minus_di": 18.0473,
+   "avg_dollar_vol": 70118536
   },
   {
    "sym": "ASML",
@@ -2293,7 +2524,14 @@
    "magical": 1.6267,
    "zlsma": 1775.631,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 31.6409,
+   "adx": 11.8301,
+   "plus_di": 24.6513,
+   "minus_di": 25.4929,
+   "avg_dollar_vol": 3918210878
   },
   {
    "sym": "ASTH",
@@ -2301,7 +2539,14 @@
    "magical": -161.4052,
    "zlsma": 47.5335,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 39.3924,
+   "adx": 26.4011,
+   "plus_di": 22.9759,
+   "minus_di": 27.6273,
+   "avg_dollar_vol": 32535813
   },
   {
    "sym": "ASTS",
@@ -2309,7 +2554,14 @@
    "magical": -76.7493,
    "zlsma": 44.4012,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -25.6113,
+   "adx": 22.0005,
+   "plus_di": 16.6011,
+   "minus_di": 29.1266,
+   "avg_dollar_vol": 1210873839
   },
   {
    "sym": "ATEN",
@@ -2317,7 +2569,14 @@
    "magical": -73.7071,
    "zlsma": 38.3676,
    "ce_mode": "BUY",
-   "ce_label": 35.4
+   "ce_label": 35.4,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 53.158,
+   "adx": 27.8908,
+   "plus_di": 19.3406,
+   "minus_di": 16.9135,
+   "avg_dollar_vol": 42473609
   },
   {
    "sym": "ATLC",
@@ -2325,7 +2584,14 @@
    "magical": -88.5171,
    "zlsma": 102.854,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 40.3659,
+   "adx": 13.0054,
+   "plus_di": 15.8851,
+   "minus_di": 16.538,
+   "avg_dollar_vol": 19691934
   },
   {
    "sym": "AVT",
@@ -2333,7 +2599,14 @@
    "magical": 128.6729,
    "zlsma": 83.7516,
    "ce_mode": "BUY",
-   "ce_label": 85.75
+   "ce_label": 85.75,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 38.4183,
+   "adx": 12.7842,
+   "plus_di": 28.6043,
+   "minus_di": 21.8565,
+   "avg_dollar_vol": 102767943
   },
   {
    "sym": "AXON",
@@ -2341,7 +2614,14 @@
    "magical": -79.9481,
    "zlsma": 565.9464,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -5.7935,
+   "adx": 23.6832,
+   "plus_di": 23.215,
+   "minus_di": 26.8357,
+   "avg_dollar_vol": 538158745
   },
   {
    "sym": "BABA",
@@ -2349,7 +2629,14 @@
    "magical": 74.282,
    "zlsma": 107.9606,
    "ce_mode": "BUY",
-   "ce_label": 112.59
+   "ce_label": 112.59,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -18.6014,
+   "adx": 29.5227,
+   "plus_di": 40.074,
+   "minus_di": 25.9471,
+   "avg_dollar_vol": 1708525687
   },
   {
    "sym": "BAC",
@@ -2357,7 +2644,14 @@
    "magical": 112.4698,
    "zlsma": 64.4943,
    "ce_mode": "BUY",
-   "ce_label": 60.13
+   "ce_label": 60.13,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.95,
+   "adx": 36.8508,
+   "plus_di": 27.0328,
+   "minus_di": 15.2383,
+   "avg_dollar_vol": 2119813091
   },
   {
    "sym": "BALL",
@@ -2365,7 +2659,14 @@
    "magical": 40.6222,
    "zlsma": 67.0666,
    "ce_mode": "BUY",
-   "ce_label": 60.69
+   "ce_label": 60.69,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 10.0322,
+   "adx": 30.8204,
+   "plus_di": 27.7614,
+   "minus_di": 13.2507,
+   "avg_dollar_vol": 150019032
   },
   {
    "sym": "BB",
@@ -2373,7 +2674,14 @@
    "magical": -106.0408,
    "zlsma": 9.9651,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 66.0482,
+   "adx": 29.0211,
+   "plus_di": 22.0532,
+   "minus_di": 27.3651,
+   "avg_dollar_vol": 292733859
   },
   {
    "sym": "BBAI",
@@ -2381,7 +2689,14 @@
    "magical": -106.4562,
    "zlsma": 2.4247,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -41.3979,
+   "adx": 29.2572,
+   "plus_di": 15.6523,
+   "minus_di": 30.9747,
+   "avg_dollar_vol": 80578703
   },
   {
    "sym": "BCAX",
@@ -2389,7 +2704,14 @@
    "magical": -23.8945,
    "zlsma": 32.3457,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 42.6,
+   "adx": 26.9556,
+   "plus_di": 16.5826,
+   "minus_di": 16.0424,
+   "avg_dollar_vol": 26728533
   },
   {
    "sym": "BCBP",
@@ -2397,7 +2719,14 @@
    "magical": -29.3147,
    "zlsma": 10.2611,
    "ce_mode": "BUY",
-   "ce_label": 10.01
+   "ce_label": 10.01,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 15.2919,
+   "adx": 21.1293,
+   "plus_di": 18.4009,
+   "minus_di": 25.4212,
+   "avg_dollar_vol": 2006265
   },
   {
    "sym": "BFC",
@@ -2405,7 +2734,14 @@
    "magical": -53.1519,
    "zlsma": 151.5883,
    "ce_mode": "BUY",
-   "ce_label": 144.75
+   "ce_label": 144.75,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.2599,
+   "adx": 15.7873,
+   "plus_di": 15.2429,
+   "minus_di": 24.718,
+   "avg_dollar_vol": 15574017
   },
   {
    "sym": "BG",
@@ -2413,7 +2749,14 @@
    "magical": 154.7134,
    "zlsma": 113.99,
    "ce_mode": "BUY",
-   "ce_label": 118.12
+   "ce_label": 118.12,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 11.7926,
+   "adx": 20.296,
+   "plus_di": 32.5845,
+   "minus_di": 16.8532,
+   "avg_dollar_vol": 185571633
   },
   {
    "sym": "BHP",
@@ -2421,7 +2764,14 @@
    "magical": 66.0469,
    "zlsma": 55.9746,
    "ce_mode": "BUY",
-   "ce_label": 56.99
+   "ce_label": 56.99,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 15.8793,
+   "adx": 13.723,
+   "plus_di": 34.1875,
+   "minus_di": 34.2233,
+   "avg_dollar_vol": 420635494
   },
   {
    "sym": "BHRB",
@@ -2429,7 +2779,14 @@
    "magical": 23.593,
    "zlsma": 74.412,
    "ce_mode": "BUY",
-   "ce_label": 68.56
+   "ce_label": 68.56,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 10.0337,
+   "adx": 22.928,
+   "plus_di": 24.3995,
+   "minus_di": 16.4289,
+   "avg_dollar_vol": 13794498
   },
   {
    "sym": "BIOA",
@@ -2437,7 +2794,14 @@
    "magical": -101.1534,
    "zlsma": 25.481,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 37.0884,
+   "adx": 29.6899,
+   "plus_di": 20.4486,
+   "minus_di": 15.3643,
+   "avg_dollar_vol": 15704007
   },
   {
    "sym": "BKR",
@@ -2445,7 +2809,14 @@
    "magical": 29.5759,
    "zlsma": 53.8024,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 0.8549,
+   "adx": 28.1069,
+   "plus_di": 19.3619,
+   "minus_di": 24.8861,
+   "avg_dollar_vol": 543049125
   },
   {
    "sym": "BLK",
@@ -2453,7 +2824,14 @@
    "magical": 76.6001,
    "zlsma": 1040.293,
    "ce_mode": "BUY",
-   "ce_label": 1012.07
+   "ce_label": 1012.07,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -0.0663,
+   "adx": 17.2983,
+   "plus_di": 29.2054,
+   "minus_di": 23.1289,
+   "avg_dollar_vol": 1013174453
   },
   {
    "sym": "BMNR",
@@ -2461,7 +2839,14 @@
    "magical": 179.3211,
    "zlsma": 16.0275,
    "ce_mode": "BUY",
-   "ce_label": 16.01
+   "ce_label": 16.01,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -33.7344,
+   "adx": 17.7365,
+   "plus_di": 36.9777,
+   "minus_di": 20.7902,
+   "avg_dollar_vol": 669724971
   },
   {
    "sym": "BOTZ",
@@ -2469,7 +2854,14 @@
    "magical": -102.3599,
    "zlsma": 33.5589,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -5.7393,
+   "adx": 27.2321,
+   "plus_di": 21.2213,
+   "minus_di": 39.9731,
+   "avg_dollar_vol": 29914056
   },
   {
    "sym": "BROS",
@@ -2477,7 +2869,14 @@
    "magical": -74.5823,
    "zlsma": 71.4897,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 13.6626,
+   "adx": 20.1857,
+   "plus_di": 22.8587,
+   "minus_di": 21.2667,
+   "avg_dollar_vol": 195083099
   },
   {
    "sym": "BSTZ",
@@ -2485,7 +2884,14 @@
    "magical": -30.9977,
    "zlsma": 27.4896,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 17.3906,
+   "adx": 20.0765,
+   "plus_di": 23.4762,
+   "minus_di": 30.4865,
+   "avg_dollar_vol": 8312268
   },
   {
    "sym": "BSX",
@@ -2493,7 +2899,14 @@
    "magical": -95.2125,
    "zlsma": 43.1486,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -42.6706,
+   "adx": 24.2471,
+   "plus_di": 18.6043,
+   "minus_di": 25.9963,
+   "avg_dollar_vol": 847780635
   },
   {
    "sym": "BTBT",
@@ -2501,7 +2914,14 @@
    "magical": -72.0339,
    "zlsma": 1.3484,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -26.3543,
+   "adx": 21.7484,
+   "plus_di": 18.3792,
+   "minus_di": 25.9923,
+   "avg_dollar_vol": 40614145
   },
   {
    "sym": "BTCS",
@@ -2509,7 +2929,14 @@
    "magical": -5.4817,
    "zlsma": 0.9982,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -54.4197,
+   "adx": 27.4752,
+   "plus_di": 18.0753,
+   "minus_di": 22.163,
+   "avg_dollar_vol": 728160
   },
   {
    "sym": "BWXT",
@@ -2517,7 +2944,14 @@
    "magical": -77.557,
    "zlsma": 183.2249,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -11.6457,
+   "adx": 41.9402,
+   "plus_di": 11.4881,
+   "minus_di": 29.1072,
+   "avg_dollar_vol": 173881476
   },
   {
    "sym": "BX",
@@ -2525,7 +2959,14 @@
    "magical": 28.3101,
    "zlsma": 129.2888,
    "ce_mode": "BUY",
-   "ce_label": 121.5318
+   "ce_label": 121.5318,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -7.7497,
+   "adx": 12.3735,
+   "plus_di": 28.1038,
+   "minus_di": 24.4181,
+   "avg_dollar_vol": 586495947
   },
   {
    "sym": "BY",
@@ -2533,7 +2974,14 @@
    "magical": 40.6179,
    "zlsma": 39.5378,
    "ce_mode": "BUY",
-   "ce_label": 37.07
+   "ce_label": 37.07,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 19.7341,
+   "adx": 49.4321,
+   "plus_di": 26.9579,
+   "minus_di": 11.066,
+   "avg_dollar_vol": 14115858
   },
   {
    "sym": "BYD",
@@ -2541,7 +2989,14 @@
    "magical": -78.6254,
    "zlsma": 91.1894,
    "ce_mode": "BUY",
-   "ce_label": 85.37
+   "ce_label": 85.37,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 3.1136,
+   "adx": 14.0973,
+   "plus_di": 20.5758,
+   "minus_di": 19.6006,
+   "avg_dollar_vol": 77123682
   },
   {
    "sym": "C",
@@ -2549,7 +3004,14 @@
    "magical": -88.0237,
    "zlsma": 139.8768,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 12.4869,
+   "adx": 28.4132,
+   "plus_di": 15.6033,
+   "minus_di": 25.9477,
+   "avg_dollar_vol": 1857664768
   },
   {
    "sym": "CACC",
@@ -2557,7 +3019,14 @@
    "magical": -127.0054,
    "zlsma": 643.9827,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 21.0692,
+   "adx": 20.6565,
+   "plus_di": 19.8284,
+   "minus_di": 21.8793,
+   "avg_dollar_vol": 93439932
   },
   {
    "sym": "CAR",
@@ -2565,7 +3034,14 @@
    "magical": 74.1515,
    "zlsma": 217.2518,
    "ce_mode": "BUY",
-   "ce_label": 153.96
+   "ce_label": 153.96,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 4.0712,
+   "adx": 9.5785,
+   "plus_di": 25.6226,
+   "minus_di": 20.5497,
+   "avg_dollar_vol": 117122706
   },
   {
    "sym": "CASH",
@@ -2573,7 +3049,14 @@
    "magical": -22.3853,
    "zlsma": 97.0103,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.715,
+   "adx": 28.8241,
+   "plus_di": 23.1897,
+   "minus_di": 19.6695,
+   "avg_dollar_vol": 20252973
   },
   {
    "sym": "CAT",
@@ -2581,7 +3064,14 @@
    "magical": -90.1395,
    "zlsma": 916.8407,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 22.4962,
+   "adx": 18.8523,
+   "plus_di": 17.9147,
+   "minus_di": 26.7671,
+   "avg_dollar_vol": 3311644504
   },
   {
    "sym": "CB",
@@ -2589,7 +3079,14 @@
    "magical": -44.6358,
    "zlsma": 361.4554,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 8.6026,
+   "adx": 20.4439,
+   "plus_di": 25.7545,
+   "minus_di": 29.3288,
+   "avg_dollar_vol": 635304846
   },
   {
    "sym": "CBL",
@@ -2597,7 +3094,14 @@
    "magical": 190.1423,
    "zlsma": 55.6163,
    "ce_mode": "BUY",
-   "ce_label": 52.8538
+   "ce_label": 52.8538,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 42.9002,
+   "adx": 32.2396,
+   "plus_di": 26.0001,
+   "minus_di": 8.4178,
+   "avg_dollar_vol": 20396493
   },
   {
    "sym": "CBSH",
@@ -2605,7 +3109,14 @@
    "magical": 58.8985,
    "zlsma": 60.8872,
    "ce_mode": "BUY",
-   "ce_label": 57.37
+   "ce_label": 57.37,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 11.468,
+   "adx": 28.5525,
+   "plus_di": 24.7811,
+   "minus_di": 16.4613,
+   "avg_dollar_vol": 75801473
   },
   {
    "sym": "CCEP",
@@ -2613,7 +3124,14 @@
    "magical": 47.0901,
    "zlsma": 110.8295,
    "ce_mode": "BUY",
-   "ce_label": 103.4
+   "ce_label": 103.4,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 11.6909,
+   "adx": 31.5227,
+   "plus_di": 28.5507,
+   "minus_di": 15.1361,
+   "avg_dollar_vol": 201828821
   },
   {
    "sym": "CCJ",
@@ -2621,7 +3139,14 @@
    "magical": -60.6893,
    "zlsma": 90.072,
    "ce_mode": "BUY",
-   "ce_label": 83.61
+   "ce_label": 83.61,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -13.5648,
+   "adx": 30.5554,
+   "plus_di": 18.9773,
+   "minus_di": 31.009,
+   "avg_dollar_vol": 331654195
   },
   {
    "sym": "CCL",
@@ -2629,7 +3154,14 @@
    "magical": -77.3833,
    "zlsma": 27.0157,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -6.7994,
+   "adx": 14.9174,
+   "plus_di": 18.8808,
+   "minus_di": 24.209,
+   "avg_dollar_vol": 538732345
   },
   {
    "sym": "CDNS",
@@ -2637,7 +3169,14 @@
    "magical": -155.3804,
    "zlsma": 337.3453,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 2.7726,
+   "adx": 18.9233,
+   "plus_di": 14.0792,
+   "minus_di": 27.9937,
+   "avg_dollar_vol": 717604425
   },
   {
    "sym": "CEG",
@@ -2645,7 +3184,14 @@
    "magical": 169.0588,
    "zlsma": 260.6602,
    "ce_mode": "BUY",
-   "ce_label": 247.5
+   "ce_label": 247.5,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -11.7839,
+   "adx": 16.836,
+   "plus_di": 32.5663,
+   "minus_di": 24.3469,
+   "avg_dollar_vol": 923239321
   },
   {
    "sym": "CENX",
@@ -2653,7 +3199,14 @@
    "magical": 34.1066,
    "zlsma": 37.6315,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -3.4949,
+   "adx": 33.5423,
+   "plus_di": 18.8766,
+   "minus_di": 28.3617,
+   "avg_dollar_vol": 106005705
   },
   {
    "sym": "CGON",
@@ -2661,7 +3214,14 @@
    "magical": -89.9607,
    "zlsma": 77.9873,
    "ce_mode": "BUY",
-   "ce_label": 67.58
+   "ce_label": 67.58,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 24.3674,
+   "adx": 40.9603,
+   "plus_di": 21.0064,
+   "minus_di": 9.7289,
+   "avg_dollar_vol": 87428570
   },
   {
    "sym": "CHCO",
@@ -2669,7 +3229,14 @@
    "magical": 212.4011,
    "zlsma": 139.7083,
    "ce_mode": "BUY",
-   "ce_label": 130.62
+   "ce_label": 130.62,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 12.3012,
+   "adx": 18.4313,
+   "plus_di": 24.1752,
+   "minus_di": 12.6793,
+   "avg_dollar_vol": 22620970
   },
   {
    "sym": "CHTR",
@@ -2677,7 +3244,14 @@
    "magical": -79.3524,
    "zlsma": 147.3344,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -34.4137,
+   "adx": 15.0194,
+   "plus_di": 22.6003,
+   "minus_di": 24.0658,
+   "avg_dollar_vol": 372251342
   },
   {
    "sym": "CHYM",
@@ -2685,7 +3259,14 @@
    "magical": 70.2091,
    "zlsma": 24.9475,
    "ce_mode": "BUY",
-   "ce_label": 20.43
+   "ce_label": 20.43,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 3.2307,
+   "adx": 24.5354,
+   "plus_di": 20.6276,
+   "minus_di": 13.9205,
+   "avg_dollar_vol": 138173056
   },
   {
    "sym": "CLX",
@@ -2693,7 +3274,14 @@
    "magical": -21.6914,
    "zlsma": 97.0478,
    "ce_mode": "BUY",
-   "ce_label": 93.129
+   "ce_label": 93.129,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -8.8516,
+   "adx": 11.0129,
+   "plus_di": 24.8967,
+   "minus_di": 19.2473,
+   "avg_dollar_vol": 219084013
   },
   {
    "sym": "CMG",
@@ -2701,7 +3289,14 @@
    "magical": -120.6997,
    "zlsma": 36.072,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -8.4396,
+   "adx": 16.3721,
+   "plus_di": 23.9229,
+   "minus_di": 31.2185,
+   "avg_dollar_vol": 616148633
   },
   {
    "sym": "CMP",
@@ -2709,7 +3304,14 @@
    "magical": 37.6179,
    "zlsma": 27.5666,
    "ce_mode": "BUY",
-   "ce_label": 28.47
+   "ce_label": 28.47,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 26.117,
+   "adx": 10.1067,
+   "plus_di": 21.0684,
+   "minus_di": 20.2006,
+   "avg_dollar_vol": 12622475
   },
   {
    "sym": "CNOB",
@@ -2717,7 +3319,14 @@
    "magical": 10.2927,
    "zlsma": 33.9222,
    "ce_mode": "BUY",
-   "ce_label": 32.52
+   "ce_label": 32.52,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 18.608,
+   "adx": 17.7011,
+   "plus_di": 22.016,
+   "minus_di": 21.0471,
+   "avg_dollar_vol": 17432524
   },
   {
    "sym": "COCO",
@@ -2725,7 +3334,14 @@
    "magical": -1.5845,
    "zlsma": 173.2094,
    "ce_mode": "BUY",
-   "ce_label": 128.518
+   "ce_label": 128.518,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -25.1744,
+   "adx": 22.4043,
+   "plus_di": 30.999,
+   "minus_di": 20.0526,
+   "avg_dollar_vol": 61456578290
   },
   {
    "sym": "COGT",
@@ -2733,7 +3349,14 @@
    "magical": 68.6202,
    "zlsma": 42.7723,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 16.6762,
+   "adx": 20.4505,
+   "plus_di": 19.7889,
+   "minus_di": 15.2812,
+   "avg_dollar_vol": 124986409
   },
   {
    "sym": "COIN",
@@ -2741,7 +3364,14 @@
    "magical": 80.1727,
    "zlsma": 158.6824,
    "ce_mode": "BUY",
-   "ce_label": 151.47
+   "ce_label": 151.47,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -24.477,
+   "adx": 11.7896,
+   "plus_di": 30.5178,
+   "minus_di": 20.7712,
+   "avg_dollar_vol": 1271812544
   },
   {
    "sym": "COKE",
@@ -2749,7 +3379,14 @@
    "magical": 18.2514,
    "zlsma": 193.0137,
    "ce_mode": "BUY",
-   "ce_label": 177.96
+   "ce_label": 177.96,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 8.0957,
+   "adx": 13.2389,
+   "plus_di": 20.1118,
+   "minus_di": 20.9686,
+   "avg_dollar_vol": 110082997
   },
   {
    "sym": "COLB",
@@ -2757,7 +3394,14 @@
    "magical": 55.4104,
    "zlsma": 33.8888,
    "ce_mode": "BUY",
-   "ce_label": 31.85
+   "ce_label": 31.85,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 13.0753,
+   "adx": 21.527,
+   "plus_di": 25.095,
+   "minus_di": 17.3109,
+   "avg_dollar_vol": 91487611
   },
   {
    "sym": "COLD",
@@ -2765,7 +3409,14 @@
    "magical": -75.0193,
    "zlsma": 15.1678,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 17.1583,
+   "adx": 22.1121,
+   "plus_di": 23.2732,
+   "minus_di": 21.275,
+   "avg_dollar_vol": 69469432
   },
   {
    "sym": "COP",
@@ -2773,7 +3424,14 @@
    "magical": 152.1247,
    "zlsma": 111.3396,
    "ce_mode": "BUY",
-   "ce_label": 114.31
+   "ce_label": 114.31,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 11.1959,
+   "adx": 21.0906,
+   "plus_di": 34.0581,
+   "minus_di": 17.2027,
+   "avg_dollar_vol": 821156830
   },
   {
    "sym": "COST",
@@ -2781,7 +3439,14 @@
    "magical": -52.1492,
    "zlsma": 902.5145,
    "ce_mode": "BUY",
-   "ce_label": 906.5
+   "ce_label": 906.5,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -3.0928,
+   "adx": 11.964,
+   "plus_di": 24.4636,
+   "minus_di": 25.1067,
+   "avg_dollar_vol": 2534063329
   },
   {
    "sym": "CPRT",
@@ -2789,7 +3454,14 @@
    "magical": -91.8316,
    "zlsma": 26.4617,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -25.3556,
+   "adx": 18.9498,
+   "plus_di": 18.0749,
+   "minus_di": 22.2246,
+   "avg_dollar_vol": 357684299
   },
   {
    "sym": "CPT",
@@ -2797,7 +3469,14 @@
    "magical": -89.7436,
    "zlsma": 113.9291,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 5.5115,
+   "adx": 14.6165,
+   "plus_di": 23.0587,
+   "minus_di": 21.7985,
+   "avg_dollar_vol": 107234403
   },
   {
    "sym": "CRCL",
@@ -2805,7 +3484,14 @@
    "magical": 1.9886,
    "zlsma": 47.6229,
    "ce_mode": "BUY",
-   "ce_label": 58.44
+   "ce_label": 58.44,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -28.5129,
+   "adx": 19.1804,
+   "plus_di": 27.6652,
+   "minus_di": 28.441,
+   "avg_dollar_vol": 1004434521
   },
   {
    "sym": "CRWD",
@@ -2813,7 +3499,14 @@
    "magical": -27.7501,
    "zlsma": 186.2889,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 44.2784,
+   "adx": 36.6782,
+   "plus_di": 28.7277,
+   "minus_di": 20.5674,
+   "avg_dollar_vol": 1939183142
   },
   {
    "sym": "CRWV",
@@ -2821,7 +3514,14 @@
    "magical": -30.3539,
    "zlsma": 78.974,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -14.9277,
+   "adx": 22.5768,
+   "plus_di": 23.5975,
+   "minus_di": 32.0253,
+   "avg_dollar_vol": 2212528525
   },
   {
    "sym": "CSCO",
@@ -2829,7 +3529,14 @@
    "magical": -60.9942,
    "zlsma": 100.4955,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 27.6238,
+   "adx": 20.7563,
+   "plus_di": 17.7223,
+   "minus_di": 24.9287,
+   "avg_dollar_vol": 2745697645
   },
   {
    "sym": "CSX",
@@ -2837,7 +3544,14 @@
    "magical": 66.5291,
    "zlsma": 50.6434,
    "ce_mode": "BUY",
-   "ce_label": 48.79
+   "ce_label": 48.79,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 22.4927,
+   "adx": 22.66,
+   "plus_di": 25.5925,
+   "minus_di": 18.8811,
+   "avg_dollar_vol": 600673421
   },
   {
    "sym": "CTM",
@@ -2845,7 +3559,14 @@
    "magical": -47.3721,
    "zlsma": 0.5861,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -25.5307,
+   "adx": 14.7681,
+   "plus_di": 22.9488,
+   "minus_di": 18.226,
+   "avg_dollar_vol": 949894
   },
   {
    "sym": "CTRE",
@@ -2853,7 +3574,14 @@
    "magical": 91.0105,
    "zlsma": 41.7875,
    "ce_mode": "BUY",
-   "ce_label": 41.25
+   "ce_label": 41.25,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 11.1639,
+   "adx": 25.1098,
+   "plus_di": 29.9121,
+   "minus_di": 12.3975,
+   "avg_dollar_vol": 119795563
   },
   {
    "sym": "CTS",
@@ -2861,7 +3589,14 @@
    "magical": -39.6258,
    "zlsma": 57.294,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 16.9648,
+   "adx": 21.2467,
+   "plus_di": 18.9849,
+   "minus_di": 25.372,
+   "avg_dollar_vol": 19907972
   },
   {
    "sym": "CTVA",
@@ -2869,7 +3604,14 @@
    "magical": 141.0249,
    "zlsma": 89.8355,
    "ce_mode": "BUY",
-   "ce_label": 85.27
+   "ce_label": 85.27,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 19.033,
+   "adx": 29.5884,
+   "plus_di": 29.9346,
+   "minus_di": 15.4404,
+   "avg_dollar_vol": 329384390
   },
   {
    "sym": "CVNA",
@@ -2877,7 +3619,14 @@
    "magical": -133.1363,
    "zlsma": 71.5826,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -13.5767,
+   "adx": 10.2602,
+   "plus_di": 18.2439,
+   "minus_di": 24.2599,
+   "avg_dollar_vol": 664314226
   },
   {
    "sym": "CVX",
@@ -2885,7 +3634,14 @@
    "magical": 143.8436,
    "zlsma": 179.0595,
    "ce_mode": "BUY",
-   "ce_label": 187.72
+   "ce_label": 187.72,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 10.919,
+   "adx": 24.1336,
+   "plus_di": 41.836,
+   "minus_di": 18.7119,
+   "avg_dollar_vol": 1704047644
   },
   {
    "sym": "CZR",
@@ -2893,7 +3649,14 @@
    "magical": -19.8322,
    "zlsma": 30.3184,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 18.9475,
+   "adx": 24.9263,
+   "plus_di": 28.695,
+   "minus_di": 16.2398,
+   "avg_dollar_vol": 138464615
   },
   {
    "sym": "DAL",
@@ -2901,7 +3664,14 @@
    "magical": -111.5271,
    "zlsma": 88.2815,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 19.4483,
+   "adx": 23.681,
+   "plus_di": 21.9572,
+   "minus_di": 23.1063,
+   "avg_dollar_vol": 646935451
   },
   {
    "sym": "DASH",
@@ -2909,7 +3679,14 @@
    "magical": -153.5529,
    "zlsma": 206.3838,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -8.4453,
+   "adx": 24.5468,
+   "plus_di": 17.6807,
+   "minus_di": 22.004,
+   "avg_dollar_vol": 759848251
   },
   {
    "sym": "DDOG",
@@ -2917,7 +3694,14 @@
    "magical": -62.6785,
    "zlsma": 233.2976,
    "ce_mode": "BUY",
-   "ce_label": 242.68
+   "ce_label": 242.68,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 49.9867,
+   "adx": 24.4671,
+   "plus_di": 23.0733,
+   "minus_di": 23.1111,
+   "avg_dollar_vol": 1061433295
   },
   {
    "sym": "DE",
@@ -2925,7 +3709,14 @@
    "magical": 8.8055,
    "zlsma": 620.7018,
    "ce_mode": "BUY",
-   "ce_label": 574
+   "ce_label": 574,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 12.0058,
+   "adx": 20.3348,
+   "plus_di": 27.6656,
+   "minus_di": 17.2235,
+   "avg_dollar_vol": 728839849
   },
   {
    "sym": "DELL",
@@ -2933,7 +3724,14 @@
    "magical": 92.4163,
    "zlsma": 408.0946,
    "ce_mode": "BUY",
-   "ce_label": 351.95
+   "ce_label": 351.95,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 115.2161,
+   "adx": 21.6282,
+   "plus_di": 27.2977,
+   "minus_di": 21.076,
+   "avg_dollar_vol": 3292615540
   },
   {
    "sym": "DFDV",
@@ -2941,7 +3739,14 @@
    "magical": 48.273,
    "zlsma": 2.866,
    "ce_mode": "BUY",
-   "ce_label": 2.7806
+   "ce_label": 2.7806,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -46.2983,
+   "adx": 11.418,
+   "plus_di": 30.4752,
+   "minus_di": 24.7184,
+   "avg_dollar_vol": 2636397
   },
   {
    "sym": "DGX",
@@ -2949,7 +3754,14 @@
    "magical": 13.4593,
    "zlsma": 213.7764,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.1398,
+   "adx": 21.5717,
+   "plus_di": 29.5807,
+   "minus_di": 20.9705,
+   "avg_dollar_vol": 182976806
   },
   {
    "sym": "DHI",
@@ -2957,7 +3769,14 @@
    "magical": -123.3217,
    "zlsma": 156.2318,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -5.4006,
+   "adx": 19.1159,
+   "plus_di": 14.8591,
+   "minus_di": 27.8717,
+   "avg_dollar_vol": 344148296
   },
   {
    "sym": "DIS",
@@ -2965,7 +3784,14 @@
    "magical": -76.6421,
    "zlsma": 95.4705,
    "ce_mode": "BUY",
-   "ce_label": 94.32
+   "ce_label": 94.32,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -8.8883,
+   "adx": 13.3947,
+   "plus_di": 18.4263,
+   "minus_di": 19.3495,
+   "avg_dollar_vol": 1027772959
   },
   {
    "sym": "DLR",
@@ -2973,7 +3799,14 @@
    "magical": -15.0062,
    "zlsma": 177.6899,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 1.6371,
+   "adx": 28.9042,
+   "plus_di": 16.8384,
+   "minus_di": 23.6945,
+   "avg_dollar_vol": 684717018
   },
   {
    "sym": "DNTH",
@@ -2981,7 +3814,14 @@
    "magical": 98.6946,
    "zlsma": 108.049,
    "ce_mode": "BUY",
-   "ce_label": 95.76
+   "ce_label": 95.76,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 60.154,
+   "adx": 15.275,
+   "plus_di": 22.9675,
+   "minus_di": 14.5149,
+   "avg_dollar_vol": 136946228
   },
   {
    "sym": "DOW",
@@ -2989,7 +3829,14 @@
    "magical": 152.6241,
    "zlsma": 28.7075,
    "ce_mode": "BUY",
-   "ce_label": 29.02
+   "ce_label": 29.02,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 3.337,
+   "adx": 17.2505,
+   "plus_di": 30.6759,
+   "minus_di": 24.3487,
+   "avg_dollar_vol": 360568475
   },
   {
    "sym": "DPZ",
@@ -2997,7 +3844,14 @@
    "magical": 76.8723,
    "zlsma": 328.3283,
    "ce_mode": "BUY",
-   "ce_label": 299.39
+   "ce_label": 299.39,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -14.7111,
+   "adx": 22.7789,
+   "plus_di": 28.8254,
+   "minus_di": 14.8069,
+   "avg_dollar_vol": 343558460
   },
   {
    "sym": "DTE",
@@ -3005,7 +3859,14 @@
    "magical": 107.1656,
    "zlsma": 24.8035,
    "ce_mode": "BUY",
-   "ce_label": 26.29
+   "ce_label": 26.29,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -5.0631,
+   "adx": 22.516,
+   "plus_di": 27.9864,
+   "minus_di": 22.1496,
+   "avg_dollar_vol": 183284026
   },
   {
    "sym": "DUK",
@@ -3013,7 +3874,14 @@
    "magical": 86.0884,
    "zlsma": 128.8824,
    "ce_mode": "BUY",
-   "ce_label": 123.81
+   "ce_label": 123.81,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 2.7149,
+   "adx": 13.1687,
+   "plus_di": 27.5119,
+   "minus_di": 15.873,
+   "avg_dollar_vol": 486423485
   },
   {
    "sym": "DUOL",
@@ -3021,7 +3889,14 @@
    "magical": -93.3625,
    "zlsma": 131.5933,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -22.1356,
+   "adx": 19.0895,
+   "plus_di": 17.3447,
+   "minus_di": 22.1256,
+   "avg_dollar_vol": 149586048
   },
   {
    "sym": "DVN",
@@ -3029,7 +3904,14 @@
    "magical": 154.0522,
    "zlsma": 42.7301,
    "ce_mode": "BUY",
-   "ce_label": 42.99
+   "ce_label": 42.99,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 8.2149,
+   "adx": 13.2016,
+   "plus_di": 28.8203,
+   "minus_di": 18.2142,
+   "avg_dollar_vol": 548169302
   },
   {
    "sym": "EFC",
@@ -3037,7 +3919,14 @@
    "magical": -87.631,
    "zlsma": 13.4897,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 1.7371,
+   "adx": 13.37,
+   "plus_di": 13.8577,
+   "minus_di": 21.0015,
+   "avg_dollar_vol": 18490200
   },
   {
    "sym": "EFX",
@@ -3045,7 +3934,14 @@
    "magical": 26.6584,
    "zlsma": 178.758,
    "ce_mode": "BUY",
-   "ce_label": 165.28
+   "ce_label": 165.28,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -12.1015,
+   "adx": 17.1451,
+   "plus_di": 21.7591,
+   "minus_di": 28.475,
+   "avg_dollar_vol": 315150187
   },
   {
    "sym": "EIG",
@@ -3053,7 +3949,14 @@
    "magical": -93.4185,
    "zlsma": 52.4341,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.1312,
+   "adx": 35.0696,
+   "plus_di": 22.979,
+   "minus_di": 20.5015,
+   "avg_dollar_vol": 11976206
   },
   {
    "sym": "EME",
@@ -3061,7 +3964,14 @@
    "magical": -76.129,
    "zlsma": 750.0328,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 1.6994,
+   "adx": 31.0021,
+   "plus_di": 13.2806,
+   "minus_di": 29.6644,
+   "avg_dollar_vol": 378487108
   },
   {
    "sym": "ENVA",
@@ -3069,7 +3979,14 @@
    "magical": -125.8815,
    "zlsma": 260.0643,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 41.9312,
+   "adx": 32.9453,
+   "plus_di": 21.6254,
+   "minus_di": 28.0446,
+   "avg_dollar_vol": 93242578
   },
   {
    "sym": "EPC",
@@ -3077,7 +3994,14 @@
    "magical": 27.8019,
    "zlsma": 33.419,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 34.7197,
+   "adx": 34.1411,
+   "plus_di": 28.0385,
+   "minus_di": 18.1468,
+   "avg_dollar_vol": 28567760
   },
   {
    "sym": "EQIX",
@@ -3085,7 +4009,14 @@
    "magical": -21.798,
    "zlsma": 1024.5622,
    "ce_mode": "BUY",
-   "ce_label": 1006.91
+   "ce_label": 1006.91,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 11.4871,
+   "adx": 17.8605,
+   "plus_di": 15.4033,
+   "minus_di": 20.998,
+   "avg_dollar_vol": 632818198
   },
   {
    "sym": "EQR",
@@ -3093,7 +4024,14 @@
    "magical": -42.8241,
    "zlsma": 0.2962,
    "ce_mode": "BUY",
-   "ce_label": 0.23
+   "ce_label": 0.23,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 38.5947,
+   "adx": 12.3247,
+   "plus_di": 26.1373,
+   "minus_di": 23.7542,
+   "avg_dollar_vol": 6836421
   },
   {
    "sym": "ERIE",
@@ -3101,7 +4039,14 @@
    "magical": -141.7939,
    "zlsma": 241.4124,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -19.8858,
+   "adx": 25.7833,
+   "plus_di": 16.5451,
+   "minus_di": 37.4805,
+   "avg_dollar_vol": 58692892
   },
   {
    "sym": "ESE",
@@ -3109,7 +4054,14 @@
    "magical": -60.7853,
    "zlsma": 354.4834,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 23.52,
+   "adx": 15.44,
+   "plus_di": 18.8501,
+   "minus_di": 21.1578,
+   "avg_dollar_vol": 90703031
   },
   {
    "sym": "ESNT",
@@ -3117,7 +4069,14 @@
    "magical": 39.7732,
    "zlsma": 68.9334,
    "ce_mode": "BUY",
-   "ce_label": 64.45
+   "ce_label": 64.45,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 5.7847,
+   "adx": 24.8605,
+   "plus_di": 26.4771,
+   "minus_di": 20.6535,
+   "avg_dollar_vol": 53827160
   },
   {
    "sym": "ESQ",
@@ -3125,7 +4084,14 @@
    "magical": 33.78,
    "zlsma": 125.9574,
    "ce_mode": "BUY",
-   "ce_label": 118.42
+   "ce_label": 118.42,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 12.5993,
+   "adx": 39.8095,
+   "plus_di": 22.8193,
+   "minus_di": 13.6387,
+   "avg_dollar_vol": 17295348
   },
   {
    "sym": "ET",
@@ -3133,7 +4099,14 @@
    "magical": 101.8727,
    "zlsma": 20.0621,
    "ce_mode": "BUY",
-   "ce_label": 19.8
+   "ce_label": 19.8,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 11.6975,
+   "adx": 25.1792,
+   "plus_di": 26.0004,
+   "minus_di": 12.5025,
+   "avg_dollar_vol": 165398920
   },
   {
    "sym": "ETN",
@@ -3141,7 +4114,14 @@
    "magical": 2.8258,
    "zlsma": 417.6261,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 8.9269,
+   "adx": 9.8871,
+   "plus_di": 19.1109,
+   "minus_di": 25.6065,
+   "avg_dollar_vol": 929364129
   },
   {
    "sym": "ETR",
@@ -3149,7 +4129,14 @@
    "magical": 31.2891,
    "zlsma": 118.2347,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 10.8808,
+   "adx": 19.4468,
+   "plus_di": 26.9606,
+   "minus_di": 16.1665,
+   "avg_dollar_vol": 337187057
   },
   {
    "sym": "EVGO",
@@ -3157,7 +4144,14 @@
    "magical": -177.0419,
    "zlsma": 1.6312,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -41.1644,
+   "adx": 15.5836,
+   "plus_di": 13.3253,
+   "minus_di": 30.2291,
+   "avg_dollar_vol": 5239804
   },
   {
    "sym": "EXC",
@@ -3165,7 +4159,14 @@
    "magical": -10.6135,
    "zlsma": 47.6123,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 1.1166,
+   "adx": 11.5275,
+   "plus_di": 25.0208,
+   "minus_di": 21.821,
+   "avg_dollar_vol": 438294741
   },
   {
    "sym": "EXTR",
@@ -3173,7 +4174,14 @@
    "magical": -69.611,
    "zlsma": 30.574,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 51.0867,
+   "adx": 22.7495,
+   "plus_di": 18.0894,
+   "minus_di": 22.369,
+   "avg_dollar_vol": 66347469
   },
   {
    "sym": "F",
@@ -3181,7 +4189,14 @@
    "magical": 144.5695,
    "zlsma": 12.7436,
    "ce_mode": "BUY",
-   "ce_label": 13.66
+   "ce_label": 13.66,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 8.8678,
+   "adx": 13.2666,
+   "plus_di": 28.3773,
+   "minus_di": 16.2724,
+   "avg_dollar_vol": 711590237
   },
   {
    "sym": "FCFS",
@@ -3189,7 +4204,14 @@
    "magical": -142.786,
    "zlsma": 208.6097,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 11.2805,
+   "adx": 24.1274,
+   "plus_di": 11.3594,
+   "minus_di": 27.0137,
+   "avg_dollar_vol": 97521115
   },
   {
    "sym": "FCX",
@@ -3197,7 +4219,14 @@
    "magical": 191.4642,
    "zlsma": 58.1162,
    "ce_mode": "BUY",
-   "ce_label": 59.97
+   "ce_label": 59.97,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.3071,
+   "adx": 21.2223,
+   "plus_di": 27.0114,
+   "minus_di": 27.8993,
+   "avg_dollar_vol": 1021520578
   },
   {
    "sym": "FDX",
@@ -3205,7 +4234,14 @@
    "magical": 101.4727,
    "zlsma": 308.3694,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 18.0696,
+   "adx": 16.5337,
+   "plus_di": 17.4934,
+   "minus_di": 17.6715,
+   "avg_dollar_vol": 717463793
   },
   {
    "sym": "FFIV",
@@ -3213,7 +4249,14 @@
    "magical": -74.0215,
    "zlsma": 399.2683,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 29.7131,
+   "adx": 20.6368,
+   "plus_di": 16.2238,
+   "minus_di": 27.6001,
+   "avg_dollar_vol": 226346873
   },
   {
    "sym": "FHB",
@@ -3221,7 +4264,14 @@
    "magical": -91.1736,
    "zlsma": 30.4577,
    "ce_mode": "BUY",
-   "ce_label": 28.32
+   "ce_label": 28.32,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.9246,
+   "adx": 26.1322,
+   "plus_di": 20.4786,
+   "minus_di": 28.7545,
+   "avg_dollar_vol": 80277017
   },
   {
    "sym": "FICO",
@@ -3229,7 +4279,14 @@
    "magical": -14.9448,
    "zlsma": 1179.7395,
    "ce_mode": "BUY",
-   "ce_label": 1202.07
+   "ce_label": 1202.07,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -12.3631,
+   "adx": 13.4812,
+   "plus_di": 19.4234,
+   "minus_di": 22.1931,
+   "avg_dollar_vol": 299241889
   },
   {
    "sym": "FITB",
@@ -3237,7 +4294,14 @@
    "magical": 49.2954,
    "zlsma": 61.1497,
    "ce_mode": "BUY",
-   "ce_label": 56.715
+   "ce_label": 56.715,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 18.4283,
+   "adx": 24.3378,
+   "plus_di": 24.1532,
+   "minus_di": 25.0542,
+   "avg_dollar_vol": 411452953
   },
   {
    "sym": "FIX",
@@ -3245,7 +4309,14 @@
    "magical": -4.6115,
    "zlsma": 1689.8535,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 30.9486,
+   "adx": 21.3379,
+   "plus_di": 21.8329,
+   "minus_di": 31.8599,
+   "avg_dollar_vol": 950829515
   },
   {
    "sym": "FLEX",
@@ -3253,7 +4324,14 @@
    "magical": -64.9532,
    "zlsma": 106.8384,
    "ce_mode": "BUY",
-   "ce_label": 115.5
+   "ce_label": 115.5,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 47.3946,
+   "adx": 24.7243,
+   "plus_di": 21.5319,
+   "minus_di": 32.7323,
+   "avg_dollar_vol": 651873620
   },
   {
    "sym": "FLG",
@@ -3261,7 +4339,14 @@
    "magical": -23.2558,
    "zlsma": 15.555,
    "ce_mode": "BUY",
-   "ce_label": 14.5
+   "ce_label": 14.5,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 12.584,
+   "adx": 18.2246,
+   "plus_di": 22.5678,
+   "minus_di": 19.0534,
+   "avg_dollar_vol": 68884162
   },
   {
    "sym": "FLR",
@@ -3269,7 +4354,14 @@
    "magical": 30.8046,
    "zlsma": 54.0955,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 10.0573,
+   "adx": 17.5795,
+   "plus_di": 19.2991,
+   "minus_di": 21.5983,
+   "avg_dollar_vol": 104792889
   },
   {
    "sym": "FLYW",
@@ -3277,7 +4369,14 @@
    "magical": -160.149,
    "zlsma": 18.2692,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 18.0227,
+   "adx": 26.5569,
+   "plus_di": 23.2928,
+   "minus_di": 29.1682,
+   "avg_dollar_vol": 40013709
   },
   {
    "sym": "FNB",
@@ -3285,7 +4384,14 @@
    "magical": -57.3477,
    "zlsma": 19.8158,
    "ce_mode": "BUY",
-   "ce_label": 18.59
+   "ce_label": 18.59,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.138,
+   "adx": 22.8592,
+   "plus_di": 20.6833,
+   "minus_di": 17.6867,
+   "avg_dollar_vol": 118979086
   },
   {
    "sym": "FRT",
@@ -3293,7 +4399,14 @@
    "magical": 65.8878,
    "zlsma": 123.1081,
    "ce_mode": "BUY",
-   "ce_label": 123.42
+   "ce_label": 123.42,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 16.144,
+   "adx": 22.5153,
+   "plus_di": 26.6964,
+   "minus_di": 15.2087,
+   "avg_dollar_vol": 100131368
   },
   {
    "sym": "FSLR",
@@ -3301,7 +4414,14 @@
    "magical": -114.2789,
    "zlsma": 173.0315,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -11.1575,
+   "adx": 32.1564,
+   "plus_di": 12.864,
+   "minus_di": 27.8634,
+   "avg_dollar_vol": 370749308
   },
   {
    "sym": "FTAI",
@@ -3309,7 +4429,14 @@
    "magical": -31.2711,
    "zlsma": 207.416,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -2.4862,
+   "adx": 23.9281,
+   "plus_di": 19.4235,
+   "minus_di": 23.3757,
+   "avg_dollar_vol": 276393887
   },
   {
    "sym": "FTDR",
@@ -3317,7 +4444,14 @@
    "magical": -142.8358,
    "zlsma": 79.6962,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 16.4795,
+   "adx": 27.3344,
+   "plus_di": 17.4557,
+   "minus_di": 23.6285,
+   "avg_dollar_vol": 48236255
   },
   {
    "sym": "FTNT",
@@ -3325,7 +4459,14 @@
    "magical": -47.4218,
    "zlsma": 149.8977,
    "ce_mode": "BUY",
-   "ce_label": 151.81
+   "ce_label": 151.81,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 57.9717,
+   "adx": 48.0412,
+   "plus_di": 23.3537,
+   "minus_di": 13.9191,
+   "avg_dollar_vol": 821756511
   },
   {
    "sym": "FUTU",
@@ -3333,7 +4474,14 @@
    "magical": 271.2713,
    "zlsma": 114.0817,
    "ce_mode": "BUY",
-   "ce_label": 92.69
+   "ce_label": 92.69,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -28.1668,
+   "adx": 14.1325,
+   "plus_di": 33.6823,
+   "minus_di": 20.4374,
+   "avg_dollar_vol": 167599428
   },
   {
    "sym": "GBCI",
@@ -3341,7 +4489,14 @@
    "magical": -71.9438,
    "zlsma": 55.224,
    "ce_mode": "BUY",
-   "ce_label": 50.78
+   "ce_label": 50.78,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.234,
+   "adx": 26.0111,
+   "plus_di": 23.8037,
+   "minus_di": 18.9783,
+   "avg_dollar_vol": 69379604
   },
   {
    "sym": "GD",
@@ -3349,7 +4504,14 @@
    "magical": 57.2402,
    "zlsma": 374.8468,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.2523,
+   "adx": 22.2033,
+   "plus_di": 23.6259,
+   "minus_di": 18.766,
+   "avg_dollar_vol": 431773155
   },
   {
    "sym": "GDX",
@@ -3357,7 +4519,14 @@
    "magical": 74.5881,
    "zlsma": 71.5762,
    "ce_mode": "BUY",
-   "ce_label": 69.08
+   "ce_label": 69.08,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -12.4082,
+   "adx": 17.4613,
+   "plus_di": 30.9422,
+   "minus_di": 29.4067,
+   "avg_dollar_vol": 1569400684
   },
   {
    "sym": "GE",
@@ -3365,7 +4534,14 @@
    "magical": -121.113,
    "zlsma": 361.5259,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 8.9854,
+   "adx": 25.2915,
+   "plus_di": 15.6615,
+   "minus_di": 23.1889,
+   "avg_dollar_vol": 1638941222
   },
   {
    "sym": "GEV",
@@ -3373,7 +4549,14 @@
    "magical": -208.4655,
    "zlsma": 1133.9641,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 19.5732,
+   "adx": 14.0027,
+   "plus_di": 21.1862,
+   "minus_di": 31.2318,
+   "avg_dollar_vol": 2815628320
   },
   {
    "sym": "GH",
@@ -3381,7 +4564,14 @@
    "magical": -54.2623,
    "zlsma": 159.5306,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 44.5146,
+   "adx": 38.3198,
+   "plus_di": 23.9868,
+   "minus_di": 19.7153,
+   "avg_dollar_vol": 532919642
   },
   {
    "sym": "GKOS",
@@ -3389,7 +4579,14 @@
    "magical": 42.4764,
    "zlsma": 165.8009,
    "ce_mode": "BUY",
-   "ce_label": 149.26
+   "ce_label": 149.26,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 33.2855,
+   "adx": 18.6653,
+   "plus_di": 24.0252,
+   "minus_di": 24.7191,
+   "avg_dollar_vol": 121147351
   },
   {
    "sym": "GLD",
@@ -3397,7 +4594,14 @@
    "magical": 104.1215,
    "zlsma": 363.0469,
    "ce_mode": "BUY",
-   "ce_label": 364.3
+   "ce_label": 364.3,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -7.9119,
+   "adx": 28.3031,
+   "plus_di": 28.0853,
+   "minus_di": 31.5709,
+   "avg_dollar_vol": 2562490922
   },
   {
    "sym": "GM",
@@ -3405,7 +4609,14 @@
    "magical": 274.4514,
    "zlsma": 76.4977,
    "ce_mode": "BUY",
-   "ce_label": 75.01
+   "ce_label": 75.01,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.5686,
+   "adx": 11.9067,
+   "plus_di": 33.3304,
+   "minus_di": 17.2988,
+   "avg_dollar_vol": 593247604
   },
   {
    "sym": "GME",
@@ -3413,7 +4624,14 @@
    "magical": -76.8278,
    "zlsma": 23.2971,
    "ce_mode": "BUY",
-   "ce_label": 21.43
+   "ce_label": 21.43,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -5.0403,
+   "adx": 7.9523,
+   "plus_di": 18.4115,
+   "minus_di": 21.7622,
+   "avg_dollar_vol": 78443519
   },
   {
    "sym": "GOOG",
@@ -3421,7 +4639,14 @@
    "magical": -110.2592,
    "zlsma": 338.7338,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 6.0285,
+   "adx": 10.7571,
+   "plus_di": 24.4818,
+   "minus_di": 26.4586,
+   "avg_dollar_vol": 7501902580
   },
   {
    "sym": "GOOGL",
@@ -3429,7 +4654,14 @@
    "magical": -116.2895,
    "zlsma": 339.3893,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 5.8467,
+   "adx": 11.4163,
+   "plus_di": 23.8639,
+   "minus_di": 28.4721,
+   "avg_dollar_vol": 11255856714
   },
   {
    "sym": "GRMN",
@@ -3437,7 +4669,14 @@
    "magical": -17.5561,
    "zlsma": 254.1938,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 5.0524,
+   "adx": 14.3376,
+   "plus_di": 20.379,
+   "minus_di": 22.0709,
+   "avg_dollar_vol": 216834544
   },
   {
    "sym": "GS",
@@ -3445,7 +4684,14 @@
    "magical": 85.3403,
    "zlsma": 1074.1272,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 20.9878,
+   "adx": 17.6453,
+   "plus_di": 27.7199,
+   "minus_di": 20.8926,
+   "avg_dollar_vol": 2300998114
   },
   {
    "sym": "GTX",
@@ -3453,7 +4699,14 @@
    "magical": -52.8387,
    "zlsma": 28.4684,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 47.0083,
+   "adx": 27.3902,
+   "plus_di": 16.6099,
+   "minus_di": 24.4927,
+   "avg_dollar_vol": 89703888
   },
   {
    "sym": "HALO",
@@ -3461,7 +4714,14 @@
    "magical": 21.9092,
    "zlsma": 79.5516,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 12.327,
+   "adx": 24.32,
+   "plus_di": 27.9327,
+   "minus_di": 15.7296,
+   "avg_dollar_vol": 147877046
   },
   {
    "sym": "HAS",
@@ -3469,7 +4729,14 @@
    "magical": 177.0237,
    "zlsma": 82.052,
    "ce_mode": "BUY",
-   "ce_label": 84.62
+   "ce_label": 84.62,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 2.6177,
+   "adx": 29.0818,
+   "plus_di": 40.8162,
+   "minus_di": 17.1282,
+   "avg_dollar_vol": 212811205
   },
   {
    "sym": "HBNC",
@@ -3477,7 +4744,14 @@
    "magical": 58.6866,
    "zlsma": 20.643,
    "ce_mode": "BUY",
-   "ce_label": 19.73
+   "ce_label": 19.73,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.0774,
+   "adx": 23.6826,
+   "plus_di": 24.4543,
+   "minus_di": 10.9065,
+   "avg_dollar_vol": 17306402
   },
   {
    "sym": "HCSG",
@@ -3485,7 +4759,14 @@
    "magical": -120.41,
    "zlsma": 25.9639,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 17.8271,
+   "adx": 44.0297,
+   "plus_di": 22.2281,
+   "minus_di": 32.87,
+   "avg_dollar_vol": 16724211
   },
   {
    "sym": "HD",
@@ -3493,7 +4774,14 @@
    "magical": -125.2187,
    "zlsma": 357.7515,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -5.5305,
+   "adx": 15.0518,
+   "plus_di": 23.6952,
+   "minus_di": 21.2875,
+   "avg_dollar_vol": 1443691976
   },
   {
    "sym": "HELE",
@@ -3501,7 +4789,14 @@
    "magical": 35.3648,
    "zlsma": 27.7151,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 34.1613,
+   "adx": 13.5745,
+   "plus_di": 17.6401,
+   "minus_di": 21.01,
+   "avg_dollar_vol": 17815608
   },
   {
    "sym": "HIMX",
@@ -3509,7 +4804,14 @@
    "magical": -57.0396,
    "zlsma": 7.8615,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 23.9932,
+   "adx": 23.7747,
+   "plus_di": 18.9562,
+   "minus_di": 30.0747,
+   "avg_dollar_vol": 30256880
   },
   {
    "sym": "HLT",
@@ -3517,7 +4819,14 @@
    "magical": -80.6144,
    "zlsma": 329.062,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 6.7776,
+   "adx": 19.5984,
+   "plus_di": 16.9483,
+   "minus_di": 27.4295,
+   "avg_dollar_vol": 874433833
   },
   {
    "sym": "HOMB",
@@ -3525,7 +4834,14 @@
    "magical": 115.2146,
    "zlsma": 31.0021,
    "ce_mode": "BUY",
-   "ce_label": 29.77
+   "ce_label": 29.77,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.2983,
+   "adx": 38.8847,
+   "plus_di": 35.5862,
+   "minus_di": 12.9806,
+   "avg_dollar_vol": 70471783
   },
   {
    "sym": "HON",
@@ -3533,7 +4849,14 @@
    "magical": 63.4205,
    "zlsma": 220.3672,
    "ce_mode": "BUY",
-   "ce_label": 217.81
+   "ce_label": 217.81,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 3.136,
+   "adx": 10.4864,
+   "plus_di": 27.1437,
+   "minus_di": 15.9946,
+   "avg_dollar_vol": 1165845325
   },
   {
    "sym": "HOOD",
@@ -3541,7 +4864,14 @@
    "magical": -26.5363,
    "zlsma": 116.9352,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 3.2849,
+   "adx": 22.5463,
+   "plus_di": 24.8248,
+   "minus_di": 22.5147,
+   "avg_dollar_vol": 2656347388
   },
   {
    "sym": "HOPE",
@@ -3549,7 +4879,14 @@
    "magical": -7.7193,
    "zlsma": 14.2137,
    "ce_mode": "BUY",
-   "ce_label": 13.21
+   "ce_label": 13.21,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.0808,
+   "adx": 26.3193,
+   "plus_di": 24.1711,
+   "minus_di": 14.359,
+   "avg_dollar_vol": 16570358
   },
   {
    "sym": "HSIC",
@@ -3557,7 +4894,14 @@
    "magical": -28.2153,
    "zlsma": 90.3855,
    "ce_mode": "BUY",
-   "ce_label": 84.57
+   "ce_label": 84.57,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 12.2475,
+   "adx": 37.4008,
+   "plus_di": 27.2138,
+   "minus_di": 20.8707,
+   "avg_dollar_vol": 114290172
   },
   {
    "sym": "HTZ",
@@ -3565,7 +4909,14 @@
    "magical": -50.7839,
    "zlsma": 1.2551,
    "ce_mode": "BUY",
-   "ce_label": 1.62
+   "ce_label": 1.62,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -61.3569,
+   "adx": 46.5825,
+   "plus_di": 17.4578,
+   "minus_di": 39.3133,
+   "avg_dollar_vol": 62383551
   },
   {
    "sym": "HUBB",
@@ -3573,7 +4924,14 @@
    "magical": -77.6617,
    "zlsma": 515.2503,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -0.3757,
+   "adx": 14.125,
+   "plus_di": 20.6616,
+   "minus_di": 25.7998,
+   "avg_dollar_vol": 252015877
   },
   {
    "sym": "HUT",
@@ -3581,7 +4939,14 @@
    "magical": 39.7012,
    "zlsma": 86.1163,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 61.832,
+   "adx": 17.9327,
+   "plus_di": 21.93,
+   "minus_di": 21.6042,
+   "avg_dollar_vol": 489713606
   },
   {
    "sym": "HWC",
@@ -3589,7 +4954,14 @@
    "magical": 42.8037,
    "zlsma": 80.2596,
    "ce_mode": "BUY",
-   "ce_label": 75.94
+   "ce_label": 75.94,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.5025,
+   "adx": 32.5647,
+   "plus_di": 26.5015,
+   "minus_di": 16.3425,
+   "avg_dollar_vol": 76629914
   },
   {
    "sym": "HWM",
@@ -3597,7 +4969,14 @@
    "magical": 151.3891,
    "zlsma": 275.6123,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 20.4679,
+   "adx": 9.783,
+   "plus_di": 18.4207,
+   "minus_di": 16.1853,
+   "avg_dollar_vol": 894619756
   },
   {
    "sym": "IBIT",
@@ -3605,7 +4984,14 @@
    "magical": 104.3555,
    "zlsma": 35.7967,
    "ce_mode": "BUY",
-   "ce_label": 36.26
+   "ce_label": 36.26,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -18.8713,
+   "adx": 16.0916,
+   "plus_di": 32.6437,
+   "minus_di": 31.128,
+   "avg_dollar_vol": 1702441425
   },
   {
    "sym": "IBKR",
@@ -3613,7 +4999,14 @@
    "magical": 22.1348,
    "zlsma": 94.6737,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 24.1224,
+   "adx": 15.1372,
+   "plus_di": 23.8029,
+   "minus_di": 22.5707,
+   "avg_dollar_vol": 412424685
   },
   {
    "sym": "IBM",
@@ -3621,7 +5014,14 @@
    "magical": -108.8063,
    "zlsma": 226.4768,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -24.5794,
+   "adx": 31.0509,
+   "plus_di": 16.0781,
+   "minus_di": 40.5342,
+   "avg_dollar_vol": 2735212787
   },
   {
    "sym": "IDA",
@@ -3629,7 +5029,14 @@
    "magical": -52.5531,
    "zlsma": 155.4596,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.7652,
+   "adx": 22.6389,
+   "plus_di": 25.6491,
+   "minus_di": 19.3831,
+   "avg_dollar_vol": 94474189
   },
   {
    "sym": "IGV",
@@ -3637,7 +5044,14 @@
    "magical": -83.1843,
    "zlsma": 87.6141,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -6.8425,
+   "adx": 10.4794,
+   "plus_di": 19.8337,
+   "minus_di": 30.8419,
+   "avg_dollar_vol": 1297564142
   },
   {
    "sym": "IIPR",
@@ -3645,7 +5059,14 @@
    "magical": -56.028,
    "zlsma": 64.8911,
    "ce_mode": "BUY",
-   "ce_label": 62.07
+   "ce_label": 62.07,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 16.3513,
+   "adx": 15.7683,
+   "plus_di": 14.8845,
+   "minus_di": 20.9151,
+   "avg_dollar_vol": 23400299
   },
   {
    "sym": "INOD",
@@ -3653,7 +5074,14 @@
    "magical": -115.277,
    "zlsma": 27.9969,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -2.5121,
+   "adx": 33.9742,
+   "plus_di": 12.6914,
+   "minus_di": 28.8332,
+   "avg_dollar_vol": 70840936
   },
   {
    "sym": "INTC",
@@ -3661,7 +5089,14 @@
    "magical": -66.1334,
    "zlsma": 94.4148,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 57.4803,
+   "adx": 20.702,
+   "plus_di": 22.9956,
+   "minus_di": 31.5197,
+   "avg_dollar_vol": 11121824760
   },
   {
    "sym": "IRM",
@@ -3669,7 +5104,14 @@
    "magical": 20.4772,
    "zlsma": 119.6462,
    "ce_mode": "BUY",
-   "ce_label": 119.982
+   "ce_label": 119.982,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 17.0785,
+   "adx": 16.5658,
+   "plus_di": 18.3328,
+   "minus_di": 21.1306,
+   "avg_dollar_vol": 271027236
   },
   {
    "sym": "IRMD",
@@ -3677,7 +5119,14 @@
    "magical": -72.6994,
    "zlsma": 96.476,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 1.4173,
+   "adx": 13.0816,
+   "plus_di": 18.7856,
+   "minus_di": 22.441,
+   "avg_dollar_vol": 12883089
   },
   {
    "sym": "IWM",
@@ -3685,7 +5134,14 @@
    "magical": -91.2763,
    "zlsma": 297.5147,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 11.1983,
+   "adx": 12.8227,
+   "plus_di": 15.3686,
+   "minus_di": 21.0782,
+   "avg_dollar_vol": 6669781239
   },
   {
    "sym": "JBHT",
@@ -3693,7 +5149,14 @@
    "magical": 86.5529,
    "zlsma": 286.144,
    "ce_mode": "BUY",
-   "ce_label": 285.06
+   "ce_label": 285.06,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 33.0963,
+   "adx": 17.2023,
+   "plus_di": 26.1399,
+   "minus_di": 16.4994,
+   "avg_dollar_vol": 310296823
   },
   {
    "sym": "JCI",
@@ -3701,7 +5164,14 @@
    "magical": 12.8807,
    "zlsma": 143.5897,
    "ce_mode": "BUY",
-   "ce_label": 137.63
+   "ce_label": 137.63,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 10.0543,
+   "adx": 8.7867,
+   "plus_di": 17.9325,
+   "minus_di": 21.2073,
+   "avg_dollar_vol": 644571255
   },
   {
    "sym": "JETS",
@@ -3709,7 +5179,14 @@
    "magical": -127.2003,
    "zlsma": 32.4251,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.5847,
+   "adx": 21.1716,
+   "plus_di": 20.6536,
+   "minus_di": 27.257,
+   "avg_dollar_vol": 79603900
   },
   {
    "sym": "JNJ",
@@ -3717,7 +5194,14 @@
    "magical": 13.3983,
    "zlsma": 262.6864,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 14.1668,
+   "adx": 22.944,
+   "plus_di": 27.8057,
+   "minus_di": 24.6623,
+   "avg_dollar_vol": 2241547881
   },
   {
    "sym": "JPM",
@@ -3725,7 +5209,14 @@
    "magical": 150.8204,
    "zlsma": 359.0159,
    "ce_mode": "BUY",
-   "ce_label": 338.5702
+   "ce_label": 338.5702,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 12.2315,
+   "adx": 18.8308,
+   "plus_di": 21.9509,
+   "minus_di": 20.5711,
+   "avg_dollar_vol": 3601563695
   },
   {
    "sym": "KMI",
@@ -3733,7 +5224,14 @@
    "magical": 31.305,
    "zlsma": 31.9921,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.2068,
+   "adx": 7.729,
+   "plus_di": 14.9764,
+   "minus_di": 15.2469,
+   "avg_dollar_vol": 303847866
   },
   {
    "sym": "KO",
@@ -3741,7 +5239,14 @@
    "magical": -28.1847,
    "zlsma": 82.358,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.0093,
+   "adx": 14.2198,
+   "plus_di": 26.0136,
+   "minus_di": 23.0218,
+   "avg_dollar_vol": 1556830998
   },
   {
    "sym": "KRE",
@@ -3749,7 +5254,14 @@
    "magical": 26.7402,
    "zlsma": 78.8411,
    "ce_mode": "BUY",
-   "ce_label": 73.9
+   "ce_label": 73.9,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 12.0805,
+   "adx": 30.5677,
+   "plus_di": 26.246,
+   "minus_di": 15.8759,
+   "avg_dollar_vol": 1043513997
   },
   {
    "sym": "KURA",
@@ -3757,7 +5269,14 @@
    "magical": -98.1661,
    "zlsma": 11.5402,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.2205,
+   "adx": 15.2141,
+   "plus_di": 19.3263,
+   "minus_di": 21.6578,
+   "avg_dollar_vol": 17825308
   },
   {
    "sym": "KWEB",
@@ -3765,7 +5284,14 @@
    "magical": 42.6448,
    "zlsma": 26.5014,
    "ce_mode": "BUY",
-   "ce_label": 26.14
+   "ce_label": 26.14,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -18.4683,
+   "adx": 17.6735,
+   "plus_di": 34.2728,
+   "minus_di": 32.8947,
+   "avg_dollar_vol": 590309331
   },
   {
    "sym": "LAES",
@@ -3773,7 +5299,14 @@
    "magical": -79.0648,
    "zlsma": 2.2677,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -33.5404,
+   "adx": 17.6815,
+   "plus_di": 16.1966,
+   "minus_di": 24.7906,
+   "avg_dollar_vol": 43058846
   },
   {
    "sym": "LCID",
@@ -3781,7 +5314,14 @@
    "magical": 68.0427,
    "zlsma": 6.6681,
    "ce_mode": "BUY",
-   "ce_label": 6.2
+   "ce_label": 6.2,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -35.4915,
+   "adx": 18.9165,
+   "plus_di": 23.2631,
+   "minus_di": 26.3313,
+   "avg_dollar_vol": 181560680
   },
   {
    "sym": "LDOS",
@@ -3789,7 +5329,14 @@
    "magical": 44.5756,
    "zlsma": 106.6739,
    "ce_mode": "BUY",
-   "ce_label": 103.5102
+   "ce_label": 103.5102,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -34.0547,
+   "adx": 32.6879,
+   "plus_di": 16.075,
+   "minus_di": 24.3421,
+   "avg_dollar_vol": 178409441
   },
   {
    "sym": "LEN",
@@ -3797,7 +5344,14 @@
    "magical": -94.24,
    "zlsma": 83.2945,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -21.3079,
+   "adx": 16.1871,
+   "plus_di": 17.4526,
+   "minus_di": 22.8786,
+   "avg_dollar_vol": 199645522
   },
   {
    "sym": "LEVI",
@@ -3805,7 +5359,14 @@
    "magical": 86.4979,
    "zlsma": 25.4999,
    "ce_mode": "BUY",
-   "ce_label": 23.8
+   "ce_label": 23.8,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 13.9336,
+   "adx": 20.0865,
+   "plus_di": 16.3101,
+   "minus_di": 18.9612,
+   "avg_dollar_vol": 85133045
   },
   {
    "sym": "LHX",
@@ -3813,7 +5374,14 @@
    "magical": -65.0181,
    "zlsma": 282.7005,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -9.8484,
+   "adx": 21.2137,
+   "plus_di": 17.5895,
+   "minus_di": 28.1631,
+   "avg_dollar_vol": 403150354
   },
   {
    "sym": "LLY",
@@ -3821,7 +5389,14 @@
    "magical": -51.4589,
    "zlsma": 1159.7352,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 14.8495,
+   "adx": 20.1783,
+   "plus_di": 18.982,
+   "minus_di": 17.6437,
+   "avg_dollar_vol": 3470351943
   },
   {
    "sym": "LNG",
@@ -3829,7 +5404,14 @@
    "magical": 96.2224,
    "zlsma": 278.2772,
    "ce_mode": "BUY",
-   "ce_label": 254.17
+   "ce_label": 254.17,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.3181,
+   "adx": 21.2149,
+   "plus_di": 24.9721,
+   "minus_di": 14.9467,
+   "avg_dollar_vol": 573903921
   },
   {
    "sym": "LOW",
@@ -3837,7 +5419,14 @@
    "magical": -107.2586,
    "zlsma": 218.6517,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -14.9518,
+   "adx": 15.5182,
+   "plus_di": 18.691,
+   "minus_di": 24.2921,
+   "avg_dollar_vol": 602952750
   },
   {
    "sym": "LSTR",
@@ -3845,7 +5434,14 @@
    "magical": 34.5401,
    "zlsma": 207.3992,
    "ce_mode": "BUY",
-   "ce_label": 206.25
+   "ce_label": 206.25,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 28.7443,
+   "adx": 11.2101,
+   "plus_di": 18.4018,
+   "minus_di": 17.9573,
+   "avg_dollar_vol": 96725324
   },
   {
    "sym": "LUNR",
@@ -3853,7 +5449,14 @@
    "magical": -85.5798,
    "zlsma": 4.82,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -26.3386,
+   "adx": 30.9068,
+   "plus_di": 14.1741,
+   "minus_di": 31.479,
+   "avg_dollar_vol": 152440827
   },
   {
    "sym": "LUV",
@@ -3861,7 +5464,14 @@
    "magical": -102.8565,
    "zlsma": 51.0335,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.3536,
+   "adx": 21.8638,
+   "plus_di": 20.1442,
+   "minus_di": 21.6613,
+   "avg_dollar_vol": 282193728
   },
   {
    "sym": "LYV",
@@ -3869,7 +5479,14 @@
    "magical": -70.7069,
    "zlsma": 182.8033,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 14.6357,
+   "adx": 23.7708,
+   "plus_di": 22.0082,
+   "minus_di": 18.9009,
+   "avg_dollar_vol": 409693270
   },
   {
    "sym": "LZB",
@@ -3877,7 +5494,14 @@
    "magical": -46.102,
    "zlsma": 40.3622,
    "ce_mode": "BUY",
-   "ce_label": 38.09
+   "ce_label": 38.09,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.0128,
+   "adx": 18.0712,
+   "plus_di": 25.7626,
+   "minus_di": 21.5011,
+   "avg_dollar_vol": 22484420
   },
   {
    "sym": "M",
@@ -3885,7 +5509,14 @@
    "magical": 50.7679,
    "zlsma": 24.0951,
    "ce_mode": "BUY",
-   "ce_label": 22.72
+   "ce_label": 22.72,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 17.0461,
+   "adx": 19.235,
+   "plus_di": 31.6892,
+   "minus_di": 20.5205,
+   "avg_dollar_vol": 126230899
   },
   {
    "sym": "MAC",
@@ -3893,7 +5524,14 @@
    "magical": 3.8002,
    "zlsma": 26.129,
    "ce_mode": "BUY",
-   "ce_label": 25
+   "ce_label": 25,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 26.1566,
+   "adx": 19.233,
+   "plus_di": 24.7698,
+   "minus_di": 22.1965,
+   "avg_dollar_vol": 84281804
   },
   {
    "sym": "MAR",
@@ -3901,7 +5539,14 @@
    "magical": -33.9048,
    "zlsma": 365.5275,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 11.6523,
+   "adx": 16.9295,
+   "plus_di": 20.7123,
+   "minus_di": 26.5693,
+   "avg_dollar_vol": 563250405
   },
   {
    "sym": "MBLY",
@@ -3909,7 +5554,14 @@
    "magical": -41.6816,
    "zlsma": 8.3733,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -12.9309,
+   "adx": 15.0613,
+   "plus_di": 21.2565,
+   "minus_di": 27.6415,
+   "avg_dollar_vol": 59665789
   },
   {
    "sym": "MCB",
@@ -3917,7 +5569,14 @@
    "magical": -358.904,
    "zlsma": 101.0729,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 6.601,
+   "adx": 24.2546,
+   "plus_di": 16.6685,
+   "minus_di": 32.8421,
+   "avg_dollar_vol": 13829275
   },
   {
    "sym": "MCD",
@@ -3925,7 +5584,14 @@
    "magical": -109.0691,
    "zlsma": 270.9551,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -12.5768,
+   "adx": 13.8333,
+   "plus_di": 18.5037,
+   "minus_di": 25.8896,
+   "avg_dollar_vol": 1236058193
   },
   {
    "sym": "MCHP",
@@ -3933,7 +5599,14 @@
    "magical": -35.1445,
    "zlsma": 80.3605,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 13.284,
+   "adx": 21.2017,
+   "plus_di": 21.1405,
+   "minus_di": 31.5709,
+   "avg_dollar_vol": 1042966926
   },
   {
    "sym": "MCO",
@@ -3941,7 +5614,14 @@
    "magical": 21.4227,
    "zlsma": 516.8409,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 3.759,
+   "adx": 20.3885,
+   "plus_di": 27.8095,
+   "minus_di": 24.939,
+   "avg_dollar_vol": 484816197
   },
   {
    "sym": "MDT",
@@ -3949,7 +5629,14 @@
    "magical": 4.149,
    "zlsma": 85.2663,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -9.5481,
+   "adx": 12.8515,
+   "plus_di": 23.9531,
+   "minus_di": 25.243,
+   "avg_dollar_vol": 683808835
   },
   {
    "sym": "MELI",
@@ -3957,7 +5644,14 @@
    "magical": 18.1785,
    "zlsma": 1983.1916,
    "ce_mode": "BUY",
-   "ce_label": 1777.22
+   "ce_label": 1777.22,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -5.5192,
+   "adx": 22.278,
+   "plus_di": 25.6994,
+   "minus_di": 20.6847,
+   "avg_dollar_vol": 722007050
   },
   {
    "sym": "META",
@@ -3965,7 +5659,14 @@
    "magical": 20.3687,
    "zlsma": 664.7406,
    "ce_mode": "BUY",
-   "ce_label": 626.14
+   "ce_label": 626.14,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -1.8814,
+   "adx": 15.2394,
+   "plus_di": 26.1813,
+   "minus_di": 28.2643,
+   "avg_dollar_vol": 12335942011
   },
   {
    "sym": "MFA",
@@ -3973,7 +5674,14 @@
    "magical": -98.5401,
    "zlsma": 9.7166,
    "ce_mode": "BUY",
-   "ce_label": 9.26
+   "ce_label": 9.26,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -3.3042,
+   "adx": 14.8428,
+   "plus_di": 14.2992,
+   "minus_di": 21.0925,
+   "avg_dollar_vol": 15599173
   },
   {
    "sym": "MIDD",
@@ -3981,7 +5689,14 @@
    "magical": -107.9826,
    "zlsma": 136.2707,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 11.354,
+   "adx": 31.119,
+   "plus_di": 24.333,
+   "minus_di": 17.7895,
+   "avg_dollar_vol": 104777141
   },
   {
    "sym": "MIRM",
@@ -3989,7 +5704,14 @@
    "magical": -120.9912,
    "zlsma": 128.8066,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 25.5805,
+   "adx": 22.2434,
+   "plus_di": 17.2956,
+   "minus_di": 21.0692,
+   "avg_dollar_vol": 104299477
   },
   {
    "sym": "MITK",
@@ -3997,7 +5719,14 @@
    "magical": -193.475,
    "zlsma": 19.7849,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 32.6049,
+   "adx": 20.1464,
+   "plus_di": 19.2845,
+   "minus_di": 27.9057,
+   "avg_dollar_vol": 17217692
   },
   {
    "sym": "MLAB",
@@ -4005,7 +5734,14 @@
    "magical": 13.9699,
    "zlsma": 95.4645,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 11.4533,
+   "adx": 19.2756,
+   "plus_di": 16.6212,
+   "minus_di": 24.5046,
+   "avg_dollar_vol": 20076161
   },
   {
    "sym": "MLI",
@@ -4013,7 +5749,14 @@
    "magical": 71.485,
    "zlsma": 56.1499,
    "ce_mode": "BUY",
-   "ce_label": 58.64
+   "ce_label": 58.64,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 5.0079,
+   "adx": 28.7662,
+   "plus_di": 24.4589,
+   "minus_di": 21.4896,
+   "avg_dollar_vol": 114474071
   },
   {
    "sym": "MLKN",
@@ -4021,7 +5764,14 @@
    "magical": 110.4913,
    "zlsma": 23.6271,
    "ce_mode": "BUY",
-   "ce_label": 20.37
+   "ce_label": 20.37,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 24.597,
+   "adx": 38.797,
+   "plus_di": 28.2725,
+   "minus_di": 16.7312,
+   "avg_dollar_vol": 21674102
   },
   {
    "sym": "MNST",
@@ -4029,7 +5779,14 @@
    "magical": -68.8907,
    "zlsma": 95.1719,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 20.1575,
+   "adx": 35.4592,
+   "plus_di": 19.9755,
+   "minus_di": 18.5756,
+   "avg_dollar_vol": 583939630
   },
   {
    "sym": "MP",
@@ -4037,7 +5794,14 @@
    "magical": -114.9744,
    "zlsma": 45.0971,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -24.4132,
+   "adx": 25.5687,
+   "plus_di": 12.7683,
+   "minus_di": 29.5408,
+   "avg_dollar_vol": 219856867
   },
   {
    "sym": "MPC",
@@ -4045,7 +5809,14 @@
    "magical": 105.5481,
    "zlsma": 304.6446,
    "ce_mode": "BUY",
-   "ce_label": 308.228
+   "ce_label": 308.228,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 45.2053,
+   "adx": 38.1615,
+   "plus_di": 43.8803,
+   "minus_di": 8.8859,
+   "avg_dollar_vol": 696577692
   },
   {
    "sym": "MRK",
@@ -4053,7 +5824,14 @@
    "magical": 47.7877,
    "zlsma": 128.1457,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.8066,
+   "adx": 16.3785,
+   "plus_di": 29.3422,
+   "minus_di": 20.5414,
+   "avg_dollar_vol": 1291600374
   },
   {
    "sym": "MRX",
@@ -4061,7 +5839,14 @@
    "magical": 47.4141,
    "zlsma": 67.8853,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 47.7324,
+   "adx": 16.2808,
+   "plus_di": 23.4754,
+   "minus_di": 21.9397,
+   "avg_dollar_vol": 64527485
   },
   {
    "sym": "MSCI",
@@ -4069,7 +5854,14 @@
    "magical": -63.7268,
    "zlsma": 599.8622,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -0.228,
+   "adx": 17.0544,
+   "plus_di": 20.4651,
+   "minus_di": 34.4656,
+   "avg_dollar_vol": 445181077
   },
   {
    "sym": "MSFT",
@@ -4077,7 +5869,14 @@
    "magical": 41.1476,
    "zlsma": 379.086,
    "ce_mode": "BUY",
-   "ce_label": 385.81
+   "ce_label": 385.81,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -10.7862,
+   "adx": 12.7435,
+   "plus_di": 25.988,
+   "minus_di": 26.3095,
+   "avg_dollar_vol": 17262507348
   },
   {
    "sym": "MSGS",
@@ -4085,7 +5884,14 @@
    "magical": 69.1824,
    "zlsma": 390.1001,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 32.18,
+   "adx": 21.322,
+   "plus_di": 28.5003,
+   "minus_di": 15.1576,
+   "avg_dollar_vol": 99553035
   },
   {
    "sym": "MSI",
@@ -4093,7 +5899,14 @@
    "magical": -91.9318,
    "zlsma": 427.473,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -3.0532,
+   "adx": 13.7663,
+   "plus_di": 17.6501,
+   "minus_di": 23.2169,
+   "avg_dollar_vol": 395625887
   },
   {
    "sym": "MSTR",
@@ -4101,7 +5914,14 @@
    "magical": 96.8526,
    "zlsma": 82.3773,
    "ce_mode": "BUY",
-   "ce_label": 92.35
+   "ce_label": 92.35,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -39.7787,
+   "adx": 17.4779,
+   "plus_di": 28.2854,
+   "minus_di": 28.6454,
+   "avg_dollar_vol": 2517810986
   },
   {
    "sym": "MTCH",
@@ -4109,7 +5929,14 @@
    "magical": -19.9175,
    "zlsma": 40.951,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 13.2761,
+   "adx": 24.6094,
+   "plus_di": 30.0546,
+   "minus_di": 26.2741,
+   "avg_dollar_vol": 135860129
   },
   {
    "sym": "MTN",
@@ -4117,7 +5944,14 @@
    "magical": 19.2808,
    "zlsma": 150.4509,
    "ce_mode": "BUY",
-   "ce_label": 142.59
+   "ce_label": 142.59,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 4.7047,
+   "adx": 10.8095,
+   "plus_di": 21.2487,
+   "minus_di": 21.5472,
+   "avg_dollar_vol": 106331337
   },
   {
    "sym": "MTRN",
@@ -4125,7 +5959,14 @@
    "magical": -51.114,
    "zlsma": 254.5672,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 50.5169,
+   "adx": 25.5815,
+   "plus_di": 19.6656,
+   "minus_di": 23.9579,
+   "avg_dollar_vol": 94561347
   },
   {
    "sym": "MTZ",
@@ -4133,7 +5974,14 @@
    "magical": -52.8632,
    "zlsma": 362.0487,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 21.8373,
+   "adx": 21.061,
+   "plus_di": 22.8104,
+   "minus_di": 31.3001,
+   "avg_dollar_vol": 473103009
   },
   {
    "sym": "MU",
@@ -4141,7 +5989,14 @@
    "magical": -29.4715,
    "zlsma": 834.6911,
    "ce_mode": "BUY",
-   "ce_label": 866.36
+   "ce_label": 866.36,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 94.0702,
+   "adx": 19.4673,
+   "plus_di": 24.6654,
+   "minus_di": 32.1229,
+   "avg_dollar_vol": 49810200149
   },
   {
    "sym": "NAT",
@@ -4149,7 +6004,14 @@
    "magical": 95.4545,
    "zlsma": 6.6129,
    "ce_mode": "BUY",
-   "ce_label": 6.02
+   "ce_label": 6.02,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 33.8736,
+   "adx": 21.7624,
+   "plus_di": 31.814,
+   "minus_di": 17.5688,
+   "avg_dollar_vol": 28453389
   },
   {
    "sym": "NBN",
@@ -4157,7 +6019,14 @@
    "magical": -117.9627,
    "zlsma": 137.9754,
    "ce_mode": "BUY",
-   "ce_label": 127.9
+   "ce_label": 127.9,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.2064,
+   "adx": 21.3341,
+   "plus_di": 16.8014,
+   "minus_di": 17.7177,
+   "avg_dollar_vol": 17806640
   },
   {
    "sym": "NCLH",
@@ -4165,7 +6034,14 @@
    "magical": -55.7842,
    "zlsma": 20.9354,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -5.3532,
+   "adx": 9.5464,
+   "plus_di": 22.7866,
+   "minus_di": 23.9715,
+   "avg_dollar_vol": 292111051
   },
   {
    "sym": "NEE",
@@ -4173,7 +6049,14 @@
    "magical": 121.7871,
    "zlsma": 91.2088,
    "ce_mode": "BUY",
-   "ce_label": 86.83
+   "ce_label": 86.83,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 2.188,
+   "adx": 13.9157,
+   "plus_di": 23.7853,
+   "minus_di": 15.8828,
+   "avg_dollar_vol": 1008169367
   },
   {
    "sym": "NEM",
@@ -4181,7 +6064,14 @@
    "magical": 64.6227,
    "zlsma": 89.8111,
    "ce_mode": "BUY",
-   "ce_label": 86.85
+   "ce_label": 86.85,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -7.9485,
+   "adx": 15.4625,
+   "plus_di": 28.6993,
+   "minus_di": 27.2678,
+   "avg_dollar_vol": 768390332
   },
   {
    "sym": "NET",
@@ -4189,7 +6079,14 @@
    "magical": 39.5215,
    "zlsma": 281.9977,
    "ce_mode": "BUY",
-   "ce_label": 255.7636
+   "ce_label": 255.7636,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 27.1667,
+   "adx": 22.6783,
+   "plus_di": 22.3456,
+   "minus_di": 16.9657,
+   "avg_dollar_vol": 870397385
   },
   {
    "sym": "NFLX",
@@ -4197,7 +6094,14 @@
    "magical": -129.2889,
    "zlsma": 70.1936,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -26.3087,
+   "adx": 35.074,
+   "plus_di": 16.733,
+   "minus_di": 35.5635,
+   "avg_dollar_vol": 3574452950
   },
   {
    "sym": "NIO",
@@ -4205,7 +6109,14 @@
    "magical": -161.2663,
    "zlsma": 4.8582,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -16.7372,
+   "adx": 14.2179,
+   "plus_di": 20.1302,
+   "minus_di": 27.8139,
+   "avg_dollar_vol": 114487537
   },
   {
    "sym": "NKE",
@@ -4213,7 +6124,14 @@
    "magical": -45.6989,
    "zlsma": 42.0421,
    "ce_mode": "BUY",
-   "ce_label": 41.4476
+   "ce_label": 41.4476,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -23.9385,
+   "adx": 11.5706,
+   "plus_di": 21.3143,
+   "minus_di": 27.2659,
+   "avg_dollar_vol": 1151945932
   },
   {
    "sym": "NLY",
@@ -4221,7 +6139,14 @@
    "magical": -80.8656,
    "zlsma": 23.6657,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 0.7256,
+   "adx": 17.0488,
+   "plus_di": 18.7221,
+   "minus_di": 27.8697,
+   "avg_dollar_vol": 172106043
   },
   {
    "sym": "NMAX",
@@ -4229,7 +6154,14 @@
    "magical": -35.7412,
    "zlsma": 7.7773,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 1.7931,
+   "adx": 15.6393,
+   "plus_di": 19.2439,
+   "minus_di": 20.1504,
+   "avg_dollar_vol": 8408783
   },
   {
    "sym": "NOV",
@@ -4237,7 +6169,14 @@
    "magical": -42.7325,
    "zlsma": 45.3186,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 5.3031,
+   "adx": 18.7141,
+   "plus_di": 22.6958,
+   "minus_di": 23.2062,
+   "avg_dollar_vol": 6704634
   },
   {
    "sym": "NOW",
@@ -4245,7 +6184,14 @@
    "magical": -116.7506,
    "zlsma": 95.5559,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -25.1717,
+   "adx": 13.572,
+   "plus_di": 19.681,
+   "minus_di": 35.5151,
+   "avg_dollar_vol": 1914714672
   },
   {
    "sym": "NPKI",
@@ -4253,7 +6199,14 @@
    "magical": 24.8605,
    "zlsma": 14.4735,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 7.5819,
+   "adx": 14.9186,
+   "plus_di": 20.4153,
+   "minus_di": 21.5813,
+   "avg_dollar_vol": 16651988
   },
   {
    "sym": "NSRGY",
@@ -4261,7 +6214,14 @@
    "magical": 26.8755,
    "zlsma": 106.2734,
    "ce_mode": "BUY",
-   "ce_label": 103.572
+   "ce_label": 103.572,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 4.589,
+   "adx": 13.0152,
+   "plus_di": 38.396,
+   "minus_di": 25.0665,
+   "avg_dollar_vol": 51146985
   },
   {
    "sym": "NTAP",
@@ -4269,7 +6229,14 @@
    "magical": 60.4324,
    "zlsma": 156.3187,
    "ce_mode": "BUY",
-   "ce_label": 159.74
+   "ce_label": 159.74,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 39.7845,
+   "adx": 27.1565,
+   "plus_di": 27.7252,
+   "minus_di": 16.5437,
+   "avg_dollar_vol": 481761799
   },
   {
    "sym": "NTRA",
@@ -4277,7 +6244,14 @@
    "magical": -86.8332,
    "zlsma": 297.0183,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 21.5367,
+   "adx": 26.7614,
+   "plus_di": 19.9247,
+   "minus_di": 17.5399,
+   "avg_dollar_vol": 419629752
   },
   {
    "sym": "NTRS",
@@ -4285,7 +6259,14 @@
    "magical": -32.0156,
    "zlsma": 188.9504,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 19.623,
+   "adx": 25.1086,
+   "plus_di": 21.545,
+   "minus_di": 22.3619,
+   "avg_dollar_vol": 167865381
   },
   {
    "sym": "NUE",
@@ -4293,7 +6274,14 @@
    "magical": 50.0386,
    "zlsma": 219.457,
    "ce_mode": "BUY",
-   "ce_label": 228.09
+   "ce_label": 228.09,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 25.9788,
+   "adx": 18.0122,
+   "plus_di": 19.3414,
+   "minus_di": 21.8986,
+   "avg_dollar_vol": 350176471
   },
   {
    "sym": "NVAX",
@@ -4301,7 +6289,14 @@
    "magical": -122.5991,
    "zlsma": 7.5433,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -7.1648,
+   "adx": 17.4133,
+   "plus_di": 17.4382,
+   "minus_di": 26.9532,
+   "avg_dollar_vol": 30640000
   },
   {
    "sym": "NVDA",
@@ -4309,7 +6304,14 @@
    "magical": 122.078,
    "zlsma": 195.669,
    "ce_mode": "BUY",
-   "ce_label": 196.96
+   "ce_label": 196.96,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 10.0498,
+   "adx": 13.3904,
+   "plus_di": 22.0976,
+   "minus_di": 17.4356,
+   "avg_dollar_vol": 28998528656
   },
   {
    "sym": "NVRI",
@@ -4317,7 +6319,14 @@
    "magical": 63.5538,
    "zlsma": 23.7635,
    "ce_mode": "BUY",
-   "ce_label": 21.77
+   "ce_label": 21.77,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 26.224,
+   "adx": 21.1013,
+   "plus_di": 12.1376,
+   "minus_di": 14.3669,
+   "avg_dollar_vol": 10341824
   },
   {
    "sym": "NVST",
@@ -4325,7 +6334,14 @@
    "magical": -29.3,
    "zlsma": 29.064,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.7168,
+   "adx": 18.1629,
+   "plus_di": 22.4299,
+   "minus_di": 19.6734,
+   "avg_dollar_vol": 67593262
   },
   {
    "sym": "NVTS",
@@ -4333,7 +6349,14 @@
    "magical": -62.4914,
    "zlsma": 5.0827,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -0.4545,
+   "adx": 25.6658,
+   "plus_di": 20.3943,
+   "minus_di": 33.1568,
+   "avg_dollar_vol": 217966230
   },
   {
    "sym": "NWPX",
@@ -4341,7 +6364,14 @@
    "magical": -70.4926,
    "zlsma": 136.2429,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 59.3002,
+   "adx": 23.4311,
+   "plus_di": 15.2848,
+   "minus_di": 24.2797,
+   "avg_dollar_vol": 30316546
   },
   {
    "sym": "OCFC",
@@ -4349,7 +6379,14 @@
    "magical": 57.7961,
    "zlsma": 20.2979,
    "ce_mode": "BUY",
-   "ce_label": 19.35
+   "ce_label": 19.35,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 5.436,
+   "adx": 19.1515,
+   "plus_di": 25.5216,
+   "minus_di": 17.9056,
+   "avg_dollar_vol": 22153916
   },
   {
    "sym": "ODFL",
@@ -4357,7 +6394,14 @@
    "magical": 84.4897,
    "zlsma": 229.7211,
    "ce_mode": "BUY",
-   "ce_label": 226.096
+   "ce_label": 226.096,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 25.6515,
+   "adx": 16.6765,
+   "plus_di": 23.3063,
+   "minus_di": 17.2157,
+   "avg_dollar_vol": 368201613
   },
   {
    "sym": "OGE",
@@ -4365,7 +6409,14 @@
    "magical": 81.2396,
    "zlsma": 49.5812,
    "ce_mode": "BUY",
-   "ce_label": 47.96
+   "ce_label": 47.96,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 6.5573,
+   "adx": 21.5456,
+   "plus_di": 31.3268,
+   "minus_di": 16.8159,
+   "avg_dollar_vol": 69020616
   },
   {
    "sym": "OILD",
@@ -4373,7 +6424,14 @@
    "magical": -131.6281,
    "zlsma": 44.908,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -46.0984,
+   "adx": 23.0637,
+   "plus_di": 16.9778,
+   "minus_di": 36.9743,
+   "avg_dollar_vol": 2398133
   },
   {
    "sym": "OILU",
@@ -4381,7 +6439,14 @@
    "magical": 152.2265,
    "zlsma": 36.8662,
    "ce_mode": "BUY",
-   "ce_label": 39.52
+   "ce_label": 39.52,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 26.4323,
+   "adx": 20.5456,
+   "plus_di": 36.1906,
+   "minus_di": 17.8019,
+   "avg_dollar_vol": 7998841
   },
   {
    "sym": "OKLO",
@@ -4389,7 +6454,14 @@
    "magical": -68.3464,
    "zlsma": 40.691,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -43.8418,
+   "adx": 22.6919,
+   "plus_di": 20.0344,
+   "minus_di": 25.8557,
+   "avg_dollar_vol": 419205470
   },
   {
    "sym": "OKTA",
@@ -4397,7 +6469,14 @@
    "magical": -32.4934,
    "zlsma": 149.2898,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 47.986,
+   "adx": 37.1308,
+   "plus_di": 24.1968,
+   "minus_di": 22.7681,
+   "avg_dollar_vol": 435332841
   },
   {
    "sym": "OPEN",
@@ -4405,7 +6484,14 @@
    "magical": -81.7537,
    "zlsma": 4.8867,
    "ce_mode": "BUY",
-   "ce_label": 4.21
+   "ce_label": 4.21,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -23.6368,
+   "adx": 18.9448,
+   "plus_di": 22.7143,
+   "minus_di": 17.1726,
+   "avg_dollar_vol": 385596671
   },
   {
    "sym": "ORCL",
@@ -4413,7 +6499,14 @@
    "magical": -92.8913,
    "zlsma": 94.1243,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -33.4581,
+   "adx": 38.9927,
+   "plus_di": 13.9798,
+   "minus_di": 33.824,
+   "avg_dollar_vol": 5072800053
   },
   {
    "sym": "OXY",
@@ -4421,7 +6514,14 @@
    "magical": 143.9464,
    "zlsma": 52.1728,
    "ce_mode": "BUY",
-   "ce_label": 54.86
+   "ce_label": 54.86,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.4134,
+   "adx": 23.9543,
+   "plus_di": 38.4686,
+   "minus_di": 17.8931,
+   "avg_dollar_vol": 550728678
   },
   {
    "sym": "PANW",
@@ -4429,7 +6529,14 @@
    "magical": -1.1451,
    "zlsma": 341.7817,
    "ce_mode": "BUY",
-   "ce_label": 334.38
+   "ce_label": 334.38,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 59.3136,
+   "adx": 43.8114,
+   "plus_di": 28.5078,
+   "minus_di": 18.7689,
+   "avg_dollar_vol": 2460383296
   },
   {
    "sym": "PB",
@@ -4437,7 +6544,14 @@
    "magical": 31.2586,
    "zlsma": 74.8711,
    "ce_mode": "BUY",
-   "ce_label": 71.16
+   "ce_label": 71.16,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 5.422,
+   "adx": 12.0514,
+   "plus_di": 22.8276,
+   "minus_di": 19.9909,
+   "avg_dollar_vol": 114687670
   },
   {
    "sym": "PBF",
@@ -4445,7 +6559,14 @@
    "magical": 107.0866,
    "zlsma": 64.7757,
    "ce_mode": "BUY",
-   "ce_label": 60.2
+   "ce_label": 60.2,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 67.0228,
+   "adx": 46.7527,
+   "plus_di": 43.2638,
+   "minus_di": 6.3028,
+   "avg_dollar_vol": 197443457
   },
   {
    "sym": "PBR",
@@ -4453,7 +6574,14 @@
    "magical": 149.2595,
    "zlsma": 18.1916,
    "ce_mode": "BUY",
-   "ce_label": 17.81
+   "ce_label": 17.81,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 17.8928,
+   "adx": 25.5978,
+   "plus_di": 39.4918,
+   "minus_di": 18.174,
+   "avg_dollar_vol": 275201688
   },
   {
    "sym": "PCVX",
@@ -4461,7 +6589,14 @@
    "magical": -50.7233,
    "zlsma": 64.224,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 8.4858,
+   "adx": 26.3748,
+   "plus_di": 21.0074,
+   "minus_di": 12.1559,
+   "avg_dollar_vol": 97107923
   },
   {
    "sym": "PEP",
@@ -4469,7 +6604,14 @@
    "magical": -82.0927,
    "zlsma": 138.5826,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -9.4981,
+   "adx": 16.5318,
+   "plus_di": 24.9677,
+   "minus_di": 28.7467,
+   "avg_dollar_vol": 1296513142
   },
   {
    "sym": "PFE",
@@ -4477,7 +6619,14 @@
    "magical": 87.8494,
    "zlsma": 24.4721,
    "ce_mode": "BUY",
-   "ce_label": 24.22
+   "ce_label": 24.22,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -4.0252,
+   "adx": 21.1753,
+   "plus_di": 25.6716,
+   "minus_di": 20.0783,
+   "avg_dollar_vol": 1208948004
   },
   {
    "sym": "PGR",
@@ -4485,7 +6634,14 @@
    "magical": -117.2308,
    "zlsma": 224.8778,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -3.4452,
+   "adx": 34.4741,
+   "plus_di": 20.1863,
+   "minus_di": 29.0678,
+   "avg_dollar_vol": 763232573
   },
   {
    "sym": "PH",
@@ -4493,7 +6649,14 @@
    "magical": 76.6333,
    "zlsma": 1025.1295,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 8.0044,
+   "adx": 16.3808,
+   "plus_di": 19.823,
+   "minus_di": 16.2276,
+   "avg_dollar_vol": 561211651
   },
   {
    "sym": "PL",
@@ -4501,7 +6664,14 @@
    "magical": -102.7443,
    "zlsma": 17.2394,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -11.9332,
+   "adx": 31.0208,
+   "plus_di": 11.9926,
+   "minus_di": 29.5378,
+   "avg_dollar_vol": 264153239
   },
   {
    "sym": "PLTR",
@@ -4509,7 +6679,14 @@
    "magical": -19.5625,
    "zlsma": 126.9366,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -19.5413,
+   "adx": 12.6182,
+   "plus_di": 21.4879,
+   "minus_di": 26.5376,
+   "avg_dollar_vol": 5257865602
   },
   {
    "sym": "PM",
@@ -4517,7 +6694,14 @@
    "magical": 150.6377,
    "zlsma": 178.296,
    "ce_mode": "BUY",
-   "ce_label": 185.24
+   "ce_label": 185.24,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.2208,
+   "adx": 14.9278,
+   "plus_di": 33.3527,
+   "minus_di": 18.7338,
+   "avg_dollar_vol": 970683542
   },
   {
    "sym": "PNC",
@@ -4525,7 +6709,14 @@
    "magical": 52.9801,
    "zlsma": 266.0883,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 17.7237,
+   "adx": 33.387,
+   "plus_di": 24.0342,
+   "minus_di": 17.4165,
+   "avg_dollar_vol": 580939808
   },
   {
    "sym": "POWL",
@@ -4533,7 +6724,14 @@
    "magical": -35.6673,
    "zlsma": 218.6016,
    "ce_mode": "BUY",
-   "ce_label": 221.47
+   "ce_label": 221.47,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 28.8738,
+   "adx": 29.4855,
+   "plus_di": 14.6256,
+   "minus_di": 25.2158,
+   "avg_dollar_vol": 221689698
   },
   {
    "sym": "PRAX",
@@ -4541,7 +6739,14 @@
    "magical": -72.5826,
    "zlsma": 329.9726,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 13.3023,
+   "adx": 14.1677,
+   "plus_di": 13.9901,
+   "minus_di": 15.9435,
+   "avg_dollar_vol": 167624150
   },
   {
    "sym": "PRLB",
@@ -4549,7 +6754,14 @@
    "magical": 65.2764,
    "zlsma": 75.4629,
    "ce_mode": "BUY",
-   "ce_label": 74.33
+   "ce_label": 74.33,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 30.4274,
+   "adx": 13.6361,
+   "plus_di": 24.3888,
+   "minus_di": 19.486,
+   "avg_dollar_vol": 19578455
   },
   {
    "sym": "PRSU",
@@ -4557,7 +6769,14 @@
    "magical": -124.5829,
    "zlsma": 55.788,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 31.2882,
+   "adx": 37.1673,
+   "plus_di": 20.8107,
+   "minus_di": 14.7657,
+   "avg_dollar_vol": 18481100
   },
   {
    "sym": "PSA",
@@ -4565,7 +6784,14 @@
    "magical": -148.2196,
    "zlsma": 322.7314,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 6.4025,
+   "adx": 10.243,
+   "plus_di": 19.4948,
+   "minus_di": 26.2445,
+   "avg_dollar_vol": 352204308
   },
   {
    "sym": "PSX",
@@ -4573,7 +6799,14 @@
    "magical": 116.7177,
    "zlsma": 200.1657,
    "ce_mode": "BUY",
-   "ce_label": 205.09
+   "ce_label": 205.09,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 34.2901,
+   "adx": 30.5927,
+   "plus_di": 41.9011,
+   "minus_di": 11.7687,
+   "avg_dollar_vol": 576869457
   },
   {
    "sym": "PTCT",
@@ -4581,7 +6814,14 @@
    "magical": -83.8209,
    "zlsma": 83.5434,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.7269,
+   "adx": 19.3895,
+   "plus_di": 21.0274,
+   "minus_di": 18.9219,
+   "avg_dollar_vol": 171405026
   },
   {
    "sym": "PVLA",
@@ -4589,7 +6829,14 @@
    "magical": -30.0483,
    "zlsma": 163.195,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 32.8967,
+   "adx": 26.645,
+   "plus_di": 19.0106,
+   "minus_di": 21.8809,
+   "avg_dollar_vol": 46735362
   },
   {
    "sym": "PWR",
@@ -4597,7 +6844,14 @@
    "magical": -70.4688,
    "zlsma": 608.2624,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 15.9993,
+   "adx": 24.0652,
+   "plus_di": 14.7978,
+   "minus_di": 30.6993,
+   "avg_dollar_vol": 865289078
   },
   {
    "sym": "QCOM",
@@ -4605,7 +6859,14 @@
    "magical": -69.2322,
    "zlsma": 136.6789,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 3.8368,
+   "adx": 13.0102,
+   "plus_di": 20.7284,
+   "minus_di": 25.8464,
+   "avg_dollar_vol": 3158398891
   },
   {
    "sym": "QLYS",
@@ -4613,7 +6874,14 @@
    "magical": -33.069,
    "zlsma": 163.7829,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 18.298,
+   "adx": 42.4582,
+   "plus_di": 27.1914,
+   "minus_di": 23.5084,
+   "avg_dollar_vol": 118579322
   },
   {
    "sym": "QQQ",
@@ -4621,7 +6889,14 @@
    "magical": -71.6968,
    "zlsma": 685.7174,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 9.8084,
+   "adx": 18.7201,
+   "plus_di": 18.6109,
+   "minus_di": 29.3202,
+   "avg_dollar_vol": 28423624236
   },
   {
    "sym": "RACE",
@@ -4629,7 +6904,14 @@
    "magical": -16.2846,
    "zlsma": 391.3817,
    "ce_mode": "BUY",
-   "ce_label": 368.14
+   "ce_label": 368.14,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 1.5632,
+   "adx": 17.2143,
+   "plus_di": 33.8541,
+   "minus_di": 27.3351,
+   "avg_dollar_vol": 173136388
   },
   {
    "sym": "RCL",
@@ -4637,7 +6919,14 @@
    "magical": -56.4229,
    "zlsma": 295.2983,
    "ce_mode": "BUY",
-   "ce_label": 280.07
+   "ce_label": 280.07,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -0.1815,
+   "adx": 11.8091,
+   "plus_di": 19.8466,
+   "minus_di": 24.6858,
+   "avg_dollar_vol": 710400080
   },
   {
    "sym": "REG",
@@ -4645,7 +6934,14 @@
    "magical": 101.6639,
    "zlsma": 83.213,
    "ce_mode": "BUY",
-   "ce_label": 80.42
+   "ce_label": 80.42,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.8442,
+   "adx": 20.4332,
+   "plus_di": 30.8789,
+   "minus_di": 15.9538,
+   "avg_dollar_vol": 112718058
   },
   {
    "sym": "RELY",
@@ -4653,7 +6949,14 @@
    "magical": -28.2809,
    "zlsma": 25.621,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 34.8078,
+   "adx": 30.5377,
+   "plus_di": 30.111,
+   "minus_di": 25.2449,
+   "avg_dollar_vol": 77414801
   },
   {
    "sym": "RGTI",
@@ -4661,7 +6964,14 @@
    "magical": -68.7466,
    "zlsma": 11.7844,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -33.869,
+   "adx": 28.9932,
+   "plus_di": 14.5615,
+   "minus_di": 29.7063,
+   "avg_dollar_vol": 378775702
   },
   {
    "sym": "RIVN",
@@ -4669,7 +6979,14 @@
    "magical": 1.1482,
    "zlsma": 18.6032,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.5786,
+   "adx": 15.2318,
+   "plus_di": 30.0644,
+   "minus_di": 22.6754,
+   "avg_dollar_vol": 736165638
   },
   {
    "sym": "RKLB",
@@ -4677,7 +6994,14 @@
    "magical": -93.0748,
    "zlsma": 38.0095,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -10.2331,
+   "adx": 30.5824,
+   "plus_di": 15.8665,
+   "minus_di": 32.5978,
+   "avg_dollar_vol": 1638789314
   },
   {
    "sym": "RMD",
@@ -4685,7 +7009,14 @@
    "magical": -104.2631,
    "zlsma": 207.0475,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -17.7668,
+   "adx": 14.2404,
+   "plus_di": 23.0207,
+   "minus_di": 29.1864,
+   "avg_dollar_vol": 303362964
   },
   {
    "sym": "ROBO",
@@ -4693,7 +7024,14 @@
    "magical": -80.3433,
    "zlsma": 76.3295,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 5.6284,
+   "adx": 23.708,
+   "plus_di": 21.5897,
+   "minus_di": 35.9688,
+   "avg_dollar_vol": 15956121
   },
   {
    "sym": "ROKU",
@@ -4701,7 +7039,14 @@
    "magical": 62.6117,
    "zlsma": 146.4018,
    "ce_mode": "BUY",
-   "ce_label": 142.3702
+   "ce_label": 142.3702,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 30.5112,
+   "adx": 33.4069,
+   "plus_di": 32.7946,
+   "minus_di": 15.1767,
+   "avg_dollar_vol": 564407626
   },
   {
    "sym": "ROP",
@@ -4709,7 +7054,14 @@
    "magical": -94.1759,
    "zlsma": 377.39,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -13.2634,
+   "adx": 14.4464,
+   "plus_di": 22.4111,
+   "minus_di": 29.3003,
+   "avg_dollar_vol": 341423721
   },
   {
    "sym": "RSG",
@@ -4717,7 +7069,14 @@
    "magical": -30.0706,
    "zlsma": 222.4195,
    "ce_mode": "BUY",
-   "ce_label": 213.36
+   "ce_label": 213.36,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 0.8165,
+   "adx": 13.6891,
+   "plus_di": 23.865,
+   "minus_di": 22.9443,
+   "avg_dollar_vol": 300363570
   },
   {
    "sym": "RSPU",
@@ -4725,7 +7084,14 @@
    "magical": 72.3729,
    "zlsma": 82.8262,
    "ce_mode": "BUY",
-   "ce_label": 79.075
+   "ce_label": 79.075,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 3.5762,
+   "adx": 15.2027,
+   "plus_di": 35.2499,
+   "minus_di": 19.6211,
+   "avg_dollar_vol": 2683301
   },
   {
    "sym": "SAIC",
@@ -4733,7 +7099,14 @@
    "magical": 107.7455,
    "zlsma": 114.147,
    "ce_mode": "BUY",
-   "ce_label": 110.52
+   "ce_label": 110.52,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 16.7759,
+   "adx": 12.7752,
+   "plus_di": 27.5215,
+   "minus_di": 22.7807,
+   "avg_dollar_vol": 60491701
   },
   {
    "sym": "SBET",
@@ -4741,7 +7114,14 @@
    "magical": 136.7143,
    "zlsma": 6.0689,
    "ce_mode": "BUY",
-   "ce_label": 5.79
+   "ce_label": 5.79,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -26.584,
+   "adx": 18.9287,
+   "plus_di": 34.1259,
+   "minus_di": 20.349,
+   "avg_dollar_vol": 71350963
   },
   {
    "sym": "SBUX",
@@ -4749,7 +7129,14 @@
    "magical": -35.4389,
    "zlsma": 106.6719,
    "ce_mode": "BUY",
-   "ce_label": 102.76
+   "ce_label": 102.76,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 10.5156,
+   "adx": 12.2572,
+   "plus_di": 19.2365,
+   "minus_di": 19.885,
+   "avg_dollar_vol": 729571870
   },
   {
    "sym": "SCCO",
@@ -4757,7 +7144,14 @@
    "magical": 287.4189,
    "zlsma": 172.9674,
    "ce_mode": "BUY",
-   "ce_label": 178.38
+   "ce_label": 178.38,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 17.3629,
+   "adx": 10.0054,
+   "plus_di": 34.5349,
+   "minus_di": 21.9975,
+   "avg_dollar_vol": 247201574
   },
   {
    "sym": "SCHL",
@@ -4765,7 +7159,14 @@
    "magical": 35.7298,
    "zlsma": 48.247,
    "ce_mode": "BUY",
-   "ce_label": 44.93
+   "ce_label": 44.93,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 30.1374,
+   "adx": 21.4268,
+   "plus_di": 21.964,
+   "minus_di": 16.2263,
+   "avg_dollar_vol": 14843383
   },
   {
    "sym": "SE",
@@ -4773,7 +7174,14 @@
    "magical": 22.7736,
    "zlsma": 111.3143,
    "ce_mode": "BUY",
-   "ce_label": 102.35
+   "ce_label": 102.35,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -7.5954,
+   "adx": 27.2587,
+   "plus_di": 29.9598,
+   "minus_di": 23.7486,
+   "avg_dollar_vol": 484121670
   },
   {
    "sym": "SENEA",
@@ -4781,7 +7189,14 @@
    "magical": -93.3207,
    "zlsma": 180.0146,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 23.2056,
+   "adx": 21.74,
+   "plus_di": 25.7638,
+   "minus_di": 23.1652,
+   "avg_dollar_vol": 21058455
   },
   {
    "sym": "SEPN",
@@ -4789,7 +7204,14 @@
    "magical": -23.3332,
    "zlsma": 33.9572,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 27.422,
+   "adx": 22.0317,
+   "plus_di": 14.2096,
+   "minus_di": 15.9309,
+   "avg_dollar_vol": 20060347
   },
   {
    "sym": "SFM",
@@ -4797,7 +7219,14 @@
    "magical": -102.3874,
    "zlsma": 70.7065,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -9.1947,
+   "adx": 18.3595,
+   "plus_di": 18.7817,
+   "minus_di": 29.6454,
+   "avg_dollar_vol": 167118796
   },
   {
    "sym": "SHAK",
@@ -4805,7 +7234,14 @@
    "magical": -38.2748,
    "zlsma": 72.8314,
    "ce_mode": "BUY",
-   "ce_label": 55.9
+   "ce_label": 55.9,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -32.5955,
+   "adx": 15.8931,
+   "plus_di": 20.5518,
+   "minus_di": 22.9614,
+   "avg_dollar_vol": 102802588
   },
   {
    "sym": "SHW",
@@ -4813,7 +7249,14 @@
    "magical": -132.3901,
    "zlsma": 351.0702,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -3.8378,
+   "adx": 17.794,
+   "plus_di": 19.4357,
+   "minus_di": 22.4168,
+   "avg_dollar_vol": 779877670
   },
   {
    "sym": "SION",
@@ -4821,7 +7264,14 @@
    "magical": 37.9863,
    "zlsma": 48.2597,
    "ce_mode": "BUY",
-   "ce_label": 41.69
+   "ce_label": 41.69,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 14.7477,
+   "adx": 28.9418,
+   "plus_di": 19.7962,
+   "minus_di": 9.4225,
+   "avg_dollar_vol": 26649121
   },
   {
    "sym": "SJM",
@@ -4829,7 +7279,14 @@
    "magical": 170.4156,
    "zlsma": 112.437,
    "ce_mode": "BUY",
-   "ce_label": 113.27
+   "ce_label": 113.27,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 13.5437,
+   "adx": 17.0338,
+   "plus_di": 36.5159,
+   "minus_di": 18.2269,
+   "avg_dollar_vol": 180956153
   },
   {
    "sym": "SKK",
@@ -4837,7 +7294,14 @@
    "magical": 188.8413,
    "zlsma": 4.8811,
    "ce_mode": "BUY",
-   "ce_label": 4.9
+   "ce_label": 4.9,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 49.8662,
+   "adx": 52.4207,
+   "plus_di": 35.7642,
+   "minus_di": 8.0376,
+   "avg_dollar_vol": 86683
   },
   {
    "sym": "SKYY",
@@ -4845,7 +7309,14 @@
    "magical": -57.9391,
    "zlsma": 131.7407,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 5.2025,
+   "adx": 12.1432,
+   "plus_di": 21.2118,
+   "minus_di": 25.2672,
+   "avg_dollar_vol": 41038869
   },
   {
    "sym": "SLAB",
@@ -4853,7 +7324,14 @@
    "magical": -146.2281,
    "zlsma": 217.8868,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 20.6036,
+   "adx": 11.5047,
+   "plus_di": 10.6668,
+   "minus_di": 14.7312,
+   "avg_dollar_vol": 103549457
   },
   {
    "sym": "SMCI",
@@ -4861,7 +7339,14 @@
    "magical": 106.4205,
    "zlsma": 19.0118,
    "ce_mode": "BUY",
-   "ce_label": 22.2942
+   "ce_label": 22.2942,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -9.3138,
+   "adx": 24.3811,
+   "plus_di": 34.4178,
+   "minus_di": 26.8758,
+   "avg_dollar_vol": 1269036111
   },
   {
    "sym": "SMH",
@@ -4869,7 +7354,14 @@
    "magical": -43.1418,
    "zlsma": 555.9116,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 32.3718,
+   "adx": 19.9783,
+   "plus_di": 21.4614,
+   "minus_di": 31.8485,
+   "avg_dollar_vol": 7007346505
   },
   {
    "sym": "SMMT",
@@ -4877,7 +7369,14 @@
    "magical": -4.3397,
    "zlsma": 16.373,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -15.1139,
+   "adx": 17.0276,
+   "plus_di": 24.9829,
+   "minus_di": 23.5282,
+   "avg_dollar_vol": 59398017
   },
   {
    "sym": "SMR",
@@ -4885,7 +7384,14 @@
    "magical": -37.889,
    "zlsma": 7.7389,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -50.5861,
+   "adx": 22.5565,
+   "plus_di": 18.8384,
+   "minus_di": 26.3159,
+   "avg_dollar_vol": 240760986
   },
   {
    "sym": "SNDA",
@@ -4893,7 +7399,14 @@
    "magical": -33.4855,
    "zlsma": 42.3815,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 19.14,
+   "adx": 19.1576,
+   "plus_di": 18.8193,
+   "minus_di": 16.7443,
+   "avg_dollar_vol": 30161602
   },
   {
    "sym": "SNDX",
@@ -4901,7 +7414,14 @@
    "magical": -24.7113,
    "zlsma": 25.1692,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.0432,
+   "adx": 25.5518,
+   "plus_di": 22.4116,
+   "minus_di": 20.1928,
+   "avg_dollar_vol": 47019715
   },
   {
    "sym": "SNOW",
@@ -4909,7 +7429,14 @@
    "magical": 49.447,
    "zlsma": 264.4022,
    "ce_mode": "BUY",
-   "ce_label": 254.14
+   "ce_label": 254.14,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 27.9651,
+   "adx": 31.3986,
+   "plus_di": 21.597,
+   "minus_di": 15.846,
+   "avg_dollar_vol": 1570019491
   },
   {
    "sym": "SO",
@@ -4917,7 +7444,14 @@
    "magical": -6.2271,
    "zlsma": 97.1159,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 3.1764,
+   "adx": 16.7149,
+   "plus_di": 28.6719,
+   "minus_di": 20.3554,
+   "avg_dollar_vol": 499379424
   },
   {
    "sym": "SOFI",
@@ -4925,7 +7459,14 @@
    "magical": -119.1131,
    "zlsma": 18.6632,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -21.2815,
+   "adx": 18.808,
+   "plus_di": 21.7383,
+   "minus_di": 22.8064,
+   "avg_dollar_vol": 1452682110
   },
   {
    "sym": "SON",
@@ -4933,7 +7474,14 @@
    "magical": -8.0508,
    "zlsma": 58.9167,
    "ce_mode": "BUY",
-   "ce_label": 54.07
+   "ce_label": 54.07,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 13.5192,
+   "adx": 21.9308,
+   "plus_di": 22.4687,
+   "minus_di": 19.9793,
+   "avg_dollar_vol": 64685366
   },
   {
    "sym": "SOUN",
@@ -4941,7 +7489,14 @@
    "magical": -25.3688,
    "zlsma": 6.0195,
    "ce_mode": "BUY",
-   "ce_label": 6.13
+   "ce_label": 6.13,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -35.1399,
+   "adx": 10.1717,
+   "plus_di": 17.2133,
+   "minus_di": 18.9317,
+   "avg_dollar_vol": 192749546
   },
   {
    "sym": "SOXL",
@@ -4949,7 +7504,14 @@
    "magical": -59.1272,
    "zlsma": 122.6023,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 68.3077,
+   "adx": 23.1121,
+   "plus_di": 21.2271,
+   "minus_di": 34.9765,
+   "avg_dollar_vol": 9743854501
   },
   {
    "sym": "SOXS",
@@ -4957,7 +7519,14 @@
    "magical": 11.9083,
    "zlsma": 52.2667,
    "ce_mode": "BUY",
-   "ce_label": 42.51
+   "ce_label": 42.51,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -88.5299,
+   "adx": 14.8213,
+   "plus_di": 29.737,
+   "minus_di": 25.3166,
+   "avg_dollar_vol": 3116006737
   },
   {
    "sym": "SPG",
@@ -4965,7 +7534,14 @@
    "magical": 43.8011,
    "zlsma": 231.8185,
    "ce_mode": "BUY",
-   "ce_label": 221.26
+   "ce_label": 221.26,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.9905,
+   "adx": 20.1266,
+   "plus_di": 27.6687,
+   "minus_di": 20.342,
+   "avg_dollar_vol": 512918017
   },
   {
    "sym": "SPGI",
@@ -4973,7 +7549,14 @@
    "magical": 13.8355,
    "zlsma": 458.7724,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -1.5631,
+   "adx": 20.7714,
+   "plus_di": 28.4785,
+   "minus_di": 23.8393,
+   "avg_dollar_vol": 1060684584
   },
   {
    "sym": "SPOT",
@@ -4981,7 +7564,14 @@
    "magical": -12.4908,
    "zlsma": 475.9007,
    "ce_mode": "BUY",
-   "ce_label": 473.33
+   "ce_label": 473.33,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -10.5495,
+   "adx": 9.7546,
+   "plus_di": 21.3156,
+   "minus_di": 26.9805,
+   "avg_dollar_vol": 775322558
   },
   {
    "sym": "SPXL",
@@ -4989,7 +7579,14 @@
    "magical": 8.8794,
    "zlsma": 259.9861,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 16.4681,
+   "adx": 14.7697,
+   "plus_di": 17.3169,
+   "minus_di": 22.3078,
+   "avg_dollar_vol": 444923276
   },
   {
    "sym": "SRRK",
@@ -4997,7 +7594,14 @@
    "magical": -207.8478,
    "zlsma": 55.6759,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 8.9523,
+   "adx": 22.8458,
+   "plus_di": 15.7343,
+   "minus_di": 26.768,
+   "avg_dollar_vol": 79920612
   },
   {
    "sym": "SSB",
@@ -5005,7 +7609,14 @@
    "magical": 79.05,
    "zlsma": 106.1987,
    "ce_mode": "BUY",
-   "ce_label": 99.79
+   "ce_label": 99.79,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 6.4191,
+   "adx": 22.8856,
+   "plus_di": 24.8213,
+   "minus_di": 16.3082,
+   "avg_dollar_vol": 89067511
   },
   {
    "sym": "ST",
@@ -5013,7 +7624,14 @@
    "magical": 9.9502,
    "zlsma": 40.9354,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 20.5296,
+   "adx": 24.5415,
+   "plus_di": 20.3729,
+   "minus_di": 23.1602,
+   "avg_dollar_vol": 77619082
   },
   {
    "sym": "STGW",
@@ -5021,7 +7639,14 @@
    "magical": -99.7543,
    "zlsma": 7.9867,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 18.8942,
+   "adx": 22.2151,
+   "plus_di": 17.2274,
+   "minus_di": 26.6673,
+   "avg_dollar_vol": 9945896
   },
   {
    "sym": "STNG",
@@ -5029,7 +7654,14 @@
    "magical": 67.6742,
    "zlsma": 77.3374,
    "ce_mode": "BUY",
-   "ce_label": 74.48
+   "ce_label": 74.48,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.1854,
+   "adx": 16.9634,
+   "plus_di": 29.1055,
+   "minus_di": 18.9992,
+   "avg_dollar_vol": 71783372
   },
   {
    "sym": "STRL",
@@ -5037,7 +7669,14 @@
    "magical": -4.7687,
    "zlsma": 527.0121,
    "ce_mode": "BUY",
-   "ce_label": 627.2502
+   "ce_label": 627.2502,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 45.3186,
+   "adx": 23.9682,
+   "plus_di": 22.322,
+   "minus_di": 27.3387,
+   "avg_dollar_vol": 649336169
   },
   {
    "sym": "STX",
@@ -5045,7 +7684,14 @@
    "magical": 31.566,
    "zlsma": 788.8024,
    "ce_mode": "BUY",
-   "ce_label": 775.72
+   "ce_label": 775.72,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 82.5999,
+   "adx": 22.1547,
+   "plus_di": 24.433,
+   "minus_di": 28.7714,
+   "avg_dollar_vol": 4621180008
   },
   {
    "sym": "SYM",
@@ -5053,7 +7699,14 @@
    "magical": 1.7825,
    "zlsma": 45.6113,
    "ce_mode": "BUY",
-   "ce_label": 40.81
+   "ce_label": 40.81,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -25.4871,
+   "adx": 13.2205,
+   "plus_di": 22.1348,
+   "minus_di": 23.5699,
+   "avg_dollar_vol": 78105134
   },
   {
    "sym": "TALO",
@@ -5061,7 +7714,14 @@
    "magical": 190.2778,
    "zlsma": 13.8191,
    "ce_mode": "BUY",
-   "ce_label": 14.02
+   "ce_label": 14.02,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 18.8766,
+   "adx": 12.5525,
+   "plus_di": 29.2339,
+   "minus_di": 19.3363,
+   "avg_dollar_vol": 31409733
   },
   {
    "sym": "TBLA",
@@ -5069,7 +7729,14 @@
    "magical": -72.1425,
    "zlsma": 5.1025,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 22.4833,
+   "adx": 22.7142,
+   "plus_di": 20.8131,
+   "minus_di": 30.1156,
+   "avg_dollar_vol": 17758182
   },
   {
    "sym": "TDOC",
@@ -5077,7 +7744,14 @@
    "magical": -25.8267,
    "zlsma": 9.984,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 29.266,
+   "adx": 46.977,
+   "plus_di": 29.6002,
+   "minus_di": 19.1205,
+   "avg_dollar_vol": 38657823
   },
   {
    "sym": "TDY",
@@ -5085,7 +7759,14 @@
    "magical": 73.4042,
    "zlsma": 653.1325,
    "ce_mode": "BUY",
-   "ce_label": 599.73
+   "ce_label": 599.73,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.0736,
+   "adx": 16.1938,
+   "plus_di": 22.0275,
+   "minus_di": 10.2817,
+   "avg_dollar_vol": 251765292
   },
   {
    "sym": "TFIN",
@@ -5093,7 +7774,14 @@
    "magical": 162.4049,
    "zlsma": 82.5669,
    "ce_mode": "BUY",
-   "ce_label": 74.94
+   "ce_label": 74.94,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 27.7288,
+   "adx": 27.0952,
+   "plus_di": 26.6629,
+   "minus_di": 11.5758,
+   "avg_dollar_vol": 26681547
   },
   {
    "sym": "TGTX",
@@ -5101,7 +7789,14 @@
    "magical": -127.5207,
    "zlsma": 59.4109,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 46.2789,
+   "adx": 31.204,
+   "plus_di": 21.7597,
+   "minus_di": 21.6423,
+   "avg_dollar_vol": 127174166
   },
   {
    "sym": "TIGO",
@@ -5109,7 +7804,14 @@
    "magical": 91.3187,
    "zlsma": 100.7333,
    "ce_mode": "BUY",
-   "ce_label": 93.88
+   "ce_label": 93.88,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 41.9972,
+   "adx": 11.1155,
+   "plus_di": 24.5066,
+   "minus_di": 18.6435,
+   "avg_dollar_vol": 155418057
   },
   {
    "sym": "TJX",
@@ -5117,7 +7819,14 @@
    "magical": 51.2506,
    "zlsma": 152.9636,
    "ce_mode": "BUY",
-   "ce_label": 151.26
+   "ce_label": 151.26,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 0.9995,
+   "adx": 21.2384,
+   "plus_di": 27.1112,
+   "minus_di": 18.573,
+   "avg_dollar_vol": 915047211
   },
   {
    "sym": "TKR",
@@ -5125,7 +7834,14 @@
    "magical": 59.1428,
    "zlsma": 138.6019,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 37.9127,
+   "adx": 15.2878,
+   "plus_di": 17.4807,
+   "minus_di": 18.2087,
+   "avg_dollar_vol": 122351040
   },
   {
    "sym": "TLN",
@@ -5133,7 +7849,14 @@
    "magical": -24.7178,
    "zlsma": 387.5853,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 2.1138,
+   "adx": 12.4017,
+   "plus_di": 21.17,
+   "minus_di": 23.7938,
+   "avg_dollar_vol": 319330941
   },
   {
    "sym": "TOST",
@@ -5141,7 +7864,14 @@
    "magical": 14.6386,
    "zlsma": 33.7102,
    "ce_mode": "BUY",
-   "ce_label": 28.921
+   "ce_label": 28.921,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -4.4967,
+   "adx": 27.6815,
+   "plus_di": 27.6153,
+   "minus_di": 20.7707,
+   "avg_dollar_vol": 412943188
   },
   {
    "sym": "TPL",
@@ -5149,7 +7879,14 @@
    "magical": 146.2022,
    "zlsma": 427.1622,
    "ce_mode": "BUY",
-   "ce_label": 400.28
+   "ce_label": 400.28,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 13.3845,
+   "adx": 17.1388,
+   "plus_di": 28.3452,
+   "minus_di": 14.9501,
+   "avg_dollar_vol": 159663636
   },
   {
    "sym": "TPR",
@@ -5157,7 +7894,14 @@
    "magical": 16.5315,
    "zlsma": 146.1286,
    "ce_mode": "BUY",
-   "ce_label": 135.79
+   "ce_label": 135.79,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.497,
+   "adx": 10.1802,
+   "plus_di": 17.6602,
+   "minus_di": 18.0118,
+   "avg_dollar_vol": 383729405
   },
   {
    "sym": "TRIN",
@@ -5165,7 +7909,14 @@
    "magical": 7.376,
    "zlsma": 17.845,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 11.6299,
+   "adx": 16.2823,
+   "plus_di": 20.738,
+   "minus_di": 20.321,
+   "avg_dollar_vol": 19242296
   },
   {
    "sym": "TSLA",
@@ -5173,7 +7924,14 @@
    "magical": -102.4761,
    "zlsma": 361.3519,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -10.0851,
+   "adx": 13.6791,
+   "plus_di": 16.8401,
+   "minus_di": 26.1936,
+   "avg_dollar_vol": 14946991985
   },
   {
    "sym": "TT",
@@ -5181,7 +7939,14 @@
    "magical": -62.9964,
    "zlsma": 494.3511,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 8.0498,
+   "adx": 12.1921,
+   "plus_di": 15.1689,
+   "minus_di": 20.8099,
+   "avg_dollar_vol": 612935725
   },
   {
    "sym": "TVTX",
@@ -5189,7 +7954,14 @@
    "magical": -67.7427,
    "zlsma": 60.328,
    "ce_mode": "BUY",
-   "ce_label": 55.14
+   "ce_label": 55.14,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 50.8951,
+   "adx": 26.9006,
+   "plus_di": 18.4859,
+   "minus_di": 20.3931,
+   "avg_dollar_vol": 94092265
   },
   {
    "sym": "TXN",
@@ -5197,7 +7969,14 @@
    "magical": -27.4824,
    "zlsma": 279.3465,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 31.8996,
+   "adx": 15.4643,
+   "plus_di": 19.6939,
+   "minus_di": 29.0614,
+   "avg_dollar_vol": 2685092900
   },
   {
    "sym": "TXNM",
@@ -5205,7 +7984,14 @@
    "magical": 186.2036,
    "zlsma": 56.724,
    "ce_mode": "BUY",
-   "ce_label": 57.61
+   "ce_label": 57.61,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -0.0688,
+   "adx": 37.3362,
+   "plus_di": 20.3019,
+   "minus_di": 17.4282,
+   "avg_dollar_vol": 96932932
   },
   {
    "sym": "TYL",
@@ -5213,7 +7999,14 @@
    "magical": -120.9877,
    "zlsma": 316.5288,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -25.6236,
+   "adx": 13.5141,
+   "plus_di": 22.488,
+   "minus_di": 31.5037,
+   "avg_dollar_vol": 214663732
   },
   {
    "sym": "UAL",
@@ -5221,7 +8014,14 @@
    "magical": -96.3547,
    "zlsma": 126.1249,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 11.9263,
+   "adx": 23.5994,
+   "plus_di": 21.7339,
+   "minus_di": 28.7921,
+   "avg_dollar_vol": 611372604
   },
   {
    "sym": "UAVS",
@@ -5229,7 +8029,14 @@
    "magical": -135.1603,
    "zlsma": 0.6958,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -40.181,
+   "adx": 31.4691,
+   "plus_di": 13.1332,
+   "minus_di": 32.5528,
+   "avg_dollar_vol": 522324
   },
   {
    "sym": "UBER",
@@ -5237,7 +8044,14 @@
    "magical": -162.2177,
    "zlsma": 74.1067,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -11.5719,
+   "adx": 10.1663,
+   "plus_di": 18.1832,
+   "minus_di": 23.6876,
+   "avg_dollar_vol": 1361877368
   },
   {
    "sym": "UDR",
@@ -5245,7 +8059,14 @@
    "magical": -58.0088,
    "zlsma": 39.8557,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.769,
+   "adx": 17.2617,
+   "plus_di": 23.8006,
+   "minus_di": 17.9487,
+   "avg_dollar_vol": 124748880
   },
   {
    "sym": "UNP",
@@ -5253,7 +8074,14 @@
    "magical": 70.278,
    "zlsma": 296.4261,
    "ce_mode": "BUY",
-   "ce_label": 291.65
+   "ce_label": 291.65,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 17.7702,
+   "adx": 36.2895,
+   "plus_di": 32.7285,
+   "minus_di": 16.065,
+   "avg_dollar_vol": 804007365
   },
   {
    "sym": "URA",
@@ -5261,7 +8089,14 @@
    "magical": -43.6029,
    "zlsma": 40.4599,
    "ce_mode": "BUY",
-   "ce_label": 38.41
+   "ce_label": 38.41,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -17.5061,
+   "adx": 30.4894,
+   "plus_di": 21.016,
+   "minus_di": 33.2798,
+   "avg_dollar_vol": 115745443
   },
   {
    "sym": "URI",
@@ -5269,7 +8104,14 @@
    "magical": -99.5598,
    "zlsma": 1056.2847,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 15.1157,
+   "adx": 24.7892,
+   "plus_di": 18.305,
+   "minus_di": 27.6232,
+   "avg_dollar_vol": 468460031
   },
   {
    "sym": "USB",
@@ -5277,7 +8119,14 @@
    "magical": 154.704,
    "zlsma": 67.0557,
    "ce_mode": "BUY",
-   "ce_label": 62.33
+   "ce_label": 62.33,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 19.1811,
+   "adx": 35.4914,
+   "plus_di": 30.0093,
+   "minus_di": 12.2497,
+   "avg_dollar_vol": 589542237
   },
   {
    "sym": "USO",
@@ -5285,7 +8134,14 @@
    "magical": 151.5427,
    "zlsma": 111.85,
    "ce_mode": "BUY",
-   "ce_label": 123.56
+   "ce_label": 123.56,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 34.1073,
+   "adx": 22.4326,
+   "plus_di": 42.0364,
+   "minus_di": 18.9317,
+   "avg_dollar_vol": 800922465
   },
   {
    "sym": "V",
@@ -5293,7 +8149,14 @@
    "magical": 23.7724,
    "zlsma": 363.9589,
    "ce_mode": "BUY",
-   "ce_label": 347.43
+   "ce_label": 347.43,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 7.1618,
+   "adx": 32.8132,
+   "plus_di": 23.7995,
+   "minus_di": 14.0804,
+   "avg_dollar_vol": 3209741408
   },
   {
    "sym": "VISN",
@@ -5301,7 +8164,14 @@
    "magical": -82.0605,
    "zlsma": 13.5654,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -25.5097,
+   "adx": 24.0439,
+   "plus_di": 12.721,
+   "minus_di": 23.6149,
+   "avg_dollar_vol": 74954220
   },
   {
    "sym": "VLO",
@@ -5309,7 +8179,14 @@
    "magical": 105.0296,
    "zlsma": 308.3915,
    "ce_mode": "BUY",
-   "ce_label": 298.38
+   "ce_label": 298.38,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 45.5999,
+   "adx": 31.6423,
+   "plus_di": 34.6254,
+   "minus_di": 10.8536,
+   "avg_dollar_vol": 993366718
   },
   {
    "sym": "VLY",
@@ -5317,7 +8194,14 @@
    "magical": -101.1146,
    "zlsma": 15.272,
    "ce_mode": "BUY",
-   "ce_label": 14.43
+   "ce_label": 14.43,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 15.6334,
+   "adx": 13.4403,
+   "plus_di": 22.0593,
+   "minus_di": 22.4341,
+   "avg_dollar_vol": 96054795
   },
   {
    "sym": "VMI",
@@ -5325,7 +8209,14 @@
    "magical": -230.8525,
    "zlsma": 525.8724,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 6.9729,
+   "adx": 17.5941,
+   "plus_di": 13.7729,
+   "minus_di": 34.1492,
+   "avg_dollar_vol": 107230354
   },
   {
    "sym": "VRSK",
@@ -5333,7 +8224,14 @@
    "magical": 36.7062,
    "zlsma": 200.1261,
    "ce_mode": "BUY",
-   "ce_label": 192.02
+   "ce_label": 192.02,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -4.1668,
+   "adx": 29.1115,
+   "plus_di": 25.4339,
+   "minus_di": 14.882,
+   "avg_dollar_vol": 404924846
   },
   {
    "sym": "VRSN",
@@ -5341,7 +8239,14 @@
    "magical": -10.9223,
    "zlsma": 250.9078,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 2.4,
+   "adx": 17.8589,
+   "plus_di": 21.4683,
+   "minus_di": 28.9315,
+   "avg_dollar_vol": 201945168
   },
   {
    "sym": "VRT",
@@ -5349,7 +8254,14 @@
    "magical": -54.4684,
    "zlsma": 296.122,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 23.9733,
+   "adx": 9.9322,
+   "plus_di": 22.638,
+   "minus_di": 29.3307,
+   "avg_dollar_vol": 1876039192
   },
   {
    "sym": "VRTX",
@@ -5357,7 +8269,14 @@
    "magical": -98.1739,
    "zlsma": 499.5931,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 4.9076,
+   "adx": 24.0124,
+   "plus_di": 22.2808,
+   "minus_di": 20.0499,
+   "avg_dollar_vol": 904629504
   },
   {
    "sym": "VST",
@@ -5365,7 +8284,14 @@
    "magical": 154.294,
    "zlsma": 165.7238,
    "ce_mode": "BUY",
-   "ce_label": 151.73
+   "ce_label": 151.73,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 0.7301,
+   "adx": 11.7063,
+   "plus_di": 28.0471,
+   "minus_di": 19.5996,
+   "avg_dollar_vol": 683632199
   },
   {
    "sym": "VVV",
@@ -5373,7 +8299,14 @@
    "magical": -12.1467,
    "zlsma": 40.71,
    "ce_mode": "BUY",
-   "ce_label": 37.69
+   "ce_label": 37.69,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 14.2519,
+   "adx": 14.1308,
+   "plus_di": 22.9067,
+   "minus_di": 21.2237,
+   "avg_dollar_vol": 79474962
   },
   {
    "sym": "VZ",
@@ -5381,7 +8314,14 @@
    "magical": 54.6498,
    "zlsma": 41.1765,
    "ce_mode": "BUY",
-   "ce_label": 42.47
+   "ce_label": 42.47,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -0.3313,
+   "adx": 27.5533,
+   "plus_di": 24.127,
+   "minus_di": 21.1275,
+   "avg_dollar_vol": 1480327172
   },
   {
    "sym": "WCN",
@@ -5389,7 +8329,14 @@
    "magical": -43.9024,
    "zlsma": 178.7189,
    "ce_mode": "BUY",
-   "ce_label": 167.73
+   "ce_label": 167.73,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 1.0064,
+   "adx": 28.8457,
+   "plus_di": 27.1812,
+   "minus_di": 17.5481,
+   "avg_dollar_vol": 246594537
   },
   {
    "sym": "WM",
@@ -5397,7 +8344,14 @@
    "magical": 62.5799,
    "zlsma": 244.3828,
    "ce_mode": "BUY",
-   "ce_label": 231.3304
+   "ce_label": 231.3304,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 6.1826,
+   "adx": 28.1783,
+   "plus_di": 31.7706,
+   "minus_di": 16.4113,
+   "avg_dollar_vol": 500443301
   },
   {
    "sym": "WMB",
@@ -5405,7 +8359,14 @@
    "magical": -17.448,
    "zlsma": 73.629,
    "ce_mode": "BUY",
-   "ce_label": 72.99
+   "ce_label": 72.99,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 9.2051,
+   "adx": 14.8712,
+   "plus_di": 15.6429,
+   "minus_di": 23.7655,
+   "avg_dollar_vol": 568493911
   },
   {
    "sym": "WMS",
@@ -5413,7 +8374,14 @@
    "magical": -145.2413,
    "zlsma": 157.8347,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -3.9078,
+   "adx": 17.1581,
+   "plus_di": 19.3439,
+   "minus_di": 28.525,
+   "avg_dollar_vol": 104815287
   },
   {
    "sym": "WST",
@@ -5421,7 +8389,14 @@
    "magical": 31.2175,
    "zlsma": 370.1039,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 26.9366,
+   "adx": 26.9946,
+   "plus_di": 24.098,
+   "minus_di": 19.038,
+   "avg_dollar_vol": 276692610
   },
   {
    "sym": "WWD",
@@ -5429,7 +8404,14 @@
    "magical": -31.6203,
    "zlsma": 426.1636,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 17.8801,
+   "adx": 19.0529,
+   "plus_di": 19.6667,
+   "minus_di": 21.2964,
+   "avg_dollar_vol": 295701803
   },
   {
    "sym": "XEL",
@@ -5437,7 +8419,14 @@
    "magical": -5.9104,
    "zlsma": 80.5605,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 1.3858,
+   "adx": 10.0204,
+   "plus_di": 22.938,
+   "minus_di": 21.7151,
+   "avg_dollar_vol": 416270656
   },
   {
    "sym": "XENE",
@@ -5445,7 +8434,14 @@
    "magical": 32.3451,
    "zlsma": 72.8077,
    "ce_mode": "BUY",
-   "ce_label": 64.59
+   "ce_label": 64.59,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 34.3142,
+   "adx": 42.5871,
+   "plus_di": 30.7627,
+   "minus_di": 12.1387,
+   "avg_dollar_vol": 126884538
   },
   {
    "sym": "XLF",
@@ -5453,7 +8449,14 @@
    "magical": 48.9838,
    "zlsma": 57.741,
    "ce_mode": "BUY",
-   "ce_label": 55.84
+   "ce_label": 55.84,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 6.3233,
+   "adx": 33.836,
+   "plus_di": 26.4726,
+   "minus_di": 15.847,
+   "avg_dollar_vol": 1929360344
   },
   {
    "sym": "XLK",
@@ -5461,7 +8464,14 @@
    "magical": -43.5983,
    "zlsma": 171.0052,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 16.8142,
+   "adx": 17.41,
+   "plus_di": 19.2637,
+   "minus_di": 28.4275,
+   "avg_dollar_vol": 1857558018
   },
   {
    "sym": "XLY",
@@ -5469,7 +8479,14 @@
    "magical": -114.4531,
    "zlsma": 115.6308,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": -2.7938,
+   "adx": 8.6342,
+   "plus_di": 21.7152,
+   "minus_di": 26.6666,
+   "avg_dollar_vol": 970963899
   },
   {
    "sym": "XOM",
@@ -5477,7 +8494,14 @@
    "magical": 176.3613,
    "zlsma": 141.4312,
    "ce_mode": "BUY",
-   "ce_label": 148.27
+   "ce_label": 148.27,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 12.1972,
+   "adx": 21.7214,
+   "plus_di": 42.3589,
+   "minus_di": 19.7513,
+   "avg_dollar_vol": 2391187440
   },
   {
    "sym": "XPO",
@@ -5485,7 +8509,14 @@
    "magical": 100.7991,
    "zlsma": 213.9688,
    "ce_mode": "BUY",
-   "ce_label": 206.02
+   "ce_label": 206.02,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 19.8274,
+   "adx": 10.9773,
+   "plus_di": 20.6017,
+   "minus_di": 17.1759,
+   "avg_dollar_vol": 242432522
   },
   {
    "sym": "XYZ",
@@ -5493,7 +8524,14 @@
    "magical": -32.9202,
    "zlsma": 82.5119,
    "ce_mode": "BUY",
-   "ce_label": 77.44
+   "ce_label": 77.44,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 14.629,
+   "adx": 23.5716,
+   "plus_di": 26.629,
+   "minus_di": 19.5184,
+   "avg_dollar_vol": 426100659
   },
   {
    "sym": "YOU",
@@ -5501,7 +8539,14 @@
    "magical": -148.8115,
    "zlsma": 54.0561,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 19.3861,
+   "adx": 12.049,
+   "plus_di": 17.466,
+   "minus_di": 24.7242,
+   "avg_dollar_vol": 71126936
   },
   {
    "sym": "ZD",
@@ -5509,7 +8554,14 @@
    "magical": 5.6803,
    "zlsma": 57.4245,
    "ce_mode": "BUY",
-   "ce_label": 51.76
+   "ce_label": 51.76,
+   "short_stop": null,
+   "regime": "PASS",
+   "pct_vs_200": 30.6676,
+   "adx": 36.5718,
+   "plus_di": 27.1341,
+   "minus_di": 18.1644,
+   "avg_dollar_vol": 35872404
   },
   {
    "sym": "ZETA",
@@ -5517,7 +8569,14 @@
    "magical": -46.3017,
    "zlsma": 20.8843,
    "ce_mode": "SELL",
-   "ce_label": null
+   "ce_label": null,
+   "short_stop": null,
+   "regime": "REPAIR",
+   "pct_vs_200": 7.3804,
+   "adx": 17.1191,
+   "plus_di": 20.3213,
+   "minus_di": 23.6469,
+   "avg_dollar_vol": 180354108
   },
   {
    "sym": "ZTS",
@@ -5525,7 +8584,14 @@
    "magical": -59.3342,
    "zlsma": 89.0664,
    "ce_mode": "BUY",
-   "ce_label": 72.38
+   "ce_label": 72.38,
+   "short_stop": null,
+   "regime": "DEEP-FAIL",
+   "pct_vs_200": -34.2356,
+   "adx": 23.0742,
+   "plus_di": 18.8345,
+   "minus_di": 24.9583,
+   "avg_dollar_vol": 472112568
   }
  ],
  "scanner_enrich": {

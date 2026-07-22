@@ -120,9 +120,18 @@ def main():
         "run_note": (f"Full universe read on candles. {len(fresh)} fresh BUY signals "
                      f"culled to {len(passing)} by the regime + ADX + DI + ZLSMA stack."),
         "data_quality": dq, "hits": list(hits.values()), "sell_mode": sells,
+        # Carry the regime/liquidity fields on EVERY name, not just fresh hits.
+        # Without them the Sell Mode short ranking has no inputs and scores every
+        # name identically - which is how it shipped broken the first time.
         "all_names": [{"sym": r["rname"], "last": r.get("last"),
                        "magical": r.get("magical"), "zlsma": r.get("zlsma"),
-                       "ce_mode": r.get("ce_mode"), "ce_label": r.get("long_stop")}
+                       "ce_mode": r.get("ce_mode"),
+                       "ce_label": r.get("long_stop") or r.get("short_stop"),
+                       "short_stop": r.get("short_stop"),
+                       "regime": r.get("regime"), "pct_vs_200": r.get("pct_vs_200"),
+                       "adx": r.get("adx"), "plus_di": r.get("plus_di"),
+                       "minus_di": r.get("minus_di"),
+                       "avg_dollar_vol": r.get("avg_dollar_vol")}
                       for r in ok],
         "scanner_enrich": enrich, "scanner_enrich_asof": "n/a (chart reads only)",
         "tracker_exit_watch": {},

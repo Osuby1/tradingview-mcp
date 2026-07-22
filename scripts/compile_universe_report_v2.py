@@ -28,7 +28,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from scan_workbook_style import (  # noqa: E402
     Col, write_table, readme_sheet, data_quality_sheet, notes_sheet,
     verdict_fill, split_note, safe, style_header_row,
-    FMT_PRICE, FMT_PCT, FMT_X, BOLD, RED_FONT, GREEN, AMBER,
+    FMT_PRICE, FMT_PCT, FMT_X, BOLD, RED_FONT, GREEN, AMBER, RED, GREY, SECTION,
+)
+from gate_stack import evaluate, funnel, MissingGateData, DEFAULT_POSITION  # noqa: E402
+from rank_candidates import (  # noqa: E402
+    score_long, score_short, rank_blocked_severity, SHORT_POLICY, RANK_RATIONALE,
 )
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -175,6 +179,66 @@ style_header_row(ws, ["Indicator", "Reading", "What This Means For Today"],
                  [34, 18, 92], freeze="A2", autofilter=False)
 for row in ctx.get("market_lines", []):
     ws.append([safe(x) for x in row])
+
+# Derive the market read from the scan itself + the radar/ignition state files,
+# rather than leaving the tab empty waiting for a hand-written context file.
+_ok_all = res.get("all_names") or []
+_sell = len(res.get("sell_mode") or [])
+_tot = len(_ok_all) or res.get("scanned") or 0
+if _tot:
+    _pct_sell = 100.0 * _sell / _tot
+    ws.append(["Breadth - names in sell mode", f"{_sell}/{_tot} ({_pct_sell:.0f}%)",
+               "Over half the market in downtrend means long setups are swimming "
+               "against the tide - size down or wait."
+               if _pct_sell >= 50 else
+               "Most names are not in downtrend - a normal tape for long setups."])
+_fresh_n = res.get("fresh_count") or 0
+_pass_n = sum(1 for h in res.get("hits", [])
+              if str(h.get("verdict") or "").startswith(("CANDIDATE", "STARTER")))
+ws.append(["Fresh buy signals", str(_fresh_n),
+           "Raw Chandelier flips before any gate."])
+ws.append(["Signals surviving all gates", str(_pass_n),
+           "What is actually tradeable. If this is 0, the honest answer is no trades."])
+if _fresh_n:
+    ws.append(["Signal survival rate", f"{100.0*_pass_n/_fresh_n:.0f}%",
+               "Low survival means the indicator is firing into a hostile tape."])
+
+# Pull the headline lines straight out of the radar / ignition state files.
+def _state_headlines(path, limit=8, section_kw="NEW"):
+    """Pull the bullet lines out of a state file's 'NEW since prior run' section.
+
+    First version stripped '-*' from the line start, which destroyed the '**'
+    it then tested for, so it silently returned nothing and the tab read
+    '(state not found)'. Match the section, then take bullets.
+    """
+    try:
+        txt = open(os.path.join(REPO, path), encoding="utf-8").read()
+    except OSError:
+        return []
+    lines, out, in_sec = txt.splitlines(), [], False
+    for ln in lines:
+        st = ln.strip()
+        if st.startswith("##"):
+            in_sec = section_kw.upper() in st.upper()
+            continue
+        if not in_sec or not st:
+            continue
+        if st.startswith(("-", "*", "·", "•")):
+            out.append(re.sub(r"\*\*", "", st.lstrip("-*·• ").strip()))
+        if len(out) >= limit:
+            break
+    return out
+
+ws.append([])
+ws.append(["IGNITION SWEEP - new since prior run"])
+ws.cell(row=ws.max_row, column=1).font = SECTION
+_ig = _state_headlines("watchlists/ignition-sweep-state.md", 12)
+if _ig:
+    for line in _ig:
+        ws.append(["", safe(line)])
+else:
+    ws.append(["", "(ignition sweep state not found - see Data Quality tab)"])
+
 ws.append([])
 ws.append(["ROTATION RADAR"])
 ws.cell(row=ws.max_row, column=1).font = BOLD
@@ -196,6 +260,17 @@ for row in ctx.get("rotation_commentary", []):
 
 # ------------------------------------------------------------ 2 Fresh Buys ---
 FRESH_COLS = [
+    Col("rank", "RANK", 7,
+        "Priority order, 1 = look at this first. Ranked by the composite BUY SCORE. "
+        "UNCALIBRATED - it is a transparent weighting of things that ought to matter, "
+        "NOT a measured edge. Use it to decide what to examine first, never as the "
+        "reason to take a trade."),
+    Col("buy_score", "BUY SCORE", 11,
+        "0-100 composite: risk quality 30 (how tight the stop is in ATR terms - "
+        "weighted highest because stop distance decides position size), trend "
+        "strength 25 (ADX + DI spread), regime 20 (distance above the 200-day), "
+        "structure 10 (room above the ZLSMA), freshness 10, liquidity 5. "
+        "Components are all shown on the Notes & Decisions tab.", FMT_PCT),
     Col("sym", "Ticker", 9, "The stock symbol."),
     Col("company", "Company", 30, "Company name, so you know what you are buying."),
     Col("sector", "Sector", 20, "Sector - use it to spot when several signals are the same bet."),
@@ -241,6 +316,9 @@ FRESH_COLS = [
 ]
 
 
+SCORED = {}   # sym -> (score, components, pros, cons); reused by Notes & Plans
+
+
 def fresh_rows():
     out = []
     for sym, h in hits.items():
@@ -248,7 +326,22 @@ def fresh_rows():
         last, stop = h.get("last"), h.get("ce_label") or h.get("flip_level")
         risk = round((last - stop) / last * 100, 1) if (last and stop and last > stop) else None
         _, why, _ = split_note(h.get("note"))
+
+        g = h.get("gates") or {}
+        sc, comp, pros, cons = score_long({
+            "last": last, "long_stop": stop, "zlsma": h.get("zlsma"),
+            "atr": h.get("atr"), "adx": g.get("adx"), "plus_di": g.get("plus_di"),
+            "minus_di": g.get("minus_di"), "regime": g.get("regime") or h.get("regime"),
+            "pct_vs_200": g.get("pct_vs_200"), "avg_dollar_vol": g.get("avg_dollar_vol"),
+            "bars_back": h.get("bars_back"),
+        }, position=DEFAULT_POSITION)
+        # A blocked name can never outrank a live candidate, whatever it scores.
+        if str(h.get("verdict") or "").startswith("BLOCKED"):
+            sc = round(sc * 0.4, 1)
+        SCORED[sym] = (sc, comp, pros, cons)
+
         out.append({
+            "buy_score": sc,
             "sym": sym, "company": e.get("description"), "sector": e.get("sector"),
             "signal_date": h.get("signal_date_est"), "age": h.get("bars_back"),
             "last": last, "stop": stop, "risk_pct": risk,
@@ -260,12 +353,22 @@ def fresh_rows():
             "score": o.get("score"), "grade": o.get("grade"),
             "regime": h.get("regime"), "verdict": h.get("verdict"), "why": why,
         })
-    return sorted(out, key=lambda r: (str(r["verdict"] or "").startswith("BLOCKED"),
-                                      r["age"] if r["age"] is not None else 99))
+    out.sort(key=lambda r: -(r["buy_score"] or 0))
+    for i, r in enumerate(out, 1):
+        r["rank"] = i
+    return out
 
 
-write_table(wb.create_sheet("2 - Fresh Buys"), FRESH_COLS, fresh_rows(),
-            row_fill=verdict_fill)
+_fresh = fresh_rows()
+ws = wb.create_sheet("2 - Fresh Buys")
+write_table(ws, FRESH_COLS, _fresh, row_fill=verdict_fill)
+ws.append([])
+ws.append([safe("RANKED STRONGEST -> WEAKEST by BUY SCORE. The score is UNCALIBRATED - "
+                "a transparent weighting, not a measured edge. Blocked names are scored "
+                "down so they can never outrank a live candidate.")])
+ws.cell(row=ws.max_row, column=1).font = BOLD
+for k, v in RANK_RATIONALE.items():
+    ws.append([safe(f"  {k}"), safe(v)])
 
 # ---------------------------------------------------------------- 3 Plans ---
 PLAN_COLS = [
@@ -282,12 +385,68 @@ PLAN_COLS = [
     Col("i", "Alert", 14, "The alert ID armed for this level, so the trigger reminds you why."),
     Col("j", "Plan Notes", 60, "Conditions attached to the plan - what must be true to take it."),
 ]
-plan_rows = [dict(zip("abcdefghij", (list(r) + [None] * 10)[:10]))
-             for r in ctx.get("plans", [])]
-write_table(wb.create_sheet("3 - Plans"), PLAN_COLS, plan_rows)
+# Build plans from the gated candidates. Previously this tab was fed only by a
+# hand-written context file, so it was almost always EMPTY - which read as "no
+# work done" rather than "no name qualified". Now it is always populated: either
+# with real sized plans, or with an explicit statement of why there are none.
+ACCOUNT, RISK_UNIT, MAX_ORDER = 1_000_000.0, 5_000.0, 100_000.0
+plan_rows = []
+for r in _fresh:
+    v = str(r.get("verdict") or "")
+    if not v.startswith(("CANDIDATE", "STARTER")):
+        continue
+    last, stop = r.get("last"), r.get("stop")
+    if not (last and stop and last > stop):
+        continue
+    risk_ps = last - stop
+    shares = int(min(MAX_ORDER / last, RISK_UNIT / risk_ps))
+    dollars = shares * last
+    starter = v.startswith("STARTER")
+    if starter:                      # regime REPAIR -> half size
+        shares, dollars = shares // 2, (shares // 2) * last
+    target = last + 2 * risk_ps
+    plan_rows.append({
+        "a": r["sym"],
+        "b": "LIMIT (starter)" if starter else "LIMIT",
+        "c": round(last, 2), "d": round(stop, 2),
+        "e": f"${dollars:,.0f} ({shares:,} sh)",
+        "f": round(shares * risk_ps, 0),
+        "g": f"{target:.2f} @ 2:1",
+        "h": "VERIFY before entry - not captured by the scan",
+        "i": "not yet armed",
+        "j": (f"Rank #{r['rank']} of {len(_fresh)}, buy score {r['buy_score']}. "
+              f"Stop is the Chandelier level ({r.get('risk_pct')}% away). "
+              + ("HALF SIZE: regime REPAIR. " if starter else "")
+              + "Confirm the earnings date and check the ATR floor by hand - "
+                "neither is wired into the gate stack yet."),
+    })
+
+ws = wb.create_sheet("3 - Plans")
+write_table(ws, PLAN_COLS, plan_rows)
+if not plan_rows:
+    ws.append([])
+    ws.append([safe("NO PLANS - and that is a result, not an omission.")])
+    ws.cell(row=ws.max_row, column=1).font = RED_FONT
+    ws.append([safe(f"{len(_fresh)} fresh buy signals were scanned. None survived the "
+                    f"gate stack (regime, ADX, DI direction, ZLSMA, liquidity), so "
+                    f"there is nothing to size.")])
+    ws.append([safe("Do NOT relax a gate to make this tab non-empty. See the Blocked "
+                    "tab for exactly which gate stopped each name.")])
+ws.append([])
+ws.append([safe(f"Sizing basis: ${ACCOUNT:,.0f} account, ${RISK_UNIT:,.0f} risk per "
+                f"trade (0.5%), ${MAX_ORDER:,.0f} max order. Shares = the SMALLER of "
+                f"the order cap and the risk unit divided by stop distance.")])
 
 # -------------------------------------------------------------- 4 Blocked ---
 BLOCK_COLS = [
+    Col("rank", "RANK", 7,
+        "1 = WORST, i.e. furthest from ever being tradeable. The top of this list is "
+        "what to stop looking at; the BOTTOM is what is nearly there and worth "
+        "re-checking tomorrow."),
+    Col("severity", "How Badly It Fails", 13,
+        "Severity score. Higher = more gates failed and failed harder. Built from: "
+        "regime DEEP-FAIL 40 / REPAIR 15, no trend 20, sellers in control 15, "
+        "below ZLSMA 15, illiquid 25, plus distance below the 200-day.", FMT_PCT),
     Col("sym", "Ticker", 9, "The stock symbol."),
     Col("company", "Company", 30, "Company name."),
     Col("signal_date", "Signal Date", 12, "When the buy signal fired."),
@@ -304,30 +463,95 @@ for sym, h in hits.items():
     if v.startswith("BLOCKED"):
         e = enrich.get(sym, {})
         _, why, _ = split_note(h.get("note"))
-        block_rows.append({"sym": sym, "company": e.get("description"),
+        g = h.get("gates") or {}
+        sev, _reasons = rank_blocked_severity({
+            "regime": g.get("regime") or h.get("regime"), "adx": g.get("adx"),
+            "plus_di": g.get("plus_di"), "minus_di": g.get("minus_di"),
+            "last": h.get("last"), "zlsma": h.get("zlsma"),
+            "avg_dollar_vol": g.get("avg_dollar_vol"), "pct_vs_200": g.get("pct_vs_200"),
+        })
+        block_rows.append({"severity": sev,
+                           "sym": sym, "company": e.get("description"),
                            "signal_date": h.get("signal_date_est"),
                            "magical": h.get("magical"), "regime": h.get("regime"),
                            "gate": v.replace("BLOCKED: ", ""), "why": why})
-write_table(wb.create_sheet("4 - Blocked"), BLOCK_COLS, block_rows)
+block_rows.sort(key=lambda r: -(r["severity"] or 0))
+for i, r in enumerate(block_rows, 1):
+    r["rank"] = i
+
+ws = wb.create_sheet("4 - Blocked")
+write_table(ws, BLOCK_COLS, block_rows,
+            row_fill=lambda r: RED if (r["severity"] or 0) >= 60 else
+                               (AMBER if (r["severity"] or 0) >= 30 else GREY))
+ws.append([])
+ws.append([safe("RANKED WORST FIRST. Rank 1 is the most comprehensively unsuitable; "
+                "the names at the BOTTOM failed on one thing and are worth re-checking "
+                "tomorrow.")])
+ws.cell(row=ws.max_row, column=1).font = BOLD
+ws.append([])
+ws.append([safe("SHOULD YOU SHORT THESE? NO.")])
+ws.cell(row=ws.max_row, column=1).font = RED_FONT
+ws.append([safe("A failed long is not a good short. These names failed a test asking "
+                "'is this going up?' - answering no is not the same as 'this is going "
+                "down'. Many are blocked for reasons that say nothing about direction "
+                "at all: illiquid, earnings too close, stop too tight. See the Sell "
+                "Mode tab for the short discussion.")])
 
 # ------------------------------------------------------------ 5 Sell Mode ---
 SELL_COLS = [
+    Col("rank", "SHORT RANK", 11,
+        "1 = the most technically shortable name here. THIS IS NOT A RECOMMENDATION "
+        "TO SHORT - read the policy block below the table. It ranks which names are "
+        "in the cleanest downtrends, for exit/hedge decisions and for paper-trading "
+        "a short book before risking money."),
+    Col("short_score", "SHORT SCORE", 12,
+        "0-100 mirror of the buy score: downtrend depth 30, trend strength 25 "
+        "(ADX + DI spread the other way), structure below ZLSMA 15, stop quality 15, "
+        "squeeze safety 15. UNCALIBRATED and, unlike the long side, never tested "
+        "against forward returns at all.", FMT_PCT),
     Col("sym", "Ticker", 9, "The stock symbol."),
     Col("company", "Company", 32, "Company name."),
     Col("sector", "Sector", 22, "Sector."),
     Col("last", "Price", 10, "Latest price.", FMT_PRICE),
-    Col("magical", "Overbought / Oversold (CCI-20)", 16, "20-period CCI.", FMT_PCT),
     Col("pct200", "% vs 200-Day Average", 14, "How far below its long-term average it is.", FMT_PCT),
-    Col("rsi", "Heat Gauge (RSI)", 11, "Daily RSI.", FMT_PCT),
+    Col("adx", "Trend Strength (ADX)", 12, "Above 20 = a real downtrend, not chop.", FMT_PCT),
+    Col("di", "-DI vs +DI", 12, "Sellers vs buyers. Sellers need to be clearly ahead."),
+    Col("magical", "Overbought / Oversold (CCI-20)", 16, "20-period CCI.", FMT_PCT),
+    Col("risk", "Main Short Risk", 46,
+        "The specific reason this short could hurt you - squeeze, thinness, or being "
+        "already too far gone."),
 ]
-sell_rows = [{"sym": s, "company": enrich.get(s, {}).get("description"),
-              "sector": enrich.get(s, {}).get("sector"),
-              "last": allrows.get(s, {}).get("last"),
-              "magical": allrows.get(s, {}).get("magical"),
-              "pct200": enrich.get(s, {}).get("pct_vs_200d"),
-              "rsi": enrich.get(s, {}).get("rsi") and round(enrich[s]["rsi"], 1)}
-             for s in res.get("sell_mode", [])]
-write_table(wb.create_sheet("5 - Sell Mode"), SELL_COLS, sell_rows)
+sell_rows = []
+for s in res.get("sell_mode", []):
+    a = allrows.get(s, {}) or {}
+    row = {"last": a.get("last"), "zlsma": a.get("zlsma"),
+           "short_stop": a.get("short_stop") or a.get("ce_label"),
+           "adx": a.get("adx"), "plus_di": a.get("plus_di"),
+           "minus_di": a.get("minus_di"), "pct_vs_200": a.get("pct_vs_200"),
+           "avg_dollar_vol": a.get("avg_dollar_vol")}
+    sc, comp, pros, cons = score_short(row, position=DEFAULT_POSITION)
+    sell_rows.append({
+        "short_score": sc, "sym": s,
+        "company": enrich.get(s, {}).get("description"),
+        "sector": enrich.get(s, {}).get("sector"),
+        "last": a.get("last"), "pct200": row["pct_vs_200"], "adx": row["adx"],
+        "di": (f"{row['minus_di']:.0f} vs {row['plus_di']:.0f}"
+               if row["minus_di"] is not None and row["plus_di"] is not None else None),
+        "magical": a.get("magical"),
+        "risk": "; ".join(cons[:2]) if cons else "no specific flag - still unvalidated",
+    })
+sell_rows.sort(key=lambda r: -(r["short_score"] or 0))
+for i, r in enumerate(sell_rows, 1):
+    r["rank"] = i
+
+ws = wb.create_sheet("5 - Sell Mode")
+write_table(ws, SELL_COLS, sell_rows,
+            row_fill=lambda r: RED if (r["short_score"] or 0) >= 70 else None)
+ws.append([])
+for line in SHORT_POLICY.strip().split("\n"):
+    ws.append([safe(line)])
+    if line.strip().startswith("SHOULD YOU SHORT"):
+        ws.cell(row=ws.max_row, column=1).font = RED_FONT
 
 # ------------------------------------------------------- 6 Tracker Broken ---
 TRACK_COLS = [
@@ -350,13 +574,19 @@ ws.cell(row=ws.max_row, column=1).font = RED_FONT
 ws.append([safe(f"Coverage: {tw.get('coverage', '?')} - {tw.get('gap_note', '')}")])
 
 # ------------------------------------------------------ 7 Notes & Decisions ---
+_rank_of = {r["sym"]: r["rank"] for r in _fresh}
 note_rows = []
 for sym, h in hits.items():
     changed, _, full = split_note(h.get("note"))
-    if full:
-        note_rows.append({"sym": sym, "verdict": h.get("verdict"),
-                          "changed": changed, "reasoning": full})
-note_rows.sort(key=lambda r: (not r["changed"], r["sym"]))
+    sc, comp, pros, cons = SCORED.get(sym, (None, {}, [], []))
+    note_rows.append({
+        "rank": _rank_of.get(sym),
+        "sym": sym, "verdict": h.get("verdict"), "changed": changed,
+        "pros": ("* " + "\n* ".join(pros)) if pros else "(nothing argues for it)",
+        "cons": ("* " + "\n* ".join(cons)) if cons else "(no flags - genuinely clean)",
+        "reasoning": full or "(no narrative recorded)",
+    })
+note_rows.sort(key=lambda r: (r["rank"] is None, r["rank"] or 999))
 notes_sheet(wb.create_sheet("7 - Notes & Decisions"), note_rows)
 
 # ----------------------------------------------------------- 8 Data Quality ---
