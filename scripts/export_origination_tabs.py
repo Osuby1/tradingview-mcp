@@ -12,6 +12,67 @@ or standalone any time after the xlsx exists. Robust to tab-name and ticker-colu
 naming variations; skips missing tabs with a warning instead of failing.
 """
 import datetime
+
+# US market holidays that matter for the current window. Extend as needed - a
+# missing holiday only shifts the archive name by one day, it does not corrupt data.
+_HOLIDAYS_2026 = {
+    "2026-01-01", "2026-01-19", "2026-02-16", "2026-04-03", "2026-05-25",
+    "2026-06-19", "2026-07-03", "2026-09-07", "2026-11-26", "2026-12-25",
+}
+
+
+def data_date_from_workbook(xlsx_path):
+    """Read the scanner's own 'DATA AS OF: <date>' stamp. Authoritative.
+
+    Added 2026-07-22 alongside the scanner change that writes it. Prefer this
+    over any clock-based guess: Yahoo's posting lag varies, so inferring the
+    session from the run time is unreliable. A scan run at 15:50 on 2026-07-21
+    - well after the close - still returned 07-20 data.
+
+    Returns an ISO date string, or None if the stamp is absent (older workbook).
+    """
+    try:
+        import openpyxl
+        wb = openpyxl.load_workbook(xlsx_path, read_only=True, data_only=True)
+        if "READ ME FIRST" not in wb.sheetnames:
+            return None
+        for row in wb["READ ME FIRST"].iter_rows(values_only=True):
+            for cell in row:
+                if isinstance(cell, str) and "DATA AS OF:" in cell:
+                    m = re.search(r"(\d{4}-\d{2}-\d{2})", cell)
+                    if m:
+                        return m.group(1)
+        return None
+    except Exception:
+        return None
+
+
+def data_session_date(run_dt):
+    """Which trading session does a scan started at `run_dt` actually contain?
+
+    The scanner reads the most recent COMPLETED daily bar. So:
+      * run AFTER today's close  -> today's session
+      * run BEFORE today's close -> the previous trading day
+      * run on a weekend/holiday -> the previous trading day
+
+    This is why origination_scan_2026-07-21.xlsx held 07-20 prices: it was
+    produced by a scan that ran while the 7/21 session was still open. Naming
+    the archive by the RUN date made the file lie about its own contents, and
+    every downstream join was silently one session off.
+
+    `run_dt` is local (America/Chicago on this machine); the close is 15:00 local.
+    """
+    CLOSE_HOUR_LOCAL = 15  # 3pm Central = 4pm Eastern
+
+    d = run_dt.date()
+    if run_dt.hour < CLOSE_HOUR_LOCAL:
+        d -= datetime.timedelta(days=1)
+    # walk back over weekends and holidays
+    for _ in range(10):
+        if d.weekday() < 5 and d.isoformat() not in _HOLIDAYS_2026:
+            return d.isoformat()
+        d -= datetime.timedelta(days=1)
+    return d.isoformat()
 import json
 import os
 import re
@@ -106,12 +167,23 @@ def main():
         tracker_note = "(recommendations_log.csv not found)"
 
     all_syms = sorted({s for syms in tabs.values() for s in syms})
+    # Prefer the scanner's own stamp; fall back to the clock-based guess only
+    # for workbooks written before that stamp existed.
+    data_date_str = data_date_from_workbook(XLSX)
+    data_date_src = "scanner stamp"
+    if not data_date_str:
+        data_date_str = data_session_date(mtime)
+        data_date_src = "INFERRED from run time - scanner predates the DATA AS OF stamp"
     lines = [
         f"# Origination scan tabs — exported {datetime.date.today().isoformat()}",
         "",
         f"Source: origination_scan.xlsx (modified {mtime:%Y-%m-%d %H:%M}). "
         "Feeds the run-the-universe command: these tickers are merged into the "
         "O.G Chandelier scan universe alongside the three watchlists.",
+        "",
+        f"**DATA AS OF: {data_date_str} close** ({data_date_src}). The scanner reads "
+        f"the most recent COMPLETED session at run time, so a scan run intraday "
+        f"carries the PREVIOUS day's data. Join on this date, not on the export date.",
         "",
     ]
     for label in TAB_PATTERNS:
@@ -128,6 +200,7 @@ def main():
         "```json",
         json.dumps(
             {"exported": datetime.date.today().isoformat(),
+             "data_as_of": data_date_str,
              "xlsx_modified": mtime.strftime("%Y-%m-%d %H:%M"),
              "tabs": tabs, "all": all_syms, "tracker": tracker},
             indent=1),
@@ -138,14 +211,19 @@ def main():
     with open(OUT, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
-    # dated archive of the scanner's xlsx (it overwrites itself daily)
+    # dated archive of the scanner's xlsx (it overwrites itself daily).
+    # Named for the DATA date, not the run date - see data_session_date().
     import shutil
     arch_dir = os.path.join(REPO, "reports")
     os.makedirs(arch_dir, exist_ok=True)
-    arch = os.path.join(arch_dir, f"origination_scan_{datetime.date.today().isoformat()}.xlsx")
+    data_date = data_date_str
+    arch = os.path.join(arch_dir, f"origination_scan_{data_date}.xlsx")
     try:
         shutil.copy2(XLSX, arch)
         print(f"Archived: {arch}")
+        if data_date != datetime.date.today().isoformat():
+            print(f"  NOTE: scan ran {mtime:%Y-%m-%d %H:%M} local, so its data is "
+                  f"through {data_date} - archived under the DATA date, not today.")
     except OSError as e:
         print(f"WARNING: dated xlsx archive failed: {e}")
 
