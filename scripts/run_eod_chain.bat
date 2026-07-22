@@ -84,12 +84,22 @@ if "%UOK%"=="0" (
 
 :report
 rem -- 4. Compile the daily Excel report ------------------------
-rem compile_daily_report.py compiles TODAY's results only; if step 3
-rem wrote nothing it exits nonzero instead of rewriting an old report.
-echo [4/4] compile report... >> "%LOG%"
-python scripts\compile_daily_report.py >> "%LOG%" 2>&1
+rem Workbook v2 = the 8-sheet origination-workbook format (the one we
+rem actually want). It has no internal date guard, so check for TODAY's
+rem results JSON first - otherwise it would quietly rebuild an older
+rem day's workbook. v1 stays only as a fallback if v2 blows up.
+for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set TODAY=%%d
+echo [4/4] compile report v2 (8-sheet) for %TODAY%... >> "%LOG%"
+if not exist "%REPO%\watchlists\universe-results-%TODAY%.json" (
+    echo [4/4] SKIPPED: watchlists\universe-results-%TODAY%.json missing - refusing to rebuild an older workbook >> "%LOG%"
+    set RC=1
+    goto done
+)
+python scripts\compile_universe_report_v2.py %TODAY% >> "%LOG%" 2>&1
 if errorlevel 1 (
-    echo WARNING: no fresh report written this run - see compiler message above >> "%LOG%"
+    echo WARNING: v2 compiler failed - falling back to the sparse v1 report >> "%LOG%"
+    python scripts\compile_daily_report.py --date %TODAY% >> "%LOG%" 2>&1
+    if errorlevel 1 echo WARNING: v1 fallback also failed - no report written >> "%LOG%"
     set RC=1
 )
 
