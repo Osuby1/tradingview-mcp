@@ -99,10 +99,14 @@ Summary. Plus the EOD brief and the HQ Swing three-bucket lens.
   forecast returns. Use the order as "look at these first," never as "these will go
   up." The gates (rejections) are what work; the ranking is a sort.
 - The sweep needs the **live TradingView chart open** to read the indicators.
-- The fully-automated evening run (`run_eod_chain.bat`, Windows Task Scheduler) is
-  **currently DISABLED** — switched off 2026-07-22 to fix a bug where it shipped
-  yesterday's report labeled as today's. It is fixed and now fails loudly instead;
-  re-enable in Task Scheduler when you want it unattended.
+- The fully-automated evening run (`run_eod_chain.bat`, Windows Task Scheduler task
+  "EOD Universe Chain", weekdays 15:15 CT) is **ENABLED and runs the FULL pipeline**
+  as of 2026-07-22: extended ~480-name universe, candle sweep + gate stack (headless
+  Claude, needs the chart), then the deterministic Python analysis (rotation radar,
+  ignition sweep, HQ Swing lens, track record, outcome tracker) run directly in the
+  batch, then the full 12-tab workbook, then a commit. It **fails closed** — a failed
+  scan or verify stops the compile and the task exits non-zero with "EOD CHAIN
+  FAILED" in `reports\eod_chain.log`, so it can never ship a stale report as today's.
 
 ---
 

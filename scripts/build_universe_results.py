@@ -40,8 +40,17 @@ def load_sweep(path):
 
 def main():
     sweep_path, regime_path, date = sys.argv[1], sys.argv[2], sys.argv[3]
+
+    # The regime file is optional BACKFILL. og_sweep_runner.js now captures regime/
+    # ADX/DI/ATR/ADV inline on every row, so a missing or non-{"rows"} file (e.g.
+    # the raw sweep passed as both args by the EOD chain) is fine - fall back to {}.
+    try:
+        _rf = json.load(open(regime_path))
+        _reg_rows = _rf["rows"] if isinstance(_rf, dict) and "rows" in _rf else []
+    except (OSError, ValueError, KeyError, TypeError):
+        _reg_rows = []
     rows = load_sweep(sweep_path)
-    reg = {r["sym"]: r for r in json.load(open(regime_path))["rows"] if r.get("ok", True)}
+    reg = {r["sym"]: r for r in _reg_rows if r.get("ok", True)}
 
     ok = [r for r in rows if r.get("ok")]
     buys = [r for r in ok if r.get("ce_mode") == "BUY"]
