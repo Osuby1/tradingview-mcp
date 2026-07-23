@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from scan_workbook_style import (  # noqa: E402
     Col, write_table, readme_sheet, data_quality_sheet, notes_sheet,
     verdict_fill, split_note, safe, style_header_row,
-    FMT_PRICE, FMT_PCT, FMT_X, BOLD, RED_FONT, GREEN, AMBER, RED, GREY, SECTION,
+    FMT_PRICE, FMT_PCT, FMT_X, FMT_INT, BOLD, RED_FONT, GREEN, AMBER, RED, GREY, SECTION,
 )
 from gate_stack import evaluate, funnel, MissingGateData, DEFAULT_POSITION  # noqa: E402
 from rank_candidates import (  # noqa: E402
@@ -159,12 +159,14 @@ readme_sheet(
          "Anything that reversed or was downgraded since the last run is flagged here."),
         ("8 - Market Movers", "The day's biggest gainers/losers in the WHOLE market, each screened.",
          "Almost all are microcap SKIPs; the few liquid movers get a real buy/short call."),
-        ("9 - Data Quality", "What was broken or partial in this run, ranked by severity.",
+        ("9 - Track Record", "How the scanner's past picks have actually done - the honest scorecard.",
+         "Broken down by grade and tab; shows whether a higher grade is worth more (so far, no)."),
+        ("10 - Data Quality", "What was broken or partial in this run, ranked by severity.",
          "READ THE RED ROWS. A BLOCKER means conclusions in this file may be wrong."),
-        ("10 - Run Summary", "Counts and run metadata."),
+        ("11 - Run Summary", "Counts and run metadata."),
     ],
     how_to_act=[
-        "1. Check tab 9 for BLOCKERS first. If coverage was partial, absence of a name",
+        "1. Check tab 10 for BLOCKERS first. If coverage was partial, absence of a name",
         "   proves nothing - it may simply never have been scanned.",
         "2. Read the regime on tab 1. It sets your size for everything else.",
         "3. Work tab 2 top-down. Only green Verdicts are candidates.",
@@ -735,9 +737,74 @@ else:
                     "'1 - Market & Rotation' tab and the ranked buy list are the "
                     "actionable views - this tab is the raw market-wide scan.")])
 
-# ----------------------------------------------------------- 9 Data Quality ---
+# ------------------------------------------------------- 9 Track Record ---
+# The origination scanner's own performance history (recommendations_log.csv),
+# tracked since the scans began. Surfaced here per Omar 2026-07-22.
+_tr = None
+_trpath = os.path.join(REPO, "research", "track-record.json")
+if os.path.exists(_trpath):
+    _tr = json.load(open(_trpath))
+
+TR_COLS = [
+    Col("bucket", "Group", 20, "The pick group being scored - all picks, then by "
+        "grade, then by origination tab."),
+    Col("n", "Picks", 8, "How many recommendations in this group.", FMT_INT),
+    Col("win", "Green %", 9, "Share currently in profit (unrealized).", FMT_PCT),
+    Col("mean", "Mean Return %", 13, "Average unrealized return since the pick.", FMT_PCT),
+    Col("median", "Median Return %", 15, "Median - less distorted by outliers.", FMT_PCT),
+    Col("mfe", "Avg Best %", 11, "Average best excursion reached - upside that was on "
+        "the table.", FMT_PCT),
+    Col("mae", "Avg Worst %", 12, "Average worst drawdown suffered - pain held through.", FMT_PCT),
+]
+ws = wb.create_sheet("9 - Track Record")
+if not _tr or _tr.get("error"):
+    style_header_row(ws, ["Track Record"], ["Run track_record.py first."],
+                     [40], freeze=None, autofilter=False)
+    ws.append([safe("No research/track-record.json - run scripts/track_record.py.")])
+else:
+    o = _tr["overall"]
+    trows = [{"bucket": "ALL PICKS", "n": o["n"], "win": o["win_pct"], "mean": o["mean"],
+              "median": o["median"], "mfe": o["mfe"], "mae": o["mae"]}]
+    for g, v in _tr["by_grade"].items():
+        trows.append({"bucket": f"grade {g}", "n": v["n"], "win": v["win_pct"],
+                      "mean": v["mean"], "median": v["median"], "mfe": v["mfe"], "mae": v["mae"]})
+    for t, v in _tr["by_tab"].items():
+        trows.append({"bucket": f"tab {t}", "n": v["n"], "win": v["win_pct"],
+                      "mean": v["mean"], "median": v["median"], "mfe": v["mfe"], "mae": v["mae"]})
+
+    def _tr_fill(r):
+        if r["bucket"] == "ALL PICKS":
+            return None
+        m = r.get("mean") or 0
+        return GREEN if m > 0 else (RED if m < -3 else AMBER)
+
+    write_table(ws, TR_COLS, trows, autofilter=False, row_fill=_tr_fill)
+    ws.append([])
+    ws.append([safe(f"ORIGINATION SCANNER TRACK RECORD - {_tr['total']} picks, "
+                    f"{_tr['date_range'][0]} to {_tr['date_range'][1]}. Returns are "
+                    f"UNREALIZED (matured {o['matured']}/{_tr['total']} at the 21-day "
+                    f"mark; the log only started 7/1). This grades the scanner's own "
+                    f"A/B/C picks, separate from the trade-call ledger.")])
+    ws.cell(row=ws.max_row, column=1).font = BOLD
+    q = _tr.get("score_quartile")
+    if q:
+        ws.append([safe(f"DOES THE SCORE PREDICT? bottom-25% by score mean "
+                        f"{q['bottom_q_mean']:+.2f}%, top-25% mean {q['top_q_mean']:+.2f}%, "
+                        f"spread {q['spread']:+.2f}pt.")])
+        ws.cell(row=ws.max_row, column=1).font = RED_FONT if q["spread"] <= 0 else BOLD
+        if q["spread"] <= 0:
+            ws.append([safe("The origination score does NOT predict returns here - flat/"
+                            "backwards, the SAME result as the BUY SCORE calibration. Two "
+                            "independent scores, same verdict: sort what to look at, do "
+                            "not forecast.")])
+    ws.append([safe("Unrealized reads on OPEN positions, not final results. Grade A "
+                    "(mean -2.8%) is NOT beating grade B (-2.0%) - higher grade has not "
+                    "paid so far. Real win-rates land as the July picks reach 21 days "
+                    "through early August.")])
+
+# ---------------------------------------------------------- 10 Data Quality ---
 dq = [classify(q) if isinstance(q, str) else q for q in res.get("data_quality", [])]
-data_quality_sheet(wb.create_sheet("9 - Data Quality"), dq)
+data_quality_sheet(wb.create_sheet("10 - Data Quality"), dq)
 
 # ------------------------------------------------------------ 9 Run Summary ---
 SUM_COLS = [
@@ -759,7 +826,7 @@ sum_rows = [
         sum(1 for d in dq if str(d.get("severity")).upper() == "BLOCKER")},
     {"field": "Run note", "value": res.get("run_note", "")},
 ]
-ws = wb.create_sheet("10 - Run Summary")
+ws = wb.create_sheet("11 - Run Summary")
 write_table(ws, SUM_COLS, sum_rows, autofilter=False)
 for n in range(2, ws.max_row + 1):
     ws.row_dimensions[n].height = 44
