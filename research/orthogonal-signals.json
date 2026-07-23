@@ -1,0 +1,1107 @@
+{
+ "orthogonality_vs_momentum": 0.008369710312456232,
+ "rows": [
+  {
+   "sym": "NVDA",
+   "score": 96.3,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.852,
+   "eps_growth": 2.106,
+   "rec_mean": 1.29508,
+   "upside": 0.42802782231443937,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 1.0,
+    "eps_growth": 1.0,
+    "analyst": 0.85246,
+    "upside": 1.0
+   }
+  },
+  {
+   "sym": "META",
+   "score": 95.6,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.331,
+   "eps_growth": 0.609,
+   "rec_mean": 1.34921,
+   "upside": 0.3170486470972784,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 1.0,
+    "eps_growth": 1.0,
+    "analyst": 0.825395,
+    "upside": 1.0
+   }
+  },
+  {
+   "sym": "MP",
+   "score": 95.4,
+   "n_signals": 3,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 1.186,
+   "eps_growth": null,
+   "rec_mean": 1.27778,
+   "upside": 0.723265105078809,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 1.0,
+    "eps_growth": null,
+    "analyst": 0.86111,
+    "upside": 1.0
+   }
+  },
+  {
+   "sym": "MU",
+   "score": 94.7,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 3.457,
+   "eps_growth": 13.983,
+   "rec_mean": 1.42222,
+   "upside": 0.5710395214074291,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 1.0,
+    "eps_growth": 1.0,
+    "analyst": 0.78889,
+    "upside": 1.0
+   }
+  },
+  {
+   "sym": "PLTR",
+   "score": 89.1,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.847,
+   "eps_growth": 3.067,
+   "rec_mean": 1.875,
+   "upside": 0.47005250060207104,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 1.0,
+    "eps_growth": 1.0,
+    "analyst": 0.5625,
+    "upside": 1.0
+   }
+  },
+  {
+   "sym": "GOOG",
+   "score": 84.3,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.218,
+   "eps_growth": 0.812,
+   "rec_mean": 1.43077,
+   "upside": 0.25785814980550414,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.7266666666666667,
+    "eps_growth": 1.0,
+    "analyst": 0.784615,
+    "upside": 0.8595271660183472
+   }
+  },
+  {
+   "sym": "AMZN",
+   "score": 82.9,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.166,
+   "eps_growth": 0.767,
+   "rec_mean": 1.33333,
+   "upside": 0.27887318766591784,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.5533333333333333,
+    "eps_growth": 1.0,
+    "analyst": 0.833335,
+    "upside": 0.9295772922197262
+   }
+  },
+  {
+   "sym": "DELL",
+   "score": 76.5,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.875,
+   "eps_growth": 2.563,
+   "rec_mean": 1.77778,
+   "upside": 0.13409574468085106,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 1.0,
+    "eps_growth": 1.0,
+    "analyst": 0.61111,
+    "upside": 0.4469858156028369
+   }
+  },
+  {
+   "sym": "MSFT",
+   "score": 75.6,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.183,
+   "eps_growth": 0.231,
+   "rec_mean": 1.32759,
+   "upside": 0.42632397397140975,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.61,
+    "eps_growth": 0.5775,
+    "analyst": 0.836205,
+    "upside": 1.0
+   }
+  },
+  {
+   "sym": "LLY",
+   "score": 73.2,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.555,
+   "eps_growth": 1.681,
+   "rec_mean": 1.75862,
+   "upside": 0.09231253385611482,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 1.0,
+    "eps_growth": 1.0,
+    "analyst": 0.62069,
+    "upside": 0.3077084461870494
+   }
+  },
+  {
+   "sym": "SNOW",
+   "score": 71.1,
+   "n_signals": 3,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.335,
+   "eps_growth": null,
+   "rec_mean": 1.4902,
+   "upside": 0.11361090365944748,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 1.0,
+    "eps_growth": null,
+    "analyst": 0.7549,
+    "upside": 0.3787030121981583
+   }
+  },
+  {
+   "sym": "AMD",
+   "score": 68.9,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.378,
+   "eps_growth": 0.951,
+   "rec_mean": 1.4902,
+   "upside": -0.019318975974508157,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 1.0,
+    "eps_growth": 1.0,
+    "analyst": 0.7549,
+    "upside": 0.0
+   }
+  },
+  {
+   "sym": "COST",
+   "score": 68.9,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.215,
+   "eps_growth": 0.456,
+   "rec_mean": 2.0,
+   "upside": 0.16133148569518285,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.7166666666666667,
+    "eps_growth": 1.0,
+    "analyst": 0.5,
+    "upside": 0.5377716189839429
+   }
+  },
+  {
+   "sym": "C",
+   "score": 67.2,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.145,
+   "eps_growth": 0.451,
+   "rec_mean": 1.71429,
+   "upside": 0.16824196597353502,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.48333333333333334,
+    "eps_growth": 1.0,
+    "analyst": 0.642855,
+    "upside": 0.5608065532451167
+   }
+  },
+  {
+   "sym": "JPM",
+   "score": 65.5,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.304,
+   "eps_growth": 0.412,
+   "rec_mean": 2.17391,
+   "upside": 0.061715631371873414,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 1.0,
+    "eps_growth": 1.0,
+    "analyst": 0.4130450000000001,
+    "upside": 0.20571877123957805
+   }
+  },
+  {
+   "sym": "SPGI",
+   "score": 64.4,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.104,
+   "eps_growth": 0.28,
+   "rec_mean": 1.33333,
+   "upside": 0.20897520160350536,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.3466666666666667,
+    "eps_growth": 0.7000000000000001,
+    "analyst": 0.833335,
+    "upside": 0.6965840053450179
+   }
+  },
+  {
+   "sym": "GE",
+   "score": 62.7,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.211,
+   "eps_growth": 0.169,
+   "rec_mean": 1.45455,
+   "upside": 0.1833931240657698,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.7033333333333334,
+    "eps_growth": 0.4225,
+    "analyst": 0.772725,
+    "upside": 0.611310413552566
+   }
+  },
+  {
+   "sym": "BAC",
+   "score": 62.0,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.214,
+   "eps_growth": 0.275,
+   "rec_mean": 1.54167,
+   "upside": 0.10538201882505693,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.7133333333333334,
+    "eps_growth": 0.6875,
+    "analyst": 0.729165,
+    "upside": 0.35127339608352315
+   }
+  },
+  {
+   "sym": "ARM",
+   "score": 60.4,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.201,
+   "eps_growth": 0.49,
+   "rec_mean": 1.95,
+   "upside": 0.06687332392378265,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.67,
+    "eps_growth": 1.0,
+    "analyst": 0.525,
+    "upside": 0.22291107974594215
+   }
+  },
+  {
+   "sym": "AMAT",
+   "score": 58.4,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.114,
+   "eps_growth": 0.313,
+   "rec_mean": 1.48718,
+   "upside": 0.12481423310225304,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.38,
+    "eps_growth": 0.7825,
+    "analyst": 0.75641,
+    "upside": 0.4160474436741768
+   }
+  },
+  {
+   "sym": "GS",
+   "score": 57.7,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.425,
+   "eps_growth": 0.78,
+   "rec_mean": 2.6,
+   "upside": 0.03296303041340387,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 1.0,
+    "eps_growth": 1.0,
+    "analyst": 0.19999999999999996,
+    "upside": 0.10987676804467958
+   }
+  },
+  {
+   "sym": "NFLX",
+   "score": 57.6,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.134,
+   "eps_growth": 0.088,
+   "rec_mean": 1.72549,
+   "upside": 0.3903561943674303,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.4466666666666667,
+    "eps_growth": 0.21999999999999997,
+    "analyst": 0.637255,
+    "upside": 1.0
+   }
+  },
+  {
+   "sym": "FCX",
+   "score": 56.5,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.088,
+   "eps_growth": 1.503,
+   "rec_mean": 1.69565,
+   "upside": 0.0939859999999999,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.29333333333333333,
+    "eps_growth": 1.0,
+    "analyst": 0.652175,
+    "upside": 0.3132866666666664
+   }
+  },
+  {
+   "sym": "CAT",
+   "score": 54.8,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.222,
+   "eps_growth": 0.273,
+   "rec_mean": 2.07143,
+   "upside": 0.09115061114796874,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.74,
+    "eps_growth": 0.6825,
+    "analyst": 0.46428500000000006,
+    "upside": 0.3038353704932292
+   }
+  },
+  {
+   "sym": "QCOM",
+   "score": 52.2,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": -0.035,
+   "eps_growth": 1.621,
+   "rec_mean": 2.55556,
+   "upside": 0.2596557535728521,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.0,
+    "eps_growth": 1.0,
+    "analyst": 0.22222000000000008,
+    "upside": 0.8655191785761737
+   }
+  },
+  {
+   "sym": "COIN",
+   "score": 51.0,
+   "n_signals": 3,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": -0.308,
+   "eps_growth": null,
+   "rec_mean": 1.94118,
+   "upside": 0.33464928967011787,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.0,
+    "eps_growth": null,
+    "analyst": 0.52941,
+    "upside": 1.0
+   }
+  },
+  {
+   "sym": "TJX",
+   "score": 49.9,
+   "n_signals": 3,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.092,
+   "eps_growth": 0.286,
+   "rec_mean": null,
+   "upside": 0.14298680908564454,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.3066666666666667,
+    "eps_growth": 0.7149999999999999,
+    "analyst": null,
+    "upside": 0.4766226969521485
+   }
+  },
+  {
+   "sym": "DIS",
+   "score": 49.8,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.065,
+   "eps_growth": -0.314,
+   "rec_mean": 1.45161,
+   "upside": 0.3296825910086574,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.21666666666666667,
+    "eps_growth": 0.0,
+    "analyst": 0.774195,
+    "upside": 1.0
+   }
+  },
+  {
+   "sym": "NKE",
+   "score": 49.0,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": -0.011,
+   "eps_growth": 4.066,
+   "rec_mean": 2.48718,
+   "upside": 0.2111013977730396,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.0,
+    "eps_growth": 1.0,
+    "analyst": 0.25641,
+    "upside": 0.703671325910132
+   }
+  },
+  {
+   "sym": "TDY",
+   "score": 47.0,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.076,
+   "eps_growth": 0.203,
+   "rec_mean": 1.69231,
+   "upside": 0.13959677171406604,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.25333333333333335,
+    "eps_growth": 0.5075,
+    "analyst": 0.653845,
+    "upside": 0.4653225723802201
+   }
+  },
+  {
+   "sym": "PEP",
+   "score": 46.9,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.064,
+   "eps_growth": 1.36,
+   "rec_mean": 2.66667,
+   "upside": 0.1493482491706597,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.21333333333333335,
+    "eps_growth": 1.0,
+    "analyst": 0.16666500000000006,
+    "upside": 0.4978274972355323
+   }
+  },
+  {
+   "sym": "DVN",
+   "score": 46.3,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": -0.008,
+   "eps_growth": -0.757,
+   "rec_mean": 1.2963,
+   "upside": 0.3223295454545454,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.0,
+    "eps_growth": 0.0,
+    "analyst": 0.85185,
+    "upside": 1.0
+   }
+  },
+  {
+   "sym": "LOW",
+   "score": 43.7,
+   "n_signals": 3,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.103,
+   "eps_growth": -0.008,
+   "rec_mean": null,
+   "upside": 0.29056647908000977,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.3433333333333333,
+    "eps_growth": 0.0,
+    "analyst": null,
+    "upside": 0.9685549302666993
+   }
+  },
+  {
+   "sym": "KO",
+   "score": 43.0,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.121,
+   "eps_growth": 0.178,
+   "rec_mean": 1.75,
+   "upside": 0.07426216545012165,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.4033333333333333,
+    "eps_growth": 0.44499999999999995,
+    "analyst": 0.625,
+    "upside": 0.24754055150040552
+   }
+  },
+  {
+   "sym": "OXY",
+   "score": 42.6,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": -0.083,
+   "eps_growth": 2.574,
+   "rec_mean": 2.375,
+   "upside": 0.11758034782608684,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.0,
+    "eps_growth": 1.0,
+    "analyst": 0.3125,
+    "upside": 0.3919344927536228
+   }
+  },
+  {
+   "sym": "MCD",
+   "score": 42.6,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.094,
+   "eps_growth": 0.062,
+   "rec_mean": 2.11765,
+   "upside": 0.23808692188033542,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.31333333333333335,
+    "eps_growth": 0.155,
+    "analyst": 0.4411750000000001,
+    "upside": 0.7936230729344514
+   }
+  },
+  {
+   "sym": "ETN",
+   "score": 41.1,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.168,
+   "eps_growth": -0.102,
+   "rec_mean": 1.62963,
+   "upside": 0.12012877540488076,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.56,
+    "eps_growth": 0.0,
+    "analyst": 0.685185,
+    "upside": 0.40042925134960256
+   }
+  },
+  {
+   "sym": "URI",
+   "score": 33.9,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.072,
+   "eps_growth": 0.025,
+   "rec_mean": 1.72727,
+   "upside": 0.12471045156802507,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.24,
+    "eps_growth": 0.0625,
+    "analyst": 0.636365,
+    "upside": 0.41570150522675026
+   }
+  },
+  {
+   "sym": "CTRE",
+   "score": 32.1,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.032,
+   "eps_growth": 0.06,
+   "rec_mean": 1.38462,
+   "upside": 0.06545186408683334,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.10666666666666667,
+    "eps_growth": 0.15,
+    "analyst": 0.80769,
+    "upside": 0.21817288028944448
+   }
+  },
+  {
+   "sym": "PH",
+   "score": 31.3,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.106,
+   "eps_growth": -0.059,
+   "rec_mean": 1.68,
+   "upside": 0.0710010610134224,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.35333333333333333,
+    "eps_growth": 0.0,
+    "analyst": 0.66,
+    "upside": 0.2366702033780747
+   }
+  },
+  {
+   "sym": "COP",
+   "score": 30.9,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": -0.053,
+   "eps_growth": -0.234,
+   "rec_mean": 1.76,
+   "upside": 0.18461149928445142,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.0,
+    "eps_growth": 0.0,
+    "analyst": 0.62,
+    "upside": 0.6153716642815048
+   }
+  },
+  {
+   "sym": "BX",
+   "score": 30.7,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.057,
+   "eps_growth": 0.057,
+   "rec_mean": 2.08696,
+   "upside": 0.13134978016609677,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.19,
+    "eps_growth": 0.1425,
+    "analyst": 0.45652000000000004,
+    "upside": 0.4378326005536559
+   }
+  },
+  {
+   "sym": "ABBV",
+   "score": 30.5,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.124,
+   "eps_growth": -0.46,
+   "rec_mean": 1.74194,
+   "upside": 0.053663047769443306,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.41333333333333333,
+    "eps_growth": 0.0,
+    "analyst": 0.62903,
+    "upside": 0.17887682589814435
+   }
+  },
+  {
+   "sym": "HD",
+   "score": 27.0,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.048,
+   "eps_growth": -0.042,
+   "rec_mean": 1.94444,
+   "upside": 0.11734424498416063,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.16,
+    "eps_growth": 0.0,
+    "analyst": 0.52778,
+    "upside": 0.39114748328053545
+   }
+  },
+  {
+   "sym": "VZ",
+   "score": 26.5,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.029,
+   "eps_growth": 0.034,
+   "rec_mean": 2.26923,
+   "upside": 0.15425016933845126,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.09666666666666668,
+    "eps_growth": 0.085,
+    "analyst": 0.36538500000000007,
+    "upside": 0.5141672311281709
+   }
+  },
+  {
+   "sym": "UNP",
+   "score": 24.6,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.032,
+   "eps_growth": 0.046,
+   "rec_mean": 1.8,
+   "upside": 0.04821800656275621,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.10666666666666667,
+    "eps_growth": 0.11499999999999999,
+    "analyst": 0.6,
+    "upside": 0.1607266885425207
+   }
+  },
+  {
+   "sym": "PFE",
+   "score": 24.4,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.054,
+   "eps_growth": -0.094,
+   "rec_mean": 2.46429,
+   "upside": 0.15827800161160366,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.18,
+    "eps_growth": 0.0,
+    "analyst": 0.26785499999999995,
+    "upside": 0.5275933387053455
+   }
+  },
+  {
+   "sym": "PM",
+   "score": 24.1,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.091,
+   "eps_growth": -0.094,
+   "rec_mean": 1.75,
+   "upside": 0.010121770458054513,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.30333333333333334,
+    "eps_growth": 0.0,
+    "analyst": 0.625,
+    "upside": 0.03373923486018171
+   }
+  },
+  {
+   "sym": "JNJ",
+   "score": 24.0,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.066,
+   "eps_growth": -0.001,
+   "rec_mean": 1.91304,
+   "upside": 0.05852560341118007,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.22000000000000003,
+    "eps_growth": 0.0,
+    "analyst": 0.54348,
+    "upside": 0.19508534470393357
+   }
+  },
+  {
+   "sym": "PGR",
+   "score": 22.8,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.073,
+   "eps_growth": 0.043,
+   "rec_mean": 2.76,
+   "upside": 0.13285567615136418,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.24333333333333332,
+    "eps_growth": 0.10749999999999998,
+    "analyst": 0.1200000000000001,
+    "upside": 0.4428522538378806
+   }
+  },
+  {
+   "sym": "INTC",
+   "score": 21.1,
+   "n_signals": 3,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.072,
+   "eps_growth": null,
+   "rec_mean": 2.60417,
+   "upside": 0.058516858312219755,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.24,
+    "eps_growth": null,
+    "analyst": 0.19791500000000006,
+    "upside": 0.19505619437406585
+   }
+  },
+  {
+   "sym": "HON",
+   "score": 19.1,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.024,
+   "eps_growth": -0.433,
+   "rec_mean": 2.0,
+   "upside": 0.055334349113695946,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.08,
+    "eps_growth": 0.0,
+    "analyst": 0.5,
+    "upside": 0.1844478303789865
+   }
+  },
+  {
+   "sym": "VLO",
+   "score": 17.0,
+   "n_signals": 3,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.066,
+   "eps_growth": null,
+   "rec_mean": 2.42105,
+   "upside": -0.07603959217805234,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.22000000000000003,
+    "eps_growth": null,
+    "analyst": 0.2894749999999999,
+    "upside": 0.0
+   }
+  },
+  {
+   "sym": "DE",
+   "score": 16.5,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": -0.111,
+   "eps_growth": -0.098,
+   "rec_mean": 2.125,
+   "upside": 0.06702181680470254,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.0,
+    "eps_growth": 0.0,
+    "analyst": 0.4375,
+    "upside": 0.22340605601567515
+   }
+  },
+  {
+   "sym": "TXNM",
+   "score": 9.5,
+   "n_signals": 4,
+   "surprise": null,
+   "beat_rate": null,
+   "rev_growth": 0.046,
+   "eps_growth": -0.581,
+   "rec_mean": 2.83333,
+   "upside": 0.04273876500857643,
+   "subs": {
+    "surprise": null,
+    "beat_rate": null,
+    "rev_growth": 0.15333333333333335,
+    "eps_growth": 0.0,
+    "analyst": 0.08333499999999994,
+    "upside": 0.1424625500285881
+   }
+  }
+ ],
+ "momentum": {
+  "NVDA": 0.1264209759270012,
+  "META": -0.2693212634288481,
+  "MP": -0.0892683199750699,
+  "MU": 9.591580205755765,
+  "PLTR": -0.2632144384467122,
+  "GOOG": 0.8372858881293073,
+  "AMZN": 0.018068411073901114,
+  "DELL": 2.287642200543105,
+  "MSFT": -0.2952210768995518,
+  "LLY": 0.6321629284057031,
+  "SNOW": 0.13870246085011195,
+  "AMD": 2.294821514313023,
+  "COST": 0.0011662507644252251,
+  "C": 0.5275675289484723,
+  "JPM": 0.1210369962242408,
+  "SPGI": -0.25480696019410576,
+  "GE": 0.38394694104357985,
+  "BAC": 0.2316737898098442,
+  "ARM": 1.5080106618866047,
+  "AMAT": 3.0447835575772135,
+  "GS": 0.4258478958909786,
+  "NFLX": -0.38416422268092465,
+  "FCX": 0.5758488348851654,
+  "CAT": 1.4485099498481229,
+  "QCOM": 0.285669333502627,
+  "COIN": -0.6130082627536264,
+  "TJX": 0.2314465432206716,
+  "DIS": -0.18022232289922746,
+  "NKE": -0.4353132908675649,
+  "TDY": 0.21030089792634232,
+  "PEP": 0.020597530228630978,
+  "DVN": 0.27613388968131725,
+  "LOW": 0.0003020838491987199,
+  "KO": 0.2309857839808067,
+  "OXY": 0.12823000756121128,
+  "MCD": -0.07731967300463172,
+  "ETN": 0.12046452041565137,
+  "URI": 0.2938637551519232,
+  "CTRE": 0.3197317394341086,
+  "PH": 0.34802647312239854,
+  "COP": 0.12655538280988088,
+  "BX": -0.29495858729526436,
+  "ABBV": 0.36288713352835256,
+  "HD": -0.014838017035332496,
+  "VZ": 0.04008542448531527,
+  "UNP": 0.2532152947199411,
+  "PFE": 0.08740821092636875,
+  "PM": 0.1427119921206088,
+  "JNJ": 0.5801610828069983,
+  "PGR": -0.03925142361815359,
+  "INTC": 6.052020720357441,
+  "HON": 0.04095633839006907,
+  "VLO": 0.9294879070383673,
+  "DE": 0.22485242178189435,
+  "TXNM": 0.028947116829336705
+ }
+}
