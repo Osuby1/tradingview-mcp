@@ -29,6 +29,7 @@ often absent from 10-Ks (fewer events for some names).
 Usage: python scripts/edgar_sue_backtest.py
 """
 import json
+import os
 import statistics as st
 import time
 import urllib.request
@@ -48,6 +49,17 @@ UNIVERSE = [
     "TSLA","GM","F","DAL","UAL","NEE","DUK","SO","D",
 ]
 FWD = [20, 60]
+WINSOR_PCT = 2.5   # pre-registered 2026-07-22: winsorize fwd returns at 2.5/97.5
+
+
+def winsorize(vals, pct=WINSOR_PCT):
+    """Cap the extremes so a few small-cap 40%+ movers cannot hijack the means."""
+    xs = sorted(v for v in vals if v is not None)
+    if len(xs) < 20:
+        return {i: v for i, v in enumerate(vals)}
+    lo = xs[int(len(xs) * pct / 100)]
+    hi = xs[int(len(xs) * (100 - pct) / 100)]
+    return [None if v is None else min(max(v, lo), hi) for v in vals]
 
 
 def cik_map():
@@ -169,8 +181,14 @@ def _load_universe():
 
 
 def main():
+    import sys as _sys
     universe = _load_universe()
-    tag = "smallmid" if any(a.endswith(".json") for a in __import__("sys").argv[1:]) else "largecap"
+    jarg = next((a for a in _sys.argv[1:] if a.endswith(".json")), None)
+    if jarg:
+        base = os.path.basename(jarg).replace("-universe.json", "").replace(".json", "")
+        tag = base or "custom"
+    else:
+        tag = "largecap"
     print("fetching CIK map...")
     cm = cik_map()
     names = [s for s in universe if s in cm]
@@ -236,8 +254,20 @@ def main():
                 ev[f"fwd{n}"], ev[f"exc{n}"] = fr[0], fr[1]
     graded = [e for e in events if e.get(f"fwd{FWD[-1]}") is not None]
 
+    # Winsorize forward returns (pre-registered) so extreme small-cap movers cannot
+    # hijack the quintile means. Applied only for midcap/smallmid runs.
+    winsorized = tag in ("midcap", "smallmid")
+    if winsorized:
+        for n in FWD:
+            capped = winsorize([e.get(f"fwd{n}") for e in graded])
+            capex = winsorize([e.get(f"exc{n}") for e in graded])
+            for e, c, cx in zip(graded, capped, capex):
+                e[f"fwd{n}"], e[f"exc{n}"] = c, cx
+
     out = []
     out.append("# EDGAR SUE / PEAD backtest - hard facts")
+    if winsorized:
+        out.append(f"*(forward returns winsorized at {WINSOR_PCT}/{100-WINSOR_PCT} pct)*")
     out.append("")
     out.append(f"{len(names)} US names, **{len(graded)} earnings events** with a "
                f"point-in-time SUE and a full {FWD[-1]}-day forward window. Surprise "
