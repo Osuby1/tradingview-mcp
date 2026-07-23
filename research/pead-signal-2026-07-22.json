@@ -1,0 +1,18 @@
+{
+ "date": "2026-07-22",
+ "signal": "PEAD-SUE-20d (mid-cap, PAPER)",
+ "fresh_days": 18,
+ "min_sue": 0.5,
+ "n_candidates": 1,
+ "basket": [
+  {
+   "sym": "DPZ",
+   "sue": 0.7,
+   "filed": "2026-07-20",
+   "age_days": 2,
+   "eps": 4.07,
+   "price": 319.83
+  }
+ ],
+ "note": "Unproven-live signal (failed the 2-horizon bar; real 20d edge). Paper basket for forward validation vs SPY over ~20 sessions - NOT sized with real money."
+}
