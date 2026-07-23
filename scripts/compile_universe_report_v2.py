@@ -32,7 +32,8 @@ from scan_workbook_style import (  # noqa: E402
 )
 from gate_stack import evaluate, funnel, MissingGateData, DEFAULT_POSITION  # noqa: E402
 from rank_candidates import (  # noqa: E402
-    score_long, score_short, rank_blocked_severity, SHORT_POLICY, RANK_RATIONALE,
+    score_long, score_long_v2, score_short, rank_blocked_severity,
+    SHORT_POLICY, RANK_RATIONALE,
 )
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -277,12 +278,17 @@ FRESH_COLS = [
         "UNCALIBRATED - it is a transparent weighting of things that ought to matter, "
         "NOT a measured edge. Use it to decide what to examine first, never as the "
         "reason to take a trade."),
-    Col("buy_score", "BUY SCORE", 11,
-        "0-100 composite: risk quality 30 (how tight the stop is in ATR terms - "
-        "weighted highest because stop distance decides position size), trend "
-        "strength 25 (ADX + DI spread), regime 20 (distance above the 200-day), "
-        "structure 10 (room above the ZLSMA), freshness 10, liquidity 5. "
-        "Components are all shown on the Notes & Decisions tab.", FMT_PCT),
+    Col("buy_score", "BUY SCORE v2", 12,
+        "0-100 rank, re-weighted 2026-07-22 after calibration: trend (ADX/DI) 45, "
+        "structure (vs ZLSMA) 35, regime 15, freshness/liquidity 5. Risk quality "
+        "was REMOVED from the sort - it correlated NEGATIVELY with returns (-0.05) "
+        "and now shows only in the Risk column. STILL UNCALIBRATED: even v2 only "
+        "rank-correlates ~+0.1-0.2 with forward returns and did NOT beat v1 out of "
+        "sample. Use it to decide what to look at first, never as a forecast.", FMT_PCT),
+    Col("risk_flag", "Risk (stop x ATR)", 15,
+        "Stop distance in ATR multiples - the sizing/survival read, kept OUT of the "
+        "ranking because it does not predict returns. 1.0-4.0x is healthy; below 1x "
+        "gets noise-stopped, above 4x is a token position."),
     Col("sym", "Ticker", 9, "The stock symbol."),
     Col("company", "Company", 30, "Company name, so you know what you are buying."),
     Col("sector", "Sector", 20, "Sector - use it to spot when several signals are the same bet."),
@@ -340,20 +346,25 @@ def fresh_rows():
         _, why, _ = split_note(h.get("note"))
 
         g = h.get("gates") or {}
-        sc, comp, pros, cons = score_long({
+        feat = {
             "last": last, "long_stop": stop, "zlsma": h.get("zlsma"),
-            "atr": h.get("atr"), "adx": g.get("adx"), "plus_di": g.get("plus_di"),
+            "atr": h.get("atr") or g.get("atr"), "adx": g.get("adx"), "plus_di": g.get("plus_di"),
             "minus_di": g.get("minus_di"), "regime": g.get("regime") or h.get("regime"),
             "pct_vs_200": g.get("pct_vs_200"), "avg_dollar_vol": g.get("avg_dollar_vol"),
             "bars_back": h.get("bars_back"),
-        }, position=DEFAULT_POSITION)
+        }
+        # v2 ranks; v1 kept only for its pros/cons narrative (component breakdown).
+        sc, _v2comp, rflag = score_long_v2(feat, position=DEFAULT_POSITION)
+        _v1sc, comp, pros, cons = score_long(feat, position=DEFAULT_POSITION)
         # A blocked name can never outrank a live candidate, whatever it scores.
         if str(h.get("verdict") or "").startswith("BLOCKED"):
             sc = round(sc * 0.4, 1)
         SCORED[sym] = (sc, comp, pros, cons)
+        risk_txt = (f"{rflag['stop_x_atr']}x ({rflag['stop_pct']}%)"
+                    + ("" if rflag.get("ok") else " !") if rflag else "-")
 
         out.append({
-            "buy_score": sc,
+            "buy_score": sc, "risk_flag": risk_txt,
             "sym": sym, "company": e.get("description"), "sector": e.get("sector"),
             "signal_date": h.get("signal_date_est"), "age": h.get("bars_back"),
             "last": last, "stop": stop, "risk_pct": risk,

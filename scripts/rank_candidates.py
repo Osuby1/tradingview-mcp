@@ -147,6 +147,70 @@ def score_long(r, position=85_000.0):
     return score, c, pros, cons
 
 
+# --------------------------------------------------------------------------- #
+# score_long_v2 - re-weighted after the 2026-07-22 calibration.
+#
+# The calibration (170 signals, 60 names) found only TWO components with any
+# forward-return signal: trend (ADX/DI, Spearman +0.092) and structure (vs ZLSMA,
+# +0.086). Risk quality - the 30%-weight driver of v1 - was NEGATIVE (-0.052).
+# Omar's instruction: re-weight toward trend + structure, stop letting risk
+# quality drive the sort.
+#
+# So v2 ranks on trend + structure + a small regime tilt. Risk quality is REMOVED
+# from the ranking and returned separately as risk_flag - it is a sizing/survival
+# input, not a return predictor, and dressing it up as "quality" was the v1 error.
+#
+# HONESTY: these weights were chosen FROM the calibration sample, so any in-sample
+# re-test is circular and optimistic. The only number that means anything is the
+# held-out test in calibrate_buy_score.py. Even that rests on a weak +0.09 signal
+# from one strong-tape window - treat v2 as "less wrong", not "calibrated".
+# --------------------------------------------------------------------------- #
+
+WEIGHTS_V2 = {"trend": 0.45, "structure": 0.35, "regime": 0.15,
+              "freshness": 0.03, "liquidity": 0.02}
+
+
+def score_long_v2(r, position=85_000.0):
+    """Re-weighted 0-100 rank. Returns (score, components, risk_flag)."""
+    last, stop, zl = r.get("last"), r.get("long_stop"), r.get("zlsma")
+    atr, adx = r.get("atr"), r.get("adx") or 0
+    pdi, ndi = r.get("plus_di") or 0, r.get("minus_di") or 0
+    regime = r.get("regime")
+    adv, bars = r.get("avg_dollar_vol") or 0, r.get("bars_back")
+
+    sub = {}
+    # trend 0-1: the strongest signal in the study
+    sub["trend"] = _clamp(0.6 * _clamp((adx - 15) / 25) + 0.4 * _clamp((pdi - ndi) / 20))
+    # structure 0-1: just above ZLSMA is best; below = 0; far above = decays
+    if last and zl and zl > 0:
+        above = (last / zl - 1) * 100
+        if above <= 0:
+            sub["structure"] = 0.0
+        elif above <= 12:
+            sub["structure"] = 1.0
+        else:
+            sub["structure"] = _clamp(1 - (above - 12) / 40)
+    else:
+        sub["structure"] = 0.0
+    # regime 0-1: weak but positive
+    sub["regime"] = {"PASS": 1.0, "REPAIR": 0.35}.get(regime, 0.0)
+    # freshness / liquidity: near-zero signal, kept as tiny operational nudges
+    sub["freshness"] = (1.0 if (bars is not None and 1 <= bars <= 3)
+                        else 0.6 if (bars is not None and bars <= 5) else 0.3)
+    sub["liquidity"] = _clamp((adv / 10.0 / position) / 3) if position else 0.0
+
+    score = round(100 * sum(WEIGHTS_V2[k] * sub[k] for k in WEIGHTS_V2), 1)
+
+    # risk_flag: sizing/survival read, NOT part of the sort
+    risk_flag = {}
+    if last and stop and atr and last > stop:
+        x = (last - stop) / atr
+        risk_flag = {"stop_pct": round((last - stop) / last * 100, 1),
+                     "stop_x_atr": round(x, 2),
+                     "ok": 1.0 <= x <= 4.0}
+    return score, {"sub": sub, "weights": WEIGHTS_V2}, risk_flag
+
+
 def score_short(r, position=85_000.0):
     """Best -> worst SHORT candidate. Mirror of the long test, plus squeeze checks.
 
