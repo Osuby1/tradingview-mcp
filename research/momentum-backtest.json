@@ -1,0 +1,172 @@
+{
+ "names": 135,
+ "months": 23,
+ "ic_mean": -0.005607952392337106,
+ "top_excess_monthly": 0.020359463258617788,
+ "hit_rate": 65.21739130434783,
+ "equity_top": 2.0576030026043197,
+ "equity_spy": 1.3573370464312005,
+ "curve": [
+  {
+   "month": "2024-08-01",
+   "top": 6.37,
+   "spy": 2.1,
+   "equity_top": 1.064,
+   "equity_spy": 1.021
+  },
+  {
+   "month": "2024-09-01",
+   "top": 2.44,
+   "spy": -0.89,
+   "equity_top": 1.09,
+   "equity_spy": 1.012
+  },
+  {
+   "month": "2024-10-01",
+   "top": 15.07,
+   "spy": 5.96,
+   "equity_top": 1.254,
+   "equity_spy": 1.072
+  },
+  {
+   "month": "2024-11-01",
+   "top": -4.0,
+   "spy": -2.41,
+   "equity_top": 1.204,
+   "equity_spy": 1.046
+  },
+  {
+   "month": "2024-12-01",
+   "top": 12.14,
+   "spy": 2.69,
+   "equity_top": 1.35,
+   "equity_spy": 1.075
+  },
+  {
+   "month": "2025-01-01",
+   "top": -6.2,
+   "spy": -1.27,
+   "equity_top": 1.266,
+   "equity_spy": 1.061
+  },
+  {
+   "month": "2025-02-01",
+   "top": -9.43,
+   "spy": -5.57,
+   "equity_top": 1.147,
+   "equity_spy": 1.002
+  },
+  {
+   "month": "2025-03-01",
+   "top": 5.72,
+   "spy": -0.87,
+   "equity_top": 1.212,
+   "equity_spy": 0.993
+  },
+  {
+   "month": "2025-04-01",
+   "top": 9.69,
+   "spy": 6.28,
+   "equity_top": 1.33,
+   "equity_spy": 1.056
+  },
+  {
+   "month": "2025-05-01",
+   "top": 9.21,
+   "spy": 5.14,
+   "equity_top": 1.452,
+   "equity_spy": 1.11
+  },
+  {
+   "month": "2025-06-01",
+   "top": 5.7,
+   "spy": 2.3,
+   "equity_top": 1.535,
+   "equity_spy": 1.135
+  },
+  {
+   "month": "2025-07-01",
+   "top": 2.32,
+   "spy": 2.05,
+   "equity_top": 1.57,
+   "equity_spy": 1.159
+  },
+  {
+   "month": "2025-08-01",
+   "top": 5.96,
+   "spy": 3.56,
+   "equity_top": 1.664,
+   "equity_spy": 1.2
+  },
+  {
+   "month": "2025-09-01",
+   "top": 1.62,
+   "spy": 2.38,
+   "equity_top": 1.691,
+   "equity_spy": 1.228
+  },
+  {
+   "month": "2025-10-01",
+   "top": -3.35,
+   "spy": 0.2,
+   "equity_top": 1.634,
+   "equity_spy": 1.231
+  },
+  {
+   "month": "2025-11-01",
+   "top": -1.11,
+   "spy": 0.08,
+   "equity_top": 1.616,
+   "equity_spy": 1.232
+  },
+  {
+   "month": "2025-12-01",
+   "top": 5.17,
+   "spy": 1.47,
+   "equity_top": 1.7,
+   "equity_spy": 1.25
+  },
+  {
+   "month": "2026-01-01",
+   "top": -0.83,
+   "spy": -0.86,
+   "equity_top": 1.686,
+   "equity_spy": 1.239
+  },
+  {
+   "month": "2026-02-01",
+   "top": -6.74,
+   "spy": -4.94,
+   "equity_top": 1.572,
+   "equity_spy": 1.178
+  },
+  {
+   "month": "2026-03-01",
+   "top": 20.49,
+   "spy": 10.51,
+   "equity_top": 1.894,
+   "equity_spy": 1.302
+  },
+  {
+   "month": "2026-04-01",
+   "top": 8.89,
+   "spy": 5.26,
+   "equity_top": 2.062,
+   "equity_spy": 1.37
+  },
+  {
+   "month": "2026-05-01",
+   "top": 4.34,
+   "spy": -1.03,
+   "equity_top": 2.152,
+   "equity_spy": 1.356
+  },
+  {
+   "month": "2026-06-01",
+   "top": -4.39,
+   "spy": 0.09,
+   "equity_top": 2.058,
+   "equity_spy": 1.357
+  }
+ ]
+}
