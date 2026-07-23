@@ -1,0 +1,52 @@
+{
+ "date": "2026-07-23",
+ "source": "stockanalysis.com/markets/gainers + /losers",
+ "note": "Whole-market movers, unscreened. Feeds the Market Movers workbook tab, where each name still gets the liquidity screen (price >= $5, cap >= $2B, $vol >= $25M) before any protocol run. Market caps and volumes are as displayed by the source, not from the TradingView feed.",
+ "gainers": [
+  {"sym": "LGCL", "company": "Lucas GC Limited", "price": 1.76, "pct_change": 84.97, "market_cap_raw": "75.31M", "volume": 62499580},
+  {"sym": "NVEC", "company": "NVE Corporation", "price": 134.21, "pct_change": 54.83, "market_cap_raw": "649.20M", "volume": 809658},
+  {"sym": "EHGO", "company": "Eshallgo Inc.", "price": 2.71, "pct_change": 53.98, "market_cap_raw": "7.26M", "volume": 79501797},
+  {"sym": "PAVS", "company": "Paranovus Entertainment Technology Ltd.", "price": 5.91, "pct_change": 52.32, "market_cap_raw": "3.10M", "volume": 16304431},
+  {"sym": "WLDS", "company": "Wearable Devices Ltd.", "price": 2.23, "pct_change": 50.68, "market_cap_raw": "4.87M", "volume": 25162052},
+  {"sym": "WBUY", "company": "Webuy Global Ltd", "price": 1.12, "pct_change": 47.76, "market_cap_raw": "5.83M", "volume": 173024033},
+  {"sym": "CJMB", "company": "Callan JMB Inc.", "price": 2.35, "pct_change": 39.88, "market_cap_raw": "13.27M", "volume": 31728562},
+  {"sym": "ADVB", "company": "Advanced Biomed Inc.", "price": 16.78, "pct_change": 36.98, "market_cap_raw": "27.72M", "volume": 11752581},
+  {"sym": "SKYQ", "company": "Sky Quarry Inc.", "price": 5.64, "pct_change": 36.56, "market_cap_raw": "27.04M", "volume": 33519076},
+  {"sym": "JEM", "company": "707 Cayman Holdings Limited", "price": 4.74, "pct_change": 34.28, "market_cap_raw": "3.19M", "volume": 24501709},
+  {"sym": "LICN", "company": "Lichen International Limited", "price": 1.19, "pct_change": 31.83, "market_cap_raw": "19.56M", "volume": 4308756},
+  {"sym": "ZYBT", "company": "Zhengye Biotechnology Holding Limited", "price": 1.80, "pct_change": 30.43, "market_cap_raw": "85.30M", "volume": 15196616},
+  {"sym": "VIVK", "company": "Vivakor, Inc.", "price": 2.12, "pct_change": 30.06, "market_cap_raw": "455.34K", "volume": 22201464},
+  {"sym": "YOUL", "company": "Youlife Group Inc.", "price": 0.78, "pct_change": 29.85, "market_cap_raw": "59.31M", "volume": 7120542},
+  {"sym": "AEHL", "company": "Antelope Enterprise Holdings Limited", "price": 0.717, "pct_change": 28.70, "market_cap_raw": "10.77M", "volume": 94846290},
+  {"sym": "NVCR", "company": "NovoCure Limited", "price": 19.99, "pct_change": 28.39, "market_cap_raw": "2.32B", "volume": 8933610},
+  {"sym": "RBNE", "company": "Robin Energy Ltd.", "price": 5.68, "pct_change": 27.35, "market_cap_raw": "2.49M", "volume": 549857},
+  {"sym": "THRM", "company": "Gentherm Incorporated", "price": 45.61, "pct_change": 26.52, "market_cap_raw": "1.40B", "volume": 1734697},
+  {"sym": "GSUN", "company": "Golden Sun Technology Group Limited", "price": 0.346, "pct_change": 26.14, "market_cap_raw": "3.02M", "volume": 17250686},
+  {"sym": "DOMO", "company": "Domo, Inc.", "price": 3.95, "pct_change": 25.40, "market_cap_raw": "178.34M", "volume": 30608596}
+ ],
+ "losers": [
+  {"sym": "SXTC", "company": "China SXT Pharmaceuticals, Inc.", "price": 0.333, "pct_change": -83.53, "market_cap_raw": "10.72M", "volume": 60176450},
+  {"sym": "ZCMD", "company": "Zhongchao Inc.", "price": 1.73, "pct_change": -59.67, "market_cap_raw": "2.00M", "volume": 29285304},
+  {"sym": "LESL", "company": "Leslie's, Inc.", "price": 1.33, "pct_change": -44.81, "market_cap_raw": "12.45M", "volume": 2033720},
+  {"sym": "NVVE", "company": "Nuvve Holding Corp.", "price": 3.23, "pct_change": -44.21, "market_cap_raw": "1.69M", "volume": 11549163},
+  {"sym": "CISS", "company": "C3is Inc.", "price": 0.962, "pct_change": -40.98, "market_cap_raw": "520.53K", "volume": 833593},
+  {"sym": "WHLR", "company": "Wheeler Real Estate Investment Trust, Inc.", "price": 0.233, "pct_change": -28.01, "market_cap_raw": "60.68K", "volume": 1065339},
+  {"sym": "NUWE", "company": "Nuwellis, Inc.", "price": 2.19, "pct_change": -23.16, "market_cap_raw": "184.09K", "volume": 345094},
+  {"sym": "JAGX", "company": "Jaguar Health, Inc.", "price": 1.03, "pct_change": -22.56, "market_cap_raw": "621.23K", "volume": 228606},
+  {"sym": "LBRT", "company": "Liberty Energy Inc.", "price": 19.62, "pct_change": -21.96, "market_cap_raw": "3.20B", "volume": 13668930},
+  {"sym": "SSTK", "company": "Shutterstock, Inc.", "price": 5.76, "pct_change": -21.95, "market_cap_raw": "211.61M", "volume": 4974459},
+  {"sym": "VEEE", "company": "Twin Vee Powercats Co.", "price": 14.50, "pct_change": -21.87, "market_cap_raw": "7.68M", "volume": 344501},
+  {"sym": "ACI", "company": "Albertsons Companies, Inc.", "price": 11.44, "pct_change": -21.64, "market_cap_raw": "5.60B", "volume": 47720997},
+  {"sym": "TAOP", "company": "Taoping Inc.", "price": 0.966, "pct_change": -20.84, "market_cap_raw": "9.27M", "volume": 77760},
+  {"sym": "AVAT", "company": "Avalanche Treasury Corporation", "price": 0.381, "pct_change": -20.04, "market_cap_raw": "17.27M", "volume": 623587},
+  {"sym": "RAY", "company": "Raytech Holding Limited", "price": 2.44, "pct_change": -20.00, "market_cap_raw": "6.65M", "volume": 8598},
+  {"sym": "STM", "company": "STMicroelectronics N.V.", "price": 53.49, "pct_change": -18.67, "market_cap_raw": "59.33B", "volume": 32169322},
+  {"sym": "RGP", "company": "Resources Connection, Inc.", "price": 3.76, "pct_change": -18.44, "market_cap_raw": "129.08M", "volume": 1972654},
+  {"sym": "WETO", "company": "Wetour Robotics Limited", "price": 0.114, "pct_change": -18.34, "market_cap_raw": "9.38M", "volume": 39382288},
+  {"sym": "KSCP", "company": "Knightscope, Inc.", "price": 1.70, "pct_change": -18.27, "market_cap_raw": "29.33M", "volume": 2494634},
+  {"sym": "HYFT", "company": "MindWalk Holdings Corp.", "price": 1.18, "pct_change": -18.06, "market_cap_raw": "58.61M", "volume": 742397}
+ ],
+ "data_quality": [
+  "Source page displays 20 rows per list, not 25 - gainers and losers are each the top 20."
+ ]
+}
