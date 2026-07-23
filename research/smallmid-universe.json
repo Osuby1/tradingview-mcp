@@ -1,0 +1,788 @@
+{
+ "filter": "$300M-$12B from scanner_enrich (7/20 Russell run)",
+ "count": 156,
+ "symbols": [
+  "ALTO",
+  "MLAB",
+  "XMAX",
+  "NVRI",
+  "HELE",
+  "CLYM",
+  "TRNS",
+  "MITK",
+  "EIG",
+  "KURA",
+  "MFA",
+  "BIOA",
+  "SCHL",
+  "NBN",
+  "ESQ",
+  "NMAX",
+  "SENEA",
+  "GOLD",
+  "MCB",
+  "IRMD",
+  "CMP",
+  "GHM",
+  "NWPX",
+  "NVAX",
+  "SBET",
+  "AI",
+  "NAT",
+  "ECVT",
+  "PRSU",
+  "HLX",
+  "PURR",
+  "BHRB",
+  "TBLA",
+  "LEG",
+  "SEPN",
+  "RYZ",
+  "LZB",
+  "BFC",
+  "SFL",
+  "CNOB",
+  "CBL",
+  "BY",
+  "HOPE",
+  "TDOC",
+  "BCAX",
+  "STGW",
+  "IIPR",
+  "TFIN",
+  "CASH",
+  "SNDA",
+  "LPG",
+  "ZD",
+  "SNDX",
+  "AMLX",
+  "INOD",
+  "SION",
+  "ASTH",
+  "HIMX",
+  "SHAK",
+  "TALO",
+  "ATEN",
+  "LCID",
+  "VISN",
+  "SOUN",
+  "DX",
+  "NVTS",
+  "DBD",
+  "WRBY",
+  "SMR",
+  "LUNR",
+  "ARQT",
+  "FHB",
+  "EXTR",
+  "ANF",
+  "STNG",
+  "COCO",
+  "NVST",
+  "COLD",
+  "CENX",
+  "VVV",
+  "RGTI",
+  "RELY",
+  "ASB",
+  "TVTX",
+  "FTDR",
+  "BB",
+  "ZETA",
+  "SBRA",
+  "SON",
+  "CAR",
+  "DNTH",
+  "MIDD",
+  "GTX",
+  "AUB",
+  "DUOL",
+  "ESNT",
+  "SRRK",
+  "CZR",
+  "FLG",
+  "M",
+  "CGON",
+  "CACC",
+  "BYD",
+  "AROC",
+  "PTCT",
+  "COGT",
+  "FNB",
+  "SFM",
+  "NOV",
+  "ACA",
+  "MIRM",
+  "SLAB",
+  "AVT",
+  "LSTR",
+  "FAF",
+  "TEX",
+  "CHRD",
+  "PBF",
+  "OKLO",
+  "YOU",
+  "MBLY",
+  "MAC",
+  "IDA",
+  "VLY",
+  "RHP",
+  "OSCR",
+  "HXL",
+  "MP",
+  "PL",
+  "TGTX",
+  "PCVX",
+  "EAT",
+  "CHYM",
+  "CBSH",
+  "ESE",
+  "POWL",
+  "PB",
+  "PRAX",
+  "NCLH",
+  "BRKR",
+  "GKOS",
+  "TKR",
+  "MSGS",
+  "GME",
+  "OGE",
+  "VMI",
+  "CFR",
+  "ERIE",
+  "CTRE",
+  "BMNR",
+  "WMS",
+  "SMMT",
+  "DPZ",
+  "BROS",
+  "CLX",
+  "HUT"
+ ],
+ "detail": [
+  {
+   "sym": "ALTO",
+   "cap": 394404000
+  },
+  {
+   "sym": "MLAB",
+   "cap": 538846529
+  },
+  {
+   "sym": "XMAX",
+   "cap": 543799897
+  },
+  {
+   "sym": "NVRI",
+   "cap": 606830222
+  },
+  {
+   "sym": "HELE",
+   "cap": 652410633
+  },
+  {
+   "sym": "CLYM",
+   "cap": 710061479
+  },
+  {
+   "sym": "TRNS",
+   "cap": 806849528
+  },
+  {
+   "sym": "MITK",
+   "cap": 839954609
+  },
+  {
+   "sym": "EIG",
+   "cap": 908953574
+  },
+  {
+   "sym": "KURA",
+   "cap": 941896017
+  },
+  {
+   "sym": "MFA",
+   "cap": 949416817
+  },
+  {
+   "sym": "BIOA",
+   "cap": 997963897
+  },
+  {
+   "sym": "SCHL",
+   "cap": 1009389791
+  },
+  {
+   "sym": "NBN",
+   "cap": 1033669226
+  },
+  {
+   "sym": "ESQ",
+   "cap": 1050684418
+  },
+  {
+   "sym": "NMAX",
+   "cap": 1062992069
+  },
+  {
+   "sym": "SENEA",
+   "cap": 1086287822
+  },
+  {
+   "sym": "GOLD",
+   "cap": 1139291834
+  },
+  {
+   "sym": "MCB",
+   "cap": 1213326672
+  },
+  {
+   "sym": "IRMD",
+   "cap": 1227810522
+  },
+  {
+   "sym": "CMP",
+   "cap": 1247841210
+  },
+  {
+   "sym": "GHM",
+   "cap": 1263110691
+  },
+  {
+   "sym": "NWPX",
+   "cap": 1283721677
+  },
+  {
+   "sym": "NVAX",
+   "cap": 1317149392
+  },
+  {
+   "sym": "SBET",
+   "cap": 1334904894
+  },
+  {
+   "sym": "AI",
+   "cap": 1340952347
+  },
+  {
+   "sym": "NAT",
+   "cap": 1362615515
+  },
+  {
+   "sym": "ECVT",
+   "cap": 1373641255
+  },
+  {
+   "sym": "PRSU",
+   "cap": 1410043952
+  },
+  {
+   "sym": "HLX",
+   "cap": 1413306037
+  },
+  {
+   "sym": "PURR",
+   "cap": 1420095894
+  },
+  {
+   "sym": "BHRB",
+   "cap": 1420561410
+  },
+  {
+   "sym": "TBLA",
+   "cap": 1422653259
+  },
+  {
+   "sym": "LEG",
+   "cap": 1456426008
+  },
+  {
+   "sym": "SEPN",
+   "cap": 1492000144
+  },
+  {
+   "sym": "RYZ",
+   "cap": 1535906175
+  },
+  {
+   "sym": "LZB",
+   "cap": 1575148402
+  },
+  {
+   "sym": "BFC",
+   "cap": 1617549951
+  },
+  {
+   "sym": "SFL",
+   "cap": 1647345071
+  },
+  {
+   "sym": "CNOB",
+   "cap": 1661531734
+  },
+  {
+   "sym": "CBL",
+   "cap": 1688345981
+  },
+  {
+   "sym": "BY",
+   "cap": 1718513354
+  },
+  {
+   "sym": "HOPE",
+   "cap": 1730299245
+  },
+  {
+   "sym": "TDOC",
+   "cap": 1752782180
+  },
+  {
+   "sym": "BCAX",
+   "cap": 1804556668
+  },
+  {
+   "sym": "STGW",
+   "cap": 1810576117
+  },
+  {
+   "sym": "IIPR",
+   "cap": 1815979514
+  },
+  {
+   "sym": "TFIN",
+   "cap": 1851412343
+  },
+  {
+   "sym": "CASH",
+   "cap": 1853249843
+  },
+  {
+   "sym": "SNDA",
+   "cap": 1916813191
+  },
+  {
+   "sym": "LPG",
+   "cap": 1917515405
+  },
+  {
+   "sym": "ZD",
+   "cap": 1935423968
+  },
+  {
+   "sym": "SNDX",
+   "cap": 1968028555
+  },
+  {
+   "sym": "AMLX",
+   "cap": 2026926567
+  },
+  {
+   "sym": "INOD",
+   "cap": 2068063828
+  },
+  {
+   "sym": "SION",
+   "cap": 2104244648
+  },
+  {
+   "sym": "ASTH",
+   "cap": 2209932953
+  },
+  {
+   "sym": "HIMX",
+   "cap": 2232320033
+  },
+  {
+   "sym": "SHAK",
+   "cap": 2432985036
+  },
+  {
+   "sym": "TALO",
+   "cap": 2465494252
+  },
+  {
+   "sym": "ATEN",
+   "cap": 2589774070
+  },
+  {
+   "sym": "LCID",
+   "cap": 2722041267
+  },
+  {
+   "sym": "VISN",
+   "cap": 2741798827
+  },
+  {
+   "sym": "SOUN",
+   "cap": 2771367157
+  },
+  {
+   "sym": "DX",
+   "cap": 2841067742
+  },
+  {
+   "sym": "NVTS",
+   "cap": 2950573260
+  },
+  {
+   "sym": "DBD",
+   "cap": 2995355780
+  },
+  {
+   "sym": "WRBY",
+   "cap": 3023089713
+  },
+  {
+   "sym": "SMR",
+   "cap": 3086488184
+  },
+  {
+   "sym": "LUNR",
+   "cap": 3172390960
+  },
+  {
+   "sym": "ARQT",
+   "cap": 3499832776
+  },
+  {
+   "sym": "FHB",
+   "cap": 3516443638
+  },
+  {
+   "sym": "EXTR",
+   "cap": 4027965236
+  },
+  {
+   "sym": "ANF",
+   "cap": 4086384211
+  },
+  {
+   "sym": "STNG",
+   "cap": 4135846860
+  },
+  {
+   "sym": "COCO",
+   "cap": 4305722264
+  },
+  {
+   "sym": "NVST",
+   "cap": 4328562649
+  },
+  {
+   "sym": "COLD",
+   "cap": 4405125662
+  },
+  {
+   "sym": "CENX",
+   "cap": 4528062549
+  },
+  {
+   "sym": "VVV",
+   "cap": 4993037661
+  },
+  {
+   "sym": "RGTI",
+   "cap": 4998480128
+  },
+  {
+   "sym": "RELY",
+   "cap": 5012406357
+  },
+  {
+   "sym": "ASB",
+   "cap": 5091088922
+  },
+  {
+   "sym": "TVTX",
+   "cap": 5147157189
+  },
+  {
+   "sym": "FTDR",
+   "cap": 5158053008
+  },
+  {
+   "sym": "BB",
+   "cap": 5201641774
+  },
+  {
+   "sym": "ZETA",
+   "cap": 5400166248
+  },
+  {
+   "sym": "SBRA",
+   "cap": 5420826234
+  },
+  {
+   "sym": "SON",
+   "cap": 5448653503
+  },
+  {
+   "sym": "CAR",
+   "cap": 5645992690
+  },
+  {
+   "sym": "DNTH",
+   "cap": 5671074935
+  },
+  {
+   "sym": "MIDD",
+   "cap": 5902074369
+  },
+  {
+   "sym": "GTX",
+   "cap": 5967569692
+  },
+  {
+   "sym": "AUB",
+   "cap": 5972932987
+  },
+  {
+   "sym": "DUOL",
+   "cap": 6011211673
+  },
+  {
+   "sym": "ESNT",
+   "cap": 6019424898
+  },
+  {
+   "sym": "SRRK",
+   "cap": 6077094263
+  },
+  {
+   "sym": "CZR",
+   "cap": 6077197874
+  },
+  {
+   "sym": "FLG",
+   "cap": 6120929946
+  },
+  {
+   "sym": "M",
+   "cap": 6147197295
+  },
+  {
+   "sym": "CGON",
+   "cap": 6215628387
+  },
+  {
+   "sym": "CACC",
+   "cap": 6322276454
+  },
+  {
+   "sym": "BYD",
+   "cap": 6498685490
+  },
+  {
+   "sym": "AROC",
+   "cap": 6534628525
+  },
+  {
+   "sym": "PTCT",
+   "cap": 6591153708
+  },
+  {
+   "sym": "COGT",
+   "cap": 6649328384
+  },
+  {
+   "sym": "FNB",
+   "cap": 6711699812
+  },
+  {
+   "sym": "SFM",
+   "cap": 6889685592
+  },
+  {
+   "sym": "NOV",
+   "cap": 7080438780
+  },
+  {
+   "sym": "ACA",
+   "cap": 7095411778
+  },
+  {
+   "sym": "MIRM",
+   "cap": 7111021018
+  },
+  {
+   "sym": "SLAB",
+   "cap": 7168764171
+  },
+  {
+   "sym": "AVT",
+   "cap": 7208276135
+  },
+  {
+   "sym": "LSTR",
+   "cap": 7228744597
+  },
+  {
+   "sym": "FAF",
+   "cap": 7257317987
+  },
+  {
+   "sym": "TEX",
+   "cap": 7338491735
+  },
+  {
+   "sym": "CHRD",
+   "cap": 7465834998
+  },
+  {
+   "sym": "PBF",
+   "cap": 7534179461
+  },
+  {
+   "sym": "OKLO",
+   "cap": 7545989004
+  },
+  {
+   "sym": "YOU",
+   "cap": 7559214235
+  },
+  {
+   "sym": "MBLY",
+   "cap": 7663894062
+  },
+  {
+   "sym": "MAC",
+   "cap": 7698249052
+  },
+  {
+   "sym": "IDA",
+   "cap": 8040842635
+  },
+  {
+   "sym": "VLY",
+   "cap": 8068154096
+  },
+  {
+   "sym": "RHP",
+   "cap": 8083666533
+  },
+  {
+   "sym": "OSCR",
+   "cap": 8100704781
+  },
+  {
+   "sym": "HXL",
+   "cap": 8182717978
+  },
+  {
+   "sym": "MP",
+   "cap": 8186351241
+  },
+  {
+   "sym": "PL",
+   "cap": 8197257661
+  },
+  {
+   "sym": "TGTX",
+   "cap": 8199921394
+  },
+  {
+   "sym": "PCVX",
+   "cap": 8223448546
+  },
+  {
+   "sym": "EAT",
+   "cap": 8225235200
+  },
+  {
+   "sym": "CHYM",
+   "cap": 8473865418
+  },
+  {
+   "sym": "CBSH",
+   "cap": 8489332862
+  },
+  {
+   "sym": "ESE",
+   "cap": 8524883941
+  },
+  {
+   "sym": "POWL",
+   "cap": 8585481980
+  },
+  {
+   "sym": "PB",
+   "cap": 8703847375
+  },
+  {
+   "sym": "PRAX",
+   "cap": 8728425663
+  },
+  {
+   "sym": "NCLH",
+   "cap": 8920509560
+  },
+  {
+   "sym": "BRKR",
+   "cap": 9025457633
+  },
+  {
+   "sym": "GKOS",
+   "cap": 9055006949
+  },
+  {
+   "sym": "TKR",
+   "cap": 9498509110
+  },
+  {
+   "sym": "MSGS",
+   "cap": 9516321499
+  },
+  {
+   "sym": "GME",
+   "cap": 9729869564
+  },
+  {
+   "sym": "OGE",
+   "cap": 9893585468
+  },
+  {
+   "sym": "VMI",
+   "cap": 10129071643
+  },
+  {
+   "sym": "CFR",
+   "cap": 10130733170
+  },
+  {
+   "sym": "ERIE",
+   "cap": 10160257042
+  },
+  {
+   "sym": "CTRE",
+   "cap": 10184316757
+  },
+  {
+   "sym": "BMNR",
+   "cap": 10278977230
+  },
+  {
+   "sym": "WMS",
+   "cap": 10736102629
+  },
+  {
+   "sym": "SMMT",
+   "cap": 10998224342
+  },
+  {
+   "sym": "DPZ",
+   "cap": 11018887310
+  },
+  {
+   "sym": "BROS",
+   "cap": 11068516218
+  },
+  {
+   "sym": "CLX",
+   "cap": 11564917741
+  },
+  {
+   "sym": "HUT",
+   "cap": 11956367991
+  }
+ ]
+}

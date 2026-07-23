@@ -155,11 +155,26 @@ def spearman(xs, ys):
     return (num/(da*db) if da and db else None), n
 
 
+def _load_universe():
+    """Universe from a JSON file arg (list, or {'symbols': [...]}) else the
+    built-in large-cap list. Lets us point the SAME pipeline at small/mid caps."""
+    import sys as _s
+    for a in _s.argv[1:]:
+        if a.endswith(".json"):
+            d = json.load(open(a))
+            syms = d if isinstance(d, list) else d.get("symbols", [])
+            print(f"universe from {a}: {len(syms)} names")
+            return [str(x).upper() for x in syms]
+    return UNIVERSE
+
+
 def main():
+    universe = _load_universe()
+    tag = "smallmid" if any(a.endswith(".json") for a in __import__("sys").argv[1:]) else "largecap"
     print("fetching CIK map...")
     cm = cik_map()
-    names = [s for s in UNIVERSE if s in cm]
-    print(f"{len(names)}/{len(UNIVERSE)} names have CIKs")
+    names = [s for s in universe if s in cm]
+    print(f"{len(names)}/{len(universe)} names have CIKs")
 
     print("pulling EDGAR point-in-time EPS + splits + computing SUE...")
     events = []  # {sym, filed, sue}
@@ -284,14 +299,14 @@ def main():
                "independent (inflates apparent significance).")
     out.append("- Q4 quarterly EPS often absent from 10-Ks, so Q4 events are under-sampled.")
 
-    with open("research/edgar-sue-backtest.md", "w", encoding="utf-8") as fh:
+    with open("research/edgar-sue-backtest-{}.md".format(tag), "w", encoding="utf-8") as fh:
         fh.write("\n".join(out) + "\n")
-    with open("research/edgar-sue-backtest.json", "w", encoding="utf-8") as fh:
+    with open("research/edgar-sue-backtest-{}.json".format(tag), "w", encoding="utf-8") as fh:
         json.dump({"names": len(names), "events_total": len(events),
                    "events_graded": len(graded),
                    "ic60": ic60, "events": graded[:500]}, fh, indent=1)
     print("\n".join(out))
-    print("\nwrote research/edgar-sue-backtest.md + .json")
+    print("\nwrote research/edgar-sue-backtest-{TAG}.md + .json")
 
 
 if __name__ == "__main__":
