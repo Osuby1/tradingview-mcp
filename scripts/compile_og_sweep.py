@@ -57,15 +57,16 @@ def gates(r):
 
 def main():
     path = sys.argv[1]
-    chart_type = sys.argv[2] if len(sys.argv) > 2 else 'candles'
+    chart_type = sys.argv[2] if len(sys.argv) > 2 else 'heikinashi'
     rows = json.load(open(path))
 
     stamp = datetime.now().strftime('%Y-%m-%d %H:%M local')
     ok = [r for r in rows if r.get('ok')]
     bad = [r for r in rows if not r.get('ok')]
 
-    # Verify the chart type from the data itself. Standing decision 2026-07-22:
-    # candles. Rows written before style capture existed have no 'style_name'.
+    # Verify the chart type from the data itself. Standing decision 2026-07-23:
+    # HEIKIN ASHI (reverses 2026-07-22 candles). Rows written before style capture
+    # existed have no 'style_name'.
     styles = {r.get('style_name') for r in ok if r.get('style_name')}
     style_note = ''
     if styles:
@@ -74,11 +75,11 @@ def main():
                           f'these readings are not comparable.**')
         else:
             actual = styles.pop()
-            if actual != 'Candles':
-                style_note = (f'**Read on {actual}, NOT Candles. Standing decision '
-                              f'2026-07-22 is candles; this run is off-standard.**')
-            elif chart_type != 'candles':
-                style_note = (f'label says "{chart_type}" but data was read on Candles - '
+            if actual != 'HeikinAshi':
+                style_note = (f'**Read on {actual}, NOT Heikin Ashi. Standing decision '
+                              f'2026-07-23 is Heikin Ashi; this run is off-standard.**')
+            elif chart_type not in ('heikinashi', 'ha', 'HeikinAshi'):
+                style_note = (f'label says "{chart_type}" but data was read on Heikin Ashi - '
                               f'trust the data.')
     else:
         style_note = ('chart type not captured in this dump (pre-dates style capture); '

@@ -117,7 +117,9 @@ def main():
                "impact": "Any 0-bar name in this file is provisional.",
                "action": "Re-read 0-bar signals after the close before acting."})
     dq.append({"severity": "INFO", "area": "Method",
-               "finding": "Read on CANDLES on the live chart, per the 2026-07-22 standard.",
+               "finding": "Read on HEIKIN ASHI on the live chart, per Omar's 2026-07-23 "
+                          "standard (reverses the 2026-07-22 candles rule). HA runs are "
+                          "NOT comparable to earlier candle-based runs.",
                "impact": "", "action": ""})
 
     out = {
@@ -126,7 +128,7 @@ def main():
         "universe_size": len(rows), "scanned": len(ok), "fresh_count": len(fresh),
         "combined_risk_new_actives":
             "$0 - no name passed the full gate stack" if not passing else "",
-        "run_note": (f"Full universe read on candles. {len(fresh)} fresh BUY signals "
+        "run_note": (f"Full universe read on Heikin Ashi. {len(fresh)} fresh BUY signals "
                      f"culled to {len(passing)} by the regime + ADX + DI + ZLSMA stack."),
         "data_quality": dq, "hits": list(hits.values()), "sell_mode": sells,
         # Carry the regime/liquidity fields on EVERY name, not just fresh hits.

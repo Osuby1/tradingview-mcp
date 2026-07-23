@@ -72,7 +72,7 @@ def main():
     out = []
     out.append("# HQ Swing v1 lens vs O.G Chandelier")
     out.append("")
-    out.append(f"**Scanned:** {len(rows)} names read clean, candles.  ")
+    out.append(f"**Scanned:** {len(rows)} names read clean, Heikin Ashi.  ")
     out.append(f"**Fresh** = Chandelier BUY within {fresh_bars} sessions.  ")
     out.append(f"**HQ-qualified** = regime PASS + ADX >= {ADX_MIN:.0f} + buyers in control.")
     out.append("")

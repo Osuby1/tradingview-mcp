@@ -7,8 +7,8 @@ rem UPGRADED 2026-07-22 to the FULL pipeline (was the basic 156-name / 10-tab ru
 rem   1.  Origination scan (stage2_leader_scanner_v3.py)
 rem   2.  Export Buy Zone / Fresh Ignitions / Coiled tabs to repo
 rem   3.  Claude headless (needs TV chart): refresh alert board -> build the
-rem       EXTENDED ~480-name universe -> sweep on CANDLES -> gate stack ->
-rem       write universe-results + market-movers. Chart/web-dependent work only.
+rem       EXTENDED ~480-name universe -> sweep on HEIKIN ASHI (Omar 2026-07-23) ->
+rem       gate stack -> universe-results + movers. Chart/web-dependent work only.
 rem   3b. VERIFY step 3 produced TODAY's gated results (blocks a stale compile).
 rem   4.  Deterministic Python analysis (run here, not via Claude, so it is
 rem       reliable): rotation radar, ignition sweep, HQ Swing lens, track record,
@@ -28,7 +28,7 @@ set FAILED=0
 if not exist "%REPO%\reports" mkdir "%REPO%\reports"
 
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set TODAY=%%d
-set RAWSWEEP=%REPO%\watchlists\og-sweep-raw-%TODAY%-candles.json
+set RAWSWEEP=%REPO%\watchlists\og-sweep-raw-%TODAY%-heikinashi.json
 
 echo. >> "%LOG%"
 echo ===== EOD chain start %date% %time% (target %TODAY%, FULL pipeline) ===== >> "%LOG%"
@@ -45,7 +45,7 @@ echo [2/6] export tabs... >> "%LOG%"
 python scripts\export_origination_tabs.py >> "%LOG%" 2>&1
 if errorlevel 1 echo WARNING: tab export failed >> "%LOG%"
 
-rem -- 3. Extended universe + candle sweep + gates (headless Claude, needs chart) --
+rem -- 3. Extended universe + Heikin Ashi sweep + gates (headless Claude, needs chart) --
 set TRIES=0
 :feedcheck
 curl -s --max-time 5 http://localhost:9222/json/version >nul 2>&1
@@ -62,13 +62,13 @@ goto feedcheck
 :feedup
 if /I "%~1"=="test" goto testrun
 echo [3/6] claude extended universe + sweep + gates... >> "%LOG%"
-claude -p "Autonomous EOD run for %TODAY%, FULL pipeline. Do the CHART- and WEB-dependent work only; do NOT commit (the batch commits at the end). Steps: (1) Refresh the alert board: fetch https://pricealerts.tradingview.com/list_alerts via ui_evaluate and write watchlists/alert-board.json as a list of {sym, active, last_fire} (bare tickers). (2) Build the EXTENDED universe with scripts/build_extended_universe.py %TODAY% - union of the three watchlists + origination tabs + TRACKED names (active/recently-fired alerts + recent plans). Do NOT use watchlist_get. (3) Confirm the chart is on CANDLES (style 1); if not, chart_set_type Candles. (4) Sweep ALL universe names with scripts/og_sweep_runner.js which captures regime (200/50 SMA, ADX, DI), ATR(14), and 20-day avg dollar volume inline. It REFUSES non-candle styles. Verify each read with the stability guard (identity match + value fingerprint + two settled reads) - the staleness trap returns the previous symbol's data under the new name. (5) Save the raw sweep to watchlists/og-sweep-raw-%TODAY%-candles.json (array of per-symbol read objects). (6) Run: python scripts/build_universe_results.py watchlists/og-sweep-raw-%TODAY%-candles.json watchlists/og-sweep-raw-%TODAY%-candles.json %TODAY% - this applies the MANDATORY gate stack (regime, ADX>=20, +DI>-DI, above ZLSMA, ATR floor 1-4x, stop cap 12pct, liquidity) and FAILS CLOSED (a name that cannot be gate-evaluated is BLOCKED). (7) Best-effort: WebFetch stockanalysis.com/markets/gainers and /losers, write watchlists/market-movers-%TODAY%.json (gainers[], losers[] with sym/company/price/pct_change/market_cap_raw/volume); if it fails, skip it. Zero passing names is a valid honest result - never relax a gate. Log any blocker into the results JSON data_quality. Never wait for input." >> "%LOG%" 2>&1
+claude -p "Autonomous EOD run for %TODAY%, FULL pipeline. Do the CHART- and WEB-dependent work only; do NOT commit (the batch commits at the end). Steps: (1) Refresh the alert board: fetch https://pricealerts.tradingview.com/list_alerts via ui_evaluate and write watchlists/alert-board.json as a list of {sym, active, last_fire} (bare tickers). (2) Build the EXTENDED universe with scripts/build_extended_universe.py %TODAY% - union of the three watchlists + origination tabs + TRACKED names (active/recently-fired alerts + recent plans). Do NOT use watchlist_get. (3) Confirm the chart is on HEIKIN ASHI (style 8); if not, chart_set_type HeikinAshi. This is Omar's standing decision as of 2026-07-23 (reverses the earlier candles rule). (4) Sweep ALL universe names with scripts/og_sweep_runner.js which captures regime (200/50 SMA, ADX, DI), ATR(14), and 20-day avg dollar volume inline. It REFUSES any style but Heikin Ashi. Verify each read with the stability guard (identity match + value fingerprint + two settled reads) - the staleness trap returns the previous symbol's data under the new name. (5) Save the raw sweep to watchlists/og-sweep-raw-%TODAY%-heikinashi.json (array of per-symbol read objects). (6) Run: python scripts/build_universe_results.py watchlists/og-sweep-raw-%TODAY%-heikinashi.json watchlists/og-sweep-raw-%TODAY%-heikinashi.json %TODAY% - this applies the MANDATORY gate stack (regime, ADX>=20, +DI>-DI, above ZLSMA, ATR floor 1-4x, stop cap 12pct, liquidity) and FAILS CLOSED (a name that cannot be gate-evaluated is BLOCKED). (7) Best-effort: WebFetch stockanalysis.com/markets/gainers and /losers, write watchlists/market-movers-%TODAY%.json (gainers[], losers[] with sym/company/price/pct_change/market_cap_raw/volume); if it fails, skip it. Zero passing names is a valid honest result - never relax a gate. Log any blocker into the results JSON data_quality. Never wait for input." >> "%LOG%" 2>&1
 if errorlevel 1 echo WARNING: claude sweep step exited nonzero >> "%LOG%"
 goto verify
 
 :testrun
 echo [3/6] claude TEST MODE (origination tabs only)... >> "%LOG%"
-claude -p "EOD chain TEST for %TODAY%: build the universe from ONLY the origination Buy Zone + Fresh Ignitions tabs (~30 names), sweep on CANDLES via og_sweep_runner.js, save raw to watchlists/og-sweep-raw-%TODAY%-candles.json, run build_universe_results.py (same file for both path args, date %TODAY%) applying the full gate stack. Write universe-results-%TODAY%.json with date=%TODAY%, variant=test. Do NOT commit. Never wait for input." >> "%LOG%" 2>&1
+claude -p "EOD chain TEST for %TODAY%: build the universe from ONLY the origination Buy Zone + Fresh Ignitions tabs (~30 names), sweep on HEIKIN ASHI via og_sweep_runner.js, save raw to watchlists/og-sweep-raw-%TODAY%-heikinashi.json, run build_universe_results.py (same file for both path args, date %TODAY%) applying the full gate stack. Write universe-results-%TODAY%.json with date=%TODAY%, variant=test. Do NOT commit. Never wait for input." >> "%LOG%" 2>&1
 if errorlevel 1 echo WARNING: claude test run exited nonzero >> "%LOG%"
 
 rem -- 3b. VERIFY the scan produced today's gated data ----------

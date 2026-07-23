@@ -31,8 +31,12 @@ Built by `scripts/build_extended_universe.py` (+ `tracked_symbols.py`).
 **Two hard rules:**
 - **Never** use the live TradingView watchlist reader — it silently returns only
   ~1/3 of the list (this is why SMCI was missed). Always build from the repo files.
-- **Always read on plain CANDLES**, never Heikin Ashi (HA changes the buy/sell
-  answer on ~22% of names).
+- **Always read on HEIKIN ASHI** (Omar's standing decision 2026-07-23, which
+  reversed the earlier candles-only rule). Chart type matters a lot — HA vs candles
+  changes the buy/sell answer on ~22% of names and the flip date on ~72% — so never
+  mix the two in one run, and note that HA runs are not comparable to the pre-7/23
+  candle history. (Backtests are the one exception: those still use normal candles,
+  because HA inflates backtests — see `research/quant-backtest-protocol.md`.)
 
 ---
 
@@ -83,7 +87,8 @@ Summary. Plus the EOD brief and the HQ Swing three-bucket lens.
 
 1. `build_extended_universe.py` → today's ~480-name universe
 2. `og_sweep_runner.js` (in the live TradingView chart) → reads Chandelier / ZLSMA /
-   Magical + computes regime, ADX, DI, ATR, dollar-volume — **on candles**
+   Magical + computes regime, ADX, DI, ATR, dollar-volume — **on Heikin Ashi**
+   (it refuses any other style unless forced)
 3. `build_universe_results.py` → applies the gate stack (`gate_stack.py`)
 4. `hq_swing_lens.py` → the three-way Chandelier-vs-HQ-Swing comparison
 5. `rotation_radar.py` + `ignition_sweep.py` → sector rotation + market-wide ignitions
@@ -101,7 +106,7 @@ Summary. Plus the EOD brief and the HQ Swing three-bucket lens.
 - The sweep needs the **live TradingView chart open** to read the indicators.
 - The fully-automated evening run (`run_eod_chain.bat`, Windows Task Scheduler task
   "EOD Universe Chain", weekdays 15:15 CT) is **ENABLED and runs the FULL pipeline**
-  as of 2026-07-22: extended ~480-name universe, candle sweep + gate stack (headless
+  as of 2026-07-22: extended ~480-name universe, Heikin Ashi sweep + gate stack (headless
   Claude, needs the chart), then the deterministic Python analysis (rotation radar,
   ignition sweep, HQ Swing lens, track record, outcome tracker) run directly in the
   batch, then the full 12-tab workbook, then a commit. It **fails closed** — a failed

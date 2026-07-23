@@ -1,7 +1,7 @@
 /* O.G Chandelier universe sweep - in-page runner.
  *
  * Paste the whole file into mcp__tradingview__ui_evaluate to install, then:
- *     window.__ogSweep(SYMBOLS, 'candles-2026-07-22')
+ *     window.__ogSweep(SYMBOLS, 'heikinashi-2026-07-23')
  * and poll:
  *     JSON.stringify({done: window.__og.done, idx: window.__og.idx})
  *
@@ -31,15 +31,19 @@
  * before trusting any of it.
  *
  * ---------------------------------------------------------------------------
- * CHART TYPE - Omar's standing decision, 2026-07-22: CANDLES.
+ * CHART TYPE - Omar's standing decision UPDATED 2026-07-23: HEIKIN ASHI.
  * ---------------------------------------------------------------------------
- * Heikin Ashi and candles are not interchangeable. Measured across 155 names at
- * the same instant: BUY/SELL mode disagreed on 22%, flip date on 72%, and the
- * Magical (CCI-20) reading differed by a median of 14 points - enough to flip
- * the +/-100 overbought gate on GDX, NVDA and SMCI.
+ * (Reverses the 2026-07-22 candles-only decision - Omar flipped the WHOLE
+ * pipeline to Heikin Ashi on 2026-07-23.) Heikin Ashi and candles are not
+ * interchangeable: measured across 155 names at the same instant, BUY/SELL mode
+ * disagreed on 22%, flip date on 72%, and the Magical (CCI-20) reading differed
+ * by a median of 14 points - enough to flip the +/-100 overbought gate on GDX,
+ * NVDA and SMCI. IMPORTANT: this HA switch is for the live O.G SIGNAL read only.
+ * BACKTESTS still use NORMAL candles - HA inflates backtests; see
+ * research/quant-backtest-protocol.md and do not conflate the two.
  *
- * __ogSweep REFUSES to run on any style but candles unless you pass
- * allowNonCandles=true, and every result row records the style it was read on.
+ * __ogSweep REFUSES to run on any style but Heikin Ashi unless you pass
+ * allowOtherStyle=true, and every result row records the style it was read on.
  */
 (function () {
   var STYLE_NAMES = {0:'Bars',1:'Candles',2:'Line',3:'Area',4:'Renko',5:'Kagi',
@@ -222,12 +226,12 @@
     return r;
   };
 
-  window.__ogSweep = function (symbols, tag, allowNonCandles) {
+  window.__ogSweep = function (symbols, tag, allowOtherStyle) {
     var style = chartStyle();
-    if (style !== 1 && !allowNonCandles) {
+    if (style !== 8 && !allowOtherStyle) {
       return 'REFUSED: chart is ' + (STYLE_NAMES[style] || style)
-           + ', not Candles. Standing decision 2026-07-22 is candles. '
-           + 'Switch with chart_set_type, or pass allowNonCandles=true.';
+           + ', not Heikin Ashi. Standing decision 2026-07-23 is Heikin Ashi. '
+           + 'Switch with chart_set_type HeikinAshi, or pass allowOtherStyle=true.';
     }
 
     var cw = widget();

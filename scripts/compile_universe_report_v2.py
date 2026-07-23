@@ -140,7 +140,7 @@ readme_sheet(
     what_this_is=[
         "Every stock on the watchlists, plus the origination scanner's actionable names,",
         "read through the O.G Chandelier stack (Chandelier Exit 1/2 + ZLSMA-50 + Magical",
-        "OB/OS) on the LIVE chart, on CANDLES.",
+        "OB/OS) on the LIVE chart, on HEIKIN ASHI (Omar's 2026-07-23 standard).",
         "",
         "The origination scanner finds candidates. THIS run tells you which ones actually",
         "triggered, which ones the gates rejected, and why.",
