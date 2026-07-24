@@ -1,0 +1,8 @@
+[
+ {"ticker": "FTRE", "earnings_date": "2026-07-29", "flagged_from": "live-picks confirming 2026-07-23"},
+ {"ticker": "HXL",  "earnings_date": "2026-07-29", "flagged_from": "live-picks confirming 2026-07-23"},
+ {"ticker": "TXG",  "earnings_date": "2026-08-06", "flagged_from": "live-picks confirming 2026-07-23"},
+ {"ticker": "ETON", "earnings_date": "2026-08-06", "flagged_from": "live-picks confirming 2026-07-23"},
+ {"ticker": "LQDA", "earnings_date": "2026-08-06", "flagged_from": "live-picks confirming 2026-07-23"},
+ {"ticker": "CEG",  "earnings_date": "2026-08-06", "flagged_from": "live-picks confirming 2026-07-23 (also needs 200d reclaim ~311)"}
+]

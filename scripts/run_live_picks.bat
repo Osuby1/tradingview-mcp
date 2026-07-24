@@ -15,7 +15,7 @@ echo ===== Live Picks Radar START %date% %time% ===== >> "%LOG%"
 python scripts\live_picks_radar.py >> "%LOG%" 2>&1
 if errorlevel 10 (
     echo   NEW movers detected - pushing >> "%LOG%"
-    claude -p "Read watchlists\live-picks-%TODAY%.md. Its 'NEW - act now' section lists OUR OWN recommended names that just started running. Send Omar exactly ONE PushNotification (status proactive, one line under 200 chars) naming the tickers with their %% gain-from-flag and the action - which are CONFIRMING (enter/add per plan) vs EXTENDED (do NOT chase, wait for a pullback). Then stop; do nothing else." >> "%LOG%" 2>&1
+    claude -p "Read watchlists\live-picks-%TODAY%.md. It flags OUR OWN names that either JUST STARTED RUNNING ('NEW - act now' section) or just went BEAT-AND-HOLD after earnings ('Post-earnings watch' section = a clean PEAD entry). Send Omar exactly ONE PushNotification (status proactive, one line under 200 chars) naming the new tickers with their %% move and the action: CONFIRMING or beat-and-hold = enter/add per plan; EXTENDED = do NOT chase, wait for a pullback. Then stop; do nothing else." >> "%LOG%" 2>&1
 ) else (
     echo   no new movers this run >> "%LOG%"
 )

@@ -138,6 +138,81 @@ def fetch_industries():
         return {}
 
 
+PE_WATCH = os.path.join(REPO, "watchlists", "post-earnings-watch.json")
+PE_REACT = 0.04        # >=+4% first-day reaction = a positive earnings surprise
+PE_HOLD = 0.95         # holding within 5% of the post-earnings high = not faded
+PE_WINDOW_DAYS = 21    # drift window; drop from the watch after this
+
+
+def post_earnings_check(state):
+    """For names whose earnings have passed, detect BEAT-AND-HOLD (a clean PEAD entry):
+    a clear positive reaction to the print AND price still holding the gap days later.
+    Returns (results, fires). Prunes names whose window has expired."""
+    if not os.path.exists(PE_WATCH):
+        return [], []
+    try:
+        watch = json.load(open(PE_WATCH))
+    except Exception:
+        return [], []
+    import yfinance as yf
+    td = today()
+    tickers = [w["ticker"] for w in watch]
+    bars = {}
+    if tickers:
+        df = yf.download(tickers, period="4mo", interval="1d",
+                         auto_adjust=True, progress=False, threads=True)
+        cl = df["Close"] if "Close" in df else df
+        for t in tickers:
+            try:
+                s = cl[t].dropna() if hasattr(cl, "columns") else cl.dropna()
+                if len(s):
+                    bars[t] = s
+            except Exception:
+                pass
+    results, fires, keep = [], [], []
+    for w in watch:
+        t = w["ticker"]
+        try:
+            ed = datetime.date.fromisoformat(w["earnings_date"])
+        except Exception:
+            continue
+        if td > ed + datetime.timedelta(days=PE_WINDOW_DAYS):
+            continue                      # expired -> drop from the watch
+        keep.append(w)
+        if td <= ed:
+            results.append({"t": t, "status": "PENDING", "ed": ed.isoformat(),
+                            "note": w.get("flagged_from", "")})
+            continue
+        s = bars.get(t)
+        if s is None or len(s) < 5:
+            results.append({"t": t, "status": "NO-DATA", "ed": ed.isoformat()})
+            continue
+        pre = s[s.index.date < ed]
+        post = s[s.index.date >= ed]
+        if pre.empty or post.empty:
+            results.append({"t": t, "status": "PENDING", "ed": ed.isoformat(),
+                            "note": "awaiting reaction"})
+            continue
+        pre_ref = float(pre.iloc[-1]); cur = float(s.iloc[-1])
+        post_high = float(post.max())
+        react = float(post.iloc[0]) / pre_ref - 1
+        overall = cur / pre_ref - 1
+        if react >= PE_REACT and cur >= pre_ref and cur >= PE_HOLD * post_high:
+            status = "BEAT-AND-HOLD"
+        elif overall <= -0.02 or cur < pre_ref:
+            status = "FADED"
+        else:
+            status = "SETTLING"
+        rec = {"t": t, "status": status, "react": react, "overall": overall,
+               "pre_ref": pre_ref, "cur": cur, "ed": ed.isoformat()}
+        results.append(rec)
+        if status == "BEAT-AND-HOLD" and state.get("PE:" + t) != "BEAT-AND-HOLD":
+            fires.append(rec)
+    if not DRY and len(keep) != len(watch):
+        json.dump(keep, open(PE_WATCH, "w"), indent=1)
+    return results, fires
+
+
 def classify(ret, cur, high20):
     if ret >= EXTENDED_RET:
         return "EXTENDED"
@@ -181,6 +256,8 @@ def main():
             if TIER_RANK[r["tier"]] > TIER_RANK.get(state.get(r["tkr"], "WATCH"), 0):
                 fires.append(r)
 
+    pe_results, pe_fires = post_earnings_check(state)
+
     def act_of(r):
         return ("do NOT chase - wait for a pullback" if r["tier"] == "EXTENDED"
                 else "confirming its run - enter/add per plan")
@@ -201,6 +278,18 @@ def main():
     for r in rows:
         lines.append(f"| {r['tkr']} | {r['industry']} | {r['tier']} | {r['ret']*100:+.0f}% | "
                      f"{r['cur']:.2f} | {r['flag']:.2f} | {r['source']} | {r['rvol']:.1f} |")
+    if pe_results:
+        lines += ["", "## Post-earnings watch (beat-and-hold = clean entry)"]
+        order = {"BEAT-AND-HOLD": 0, "SETTLING": 1, "PENDING": 2, "FADED": 3, "NO-DATA": 4}
+        for pr in sorted(pe_results, key=lambda x: order.get(x["status"], 9)):
+            if pr["status"] in ("BEAT-AND-HOLD", "SETTLING", "FADED"):
+                tail = " -> CLEAN ENTRY: beat and holding the gap" if pr["status"] == "BEAT-AND-HOLD" else ""
+                lines.append(f"- **{pr['t']}** {pr['status']} - earnings {pr['ed']}, "
+                             f"reaction {pr['react']*100:+.0f}%, now {pr['cur']:.2f} "
+                             f"({pr['overall']*100:+.0f}% vs pre-earnings){tail}")
+            else:
+                lines.append(f"- {pr['t']} {pr['status']} - earnings {pr['ed']}"
+                             + (f" ({pr.get('note')})" if pr.get('note') else ""))
     open(os.path.join(REPO, "watchlists", f"live-picks-{today().isoformat()}.md"),
          "w", encoding="utf-8").write("\n".join(lines))
 
@@ -217,23 +306,33 @@ def main():
                     else "confirming - enter/add per plan")
             bb.append(f"| {r['tkr']} | {r['industry']} | {r['flag']:.2f} | {r['cur']:.2f} | "
                       f"{r['ret']*100:+.0f}% | {read} |")
+    pe_hold = [pr for pr in pe_results if pr["status"] == "BEAT-AND-HOLD"]
+    if pe_hold:
+        bb += ["", "**Post-earnings beat-and-hold (clean entries):** " +
+               ", ".join(f"{pr['t']} ({pr['overall']*100:+.0f}% vs pre-earnings)" for pr in pe_hold)]
     bb.append("")
     bb.append("_Watches OUR own recommendations; alerts once per confirm/extend transition. "
+              "Post-earnings watch re-surfaces beat-and-hold names. "
               "Prices ~15min delayed - take entry/stop from the live feed._")
     open(os.path.join(REPO, "watchlists", "live-picks-brief-block.md"),
          "w", encoding="utf-8").write("\n".join(bb))
 
-    print(f"picks {len(picks)} | priced {len(cur)} | industries {len(ind)} | fires {len(fires)}")
+    print(f"picks {len(picks)} | priced {len(cur)} | fires {len(fires)} | "
+          f"pe_watch {len(pe_results)} | pe_fires {len(pe_fires)}")
     for r in fires:
         print(f"  FIRE {r['tkr']} ({r['industry']}) {r['tier']} +{r['ret']*100:.0f}% "
               f"reco {r['flag']:.2f} now {r['cur']:.2f}")
+    for pr in pe_fires:
+        print(f"  PE-FIRE {pr['t']} BEAT-AND-HOLD reaction {pr['react']*100:+.0f}% now {pr['cur']:.2f}")
 
     if not DRY:
         for r in fires:
             state[r["tkr"]] = r["tier"]
+        for pr in pe_fires:
+            state["PE:" + pr["t"]] = "BEAT-AND-HOLD"
         json.dump(state, open(STATE, "w"), indent=1)
 
-    return 10 if (fires and not DRY) else 0
+    return 10 if ((fires or pe_fires) and not DRY) else 0
 
 
 if __name__ == "__main__":
