@@ -93,6 +93,7 @@ if exist "%RAWSWEEP%" (
 python scripts\track_record.py %TODAY% >> "%LOG%" 2>&1                 || echo WARNING: track_record failed >> "%LOG%"
 python scripts\dump_call_prices.py %TODAY% >> "%LOG%" 2>&1             || echo WARNING: dump_call_prices failed >> "%LOG%"
 python scripts\outcome_tracker.py %TODAY% >> "%LOG%" 2>&1              || echo WARNING: outcome_tracker failed >> "%LOG%"
+python scripts\build_catalyst_calendar.py >> "%LOG%" 2>&1             || echo WARNING: catalyst_calendar failed >> "%LOG%"
 
 rem -- 5. Compile the full workbook ----------------------------
 echo [5/6] compile full workbook (explicit date %TODAY%)... >> "%LOG%"

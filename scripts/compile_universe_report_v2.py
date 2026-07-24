@@ -274,6 +274,32 @@ for row in ctx.get("rotation_commentary", []):
     ws.append([safe(row[0] if isinstance(row, list) else row)])
 
 # ------------------------------------------------------------ 2 Fresh Buys ---
+# ---- Catalyst calendar join (Omar 2026-07-23): catalyst as columns on the ticker rows,
+# not a standalone tab. Fed by research/catalyst-calendar.json (build_catalyst_calendar.py). ----
+try:
+    _cat_raw = json.load(open(os.path.join(REPO, "research", "catalyst-calendar.json")))
+    CATALYST = {r["ticker"].upper(): r for r in _cat_raw.get("records", [])}
+except Exception:
+    CATALYST = {}
+
+CAT_COL = Col("catalyst", "Catalyst", 22,
+              "Next scheduled catalyst for this name - earnings within 7 days, or a Phase-3 "
+              "trial readout window. Blank = none flagged. From build_catalyst_calendar.py.")
+CATVIEW_COL = Col("catview", "Catalyst View", 62,
+                  "What the catalyst is and the suggested ACTION. Earnings: trim into the print, "
+                  "re-enter post-print only if it beats AND holds (PEAD). Biopharma: BINARY - "
+                  "defined-risk / awareness only, never hold a momentum long through it.")
+
+
+def _inject_cat(rows):
+    """Attach Catalyst + Catalyst View onto each ticker row before rendering."""
+    for r in rows:
+        sym = (r.get("sym") or r.get("a") or r.get("ticker") or "").upper()
+        c = CATALYST.get(sym)
+        r["catalyst"] = f"{c['event_type']} {c['date_or_window']}" if c else ""
+        r["catview"] = c["view"] if c else ""
+
+
 FRESH_COLS = [
     Col("rank", "RANK", 7,
         "Priority order, 1 = look at this first. Ranked by the composite BUY SCORE. "
@@ -386,7 +412,8 @@ def fresh_rows():
 
 _fresh = fresh_rows()
 ws = wb.create_sheet("2 - Fresh Buys")
-write_table(ws, FRESH_COLS, _fresh, row_fill=verdict_fill)
+_inject_cat(_fresh)
+write_table(ws, FRESH_COLS + [CAT_COL, CATVIEW_COL], _fresh, row_fill=verdict_fill)
 ws.append([])
 ws.append([safe("RANKED STRONGEST -> WEAKEST by BUY SCORE. The score is UNCALIBRATED - "
                 "a transparent weighting, not a measured edge. Blocked names are scored "
@@ -532,7 +559,8 @@ for i, r in enumerate(block_rows, 1):
     r["rank"] = i
 
 ws = wb.create_sheet("4 - Blocked")
-write_table(ws, BLOCK_COLS, block_rows,
+_inject_cat(block_rows)
+write_table(ws, BLOCK_COLS + [CAT_COL, CATVIEW_COL], block_rows,
             row_fill=lambda r: RED if (r["severity"] or 0) >= 60 else
                                (AMBER if (r["severity"] or 0) >= 30 else GREY))
 ws.append([])
@@ -597,7 +625,8 @@ for i, r in enumerate(sell_rows, 1):
     r["rank"] = i
 
 ws = wb.create_sheet("5 - Sell Mode")
-write_table(ws, SELL_COLS, sell_rows,
+_inject_cat(sell_rows)
+write_table(ws, SELL_COLS + [CAT_COL, CATVIEW_COL], sell_rows,
             row_fill=lambda r: RED if (r["short_score"] or 0) >= 70 else None)
 ws.append([])
 for line in SHORT_POLICY.strip().split("\n"):
