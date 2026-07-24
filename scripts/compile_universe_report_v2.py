@@ -414,6 +414,53 @@ _fresh = fresh_rows()
 ws = wb.create_sheet("2 - Fresh Buys")
 _inject_cat(_fresh)
 write_table(ws, FRESH_COLS + [CAT_COL, CATVIEW_COL], _fresh, row_fill=verdict_fill)
+
+# ------------------------------------------------- 2b Gated Longs (all ages) ---
+# Every BUY-mode name that clears the FULL gate stack, regardless of how long ago it
+# flipped (Fresh Buys is <=5 bars only). Surfaces established uptrends like DVN/PBR
+# that are still valid gated longs (Omar 2026-07-24). Ranked least-extended first.
+GATED_COLS = [
+    Col("rank", "RANK", 6, "Least-extended-above-the-200-day first - names with the most room "
+        "and best entry reward-to-risk are at the top."),
+    Col("sym", "Ticker", 9, "The stock symbol."),
+    Col("last", "Price", 10, "Latest price from the live feed.", FMT_PRICE),
+    Col("stop", "Chandelier Stop", 13, "The Chandelier trend-break level - the STOP, not an entry "
+        "price. Price minus this is your risk per share.", FMT_PRICE),
+    Col("stop_pct", "Stop %", 8, "How far the stop sits below price.", FMT_PCT),
+    Col("ext", "Extension vs 200d", 15, "How far above the 200-day average. HIGH = stretched = "
+        "worse entry. This is the extension label - the Fresh tab had no such view, which is how "
+        "DVN/PBR stayed hidden.", FMT_PCT),
+    Col("magical", "Overbought (CCI-20)", 14, "Above +100 = stretched. Measured NOT to predict "
+        "returns - context only, never the sole reason to skip.", FMT_PCT),
+    Col("adx", "Trend (ADX)", 11, "20+ = a real trend is present.", FMT_PCT),
+    Col("age", "Sessions Old", 11, "Sessions since the Chandelier flipped BUY. Fresh Buys shows "
+        "<=5; THIS tab shows every age."),
+    Col("regime", "Regime", 10, "PASS = above a rising 200-day. REPAIR = below it, starter size only."),
+    Col("note", "Gate Notes", 44, "Why it passed / any starter flag."),
+]
+_gated = res.get("gated_longs", [])
+grows = []
+for _i, _g in enumerate(_gated, 1):
+    _last, _stop = _g.get("last"), _g.get("stop")
+    grows.append({
+        "rank": _i, "sym": _g["sym"], "last": _last, "stop": _stop,
+        "stop_pct": round((_last - _stop) / _last * 100, 1) if (_last and _stop and _last > _stop) else None,
+        "ext": round(_g["pct_vs_200"], 1) if _g.get("pct_vs_200") is not None else None,
+        "magical": _g.get("magical"), "adx": _g.get("adx"), "age": _g.get("bars_back"),
+        "regime": _g.get("regime"),
+        "note": (("STARTER (regime REPAIR - half size). "
+                  if str(_g.get("verdict", "")).startswith("STARTER") else "") + (_g.get("note") or "")),
+    })
+_inject_cat(grows)
+ws = wb.create_sheet("2b - Gated Longs")
+write_table(ws, GATED_COLS + [CAT_COL, CATVIEW_COL], grows)
+ws.append([])
+ws.append([safe(f"GATED LONGS (all ages): {len(grows)} names currently in BUY mode that clear the "
+                "FULL gate stack - not just fresh flips (Fresh Buys is <=5 sessions). Ranked "
+                "LEAST-EXTENDED first = best entry reward-to-risk on top.")])
+ws.append([safe("This is where established-but-still-valid uptrends live (DVN, PBR and the like). "
+                "Check Extension + Overbought + the Catalyst columns before acting - many "
+                "established uptrends are stretched or reporting earnings within days.")])
 ws.append([])
 ws.append([safe("RANKED STRONGEST -> WEAKEST by BUY SCORE. The score is UNCALIBRATED - "
                 "a transparent weighting, not a measured edge. Blocked names are scored "

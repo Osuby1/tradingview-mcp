@@ -98,6 +98,27 @@ def main():
                    "action": "Re-run the sweep with og_sweep_runner.js, which captures "
                              "regime and average dollar volume inline."})
 
+    # GATED LONGS (all ages) - every BUY-mode name that passes the FULL gate stack,
+    # regardless of how long ago it flipped. Fresh Buys only shows <=5-bar signals;
+    # this surfaces established uptrends (DVN/PBR) that are still valid gated longs
+    # (Omar 2026-07-24). Ranked least-extended-vs-200d first = best entry R/R on top.
+    gated_longs = []
+    for r in buys:
+        try:
+            gv, greasons, _ = evaluate(r, position_size=DEFAULT_POSITION)
+        except MissingGateData:
+            continue
+        if gv.startswith(("CANDIDATE", "STARTER")):
+            gated_longs.append({
+                "sym": r["rname"], "last": r.get("last"), "stop": r.get("long_stop"),
+                "bars_back": r.get("bars_back"), "flip_date": r.get("flip_date"),
+                "magical": r.get("magical"), "pct_vs_200": r.get("pct_vs_200"),
+                "adx": r.get("adx"), "regime": r.get("regime"), "zlsma": r.get("zlsma"),
+                "avg_dollar_vol": r.get("avg_dollar_vol"), "verdict": gv,
+                "note": "; ".join(greasons) if greasons else "Passes every gate.",
+            })
+    gated_longs.sort(key=lambda x: (x["pct_vs_200"] if x.get("pct_vs_200") is not None else 9999))
+
     enrich = {r["rname"]: {"description": r.get("rdesc")} for r in ok}
 
     passing = [s for s, h in hits.items() if h["verdict"].startswith("CANDIDATE")]
@@ -131,6 +152,7 @@ def main():
         "run_note": (f"Full universe read on Heikin Ashi. {len(fresh)} fresh BUY signals "
                      f"culled to {len(passing)} by the regime + ADX + DI + ZLSMA stack."),
         "data_quality": dq, "hits": list(hits.values()), "sell_mode": sells,
+        "gated_longs": gated_longs,
         # Carry the regime/liquidity fields on EVERY name, not just fresh hits.
         # Without them the Sell Mode short ranking has no inputs and scores every
         # name identically - which is how it shipped broken the first time.
