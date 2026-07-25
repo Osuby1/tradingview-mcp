@@ -332,9 +332,13 @@ def main():
     with open("research/edgar-sue-backtest-{}.md".format(tag), "w", encoding="utf-8") as fh:
         fh.write("\n".join(out) + "\n")
     with open("research/edgar-sue-backtest-{}.json".format(tag), "w", encoding="utf-8") as fh:
+        # Save EVERY graded event, not the first 500. The truncation made
+        # year-by-year and concentration analysis impossible from the saved
+        # output - you could only re-derive it by re-pulling EDGAR. Changes no
+        # calculation; only what is written to disk. (2026-07-25)
         json.dump({"names": len(names), "events_total": len(events),
                    "events_graded": len(graded),
-                   "ic60": ic60, "events": graded[:500]}, fh, indent=1)
+                   "ic60": ic60, "events": graded}, fh, indent=1)
     print("\n".join(out))
     print("\nwrote research/edgar-sue-backtest-{TAG}.md + .json")
 
