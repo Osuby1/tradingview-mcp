@@ -48,6 +48,9 @@ import numpy as np
 import pandas as pd
 import yfinance as yf
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import schema  # noqa: E402
+
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HOLDING = int(sys.argv[1]) if len(sys.argv) > 1 else 21
 LOOKBACK = "6mo"
@@ -70,6 +73,14 @@ def collect_signals():
         date = re.search(r"(\d{4}-\d{2}-\d{2})", f).group(1)
         try:
             d = json.load(open(f, encoding="utf-8"))
+            # Reads the WHOLE history, so most files here are legitimately legacy
+            # (pre-2026-07-25, unstamped). Those are fine - cohort_of() below only
+            # accepts machine verdicts anyway. What must not pass silently is a
+            # FUTURE version this grader has not been taught to read.
+            schema.require(d, understood=(2,), path=f, warn=lambda m: None)
+        except schema.SchemaError as exc:
+            skipped[f"unreadable contract: {exc}"] += 1
+            continue
         except Exception:
             skipped["unreadable file"] += 1
             continue

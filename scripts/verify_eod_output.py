@@ -28,6 +28,9 @@ import os
 import sys
 import time
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import schema  # noqa: E402
+
 GATE_FIELDS = ("regime", "adx", "plus_di", "minus_di", "avg_dollar_vol")
 
 
@@ -65,6 +68,23 @@ def main():
         d = json.load(open(path))
     except Exception as exc:
         fail(f"{path} is not readable JSON: {exc}")
+
+    # 2b. DATA CONTRACT (added 2026-07-25)
+    # This file changed shape seven times in seven days and a dozen scripts read
+    # it without checking. That is how og_shadow.py ran dead for four days. This
+    # is the gatekeeper step, so the contract is enforced STRICTLY here: the file
+    # already passed the freshness check above, so it was written today, by the
+    # current producer, and it must therefore carry a stamp.
+    try:
+        if d.get("schema_version") is None:
+            fail(f"{path} carries no schema stamp. It passed the freshness check, so it "
+                 f"was written today - which means the producer is a pre-contract build "
+                 f"or stopped stamping. Do NOT compile from an unverified shape.")
+        schema.require(d, understood=(schema.CURRENT_VERSION,), path=path, warn=lambda m: None)
+    except SystemExit:
+        raise
+    except schema.SchemaError as exc:
+        fail(f"data contract violation - {exc}")
 
     # 2. internal date
     if str(d.get("date")) != date:

@@ -41,10 +41,10 @@ rem CLOSED. A regression there is a name quietly passing, which is invisible in
 rem the output. Run the tests BEFORE the 40-minute sweep, and refuse to run the
 rem pipeline on a broken gate rather than produce a confident wrong workbook.
 cd /d "%REPO%"
-echo [0/6] gate stack tests... >> "%LOG%"
-python -m unittest discover -s tests -p "test_gate_stack.py" >> "%LOG%" 2>&1
+echo [0/6] unit tests (gate stack + data contract)... >> "%LOG%"
+python -m unittest discover -s tests -p "test_*.py" >> "%LOG%" 2>&1
 if errorlevel 1 (
-    echo FAILED: gate stack unit tests did not pass - refusing to run the pipeline. >> "%LOG%"
+    echo FAILED: unit tests did not pass - refusing to run the pipeline. >> "%LOG%"
     set FAILED=1
     goto finish
 )
@@ -160,6 +160,24 @@ if not exist "%REPO%\daily-ignition-brief\%TODAY%-eod.md" (
 )
 
 :finish
+rem -- 8. TELL OMAR (added 2026-07-25) ---------------------------
+rem Until now this chain's entire "fail loudly" design terminated in a log file
+rem nobody reads. On 2026-07-24 it failed at 15:25 and that went unnoticed for
+rem ~8 hours. Meanwhile run_live_picks.bat - a far less important job - pushes to
+rem his phone. The critical job now pushes too, on BOTH outcomes, so that silence
+rem from this chain is itself suspicious rather than reassuring.
+set BRIEFMISSING=0
+if not exist "%REPO%\daily-ignition-brief\%TODAY%-eod.md" set BRIEFMISSING=1
+if "!FAILED!"=="1" (
+    claude -p "The EOD universe chain FAILED for %TODAY%. Read the last 60 lines of reports\eod_chain.log, find the step that failed and why. Send Omar exactly ONE PushNotification (status proactive, one line under 200 chars): say the EOD scan failed, name the failing step in plain English, and warn that there is NO trustworthy workbook for %TODAY%. Then stop; do nothing else." >> "%LOG%" 2>&1
+) else (
+    if "!BRIEFMISSING!"=="1" (
+        claude -p "The EOD universe chain completed for %TODAY% but the brief file daily-ignition-brief\%TODAY%-eod.md was never written. Send Omar exactly ONE PushNotification (status proactive, one line under 200 chars): the scan ran clean and the workbook is ready, but the written brief is MISSING. Then stop; do nothing else." >> "%LOG%" 2>&1
+    ) else (
+        claude -p "The EOD universe chain completed cleanly for %TODAY%. Read watchlists\universe-results-%TODAY%.json for scanned/fresh counts and how many names passed every gate. Send Omar exactly ONE PushNotification (status proactive, one line under 200 chars): confirm the scan ran clean, give the scanned count, the fresh-signal count and the number that cleared every gate. Then stop; do nothing else." >> "%LOG%" 2>&1
+    )
+)
+
 if "!FAILED!"=="1" (
     echo ===== EOD CHAIN FAILED %date% %time% ===== >> "%LOG%"
     echo *** No trustworthy output for %TODAY% - do not act on any workbook dated %TODAY%. *** >> "%LOG%"

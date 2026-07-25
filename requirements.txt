@@ -1,0 +1,35 @@
+# Python dependencies for the scan / analysis pipeline.
+#
+# WHY THESE ARE PINNED (added 2026-07-25)
+# ---------------------------------------
+# Every price, return, backtest and track-record number in this repo ultimately
+# comes out of yfinance. It is a free scraper of a site that changes without
+# notice, and it has a history of shifting behaviour between releases - adjusted
+# vs raw closes, index/timezone conventions, column names, rate limiting.
+#
+# Unpinned, a routine `pip install -U` could silently rebase every number the
+# system produces. The track record would change underneath us, this month would
+# stop being comparable to last month, and NOTHING in the pipeline would notice -
+# the same silent-failure pattern that killed og_shadow.py for four days.
+#
+# Recorded from the working environment on 2026-07-25 (Python 3.13.0, Windows).
+# The pipeline was verified green against exactly these versions.
+#
+# To upgrade DELIBERATELY:
+#   1. bump one line here
+#   2. re-run: python -m unittest discover -s tests -p "test_*.py"
+#   3. re-run scripts/outcome_tracker.py and scripts/track_record.py and diff the
+#      output against the previous run - if the numbers moved, the library
+#      changed its behaviour and you need to know that BEFORE it reaches a brief.
+# Never upgrade yfinance casually.
+
+yfinance==1.4.0
+pandas==3.0.3
+numpy==2.4.6
+openpyxl==3.1.5
+websockets==16.0
+requests==2.34.2
+
+# pulled in by yfinance; pinned because its HTTP behaviour affects fetch success
+curl_cffi==0.15.0
+beautifulsoup4==4.14.3

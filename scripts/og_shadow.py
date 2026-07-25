@@ -34,8 +34,16 @@ if not DATE:
                    if re.match(r"universe-results-\d{4}-\d{2}-\d{2}\.json$", f))
     DATE = cands[-1][17:-5]
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import schema  # noqa: E402
+
 RES_PATH = os.path.join(REPO, "watchlists", f"universe-results-{DATE}.json")
 res = json.load(open(RES_PATH))
+# This script is the reason the contract exists: it read a renamed field, found
+# nothing, and exited quietly every night for four days. It now states which
+# versions it understands and refuses anything else out loud. Legacy (unstamped)
+# files are still readable - normalize_truth() below handles both shapes.
+schema.require(res, understood=(2,), path=RES_PATH)
 
 
 def normalize_truth(res):

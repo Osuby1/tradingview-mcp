@@ -43,7 +43,13 @@ if not DATE:
                    if re.match(r"universe-results-\d{4}-\d{2}-\d{2}\.json$", f))
     DATE = cands[-1][17:-5]
 
-res = json.load(open(os.path.join(REPO, "watchlists", f"universe-results-{DATE}.json")))
+import schema  # noqa: E402
+
+_RES_PATH = os.path.join(REPO, "watchlists", f"universe-results-{DATE}.json")
+res = json.load(open(_RES_PATH))
+# The workbook is the deliverable Omar acts on, so it must never be built from a
+# file shape it does not understand. Legacy files still compile (with a note).
+schema.require(res, understood=(2,), path=_RES_PATH)
 enrich = res.get("scanner_enrich", {})
 allrows = {r["sym"]: r for r in res.get("all_names", [])}
 hits = {h["sym"]: h for h in res.get("hits", [])}

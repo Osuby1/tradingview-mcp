@@ -22,6 +22,7 @@ from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gate_stack import evaluate, funnel, MissingGateData, DEFAULT_POSITION  # noqa: E402
+import schema  # noqa: E402
 
 
 def load_sweep(path):
@@ -170,6 +171,11 @@ def main():
         "tracker_exit_watch": {},
     }
     path = f"watchlists/universe-results-{date}.json"
+    # Keep the promise before writing it. If this raises, the producer changed
+    # shape without updating the contract - which is how og_shadow.py was
+    # silently dead for four days. Better to fail here than to hand a
+    # differently-shaped file to a dozen consumers that will each shrug.
+    schema.validate(schema.stamp(out), path=path)
     json.dump(out, open(path, "w"), indent=1)
     print(f"wrote {path}")
     print(f"  scanned {len(ok)} | fresh {len(fresh)} | passing {len(passing)} "
