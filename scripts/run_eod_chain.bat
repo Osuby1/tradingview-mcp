@@ -148,6 +148,17 @@ git add reports watchlists research >> "%LOG%" 2>&1
 git commit -m "EOD chain %TODAY% (full pipeline, automated)" >> "%LOG%" 2>&1
 if errorlevel 1 echo NOTE: nothing to commit or commit failed (non-fatal) >> "%LOG%"
 
+rem -- 7. Brief check (added 2026-07-25) -------------------------
+rem The standing rule is that every EOD owes TWO artifacts: the workbook AND
+rem daily-ignition-brief\<date>-eod.md. That rule was written 7/22 and broken on
+rem both 7/23 and 7/24 - the workbooks appeared, the briefs did not, and nobody
+rem noticed until an audit. The chain cannot write the brief (it needs judgement)
+rem but it must not look like a clean run without one.
+if not exist "%REPO%\daily-ignition-brief\%TODAY%-eod.md" (
+    echo *** MISSING BRIEF: daily-ignition-brief\%TODAY%-eod.md was never written. >> "%LOG%"
+    echo *** The workbook alone is NOT the deliverable - write the brief. >> "%LOG%"
+)
+
 :finish
 if "!FAILED!"=="1" (
     echo ===== EOD CHAIN FAILED %date% %time% ===== >> "%LOG%"
