@@ -4,19 +4,19 @@
  "cohorts": {
   "PASSED": {
    "n": 21,
-   "mean": -0.66,
+   "mean": -1.01,
    "median": -0.77,
    "win_pct": 48,
-   "mean_excess": 0.24,
-   "mean_mae": -3.11
+   "mean_excess": -0.06,
+   "mean_mae": -3.23
   },
   "BLOCKED": {
-   "n": 118,
-   "mean": -0.52,
-   "median": -0.4,
-   "win_pct": 47,
-   "mean_excess": 0.42,
-   "mean_mae": -3.84
+   "n": 115,
+   "mean": -0.75,
+   "median": -0.63,
+   "win_pct": 46,
+   "mean_excess": 0.27,
+   "mean_mae": -3.81
   }
  },
  "matured": {
@@ -37,7 +37,7 @@
    "return_pct": 0.53,
    "mfe": 2.33,
    "mae": -1.96,
-   "spy_excess": 0.96
+   "spy_excess": 1.06
   },
   {
    "date": "2026-07-20",
@@ -46,13 +46,13 @@
    "verdict": "BLOCKED: regime DEEP-FAIL -11.8%",
    "regime": "DEEP-FAIL",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 3,
    "entry": 64.14,
-   "mark": 60.46,
-   "return_pct": -5.74,
+   "mark": 60.19,
+   "return_pct": -6.16,
    "mfe": 5.96,
-   "mae": -7.91,
-   "spy_excess": -5.31
+   "mae": -7.17,
+   "spy_excess": -5.63
   },
   {
    "date": "2026-07-20",
@@ -67,7 +67,7 @@
    "return_pct": 8.82,
    "mfe": 14.05,
    "mae": -0.72,
-   "spy_excess": 9.25
+   "spy_excess": 9.35
   },
   {
    "date": "2026-07-20",
@@ -82,7 +82,7 @@
    "return_pct": -11.39,
    "mfe": 9.52,
    "mae": -13.99,
-   "spy_excess": -10.97
+   "spy_excess": -10.87
   },
   {
    "date": "2026-07-20",
@@ -91,13 +91,13 @@
    "verdict": "BLOCKED: regime DEEP-FAIL -31.7%",
    "regime": "DEEP-FAIL",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 3,
    "entry": 56.97,
-   "mark": 57.1,
-   "return_pct": 0.23,
+   "mark": 55.99,
+   "return_pct": -1.72,
    "mfe": 2.53,
    "mae": -4.7,
-   "spy_excess": 0.65
+   "spy_excess": -1.19
   },
   {
    "date": "2026-07-20",
@@ -112,7 +112,7 @@
    "return_pct": -10.69,
    "mfe": 8.28,
    "mae": -11.22,
-   "spy_excess": -10.27
+   "spy_excess": -10.17
   },
   {
    "date": "2026-07-20",
@@ -127,7 +127,7 @@
    "return_pct": 1.6,
    "mfe": 1.97,
    "mae": -1.28,
-   "spy_excess": 2.03
+   "spy_excess": 2.13
   },
   {
    "date": "2026-07-20",
@@ -142,7 +142,7 @@
    "return_pct": 0.7,
    "mfe": 1.18,
    "mae": -1.74,
-   "spy_excess": 1.12
+   "spy_excess": 1.22
   },
   {
    "date": "2026-07-20",
@@ -157,7 +157,7 @@
    "return_pct": -3.29,
    "mfe": 0.45,
    "mae": -8.4,
-   "spy_excess": -2.86
+   "spy_excess": -2.76
   },
   {
    "date": "2026-07-20",
@@ -172,7 +172,7 @@
    "return_pct": -1.47,
    "mfe": 1.96,
    "mae": -3.92,
-   "spy_excess": -1.04
+   "spy_excess": -0.94
   },
   {
    "date": "2026-07-20",
@@ -187,7 +187,7 @@
    "return_pct": 5.92,
    "mfe": 6.95,
    "mae": -0.83,
-   "spy_excess": 6.34
+   "spy_excess": 6.44
   },
   {
    "date": "2026-07-20",
@@ -202,7 +202,7 @@
    "return_pct": -0.88,
    "mfe": 0.94,
    "mae": -2.16,
-   "spy_excess": -0.45
+   "spy_excess": -0.35
   },
   {
    "date": "2026-07-20",
@@ -217,7 +217,7 @@
    "return_pct": 2.02,
    "mfe": 2.14,
    "mae": -0.78,
-   "spy_excess": 2.45
+   "spy_excess": 2.55
   },
   {
    "date": "2026-07-20",
@@ -232,7 +232,7 @@
    "return_pct": 0.3,
    "mfe": 5.58,
    "mae": -1.97,
-   "spy_excess": 0.73
+   "spy_excess": 0.83
   },
   {
    "date": "2026-07-20",
@@ -241,13 +241,13 @@
    "verdict": "BLOCKED: whipsaw + red since signal + thin",
    "regime": "n/a",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 3,
    "entry": 86.09,
-   "mark": 84.85,
-   "return_pct": -1.44,
+   "mark": 87.31,
+   "return_pct": 1.42,
    "mfe": 3.48,
    "mae": -1.86,
-   "spy_excess": -1.01
+   "spy_excess": 1.94
   },
   {
    "date": "2026-07-20",
@@ -256,13 +256,13 @@
    "verdict": "BLOCKED: Magical +149 + REPAIR",
    "regime": "REPAIR",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 3,
    "entry": 19.55,
-   "mark": 20.76,
-   "return_pct": 6.19,
-   "mfe": 7.06,
+   "mark": 20.13,
+   "return_pct": 2.97,
+   "mfe": 5.83,
    "mae": -1.94,
-   "spy_excess": 6.62
+   "spy_excess": 3.49
   },
   {
    "date": "2026-07-20",
@@ -271,13 +271,13 @@
    "verdict": "BLOCKED: Magical +137",
    "regime": "n/a",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 3,
    "entry": 120.49,
-   "mark": 121.53,
-   "return_pct": 0.86,
+   "mark": 122.3,
+   "return_pct": 1.5,
    "mfe": 4.37,
    "mae": -2.1,
-   "spy_excess": 1.29
+   "spy_excess": 2.03
   },
   {
    "date": "2026-07-20",
@@ -286,13 +286,13 @@
    "verdict": "BLOCKED: Magical +103",
    "regime": "n/a",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 3,
    "entry": 9.43,
-   "mark": 9.91,
-   "return_pct": 5.09,
+   "mark": 9.7,
+   "return_pct": 2.86,
    "mfe": 5.73,
    "mae": -1.06,
-   "spy_excess": 5.52
+   "spy_excess": 3.39
   },
   {
    "date": "2026-07-20",
@@ -301,13 +301,13 @@
    "verdict": "BLOCKED: Magical +146",
    "regime": "n/a",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 3,
    "entry": 128.8,
-   "mark": 138.36,
-   "return_pct": 7.42,
+   "mark": 138.89,
+   "return_pct": 7.83,
    "mfe": 10.12,
    "mae": -2.2,
-   "spy_excess": 7.85
+   "spy_excess": 8.36
   },
   {
    "date": "2026-07-20",
@@ -322,7 +322,7 @@
    "return_pct": 6.62,
    "mfe": 6.76,
    "mae": -1.4,
-   "spy_excess": 7.05
+   "spy_excess": 7.15
   },
   {
    "date": "2026-07-21",
@@ -337,7 +337,7 @@
    "return_pct": 3.87,
    "mfe": 4.63,
    "mae": -4.95,
-   "spy_excess": 5.12
+   "spy_excess": 5.22
   },
   {
    "date": "2026-07-21",
@@ -352,7 +352,7 @@
    "return_pct": -3.12,
    "mfe": 1.94,
    "mae": -4.76,
-   "spy_excess": -1.87
+   "spy_excess": -1.77
   },
   {
    "date": "2026-07-21",
@@ -367,7 +367,7 @@
    "return_pct": -5.68,
    "mfe": 4.64,
    "mae": -7.24,
-   "spy_excess": -4.43
+   "spy_excess": -4.33
   },
   {
    "date": "2026-07-21",
@@ -382,7 +382,7 @@
    "return_pct": -3.2,
    "mfe": 1.67,
    "mae": -8.05,
-   "spy_excess": -1.95
+   "spy_excess": -1.85
   },
   {
    "date": "2026-07-21",
@@ -397,7 +397,7 @@
    "return_pct": -0.35,
    "mfe": 0.46,
    "mae": -3.0,
-   "spy_excess": 0.9
+   "spy_excess": 1.0
   },
   {
    "date": "2026-07-21",
@@ -412,7 +412,7 @@
    "return_pct": -5.14,
    "mfe": 4.22,
    "mae": -6.88,
-   "spy_excess": -3.89
+   "spy_excess": -3.79
   },
   {
    "date": "2026-07-21",
@@ -427,7 +427,7 @@
    "return_pct": 5.78,
    "mfe": 8.88,
    "mae": -1.89,
-   "spy_excess": 7.03
+   "spy_excess": 7.13
   },
   {
    "date": "2026-07-21",
@@ -436,13 +436,13 @@
    "verdict": "CANDIDATE \u2014 passes, but Magical 96.1 is at the line",
    "regime": "TAPE OK",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 2,
    "entry": 397.75,
-   "mark": 381.7,
-   "return_pct": -4.04,
+   "mark": 381.58,
+   "return_pct": -4.07,
    "mfe": 0.94,
    "mae": -5.12,
-   "spy_excess": -2.79
+   "spy_excess": -2.72
   },
   {
    "date": "2026-07-21",
@@ -457,7 +457,7 @@
    "return_pct": 1.4,
    "mfe": 5.12,
    "mae": -2.8,
-   "spy_excess": 2.65
+   "spy_excess": 2.75
   },
   {
    "date": "2026-07-21",
@@ -466,13 +466,13 @@
    "verdict": "CANDIDATE \u2014 passes indicator gate",
    "regime": "TAPE OK",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 2,
    "entry": 136.02,
-   "mark": 131.96,
-   "return_pct": -2.98,
+   "mark": 129.72,
+   "return_pct": -4.63,
    "mfe": 1.31,
    "mae": -4.89,
-   "spy_excess": -1.74
+   "spy_excess": -3.28
   },
   {
    "date": "2026-07-21",
@@ -481,13 +481,13 @@
    "verdict": "CANDIDATE \u2014 passes indicator gate",
    "regime": "TAPE OK",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 2,
    "entry": 42.96,
-   "mark": 41.7,
-   "return_pct": -2.93,
+   "mark": 40.99,
+   "return_pct": -4.59,
    "mfe": 1.4,
    "mae": -5.28,
-   "spy_excess": -1.68
+   "spy_excess": -3.24
   },
   {
    "date": "2026-07-21",
@@ -502,7 +502,7 @@
    "return_pct": -6.97,
    "mfe": 3.37,
    "mae": -7.53,
-   "spy_excess": -5.72
+   "spy_excess": -5.62
   },
   {
    "date": "2026-07-21",
@@ -511,13 +511,13 @@
    "verdict": "CANDIDATE \u2014 passes indicator gate",
    "regime": "TAPE OK",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 2,
    "entry": 188.04,
-   "mark": 193.0,
-   "return_pct": 2.64,
+   "mark": 191.12,
+   "return_pct": 1.64,
    "mfe": 6.24,
    "mae": -0.39,
-   "spy_excess": 3.89
+   "spy_excess": 2.99
   },
   {
    "date": "2026-07-21",
@@ -532,7 +532,7 @@
    "return_pct": -2.7,
    "mfe": 1.15,
    "mae": -3.33,
-   "spy_excess": -1.45
+   "spy_excess": -1.35
   },
   {
    "date": "2026-07-21",
@@ -541,13 +541,13 @@
    "verdict": "CANDIDATE \u2014 passes but flip is ancient",
    "regime": "TAPE OK",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 2,
    "entry": 271.73,
-   "mark": 268.06,
-   "return_pct": -1.35,
+   "mark": 265.13,
+   "return_pct": -2.43,
    "mfe": 2.86,
    "mae": -4.19,
-   "spy_excess": -0.1
+   "spy_excess": -1.08
   },
   {
    "date": "2026-07-21",
@@ -562,7 +562,7 @@
    "return_pct": -5.36,
    "mfe": 3.08,
    "mae": -9.98,
-   "spy_excess": -4.11
+   "spy_excess": -4.01
   },
   {
    "date": "2026-07-21",
@@ -577,7 +577,7 @@
    "return_pct": -4.91,
    "mfe": 0.34,
    "mae": -7.53,
-   "spy_excess": -3.66
+   "spy_excess": -3.56
   },
   {
    "date": "2026-07-21",
@@ -592,7 +592,7 @@
    "return_pct": -13.07,
    "mfe": 5.4,
    "mae": -13.59,
-   "spy_excess": -11.82
+   "spy_excess": -11.72
   },
   {
    "date": "2026-07-21",
@@ -607,7 +607,7 @@
    "return_pct": 0.39,
    "mfe": 0.61,
    "mae": -1.19,
-   "spy_excess": 1.64
+   "spy_excess": 1.74
   },
   {
    "date": "2026-07-21",
@@ -622,7 +622,7 @@
    "return_pct": -2.88,
    "mfe": 5.47,
    "mae": -4.74,
-   "spy_excess": -1.63
+   "spy_excess": -1.53
   },
   {
    "date": "2026-07-21",
@@ -637,7 +637,7 @@
    "return_pct": 1.4,
    "mfe": 1.54,
    "mae": -4.72,
-   "spy_excess": 2.64
+   "spy_excess": 2.74
   },
   {
    "date": "2026-07-21",
@@ -652,7 +652,7 @@
    "return_pct": -2.23,
    "mfe": 0.74,
    "mae": -8.01,
-   "spy_excess": -0.98
+   "spy_excess": -0.88
   },
   {
    "date": "2026-07-21",
@@ -661,13 +661,13 @@
    "verdict": "BLOCKED: earnings 7/27 + SELL MODE",
    "regime": "TAPE OK",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 2,
    "entry": 408.74,
-   "mark": 392.21,
-   "return_pct": -4.04,
+   "mark": 388.08,
+   "return_pct": -5.05,
    "mfe": 2.03,
-   "mae": -5.72,
-   "spy_excess": -2.79
+   "mae": -5.37,
+   "spy_excess": -3.7
   },
   {
    "date": "2026-07-21",
@@ -682,7 +682,7 @@
    "return_pct": 0.08,
    "mfe": 1.95,
    "mae": -3.03,
-   "spy_excess": 1.33
+   "spy_excess": 1.43
   },
   {
    "date": "2026-07-21",
@@ -697,7 +697,7 @@
    "return_pct": -4.5,
    "mfe": 1.97,
    "mae": -5.1,
-   "spy_excess": -3.26
+   "spy_excess": -3.16
   },
   {
    "date": "2026-07-21",
@@ -712,7 +712,7 @@
    "return_pct": 6.59,
    "mfe": 12.62,
    "mae": -3.84,
-   "spy_excess": 7.84
+   "spy_excess": 7.94
   },
   {
    "date": "2026-07-21",
@@ -727,7 +727,7 @@
    "return_pct": 0.03,
    "mfe": 5.05,
    "mae": -9.32,
-   "spy_excess": 1.28
+   "spy_excess": 1.38
   },
   {
    "date": "2026-07-21",
@@ -742,7 +742,7 @@
    "return_pct": -8.38,
    "mfe": 0.75,
    "mae": -8.7,
-   "spy_excess": -7.14
+   "spy_excess": -7.04
   },
   {
    "date": "2026-07-21",
@@ -757,7 +757,7 @@
    "return_pct": 1.38,
    "mfe": 6.04,
    "mae": -3.99,
-   "spy_excess": 2.63
+   "spy_excess": 2.73
   },
   {
    "date": "2026-07-21",
@@ -772,7 +772,7 @@
    "return_pct": 3.23,
    "mfe": 5.98,
    "mae": -4.86,
-   "spy_excess": 4.48
+   "spy_excess": 4.58
   },
   {
    "date": "2026-07-21",
@@ -787,7 +787,7 @@
    "return_pct": 4.36,
    "mfe": 4.47,
    "mae": -6.12,
-   "spy_excess": 5.61
+   "spy_excess": 5.71
   },
   {
    "date": "2026-07-21",
@@ -796,13 +796,13 @@
    "verdict": "BLOCKED: fails 2:1 + too hot + below ZLSMA",
    "regime": "TAPE OK",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 2,
    "entry": 30.42,
-   "mark": 30.98,
-   "return_pct": 1.84,
-   "mfe": 2.7,
+   "mark": 30.73,
+   "return_pct": 1.02,
+   "mfe": 1.02,
    "mae": -1.31,
-   "spy_excess": 3.09
+   "spy_excess": 2.37
   },
   {
    "date": "2026-07-21",
@@ -817,7 +817,7 @@
    "return_pct": 3.67,
    "mfe": 4.15,
    "mae": -2.4,
-   "spy_excess": 4.92
+   "spy_excess": 5.02
   },
   {
    "date": "2026-07-21",
@@ -832,7 +832,7 @@
    "return_pct": -1.51,
    "mfe": 4.92,
    "mae": -2.79,
-   "spy_excess": -0.26
+   "spy_excess": -0.16
   },
   {
    "date": "2026-07-21",
@@ -847,7 +847,7 @@
    "return_pct": 0.96,
    "mfe": 5.08,
    "mae": -1.6,
-   "spy_excess": 2.21
+   "spy_excess": 2.31
   },
   {
    "date": "2026-07-21",
@@ -862,7 +862,7 @@
    "return_pct": -3.14,
    "mfe": 0.6,
    "mae": -8.26,
-   "spy_excess": -1.89
+   "spy_excess": -1.79
   },
   {
    "date": "2026-07-21",
@@ -871,13 +871,13 @@
    "verdict": "BLOCKED: below ZLSMA",
    "regime": "TAPE OK",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 2,
    "entry": 24.8,
-   "mark": 22.74,
-   "return_pct": -8.31,
+   "mark": 22.43,
+   "return_pct": -9.56,
    "mfe": 1.21,
    "mae": -14.27,
-   "spy_excess": -7.06
+   "spy_excess": -8.21
   },
   {
    "date": "2026-07-21",
@@ -892,7 +892,7 @@
    "return_pct": 0.24,
    "mfe": 1.09,
    "mae": -1.45,
-   "spy_excess": 1.49
+   "spy_excess": 1.59
   },
   {
    "date": "2026-07-22",
@@ -907,7 +907,7 @@
    "return_pct": 1.97,
    "mfe": 2.63,
    "mae": -1.09,
-   "spy_excess": 3.1
+   "spy_excess": 3.2
   },
   {
    "date": "2026-07-22",
@@ -922,7 +922,7 @@
    "return_pct": 3.08,
    "mfe": 3.31,
    "mae": -2.94,
-   "spy_excess": 4.21
+   "spy_excess": 4.31
   },
   {
    "date": "2026-07-22",
@@ -937,7 +937,7 @@
    "return_pct": 2.73,
    "mfe": 3.65,
    "mae": -1.87,
-   "spy_excess": 3.86
+   "spy_excess": 3.96
   },
   {
    "date": "2026-07-22",
@@ -952,7 +952,7 @@
    "return_pct": 0.36,
    "mfe": 1.3,
    "mae": -2.54,
-   "spy_excess": 1.49
+   "spy_excess": 1.59
   },
   {
    "date": "2026-07-22",
@@ -961,13 +961,13 @@
    "verdict": "BLOCKED: -DI 25.4212 >= +DI 18.4009",
    "regime": "REPAIR",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 10.29,
-   "mark": 10.14,
-   "return_pct": -1.46,
+   "mark": 10.03,
+   "return_pct": -2.53,
    "mfe": 0.58,
    "mae": -3.3,
-   "spy_excess": -0.32
+   "spy_excess": -1.29
   },
   {
    "date": "2026-07-22",
@@ -982,7 +982,7 @@
    "return_pct": -0.97,
    "mfe": 0.86,
    "mae": -2.11,
-   "spy_excess": 0.16
+   "spy_excess": 0.26
   },
   {
    "date": "2026-07-22",
@@ -991,13 +991,13 @@
    "verdict": "BLOCKED: price 71.01 at/below ZLSMA 74.412",
    "regime": "PASS",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 71.01,
-   "mark": 70.47,
-   "return_pct": -0.76,
+   "mark": 70.77,
+   "return_pct": -0.34,
    "mfe": 0.35,
-   "mae": -3.53,
-   "spy_excess": 0.37
+   "mae": -1.73,
+   "spy_excess": 0.9
   },
   {
    "date": "2026-07-22",
@@ -1006,13 +1006,13 @@
    "verdict": "BLOCKED: ADX 12.3735 below 20",
    "regime": "REPAIR",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 122.82,
-   "mark": 130.0,
-   "return_pct": 5.85,
-   "mfe": 5.85,
+   "mark": 124.5,
+   "return_pct": 1.37,
+   "mfe": 3.0,
    "mae": -2.39,
-   "spy_excess": 6.98
+   "spy_excess": 2.6
   },
   {
    "date": "2026-07-22",
@@ -1027,7 +1027,7 @@
    "return_pct": 2.25,
    "mfe": 4.66,
    "mae": -1.91,
-   "spy_excess": 3.39
+   "spy_excess": 3.49
   },
   {
    "date": "2026-07-22",
@@ -1042,7 +1042,7 @@
    "return_pct": 0.66,
    "mfe": 1.53,
    "mae": -1.52,
-   "spy_excess": 1.8
+   "spy_excess": 1.9
   },
   {
    "date": "2026-07-22",
@@ -1051,13 +1051,13 @@
    "verdict": "BLOCKED: regime DEEP-FAIL (-13.5648% vs 200-day)",
    "regime": "DEEP-FAIL",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 90.37,
-   "mark": 87.86,
-   "return_pct": -2.78,
+   "mark": 89.33,
+   "return_pct": -1.15,
    "mfe": 1.87,
-   "mae": -4.49,
-   "spy_excess": -1.64
+   "mae": -2.55,
+   "spy_excess": 0.08
   },
   {
    "date": "2026-07-22",
@@ -1072,7 +1072,7 @@
    "return_pct": -2.32,
    "mfe": 1.53,
    "mae": -3.48,
-   "spy_excess": -1.19
+   "spy_excess": -1.09
   },
   {
    "date": "2026-07-22",
@@ -1087,7 +1087,7 @@
    "return_pct": -1.94,
    "mfe": 0.94,
    "mae": -7.12,
-   "spy_excess": -0.8
+   "spy_excess": -0.7
   },
   {
    "date": "2026-07-22",
@@ -1096,13 +1096,13 @@
    "verdict": "BLOCKED: ADX 13.2389 below 20",
    "regime": "PASS",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 184.36,
-   "mark": 184.7,
-   "return_pct": 0.18,
+   "mark": 178.44,
+   "return_pct": -3.21,
    "mfe": 0.78,
    "mae": -5.35,
-   "spy_excess": 1.32
+   "spy_excess": -1.98
   },
   {
    "date": "2026-07-22",
@@ -1117,7 +1117,7 @@
    "return_pct": -4.54,
    "mfe": 1.04,
    "mae": -5.55,
-   "spy_excess": -3.4
+   "spy_excess": -3.3
   },
   {
    "date": "2026-07-22",
@@ -1132,7 +1132,7 @@
    "return_pct": 0.83,
    "mfe": 1.01,
    "mae": -1.14,
-   "spy_excess": 1.97
+   "spy_excess": 2.07
   },
   {
    "date": "2026-07-22",
@@ -1141,13 +1141,13 @@
    "verdict": "BLOCKED: regime DEEP-FAIL (-28.5129% vs 200-day)",
    "regime": "DEEP-FAIL",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 66.16,
-   "mark": 62.36,
-   "return_pct": -5.74,
+   "mark": 62.18,
+   "return_pct": -6.02,
    "mfe": 6.15,
-   "mae": -9.37,
-   "spy_excess": -4.61
+   "mae": -7.27,
+   "spy_excess": -4.78
   },
   {
    "date": "2026-07-22",
@@ -1162,7 +1162,7 @@
    "return_pct": 2.05,
    "mfe": 2.88,
    "mae": -0.66,
-   "spy_excess": 3.19
+   "spy_excess": 3.29
   },
   {
    "date": "2026-07-22",
@@ -1177,7 +1177,7 @@
    "return_pct": 3.43,
    "mfe": 3.62,
    "mae": -2.87,
-   "spy_excess": 4.56
+   "spy_excess": 4.66
   },
   {
    "date": "2026-07-22",
@@ -1192,7 +1192,7 @@
    "return_pct": -0.97,
    "mfe": 2.94,
    "mae": -6.34,
-   "spy_excess": 0.16
+   "spy_excess": 0.26
   },
   {
    "date": "2026-07-22",
@@ -1207,7 +1207,7 @@
    "return_pct": -1.06,
    "mfe": 1.49,
    "mae": -3.53,
-   "spy_excess": 0.07
+   "spy_excess": 0.17
   },
   {
    "date": "2026-07-22",
@@ -1222,7 +1222,7 @@
    "return_pct": -0.63,
    "mfe": 1.46,
    "mae": -1.19,
-   "spy_excess": 0.5
+   "spy_excess": 0.61
   },
   {
    "date": "2026-07-22",
@@ -1231,13 +1231,13 @@
    "verdict": "BLOCKED: ADX 13.2666 below 20",
    "regime": "PASS",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 14.42,
-   "mark": 14.37,
-   "return_pct": -0.35,
+   "mark": 14.15,
+   "return_pct": -1.87,
    "mfe": 1.94,
    "mae": -2.77,
-   "spy_excess": 0.79
+   "spy_excess": -0.64
   },
   {
    "date": "2026-07-22",
@@ -1252,7 +1252,7 @@
    "return_pct": -3.69,
    "mfe": 0.66,
    "mae": -6.08,
-   "spy_excess": -2.56
+   "spy_excess": -2.46
   },
   {
    "date": "2026-07-22",
@@ -1267,7 +1267,7 @@
    "return_pct": -2.43,
    "mfe": 1.04,
    "mae": -2.6,
-   "spy_excess": -1.3
+   "spy_excess": -1.19
   },
   {
    "date": "2026-07-22",
@@ -1282,7 +1282,7 @@
    "return_pct": -0.45,
    "mfe": 0.36,
    "mae": -2.41,
-   "spy_excess": 0.68
+   "spy_excess": 0.78
   },
   {
    "date": "2026-07-22",
@@ -1297,7 +1297,7 @@
    "return_pct": -6.69,
    "mfe": 3.69,
    "mae": -7.24,
-   "spy_excess": -5.55
+   "spy_excess": -5.45
   },
   {
    "date": "2026-07-22",
@@ -1312,7 +1312,7 @@
    "return_pct": -1.14,
    "mfe": 0.4,
    "mae": -2.42,
-   "spy_excess": -0.01
+   "spy_excess": 0.09
   },
   {
    "date": "2026-07-22",
@@ -1327,7 +1327,7 @@
    "return_pct": 1.01,
    "mfe": 1.38,
    "mae": -1.59,
-   "spy_excess": 2.14
+   "spy_excess": 2.24
   },
   {
    "date": "2026-07-22",
@@ -1342,7 +1342,7 @@
    "return_pct": 0.82,
    "mfe": 1.05,
    "mae": -0.76,
-   "spy_excess": 1.96
+   "spy_excess": 2.06
   },
   {
    "date": "2026-07-22",
@@ -1357,7 +1357,7 @@
    "return_pct": -1.76,
    "mfe": 2.76,
    "mae": -4.87,
-   "spy_excess": -0.62
+   "spy_excess": -0.52
   },
   {
    "date": "2026-07-22",
@@ -1372,7 +1372,7 @@
    "return_pct": -1.89,
    "mfe": 1.71,
    "mae": -3.69,
-   "spy_excess": -0.76
+   "spy_excess": -0.66
   },
   {
    "date": "2026-07-22",
@@ -1387,7 +1387,7 @@
    "return_pct": -1.9,
    "mfe": 0.82,
    "mae": -2.27,
-   "spy_excess": -0.77
+   "spy_excess": -0.67
   },
   {
    "date": "2026-07-22",
@@ -1402,7 +1402,7 @@
    "return_pct": 0.62,
    "mfe": 2.68,
    "mae": -3.81,
-   "spy_excess": 1.76
+   "spy_excess": 1.86
   },
   {
    "date": "2026-07-22",
@@ -1417,7 +1417,7 @@
    "return_pct": -0.74,
    "mfe": 0.89,
    "mae": -5.79,
-   "spy_excess": 0.39
+   "spy_excess": 0.49
   },
   {
    "date": "2026-07-22",
@@ -1432,7 +1432,7 @@
    "return_pct": 4.36,
    "mfe": 7.42,
    "mae": -0.72,
-   "spy_excess": 5.5
+   "spy_excess": 5.6
   },
   {
    "date": "2026-07-22",
@@ -1447,7 +1447,7 @@
    "return_pct": -0.66,
    "mfe": 1.18,
    "mae": -2.73,
-   "spy_excess": 0.47
+   "spy_excess": 0.57
   },
   {
    "date": "2026-07-22",
@@ -1462,7 +1462,7 @@
    "return_pct": 0.78,
    "mfe": 2.03,
    "mae": -1.91,
-   "spy_excess": 1.91
+   "spy_excess": 2.01
   },
   {
    "date": "2026-07-22",
@@ -1477,7 +1477,7 @@
    "return_pct": -6.22,
    "mfe": 6.22,
    "mae": -7.77,
-   "spy_excess": -5.08
+   "spy_excess": -4.98
   },
   {
    "date": "2026-07-22",
@@ -1492,7 +1492,7 @@
    "return_pct": 0.17,
    "mfe": 0.79,
    "mae": -2.18,
-   "spy_excess": 1.31
+   "spy_excess": 1.41
   },
   {
    "date": "2026-07-22",
@@ -1507,7 +1507,7 @@
    "return_pct": -7.08,
    "mfe": 14.85,
    "mae": -9.81,
-   "spy_excess": -5.95
+   "spy_excess": -5.84
   },
   {
    "date": "2026-07-22",
@@ -1522,7 +1522,7 @@
    "return_pct": 0.97,
    "mfe": 1.25,
    "mae": -2.9,
-   "spy_excess": 2.1
+   "spy_excess": 2.2
   },
   {
    "date": "2026-07-22",
@@ -1537,7 +1537,7 @@
    "return_pct": -3.9,
    "mfe": 1.15,
    "mae": -6.08,
-   "spy_excess": -2.77
+   "spy_excess": -2.67
   },
   {
    "date": "2026-07-22",
@@ -1552,7 +1552,7 @@
    "return_pct": -1.61,
    "mfe": 0.65,
    "mae": -2.8,
-   "spy_excess": -0.48
+   "spy_excess": -0.38
   },
   {
    "date": "2026-07-22",
@@ -1567,7 +1567,7 @@
    "return_pct": -4.02,
    "mfe": 5.45,
    "mae": -5.78,
-   "spy_excess": -2.88
+   "spy_excess": -2.78
   },
   {
    "date": "2026-07-22",
@@ -1576,13 +1576,13 @@
    "verdict": "BLOCKED: ADX 13.9157 below 20",
    "regime": "PASS",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 89.41,
-   "mark": 89.78,
-   "return_pct": 0.41,
-   "mfe": 1.68,
+   "mark": 89.79,
+   "return_pct": 0.43,
+   "mfe": 1.21,
    "mae": -1.2,
-   "spy_excess": 1.55
+   "spy_excess": 1.66
   },
   {
    "date": "2026-07-22",
@@ -1597,7 +1597,7 @@
    "return_pct": -2.67,
    "mfe": 1.24,
    "mae": -3.39,
-   "spy_excess": -1.54
+   "spy_excess": -1.44
   },
   {
    "date": "2026-07-22",
@@ -1612,7 +1612,7 @@
    "return_pct": -0.56,
    "mfe": 0.71,
    "mae": -2.54,
-   "spy_excess": 0.58
+   "spy_excess": 0.68
   },
   {
    "date": "2026-07-22",
@@ -1621,13 +1621,13 @@
    "verdict": "BLOCKED: price 335.28 at/below ZLSMA 341.7817",
    "regime": "PASS",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 335.28,
-   "mark": 323.79,
-   "return_pct": -3.43,
+   "mark": 325.63,
+   "return_pct": -2.88,
    "mfe": 2.66,
-   "mae": -4.05,
-   "spy_excess": -2.29
+   "mae": -4.0,
+   "spy_excess": -1.64
   },
   {
    "date": "2026-07-22",
@@ -1642,7 +1642,7 @@
    "return_pct": 0.12,
    "mfe": 0.67,
    "mae": -2.26,
-   "spy_excess": 1.26
+   "spy_excess": 1.36
   },
   {
    "date": "2026-07-22",
@@ -1657,7 +1657,7 @@
    "return_pct": -1.13,
    "mfe": 1.49,
    "mae": -1.25,
-   "spy_excess": 0.01
+   "spy_excess": 0.11
   },
   {
    "date": "2026-07-22",
@@ -1666,13 +1666,13 @@
    "verdict": "BLOCKED: ADX 14.9278 below 20",
    "regime": "PASS",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 194.3,
-   "mark": 193.0,
-   "return_pct": -0.67,
+   "mark": 191.12,
+   "return_pct": -1.64,
    "mfe": 2.82,
    "mae": -2.7,
-   "spy_excess": 0.47
+   "spy_excess": -0.4
   },
   {
    "date": "2026-07-22",
@@ -1687,7 +1687,7 @@
    "return_pct": -3.52,
    "mfe": 2.99,
    "mae": -6.1,
-   "spy_excess": -2.38
+   "spy_excess": -2.28
   },
   {
    "date": "2026-07-22",
@@ -1702,7 +1702,7 @@
    "return_pct": -1.87,
    "mfe": 2.47,
    "mae": -2.33,
-   "spy_excess": -0.73
+   "spy_excess": -0.63
   },
   {
    "date": "2026-07-22",
@@ -1717,7 +1717,7 @@
    "return_pct": -3.09,
    "mfe": 0.9,
    "mae": -4.11,
-   "spy_excess": -1.95
+   "spy_excess": -1.85
   },
   {
    "date": "2026-07-22",
@@ -1726,13 +1726,13 @@
    "verdict": "BLOCKED: ADX 11.8091 below 20",
    "regime": "REPAIR",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 285.85,
-   "mark": 293.54,
-   "return_pct": 2.69,
-   "mfe": 5.07,
+   "mark": 283.41,
+   "return_pct": -0.85,
+   "mfe": 1.27,
    "mae": -2.52,
-   "spy_excess": 3.82
+   "spy_excess": 0.38
   },
   {
    "date": "2026-07-22",
@@ -1747,7 +1747,7 @@
    "return_pct": 0.59,
    "mfe": 1.21,
    "mae": -1.77,
-   "spy_excess": 1.72
+   "spy_excess": 1.82
   },
   {
    "date": "2026-07-22",
@@ -1756,13 +1756,13 @@
    "verdict": "BLOCKED: ADX 12.7752 below 20",
    "regime": "PASS",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 115.95,
-   "mark": 118.99,
-   "return_pct": 2.62,
-   "mfe": 5.5,
+   "mark": 116.5,
+   "return_pct": 0.47,
+   "mfe": 2.78,
    "mae": -2.98,
-   "spy_excess": 3.76
+   "spy_excess": 1.71
   },
   {
    "date": "2026-07-22",
@@ -1771,13 +1771,13 @@
    "verdict": "BLOCKED: ADX 17.0338 below 20",
    "regime": "PASS",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 118.05,
-   "mark": 118.32,
-   "return_pct": 0.23,
-   "mfe": 0.31,
+   "mark": 115.71,
+   "return_pct": -1.98,
+   "mfe": 0.08,
    "mae": -2.96,
-   "spy_excess": 1.36
+   "spy_excess": -0.75
   },
   {
    "date": "2026-07-22",
@@ -1792,7 +1792,7 @@
    "return_pct": -5.94,
    "mfe": 2.3,
    "mae": -8.05,
-   "spy_excess": -4.8
+   "spy_excess": -4.7
   },
   {
    "date": "2026-07-22",
@@ -1801,13 +1801,13 @@
    "verdict": "BLOCKED: stop is 5.27x ATR",
    "regime": "REPAIR",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 30.56,
-   "mark": 30.1,
-   "return_pct": -1.51,
+   "mark": 31.2,
+   "return_pct": 2.09,
    "mfe": 6.64,
    "mae": -6.74,
-   "spy_excess": -0.37
+   "spy_excess": 3.33
   },
   {
    "date": "2026-07-22",
@@ -1816,13 +1816,13 @@
    "verdict": "BLOCKED: price 55.15 at/below ZLSMA 58.9167",
    "regime": "PASS",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 55.15,
-   "mark": 58.23,
-   "return_pct": 5.58,
-   "mfe": 6.29,
+   "mark": 56.32,
+   "return_pct": 2.12,
+   "mfe": 4.57,
    "mae": -0.98,
-   "spy_excess": 6.72
+   "spy_excess": 3.36
   },
   {
    "date": "2026-07-22",
@@ -1837,7 +1837,7 @@
    "return_pct": 1.57,
    "mfe": 1.6,
    "mae": -0.88,
-   "spy_excess": 2.71
+   "spy_excess": 2.81
   },
   {
    "date": "2026-07-22",
@@ -1852,7 +1852,7 @@
    "return_pct": -0.92,
    "mfe": 0.34,
    "mae": -2.08,
-   "spy_excess": 0.21
+   "spy_excess": 0.32
   },
   {
    "date": "2026-07-22",
@@ -1867,7 +1867,7 @@
    "return_pct": -8.12,
    "mfe": 2.59,
    "mae": -8.39,
-   "spy_excess": -6.98
+   "spy_excess": -6.88
   },
   {
    "date": "2026-07-22",
@@ -1882,7 +1882,7 @@
    "return_pct": -6.21,
    "mfe": 3.13,
    "mae": -7.99,
-   "spy_excess": -5.08
+   "spy_excess": -4.98
   },
   {
    "date": "2026-07-22",
@@ -1891,13 +1891,13 @@
    "verdict": "BLOCKED: ADX 16.1938 below 20",
    "regime": "PASS",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 650.5,
-   "mark": 651.22,
-   "return_pct": 0.11,
+   "mark": 655.35,
+   "return_pct": 0.75,
    "mfe": 3.31,
    "mae": -4.54,
-   "spy_excess": 1.25
+   "spy_excess": 1.98
   },
   {
    "date": "2026-07-22",
@@ -1912,7 +1912,7 @@
    "return_pct": -0.77,
    "mfe": 1.67,
    "mae": -2.12,
-   "spy_excess": 0.37
+   "spy_excess": 0.47
   },
   {
    "date": "2026-07-22",
@@ -1921,13 +1921,13 @@
    "verdict": "BLOCKED: ADX 17.1388 below 20",
    "regime": "PASS",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 1,
    "entry": 433.1,
-   "mark": 419.44,
-   "return_pct": -3.15,
+   "mark": 425.55,
+   "return_pct": -1.74,
    "mfe": 0.97,
-   "mae": -3.25,
-   "spy_excess": -2.02
+   "mae": -3.03,
+   "spy_excess": -0.51
   },
   {
    "date": "2026-07-22",
@@ -1942,7 +1942,7 @@
    "return_pct": -0.79,
    "mfe": 0.09,
    "mae": -4.36,
-   "spy_excess": 0.35
+   "spy_excess": 0.45
   },
   {
    "date": "2026-07-22",
@@ -1957,7 +1957,7 @@
    "return_pct": 0.17,
    "mfe": 0.21,
    "mae": -0.6,
-   "spy_excess": 1.31
+   "spy_excess": 1.41
   },
   {
    "date": "2026-07-22",
@@ -1972,7 +1972,7 @@
    "return_pct": -2.64,
    "mfe": 1.37,
    "mae": -3.44,
-   "spy_excess": -1.5
+   "spy_excess": -1.4
   },
   {
    "date": "2026-07-22",
@@ -1987,7 +1987,7 @@
    "return_pct": -0.78,
    "mfe": 0.08,
    "mae": -2.48,
-   "spy_excess": 0.36
+   "spy_excess": 0.46
   },
   {
    "date": "2026-07-22",
@@ -2002,7 +2002,7 @@
    "return_pct": -2.02,
    "mfe": 1.81,
    "mae": -4.26,
-   "spy_excess": -0.88
+   "spy_excess": -0.78
   },
   {
    "date": "2026-07-22",
@@ -2017,7 +2017,7 @@
    "return_pct": -0.18,
    "mfe": 2.46,
    "mae": -2.66,
-   "spy_excess": 0.96
+   "spy_excess": 1.06
   },
   {
    "date": "2026-07-22",
@@ -2032,7 +2032,7 @@
    "return_pct": 4.72,
    "mfe": 4.85,
    "mae": -1.26,
-   "spy_excess": 5.85
+   "spy_excess": 5.95
   },
   {
    "date": "2026-07-23",
@@ -2047,7 +2047,7 @@
    "return_pct": 0.87,
    "mfe": 1.52,
    "mae": -2.16,
-   "spy_excess": 0.76
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2062,7 +2062,7 @@
    "return_pct": 2.26,
    "mfe": 3.29,
    "mae": -0.81,
-   "spy_excess": 2.16
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2070,14 +2070,7 @@
    "cohort": "BLOCKED",
    "verdict": "BLOCKED: ADX 17.2122 below 20",
    "regime": "PASS",
-   "status": "OPEN",
-   "elapsed": 1,
-   "entry": 89.92,
-   "mark": 89.42,
-   "return_pct": -0.56,
-   "mfe": 1.56,
-   "mae": -1.53,
-   "spy_excess": -0.66
+   "status": "TOO NEW"
   },
   {
    "date": "2026-07-23",
@@ -2085,14 +2078,7 @@
    "cohort": "BLOCKED",
    "verdict": "BLOCKED: ADX 17.0158 below 20",
    "regime": "REPAIR",
-   "status": "OPEN",
-   "elapsed": 1,
-   "entry": 80.48,
-   "mark": 81.66,
-   "return_pct": 1.47,
-   "mfe": 1.6,
-   "mae": -0.81,
-   "spy_excess": 1.36
+   "status": "TOO NEW"
   },
   {
    "date": "2026-07-23",
@@ -2107,7 +2093,7 @@
    "return_pct": 0.97,
    "mfe": 1.14,
    "mae": -1.0,
-   "spy_excess": 0.87
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2115,14 +2101,7 @@
    "cohort": "BLOCKED",
    "verdict": "BLOCKED: regime DEEP-FAIL (-31.2972% vs 200-day)",
    "regime": "DEEP-FAIL",
-   "status": "OPEN",
-   "elapsed": 1,
-   "entry": 62.18,
-   "mark": 62.36,
-   "return_pct": 0.29,
-   "mfe": 5.19,
-   "mae": -3.57,
-   "spy_excess": 0.19
+   "status": "TOO NEW"
   },
   {
    "date": "2026-07-23",
@@ -2137,7 +2116,7 @@
    "return_pct": -0.42,
    "mfe": 3.51,
    "mae": -1.61,
-   "spy_excess": -0.52
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2145,14 +2124,7 @@
    "cohort": "BLOCKED",
    "verdict": "BLOCKED: stop is 5.04x ATR",
    "regime": "PASS",
-   "status": "OPEN",
-   "elapsed": 1,
-   "entry": 227.9,
-   "mark": 227.86,
-   "return_pct": -0.02,
-   "mfe": 4.34,
-   "mae": -3.47,
-   "spy_excess": -0.12
+   "status": "TOO NEW"
   },
   {
    "date": "2026-07-23",
@@ -2167,7 +2139,7 @@
    "return_pct": -3.34,
    "mfe": 3.03,
    "mae": -3.65,
-   "spy_excess": -3.44
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2175,14 +2147,7 @@
    "cohort": "BLOCKED",
    "verdict": "BLOCKED: ADX 15.7788 below 20",
    "regime": "REPAIR",
-   "status": "OPEN",
-   "elapsed": 1,
-   "entry": 14.15,
-   "mark": 14.37,
-   "return_pct": 1.55,
-   "mfe": 2.83,
-   "mae": -0.92,
-   "spy_excess": 1.45
+   "status": "TOO NEW"
   },
   {
    "date": "2026-07-23",
@@ -2197,7 +2162,7 @@
    "return_pct": -1.42,
    "mfe": 3.04,
    "mae": -3.86,
-   "spy_excess": -1.52
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2220,7 +2185,7 @@
    "return_pct": 0.95,
    "mfe": 1.32,
    "mae": -1.64,
-   "spy_excess": 0.85
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2235,7 +2200,7 @@
    "return_pct": 1.0,
    "mfe": 1.11,
    "mae": -0.58,
-   "spy_excess": 0.9
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2243,7 +2208,14 @@
    "cohort": "BLOCKED",
    "verdict": "BLOCKED: regime DEEP-FAIL (-31.292% vs 200-day)",
    "regime": "DEEP-FAIL",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 98.96,
+   "mark": 99.36,
+   "return_pct": 0.4,
+   "mfe": 5.92,
+   "mae": -0.88,
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2258,7 +2230,7 @@
    "return_pct": 0.28,
    "mfe": 1.95,
    "mae": -1.56,
-   "spy_excess": 0.18
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2273,7 +2245,7 @@
    "return_pct": 0.1,
    "mfe": 0.8,
    "mae": -0.27,
-   "spy_excess": 0.0
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2288,7 +2260,7 @@
    "return_pct": 2.44,
    "mfe": 3.83,
    "mae": -2.07,
-   "spy_excess": 2.34
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2303,7 +2275,7 @@
    "return_pct": 1.65,
    "mfe": 1.89,
    "mae": -0.74,
-   "spy_excess": 1.55
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2318,7 +2290,7 @@
    "return_pct": -1.27,
    "mfe": 1.62,
    "mae": -3.48,
-   "spy_excess": -1.37
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2326,14 +2298,7 @@
    "cohort": "BLOCKED",
    "verdict": "BLOCKED: ADX 16.8926 below 20",
    "regime": "REPAIR",
-   "status": "OPEN",
-   "elapsed": 1,
-   "entry": 124.55,
-   "mark": 128.31,
-   "return_pct": 3.02,
-   "mfe": 6.68,
-   "mae": -1.93,
-   "spy_excess": 2.92
+   "status": "TOO NEW"
   },
   {
    "date": "2026-07-23",
@@ -2348,7 +2313,7 @@
    "return_pct": -2.33,
    "mfe": 4.34,
    "mae": -5.19,
-   "spy_excess": -2.43
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2356,7 +2321,14 @@
    "cohort": "PASSED",
    "verdict": "STARTER ONLY - regime REPAIR",
    "regime": "REPAIR",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 299.67,
+   "mark": 300.21,
+   "return_pct": 0.18,
+   "mfe": 2.25,
+   "mae": -3.39,
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2371,7 +2343,7 @@
    "return_pct": -3.7,
    "mfe": 1.97,
    "mae": -5.27,
-   "spy_excess": -3.8
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2386,7 +2358,7 @@
    "return_pct": 0.21,
    "mfe": 2.91,
    "mae": -2.06,
-   "spy_excess": 0.11
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2401,7 +2373,7 @@
    "return_pct": 2.09,
    "mfe": 2.37,
    "mae": -1.3,
-   "spy_excess": 1.99
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2416,7 +2388,7 @@
    "return_pct": 1.24,
    "mfe": 2.01,
    "mae": -1.24,
-   "spy_excess": 1.13
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2431,7 +2403,7 @@
    "return_pct": -1.62,
    "mfe": 0.65,
    "mae": -2.34,
-   "spy_excess": -1.72
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2446,7 +2418,7 @@
    "return_pct": -1.88,
    "mfe": 0.36,
    "mae": -2.0,
-   "spy_excess": -1.98
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2461,7 +2433,7 @@
    "return_pct": 1.73,
    "mfe": 2.23,
    "mae": -1.93,
-   "spy_excess": 1.63
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2476,7 +2448,7 @@
    "return_pct": -0.48,
    "mfe": 2.21,
    "mae": -0.95,
-   "spy_excess": -0.58
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2491,7 +2463,7 @@
    "return_pct": 3.26,
    "mfe": 3.77,
    "mae": -0.31,
-   "spy_excess": 3.16
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2499,14 +2471,7 @@
    "cohort": "PASSED",
    "verdict": "CANDIDATE - passes every gate",
    "regime": "PASS",
-   "status": "OPEN",
-   "elapsed": 1,
-   "entry": 115.71,
-   "mark": 118.32,
-   "return_pct": 2.26,
-   "mfe": 2.34,
-   "mae": -0.99,
-   "spy_excess": 2.15
+   "status": "TOO NEW"
   },
   {
    "date": "2026-07-23",
@@ -2514,14 +2479,7 @@
    "cohort": "BLOCKED",
    "verdict": "BLOCKED: stop is 28.9% away",
    "regime": "REPAIR",
-   "status": "OPEN",
-   "elapsed": 1,
-   "entry": 31.2,
-   "mark": 30.1,
-   "return_pct": -3.53,
-   "mfe": 4.46,
-   "mae": -6.15,
-   "spy_excess": -3.63
+   "status": "TOO NEW"
   },
   {
    "date": "2026-07-23",
@@ -2529,14 +2487,7 @@
    "cohort": "BLOCKED",
    "verdict": "BLOCKED: price 56.7275 at/below ZLSMA 59.3914",
    "regime": "PASS",
-   "status": "OPEN",
-   "elapsed": 1,
-   "entry": 56.32,
-   "mark": 58.23,
-   "return_pct": 3.39,
-   "mfe": 4.08,
-   "mae": -1.88,
-   "spy_excess": 3.29
+   "status": "TOO NEW"
   },
   {
    "date": "2026-07-23",
@@ -2551,7 +2502,7 @@
    "return_pct": 2.03,
    "mfe": 2.06,
    "mae": -0.44,
-   "spy_excess": 1.93
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2559,7 +2510,14 @@
    "cohort": "BLOCKED",
    "verdict": "BLOCKED: ADX 17.9432 below 20",
    "regime": "PASS",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 651.22,
+   "mark": 655.35,
+   "return_pct": 0.63,
+   "mfe": 2.82,
+   "mae": -0.81,
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2574,7 +2532,7 @@
    "return_pct": -3.01,
    "mfe": 0.8,
    "mae": -3.82,
-   "spy_excess": -3.12
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2589,7 +2547,7 @@
    "return_pct": 0.16,
    "mfe": 3.33,
    "mae": -4.09,
-   "spy_excess": 0.06
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2604,7 +2562,7 @@
    "return_pct": -3.31,
    "mfe": 0.46,
    "mae": -3.95,
-   "spy_excess": -3.42
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2619,7 +2577,7 @@
    "return_pct": 1.7,
    "mfe": 2.32,
    "mae": -0.84,
-   "spy_excess": 1.6
+   "spy_excess": null
   },
   {
    "date": "2026-07-23",
@@ -2634,7 +2592,7 @@
    "return_pct": 5.84,
    "mfe": 5.98,
    "mae": -0.21,
-   "spy_excess": 5.74
+   "spy_excess": null
   },
   {
    "date": "2026-07-24",

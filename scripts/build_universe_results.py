@@ -53,6 +53,28 @@ def main():
     rows = load_sweep(sweep_path)
     reg = {r["sym"]: r for r in _reg_rows if r.get("ok", True)}
 
+    # ---- CURRENCY GUARD (added 2026-07-25) --------------------------------
+    # A US-equity universe cannot contain a non-USD listing. When one appears it
+    # means TradingView resolved a bare ticker to a FOREIGN listing of a
+    # DIFFERENT COMPANY - on 2026-07-24 the live sweep carried five: BHP (ASX,
+    # AUD), COCO (Indonesia, IDR), DTE (Deutsche Telekom, EUR), EQR (ASX, AUD)
+    # and SFL (India, INR, off by a factor of 63). Those prices were ranked and
+    # gated as if they were the US names.
+    #
+    # BHP and EQR had already been fixed by hand for the 7/23 run and came back
+    # the next day, because manual fixes do not stick. The sweep has always
+    # recorded the quote currency; nothing ever looked at it. This is the
+    # mechanical half of the fix and it catches traps nobody has hit yet.
+    #
+    # Fails CLOSED: a wrong-company row is dropped from the scan entirely rather
+    # than silently priced, and it is surfaced as a workbook BLOCKER.
+    foreign = [r for r in rows
+               if r.get("ok") and r.get("rccy") and r.get("rccy") != "USD"]
+    for r in foreign:
+        r["ok"] = False
+        r["why"] = (f"WRONG LISTING: resolved to {r.get('rfull')} quoted in "
+                    f"{r.get('rccy')} ({r.get('rdesc')}) - not the US company")
+
     ok = [r for r in rows if r.get("ok")]
     buys = [r for r in ok if r.get("ce_mode") == "BUY"]
     sells = [r["rname"] for r in ok if r.get("ce_mode") == "SELL"]
@@ -132,6 +154,19 @@ def main():
                          "output, not a failure of the scan."
                          if not passing else "",
                "action": "Do not manufacture a candidate to have something to say."})
+    if foreign:
+        dq.append({
+            "severity": "BLOCKER", "area": "Symbol resolution",
+            "finding": f"{len(foreign)} ticker(s) resolved to a FOREIGN listing of a "
+                       f"different company and were DROPPED from the scan: "
+                       + "; ".join(f"{r['rname']} -> {r.get('rfull')} "
+                                   f"({r.get('rccy')}, {r.get('rdesc')})"
+                                   for r in foreign),
+            "impact": "Those rows carried the wrong company's price in the wrong "
+                      "currency. They are excluded, so no plan can be built on them.",
+            "action": "Add an exchange prefix for each in FORCE_PREFIX "
+                      "(scripts/build_extended_universe.py) so the sweep reads the "
+                      "US line next time."})
     dq.append({"severity": "WARNING", "area": "Signal quality",
                "finding": "0-bar signals (flipped today) can repaint before the close. "
                           "On 2026-07-22, CENX and CRWV both showed fresh BUY flips at "

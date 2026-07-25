@@ -3,7 +3,7 @@
  "variant": "full - O.G Chandelier + HQ Swing v1 regime filter",
  "system_version": "gate-stack-v1-2026-07-22",
  "universe_size": 494,
- "scanned": 492,
+ "scanned": 487,
  "fresh_count": 48,
  "combined_risk_new_actives": "",
  "run_note": "Full universe read on Heikin Ashi. 48 fresh BUY signals culled to 6 by the regime + ADX + DI + ZLSMA stack.",
@@ -14,6 +14,13 @@
    "finding": "48 fresh Chandelier BUY signals culled to 6. Funnel: fresh signals 48 -> regime PASS 30 -> ADX >= 20 18 -> +DI > -DI 18 -> above ZLSMA 9 -> stop >= 1x ATR 9 -> liquid enough 9.",
    "impact": "",
    "action": "Do not manufacture a candidate to have something to say."
+  },
+  {
+   "severity": "BLOCKER",
+   "area": "Symbol resolution",
+   "finding": "5 ticker(s) resolved to a FOREIGN listing of a different company and were DROPPED from the scan: BHP -> ASX_DLY:BHP (AUD, BHP Group Ltd); COCO -> IDX_DLY:COCO (IDR, PT Wahana Interfood Nusantara Tbk); DTE -> XETR_DLY:DTE (EUR, Deutsche Telekom AG); EQR -> ASX_DLY:EQR (AUD, EQ Resources Limited); SFL -> NSE_DLY:SFL (INR, Sheela Foam Ltd.)",
+   "impact": "Those rows carried the wrong company's price in the wrong currency. They are excluded, so no plan can be built on them.",
+   "action": "Add an exchange prefix for each in FORCE_PREFIX (scripts/build_extended_universe.py) so the sweep reads the US line next time."
   },
   {
    "severity": "WARNING",
@@ -1296,7 +1303,6 @@
   "DFDV",
   "DHI",
   "DIS",
-  "DTE",
   "DUOL",
   "DX",
   "EFC",
@@ -1304,7 +1310,6 @@
   "EME",
   "ENVA",
   "EPC",
-  "EQR",
   "ERIE",
   "ESE",
   "ESQ",
@@ -3070,21 +3075,6 @@
    "avg_dollar_vol": 167175824
   },
   {
-   "sym": "BHP",
-   "last": 59.23,
-   "magical": 15.373,
-   "zlsma": 56.6908,
-   "ce_mode": "BUY",
-   "ce_label": 56.855,
-   "short_stop": null,
-   "regime": "REPAIR",
-   "pct_vs_200": 14.4917,
-   "adx": 16.0164,
-   "plus_di": 20.6978,
-   "minus_di": 17.88,
-   "avg_dollar_vol": 399404981
-  },
-  {
    "sym": "BHRB",
    "last": 70.0913,
    "magical": -67.8643,
@@ -3775,21 +3765,6 @@
    "avg_dollar_vol": 308834756
   },
   {
-   "sym": "COCO",
-   "last": 130.25,
-   "magical": -29.5675,
-   "zlsma": 181.3283,
-   "ce_mode": "BUY",
-   "ce_label": 118.75,
-   "short_stop": null,
-   "regime": "DEEP-FAIL",
-   "pct_vs_200": -28.4559,
-   "adx": 25.5664,
-   "plus_di": 23.6682,
-   "minus_di": 16.4422,
-   "avg_dollar_vol": 73964189712
-  },
-  {
    "sym": "COGT",
    "last": 40,
    "magical": 119.3888,
@@ -4390,21 +4365,6 @@
    "avg_dollar_vol": 11324273
   },
   {
-   "sym": "DTE",
-   "last": 26.0575,
-   "magical": 12.5647,
-   "zlsma": 24.7938,
-   "ce_mode": "SELL",
-   "ce_label": 27.2025,
-   "short_stop": 27.2025,
-   "regime": "REPAIR",
-   "pct_vs_200": -9.0723,
-   "adx": 24.2939,
-   "plus_di": 16.5295,
-   "minus_di": 20.9468,
-   "avg_dollar_vol": 182396199
-  },
-  {
    "sym": "DUK",
    "last": 130.03,
    "magical": 184.846,
@@ -4628,21 +4588,6 @@
    "plus_di": 24.6028,
    "minus_di": 13.8856,
    "avg_dollar_vol": 611520560
-  },
-  {
-   "sym": "EQR",
-   "last": 0.2638,
-   "magical": -65.2557,
-   "zlsma": 0.2972,
-   "ce_mode": "SELL",
-   "ce_label": 0.2888,
-   "short_stop": 0.2888,
-   "regime": "PASS",
-   "pct_vs_200": 36.0264,
-   "adx": 13.8959,
-   "plus_di": 16.1303,
-   "minus_di": 19.6826,
-   "avg_dollar_vol": 7144105
   },
   {
    "sym": "ERIE",
@@ -8125,21 +8070,6 @@
    "avg_dollar_vol": 101512204
   },
   {
-   "sym": "SFL",
-   "last": 755.925,
-   "magical": -22.1147,
-   "zlsma": 775.376,
-   "ce_mode": "BUY",
-   "ce_label": 730.4375,
-   "short_stop": null,
-   "regime": "PASS",
-   "pct_vs_200": 23.8863,
-   "adx": 57.1222,
-   "plus_di": 20.603,
-   "minus_di": 9.5951,
-   "avg_dollar_vol": 178079904
-  },
-  {
    "sym": "SFM",
    "last": 74.0475,
    "magical": -80.9691,
@@ -9779,9 +9709,6 @@
   "BG": {
    "description": "Bunge Global SA"
   },
-  "BHP": {
-   "description": "BHP Group Ltd"
-  },
   "BHRB": {
    "description": "Burke Herbert Financial Services Corp"
   },
@@ -9920,9 +9847,6 @@
   "CNP": {
    "description": "CenterPoint Energy, Inc."
   },
-  "COCO": {
-   "description": "PT Wahana Interfood Nusantara Tbk"
-  },
   "COGT": {
    "description": "Cogent Biosciences, Inc."
   },
@@ -10043,9 +9967,6 @@
   "DRTS": {
    "description": "Alpha Tau Medical Ltd"
   },
-  "DTE": {
-   "description": "Deutsche Telekom AG"
-  },
   "DUK": {
    "description": "Duke Energy Corporation"
   },
@@ -10090,9 +10011,6 @@
   },
   "EQIX": {
    "description": "Equinix, Inc."
-  },
-  "EQR": {
-   "description": "EQ Resources Limited"
   },
   "ERIE": {
    "description": "Erie Indemnity Company Class A"
@@ -10790,9 +10708,6 @@
   "SEZL": {
    "description": "Sezzle Inc."
   },
-  "SFL": {
-   "description": "Sheela Foam Ltd."
-  },
   "SFM": {
    "description": "Sprouts Farmers Market, Inc."
   },
@@ -11090,15 +11005,6 @@
  },
  "scanner_enrich_asof": "n/a (chart reads only)",
  "tracker_exit_watch": {},
- "shadow": [
-  {
-   "name": "og-python-port-v1",
-   "date_graded": "2026-07-24",
-   "mode_match_pct": 85.8,
-   "fresh_match_pct": 92.3,
-   "cci_proxy_corr": 0.991,
-   "graded": 492,
-   "grade_file": "shadow-og-grade-2026-07-24.md"
-  }
- ]
+ "schema_kind": "universe-results",
+ "schema_version": 2
 }

@@ -31,7 +31,43 @@ NON_EQUITY = {
 }
 
 # Exchange prefixes where bare-ticker resolution is a known trap.
-FORCE_PREFIX = {'FITB': 'NYSE:FITB', 'SMCI': 'NASDAQ:SMCI'}
+#
+# TradingView resolves a BARE ticker to whichever listing it ranks first, which
+# for these is a FOREIGN listing of a DIFFERENT COMPANY. Searching "BHP" returns
+# ASX:BHP ahead of NYSE:BHP, so the sweep silently read Australian shares in AUD.
+#
+# Added 2026-07-25 after the 7/24 live sweep was found carrying five wrong
+# companies. Every prefix below was verified against TradingView symbol search,
+# not assumed:
+#   BHP  -> ASX:BHP        BHP Group Ltd, AUD 59.23   (want NYSE ADR, $83.72)
+#   COCO -> IDX:COCO       PT Wahana Interfood, IDR   (want Vita Coco, $65.97)
+#   DTE  -> XETR:DTE       Deutsche Telekom, EUR      (want DTE Energy, $149.46)
+#   EQR  -> ASX:EQR        EQ Resources, AUD 0.26     (want Equity Residential, $67.86)
+#   SFL  -> NSE:SFL        Sheela Foam, INR 755.92    (want SFL Corp, $11.92)
+#
+# THE RESOLUTION IS NON-DETERMINISTIC, which is the real reason this needs code
+# rather than vigilance. Tracing BHP's `last` across four consecutive runs
+# against the true NYSE close:
+#
+#   2026-07-20   80.55   vs real 80.49   CORRECT (US ADR)
+#   2026-07-22   59.76   vs real 84.54   WRONG   (ASX, AUD)
+#   2026-07-23   83.74   vs real 83.65   CORRECT (hand-patched that day)
+#   2026-07-24   59.23   vs real 83.72   WRONG   (ASX again)
+#
+# The same bare ticker resolved to a different company on different days. So the
+# 7/23 hand-patch did not "get forgotten" - the ticker simply flipped back. No
+# amount of care fixes that; only pinning the exchange does. This list is the
+# durable half; the currency guard in build_universe_results.py is the half that
+# catches traps nobody has hit yet.
+FORCE_PREFIX = {
+    'FITB': 'NYSE:FITB',
+    'SMCI': 'NASDAQ:SMCI',
+    'BHP': 'NYSE:BHP',
+    'COCO': 'NASDAQ:COCO',
+    'DTE': 'NYSE:DTE',
+    'EQR': 'NYSE:EQR',
+    'SFL': 'NYSE:SFL',
+}
 
 TICKER_RE = re.compile(r'^[A-Z][A-Z0-9.\-]{0,6}$')
 
