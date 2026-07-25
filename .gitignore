@@ -7,3 +7,4 @@ temp_*
 *.log
 discovery-log.json
 __pycache__/
+.claude/settings.local.json.bak-*

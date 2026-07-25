@@ -10,6 +10,15 @@ set REPO=C:\Users\osuby\tradingview-mcp
 set LOG=%REPO%\reports\live_picks.log
 cd /d "%REPO%"
 for /f %%d in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set TODAY=%%d
+
+rem Weekday gate (added 2026-07-25): the radar was firing on Saturdays and
+rem Sundays - 338 price fetches per run against a closed market, and any "mover"
+rem it reported would just be Friday's close re-read. Task Scheduler is set to
+rem run daily, so the guard lives here.
+for /f %%w in ('powershell -NoProfile -Command "[int](Get-Date).DayOfWeek"') do set DOW=%%w
+if "%DOW%"=="0" goto :weekend
+if "%DOW%"=="6" goto :weekend
+
 echo. >> "%LOG%"
 echo ===== Live Picks Radar START %date% %time% ===== >> "%LOG%"
 python scripts\live_picks_radar.py >> "%LOG%" 2>&1
@@ -20,4 +29,10 @@ if errorlevel 10 (
     echo   no new movers this run >> "%LOG%"
 )
 echo ===== Live Picks Radar DONE %date% %time% ===== >> "%LOG%"
+goto :done
+
+:weekend
+echo ===== Live Picks Radar SKIPPED (weekend) %date% %time% ===== >> "%LOG%"
+
+:done
 endlocal

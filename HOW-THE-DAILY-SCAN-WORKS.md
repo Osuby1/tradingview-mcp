@@ -76,7 +76,9 @@ blocked, never passed. This is the scan's real strength — knowing what *not* t
 ## 4. What comes out — the workbook (`reports/universe_<date>.xlsx`)
 
 11–12 tabs, every column with a plain-English tooltip:
-1. Market & Rotation · 2. Fresh Buys (ranked) · 3. Plans (sized) · 4. Blocked
+1. Market & Rotation · 2. Fresh Buys (ranked, ≤5-bar flips) · 2b. Gated Longs (ALL
+ages — every BUY name that clears the full gate stack, ranked least-extended first,
+so established uptrends like DVN/PBR surface too) · 3. Plans (sized) · 4. Blocked
 (worst-first) · 5. Sell Mode · 6. Tracker Broken · 7. Notes & Decisions · 8. Market
 Movers · 9. Track Record · 10. Data Quality (read the red BLOCKERS first) · 11. Run
 Summary. Plus the EOD brief and the HQ Swing three-bucket lens.
@@ -102,16 +104,34 @@ Summary. Plus the EOD brief and the HQ Swing three-bucket lens.
 
 - The **ranking of survivors is UNPROVEN** — measured 2026-07-22, it does not
   forecast returns. Use the order as "look at these first," never as "these will go
-  up." The gates (rejections) are what work; the ranking is a sort.
-- The sweep needs the **live TradingView chart open** to read the indicators.
+  up." The ranking is a sort, not a forecast.
+- **The gates are unproven too — corrected 2026-07-25.** This document used to say
+  "the gates (rejections) are what work." That was an assertion, never a
+  measurement. `scripts/gate_outcomes.py` now grades the cull forward: it buckets
+  every fresh signal into PASSED vs BLOCKED and compares their returns. First run
+  showed a spread of **−0.11 percentage points** — i.e. no detectable edge — but
+  **nothing has matured yet**, so there is no verdict in either direction. Read
+  `research/gate-outcomes.md` before repeating any claim about what the gates buy
+  you. If the spread stays flat as the sample grows, the stack is costing
+  opportunities without buying safety.
+- The sweep needs the **live TradingView chart open** to read the indicators. This
+  is the system's single biggest fragility — it is what broke the nightly run on
+  7/21 and 7/24. `scripts/og_shadow.py` is the chart-free lane that would remove
+  the dependency; as of 2026-07-25 it matches the chart on 85.8% of names, which is
+  not good enough to promote (Omar's call after 8/31).
 - The fully-automated evening run (`run_eod_chain.bat`, Windows Task Scheduler task
-  "EOD Universe Chain", weekdays 15:15 CT) is **ENABLED and runs the FULL pipeline**
-  as of 2026-07-22: extended ~480-name universe, Heikin Ashi sweep + gate stack (headless
-  Claude, needs the chart), then the deterministic Python analysis (rotation radar,
-  ignition sweep, HQ Swing lens, track record, outcome tracker) run directly in the
-  batch, then the full 12-tab workbook, then a commit. It **fails closed** — a failed
-  scan or verify stops the compile and the task exits non-zero with "EOD CHAIN
-  FAILED" in `reports\eod_chain.log`, so it can never ship a stale report as today's.
+  "EOD Universe Chain", weekdays 15:15 CT) is **ENABLED and runs the FULL pipeline**:
+  gate-stack unit tests (step 0 — a failing gate refuses the whole run), origination
+  scan, extended ~480-name universe, Heikin Ashi sweep + gate stack, then the
+  deterministic Python analysis (rotation radar, ignition sweep, HQ Swing lens,
+  track record, outcome tracker, gate outcomes, shadow grade), then the full 12-tab
+  workbook, then a commit. It **fails closed** — a failed scan or verify stops the
+  compile and the task exits non-zero with "EOD CHAIN FAILED" in
+  `reports\eod_chain.log`, so it can never ship a stale report as today's.
+- **The sweep is driven by a plain Node process, not a headless LLM** (fixed
+  2026-07-25). `scripts/og_sweep_cdp.mjs` connects over CDP and runs the loop
+  itself, so it cannot run out of turn or credit budget — the failure that killed
+  the 7/21 and 7/24 nightlies. Soak-tested on the full 494-name universe 2026-07-25.
 
 ---
 

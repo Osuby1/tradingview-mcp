@@ -11089,5 +11089,16 @@
   }
  },
  "scanner_enrich_asof": "n/a (chart reads only)",
- "tracker_exit_watch": {}
+ "tracker_exit_watch": {},
+ "shadow": [
+  {
+   "name": "og-python-port-v1",
+   "date_graded": "2026-07-24",
+   "mode_match_pct": 85.8,
+   "fresh_match_pct": 92.3,
+   "cci_proxy_corr": 0.991,
+   "graded": 492,
+   "grade_file": "shadow-og-grade-2026-07-24.md"
+  }
+ ]
 }

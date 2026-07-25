@@ -36,7 +36,36 @@ if not DATE:
 
 RES_PATH = os.path.join(REPO, "watchlists", f"universe-results-{DATE}.json")
 res = json.load(open(RES_PATH))
-truth = {r["sym"]: r for r in res.get("all_names", []) if r.get("mode") in ("long", "sell")}
+
+
+def normalize_truth(res):
+    """Chart truth from either results schema.
+
+    The v1 files (<= 2026-07-21) carried `mode` ("long"/"sell") and `fresh` on
+    every all_names row. The v2 files written by build_universe_results.py carry
+    `ce_mode` ("BUY"/"SELL") and no freshness flag - freshness lives in `hits`,
+    which IS the fresh-signal list (bars_back <= 5).
+
+    This shim exists because the schema changed under the shadow lane and it
+    silently exited with "nothing to grade against" from then on. Nothing in the
+    EOD chain calls this script, so nobody noticed for four days. Read both.
+    """
+    rows = res.get("all_names", []) or []
+    fresh_syms = {h["sym"] for h in res.get("hits", []) or []}
+    truth = {}
+    for r in rows:
+        if r.get("mode") in ("long", "sell"):          # v1
+            mode, fresh = r["mode"], bool(r.get("fresh"))
+        elif r.get("ce_mode") in ("BUY", "SELL"):      # v2
+            mode = "long" if r["ce_mode"] == "BUY" else "sell"
+            fresh = r["sym"] in fresh_syms
+        else:
+            continue
+        truth[r["sym"]] = {**r, "mode": mode, "fresh": fresh}
+    return truth
+
+
+truth = normalize_truth(res)
 if not truth:
     sys.exit("no all_names chart truth in the results JSON — nothing to grade against")
 

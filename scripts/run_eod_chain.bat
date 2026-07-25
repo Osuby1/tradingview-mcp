@@ -35,6 +35,20 @@ set RAWSWEEP=%REPO%\watchlists\og-sweep-raw-%TODAY%-heikinashi.json
 echo. >> "%LOG%"
 echo ===== EOD chain start %date% %time% (target %TODAY%, FULL pipeline) ===== >> "%LOG%"
 
+rem -- 0. Gate stack unit tests (added 2026-07-25) ---------------
+rem The gate stack decides what is tradeable and its promise is that it FAILS
+rem CLOSED. A regression there is a name quietly passing, which is invisible in
+rem the output. Run the tests BEFORE the 40-minute sweep, and refuse to run the
+rem pipeline on a broken gate rather than produce a confident wrong workbook.
+cd /d "%REPO%"
+echo [0/6] gate stack tests... >> "%LOG%"
+python -m unittest discover -s tests -p "test_gate_stack.py" >> "%LOG%" 2>&1
+if errorlevel 1 (
+    echo FAILED: gate stack unit tests did not pass - refusing to run the pipeline. >> "%LOG%"
+    set FAILED=1
+    goto finish
+)
+
 rem -- 1. Origination scan (refreshes recommendations_log for the Track Record) --
 cd /d "%USERPROFILE%\Documents\Equities_Scanner"
 echo [1/6] origination scan... >> "%LOG%"
@@ -109,6 +123,14 @@ if exist "%RAWSWEEP%" (
 python scripts\track_record.py %TODAY% >> "%LOG%" 2>&1                 || echo WARNING: track_record failed >> "%LOG%"
 python scripts\dump_call_prices.py %TODAY% >> "%LOG%" 2>&1             || echo WARNING: dump_call_prices failed >> "%LOG%"
 python scripts\outcome_tracker.py %TODAY% >> "%LOG%" 2>&1              || echo WARNING: outcome_tracker failed >> "%LOG%"
+rem gate_outcomes: forward-grades the scan's OWN cull (passed vs blocked). Added
+rem 2026-07-25 - before it, the gate stack was unfalsifiable because only the ~14
+rem hand-registered calls were ever graded.
+python scripts\gate_outcomes.py >> "%LOG%" 2>&1                        || echo WARNING: gate_outcomes failed >> "%LOG%"
+rem og_shadow: grades the chart-free Python port against the night's chart truth.
+rem Added to the chain 2026-07-25 because nothing called it, so when the results
+rem schema changed on 7/21 it silently exited "nothing to grade" for four days.
+python scripts\og_shadow.py %TODAY% >> "%LOG%" 2>&1                    || echo WARNING: og_shadow failed >> "%LOG%"
 python scripts\build_catalyst_calendar.py >> "%LOG%" 2>&1             || echo WARNING: catalyst_calendar failed >> "%LOG%"
 
 rem -- 5. Compile the full workbook ----------------------------
