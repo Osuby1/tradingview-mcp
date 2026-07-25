@@ -92,6 +92,29 @@ def main():
             if r.get(dst) is None:
                 r[dst] = g.get(src)
 
+    def plan_prices(r):
+        """Tradeable entry/stop/target in REAL prices (Omar, 2026-07-25).
+
+        Signals stay on Heikin Ashi; plans must not. `last` and `long_stop` are
+        both HA values, so the STOP DISTANCE between them is a valid percentage
+        even though neither number is tradeable. That percentage is the risk
+        geometry the Chandelier actually expresses, so it is carried over onto
+        the real price rather than recomputed - which preserves the stop the
+        signal intended while quoting a level that exists in the market.
+
+        Returns (entry, stop, target, pct) or Nones when the real price is
+        absent (legacy sweeps predate the quote capture).
+        """
+        real = r.get("real_close") or r.get("real_last")
+        ha_last, ha_stop = r.get("last"), r.get("long_stop")
+        if not real:
+            return None, None, None, None
+        if not (ha_last and ha_stop and ha_last > ha_stop > 0):
+            return round(real, 4), None, None, None
+        pct = (ha_last - ha_stop) / ha_last
+        return (round(real, 4), round(real * (1 - pct), 4),
+                round(real * (1 + 2 * pct), 4), round(pct * 100, 3))
+
     hits, dq, ungated = {}, [], []
     for r in fresh:
         sym = r["rname"]
@@ -102,10 +125,16 @@ def main():
             ungated.append(str(exc))
             verdict, reasons, detail = "BLOCKED: gate data missing", [str(exc)], {}
 
+        p_entry, p_stop, p_target, p_pct = plan_prices(r)
         hits[sym] = {
             "sym": sym, "source": "og-chandelier", "signal_date_est": r.get("flip_date"),
             "bars_back": r.get("bars_back"), "last": r.get("last"), "zlsma": r.get("zlsma"),
             "magical": r.get("magical"), "ce_label": r.get("long_stop"),
+            # --- REAL, tradeable numbers. Everything above this line is Heikin
+            # Ashi and must never be quoted as a price. ---
+            "real_last": r.get("real_last"), "real_close": r.get("real_close"),
+            "plan_entry": p_entry, "plan_stop": p_stop, "plan_target": p_target,
+            "plan_stop_pct": p_pct,
             "regime": r.get("regime"), "verdict": verdict, "gates": detail,
             "note": ("; ".join(reasons) if reasons else
                      "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid "
@@ -132,8 +161,12 @@ def main():
         except MissingGateData:
             continue
         if gv.startswith(("CANDIDATE", "STARTER")):
+            g_entry, g_stop, g_target, g_pct = plan_prices(r)
             gated_longs.append({
                 "sym": r["rname"], "last": r.get("last"), "stop": r.get("long_stop"),
+                "real_last": r.get("real_last"), "real_close": r.get("real_close"),
+                "plan_entry": g_entry, "plan_stop": g_stop, "plan_target": g_target,
+                "plan_stop_pct": g_pct,
                 "bars_back": r.get("bars_back"), "flip_date": r.get("flip_date"),
                 "magical": r.get("magical"), "pct_vs_200": r.get("pct_vs_200"),
                 "adx": r.get("adx"), "regime": r.get("regime"), "zlsma": r.get("zlsma"),
@@ -154,6 +187,21 @@ def main():
                          "output, not a failure of the scan."
                          if not passing else "",
                "action": "Do not manufacture a candidate to have something to say."})
+    # A name with no real price silently falls back to the Heikin-Ashi number in
+    # any plan built from it. That is the exact defect being fixed here, so it
+    # must be visible rather than absorbed.
+    no_real = [r["rname"] for r in ok
+               if not (r.get("real_close") or r.get("real_last"))]
+    if no_real:
+        dq.append({
+            "severity": "WARNING", "area": "Plan prices",
+            "finding": f"{len(no_real)} name(s) returned no real quote, so any price shown "
+                       f"for them is the HEIKIN-ASHI bar value, not a tradeable price: "
+                       + ", ".join(sorted(no_real)[:25])
+                       + (" ..." if len(no_real) > 25 else ""),
+            "impact": "HA close ran a median 0.59% from the true close (12% of names >2%). "
+                      "Do not quote these as an entry.",
+            "action": "Re-read the name on the live chart before sizing it."})
     if foreign:
         dq.append({
             "severity": "BLOCKER", "area": "Symbol resolution",
@@ -193,6 +241,8 @@ def main():
         # Without them the Sell Mode short ranking has no inputs and scores every
         # name identically - which is how it shipped broken the first time.
         "all_names": [{"sym": r["rname"], "last": r.get("last"),
+                       "real_last": r.get("real_last"),
+                       "real_close": r.get("real_close"),
                        "magical": r.get("magical"), "zlsma": r.get("zlsma"),
                        "ce_mode": r.get("ce_mode"),
                        "ce_label": r.get("long_stop") or r.get("short_stop"),

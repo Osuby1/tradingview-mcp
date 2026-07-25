@@ -31,7 +31,7 @@ Design rules, learned the hard way:
 """
 
 KIND = "universe-results"
-CURRENT_VERSION = 2
+CURRENT_VERSION = 3
 
 # What version 2 promises. Keep this list SHORT and load-bearing: these are the
 # fields something downstream will break without, not everything that happens to
@@ -54,7 +54,30 @@ CONTRACTS = {
                 "hits": ["sym", "verdict", "gates"],
                 "all_names": ["sym", "ce_mode", "last"],
             },
-        }
+        },
+        # v3 (2026-07-25) - the FIRST deliberate, announced schema change, and
+        # the reason this module exists. Adds REAL prices alongside the
+        # Heikin-Ashi ones.
+        #
+        # `last` remains the HA close, because every indicator and every gate is
+        # computed on it and that maths is internally consistent. What v3 adds is
+        # the tradeable price: HA close is (O+H+L+C)/4, a smoothed average that
+        # cannot be inverted, and it differed from the real close by a median
+        # 0.59% across 413 names on 2026-07-24 (12% of names by more than 2%).
+        # Quoting it as an entry put that error into every plan.
+        #
+        # Rule going forward: `last` is for SIGNALS, `plan_entry` is for PLANS.
+        # Never quote `last` to Omar as a price.
+        3: {
+            "top_level": [
+                "date", "universe_size", "scanned", "fresh_count",
+                "hits", "all_names", "data_quality",
+            ],
+            "rows": {
+                "hits": ["sym", "verdict", "gates", "plan_entry"],
+                "all_names": ["sym", "ce_mode", "last", "real_close"],
+            },
+        },
     }
 }
 
@@ -97,7 +120,7 @@ def validate(obj, kind=KIND, version=CURRENT_VERSION, path=""):
     return obj
 
 
-def require(obj, understood=(2,), kind=KIND, path="", warn=print):
+def require(obj, understood=(2, 3), kind=KIND, path="", warn=print):
     """Check a file we are ABOUT TO READ. Returns the version in force.
 
     Legacy (unstamped, pre-2026-07-25) files are accepted with a warning so that

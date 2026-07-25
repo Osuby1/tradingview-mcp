@@ -53,6 +53,15 @@
     return window.TradingViewApi._activeChartWidgetWV.value()._chartWidget;
   }
 
+  // Rounding helper, hoisted to module scope 2026-07-25. It used to live inside
+  // __ogRead only, so the quote-retry loop in __ogSweep threw ReferenceError on
+  // every attempt - and the retry's own catch swallowed it silently, 25 times
+  // per name. The symptom looked exactly like "the quote never arrived".
+  function f(x) {
+    return (x == null || (typeof x === 'number' && isNaN(x)))
+      ? null : Math.round(x * 10000) / 10000;
+  }
+
   function chartStyle() {
     try { return widget().model().model().mainSeries().properties().style.value(); }
     catch (e) { return null; }
@@ -61,10 +70,6 @@
   window.__ogRead = function () {
     var cw = widget();
     var sources = cw.model().model().dataSources();
-    var f = function (x) {
-      return (x == null || (typeof x === 'number' && isNaN(x)))
-        ? null : Math.round(x * 10000) / 10000;
-    };
     var r = {};
 
     for (var i = 0; i < sources.length; i++) {
@@ -117,6 +122,46 @@
       r.last = f(lv[4]);
       r.bar_date = new Date(lv[0] * 1000).toISOString().slice(0, 10);
       r.bar_count = b.size();
+
+      // ------------------------------------------------------------------
+      // REAL PRICES (added 2026-07-25) - r.last above is the HEIKIN-ASHI close,
+      // not a price anyone can trade at. HA close is (O+H+L+C)/4, so it is a
+      // smoothed average and cannot be inverted back to the real close.
+      //
+      // Measured across 487 US names on 2026-07-24: the HA close differs from
+      // the real close by a median 0.59%, with 31% of names off by >1%, 12% by
+      // >2% and a worst case of 5.3%. NVTS printed 11.49 against a real close of
+      // 10.92; ARM printed 272.55 against 260.01. Every quoted entry, stop distance, risk-per-share and 2:1 target
+      // built on that number inherited the error.
+      //
+      // Omar's 2026-07-25 call: SIGNALS stay on Heikin Ashi, PLANS use real
+      // closes. So r.last stays HA (every indicator and gate is computed on it,
+      // unchanged and still internally consistent) and the real prices are
+      // captured ALONGSIDE it from the quote object, which is the untransformed
+      // feed. Verified on XOM: bars() gave 157.08, quote gave 156.94, which is
+      // the true 7/24 close.
+      try {
+        var q = cw.model().model().mainSeries().quotes();
+        if (q) {
+          r.real_last = f(q.last_price);        // live last trade
+          r.real_close = f(q.regular_close);    // regular-session close (use for EOD plans)
+          r.real_open = f(q.open_price);
+          r.real_high = f(q.high_price);
+          r.real_low = f(q.low_price);
+          r.prev_close = f(q.prev_close_price);
+          // second, independent currency source for the wrong-listing guard
+          r.qccy = q.currency_code || null;
+        }
+        // The quote object streams in AFTER the symbol switch, so on a fast
+        // sweep it can still be empty when we read it (SJM did exactly this on
+        // the 2026-07-25 test: currency present, prices null). A missing real
+        // price is not cosmetic - it silently sends the plan back to the HA
+        // number - so flag it explicitly rather than leaving a null to be
+        // shrugged at downstream.
+        if (r.real_close == null && r.real_last == null) {
+          r.real_price_missing = true;
+        }
+      } catch (e) { r.quoteErr = String(e); r.real_price_missing = true; }
 
       // ------------------------------------------------------------------
       // REGIME + LIQUIDITY - captured on every sweep since 2026-07-22.
@@ -263,6 +308,33 @@
             if (prev !== null && fp === prev) { why = 'stale-values'; stable = 0; continue; }
             if (fp === lastfp) { stable++; } else { stable = 1; lastfp = fp; }
             if (stable >= 2) { ok = true; why = 'ok'; break; }
+          }
+          // The quote object streams in independently of the bars, so it can
+          // still be empty when the indicators have already settled. Top it up
+          // rather than fall back to the Heikin-Ashi number, which is not a
+          // tradeable price. Deliberately does NOT fail the row: a missing quote
+          // costs us a plan price, and failing would cost us the SIGNAL too.
+          // Budget 5s: measured on SJM 2026-07-25, whose indicators settled fast
+          // but whose quote had not streamed yet at 1.6s and HAD arrived when
+          // checked later. Only names that actually need it pay this.
+          if (ok && r && r.real_price_missing) {
+            for (var qt = 0; qt < 25; qt++) {
+              await sleep(200);
+              try {
+                var q2 = cw.model().model().mainSeries().quotes();
+                if (q2 && (q2.regular_close != null || q2.last_price != null)) {
+                  r.real_last = f(q2.last_price);
+                  r.real_close = f(q2.regular_close);
+                  r.real_open = f(q2.open_price);
+                  r.real_high = f(q2.high_price);
+                  r.real_low = f(q2.low_price);
+                  r.prev_close = f(q2.prev_close_price);
+                  r.qccy = q2.currency_code || r.qccy;
+                  delete r.real_price_missing;
+                  break;
+                }
+              } catch (e) { r.quoteRetryErr = String(e); }   // never swallow silently again
+            }
           }
           if (!r) r = {};
           r.req = sym; r.ok = ok; r.why = why;

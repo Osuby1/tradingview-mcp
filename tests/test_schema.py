@@ -20,15 +20,21 @@ import schema  # noqa: E402
 
 
 def good():
-    """A minimal object that satisfies the v2 contract."""
+    """A minimal object that satisfies the CURRENT (v3) contract.
+
+    v3 added the real, tradeable prices alongside the Heikin-Ashi ones:
+    `last` stays HA (signals), `plan_entry`/`real_close` are what a plan quotes.
+    """
     return {
         "date": "2026-07-24",
         "universe_size": 494,
         "scanned": 492,
         "fresh_count": 48,
         "data_quality": [],
-        "hits": [{"sym": "SJM", "verdict": "CANDIDATE - passes every gate", "gates": {}}],
-        "all_names": [{"sym": "AAPL", "ce_mode": "BUY", "last": 327.7}],
+        "hits": [{"sym": "SJM", "verdict": "CANDIDATE - passes every gate",
+                  "gates": {}, "plan_entry": 118.32}],
+        "all_names": [{"sym": "AAPL", "ce_mode": "BUY", "last": 327.7,
+                       "real_close": 333.02}],
     }
 
 
@@ -83,30 +89,30 @@ class TestRequireOnRead(unittest.TestCase):
         """Breaking history would be a worse bug than the one being fixed."""
         warned = []
         obj = good()                       # no stamp
-        got = schema.require(obj, understood=(2,), path="old.json", warn=warned.append)
+        got = schema.require(obj, understood=(2, 3), path="old.json", warn=warned.append)
         self.assertIsNone(got)
         self.assertTrue(warned and "LEGACY" in warned[0])
 
     def test_current_version_reads_clean(self):
         warned = []
-        got = schema.require(schema.stamp(good()), understood=(2,), warn=warned.append)
-        self.assertEqual(got, 2)
+        got = schema.require(schema.stamp(good()), understood=(2, 3), warn=warned.append)
+        self.assertEqual(got, schema.CURRENT_VERSION)
         self.assertEqual(warned, [])
 
     def test_unknown_future_version_is_fatal(self):
         """The og_shadow scenario: a newer file handed to an older reader."""
-        obj = schema.stamp(good(), version=2)
-        obj["schema_version"] = 3
+        obj = schema.stamp(good())
+        obj["schema_version"] = 99
         with self.assertRaises(schema.SchemaError) as ctx:
-            schema.require(obj, understood=(2,), path="future.json")
-        self.assertIn("v3", str(ctx.exception))
+            schema.require(obj, understood=(2, 3), path="future.json")
+        self.assertIn("v99", str(ctx.exception))
         self.assertIn("only understands", str(ctx.exception))
 
     def test_file_that_lies_about_its_version_is_fatal(self):
         obj = schema.stamp(good())
         del obj["all_names"]
         with self.assertRaises(schema.SchemaError) as ctx:
-            schema.require(obj, understood=(2,))
+            schema.require(obj, understood=(2, 3))
         self.assertIn("not what it says it is", str(ctx.exception))
 
 
@@ -123,7 +129,7 @@ class TestRealFilesOnDisk(unittest.TestCase):
             with self.subTest(file=os.path.basename(f)):
                 with open(f, encoding="utf-8") as fh:
                     d = json.load(fh)
-                schema.require(d, understood=(2,), path=f, warn=lambda m: None)
+                schema.require(d, understood=(2, 3), path=f, warn=lambda m: None)
 
 
 if __name__ == "__main__":

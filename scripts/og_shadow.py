@@ -43,7 +43,7 @@ res = json.load(open(RES_PATH))
 # nothing, and exited quietly every night for four days. It now states which
 # versions it understands and refuses anything else out loud. Legacy (unstamped)
 # files are still readable - normalize_truth() below handles both shapes.
-schema.require(res, understood=(2,), path=RES_PATH)
+schema.require(res, understood=(2, 3), path=RES_PATH)
 
 
 def normalize_truth(res):

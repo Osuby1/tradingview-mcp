@@ -49,7 +49,7 @@ _RES_PATH = os.path.join(REPO, "watchlists", f"universe-results-{DATE}.json")
 res = json.load(open(_RES_PATH))
 # The workbook is the deliverable Omar acts on, so it must never be built from a
 # file shape it does not understand. Legacy files still compile (with a note).
-schema.require(res, understood=(2,), path=_RES_PATH)
+schema.require(res, understood=(2, 3), path=_RES_PATH)
 enrich = res.get("scanner_enrich", {})
 allrows = {r["sym"]: r for r in res.get("all_names", [])}
 hits = {h["sym"]: h for h in res.get("hits", [])}
@@ -100,6 +100,28 @@ if os.path.exists(cpath):
 WRITTEN = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 ENRICH_AS_OF = res.get("scanner_enrich_asof", "n/a")
 wb = Workbook()
+
+
+def plan_display(row, ha_last, ha_stop):
+    """The REAL, tradeable (price, stop, risk%) for anything Omar reads.
+
+    Added 2026-07-25. Signals stay on Heikin Ashi; plans must not. When the sweep
+    captured real prices (schema v3+) the stop is carried across at the SAME
+    PERCENTAGE distance, which preserves the risk geometry the Chandelier
+    expressed while quoting levels that exist in the market. Legacy files with no
+    real price fall back to the HA numbers, so old workbooks still compile.
+    """
+    entry = row.get("plan_entry") or row.get("real_close") or row.get("real_last")
+    if not entry:
+        risk = (round((ha_last - ha_stop) / ha_last * 100, 1)
+                if (ha_last and ha_stop and ha_last > ha_stop) else None)
+        return ha_last, ha_stop, risk
+    stop = row.get("plan_stop")
+    if stop is None and ha_last and ha_stop and ha_last > ha_stop > 0:
+        stop = round(entry * (1 - (ha_last - ha_stop) / ha_last), 4)
+    risk = (round((entry - stop) / entry * 100, 1)
+            if (stop and entry > stop) else None)
+    return round(entry, 4), stop, risk
 
 
 def _fmt_cap(x):
@@ -330,7 +352,7 @@ FRESH_COLS = [
     Col("age", "Sessions Old", 11,
         "How many sessions ago the signal fired. 0 = today's bar, which can still "
         "repaint before the close. Anything over 5 is not fresh."),
-    Col("last", "Price", 10, "Latest price from the live feed.", FMT_PRICE),
+    Col("last", "Price", 10, "REAL last traded price from the live feed - what you can actually deal at. NOT the Heikin-Ashi bar value, which is a smoothed average and ran a median 0.59% (up to 5.3%) away from the true close.", FMT_PRICE),
     Col("stop", "Chandelier Stop", 13,
         "The Chandelier Exit level. This is the STOP, not an entry price - a common "
         "misreading. Price minus this level is your risk per share.", FMT_PRICE),
@@ -376,7 +398,13 @@ def fresh_rows():
     for sym, h in hits.items():
         e, o = enrich.get(sym, {}), orig.get(sym, {})
         last, stop = h.get("last"), h.get("ce_label") or h.get("flip_level")
-        risk = round((last - stop) / last * 100, 1) if (last and stop and last > stop) else None
+        # SIGNAL side keeps the Heikin-Ashi numbers above (every gate and score is
+        # computed on them and that maths is internally consistent).
+        # DISPLAY side uses the REAL, tradeable prices - Omar's 2026-07-25 call.
+        # `last` is an HA close, a smoothed (O+H+L+C)/4 average that nobody can
+        # trade at; it ran a median 0.59% away from the true close and up to 5.3%.
+        # Quoting it as an entry put that error straight into the plan.
+        d_last, d_stop, d_risk = plan_display(h, last, stop)
         _, why, _ = split_note(h.get("note"))
 
         g = h.get("gates") or {}
@@ -401,7 +429,7 @@ def fresh_rows():
             "buy_score": sc, "risk_flag": risk_txt,
             "sym": sym, "company": e.get("description"), "sector": e.get("sector"),
             "signal_date": h.get("signal_date_est"), "age": h.get("bars_back"),
-            "last": last, "stop": stop, "risk_pct": risk,
+            "last": d_last, "stop": d_stop, "risk_pct": d_risk,
             "magical": h.get("magical"), "zlsma": h.get("zlsma"),
             "rsi": e.get("rsi") and round(e["rsi"], 1),
             "relvol": e.get("relvol") and round(e["relvol"], 2),
@@ -429,7 +457,7 @@ GATED_COLS = [
     Col("rank", "RANK", 6, "Least-extended-above-the-200-day first - names with the most room "
         "and best entry reward-to-risk are at the top."),
     Col("sym", "Ticker", 9, "The stock symbol."),
-    Col("last", "Price", 10, "Latest price from the live feed.", FMT_PRICE),
+    Col("last", "Price", 10, "REAL last traded price from the live feed - what you can actually deal at. NOT the Heikin-Ashi bar value, which is a smoothed average and ran a median 0.59% (up to 5.3%) away from the true close.", FMT_PRICE),
     Col("stop", "Chandelier Stop", 13, "The Chandelier trend-break level - the STOP, not an entry "
         "price. Price minus this is your risk per share.", FMT_PRICE),
     Col("stop_pct", "Stop %", 8, "How far the stop sits below price.", FMT_PCT),
@@ -447,10 +475,10 @@ GATED_COLS = [
 _gated = res.get("gated_longs", [])
 grows = []
 for _i, _g in enumerate(_gated, 1):
-    _last, _stop = _g.get("last"), _g.get("stop")
+    _last, _stop, _spct = plan_display(_g, _g.get("last"), _g.get("stop"))
     grows.append({
         "rank": _i, "sym": _g["sym"], "last": _last, "stop": _stop,
-        "stop_pct": round((_last - _stop) / _last * 100, 1) if (_last and _stop and _last > _stop) else None,
+        "stop_pct": _spct,
         "ext": round(_g["pct_vs_200"], 1) if _g.get("pct_vs_200") is not None else None,
         "magical": _g.get("magical"), "adx": _g.get("adx"), "age": _g.get("bars_back"),
         "regime": _g.get("regime"),

@@ -77,7 +77,7 @@ def collect_signals():
             # (pre-2026-07-25, unstamped). Those are fine - cohort_of() below only
             # accepts machine verdicts anyway. What must not pass silently is a
             # FUTURE version this grader has not been taught to read.
-            schema.require(d, understood=(2,), path=f, warn=lambda m: None)
+            schema.require(d, understood=(2, 3), path=f, warn=lambda m: None)
         except schema.SchemaError as exc:
             skipped[f"unreadable contract: {exc}"] += 1
             continue
