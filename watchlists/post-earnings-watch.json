@@ -1,6 +1,11 @@
 [
  {"ticker": "FTRE", "earnings_date": "2026-07-29", "flagged_from": "live-picks confirming 2026-07-23"},
  {"ticker": "HXL",  "earnings_date": "2026-07-29", "flagged_from": "live-picks confirming 2026-07-23"},
+ {"ticker": "VTR",  "earnings_date": "2026-07-29", "flagged_from": "protocol 2026-07-24 (earnings-this-week group)"},
+ {"ticker": "LHX",  "earnings_date": "2026-07-29", "flagged_from": "protocol 2026-07-24 (earnings-this-week group)"},
+ {"ticker": "AAPL", "earnings_date": "2026-07-30", "flagged_from": "protocol 2026-07-24 (earnings-this-week group)"},
+ {"ticker": "CVX",  "earnings_date": "2026-07-31", "flagged_from": "protocol 2026-07-24 (earnings-this-week group)"},
+ {"ticker": "FRT",  "earnings_date": "2026-07-31", "flagged_from": "protocol 2026-07-24 (earnings-this-week group)"},
  {"ticker": "TXG",  "earnings_date": "2026-08-06", "flagged_from": "live-picks confirming 2026-07-23"},
  {"ticker": "ETON", "earnings_date": "2026-08-06", "flagged_from": "live-picks confirming 2026-07-23"},
  {"ticker": "LQDA", "earnings_date": "2026-08-06", "flagged_from": "live-picks confirming 2026-07-23"},

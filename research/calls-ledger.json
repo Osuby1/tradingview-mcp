@@ -3,6 +3,54 @@
  "holding_days": 21,
  "calls": [
   {
+   "id": "2026-07-24-DVN-long",
+   "date": "2026-07-24",
+   "sym": "DVN",
+   "dir": "long",
+   "ref": 45.11,
+   "stop": 43.90,
+   "target": 47.50,
+   "source": "protocol 7/24 (gated candidate; energy #1 igniting)",
+   "fill": "FILLED 1000 sh @ 45.11 (real book)",
+   "thesis": "Devon Energy; regime PASS +10% vs 200d, ADX 22, +DI>-DI, HA Chandelier BUY, energy igniting. Stop under Chandelier line; TRIM/exit before 8/4 earnings."
+  },
+  {
+   "id": "2026-07-24-HAS-long",
+   "date": "2026-07-24",
+   "sym": "HAS",
+   "dir": "long",
+   "ref": 88.17,
+   "stop": 84.30,
+   "target": 95.80,
+   "source": "protocol 7/24 (tier-1 gated candidate)",
+   "fill": "FILLED 500 sh @ 88.17 (real book)",
+   "thesis": "Hasbro; regime PASS, ADX 36, +DI>-DI, HA Chandelier BUY. Stop under Chandelier line. Earnings ~10/22 (far)."
+  },
+  {
+   "id": "2026-07-24-SJM-long",
+   "date": "2026-07-24",
+   "sym": "SJM",
+   "dir": "long",
+   "ref": 117.21,
+   "stop": 112.50,
+   "target": 126.60,
+   "source": "protocol 7/24 (tier-1 gated candidate)",
+   "fill": "FILLED 400 sh @ 117.21 (real book)",
+   "thesis": "J.M. Smucker; staples/defensive-rotation, regime PASS +14% vs 200d, ADX 26, fresh 2-bar Chandelier BUY. Stop under Chandelier line. Earnings ~9/1 (far)."
+  },
+  {
+   "id": "2026-07-24-MLI-long",
+   "date": "2026-07-24",
+   "sym": "MLI",
+   "dir": "long",
+   "ref": 63.53,
+   "stop": 60.30,
+   "target": 70.00,
+   "source": "protocol 7/24 (tier-1, #1 clean pick)",
+   "fill": "FILLED 900 sh @ 63.53 (real book)",
+   "thesis": "Mueller Industries; least-extended (+6.7% vs 200d), fresh 3-bar Chandelier BUY, ADX 30, but below 50d = bounce-flip. Industrials/copper. Stop under Chandelier line. Earnings ~10/27 (far)."
+  },
+  {
    "id": "2026-07-16-SMH-short",
    "date": "2026-07-16",
    "sym": "SMH",
