@@ -21,6 +21,7 @@ The stock-picker/risk-manager contract. Applies to every idea, entry, fill, and 
 8. **ZLSMA gate** (from `pine/zlsma_chandelier_strategy.pine`): longs want close > ZLSMA(50) AND rising; a FAIL is disclosed on the idea, never silent
 9. **Chart-verify before entry:** symbol on the live TV chart (daily TF confirmed), read the actual HQ Swing v1 / OG Chandelier OB-OS values — Python/Yahoo ports are approximations, the chart is ground truth
 10. **O.G CHANDELIER HARD VETO (Omar-approved 2026-07-17, from Week-1 review):** NO buy of any kind — door fire, leftover call, add, re-entry — while the O.G Chandelier on the chart shows SELL mode on the daily. No exceptions, no "counter-regime tests" (the TXN experiment answered that: gapped through its stop for the week's worst loss). The read comes from the CHART INSTANCE per rule 9, never from a recomputed approximation — the 7/17 review proved recomputed defaults miss the chart's actual signals (IBKR). If the chart can't be read, the entry waits.
+11. **THESIS-PER-PLAN (added 2026-07-26, Omar override, logged):** every plan states a **falsifiable thesis and its BREAK condition** before entry — "what am I betting on, and what observation proves me wrong." A thesis break = EXIT, regardless of where the stop or profit sits (it is the third leg of the 7/25 exit rule: stop / thesis break / 20% ratchet). Default mechanical break for scan trades: the daily O.G Chandelier flips SELL, or the regime leaves PASS. Name-specific breaks (a failed 50-day reclaim, a catalyst that fizzles, a level that must hold) are written per plan. A plan without a written break condition is not takeable.
 
 ## GOVERNANCE — rule freeze & shadow lane (Omar-approved 2026-07-20)
 **No new live rules until measured — this is itself a codified rule.**
@@ -31,7 +32,7 @@ The stock-picker/risk-manager contract. Applies to every idea, entry, fill, and 
 **Why (Omar, 2026-07-20):** six rules were added in the 72 hours after Week-1 with zero graded trades behind them — plausible-rule stacking without measurement is how systems quietly rot. The scorecard earns changes; changes don't earn themselves.
 
 ## Claude's enforcement duties (unprompted)
-Grade every fill vs plan price (flag chases >0.5%) · wire stop+context alerts on every position, entry-ladder alerts on every plan · delete stale alerts on exits · log deliberate SKIPs with reference prices · quote $ risk on every idea · raise sizing/pain flags at entry, not after · every idea ships complete (level, halves, stop, $ risk, verified earnings, catalyst, ZLSMA verdict, wired alert)
+Grade every fill vs plan price (flag chases >0.5%) · wire stop+context alerts on every position, entry-ladder alerts on every plan · delete stale alerts on exits · log deliberate SKIPs with reference prices · quote $ risk on every idea · raise sizing/pain flags at entry, not after · every idea ships complete (level, halves, stop, $ risk, verified earnings, catalyst, ZLSMA verdict, wired alert, **thesis + break condition**)
 
 ## Detection stack (daily)
 Rotation Radar (groups, AM+EOD, `scripts/rotation_radar.py`) → Ignition Sweep (names, market-wide, EOD, `scripts/ignition_sweep.py`) → convergence rule (LOADED name in WATCH/IGNITING group = top candidate) → volume-gated trigger alerts → ledger/tracker scorecard. Sector+rotation commentary in all three daily briefs.

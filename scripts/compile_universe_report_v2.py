@@ -521,6 +521,10 @@ PLAN_COLS = [
         "size into a report."),
     Col("i", "Alert", 14, "The alert ID armed for this level, so the trigger reminds you why."),
     Col("j", "Plan Notes", 60, "Conditions attached to the plan - what must be true to take it."),
+    Col("k", "Thesis & Break", 62,
+        "What this trade is betting on, and the observation that proves it wrong "
+        "(protocol rule 11, added 2026-07-26). A thesis BREAK = exit regardless of "
+        "stop or profit. A plan without a break condition is not takeable."),
 ]
 # Build plans from the gated candidates. Previously this tab was fed only by a
 # hand-written context file, so it was almost always EMPTY - which read as "no
@@ -583,6 +587,14 @@ for r in _fresh:
               + ("HALF SIZE: regime REPAIR. " if starter else "")
               + "Confirm the earnings date and check the ATR floor by hand - "
                 "neither is wired into the gate stack yet."),
+        "k": (lambda g: (
+              f"Thesis: gated trend continuation - regime {g.get('regime') or r.get('regime') or '?'}, "
+              f"ADX {g.get('adx') or '?'}, fresh Chandelier BUY. "
+              f"BREAK = daily O.G Chandelier flips SELL, or regime exits PASS -> "
+              f"EXIT regardless of stop/profit. ADD the name-specific thesis "
+              f"(catalyst / level that must hold) by hand before entry - "
+              f"a plan without one is NOT takeable (protocol rule 11)."))
+             (r.get("gates") or {}),
     })
 
 ws = wb.create_sheet("3 - Plans")

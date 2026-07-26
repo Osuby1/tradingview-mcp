@@ -90,6 +90,35 @@ def block_reason(verdict):
     return "OTHER"
 
 
+def near_miss(e):
+    """SHADOW COHORTS (pre-registered 2026-07-26, Omar-approved item 4).
+
+    The Jan-Jun replay showed monsters missed by less than a point of ADX
+    (TWST 19.15, HUT 19.47, HIMX 19.66) and DEEP-FAIL rejects that ran
+    hundreds of percent (CAR +561%). Retro-lowering a threshold because of
+    those names is forbidden curve-fitting. THIS is the legitimate version:
+    grade the near-misses FORWARD, nightly, as their own cohorts.
+
+    A near-miss must be a SOLE failure - every other gate passed - detected
+    from the note (multiple failures are '; '-joined by gate_stack).
+
+    PROMOTION BAR, declared now per the 2026-07-20 governance rules: a
+    threshold change goes to a Friday review ONLY after >=30 MATURED signals
+    in the cohort AND the cohort's mean forward return exceeds the PASSED
+    cohort's mean over the same period. Until then these rows are
+    observation, not evidence for any change.
+    """
+    note = e.get("note") or ""
+    if e["cohort"] != "BLOCKED" or ";" in note:
+        return None                      # not blocked, or more than one gate failed
+    adx = e.get("adx")
+    if "ADX" in note and adx is not None and 18.0 <= adx < 20.0:
+        return "ADX 18-20, all else passed"
+    if "DEEP-FAIL" in note:
+        return "DEEP-FAIL, all else passed"
+    return None
+
+
 def collect_signals():
     """Every fresh signal ever written, with its cohort and signal date."""
     events, skipped = [], defaultdict(int)
@@ -115,7 +144,9 @@ def collect_signals():
                 continue
             events.append({"date": date, "sym": h["sym"], "cohort": c,
                            "verdict": h.get("verdict"),
-                           "regime": (h.get("gates") or {}).get("regime") or h.get("regime")})
+                           "regime": (h.get("gates") or {}).get("regime") or h.get("regime"),
+                           "adx": (h.get("gates") or {}).get("adx"),
+                           "note": h.get("note") or ""})
     return events, dict(skipped)
 
 
@@ -283,6 +314,29 @@ def main():
             me = f"{s['mean_excess']:+.2f}%" if s["mean_excess"] is not None else "-"
             L.append(f"| {reason} | {s['n']} | {s['win_pct']}% | {s['mean']:+.2f}% "
                      f"| {s['median']:+.2f}% | {me} |")
+    L.append("")
+    L.append("## Shadow cohorts - the forbidden retro-tune, run forward instead")
+    L.append("")
+    L.append("Would lowering the ADX floor to 18, or softening DEEP-FAIL, have helped? "
+             "The replay's missed monsters make that tempting; answering it by re-running "
+             "history is curve-fitting. These cohorts answer it FORWARD: sole-failure "
+             "near-misses graded nightly against the PASSED cohort. Promotion bar "
+             "(pre-registered): >=30 MATURED signals AND mean above PASSED's - then it "
+             "goes to a Friday review, not before.")
+    L.append("")
+    L.append("| Shadow cohort | n | Win% | Mean | Median | Mean vs SPY | PASSED mean (ref) |")
+    L.append("|---|---|---|---|---|---|---|")
+    passed_ref = (st["PASSED"] or {}).get("mean")
+    for label in ("ADX 18-20, all else passed", "DEEP-FAIL, all else passed"):
+        rows_nm = [g for g in first if near_miss(g) == label]
+        s = stats(rows_nm)
+        ref = f"{passed_ref:+.2f}%" if passed_ref is not None else "-"
+        if not s:
+            L.append(f"| {label} | 0 | - | - | - | - | {ref} |")
+        else:
+            me = f"{s['mean_excess']:+.2f}%" if s["mean_excess"] is not None else "-"
+            L.append(f"| {label} | {s['n']} | {s['win_pct']}% | {s['mean']:+.2f}% "
+                     f"| {s['median']:+.2f}% | {me} | {ref} |")
     L.append("")
     L.append("## Every graded signal")
     L.append("")
