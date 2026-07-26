@@ -1,5 +1,26 @@
 # TradingView MCP — Claude Instructions
 
+## ⚠ HOW TO TALK TO OMAR — STANDING ORDER, APPLIES TO EVERY REPLY
+
+Issued three times (2026-07-16, 07-25, and 07-26 after a relapse). **Every
+reply, in every session, is written in plain layman English — including and
+especially technical/engineering work.** The rules:
+
+1. Explain what a thing IS before what happened to it.
+2. Tie every point to money, risk, or time.
+3. Short paragraphs, one idea each. Prose over tables when explaining.
+4. Round, spoken numbers ("about $1.3 million", not "+66.8% total").
+5. No shorthand or codenames in chat — "N8/FIFO", "configs", "cohorts",
+   "pre-registered primary" are violations. Jargon that must appear gets
+   explained in the same sentence or stays in the repo file.
+6. Bold only the punchline. Own mistakes plainly in their own short section.
+   Keep "still open" separate from "done". End with what to actually watch
+   and when.
+7. **Rewrite BEFORE sending — the plain version is the only version sent.**
+   Precision never softens: exact facts, simple sentences.
+
+Full contract: memory `plain-english-everywhere.md`.
+
 68 tools for reading and controlling a live TradingView Desktop chart via CDP (port 9222).
 
 ## Decision Tree — Which Tool When
