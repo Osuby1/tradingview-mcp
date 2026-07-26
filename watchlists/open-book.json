@@ -1,0 +1,47 @@
+{
+ "note": "Omar's REAL open book as machine-readable state. KEEP IN SYNC when he reports fills/closes (also update the open-positions memory). Consumed nightly by scripts/ratchet_watch.py (EOD chain step 4) which maintains the 20% trailing-ratchet alerts per the 2026-07-25 exit rule: exit line = max(initial stop, 0.8 x highest close since entry). Remove a position from this list when it closes.",
+ "as_of": "2026-07-25",
+ "ratchet_pct": 0.2,
+ "positions": [
+  {
+   "sym": "DVN",
+   "shares": 1000,
+   "entry": 45.11,
+   "stop": 43.9,
+   "opened": "2026-07-24",
+   "high_close": 45.04,
+   "ratchet_alert": null,
+   "notes": "trim/exit before 8/4 earnings regardless of any price rule"
+  },
+  {
+   "sym": "HAS",
+   "shares": 500,
+   "entry": 88.17,
+   "stop": 84.3,
+   "opened": "2026-07-24",
+   "high_close": 88.79,
+   "ratchet_alert": null,
+   "notes": ""
+  },
+  {
+   "sym": "SJM",
+   "shares": 400,
+   "entry": 117.21,
+   "stop": 112.5,
+   "opened": "2026-07-24",
+   "high_close": 118.32,
+   "ratchet_alert": null,
+   "notes": ""
+  },
+  {
+   "sym": "MLI",
+   "shares": 900,
+   "entry": 63.53,
+   "stop": 60.3,
+   "opened": "2026-07-24",
+   "high_close": 63.91,
+   "ratchet_alert": null,
+   "notes": "bounce-flip entry (below 50d) - failed 50-day reclaim = thesis break"
+  }
+ ]
+}
