@@ -13,7 +13,7 @@ The stock-picker/risk-manager contract. Applies to every idea, entry, fill, and 
 ## Entry rules
 1. Limit orders AT the plan level, set in advance — never market after the level is gone
 2. Stops at STRUCTURE with an **ATR floor** (≥1.5–2x daily ATR from entry; if 2x ATR > structure distance, the entry is too far from structure — wait)
-3. **Reward:risk ≥2:1** measured to the next structure level, or no entry
+3. **Headroom ≥2 stop-distances of clear air to the nearest overhead structure, or no entry** — name the shelf in the plan. *(Replaced 2026-07-26, Omar override, logged: was "Reward:risk ≥2:1 to the next structure level." The 2:1 payoff test died with the profit target (retired 7/25 — exit-redesign test); buying directly under a ceiling is still a bad entry, so the same ≥2x threshold carries over re-anchored to entry quality. The threshold itself is UNTESTED at its new job — flagged for the shadow lane.)*
 4. **Volume gates on breakouts:** alert fire = LOOK; projected RVOL ≥1.5–2x = BUY
 5. No resting stop-markets on full size — alert → decide → limit into the bounce
 6. Binary gates: earnings date VERIFIED before every entry; no fresh entries the day before a print; trim before earnings; no fresh full size into long weekends; crypto re-entry requires a DAILY CLOSE through the level

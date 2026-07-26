@@ -66,6 +66,30 @@ def cohort_of(verdict):
     return None          # 7/18-7/21 hand-written verdicts - not machine-comparable
 
 
+def block_reason(verdict):
+    """Which gate fired FIRST (gates run in order, so e.g. a VOLATILITY-CAP
+    block means every earlier gate passed - exactly the shadow cohort the
+    2026-07-26 re-justification promised to grade forward)."""
+    v = (verdict or "").upper()
+    if not v.startswith("BLOCKED"):
+        return None
+    if "DEEP-FAIL" in v:
+        return "REGIME"
+    if "ADX" in v:
+        return "ADX FLOOR"
+    if "+DI" in v or "-DI" in v:
+        return "DIRECTION"
+    if "ZLSMA" in v:
+        return "ZLSMA"
+    if "% AWAY" in v:
+        return "VOLATILITY CAP (ex 2:1)"
+    if "X ATR" in v:
+        return "ATR GEOMETRY"
+    if "ILLIQUID" in v:
+        return "LIQUIDITY"
+    return "OTHER"
+
+
 def collect_signals():
     """Every fresh signal ever written, with its cohort and signal date."""
     events, skipped = [], defaultdict(int)
@@ -239,6 +263,25 @@ def main():
         else:
             me = f"{s['mean_excess']:+.2f}%" if s["mean_excess"] is not None else "-"
             L.append(f"| {c} | {s['n']} | {s['win_pct']}% | {s['mean']:+.2f}% "
+                     f"| {s['median']:+.2f}% | {me} |")
+    L.append("")
+    L.append("## Blocked names by the gate that fired first")
+    L.append("")
+    L.append("Added 2026-07-26 with the volatility-cap re-justification. Gates run in "
+             "order, so each bucket contains names that PASSED every earlier gate. The "
+             "VOLATILITY CAP row is the one on probation: its old 2:1 rationale died "
+             "with the profit target, it blocked SOXL before +539%, and it keeps its "
+             "job only if this table keeps saying its blocks were worth blocking.")
+    L.append("")
+    L.append("| First-failing gate | n | Win% | Mean | Median | Mean vs SPY |")
+    L.append("|---|---|---|---|---|---|")
+    blocked_first = [g for g in first if g["cohort"] == "BLOCKED"]
+    reasons = sorted({block_reason(g.get("verdict")) for g in blocked_first} - {None})
+    for reason in reasons:
+        s = stats([g for g in blocked_first if block_reason(g.get("verdict")) == reason])
+        if s:
+            me = f"{s['mean_excess']:+.2f}%" if s["mean_excess"] is not None else "-"
+            L.append(f"| {reason} | {s['n']} | {s['win_pct']}% | {s['mean']:+.2f}% "
                      f"| {s['median']:+.2f}% | {me} |")
     L.append("")
     L.append("## Every graded signal")

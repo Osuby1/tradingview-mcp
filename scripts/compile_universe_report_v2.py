@@ -511,7 +511,11 @@ PLAN_COLS = [
     Col("d", "Stop", 10, "Where the trade is wrong and you are out.", FMT_PRICE),
     Col("e", "Size", 18, "Dollar size and share count."),
     Col("f", "Risk $", 10, "Dollars lost if the stop hits. Should be about 0.5% of the account.", FMT_PRICE),
-    Col("g", "Targets", 16, "Where you take profit, and the reward-to-risk that implies."),
+    Col("g", "Checkpoint", 16,
+        "NOT a sell level. The old 2:1 target, kept as a progress checkpoint "
+        "(retired 2026-07-25: targets measured harmful - they cap the tail winners). "
+        "Exits are: stop / thesis break / 20% ratchet below the highest close once "
+        "well in profit."),
     Col("h", "Earnings Gate", 26,
         "Next earnings date and whether it blocks or shrinks this trade. Never full "
         "size into a report."),
@@ -571,7 +575,7 @@ for r in _fresh:
         "c": round(last, 2), "d": round(stop, 2),
         "e": f"${dollars:,.0f} ({shares:,} sh)",
         "f": round(shares * risk_ps, 0),
-        "g": f"{target:.2f} @ 2:1",
+        "g": f"{target:.2f} CHECKPOINT (no sell)",
         "h": _earn_txt(hits.get(r["sym"], {})),
         "i": _alert_txt(hits.get(r["sym"], {})),
         "j": (f"Rank #{r['rank']} of {len(_fresh)}, buy score {r['buy_score']}. "

@@ -130,11 +130,12 @@ class TestStopGates(unittest.TestCase):
         self.assertTrue(verdict.startswith("BLOCKED"))
         self.assertTrue(any("token" in f for f in fails))
 
-    def test_wide_percentage_stop_blocks_on_the_2to1_cap(self):
-        """The DELL case: 2.78x ATR is fine, but 20% away needs +40% for 2:1."""
+    def test_wide_percentage_stop_blocks_on_the_volatility_cap(self):
+        """The DELL case: 2.78x ATR is fine, but a 20%-away stop = too wild to
+        size. (Renamed 2026-07-26: was the '2:1 cap'; same behavior, honest name.)"""
         verdict, fails, _ = gs.evaluate(row(atr=8.0, long_stop=80.0))  # 2.5x ATR, 20%
         self.assertTrue(verdict.startswith("BLOCKED"))
-        self.assertTrue(any("2:1 would need" in f for f in fails))
+        self.assertTrue(any("volatility cap" in f for f in fails))
 
     def test_stop_read_from_stop_key_when_long_stop_absent(self):
         r = row()

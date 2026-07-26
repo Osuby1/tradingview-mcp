@@ -32,7 +32,7 @@ ADV_MULTIPLE = 10.0          # position must be <= ADV / this
 DEFAULT_POSITION = 85_000.0  # sizing assumption for the liquidity test
 ATR_FLOOR = 1.0              # stop must be at least this many ATRs from entry
 ATR_CEILING = 4.0            # a stop this far out makes the position a token
-MAX_STOP_PCT = 12.0          # absolute cap: beyond this, 2:1 needs an implausible move
+MAX_STOP_PCT = 12.0          # volatility cap: a trend stop this far out = too wild to size
 
 
 class MissingGateData(Exception):
@@ -105,20 +105,26 @@ def evaluate(row, position_size=DEFAULT_POSITION, strict=True):
         if not atr:
             fails.append("no ATR available - cannot check the stop against noise")
 
-    # 5b. Absolute stop cap -> the 2:1 gate, expressed as arithmetic.
+    # 5b. Absolute stop cap - the VOLATILITY CAP (re-justified 2026-07-26).
     #
-    # A stop N% away needs a 2N% move to make 2:1. Past ~12% that target stops
-    # being a base case. DELL on 2026-07-22 was the trigger: a 20.3% stop is a
-    # perfectly reasonable 2.78x ATR, so the ATR gate passed it, but 2:1 then
-    # required +40.7% on a name already 115% above its 200-day. This is the
-    # only form of the 2:1 gate that can be automated - whether a specific
-    # target is REACHABLE still needs a human looking at the chart.
+    # HISTORY: born 2026-07-22 as "the 2:1 gate expressed as arithmetic" (a stop
+    # N% away needs a 2N% move to pay 2:1; DELL's 20.3% stop was the trigger).
+    # The 2:1 profit target was RETIRED 2026-07-25 (exit-redesign test), which
+    # killed that rationale - with tail-riding exits, +2N% moves are precisely
+    # what we hold for. The BEHAVIOR is deliberately unchanged (Omar-directed
+    # 7/26, freeze-compatible): what the cap actually screens is volatility - a
+    # name whose trend stop sits >12% away swings so hard that a fixed-risk
+    # position becomes a token and any sane initial stop lives inside its daily
+    # range. Whether that screen still earns its keep under the new exits is an
+    # OPEN question: it blocked SOXL before +539% (Jan-Jun replay), and
+    # gate_outcomes.py now grades cap-blocks as their own forward cohort so the
+    # answer arrives as data, not anecdote.
     if last and stop and last > stop:
         stop_pct = (last - stop) / last * 100
         if stop_pct > MAX_STOP_PCT:
             fails.append(
-                f"stop is {stop_pct:.1f}% away - 2:1 would need +{2*stop_pct:.1f}%, "
-                f"and the position shrinks to a token (cap {MAX_STOP_PCT:.0f}%)")
+                f"stop is {stop_pct:.1f}% away - volatility cap {MAX_STOP_PCT:.0f}%: "
+                f"a name this wild shrinks a fixed-risk position to a token")
 
     # 6. liquidity
     max_pos = adv / ADV_MULTIPLE
