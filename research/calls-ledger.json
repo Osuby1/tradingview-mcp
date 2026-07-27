@@ -181,6 +181,18 @@
    "source": "PEAD-SUE-20d-paper",
    "fill": "paper (not sized - forward validation only)",
    "thesis": "fresh high-SUE 0.7 (filed 2026-07-20, 2d ago); 20-day drift test"
+  },
+  {
+   "id": "2026-07-27-SPY-putspread-skip",
+   "date": "2026-07-27",
+   "sym": "SPY",
+   "dir": "short (hedge) - DECLINED",
+   "ref": 737.6,
+   "stop": null,
+   "target": 697.86,
+   "fill": "NOT TAKEN (Omar declined 2026-07-27, tranche 1)",
+   "source": "spy-midterm-put-spread-plan.md - Nov 20 2026 710/600 vertical put spread",
+   "thesis": "AVOID/SKIP: plan called for tranche 1 in the week of Jul 27-31, before the Jul 28-29 FOMC. Quoted debit $1,214 per spread (vs $1,420 modelled 7/6). Max loss $1,214; max gain $9,786; breakeven SPY 697.86 (-5.4% from ref). NONE of the plan's abort clauses had fired at decision time: VIX 19.33 (abort >20), SPY 737.60 (abort well under 735), SPY below its 20d (746.58) and 50d (744.97) but +5.5% over its 200d (698.89) and only -2.9% off its highest close. Omar declined. GRADE WHETHER SKIPPING WAS RIGHT: mark at SPY levels through Nov 20 2026 - a close below 697.86 means the skip cost money; flat or up means the skip saved $1,214."
   }
  ]
 }

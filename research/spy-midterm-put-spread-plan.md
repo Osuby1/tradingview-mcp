@@ -29,3 +29,16 @@ Omar's H2-2026 correction expression. Reminder routine fires Mon 2026-07-27 ~9:0
 
 ## Status log
 - 2026-07-06: plan authored; NOT entered. Cloud reminder set for 7/27. No position.
+- **2026-07-27: TRANCHE 1 DECLINED by Omar. No position.** Quoted debit **$1,214**
+  (vs $1,420 modelled) → max loss $1,214, max gain $9,786, breakeven SPY 697.86
+  (−5.4%), best case ~8.1x. **No abort clause had fired:** VIX 19.33 (line 20,
+  intraday high 19.93), SPY 737.60 (line ~735, intraday low 735.87), SPY below its
+  20d 746.58 and 50d 744.97 but +5.5% over its 200d 698.89 and only −2.9% off its
+  highest close. So this was a discretionary decline against a live plan, not an
+  abort. Logged as a graded skip: `research/calls-ledger.json`
+  → `2026-07-27-SPY-putspread-skip`. Grades at SPY levels through Nov 20 2026 —
+  below 697.86 the skip cost money, flat/up it saved $1,214.
+- **2026-07-27 process note:** the 7/27 reminder was a CLOUD routine and never
+  reached the local session. Nothing in the nightly chain or the morning brief reads
+  this file, so its own dated entry week passed unflagged until Omar asked. Tranche 2
+  (Aug 10–21) has the same exposure. See "commitments due today" TODO.
