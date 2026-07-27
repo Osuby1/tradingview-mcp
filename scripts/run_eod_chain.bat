@@ -48,6 +48,15 @@ if errorlevel 1 (
     set FAILED=1
     goto finish
 )
+rem The CDP target-picking test is JS, so the Python discover above cannot see it.
+rem Added 2026-07-27 after the loose /tradingview/i match bound the MCP server to a
+rem Desktop-app helper window all morning. That same race can kill step 3.
+node --test tests\connection.test.js >> "%LOG%" 2>&1
+if errorlevel 1 (
+    echo FAILED: CDP target-picking tests did not pass - refusing to run the pipeline. >> "%LOG%"
+    set FAILED=1
+    goto finish
+)
 
 rem -- 1. Origination scan (refreshes recommendations_log for the Track Record) --
 cd /d "%USERPROFILE%\Documents\Equities_Scanner"
@@ -62,13 +71,19 @@ python scripts\export_origination_tabs.py >> "%LOG%" 2>&1
 if errorlevel 1 echo WARNING: tab export failed >> "%LOG%"
 
 rem -- 3. Extended universe + Heikin Ashi sweep + gates (headless Claude, needs chart) --
+rem Wait for an actual CHART PAGE, not merely "the app answers CDP" (2026-07-27).
+rem /json/version returns 200 as soon as the Desktop app is up, several seconds
+rem before the chart tab exists - and the app's file:// helper windows used to get
+rem picked in its place, which fails the sweep. Poll /json/list for a real
+rem tradingview.com/chart page instead, so a slow chart is waited out.
 set TRIES=0
 :feedcheck
-curl -s --max-time 5 http://localhost:9222/json/version >nul 2>&1
+curl -s --max-time 5 http://localhost:9222/json/list | findstr /I /C:"tradingview.com/chart" >nul 2>&1
 if not errorlevel 1 goto feedup
 set /a TRIES+=1
 if !TRIES! geq 30 (
-    echo [3/6] FAILED: TradingView CDP feed not reachable after 15 min >> "%LOG%"
+    echo [3/6] FAILED: no TradingView CHART page on CDP after 15 min >> "%LOG%"
+    echo        (app may be running with no chart tab open - helper windows do not count) >> "%LOG%"
     set FAILED=1
     goto finish
 )

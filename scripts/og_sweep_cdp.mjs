@@ -17,7 +17,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { connect, evaluate, disconnect } from '../src/connection.js';
+import { connect, evaluate, disconnect, waitForChartTarget } from '../src/connection.js';
 
 const DATE = process.argv[2];
 if (!DATE || !/^\d{4}-\d{2}-\d{2}$/.test(DATE)) {
@@ -42,6 +42,13 @@ function loadSymbols() {
 
 async function main() {
   console.log(`[cdp-sweep] ${DATE} - connecting to TradingView via CDP...`);
+  // Wait for a REAL chart page before connecting. The Desktop build answers CDP
+  // (and the .bat feed check) the moment the app is up, but its chart tab can be
+  // seconds behind - and its file:// helper windows used to get picked instead,
+  // which fails at setChartType with "_activeChartWidgetWV undefined". Waiting
+  // here turns a race into a pause instead of a lost night. (2026-07-27)
+  const tgt = await waitForChartTarget(3 * 60 * 1000);
+  console.log(`[cdp-sweep] chart page found: ${tgt.url}`);
   await connect();
 
   // 1. install the sweep runner (idempotent - redefines the window fns)

@@ -87,13 +87,72 @@ export async function connect() {
   throw new Error(`CDP connection failed after ${MAX_RETRIES} attempts: ${lastError?.message}`);
 }
 
+/**
+ * Pick the real chart page out of a CDP /json/list response.
+ *
+ * WHY THIS IS FUSSY (2026-07-27): the old rule was "first page whose URL matches
+ * /tradingview/i". That was written for the browser/PWA setup. Omar is now on the
+ * TradingView Desktop (Store) build, which exposes several INTERNAL helper windows
+ * as file:/// URLs under
+ *   file:///C:/Program Files/WindowsApps/TradingView.Desktop_<ver>_.../index.html
+ * The path contains "TradingView.Desktop", so the loose regex matched them. Those
+ * windows have no window.TradingViewApi at all, so everything downstream dies with
+ * "Cannot read properties of undefined (reading '_activeChartWidgetWV')".
+ *
+ * That is exactly what stranded the MCP server on the morning of 2026-07-27, and it
+ * is a live risk for the nightly chain: if the chart tab is a few seconds slow, the
+ * sweep binds to a helper window and the whole run fails.
+ *
+ * Rule now: only real http(s) pages on a tradingview.com host qualify at all, and a
+ * /chart/ path wins over any other tradingview.com page. file:// is never eligible.
+ *
+ * Pure function so it can be unit-tested without a live browser.
+ */
+export function pickChartTarget(targets) {
+  const pages = (targets || []).filter(t => {
+    if (!t || t.type !== 'page' || typeof t.url !== 'string' || !t.url) return false;
+    if (!/^https?:\/\//i.test(t.url)) return false;   // kills file:// helper windows
+    try {
+      return /(^|\.)tradingview\.com$/i.test(new URL(t.url).hostname);
+    } catch {
+      return false;
+    }
+  });
+  const isChart = (t) => {
+    try { return /^\/chart(\/|$)/i.test(new URL(t.url).pathname); }
+    catch { return false; }
+  };
+  return pages.find(isChart) || pages[0] || null;
+}
+
 async function findChartTarget() {
   const resp = await fetch(`http://${CDP_HOST}:${CDP_PORT}/json/list`);
   const targets = await resp.json();
-  // Prefer targets with tradingview.com/chart in the URL
-  return targets.find(t => t.type === 'page' && /tradingview\.com\/chart/i.test(t.url))
-    || targets.find(t => t.type === 'page' && /tradingview/i.test(t.url))
-    || null;
+  return pickChartTarget(targets);
+}
+
+/**
+ * Block until a real chart page exists (or timeout). Used by long unattended jobs
+ * (the nightly sweep) so a slow-loading chart is waited out instead of turning into
+ * a false "chain failed". Returns the target, or throws on timeout.
+ */
+export async function waitForChartTarget(timeoutMs = 120000, pollMs = 3000) {
+  const deadline = Date.now() + timeoutMs;
+  let last = null;
+  for (;;) {
+    try {
+      const t = await findChartTarget();
+      if (t) return t;
+      last = 'no tradingview.com chart page among CDP targets';
+    } catch (e) {
+      last = e.message;
+    }
+    if (Date.now() >= deadline) {
+      throw new Error(`No TradingView chart page after ${Math.round(timeoutMs / 1000)}s (${last}). `
+        + 'Is a chart tab actually open? Desktop-app helper windows do not count.');
+    }
+    await new Promise(r => setTimeout(r, pollMs));
+  }
 }
 
 export async function getTargetInfo() {
