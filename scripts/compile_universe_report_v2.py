@@ -600,6 +600,7 @@ def _tv_screen_metrics():
         out[bare] = {
             "rsi": round(rsi, 1) if isinstance(rsi, (int, float)) else None,
             "relvol": round(rvol, 2) if isinstance(rvol, (int, float)) else None,
+            "close": round(close, 2) if isinstance(close, (int, float)) else None,
             "pct52": round(close / hi52 * 100, 1)
                      if (isinstance(close, (int, float)) and isinstance(hi52, (int, float)) and hi52) else None,
         }
@@ -1459,7 +1460,10 @@ def _actioned_rows():
             b = book.get(sym, {})
             a = allrows.get(sym, {})
             stop = b.get("stop") or c.get("stop")
-            now = a.get("real_last") or a.get("real_close")
+            # Scan real quote first; public-scanner close as fallback (2026-07-28:
+            # SJM's sweep quote came back empty and its P&L cell shipped blank).
+            now = (a.get("real_last") or a.get("real_close")
+                   or TV_METRICS.get(sym, {}).get("close"))
             status = "OPEN"
             pnl = round((now - entry) * shares) if now else None
         out.append({"sym": sym, "opened": c.get("date"), "status": status,
