@@ -9,7 +9,7 @@
    "entry": 88.17,
    "stop": 83.76,
    "opened": "2026-07-24",
-   "high_close": 90.61,
+   "high_close": 96.34,
    "ratchet_alert": null,
    "notes": ""
   },
@@ -19,7 +19,7 @@
    "entry": 117.21,
    "stop": 111.35,
    "opened": "2026-07-24",
-   "high_close": 121.05,
+   "high_close": 123.04,
    "ratchet_alert": null,
    "notes": ""
   },
@@ -29,7 +29,7 @@
    "entry": 63.53,
    "stop": 60.35,
    "opened": "2026-07-24",
-   "high_close": 64.17,
+   "high_close": 66.49,
    "ratchet_alert": null,
    "notes": "bounce-flip entry (below 50d) - failed 50-day reclaim = thesis break"
   }

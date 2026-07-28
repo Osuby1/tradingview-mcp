@@ -3,20 +3,20 @@
  "generated_from": "universe-results-*.json",
  "cohorts": {
   "PASSED": {
-   "n": 27,
-   "mean": -0.11,
-   "median": -0.07,
-   "win_pct": 48,
-   "mean_excess": 0.56,
-   "mean_mae": -3.61
+   "n": 31,
+   "mean": 0.1,
+   "median": 0.57,
+   "win_pct": 65,
+   "mean_excess": 0.45,
+   "mean_mae": -4.35
   },
   "BLOCKED": {
-   "n": 130,
-   "mean": -0.13,
-   "median": 0.02,
-   "win_pct": 50,
-   "mean_excess": 0.7,
-   "mean_mae": -4.15
+   "n": 138,
+   "mean": 0.42,
+   "median": 1.04,
+   "win_pct": 57,
+   "mean_excess": 0.96,
+   "mean_mae": -4.81
   }
  },
  "matured": {
@@ -33,13 +33,13 @@
    "adx": null,
    "note": "Fresh 7/14, regime PASS. Trucking pair w/ XPO - one-vehicle rule, XPO already armed",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 231.76,
-   "mark": 226.77,
-   "return_pct": -2.15,
+   "mark": 226.28,
+   "return_pct": -2.36,
    "mfe": 2.33,
    "mae": -3.14,
-   "spy_excess": -1.75
+   "spy_excess": -2.2
   },
   {
    "date": "2026-07-20",
@@ -50,13 +50,13 @@
    "adx": null,
    "note": "Fresh but RS -37 vs SPY. Watch only",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 64.14,
-   "mark": 64.04,
-   "return_pct": -0.16,
+   "mark": 66.07,
+   "return_pct": 3.01,
    "mfe": 5.96,
    "mae": -7.91,
-   "spy_excess": 0.25
+   "spy_excess": 3.17
   },
   {
    "date": "2026-07-20",
@@ -67,13 +67,13 @@
    "adx": null,
    "note": "Fresh 7/16 into the print - earnings gate. Post-print re-check was already the standing plan",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 81.59,
-   "mark": 90.61,
-   "return_pct": 11.06,
-   "mfe": 14.05,
+   "mark": 96.34,
+   "return_pct": 18.08,
+   "mfe": 18.2,
    "mae": -0.72,
-   "spy_excess": 11.46
+   "spy_excess": 18.24
   },
   {
    "date": "2026-07-20",
@@ -84,13 +84,13 @@
    "adx": null,
    "note": "Buy after crash candle, Magical +152. Not a trend start",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 7.11,
-   "mark": 6.5,
-   "return_pct": -8.58,
-   "mfe": 9.52,
+   "mark": 7.9,
+   "return_pct": 11.11,
+   "mfe": 19.41,
    "mae": -13.99,
-   "spy_excess": -8.18
+   "spy_excess": 11.28
   },
   {
    "date": "2026-07-20",
@@ -101,13 +101,13 @@
    "adx": null,
    "note": "Fresh-ish but deep repair; ZLSMA value suspect too",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 56.97,
-   "mark": 61.57,
-   "return_pct": 8.07,
-   "mfe": 8.86,
+   "mark": 63.2,
+   "return_pct": 10.94,
+   "mfe": 11.16,
    "mae": -4.7,
-   "spy_excess": 8.48
+   "spy_excess": 11.1
   },
   {
    "date": "2026-07-20",
@@ -118,13 +118,13 @@
    "adx": null,
    "note": "Regime PASS +29.2% (best of the fresh list) but print is 2 sessions away + already +10% off signal. Re-look post-print",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 73.87,
-   "mark": 67.35,
-   "return_pct": -8.83,
+   "mark": 69.58,
+   "return_pct": -5.81,
    "mfe": 8.28,
    "mae": -11.22,
-   "spy_excess": -8.42
+   "spy_excess": -5.64
   },
   {
    "date": "2026-07-20",
@@ -135,13 +135,13 @@
    "adx": null,
    "note": "Re-flipped 1 day after sell flip; stop 30c below. CE(1,2) chop pattern",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 18.75,
-   "mark": 18.84,
-   "return_pct": 0.48,
+   "mark": 19.13,
+   "return_pct": 2.03,
    "mfe": 2.99,
    "mae": -1.28,
-   "spy_excess": 0.88
+   "spy_excess": 2.19
   },
   {
    "date": "2026-07-20",
@@ -152,13 +152,13 @@
    "adx": null,
    "note": "Fresh 7/17, regime PASS, but hot + ZLSMA borderline-fail. Part of mall-REIT cluster; MAC is the gated vehicle. Earnings 8/10",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 228.19,
-   "mark": 231.67,
-   "return_pct": 1.53,
-   "mfe": 1.54,
+   "mark": 236.7,
+   "return_pct": 3.73,
+   "mfe": 4.25,
    "mae": -1.74,
-   "spy_excess": 1.93
+   "spy_excess": 3.9
   },
   {
    "date": "2026-07-20",
@@ -169,13 +169,13 @@
    "adx": null,
    "note": "577K vol",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 33.46,
-   "mark": 32.82,
-   "return_pct": -1.91,
+   "mark": 33.1,
+   "return_pct": -1.08,
    "mfe": 0.45,
    "mae": -8.4,
-   "spy_excess": -1.51
+   "spy_excess": -0.91
   },
   {
    "date": "2026-07-20",
@@ -186,13 +186,13 @@
    "adx": null,
    "note": "Fresh 7/16, regime PASS. Watch reclaim ~40.50; earnings 8/5; oil-change class action pre-existing",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 39.54,
-   "mark": 39.56,
-   "return_pct": 0.05,
-   "mfe": 1.96,
+   "mark": 40.2,
+   "return_pct": 1.67,
+   "mfe": 3.29,
    "mae": -3.92,
-   "spy_excess": 0.45
+   "spy_excess": 1.83
   },
   {
    "date": "2026-07-20",
@@ -203,13 +203,13 @@
    "adx": null,
    "note": "TV says Ryerson at RYZ but Ryerson trades RYI - verify before ever trading",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 29.07,
-   "mark": 30.62,
-   "return_pct": 5.33,
-   "mfe": 8.19,
+   "mark": 31.03,
+   "return_pct": 6.74,
+   "mfe": 10.08,
    "mae": -0.83,
-   "spy_excess": 5.74
+   "spy_excess": 6.91
   },
   {
    "date": "2026-07-20",
@@ -220,13 +220,13 @@
    "adx": null,
    "note": "Likely whipsaw",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 14.84,
-   "mark": 13.76,
-   "return_pct": -7.28,
+   "mark": 13.98,
+   "return_pct": -5.8,
    "mfe": 0.94,
    "mae": -8.15,
-   "spy_excess": -6.87
+   "spy_excess": -5.63
   },
   {
    "date": "2026-07-20",
@@ -237,13 +237,13 @@
    "adx": null,
    "note": "Vertical 5-bar rally, way extended",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 75.17,
-   "mark": 76.21,
-   "return_pct": 1.38,
-   "mfe": 2.59,
+   "mark": 75.61,
+   "return_pct": 0.59,
+   "mfe": 2.72,
    "mae": -0.78,
-   "spy_excess": 1.79
+   "spy_excess": 0.75
   },
   {
    "date": "2026-07-20",
@@ -256,11 +256,11 @@
    "status": "OPEN",
    "elapsed": 5,
    "entry": 23.31,
-   "mark": 24.96,
-   "return_pct": 7.08,
-   "mfe": 7.29,
-   "mae": -1.97,
-   "spy_excess": 7.48
+   "mark": 25.15,
+   "return_pct": 7.89,
+   "mfe": 9.48,
+   "mae": -1.16,
+   "spy_excess": 8.06
   },
   {
    "date": "2026-07-20",
@@ -271,13 +271,13 @@
    "adx": null,
    "note": "",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 86.09,
-   "mark": 86.14,
-   "return_pct": 0.06,
+   "mark": 86.07,
+   "return_pct": -0.02,
    "mfe": 3.48,
    "mae": -3.55,
-   "spy_excess": 0.46
+   "spy_excess": 0.14
   },
   {
    "date": "2026-07-20",
@@ -288,13 +288,13 @@
    "adx": null,
    "note": "Oil-services V-bottom, hot",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 19.55,
-   "mark": 20.47,
-   "return_pct": 4.71,
+   "mark": 19.82,
+   "return_pct": 1.38,
    "mfe": 8.18,
    "mae": -1.94,
-   "spy_excess": 5.11
+   "spy_excess": 1.55
   },
   {
    "date": "2026-07-20",
@@ -305,13 +305,13 @@
    "adx": null,
    "note": "V-bottom bounce, hot",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 120.49,
-   "mark": 117.5,
-   "return_pct": -2.48,
+   "mark": 117.37,
+   "return_pct": -2.59,
    "mfe": 4.37,
-   "mae": -3.04,
-   "spy_excess": -2.08
+   "mae": -4.53,
+   "spy_excess": -2.42
   },
   {
    "date": "2026-07-20",
@@ -322,13 +322,13 @@
    "adx": null,
    "note": "Hot; smallish. Oil-services theme w/ NOV",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 9.43,
-   "mark": 9.64,
-   "return_pct": 2.23,
-   "mfe": 6.57,
-   "mae": -1.06,
-   "spy_excess": 2.63
+   "mark": 9.13,
+   "return_pct": -3.18,
+   "mfe": 6.68,
+   "mae": -4.13,
+   "spy_excess": -3.02
   },
   {
    "date": "2026-07-20",
@@ -339,13 +339,13 @@
    "adx": null,
    "note": "V-bottom bounce, hot",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 128.8,
-   "mark": 131.8,
-   "return_pct": 2.33,
+   "mark": 128.8,
+   "return_pct": 0.0,
    "mfe": 10.12,
    "mae": -2.2,
-   "spy_excess": 2.73
+   "spy_excess": 0.17
   },
   {
    "date": "2026-07-20",
@@ -356,13 +356,13 @@
    "adx": null,
    "note": "Fresh Fri 7/17 but print Friday = no runway. Regime REPAIR -2.1%. Re-look post-print",
    "status": "OPEN",
-   "elapsed": 5,
+   "elapsed": 6,
    "entry": 43.5,
-   "mark": 47.32,
-   "return_pct": 8.78,
-   "mfe": 9.32,
+   "mark": 48.19,
+   "return_pct": 10.78,
+   "mfe": 12.67,
    "mae": -1.4,
-   "spy_excess": 9.19
+   "spy_excess": 10.95
   },
   {
    "date": "2026-07-21",
@@ -375,11 +375,11 @@
    "status": "OPEN",
    "elapsed": 4,
    "entry": 53.95,
-   "mark": 55.75,
-   "return_pct": 3.34,
-   "mfe": 6.72,
+   "mark": 54.87,
+   "return_pct": 1.71,
+   "mfe": 4.63,
    "mae": -4.95,
-   "spy_excess": 4.56
+   "spy_excess": 2.7
   },
   {
    "date": "2026-07-21",
@@ -390,13 +390,13 @@
    "adx": null,
    "note": "REVERSAL OF EARLIER CALL. Was my #2 plan at 2.4R. Sell label 35.09, price below ZLSMA 30.75.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 30.44,
-   "mark": 29.95,
-   "return_pct": -1.61,
+   "mark": 29.99,
+   "return_pct": -1.48,
    "mfe": 1.94,
-   "mae": -4.76,
-   "spy_excess": -0.38
+   "mae": -6.67,
+   "spy_excess": -0.49
   },
   {
    "date": "2026-07-21",
@@ -407,13 +407,13 @@
    "adx": null,
    "note": "REVERSAL OF EARLIER CALL. Sell label 5.61. Price 5.11 is a hair above ZLSMA 5.07 but the CE is short \u2014 I had already flagged it as falling INTO its zone; the indicator agrees.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 5.11,
-   "mark": 4.95,
-   "return_pct": -3.13,
+   "mark": 5.01,
+   "return_pct": -1.86,
    "mfe": 4.64,
    "mae": -7.24,
-   "spy_excess": -1.9
+   "spy_excess": -0.87
   },
   {
    "date": "2026-07-21",
@@ -426,11 +426,11 @@
    "status": "OPEN",
    "elapsed": 4,
    "entry": 47.21,
-   "mark": 45.38,
-   "return_pct": -3.88,
+   "mark": 46.55,
+   "return_pct": -1.4,
    "mfe": 1.67,
-   "mae": -8.05,
-   "spy_excess": -2.65
+   "mae": -7.14,
+   "spy_excess": -0.41
   },
   {
    "date": "2026-07-21",
@@ -441,13 +441,13 @@
    "adx": null,
    "note": "DOWNGRADED. CE buy mode and price is above ZLSMA 41.32, so trend structure is fine, but Magical 176.1 is the hottest reading in the candidate set. Buying a one-tick-from-breakout name at that oscillator level is the definition of chasing. Re-qualifies on a pullback toward 41.30.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 43.4,
-   "mark": 42.96,
-   "return_pct": -1.01,
-   "mfe": 0.46,
+   "mark": 42.73,
+   "return_pct": -1.54,
+   "mfe": 0.51,
    "mae": -3.0,
-   "spy_excess": 0.21
+   "spy_excess": -0.55
   },
   {
    "date": "2026-07-21",
@@ -458,13 +458,13 @@
    "adx": null,
    "note": "BEST STRUCTURAL READ OF THE 76. CE buy mode, price well above ZLSMA 838.04, and Magical is only -22.8 \u2014 i.e. it ran +12.17% today WITHOUT becoming overbought on this oscillator. Buy label 761.36 is ~27% back, so the flip is not fresh. Memory-semis leadership. Needs an earnings-date check before any plan.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 970.82,
-   "mark": 900.2,
-   "return_pct": -7.27,
+   "mark": 820.53,
+   "return_pct": -15.48,
    "mfe": 4.22,
-   "mae": -11.95,
-   "spy_excess": -6.05
+   "mae": -18.72,
+   "spy_excess": -14.49
   },
   {
    "date": "2026-07-21",
@@ -477,11 +477,11 @@
    "status": "OPEN",
    "elapsed": 4,
    "entry": 229.86,
-   "mark": 245.75,
-   "return_pct": 6.91,
-   "mfe": 8.88,
+   "mark": 247.05,
+   "return_pct": 7.48,
+   "mfe": 9.63,
    "mae": -1.89,
-   "spy_excess": 8.14
+   "spy_excess": 8.47
   },
   {
    "date": "2026-07-21",
@@ -492,13 +492,13 @@
    "adx": null,
    "note": "CE buy mode, label 373.49 (~6.5% back), price above ZLSMA. Magical 96.1 is just under the +100 too-hot threshold \u2014 marginal.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 397.75,
-   "mark": 389.1,
-   "return_pct": -2.17,
+   "mark": 393.35,
+   "return_pct": -1.11,
    "mfe": 0.94,
    "mae": -5.12,
-   "spy_excess": -0.95
+   "spy_excess": -0.11
   },
   {
    "date": "2026-07-21",
@@ -509,13 +509,13 @@
    "adx": null,
    "note": "CE buy mode, label 68.70 (~8% back), price above ZLSMA 70.63, Magical -30.4 = plenty of room. Closed +4.88% on the gold move. ETF, so no earnings gate.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 74.19,
-   "mark": 75.73,
-   "return_pct": 2.08,
+   "mark": 74.21,
+   "return_pct": 0.03,
    "mfe": 5.12,
    "mae": -2.8,
-   "spy_excess": 3.3
+   "spy_excess": 1.02
   },
   {
    "date": "2026-07-21",
@@ -526,13 +526,13 @@
    "adx": null,
    "note": "CE buy mode, label 127.96 (~6.3% back), above ZLSMA, Magical 9.0 = cold. ETF, no earnings gate. Low volume (215K) is the caveat.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 136.02,
-   "mark": 135.84,
-   "return_pct": -0.13,
-   "mfe": 1.31,
+   "mark": 137.9,
+   "return_pct": 1.38,
+   "mfe": 2.02,
    "mae": -4.89,
-   "spy_excess": 1.1
+   "spy_excess": 2.37
   },
   {
    "date": "2026-07-21",
@@ -543,13 +543,13 @@
    "adx": null,
    "note": "CE buy mode, label 39.68 (~8.3% back), just above ZLSMA 42.17, Magical 11.4 = cold. Marginal on the ZLSMA gap.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 42.96,
-   "mark": 42.14,
-   "return_pct": -1.91,
+   "mark": 43.05,
+   "return_pct": 0.21,
    "mfe": 1.4,
    "mae": -5.28,
-   "spy_excess": -0.68
+   "spy_excess": 1.2
   },
   {
    "date": "2026-07-21",
@@ -560,13 +560,13 @@
    "adx": null,
    "note": "CE buy mode, price far above ZLSMA 106.37, Magical -68.1 despite closing +6.24%. Buy label 113.30 is ~12% back.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 127.39,
-   "mark": 116.07,
-   "return_pct": -8.89,
+   "mark": 113.28,
+   "return_pct": -11.08,
    "mfe": 3.37,
-   "mae": -14.11,
-   "spy_excess": -7.66
+   "mae": -19.33,
+   "spy_excess": -10.08
   },
   {
    "date": "2026-07-21",
@@ -577,13 +577,13 @@
    "adx": null,
    "note": "CE buy mode, label 171.60 (~9.6% back), above ZLSMA, Magical 79.1 approaching hot. Closed +2.34%.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 188.04,
-   "mark": 195.66,
-   "return_pct": 4.05,
-   "mfe": 6.24,
+   "mark": 200.17,
+   "return_pct": 6.45,
+   "mfe": 10.48,
    "mae": -0.39,
-   "spy_excess": 5.28
+   "spy_excess": 7.44
   },
   {
    "date": "2026-07-21",
@@ -594,13 +594,13 @@
    "adx": null,
    "note": "CE buy mode, above ZLSMA, Magical 84.2 (warm, under the line). The KWEB engine flagged as real in prior work; still watch-only per that note.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 27.02,
-   "mark": 27.0,
-   "return_pct": -0.07,
-   "mfe": 1.15,
+   "mark": 27.31,
+   "return_pct": 1.07,
+   "mfe": 1.26,
    "mae": -3.33,
-   "spy_excess": 1.15
+   "spy_excess": 2.06
   },
   {
    "date": "2026-07-21",
@@ -611,13 +611,13 @@
    "adx": null,
    "note": "CE buy mode, price just above ZLSMA 266.42, Magical 75.2. Buy label 133.64 is ~103% below current price \u2014 the oldest live signal in the scan. Trend intact, entry timing is not.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 271.73,
-   "mark": 272.92,
-   "return_pct": 0.44,
+   "mark": 270.36,
+   "return_pct": -0.5,
    "mfe": 2.86,
-   "mae": -4.19,
-   "spy_excess": 1.67
+   "mae": -6.68,
+   "spy_excess": 0.49
   },
   {
    "date": "2026-07-21",
@@ -628,13 +628,13 @@
    "adx": null,
    "note": "The one origination name that passes the stack: CE buy mode, above ZLSMA 15.12, Magical 72.2. But it closed +3.37% ABOVE its stated buy zone top of 15.73, so entry would be a chase. Earnings unverified, early-to-mid August. Watch for a pullback into 15.12-15.73.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 16.24,
-   "mark": 15.15,
-   "return_pct": -6.71,
+   "mark": 15.17,
+   "return_pct": -6.59,
    "mfe": 3.08,
    "mae": -9.98,
-   "spy_excess": -5.48
+   "spy_excess": -5.6
   },
   {
    "date": "2026-07-21",
@@ -645,13 +645,13 @@
    "adx": null,
    "note": "Passes the indicator gate (CE buy, above ZLSMA, Magical 70.4) but earnings block it, and it is ~5% above the stated zone top. Would be a real candidate after 7/30.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 59.53,
-   "mark": 55.61,
-   "return_pct": -6.58,
+   "mark": 55.65,
+   "return_pct": -6.52,
    "mfe": 0.34,
-   "mae": -7.53,
-   "spy_excess": -5.36
+   "mae": -8.09,
+   "spy_excess": -5.53
   },
   {
    "date": "2026-07-21",
@@ -662,13 +662,13 @@
    "adx": null,
    "note": "Passes the indicator gate cleanly (CE buy, well above ZLSMA, Magical 50.4). Blocked only by the date. SYMBOL TRAP: bare COCO resolves to an Indonesian listing; use NASDAQ:COCO.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 75.89,
-   "mark": 67.35,
-   "return_pct": -11.25,
+   "mark": 69.58,
+   "return_pct": -8.31,
    "mfe": 5.4,
    "mae": -13.59,
-   "spy_excess": -10.02
+   "spy_excess": -7.32
   },
   {
    "date": "2026-07-21",
@@ -679,13 +679,13 @@
    "adx": null,
    "note": "Passes the indicator gate (CE buy, above ZLSMA, Magical 90.7 just under the line). Blocked by the date only.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 125.59,
-   "mark": 127.13,
-   "return_pct": 1.23,
-   "mfe": 1.7,
+   "mark": 126.12,
+   "return_pct": 0.42,
+   "mfe": 2.09,
    "mae": -1.19,
-   "spy_excess": 2.45
+   "spy_excess": 1.41
   },
   {
    "date": "2026-07-21",
@@ -698,11 +698,11 @@
    "status": "OPEN",
    "elapsed": 4,
    "entry": 79.19,
-   "mark": 75.38,
-   "return_pct": -4.81,
+   "mark": 77.08,
+   "return_pct": -2.66,
    "mfe": 5.47,
-   "mae": -5.03,
-   "spy_excess": -3.58
+   "mae": -5.29,
+   "spy_excess": -1.67
   },
   {
    "date": "2026-07-21",
@@ -713,13 +713,13 @@
    "adx": null,
    "note": "Double block: reported after the close tonight (beat \u2014 core operating $7.26/sh vs Street $6.60-6.77), and the Chandelier is in SELL mode with price below ZLSMA 362.50.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 354.8,
-   "mark": 358.91,
-   "return_pct": 1.16,
-   "mfe": 2.05,
+   "mark": 363.5,
+   "return_pct": 2.45,
+   "mfe": 2.92,
    "mae": -4.72,
-   "spy_excess": 2.39
+   "spy_excess": 3.44
   },
   {
    "date": "2026-07-21",
@@ -730,13 +730,13 @@
    "adx": null,
    "note": "CE buy mode but price is under ZLSMA 126.17.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 122.83,
-   "mark": 120.49,
-   "return_pct": -1.91,
-   "mfe": 0.74,
+   "mark": 127.58,
+   "return_pct": 3.86,
+   "mfe": 4.71,
    "mae": -8.01,
-   "spy_excess": -0.68
+   "spy_excess": 4.85
   },
   {
    "date": "2026-07-21",
@@ -749,11 +749,11 @@
    "status": "OPEN",
    "elapsed": 4,
    "entry": 408.74,
-   "mark": 407.96,
-   "return_pct": -0.19,
+   "mark": 403.46,
+   "return_pct": -1.29,
    "mfe": 2.03,
-   "mae": -5.72,
-   "spy_excess": 1.04
+   "mae": -10.23,
+   "spy_excess": -0.3
   },
   {
    "date": "2026-07-21",
@@ -764,13 +764,13 @@
    "adx": null,
    "note": "Triple block. CE buy label at 26.82 is ~97% back \u2014 an ancient signal.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 52.85,
-   "mark": 52.73,
-   "return_pct": -0.23,
+   "mark": 50.5,
+   "return_pct": -4.45,
    "mfe": 1.95,
-   "mae": -3.03,
-   "spy_excess": 1.0
+   "mae": -6.66,
+   "spy_excess": -3.45
   },
   {
    "date": "2026-07-21",
@@ -781,13 +781,13 @@
    "adx": null,
    "note": "Sell label 156.18, price below ZLSMA.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 135.41,
-   "mark": 128.26,
-   "return_pct": -5.28,
+   "mark": 126.25,
+   "return_pct": -6.76,
    "mfe": 1.97,
-   "mae": -8.83,
-   "spy_excess": -4.05
+   "mae": -9.54,
+   "spy_excess": -5.77
   },
   {
    "date": "2026-07-21",
@@ -800,11 +800,11 @@
    "status": "OPEN",
    "elapsed": 4,
    "entry": 80.89,
-   "mark": 84.42,
-   "return_pct": 4.36,
-   "mfe": 12.62,
+   "mark": 86.82,
+   "return_pct": 7.33,
+   "mfe": 12.37,
    "mae": -3.84,
-   "spy_excess": 5.59
+   "spy_excess": 8.32
   },
   {
    "date": "2026-07-21",
@@ -815,13 +815,13 @@
    "adx": null,
    "note": "Sell label 61.85. Closed +7.58%, the biggest move in the candidate set, but the CE has not flipped long.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 60.43,
-   "mark": 60.05,
-   "return_pct": -0.63,
+   "mark": 62.91,
+   "return_pct": 4.1,
    "mfe": 5.05,
    "mae": -9.32,
-   "spy_excess": 0.6
+   "spy_excess": 5.1
   },
   {
    "date": "2026-07-21",
@@ -832,13 +832,13 @@
    "adx": null,
    "note": "Sell label 33.41.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 30.77,
-   "mark": 28.34,
-   "return_pct": -7.9,
-   "mfe": 0.75,
-   "mae": -9.0,
-   "spy_excess": -6.67
+   "mark": 31.4,
+   "return_pct": 2.05,
+   "mfe": 2.73,
+   "mae": -10.14,
+   "spy_excess": 3.04
   },
   {
    "date": "2026-07-21",
@@ -849,13 +849,13 @@
    "adx": null,
    "note": "CE buy mode but label 43.63 is ~30% back and price is well under ZLSMA 60.52.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 56.58,
-   "mark": 56.68,
-   "return_pct": 0.18,
+   "mark": 55.91,
+   "return_pct": -1.18,
    "mfe": 6.04,
    "mae": -3.99,
-   "spy_excess": 1.4
+   "spy_excess": -0.19
   },
   {
    "date": "2026-07-21",
@@ -866,13 +866,13 @@
    "adx": null,
    "note": "Now double-blocked: already failed the 2:1 gate at 1.8R, and the CE is short (label 115.79) with price under ZLSMA.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 96.37,
-   "mark": 104.2,
-   "return_pct": 8.12,
-   "mfe": 9.42,
+   "mark": 104.82,
+   "return_pct": 8.77,
+   "mfe": 10.0,
    "mae": -4.86,
-   "spy_excess": 9.35
+   "spy_excess": 9.76
   },
   {
    "date": "2026-07-21",
@@ -883,13 +883,13 @@
    "adx": null,
    "note": "Confirms the earlier read \u2014 downtrending, and the indicator agrees.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 27.28,
-   "mark": 28.27,
-   "return_pct": 3.63,
-   "mfe": 6.82,
+   "mark": 28.85,
+   "return_pct": 5.76,
+   "mfe": 8.61,
    "mae": -6.12,
-   "spy_excess": 4.86
+   "spy_excess": 6.75
   },
   {
    "date": "2026-07-21",
@@ -900,13 +900,13 @@
    "adx": null,
    "note": "Triple fail. Magical 139.5.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 30.42,
-   "mark": 30.98,
-   "return_pct": 1.84,
-   "mfe": 3.02,
+   "mark": 31.48,
+   "return_pct": 3.48,
+   "mfe": 3.55,
    "mae": -1.31,
-   "spy_excess": 3.07
+   "spy_excess": 4.48
   },
   {
    "date": "2026-07-21",
@@ -917,13 +917,13 @@
    "adx": null,
    "note": "CE buy and above ZLSMA, but the oscillator is extended.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 55.53,
-   "mark": 58.41,
-   "return_pct": 5.19,
-   "mfe": 5.56,
+   "mark": 60.05,
+   "return_pct": 8.14,
+   "mfe": 8.37,
    "mae": -2.4,
-   "spy_excess": 6.41
+   "spy_excess": 9.13
   },
   {
    "date": "2026-07-21",
@@ -934,13 +934,13 @@
    "adx": null,
    "note": "Closed -3.66%; label 40.06 is ~31% back. Not coiling \u2014 weakening.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 52.39,
-   "mark": 52.36,
-   "return_pct": -0.06,
+   "mark": 52.93,
+   "return_pct": 1.03,
    "mfe": 4.92,
    "mae": -2.79,
-   "spy_excess": 1.17
+   "spy_excess": 2.02
   },
   {
    "date": "2026-07-21",
@@ -951,13 +951,13 @@
    "adx": null,
    "note": "CE buy mode but price is well under ZLSMA.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 21.87,
-   "mark": 22.07,
-   "return_pct": 0.91,
+   "mark": 22.16,
+   "return_pct": 1.33,
    "mfe": 5.08,
-   "mae": -1.6,
-   "spy_excess": 2.14
+   "mae": -1.69,
+   "spy_excess": 2.32
   },
   {
    "date": "2026-07-21",
@@ -968,13 +968,13 @@
    "adx": null,
    "note": "Close call \u2014 33.41 vs ZLSMA 33.91. Would qualify on a move back above the line.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 33.41,
-   "mark": 32.82,
-   "return_pct": -1.77,
+   "mark": 33.1,
+   "return_pct": -0.93,
    "mfe": 0.6,
    "mae": -8.26,
-   "spy_excess": -0.54
+   "spy_excess": 0.06
   },
   {
    "date": "2026-07-21",
@@ -985,13 +985,13 @@
    "adx": null,
    "note": "CE buy mode, label 19.84 (~25% back), price under ZLSMA.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 24.8,
-   "mark": 22.95,
-   "return_pct": -7.46,
+   "mark": 23.75,
+   "return_pct": -4.23,
    "mfe": 1.21,
    "mae": -14.27,
-   "spy_excess": -6.23
+   "spy_excess": -3.24
   },
   {
    "date": "2026-07-21",
@@ -1002,13 +1002,13 @@
    "adx": null,
    "note": "Sell label 259.65, price well below ZLSMA.",
    "status": "OPEN",
-   "elapsed": 4,
+   "elapsed": 5,
    "entry": 250.38,
-   "mark": 249.64,
-   "return_pct": -0.3,
-   "mfe": 1.23,
+   "mark": 251.6,
+   "return_pct": 0.49,
+   "mfe": 1.25,
    "mae": -1.45,
-   "spy_excess": 0.93
+   "spy_excess": 1.48
   },
   {
    "date": "2026-07-22",
@@ -1019,13 +1019,13 @@
    "adx": 19.0054,
    "note": "ADX 19.0054 below 20 - no trend to ride; price 4.57 at/below ZLSMA 4.6178 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 4.57,
    "mark": 4.63,
    "return_pct": 1.31,
-   "mfe": 3.28,
+   "mfe": 3.5,
    "mae": -1.09,
-   "spy_excess": 2.43
+   "spy_excess": 2.19
   },
   {
    "date": "2026-07-22",
@@ -1036,13 +1036,13 @@
    "adx": 19.5057,
    "note": "ADX 19.5057 below 20 - no trend to ride; price 43.21 at/below ZLSMA 45.5691 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 43.21,
-   "mark": 45.24,
-   "return_pct": 4.7,
-   "mfe": 5.09,
+   "mark": 46.69,
+   "return_pct": 8.05,
+   "mfe": 8.67,
    "mae": -2.94,
-   "spy_excess": 5.81
+   "spy_excess": 8.93
   },
   {
    "date": "2026-07-22",
@@ -1053,13 +1053,13 @@
    "adx": 18.0368,
    "note": "ADX 18.0368 below 20 - no trend to ride; price 366.05 at/below ZLSMA 374.3464 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 366.05,
-   "mark": 376.26,
-   "return_pct": 2.79,
-   "mfe": 4.43,
+   "mark": 393.1,
+   "return_pct": 7.39,
+   "mfe": 8.73,
    "mae": -1.87,
-   "spy_excess": 3.9
+   "spy_excess": 8.27
   },
   {
    "date": "2026-07-22",
@@ -1070,13 +1070,13 @@
    "adx": 27.2786,
    "note": "price 30.7 at/below ZLSMA 32.4243 - structure has not turned; stop is 0.99x ATR (0.6783) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 30.7,
-   "mark": 30.64,
-   "return_pct": -0.2,
-   "mfe": 1.74,
+   "mark": 31.06,
+   "return_pct": 1.17,
+   "mfe": 1.92,
    "mae": -2.54,
-   "spy_excess": 0.92
+   "spy_excess": 2.05
   },
   {
    "date": "2026-07-22",
@@ -1087,13 +1087,13 @@
    "adx": 21.1293,
    "note": "-DI 25.4212 >= +DI 18.4009 - sellers in control; stop is 0.97x ATR (0.2886) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 10.29,
-   "mark": 10.31,
-   "return_pct": 0.19,
-   "mfe": 1.07,
+   "mark": 10.72,
+   "return_pct": 4.18,
+   "mfe": 4.37,
    "mae": -3.3,
-   "spy_excess": 1.31
+   "spy_excess": 5.06
   },
   {
    "date": "2026-07-22",
@@ -1106,11 +1106,11 @@
    "status": "OPEN",
    "elapsed": 3,
    "entry": 84.54,
-   "mark": 83.93,
-   "return_pct": -0.72,
+   "mark": 83.79,
+   "return_pct": -0.89,
    "mfe": 0.86,
-   "mae": -2.19,
-   "spy_excess": 0.39
+   "mae": -3.63,
+   "spy_excess": -0.01
   },
   {
    "date": "2026-07-22",
@@ -1121,13 +1121,13 @@
    "adx": 22.928,
    "note": "price 71.01 at/below ZLSMA 74.412 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 71.01,
-   "mark": 72.5,
-   "return_pct": 2.1,
-   "mfe": 2.37,
+   "mark": 74.08,
+   "return_pct": 4.32,
+   "mfe": 4.41,
    "mae": -3.53,
-   "spy_excess": 3.21
+   "spy_excess": 5.2
   },
   {
    "date": "2026-07-22",
@@ -1138,13 +1138,13 @@
    "adx": 12.3735,
    "note": "ADX 12.3735 below 20 - no trend to ride; price 122.82 at/below ZLSMA 129.2888 - structure has not turned; stop is 0.34x ATR (3.8284) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 122.82,
-   "mark": 132.6,
-   "return_pct": 7.96,
+   "mark": 133.9,
+   "return_pct": 9.02,
    "mfe": 10.28,
    "mae": -2.39,
-   "spy_excess": 9.08
+   "spy_excess": 9.9
   },
   {
    "date": "2026-07-22",
@@ -1155,13 +1155,13 @@
    "adx": 49.4321,
    "note": "price 37.75 at/below ZLSMA 39.5378 - structure has not turned; stop is 0.90x ATR (0.7551) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 37.75,
-   "mark": 38.68,
-   "return_pct": 2.46,
+   "mark": 39.2,
+   "return_pct": 3.84,
    "mfe": 4.66,
    "mae": -1.91,
-   "spy_excess": 3.58
+   "spy_excess": 4.72
   },
   {
    "date": "2026-07-22",
@@ -1172,13 +1172,13 @@
    "adx": 28.5525,
    "note": "price 58.7 at/below ZLSMA 60.8872 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 58.7,
-   "mark": 59.0,
-   "return_pct": 0.51,
-   "mfe": 1.53,
+   "mark": 60.01,
+   "return_pct": 2.23,
+   "mfe": 2.3,
    "mae": -1.52,
-   "spy_excess": 1.62
+   "spy_excess": 3.11
   },
   {
    "date": "2026-07-22",
@@ -1189,13 +1189,13 @@
    "adx": 30.5554,
    "note": "regime DEEP-FAIL (-13.5648% vs 200-day) - watch only, no size; -DI 31.009 >= +DI 18.9773 - sellers in control",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 90.37,
-   "mark": 89.35,
-   "return_pct": -1.13,
+   "mark": 86.96,
+   "return_pct": -3.77,
    "mfe": 1.87,
-   "mae": -4.49,
-   "spy_excess": -0.02
+   "mae": -6.46,
+   "spy_excess": -2.9
   },
   {
    "date": "2026-07-22",
@@ -1206,13 +1206,13 @@
    "adx": 10.1067,
    "note": "ADX 10.1067 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 30.14,
-   "mark": 29.77,
-   "return_pct": -1.23,
+   "mark": 29.69,
+   "return_pct": -1.49,
    "mfe": 1.53,
-   "mae": -4.31,
-   "spy_excess": -0.11
+   "mae": -4.41,
+   "spy_excess": -0.62
   },
   {
    "date": "2026-07-22",
@@ -1223,13 +1223,13 @@
    "adx": 17.7011,
    "note": "ADX 17.7011 below 20 - no trend to ride; price 33 at/below ZLSMA 33.9222 - structure has not turned; stop is 0.57x ATR (0.8493) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 33.0,
-   "mark": 32.82,
-   "return_pct": -0.55,
-   "mfe": 0.94,
+   "mark": 33.1,
+   "return_pct": 0.3,
+   "mfe": 1.42,
    "mae": -7.12,
-   "spy_excess": 0.57
+   "spy_excess": 1.18
   },
   {
    "date": "2026-07-22",
@@ -1240,13 +1240,13 @@
    "adx": 13.2389,
    "note": "ADX 13.2389 below 20 - no trend to ride; -DI 20.9686 >= +DI 20.1118 - sellers in control; price 184.36 at/below ZLSMA 193.0137 - structure has not turned; stop is 0.85x ATR (7.4921) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 184.36,
-   "mark": 186.28,
-   "return_pct": 1.04,
-   "mfe": 1.99,
+   "mark": 195.0,
+   "return_pct": 5.77,
+   "mfe": 8.49,
    "mae": -5.35,
-   "spy_excess": 2.15
+   "spy_excess": 6.65
   },
   {
    "date": "2026-07-22",
@@ -1257,13 +1257,13 @@
    "adx": 21.527,
    "note": "price 32.63 at/below ZLSMA 33.8888 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 32.63,
-   "mark": 30.9,
-   "return_pct": -5.3,
+   "mark": 31.27,
+   "return_pct": -4.17,
    "mfe": 1.04,
    "mae": -5.55,
-   "spy_excess": -4.19
+   "spy_excess": -3.29
   },
   {
    "date": "2026-07-22",
@@ -1274,13 +1274,13 @@
    "adx": 11.964,
    "note": "ADX 11.964 below 20 - no trend to ride; -DI 25.1067 >= +DI 24.4636 - sellers in control",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 927.31,
-   "mark": 951.58,
-   "return_pct": 2.62,
-   "mfe": 3.16,
+   "mark": 966.58,
+   "return_pct": 4.23,
+   "mfe": 6.5,
    "mae": -1.14,
-   "spy_excess": 3.73
+   "spy_excess": 5.11
   },
   {
    "date": "2026-07-22",
@@ -1291,13 +1291,13 @@
    "adx": 19.1804,
    "note": "regime DEEP-FAIL (-28.5129% vs 200-day) - watch only, no size; ADX 19.1804 below 20 - no trend to ride; -DI 28.441 >= +DI 27.6652 - sellers in control",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 66.16,
-   "mark": 65.67,
-   "return_pct": -0.74,
+   "mark": 64.32,
+   "return_pct": -2.78,
    "mfe": 6.15,
    "mae": -9.37,
-   "spy_excess": 0.37
+   "spy_excess": -1.9
   },
   {
    "date": "2026-07-22",
@@ -1308,13 +1308,13 @@
    "adx": 25.1098,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 42.38,
-   "mark": 42.96,
-   "return_pct": 1.37,
-   "mfe": 2.88,
+   "mark": 42.73,
+   "return_pct": 0.83,
+   "mfe": 2.93,
    "mae": -0.66,
-   "spy_excess": 2.48
+   "spy_excess": 1.7
   },
   {
    "date": "2026-07-22",
@@ -1325,13 +1325,13 @@
    "adx": 20.3348,
    "note": "price 607.33 at/below ZLSMA 620.7018 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 607.33,
-   "mark": 625.02,
-   "return_pct": 2.91,
-   "mfe": 3.62,
+   "mark": 639.84,
+   "return_pct": 5.35,
+   "mfe": 6.04,
    "mae": -2.87,
-   "spy_excess": 4.03
+   "spy_excess": 6.23
   },
   {
    "date": "2026-07-22",
@@ -1342,13 +1342,13 @@
    "adx": 21.6282,
    "note": "stop is 20.3% away - 2:1 would need +40.7%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 441.8,
-   "mark": 426.91,
-   "return_pct": -3.37,
+   "mark": 392.1,
+   "return_pct": -11.25,
    "mfe": 2.94,
-   "mae": -6.77,
-   "spy_excess": -2.26
+   "mae": -18.77,
+   "spy_excess": -10.37
   },
   {
    "date": "2026-07-22",
@@ -1359,13 +1359,13 @@
    "adx": 13.3947,
    "note": "ADX 13.3947 below 20 - no trend to ride; -DI 19.3495 >= +DI 18.4263 - sellers in control; stop is 0.74x ATR (2.0964) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 95.87,
-   "mark": 96.65,
-   "return_pct": 0.81,
-   "mfe": 1.49,
+   "mark": 98.89,
+   "return_pct": 3.15,
+   "mfe": 3.5,
    "mae": -3.53,
-   "spy_excess": 1.93
+   "spy_excess": 4.03
   },
   {
    "date": "2026-07-22",
@@ -1378,11 +1378,11 @@
    "status": "OPEN",
    "elapsed": 3,
    "entry": 68.29,
-   "mark": 67.24,
-   "return_pct": -1.54,
+   "mark": 68.09,
+   "return_pct": -0.29,
    "mfe": 1.46,
-   "mae": -1.56,
-   "spy_excess": -0.42
+   "mae": -1.58,
+   "spy_excess": 0.58
   },
   {
    "date": "2026-07-22",
@@ -1393,13 +1393,13 @@
    "adx": 13.2666,
    "note": "ADX 13.2666 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 14.42,
-   "mark": 14.68,
-   "return_pct": 1.8,
-   "mfe": 3.12,
+   "mark": 14.96,
+   "return_pct": 3.74,
+   "mfe": 4.16,
    "mae": -2.77,
-   "spy_excess": 2.92
+   "spy_excess": 4.62
   },
   {
    "date": "2026-07-22",
@@ -1410,13 +1410,13 @@
    "adx": 21.2223,
    "note": "-DI 27.8993 >= +DI 27.0114 - sellers in control",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 65.0,
-   "mark": 62.72,
-   "return_pct": -3.51,
+   "mark": 61.64,
+   "return_pct": -5.17,
    "mfe": 0.66,
-   "mae": -6.08,
-   "spy_excess": -2.39
+   "mae": -7.8,
+   "spy_excess": -4.29
   },
   {
    "date": "2026-07-22",
@@ -1427,13 +1427,13 @@
    "adx": 26.1322,
    "note": "-DI 28.7545 >= +DI 20.4786 - sellers in control; price 28.81 at/below ZLSMA 30.4577 - structure has not turned; stop is 0.59x ATR (0.8371) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 28.81,
-   "mark": 27.79,
-   "return_pct": -3.54,
+   "mark": 28.09,
+   "return_pct": -2.5,
    "mfe": 1.04,
-   "mae": -3.68,
-   "spy_excess": -2.43
+   "mae": -3.85,
+   "spy_excess": -1.62
   },
   {
    "date": "2026-07-22",
@@ -1446,11 +1446,11 @@
    "status": "OPEN",
    "elapsed": 3,
    "entry": 57.67,
-   "mark": 57.0,
-   "return_pct": -1.16,
-   "mfe": 0.65,
+   "mark": 57.8,
+   "return_pct": 0.23,
+   "mfe": 0.68,
    "mae": -2.41,
-   "spy_excess": -0.05
+   "spy_excess": 1.1
   },
   {
    "date": "2026-07-22",
@@ -1461,13 +1461,13 @@
    "adx": 24.7243,
    "note": "-DI 32.7323 >= +DI 21.5319 - sellers in control",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 127.0,
-   "mark": 116.07,
-   "return_pct": -8.61,
+   "mark": 113.28,
+   "return_pct": -10.8,
    "mfe": 3.69,
-   "mae": -13.85,
-   "spy_excess": -7.49
+   "mae": -19.09,
+   "spy_excess": -9.93
   },
   {
    "date": "2026-07-22",
@@ -1478,13 +1478,13 @@
    "adx": 18.2246,
    "note": "ADX 18.2246 below 20 - no trend to ride; price 14.88 at/below ZLSMA 15.555 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 14.88,
-   "mark": 13.76,
-   "return_pct": -7.53,
+   "mark": 13.98,
+   "return_pct": -6.05,
    "mfe": 0.4,
    "mae": -8.4,
-   "spy_excess": -6.41
+   "spy_excess": -5.17
   },
   {
    "date": "2026-07-22",
@@ -1495,13 +1495,13 @@
    "adx": 22.8592,
    "note": "price 18.86 at/below ZLSMA 19.8158 - structure has not turned; stop is 0.61x ATR (0.4411) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 18.86,
-   "mark": 18.84,
-   "return_pct": -0.11,
+   "mark": 19.13,
+   "return_pct": 1.43,
    "mfe": 2.39,
    "mae": -1.59,
-   "spy_excess": 1.01
+   "spy_excess": 2.31
   },
   {
    "date": "2026-07-22",
@@ -1512,13 +1512,13 @@
    "adx": 22.5153,
    "note": "stop is 0.82x ATR (1.9911) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 125.05,
-   "mark": 127.13,
-   "return_pct": 1.66,
-   "mfe": 2.14,
+   "mark": 126.12,
+   "return_pct": 0.86,
+   "mfe": 2.53,
    "mae": -0.76,
-   "spy_excess": 2.78
+   "spy_excess": 1.73
   },
   {
    "date": "2026-07-22",
@@ -1529,13 +1529,13 @@
    "adx": 26.0111,
    "note": "price 51.17 at/below ZLSMA 55.224 - structure has not turned; stop is 0.30x ATR (1.2824) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 51.17,
-   "mark": 49.0,
-   "return_pct": -4.24,
+   "mark": 49.51,
+   "return_pct": -3.24,
    "mfe": 2.76,
    "mae": -4.87,
-   "spy_excess": -3.13
+   "spy_excess": -2.37
   },
   {
    "date": "2026-07-22",
@@ -1546,13 +1546,13 @@
    "adx": 17.4613,
    "note": "regime DEEP-FAIL (-12.4082% vs 200-day) - watch only, no size; ADX 17.4613 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 76.68,
-   "mark": 75.73,
-   "return_pct": -1.24,
+   "mark": 74.21,
+   "return_pct": -3.22,
    "mfe": 1.71,
-   "mae": -3.69,
-   "spy_excess": -0.13
+   "mae": -4.37,
+   "spy_excess": -2.34
   },
   {
    "date": "2026-07-22",
@@ -1563,13 +1563,13 @@
    "adx": 28.3031,
    "note": "-DI 31.5709 >= +DI 28.0853 - sellers in control",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 379.12,
-   "mark": 374.63,
-   "return_pct": -1.18,
+   "mark": 369.37,
+   "return_pct": -2.57,
    "mfe": 0.82,
-   "mae": -2.27,
-   "spy_excess": -0.07
+   "mae": -2.94,
+   "spy_excess": -1.7
   },
   {
    "date": "2026-07-22",
@@ -1580,13 +1580,13 @@
    "adx": 11.9067,
    "note": "ADX 11.9067 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 82.13,
-   "mark": 87.04,
-   "return_pct": 5.98,
-   "mfe": 6.03,
+   "mark": 90.3,
+   "return_pct": 9.95,
+   "mfe": 10.98,
    "mae": -3.81,
-   "spy_excess": 7.09
+   "spy_excess": 10.82
   },
   {
    "date": "2026-07-22",
@@ -1597,13 +1597,13 @@
    "adx": 23.6826,
    "note": "price 20.21 at/below ZLSMA 20.643 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 20.21,
-   "mark": 20.36,
-   "return_pct": 0.74,
-   "mfe": 0.94,
+   "mark": 20.71,
+   "return_pct": 2.47,
+   "mfe": 3.27,
    "mae": -5.79,
-   "spy_excess": 1.86
+   "spy_excess": 3.35
   },
   {
    "date": "2026-07-22",
@@ -1616,11 +1616,11 @@
    "status": "OPEN",
    "elapsed": 3,
    "entry": 232.99,
-   "mark": 245.75,
-   "return_pct": 5.48,
-   "mfe": 7.42,
+   "mark": 247.05,
+   "return_pct": 6.03,
+   "mfe": 8.16,
    "mae": -0.72,
-   "spy_excess": 6.59
+   "spy_excess": 6.91
   },
   {
    "date": "2026-07-22",
@@ -1631,13 +1631,13 @@
    "adx": 26.3193,
    "note": "price 13.54 at/below ZLSMA 14.2137 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 13.54,
-   "mark": 13.82,
-   "return_pct": 2.07,
-   "mfe": 3.03,
+   "mark": 14.12,
+   "return_pct": 4.28,
+   "mfe": 4.95,
    "mae": -2.73,
-   "spy_excess": 3.18
+   "spy_excess": 5.16
   },
   {
    "date": "2026-07-22",
@@ -1650,11 +1650,11 @@
    "status": "OPEN",
    "elapsed": 3,
    "entry": 84.81,
-   "mark": 84.61,
-   "return_pct": -0.24,
+   "mark": 85.71,
+   "return_pct": 1.06,
    "mfe": 2.06,
    "mae": -1.91,
-   "spy_excess": 0.88
+   "spy_excess": 1.94
   },
   {
    "date": "2026-07-22",
@@ -1665,13 +1665,13 @@
    "adx": 46.5825,
    "note": "regime DEEP-FAIL (-61.3569% vs 200-day) - watch only, no size; -DI 39.3133 >= +DI 17.4578 - sellers in control; stop is 16.1% away - 2:1 would need +32.1%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 1.93,
-   "mark": 2.0,
-   "return_pct": 3.63,
+   "mark": 1.76,
+   "return_pct": -8.55,
    "mfe": 6.22,
-   "mae": -7.77,
-   "spy_excess": 4.74
+   "mae": -8.81,
+   "spy_excess": -7.67
   },
   {
    "date": "2026-07-22",
@@ -1682,13 +1682,13 @@
    "adx": 30.5677,
    "note": "price 75.6 at/below ZLSMA 78.8411 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 75.6,
-   "mark": 75.52,
-   "return_pct": -0.11,
-   "mfe": 1.35,
+   "mark": 76.79,
+   "return_pct": 1.57,
+   "mfe": 1.71,
    "mae": -2.18,
-   "spy_excess": 1.01
+   "spy_excess": 2.45
   },
   {
    "date": "2026-07-22",
@@ -1699,13 +1699,13 @@
    "adx": 18.9165,
    "note": "regime DEEP-FAIL (-35.4915% vs 200-day) - watch only, no size; ADX 18.9165 below 20 - no trend to ride; -DI 26.3313 >= +DI 23.2631 - sellers in control; stop is 0.64x ATR (0.9061) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 6.78,
-   "mark": 6.5,
-   "return_pct": -4.13,
-   "mfe": 14.85,
+   "mark": 7.9,
+   "return_pct": 16.52,
+   "mfe": 25.22,
    "mae": -9.81,
-   "spy_excess": -3.02
+   "spy_excess": 17.4
   },
   {
    "date": "2026-07-22",
@@ -1716,13 +1716,13 @@
    "adx": 18.0712,
    "note": "ADX 18.0712 below 20 - no trend to ride; price 39.3 at/below ZLSMA 40.3622 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 39.3,
-   "mark": 40.38,
-   "return_pct": 2.75,
-   "mfe": 3.96,
+   "mark": 41.3,
+   "return_pct": 5.09,
+   "mfe": 6.62,
    "mae": -2.9,
-   "spy_excess": 3.86
+   "spy_excess": 5.97
   },
   {
    "date": "2026-07-22",
@@ -1735,11 +1735,11 @@
    "status": "OPEN",
    "elapsed": 3,
    "entry": 24.33,
-   "mark": 24.96,
-   "return_pct": 2.59,
-   "mfe": 2.79,
-   "mae": -6.08,
-   "spy_excess": 3.7
+   "mark": 25.15,
+   "return_pct": 3.37,
+   "mfe": 4.89,
+   "mae": -4.97,
+   "spy_excess": 4.25
   },
   {
    "date": "2026-07-22",
@@ -1750,13 +1750,13 @@
    "adx": 14.8428,
    "note": "ADX 14.8428 below 20 - no trend to ride; -DI 21.0925 >= +DI 14.2992 - sellers in control; price 9.29 at/below ZLSMA 9.7166 - structure has not turned; stop is 0.16x ATR (0.187) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 9.29,
-   "mark": 9.12,
-   "return_pct": -1.83,
+   "mark": 9.2,
+   "return_pct": -0.97,
    "mfe": 0.65,
    "mae": -2.8,
-   "spy_excess": -0.72
+   "spy_excess": -0.09
   },
   {
    "date": "2026-07-22",
@@ -1767,13 +1767,13 @@
    "adx": 19.4673,
    "note": "ADX 19.4673 below 20 - no trend to ride; -DI 32.1229 >= +DI 24.6654 - sellers in control",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 959.48,
-   "mark": 900.2,
-   "return_pct": -6.18,
+   "mark": 820.53,
+   "return_pct": -14.48,
    "mfe": 5.45,
-   "mae": -10.91,
-   "spy_excess": -5.07
+   "mae": -17.76,
+   "spy_excess": -13.61
   },
   {
    "date": "2026-07-22",
@@ -1784,13 +1784,13 @@
    "adx": 13.9157,
    "note": "ADX 13.9157 below 20 - no trend to ride; price 89.41 at/below ZLSMA 91.2088 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 89.41,
-   "mark": 88.83,
-   "return_pct": -0.65,
-   "mfe": 1.68,
+   "mark": 89.28,
+   "return_pct": -0.15,
+   "mfe": 1.77,
    "mae": -1.25,
-   "spy_excess": 0.46
+   "spy_excess": 0.73
   },
   {
    "date": "2026-07-22",
@@ -1801,13 +1801,13 @@
    "adx": 15.4625,
    "note": "ADX 15.4625 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 95.75,
-   "mark": 93.47,
-   "return_pct": -2.38,
+   "mark": 91.52,
+   "return_pct": -4.42,
    "mfe": 1.24,
-   "mae": -3.99,
-   "spy_excess": -1.27
+   "mae": -5.09,
+   "spy_excess": -3.54
   },
   {
    "date": "2026-07-22",
@@ -1818,13 +1818,13 @@
    "adx": 19.1515,
    "note": "ADX 19.1515 below 20 - no trend to ride; price 19.67 at/below ZLSMA 20.2979 - structure has not turned; stop is 0.74x ATR (0.43) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 19.67,
-   "mark": 19.6,
-   "return_pct": -0.36,
-   "mfe": 1.35,
+   "mark": 20.04,
+   "return_pct": 1.88,
+   "mfe": 2.16,
    "mae": -2.54,
-   "spy_excess": 0.76
+   "spy_excess": 2.76
   },
   {
    "date": "2026-07-22",
@@ -1835,13 +1835,13 @@
    "adx": 43.8114,
    "note": "price 335.28 at/below ZLSMA 341.7817 - structure has not turned; stop is 0.05x ATR (18.8987) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 335.28,
-   "mark": 317.32,
-   "return_pct": -5.36,
+   "mark": 319.0,
+   "return_pct": -4.86,
    "mfe": 2.66,
-   "mae": -5.5,
-   "spy_excess": -4.24
+   "mae": -7.98,
+   "spy_excess": -3.98
   },
   {
    "date": "2026-07-22",
@@ -1852,13 +1852,13 @@
    "adx": 12.0514,
    "note": "ADX 12.0514 below 20 - no trend to ride; price 73.06 at/below ZLSMA 74.8711 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 73.06,
-   "mark": 72.54,
-   "return_pct": -0.71,
-   "mfe": 0.88,
+   "mark": 73.55,
+   "return_pct": 0.67,
+   "mfe": 0.9,
    "mae": -2.26,
-   "spy_excess": 0.4
+   "spy_excess": 1.55
   },
   {
    "date": "2026-07-22",
@@ -1869,13 +1869,13 @@
    "adx": 21.1753,
    "note": "regime REPAIR (-4.0252% vs 200-day) - starter size only",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 24.82,
-   "mark": 24.67,
-   "return_pct": -0.6,
-   "mfe": 1.49,
-   "mae": -1.52,
-   "spy_excess": 0.51
+   "mark": 25.25,
+   "return_pct": 1.73,
+   "mfe": 2.74,
+   "mae": -1.53,
+   "spy_excess": 2.61
   },
   {
    "date": "2026-07-22",
@@ -1886,13 +1886,13 @@
    "adx": 14.9278,
    "note": "ADX 14.9278 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 194.3,
-   "mark": 195.66,
-   "return_pct": 0.7,
-   "mfe": 2.82,
+   "mark": 200.17,
+   "return_pct": 3.02,
+   "mfe": 6.92,
    "mae": -2.7,
-   "spy_excess": 1.81
+   "spy_excess": 3.9
   },
   {
    "date": "2026-07-22",
@@ -1903,13 +1903,13 @@
    "adx": 29.4855,
    "note": "-DI 25.2158 >= +DI 14.6256 - sellers in control",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 240.68,
-   "mark": 219.23,
-   "return_pct": -8.91,
+   "mark": 201.0,
+   "return_pct": -16.49,
    "mfe": 2.99,
-   "mae": -11.34,
-   "spy_excess": -7.8
+   "mae": -18.18,
+   "spy_excess": -15.61
   },
   {
    "date": "2026-07-22",
@@ -1920,13 +1920,13 @@
    "adx": 13.6361,
    "note": "ADX 13.6361 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 79.73,
-   "mark": 77.64,
-   "return_pct": -2.62,
+   "mark": 74.88,
+   "return_pct": -6.08,
    "mfe": 2.47,
-   "mae": -3.68,
-   "spy_excess": -1.51
+   "mae": -6.2,
+   "spy_excess": -5.21
   },
   {
    "date": "2026-07-22",
@@ -1937,13 +1937,13 @@
    "adx": 17.2143,
    "note": "ADX 17.2143 below 20 - no trend to ride; price 371.61 at/below ZLSMA 391.3817 - structure has not turned; stop is 0.44x ATR (7.9361) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 371.61,
-   "mark": 380.01,
-   "return_pct": 2.26,
-   "mfe": 2.45,
+   "mark": 390.14,
+   "return_pct": 4.99,
+   "mfe": 5.27,
    "mae": -4.11,
-   "spy_excess": 3.37
+   "spy_excess": 5.86
   },
   {
    "date": "2026-07-22",
@@ -1954,13 +1954,13 @@
    "adx": 11.8091,
    "note": "ADX 11.8091 below 20 - no trend to ride; -DI 24.6858 >= +DI 19.8466 - sellers in control; price 285.85 at/below ZLSMA 295.2983 - structure has not turned; stop is 0.56x ATR (10.3859) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 285.85,
-   "mark": 305.04,
-   "return_pct": 6.71,
-   "mfe": 7.43,
+   "mark": 322.5,
+   "return_pct": 12.82,
+   "mfe": 13.55,
    "mae": -2.52,
-   "spy_excess": 7.83
+   "spy_excess": 13.7
   },
   {
    "date": "2026-07-22",
@@ -1973,11 +1973,11 @@
    "status": "OPEN",
    "elapsed": 3,
    "entry": 81.85,
-   "mark": 81.24,
-   "return_pct": -0.75,
-   "mfe": 1.21,
+   "mark": 81.03,
+   "return_pct": -1.0,
+   "mfe": 0.79,
    "mae": -1.77,
-   "spy_excess": 0.37
+   "spy_excess": -0.13
   },
   {
    "date": "2026-07-22",
@@ -1988,13 +1988,13 @@
    "adx": 12.7752,
    "note": "ADX 12.7752 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 115.95,
-   "mark": 118.48,
-   "return_pct": 2.18,
-   "mfe": 5.5,
+   "mark": 121.59,
+   "return_pct": 4.86,
+   "mfe": 5.74,
    "mae": -2.98,
-   "spy_excess": 3.3
+   "spy_excess": 5.74
   },
   {
    "date": "2026-07-22",
@@ -2005,13 +2005,13 @@
    "adx": 17.0338,
    "note": "ADX 17.0338 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 118.05,
-   "mark": 121.05,
-   "return_pct": 2.54,
-   "mfe": 3.04,
+   "mark": 123.04,
+   "return_pct": 4.23,
+   "mfe": 6.24,
    "mae": -2.96,
-   "spy_excess": 3.65
+   "spy_excess": 5.1
   },
   {
    "date": "2026-07-22",
@@ -2022,13 +2022,13 @@
    "adx": 52.4207,
    "note": "illiquid - $86,683 avg daily dollar volume; a $85,000 position is 98% of a day's turnover (max $8,668)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 5.22,
-   "mark": 4.74,
-   "return_pct": -9.2,
+   "mark": 4.76,
+   "return_pct": -8.81,
    "mfe": 2.3,
    "mae": -9.96,
-   "spy_excess": -8.08
+   "spy_excess": -7.94
   },
   {
    "date": "2026-07-22",
@@ -2039,13 +2039,13 @@
    "adx": 24.3811,
    "note": "stop is 5.27x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 27.0% away - 2:1 would need +54.1%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 30.56,
-   "mark": 29.81,
-   "return_pct": -2.45,
+   "mark": 28.45,
+   "return_pct": -6.9,
    "mfe": 6.64,
-   "mae": -6.74,
-   "spy_excess": -1.34
+   "mae": -11.22,
+   "spy_excess": -6.03
   },
   {
    "date": "2026-07-22",
@@ -2058,11 +2058,11 @@
    "status": "OPEN",
    "elapsed": 3,
    "entry": 55.15,
-   "mark": 58.68,
-   "return_pct": 6.4,
-   "mfe": 7.04,
+   "mark": 60.56,
+   "return_pct": 9.81,
+   "mfe": 10.01,
    "mae": -0.98,
-   "spy_excess": 7.51
+   "spy_excess": 10.69
   },
   {
    "date": "2026-07-22",
@@ -2073,13 +2073,13 @@
    "adx": 20.1266,
    "note": "price 226.22 at/below ZLSMA 231.8185 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 226.22,
-   "mark": 231.67,
-   "return_pct": 2.41,
-   "mfe": 2.43,
+   "mark": 236.7,
+   "return_pct": 4.63,
+   "mfe": 5.16,
    "mae": -0.88,
-   "spy_excess": 3.52
+   "spy_excess": 5.51
   },
   {
    "date": "2026-07-22",
@@ -2092,11 +2092,11 @@
    "status": "OPEN",
    "elapsed": 3,
    "entry": 102.19,
-   "mark": 105.16,
-   "return_pct": 2.91,
-   "mfe": 5.06,
+   "mark": 106.6,
+   "return_pct": 4.32,
+   "mfe": 5.1,
    "mae": -2.08,
-   "spy_excess": 4.02
+   "spy_excess": 5.19
   },
   {
    "date": "2026-07-22",
@@ -2107,13 +2107,13 @@
    "adx": 23.9682,
    "note": "-DI 27.3387 >= +DI 22.322 - sellers in control; stop is 12.8% away - 2:1 would need +25.6%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 719.34,
-   "mark": 634.63,
-   "return_pct": -11.78,
+   "mark": 538.09,
+   "return_pct": -25.2,
    "mfe": 2.59,
-   "mae": -14.92,
-   "spy_excess": -10.66
+   "mae": -26.99,
+   "spy_excess": -24.32
   },
   {
    "date": "2026-07-22",
@@ -2124,13 +2124,13 @@
    "adx": 22.1547,
    "note": "-DI 28.7714 >= +DI 24.433 - sellers in control; stop is 14.6% away - 2:1 would need +29.2%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 908.1,
-   "mark": 816.99,
-   "return_pct": -10.03,
+   "mark": 747.3,
+   "return_pct": -17.71,
    "mfe": 3.13,
-   "mae": -13.98,
-   "spy_excess": -8.92
+   "mae": -23.03,
+   "spy_excess": -16.83
   },
   {
    "date": "2026-07-22",
@@ -2141,13 +2141,13 @@
    "adx": 16.1938,
    "note": "ADX 16.1938 below 20 - no trend to ride; price 650.5 at/below ZLSMA 653.1325 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 650.5,
-   "mark": 651.65,
-   "return_pct": 0.18,
+   "mark": 649.67,
+   "return_pct": -0.13,
    "mfe": 3.31,
    "mae": -4.54,
-   "spy_excess": 1.29
+   "spy_excess": 0.75
   },
   {
    "date": "2026-07-22",
@@ -2158,13 +2158,13 @@
    "adx": 21.2384,
    "note": "regime REPAIR (0.9995% vs 200-day) - starter size only",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 155.41,
-   "mark": 156.38,
-   "return_pct": 0.62,
-   "mfe": 1.67,
+   "mark": 160.8,
+   "return_pct": 3.47,
+   "mfe": 3.89,
    "mae": -2.12,
-   "spy_excess": 1.74
+   "spy_excess": 4.34
   },
   {
    "date": "2026-07-22",
@@ -2175,13 +2175,13 @@
    "adx": 17.1388,
    "note": "ADX 17.1388 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 433.1,
-   "mark": 396.62,
-   "return_pct": -8.42,
+   "mark": 389.42,
+   "return_pct": -10.09,
    "mfe": 0.97,
-   "mae": -8.65,
-   "spy_excess": -7.31
+   "mae": -10.64,
+   "spy_excess": -9.21
   },
   {
    "date": "2026-07-22",
@@ -2192,13 +2192,13 @@
    "adx": 10.1802,
    "note": "ADX 10.1802 below 20 - no trend to ride; -DI 18.0118 >= +DI 17.6602 - sellers in control; price 143.73 at/below ZLSMA 146.1286 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 143.73,
-   "mark": 147.43,
-   "return_pct": 2.57,
-   "mfe": 2.69,
+   "mark": 150.9,
+   "return_pct": 4.99,
+   "mfe": 5.21,
    "mae": -4.36,
-   "spy_excess": 3.69
+   "spy_excess": 5.86
   },
   {
    "date": "2026-07-22",
@@ -2211,11 +2211,11 @@
    "status": "OPEN",
    "elapsed": 3,
    "entry": 58.3,
-   "mark": 58.16,
-   "return_pct": -0.24,
+   "mark": 58.05,
+   "return_pct": -0.43,
    "mfe": 0.43,
    "mae": -0.6,
-   "spy_excess": 0.87
+   "spy_excess": 0.45
   },
   {
    "date": "2026-07-22",
@@ -2226,13 +2226,13 @@
    "adx": 30.4894,
    "note": "regime DEEP-FAIL (-17.5061% vs 200-day) - watch only, no size; -DI 33.2798 >= +DI 21.016 - sellers in control",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 40.97,
-   "mark": 40.32,
-   "return_pct": -1.59,
+   "mark": 38.95,
+   "return_pct": -4.93,
    "mfe": 1.37,
-   "mae": -3.44,
-   "spy_excess": -0.47
+   "mae": -7.55,
+   "spy_excess": -4.05
   },
   {
    "date": "2026-07-22",
@@ -2243,13 +2243,13 @@
    "adx": 35.4914,
    "note": "price 64.47 at/below ZLSMA 67.0557 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 64.47,
-   "mark": 63.49,
-   "return_pct": -1.52,
-   "mfe": 0.32,
+   "mark": 64.43,
+   "return_pct": -0.06,
+   "mfe": 0.31,
    "mae": -2.48,
-   "spy_excess": -0.41
+   "spy_excess": 0.81
   },
   {
    "date": "2026-07-22",
@@ -2260,13 +2260,13 @@
    "adx": 11.7063,
    "note": "ADX 11.7063 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 166.74,
-   "mark": 157.08,
-   "return_pct": -5.79,
+   "mark": 148.64,
+   "return_pct": -10.86,
    "mfe": 1.81,
-   "mae": -6.72,
-   "spy_excess": -4.68
+   "mae": -12.31,
+   "spy_excess": -9.98
   },
   {
    "date": "2026-07-22",
@@ -2277,13 +2277,13 @@
    "adx": 14.1308,
    "note": "ADX 14.1308 below 20 - no trend to ride; price 39.03 at/below ZLSMA 40.71 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 39.03,
-   "mark": 39.56,
-   "return_pct": 1.36,
-   "mfe": 2.46,
+   "mark": 40.2,
+   "return_pct": 3.0,
+   "mfe": 4.64,
    "mae": -2.66,
-   "spy_excess": 2.47
+   "spy_excess": 3.87
   },
   {
    "date": "2026-07-22",
@@ -2294,13 +2294,13 @@
    "adx": 27.5533,
    "note": "regime REPAIR (-0.3313% vs 200-day) - starter size only",
    "status": "OPEN",
-   "elapsed": 3,
+   "elapsed": 4,
    "entry": 44.29,
-   "mark": 47.32,
-   "return_pct": 6.84,
-   "mfe": 7.37,
+   "mark": 48.19,
+   "return_pct": 8.81,
+   "mfe": 10.66,
    "mae": -1.26,
-   "spy_excess": 7.95
+   "spy_excess": 9.68
   },
   {
    "date": "2026-07-23",
@@ -2311,13 +2311,13 @@
    "adx": 20.7762,
    "note": "price 4.5775 at/below ZLSMA 4.614 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 4.62,
    "mark": 4.63,
    "return_pct": 0.22,
-   "mfe": 2.16,
+   "mfe": 2.38,
    "mae": -2.16,
-   "spy_excess": 0.09
+   "spy_excess": -0.15
   },
   {
    "date": "2026-07-23",
@@ -2328,13 +2328,13 @@
    "adx": 15.7489,
    "note": "ADX 15.7489 below 20 - no trend to ride; price 119.5675 at/below ZLSMA 123.5136 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 119.64,
-   "mark": 121.91,
-   "return_pct": 1.9,
+   "mark": 121.11,
+   "return_pct": 1.23,
    "mfe": 3.29,
    "mae": -0.81,
-   "spy_excess": 1.77
+   "spy_excess": 0.87
   },
   {
    "date": "2026-07-23",
@@ -2345,13 +2345,13 @@
    "adx": 17.2122,
    "note": "ADX 17.2122 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 89.92,
-   "mark": 88.38,
-   "return_pct": -1.71,
+   "mark": 86.22,
+   "return_pct": -4.11,
    "mfe": 1.56,
-   "mae": -4.95,
-   "spy_excess": -1.84
+   "mae": -5.84,
+   "spy_excess": -4.48
   },
   {
    "date": "2026-07-23",
@@ -2362,13 +2362,13 @@
    "adx": 17.0158,
    "note": "ADX 17.0158 below 20 - no trend to ride; stop is 0.88x ATR (1.7507) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 80.48,
-   "mark": 80.87,
-   "return_pct": 0.48,
-   "mfe": 1.6,
+   "mark": 83.2,
+   "return_pct": 3.38,
+   "mfe": 4.49,
    "mae": -0.81,
-   "spy_excess": 0.36
+   "spy_excess": 3.02
   },
   {
    "date": "2026-07-23",
@@ -2379,13 +2379,13 @@
    "adx": 22.1252,
    "note": "-DI 21.131 >= +DI 15.2216 - sellers in control; stop is 0.86x ATR (23.0514) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 926.06,
-   "mark": 951.58,
-   "return_pct": 2.76,
-   "mfe": 3.29,
+   "mark": 966.58,
+   "return_pct": 4.38,
+   "mfe": 6.64,
    "mae": -1.0,
-   "spy_excess": 2.63
+   "spy_excess": 4.01
   },
   {
    "date": "2026-07-23",
@@ -2396,13 +2396,13 @@
    "adx": 23.7921,
    "note": "regime DEEP-FAIL (-31.2972% vs 200-day) - watch only, no size; -DI 23.0096 >= +DI 18.2274 - sellers in control; stop is 0.97x ATR (5.9727) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 62.18,
-   "mark": 65.67,
-   "return_pct": 5.61,
+   "mark": 64.32,
+   "return_pct": 3.44,
    "mfe": 6.53,
    "mae": -3.57,
-   "spy_excess": 5.49
+   "spy_excess": 3.08
   },
   {
    "date": "2026-07-23",
@@ -2413,13 +2413,13 @@
    "adx": 22.8136,
    "note": "stop is 16.8% away - 2:1 would need +33.6%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 439.34,
-   "mark": 426.91,
-   "return_pct": -2.83,
+   "mark": 392.1,
+   "return_pct": -10.75,
    "mfe": 3.51,
-   "mae": -6.25,
-   "spy_excess": -2.95
+   "mae": -18.31,
+   "spy_excess": -11.12
   },
   {
    "date": "2026-07-23",
@@ -2430,13 +2430,13 @@
    "adx": 30.7025,
    "note": "stop is 5.04x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 13.3% away - 2:1 would need +26.7%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 227.9,
-   "mark": 231.84,
-   "return_pct": 1.73,
-   "mfe": 4.34,
+   "mark": 235.94,
+   "return_pct": 3.53,
+   "mfe": 5.32,
    "mae": -3.47,
-   "spy_excess": 1.61
+   "spy_excess": 3.16
   },
   {
    "date": "2026-07-23",
@@ -2449,11 +2449,11 @@
    "status": "OPEN",
    "elapsed": 2,
    "entry": 12.89,
-   "mark": 12.24,
-   "return_pct": -5.04,
+   "mark": 12.32,
+   "return_pct": -4.42,
    "mfe": 3.03,
    "mae": -5.82,
-   "spy_excess": -5.17
+   "spy_excess": -4.79
   },
   {
    "date": "2026-07-23",
@@ -2464,13 +2464,13 @@
    "adx": 15.7788,
    "note": "ADX 15.7788 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 14.15,
-   "mark": 14.68,
-   "return_pct": 3.75,
-   "mfe": 5.09,
+   "mark": 14.96,
+   "return_pct": 5.72,
+   "mfe": 6.15,
    "mae": -0.92,
-   "spy_excess": 3.62
+   "spy_excess": 5.36
   },
   {
    "date": "2026-07-23",
@@ -2481,13 +2481,13 @@
    "adx": 24.6801,
    "note": "-DI 19.4854 >= +DI 19.1741 - sellers in control",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 63.5,
-   "mark": 62.72,
-   "return_pct": -1.23,
+   "mark": 61.64,
+   "return_pct": -2.93,
    "mfe": 3.04,
-   "mae": -3.86,
-   "spy_excess": -1.35
+   "mae": -5.62,
+   "spy_excess": -3.29
   },
   {
    "date": "2026-07-23",
@@ -2498,13 +2498,13 @@
    "adx": 16.8538,
    "note": "ADX 16.8538 below 20 - no trend to ride; -DI 19.1512 >= +DI 16.4621 - sellers in control; price 14.6425 at/below ZLSMA 15.502 - structure has not turned; stop is 0.08x ATR (0.3663) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 14.71,
-   "mark": 13.76,
-   "return_pct": -6.46,
+   "mark": 13.98,
+   "return_pct": -4.96,
    "mfe": 0.0,
    "mae": -7.34,
-   "spy_excess": -6.58
+   "spy_excess": -5.33
   },
   {
    "date": "2026-07-23",
@@ -2515,13 +2515,13 @@
    "adx": 22.1609,
    "note": "-DI 18.9096 >= +DI 17.2564 - sellers in control; price 18.7613 at/below ZLSMA 19.7459 - structure has not turned; stop is 0.57x ATR (0.4408) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 18.87,
-   "mark": 18.84,
-   "return_pct": -0.16,
+   "mark": 19.13,
+   "return_pct": 1.38,
    "mfe": 2.33,
    "mae": -1.64,
-   "spy_excess": -0.28
+   "spy_excess": 1.01
   },
   {
    "date": "2026-07-23",
@@ -2532,13 +2532,13 @@
    "adx": 24.5847,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 124.83,
-   "mark": 127.13,
-   "return_pct": 1.84,
-   "mfe": 2.32,
+   "mark": 126.12,
+   "return_pct": 1.03,
+   "mfe": 2.71,
    "mae": -0.58,
-   "spy_excess": 1.72
+   "spy_excess": 0.67
   },
   {
    "date": "2026-07-23",
@@ -2549,13 +2549,13 @@
    "adx": 18.6242,
    "note": "regime DEEP-FAIL (-31.292% vs 200-day) - watch only, no size; ADX 18.6242 below 20 - no trend to ride; price 101.4025 at/below ZLSMA 116.0944 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 98.96,
-   "mark": 104.27,
-   "return_pct": 5.37,
+   "mark": 101.84,
+   "return_pct": 2.91,
    "mfe": 6.61,
    "mae": -0.88,
-   "spy_excess": 5.24
+   "spy_excess": 2.55
   },
   {
    "date": "2026-07-23",
@@ -2566,13 +2566,13 @@
    "adx": 22.8397,
    "note": "regime DEEP-FAIL (-14.6698% vs 200-day) - watch only, no size; -DI 22.425 >= +DI 20.4074 - sellers in control",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 75.02,
-   "mark": 75.73,
-   "return_pct": 0.95,
-   "mfe": 2.04,
-   "mae": -1.56,
-   "spy_excess": 0.82
+   "mark": 74.21,
+   "return_pct": -1.08,
+   "mfe": 2.05,
+   "mae": -2.25,
+   "spy_excess": -1.44
   },
   {
    "date": "2026-07-23",
@@ -2583,13 +2583,13 @@
    "adx": 41.2216,
    "note": "-DI 23.1341 >= +DI 16.9536 - sellers in control",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 371.52,
-   "mark": 374.63,
-   "return_pct": 0.84,
+   "mark": 369.37,
+   "return_pct": -0.58,
    "mfe": 1.08,
-   "mae": -0.27,
-   "spy_excess": 0.71
+   "mae": -0.95,
+   "spy_excess": -0.94
   },
   {
    "date": "2026-07-23",
@@ -2600,13 +2600,13 @@
    "adx": 17.7299,
    "note": "ADX 17.7299 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 80.67,
-   "mark": 87.04,
-   "return_pct": 7.9,
-   "mfe": 7.95,
+   "mark": 90.3,
+   "return_pct": 11.94,
+   "mfe": 12.99,
    "mae": -2.07,
-   "spy_excess": 7.77
+   "spy_excess": 11.57
   },
   {
    "date": "2026-07-23",
@@ -2617,13 +2617,13 @@
    "adx": 34.5079,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 87.35,
-   "mark": 90.61,
-   "return_pct": 3.73,
-   "mfe": 3.84,
+   "mark": 96.34,
+   "return_pct": 10.29,
+   "mfe": 10.41,
    "mae": -0.74,
-   "spy_excess": 3.61
+   "spy_excess": 9.93
   },
   {
    "date": "2026-07-23",
@@ -2636,11 +2636,11 @@
    "status": "OPEN",
    "elapsed": 2,
    "entry": 246.27,
-   "mark": 245.75,
-   "return_pct": -0.21,
-   "mfe": 1.62,
+   "mark": 247.05,
+   "return_pct": 0.32,
+   "mfe": 2.33,
    "mae": -3.48,
-   "spy_excess": -0.33
+   "spy_excess": -0.05
   },
   {
    "date": "2026-07-23",
@@ -2651,13 +2651,13 @@
    "adx": 16.8926,
    "note": "ADX 16.8926 below 20 - no trend to ride; -DI 17.3889 >= +DI 14.0312 - sellers in control; stop is 0.67x ATR (5.0559) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 124.55,
-   "mark": 126.99,
-   "return_pct": 1.96,
+   "mark": 125.7,
+   "return_pct": 0.92,
    "mfe": 6.68,
    "mae": -1.93,
-   "spy_excess": 1.84
+   "spy_excess": 0.56
   },
   {
    "date": "2026-07-23",
@@ -2668,13 +2668,13 @@
    "adx": 20.6651,
    "note": "regime DEEP-FAIL (-37.7549% vs 200-day) - watch only, no size; -DI 21.6779 >= +DI 17.4605 - sellers in control; price 6.5153 at/below ZLSMA 6.6153 - structure has not turned; stop is 0.61x ATR (1.1167) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 6.45,
-   "mark": 6.5,
-   "return_pct": 0.78,
-   "mfe": 4.34,
+   "mark": 7.9,
+   "return_pct": 22.48,
+   "mfe": 31.63,
    "mae": -5.19,
-   "spy_excess": 0.65
+   "spy_excess": 22.12
   },
   {
    "date": "2026-07-23",
@@ -2685,13 +2685,13 @@
    "adx": 23.6402,
    "note": "regime REPAIR (-6.5949% vs 200-day) - starter size only",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 299.67,
-   "mark": 303.48,
-   "return_pct": 1.27,
-   "mfe": 2.25,
+   "mark": 305.2,
+   "return_pct": 1.85,
+   "mfe": 3.08,
    "mae": -3.39,
-   "spy_excess": 1.15
+   "spy_excess": 1.48
   },
   {
    "date": "2026-07-23",
@@ -2702,13 +2702,13 @@
    "adx": 13.0939,
    "note": "ADX 13.0939 below 20 - no trend to ride; -DI 19.8412 >= +DI 15.6618 - sellers in control; stop is 0.55x ATR (5.6331) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 207.97,
-   "mark": 191.63,
-   "return_pct": -7.86,
+   "mark": 185.32,
+   "return_pct": -10.89,
    "mfe": 1.97,
-   "mae": -8.21,
-   "spy_excess": -7.98
+   "mae": -11.11,
+   "spy_excess": -11.25
   },
   {
    "date": "2026-07-23",
@@ -2721,11 +2721,11 @@
    "status": "OPEN",
    "elapsed": 2,
    "entry": 23.33,
-   "mark": 24.96,
-   "return_pct": 6.99,
-   "mfe": 7.2,
-   "mae": -2.06,
-   "spy_excess": 6.86
+   "mark": 25.15,
+   "return_pct": 7.8,
+   "mfe": 9.39,
+   "mae": -0.9,
+   "spy_excess": 7.44
   },
   {
    "date": "2026-07-23",
@@ -2736,13 +2736,13 @@
    "adx": 24.6711,
    "note": "price 25.185 at/below ZLSMA 26.0815 - structure has not turned; stop is 0.17x ATR (0.6422) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 25.3,
-   "mark": 26.13,
-   "return_pct": 3.28,
-   "mfe": 4.35,
+   "mark": 26.51,
+   "return_pct": 4.78,
+   "mfe": 5.43,
    "mae": -1.3,
-   "spy_excess": 3.16
+   "spy_excess": 4.42
   },
   {
    "date": "2026-07-23",
@@ -2753,13 +2753,13 @@
    "adx": 31.7673,
    "note": "regime REPAIR (5.7174% vs 200-day) - starter size only",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 63.13,
-   "mark": 64.17,
-   "return_pct": 1.65,
-   "mfe": 3.5,
+   "mark": 66.49,
+   "return_pct": 5.32,
+   "mfe": 5.84,
    "mae": -1.24,
-   "spy_excess": 1.52
+   "spy_excess": 4.96
   },
   {
    "date": "2026-07-23",
@@ -2770,13 +2770,13 @@
    "adx": 18.5252,
    "note": "ADX 18.5252 below 20 - no trend to ride; -DI 21.6138 >= +DI 20.3653 - sellers in control",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 94.72,
-   "mark": 93.47,
-   "return_pct": -1.32,
+   "mark": 91.52,
+   "return_pct": -3.38,
    "mfe": 0.65,
-   "mae": -2.95,
-   "spy_excess": -1.44
+   "mae": -4.05,
+   "spy_excess": -3.74
   },
   {
    "date": "2026-07-23",
@@ -2787,13 +2787,13 @@
    "adx": 24.7178,
    "note": "regime REPAIR (-3.5918% vs 200-day) - starter size only",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 25.01,
-   "mark": 24.67,
-   "return_pct": -1.36,
-   "mfe": 0.36,
-   "mae": -2.27,
-   "spy_excess": -1.48
+   "mark": 25.25,
+   "return_pct": 0.96,
+   "mfe": 1.96,
+   "mae": -2.28,
+   "spy_excess": 0.6
   },
   {
    "date": "2026-07-23",
@@ -2806,11 +2806,11 @@
    "status": "OPEN",
    "elapsed": 2,
    "entry": 145.12,
-   "mark": 147.26,
-   "return_pct": 1.47,
-   "mfe": 2.23,
+   "mark": 147.12,
+   "return_pct": 1.38,
+   "mfe": 2.78,
    "mae": -1.93,
-   "spy_excess": 1.35
+   "spy_excess": 1.02
   },
   {
    "date": "2026-07-23",
@@ -2821,13 +2821,13 @@
    "adx": 17.8992,
    "note": "ADX 17.8992 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 78.62,
-   "mark": 77.64,
-   "return_pct": -1.25,
+   "mark": 74.88,
+   "return_pct": -4.76,
    "mfe": 2.21,
-   "mae": -2.32,
-   "spy_excess": -1.37
+   "mae": -4.87,
+   "spy_excess": -5.12
   },
   {
    "date": "2026-07-23",
@@ -2838,13 +2838,13 @@
    "adx": 23.1488,
    "note": "price 129.4413 at/below ZLSMA 129.6324 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 128.89,
-   "mark": 134.94,
-   "return_pct": 4.69,
-   "mfe": 5.14,
+   "mark": 135.99,
+   "return_pct": 5.51,
+   "mfe": 5.68,
    "mae": -0.31,
-   "spy_excess": 4.57
+   "spy_excess": 5.15
   },
   {
    "date": "2026-07-23",
@@ -2855,13 +2855,13 @@
    "adx": 24.2699,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 115.71,
-   "mark": 121.05,
-   "return_pct": 4.61,
-   "mfe": 5.12,
+   "mark": 123.04,
+   "return_pct": 6.33,
+   "mfe": 8.39,
    "mae": -0.99,
-   "spy_excess": 4.49
+   "spy_excess": 5.97
   },
   {
    "date": "2026-07-23",
@@ -2872,13 +2872,13 @@
    "adx": 25.9299,
    "note": "stop is 28.9% away - 2:1 would need +57.7%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 31.2,
-   "mark": 29.81,
-   "return_pct": -4.46,
+   "mark": 28.45,
+   "return_pct": -8.81,
    "mfe": 4.46,
-   "mae": -8.65,
-   "spy_excess": -4.58
+   "mae": -13.04,
+   "spy_excess": -9.18
   },
   {
    "date": "2026-07-23",
@@ -2891,11 +2891,11 @@
    "status": "OPEN",
    "elapsed": 2,
    "entry": 56.32,
-   "mark": 58.68,
-   "return_pct": 4.19,
-   "mfe": 4.81,
+   "mark": 60.56,
+   "return_pct": 7.53,
+   "mfe": 7.72,
    "mae": -1.88,
-   "spy_excess": 4.07
+   "spy_excess": 7.17
   },
   {
    "date": "2026-07-23",
@@ -2906,13 +2906,13 @@
    "adx": 25.752,
    "note": "price 225.6463 at/below ZLSMA 232.0206 - structure has not turned; stop is 0.96x ATR (5.083) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 225.2,
-   "mark": 231.67,
-   "return_pct": 2.87,
-   "mfe": 2.89,
+   "mark": 236.7,
+   "return_pct": 5.11,
+   "mfe": 5.63,
    "mae": -0.44,
-   "spy_excess": 2.75
+   "spy_excess": 4.74
   },
   {
    "date": "2026-07-23",
@@ -2923,13 +2923,13 @@
    "adx": 17.9432,
    "note": "ADX 17.9432 below 20 - no trend to ride; price 654.385 at/below ZLSMA 655.0633 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 651.22,
-   "mark": 651.65,
-   "return_pct": 0.07,
+   "mark": 649.67,
+   "return_pct": -0.24,
    "mfe": 2.82,
-   "mae": -1.37,
-   "spy_excess": -0.06
+   "mae": -1.92,
+   "spy_excess": -0.6
   },
   {
    "date": "2026-07-23",
@@ -2940,13 +2940,13 @@
    "adx": 35.7817,
    "note": "regime DEEP-FAIL (-17.4371% vs 200-day) - watch only, no size; -DI 25.0209 >= +DI 13.2065 - sellers in control",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 41.13,
-   "mark": 40.32,
-   "return_pct": -1.97,
+   "mark": 38.95,
+   "return_pct": -5.3,
    "mfe": 0.8,
-   "mae": -3.82,
-   "spy_excess": -2.09
+   "mae": -7.91,
+   "spy_excess": -5.66
   },
   {
    "date": "2026-07-23",
@@ -2957,13 +2957,13 @@
    "adx": 28.9585,
    "note": "stop is 4.01x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 14.6% away - 2:1 would need +29.2%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 1139.71,
-   "mark": 1127.91,
-   "return_pct": -1.04,
+   "mark": 1091.26,
+   "return_pct": -4.25,
    "mfe": 3.33,
-   "mae": -4.09,
-   "spy_excess": -1.16
+   "mae": -4.6,
+   "spy_excess": -4.61
   },
   {
    "date": "2026-07-23",
@@ -2974,13 +2974,13 @@
    "adx": 13.9288,
    "note": "ADX 13.9288 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 168.98,
-   "mark": 157.08,
-   "return_pct": -7.04,
+   "mark": 148.64,
+   "return_pct": -12.04,
    "mfe": 0.46,
-   "mae": -7.95,
-   "spy_excess": -7.17
+   "mae": -13.47,
+   "spy_excess": -12.4
   },
   {
    "date": "2026-07-23",
@@ -2991,13 +2991,13 @@
    "adx": 17.2263,
    "note": "ADX 17.2263 below 20 - no trend to ride; -DI 18.2474 >= +DI 17.0695 - sellers in control; price 38.43 at/below ZLSMA 40.6627 - structure has not turned; stop is 0.32x ATR (1.3109) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 38.31,
-   "mark": 39.56,
-   "return_pct": 3.26,
-   "mfe": 4.12,
+   "mark": 40.2,
+   "return_pct": 4.93,
+   "mfe": 6.6,
    "mae": -0.84,
-   "spy_excess": 3.14
+   "spy_excess": 4.57
   },
   {
    "date": "2026-07-23",
@@ -3008,13 +3008,13 @@
    "adx": 26.9671,
    "note": "regime REPAIR (-0.8314% vs 200-day) - starter size only",
    "status": "OPEN",
-   "elapsed": 2,
+   "elapsed": 3,
    "entry": 43.82,
-   "mark": 47.32,
-   "return_pct": 7.99,
-   "mfe": 8.52,
+   "mark": 48.19,
+   "return_pct": 9.97,
+   "mfe": 11.84,
    "mae": -0.21,
-   "spy_excess": 7.86
+   "spy_excess": 9.61
   },
   {
    "date": "2026-07-24",
@@ -3025,13 +3025,13 @@
    "adx": 21.6336,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 4.66,
    "mark": 4.63,
    "return_pct": -0.64,
-   "mfe": 1.29,
-   "mae": -1.82,
-   "spy_excess": -0.67
+   "mfe": 1.5,
+   "mae": -1.72,
+   "spy_excess": -0.9
   },
   {
    "date": "2026-07-24",
@@ -3042,13 +3042,13 @@
    "adx": 16.3962,
    "note": "ADX 16.3962 below 20 - no trend to ride; price 121.4808 at/below ZLSMA 124.226 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 122.34,
-   "mark": 121.91,
-   "return_pct": -0.35,
+   "mark": 121.11,
+   "return_pct": -1.01,
    "mfe": 1.01,
    "mae": -2.57,
-   "spy_excess": -0.37
+   "spy_excess": -1.27
   },
   {
    "date": "2026-07-24",
@@ -3059,13 +3059,13 @@
    "adx": 17.0219,
    "note": "ADX 17.0219 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 89.42,
-   "mark": 88.38,
-   "return_pct": -1.16,
+   "mark": 86.22,
+   "return_pct": -3.58,
    "mfe": 1.23,
-   "mae": -4.42,
-   "spy_excess": -1.18
+   "mae": -5.32,
+   "spy_excess": -3.84
   },
   {
    "date": "2026-07-24",
@@ -3076,13 +3076,13 @@
    "adx": 16.4727,
    "note": "ADX 16.4727 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 81.66,
-   "mark": 80.87,
-   "return_pct": -0.97,
-   "mfe": 0.13,
+   "mark": 83.2,
+   "return_pct": 1.89,
+   "mfe": 2.98,
    "mae": -2.02,
-   "spy_excess": -0.99
+   "spy_excess": 1.62
   },
   {
    "date": "2026-07-24",
@@ -3093,13 +3093,13 @@
    "adx": 19.4991,
    "note": "ADX 19.4991 below 20 - no trend to ride; price 357.4013 at/below ZLSMA 361.6108 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 359.75,
-   "mark": 358.91,
-   "return_pct": -0.23,
-   "mfe": 0.65,
+   "mark": 363.5,
+   "return_pct": 1.04,
+   "mfe": 1.51,
    "mae": -1.6,
-   "spy_excess": -0.26
+   "spy_excess": 0.78
   },
   {
    "date": "2026-07-24",
@@ -3110,13 +3110,13 @@
    "adx": 11.7152,
    "note": "ADX 11.7152 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 44.56,
-   "mark": 44.01,
-   "return_pct": -1.23,
-   "mfe": 0.43,
-   "mae": -1.87,
-   "spy_excess": -1.26
+   "mark": 44.1,
+   "return_pct": -1.03,
+   "mfe": 1.57,
+   "mae": -1.86,
+   "spy_excess": -1.29
   },
   {
    "date": "2026-07-24",
@@ -3127,13 +3127,13 @@
    "adx": 21.2815,
    "note": "-DI 20.0651 >= +DI 16.3135 - sellers in control",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 935.03,
-   "mark": 951.58,
-   "return_pct": 1.77,
-   "mfe": 2.3,
+   "mark": 966.58,
+   "return_pct": 3.37,
+   "mfe": 5.62,
    "mae": -1.47,
-   "spy_excess": 1.75
+   "spy_excess": 3.11
   },
   {
    "date": "2026-07-24",
@@ -3144,13 +3144,13 @@
    "adx": 23.1518,
    "note": "regime DEEP-FAIL (-32.8196% vs 200-day) - watch only, no size; -DI 23.1991 >= +DI 17.2075 - sellers in control; stop is 0.68x ATR (5.9901) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 62.36,
-   "mark": 65.67,
-   "return_pct": 5.31,
+   "mark": 64.32,
+   "return_pct": 3.14,
    "mfe": 6.22,
    "mae": -3.85,
-   "spy_excess": 5.29
+   "spy_excess": 2.88
   },
   {
    "date": "2026-07-24",
@@ -3161,13 +3161,13 @@
    "adx": 22.3686,
    "note": "price 620.2488 at/below ZLSMA 626.6481 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 628.16,
-   "mark": 625.02,
-   "return_pct": -0.5,
-   "mfe": 0.19,
+   "mark": 639.84,
+   "return_pct": 1.86,
+   "mfe": 2.52,
    "mae": -2.69,
-   "spy_excess": -0.52
+   "spy_excess": 1.6
   },
   {
    "date": "2026-07-24",
@@ -3178,13 +3178,13 @@
    "adx": 22.3304,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 437.5,
-   "mark": 426.91,
-   "return_pct": -2.42,
+   "mark": 392.1,
+   "return_pct": -10.38,
    "mfe": 3.2,
-   "mae": -5.86,
-   "spy_excess": -2.44
+   "mae": -17.97,
+   "spy_excess": -10.64
   },
   {
    "date": "2026-07-24",
@@ -3195,13 +3195,13 @@
    "adx": 33.0818,
    "note": "stop is 13.2% away - 2:1 would need +26.3%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 227.86,
-   "mark": 231.84,
-   "return_pct": 1.75,
-   "mfe": 2.35,
+   "mark": 235.94,
+   "return_pct": 3.55,
+   "mfe": 5.34,
    "mae": -1.95,
-   "spy_excess": 1.73
+   "spy_excess": 3.28
   },
   {
    "date": "2026-07-24",
@@ -3212,13 +3212,13 @@
    "adx": 30.532,
    "note": "stop is 5.20x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 12.6% away - 2:1 would need +25.2%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 199.08,
-   "mark": 195.76,
-   "return_pct": -1.67,
+   "mark": 193.18,
+   "return_pct": -2.96,
    "mfe": 4.21,
    "mae": -5.07,
-   "spy_excess": -1.69
+   "spy_excess": -3.22
   },
   {
    "date": "2026-07-24",
@@ -3229,13 +3229,13 @@
    "adx": 17.3431,
    "note": "ADX 17.3431 below 20 - no trend to ride; -DI 25.7849 >= +DI 16.6587 - sellers in control; stop is 5.48x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 19.6% away - 2:1 would need +39.3%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 28.44,
-   "mark": 28.15,
-   "return_pct": -1.02,
+   "mark": 28.39,
+   "return_pct": -0.18,
    "mfe": 1.93,
    "mae": -2.74,
-   "spy_excess": -1.04
+   "spy_excess": -0.44
   },
   {
    "date": "2026-07-24",
@@ -3246,13 +3246,13 @@
    "adx": 22.3487,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 1084.24,
-   "mark": 1046.79,
-   "return_pct": -3.45,
+   "mark": 1034.86,
+   "return_pct": -4.55,
    "mfe": 1.91,
-   "mae": -3.92,
-   "spy_excess": -3.48
+   "mae": -5.09,
+   "spy_excess": -4.82
   },
   {
    "date": "2026-07-24",
@@ -3263,13 +3263,13 @@
    "adx": 16.5966,
    "note": "ADX 16.5966 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 14.37,
-   "mark": 14.68,
-   "return_pct": 2.16,
-   "mfe": 3.48,
+   "mark": 14.96,
+   "return_pct": 4.11,
+   "mfe": 4.52,
    "mae": -1.6,
-   "spy_excess": 2.14
+   "spy_excess": 3.84
   },
   {
    "date": "2026-07-24",
@@ -3280,13 +3280,13 @@
    "adx": 23.3393,
    "note": "-DI 20.4916 >= +DI 18.2053 - sellers in control",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 62.6,
-   "mark": 62.72,
-   "return_pct": 0.19,
-   "mfe": 1.23,
-   "mae": -2.48,
-   "spy_excess": 0.17
+   "mark": 61.64,
+   "return_pct": -1.53,
+   "mfe": 1.49,
+   "mae": -4.27,
+   "spy_excess": -1.79
   },
   {
    "date": "2026-07-24",
@@ -3297,13 +3297,13 @@
    "adx": 18.7383,
    "note": "regime DEEP-FAIL (-32.6026% vs 200-day) - watch only, no size; ADX 18.7383 below 20 - no trend to ride; price 99.2225 at/below ZLSMA 117.2611 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 99.36,
-   "mark": 104.27,
-   "return_pct": 4.94,
+   "mark": 101.84,
+   "return_pct": 2.5,
    "mfe": 6.18,
    "mae": -1.24,
-   "spy_excess": 4.92
+   "spy_excess": 2.23
   },
   {
    "date": "2026-07-24",
@@ -3314,13 +3314,13 @@
    "adx": 21.2647,
    "note": "regime DEEP-FAIL (-13.7526% vs 200-day) - watch only, no size",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 75.23,
-   "mark": 75.73,
-   "return_pct": 0.66,
-   "mfe": 1.75,
-   "mae": -1.3,
-   "spy_excess": 0.64
+   "mark": 74.21,
+   "return_pct": -1.36,
+   "mfe": 1.77,
+   "mae": -2.53,
+   "spy_excess": -1.62
   },
   {
    "date": "2026-07-24",
@@ -3331,13 +3331,13 @@
    "adx": 28.342,
    "note": "price 353.54 at/below ZLSMA 359.0313 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 353.73,
-   "mark": 361.61,
-   "return_pct": 2.23,
-   "mfe": 3.33,
+   "mark": 363.59,
+   "return_pct": 2.79,
+   "mfe": 3.69,
    "mae": -1.0,
-   "spy_excess": 2.21
+   "spy_excess": 2.53
   },
   {
    "date": "2026-07-24",
@@ -3348,13 +3348,13 @@
    "adx": 39.3785,
    "note": "-DI 22.4211 >= +DI 16.4311 - sellers in control; stop is 0.92x ATR (7.5404) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 371.9,
-   "mark": 374.63,
-   "return_pct": 0.73,
-   "mfe": 0.97,
-   "mae": -0.23,
-   "spy_excess": 0.71
+   "mark": 369.37,
+   "return_pct": -0.68,
+   "mfe": 0.98,
+   "mae": -1.05,
+   "spy_excess": -0.94
   },
   {
    "date": "2026-07-24",
@@ -3365,13 +3365,13 @@
    "adx": 19.3339,
    "note": "ADX 19.3339 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 82.64,
-   "mark": 87.04,
-   "return_pct": 5.32,
-   "mfe": 5.37,
+   "mark": 90.3,
+   "return_pct": 9.27,
+   "mfe": 10.3,
    "mae": -2.67,
-   "spy_excess": 5.3
+   "spy_excess": 9.01
   },
   {
    "date": "2026-07-24",
@@ -3383,12 +3383,12 @@
    "note": "ADX 17.3806 below 20 - no trend to ride",
    "status": "OPEN",
    "elapsed": 1,
-   "entry": 243.15,
-   "mark": 245.75,
-   "return_pct": 1.07,
-   "mfe": 2.0,
-   "mae": -1.66,
-   "spy_excess": 1.05
+   "entry": 245.75,
+   "mark": 247.05,
+   "return_pct": 0.53,
+   "mfe": 2.54,
+   "mae": -1.31,
+   "spy_excess": 0.27
   },
   {
    "date": "2026-07-24",
@@ -3399,13 +3399,13 @@
    "adx": 17.0078,
    "note": "ADX 17.0078 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 128.31,
-   "mark": 126.99,
-   "return_pct": -1.03,
+   "mark": 125.7,
+   "return_pct": -2.03,
    "mfe": 3.55,
-   "mae": -2.81,
-   "spy_excess": -1.05
+   "mae": -4.28,
+   "spy_excess": -2.3
   },
   {
    "date": "2026-07-24",
@@ -3416,13 +3416,13 @@
    "adx": 27.7459,
    "note": "price 262.0375 at/below ZLSMA 263.1297 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 263.4,
-   "mark": 265.95,
-   "return_pct": 0.97,
-   "mfe": 2.04,
+   "mark": 266.73,
+   "return_pct": 1.26,
+   "mfe": 4.36,
    "mae": -1.44,
-   "spy_excess": 0.95
+   "spy_excess": 1.0
   },
   {
    "date": "2026-07-24",
@@ -3433,13 +3433,13 @@
    "adx": 20.0907,
    "note": "regime DEEP-FAIL (-38.1427% vs 200-day) - watch only, no size; -DI 21.3792 >= +DI 16.5864 - sellers in control; price 6.4188 at/below ZLSMA 6.6202 - structure has not turned; stop is 0.53x ATR (1.1143) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 6.3,
-   "mark": 6.5,
-   "return_pct": 3.17,
-   "mfe": 5.87,
+   "mark": 7.9,
+   "return_pct": 25.4,
+   "mfe": 34.76,
    "mae": -2.94,
-   "spy_excess": 3.15
+   "spy_excess": 25.14
   },
   {
    "date": "2026-07-24",
@@ -3450,13 +3450,13 @@
    "adx": 37.3555,
    "note": "regime DEEP-FAIL (-30.3395% vs 200-day) - watch only, no size",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 112.14,
-   "mark": 114.95,
-   "return_pct": 2.51,
-   "mfe": 3.28,
+   "mark": 118.36,
+   "return_pct": 5.55,
+   "mfe": 6.24,
    "mae": -0.57,
-   "spy_excess": 2.48
+   "spy_excess": 5.29
   },
   {
    "date": "2026-07-24",
@@ -3467,13 +3467,13 @@
    "adx": 22.6392,
    "note": "regime REPAIR (-4.694% vs 200-day) - starter size only",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 300.21,
-   "mark": 303.48,
-   "return_pct": 1.09,
-   "mfe": 2.07,
+   "mark": 305.2,
+   "return_pct": 1.66,
+   "mfe": 2.89,
    "mae": -0.32,
-   "spy_excess": 1.07
+   "spy_excess": 1.4
   },
   {
    "date": "2026-07-24",
@@ -3484,13 +3484,13 @@
    "adx": 36.8557,
    "note": "price 27.265 at/below ZLSMA 28.462 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 26.85,
-   "mark": 28.09,
-   "return_pct": 4.62,
-   "mfe": 4.77,
+   "mark": 29.74,
+   "return_pct": 10.76,
+   "mfe": 10.88,
    "mae": -0.15,
-   "spy_excess": 4.6
+   "spy_excess": 10.5
   },
   {
    "date": "2026-07-24",
@@ -3502,12 +3502,12 @@
    "note": "price 23.2328 at/below ZLSMA 23.6358 - structure has not turned; stop is 0.84x ATR (0.9803) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
    "elapsed": 1,
-   "entry": 23.38,
-   "mark": 24.96,
-   "return_pct": 6.76,
-   "mfe": 6.97,
-   "mae": -2.27,
-   "spy_excess": 6.74
+   "entry": 24.96,
+   "mark": 25.15,
+   "return_pct": 0.76,
+   "mfe": 2.24,
+   "mae": -4.97,
+   "spy_excess": 0.5
   },
   {
    "date": "2026-07-24",
@@ -3518,13 +3518,13 @@
    "adx": 30.3354,
    "note": "regime REPAIR (6.4053% vs 200-day) - starter size only",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 63.91,
-   "mark": 64.17,
-   "return_pct": 0.41,
-   "mfe": 2.24,
+   "mark": 66.49,
+   "return_pct": 4.04,
+   "mfe": 4.55,
    "mae": -1.75,
-   "spy_excess": 0.39
+   "spy_excess": 3.78
   },
   {
    "date": "2026-07-24",
@@ -3535,13 +3535,13 @@
    "adx": 22.9506,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 131.07,
-   "mark": 130.76,
-   "return_pct": -0.24,
-   "mfe": 1.11,
+   "mark": 131.82,
+   "return_pct": 0.57,
+   "mfe": 3.04,
    "mae": -0.63,
-   "spy_excess": -0.26
+   "spy_excess": 0.31
   },
   {
    "date": "2026-07-24",
@@ -3552,13 +3552,13 @@
    "adx": 17.2543,
    "note": "ADX 17.2543 below 20 - no trend to ride; -DI 20.5251 >= +DI 20.2263 - sellers in control",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 93.19,
-   "mark": 93.47,
-   "return_pct": 0.3,
+   "mark": 91.52,
+   "return_pct": -1.79,
    "mfe": 2.31,
-   "mae": -1.36,
-   "spy_excess": 0.28
+   "mae": -2.48,
+   "spy_excess": -2.05
   },
   {
    "date": "2026-07-24",
@@ -3569,13 +3569,13 @@
    "adx": 36.7606,
    "note": "price 92.37 at/below ZLSMA 106.2349 - structure has not turned; stop is 0.96x ATR (5.8624) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 92.16,
-   "mark": 90.2,
-   "return_pct": -2.13,
+   "mark": 90.45,
+   "return_pct": -1.86,
    "mfe": 2.53,
-   "mae": -3.03,
-   "spy_excess": -2.15
+   "mae": -5.51,
+   "spy_excess": -2.12
   },
   {
    "date": "2026-07-24",
@@ -3586,13 +3586,13 @@
    "adx": 17.6486,
    "note": "ADX 17.6486 below 20 - no trend to ride; price 988.6525 at/below ZLSMA 1025.8836 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 987.54,
-   "mark": 987.31,
-   "return_pct": -0.02,
+   "mark": 990.96,
+   "return_pct": 0.35,
    "mfe": 1.33,
-   "mae": -1.19,
-   "spy_excess": -0.04
+   "mae": -1.22,
+   "spy_excess": 0.09
   },
   {
    "date": "2026-07-24",
@@ -3603,13 +3603,13 @@
    "adx": 17.0552,
    "note": "ADX 17.0552 below 20 - no trend to ride",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 78.24,
-   "mark": 77.64,
-   "return_pct": -0.77,
+   "mark": 74.88,
+   "return_pct": -4.29,
    "mfe": 2.21,
-   "mae": -1.84,
-   "spy_excess": -0.79
+   "mae": -4.41,
+   "spy_excess": -4.56
   },
   {
    "date": "2026-07-24",
@@ -3620,13 +3620,13 @@
    "adx": 23.7236,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 133.09,
-   "mark": 134.94,
-   "return_pct": 1.39,
-   "mfe": 1.83,
+   "mark": 135.99,
+   "return_pct": 2.18,
+   "mfe": 2.34,
    "mae": -2.38,
-   "spy_excess": 1.37
+   "spy_excess": 1.92
   },
   {
    "date": "2026-07-24",
@@ -3638,12 +3638,12 @@
    "note": "ADX 18.9503 below 20 - no trend to ride; price 365.1275 at/below ZLSMA 380.3308 - structure has not turned",
    "status": "OPEN",
    "elapsed": 1,
-   "entry": 367.34,
-   "mark": 375.02,
-   "return_pct": 2.09,
-   "mfe": 3.67,
-   "mae": -2.16,
-   "spy_excess": 2.07
+   "entry": 375.02,
+   "mark": 390.92,
+   "return_pct": 4.24,
+   "mfe": 6.99,
+   "mae": -2.0,
+   "spy_excess": 3.98
   },
   {
    "date": "2026-07-24",
@@ -3655,12 +3655,12 @@
    "note": "price 82.45 at/below ZLSMA 83.1148 - structure has not turned",
    "status": "OPEN",
    "elapsed": 1,
-   "entry": 82.33,
-   "mark": 81.24,
-   "return_pct": -1.32,
-   "mfe": 0.62,
-   "mae": -1.43,
-   "spy_excess": -1.35
+   "entry": 81.24,
+   "mark": 81.03,
+   "return_pct": -0.26,
+   "mfe": 1.55,
+   "mae": -0.26,
+   "spy_excess": -0.52
   },
   {
    "date": "2026-07-24",
@@ -3671,13 +3671,13 @@
    "adx": 25.7262,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 118.32,
-   "mark": 121.05,
-   "return_pct": 2.31,
-   "mfe": 2.81,
+   "mark": 123.04,
+   "return_pct": 3.99,
+   "mfe": 6.0,
    "mae": -2.05,
-   "spy_excess": 2.29
+   "spy_excess": 3.73
   },
   {
    "date": "2026-07-24",
@@ -3688,13 +3688,13 @@
    "adx": 24.8488,
    "note": "stop is 13.6% away - 2:1 would need +27.2%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 30.1,
-   "mark": 29.81,
-   "return_pct": -0.96,
+   "mark": 28.45,
+   "return_pct": -5.48,
    "mfe": 4.09,
-   "mae": -5.32,
-   "spy_excess": -0.99
+   "mae": -9.87,
+   "spy_excess": -5.74
   },
   {
    "date": "2026-07-24",
@@ -3706,12 +3706,12 @@
    "note": "price 57.3038 at/below ZLSMA 59.6264 - structure has not turned",
    "status": "OPEN",
    "elapsed": 1,
-   "entry": 58.23,
-   "mark": 58.68,
-   "return_pct": 0.77,
-   "mfe": 1.37,
-   "mae": -4.71,
-   "spy_excess": 0.75
+   "entry": 58.68,
+   "mark": 60.56,
+   "return_pct": 3.2,
+   "mfe": 3.39,
+   "mae": -1.33,
+   "spy_excess": 2.94
   },
   {
    "date": "2026-07-24",
@@ -3722,13 +3722,13 @@
    "adx": 25.602,
    "note": "price 227.9813 at/below ZLSMA 232.5229 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 229.78,
-   "mark": 231.67,
-   "return_pct": 0.82,
-   "mfe": 0.84,
+   "mark": 236.7,
+   "return_pct": 3.01,
+   "mfe": 3.53,
    "mae": -1.72,
-   "spy_excess": 0.8
+   "spy_excess": 2.75
   },
   {
    "date": "2026-07-24",
@@ -3739,13 +3739,13 @@
    "adx": 19.1515,
    "note": "ADX 19.1515 below 20 - no trend to ride; price 653.9963 at/below ZLSMA 657.79 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 655.35,
-   "mark": 651.65,
-   "return_pct": -0.56,
+   "mark": 649.67,
+   "return_pct": -0.87,
    "mfe": 0.77,
-   "mae": -1.99,
-   "spy_excess": -0.59
+   "mae": -2.54,
+   "spy_excess": -1.13
   },
   {
    "date": "2026-07-24",
@@ -3756,13 +3756,13 @@
    "adx": 35.7306,
    "note": "regime DEEP-FAIL (-18.5953% vs 200-day) - watch only, no size; -DI 25.9329 >= +DI 12.4674 - sellers in control; price 40.368 at/below ZLSMA 41.0358 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 39.89,
-   "mark": 40.32,
-   "return_pct": 1.08,
-   "mfe": 3.18,
-   "mae": -0.83,
-   "spy_excess": 1.06
+   "mark": 38.95,
+   "return_pct": -2.36,
+   "mfe": 3.21,
+   "mae": -5.05,
+   "spy_excess": -2.62
   },
   {
    "date": "2026-07-24",
@@ -3773,13 +3773,13 @@
    "adx": 28.8548,
    "note": "stop is 12.9% away - 2:1 would need +25.7%, and the position shrinks to a token (cap 12%)",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 1141.59,
-   "mark": 1127.91,
-   "return_pct": -1.2,
+   "mark": 1091.26,
+   "return_pct": -4.41,
    "mfe": 0.74,
-   "mae": -2.53,
-   "spy_excess": -1.22
+   "mae": -4.76,
+   "spy_excess": -4.67
   },
   {
    "date": "2026-07-24",
@@ -3790,13 +3790,13 @@
    "adx": 14.6553,
    "note": "ADX 14.6553 below 20 - no trend to ride; price 166.0363 at/below ZLSMA 167.429 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 163.38,
-   "mark": 157.08,
-   "return_pct": -3.86,
+   "mark": 148.64,
+   "return_pct": -9.02,
    "mfe": 3.91,
-   "mae": -4.8,
-   "spy_excess": -3.88
+   "mae": -10.51,
+   "spy_excess": -9.28
   },
   {
    "date": "2026-07-24",
@@ -3807,13 +3807,13 @@
    "adx": 27.1693,
    "note": "regime REPAIR (1.5492% vs 200-day) - starter size only",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 46.38,
-   "mark": 47.32,
-   "return_pct": 2.03,
-   "mfe": 2.53,
+   "mark": 48.19,
+   "return_pct": 3.9,
+   "mfe": 5.67,
    "mae": -5.71,
-   "spy_excess": 2.01
+   "spy_excess": 3.64
   },
   {
    "date": "2026-07-24",
@@ -3824,13 +3824,13 @@
    "adx": 16.03,
    "note": "ADX 16.03 below 20 - no trend to ride; price 182.555 at/below ZLSMA 184.0336 - structure has not turned",
    "status": "OPEN",
-   "elapsed": 1,
+   "elapsed": 2,
    "entry": 182.66,
-   "mark": 183.2,
-   "return_pct": 0.3,
+   "mark": 182.49,
+   "return_pct": -0.09,
    "mfe": 0.96,
    "mae": -1.0,
-   "spy_excess": 0.27
+   "spy_excess": -0.35
   },
   {
    "date": "2026-07-27",
@@ -3840,7 +3840,14 @@
    "regime": "PASS",
    "adx": 30.3141,
    "note": "price 103.4925 at/below ZLSMA 105.9913 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 103.88,
+   "mark": 106.48,
+   "return_pct": 2.5,
+   "mfe": 3.09,
+   "mae": -1.88,
+   "spy_excess": 2.26
   },
   {
    "date": "2026-07-27",
@@ -3850,7 +3857,14 @@
    "regime": "PASS",
    "adx": 22.7052,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 4.63,
+   "mark": 4.63,
+   "return_pct": 0.0,
+   "mfe": 2.16,
+   "mae": -1.08,
+   "spy_excess": -0.24
   },
   {
    "date": "2026-07-27",
@@ -3860,7 +3874,14 @@
    "regime": "PASS",
    "adx": 16.9972,
    "note": "ADX 16.9972 below 20 - no trend to ride; price 121.8275 at/below ZLSMA 124.9196 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 121.91,
+   "mark": 121.11,
+   "return_pct": -0.66,
+   "mfe": 1.07,
+   "mae": -2.22,
+   "spy_excess": -0.9
   },
   {
    "date": "2026-07-27",
@@ -3870,7 +3891,14 @@
    "regime": "PASS",
    "adx": 16.1198,
    "note": "ADX 16.1198 below 20 - no trend to ride; -DI 20.0158 >= +DI 18.3316 - sellers in control; stop is 0.85x ATR (3.3201) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 88.38,
+   "mark": 86.22,
+   "return_pct": -2.44,
+   "mfe": 1.84,
+   "mae": -4.2,
+   "spy_excess": -2.68
   },
   {
    "date": "2026-07-27",
@@ -3880,7 +3908,14 @@
    "regime": "REPAIR",
    "adx": 15.4778,
    "note": "ADX 15.4778 below 20 - no trend to ride; stop is 0.91x ATR (1.7661) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 80.87,
+   "mark": 83.2,
+   "return_pct": 2.88,
+   "mfe": 3.98,
+   "mae": -1.06,
+   "spy_excess": 2.64
   },
   {
    "date": "2026-07-27",
@@ -3890,7 +3925,14 @@
    "regime": "PASS",
    "adx": 18.897,
    "note": "ADX 18.897 below 20 - no trend to ride; price 359.3013 at/below ZLSMA 362.5958 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 358.91,
+   "mark": 363.5,
+   "return_pct": 1.28,
+   "mfe": 1.74,
+   "mae": -0.47,
+   "spy_excess": 1.04
   },
   {
    "date": "2026-07-27",
@@ -3900,7 +3942,14 @@
    "regime": "DEEP-FAIL",
    "adx": 29.4984,
    "note": "regime DEEP-FAIL (-19.6594% vs 200-day) - watch only, no size",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 29.79,
+   "mark": 30.69,
+   "return_pct": 3.02,
+   "mfe": 4.7,
+   "mae": -5.3,
+   "spy_excess": 2.78
   },
   {
    "date": "2026-07-27",
@@ -3910,7 +3959,14 @@
    "regime": "DEEP-FAIL",
    "adx": 22.3283,
    "note": "regime DEEP-FAIL (-29.4909% vs 200-day) - watch only, no size; -DI 22.0726 >= +DI 17.4761 - sellers in control",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 65.67,
+   "mark": 64.32,
+   "return_pct": -2.06,
+   "mfe": 0.87,
+   "mae": -6.76,
+   "spy_excess": -2.3
   },
   {
    "date": "2026-07-27",
@@ -3920,7 +3976,14 @@
    "regime": "PASS",
    "adx": 23.5386,
    "note": "price 623.285 at/below ZLSMA 629.7476 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 625.02,
+   "mark": 639.84,
+   "return_pct": 2.37,
+   "mfe": 3.04,
+   "mae": -2.02,
+   "spy_excess": 2.13
   },
   {
    "date": "2026-07-27",
@@ -3930,7 +3993,14 @@
    "regime": "PASS",
    "adx": 21.1548,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 426.91,
+   "mark": 392.1,
+   "return_pct": -8.15,
+   "mfe": 4.91,
+   "mae": -15.94,
+   "spy_excess": -8.39
   },
   {
    "date": "2026-07-27",
@@ -3940,7 +4010,14 @@
    "regime": "PASS",
    "adx": 35.2912,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 231.84,
+   "mark": 235.94,
+   "return_pct": 1.77,
+   "mfe": 3.53,
+   "mae": -2.96,
+   "spy_excess": 1.53
   },
   {
    "date": "2026-07-27",
@@ -3950,7 +4027,14 @@
    "regime": "PASS",
    "adx": 31.941,
    "note": "stop is 12.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 195.76,
+   "mark": 193.18,
+   "return_pct": -1.32,
+   "mfe": 2.55,
+   "mae": -2.59,
+   "spy_excess": -1.56
   },
   {
    "date": "2026-07-27",
@@ -3960,7 +4044,14 @@
    "regime": "PASS",
    "adx": 17.1441,
    "note": "ADX 17.1441 below 20 - no trend to ride; -DI 23.1485 >= +DI 17.2649 - sellers in control",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 28.15,
+   "mark": 28.39,
+   "return_pct": 0.85,
+   "mfe": 2.98,
+   "mae": -1.67,
+   "spy_excess": 0.61
   },
   {
    "date": "2026-07-27",
@@ -3970,7 +4061,14 @@
    "regime": "PASS",
    "adx": 22.7413,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 1046.79,
+   "mark": 1034.86,
+   "return_pct": -1.14,
+   "mfe": 3.72,
+   "mae": -1.7,
+   "spy_excess": -1.38
   },
   {
    "date": "2026-07-27",
@@ -3980,7 +4078,14 @@
    "regime": "PASS",
    "adx": 17.9527,
    "note": "ADX 17.9527 below 20 - no trend to ride",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 14.68,
+   "mark": 14.96,
+   "return_pct": 1.91,
+   "mfe": 2.32,
+   "mae": -2.32,
+   "spy_excess": 1.67
   },
   {
    "date": "2026-07-27",
@@ -3990,7 +4095,14 @@
    "regime": "REPAIR",
    "adx": 21.856,
    "note": "-DI 19.4277 >= +DI 18.4531 - sellers in control",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 62.72,
+   "mark": 61.64,
+   "return_pct": -1.72,
+   "mfe": 1.29,
+   "mae": -4.45,
+   "spy_excess": -1.96
   },
   {
    "date": "2026-07-27",
@@ -4000,7 +4112,14 @@
    "regime": "DEEP-FAIL",
    "adx": 19.4793,
    "note": "regime DEEP-FAIL (-29.6664% vs 200-day) - watch only, no size; ADX 19.4793 below 20 - no trend to ride; price 103.2975 at/below ZLSMA 119.1575 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 104.27,
+   "mark": 101.84,
+   "return_pct": -2.33,
+   "mfe": 1.18,
+   "mae": -3.66,
+   "spy_excess": -2.57
   },
   {
    "date": "2026-07-27",
@@ -4010,7 +4129,14 @@
    "regime": "DEEP-FAIL",
    "adx": 19.8105,
    "note": "regime DEEP-FAIL (-13.4795% vs 200-day) - watch only, no size; ADX 19.8105 below 20 - no trend to ride; -DI 21.228 >= +DI 20.8466 - sellers in control",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 75.73,
+   "mark": 74.21,
+   "return_pct": -2.01,
+   "mfe": 1.1,
+   "mae": -3.17,
+   "spy_excess": -2.25
   },
   {
    "date": "2026-07-27",
@@ -4020,7 +4146,14 @@
    "regime": "PASS",
    "adx": 27.415,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 361.61,
+   "mark": 363.59,
+   "return_pct": 0.55,
+   "mfe": 1.43,
+   "mae": -1.53,
+   "spy_excess": 0.31
   },
   {
    "date": "2026-07-27",
@@ -4030,7 +4163,14 @@
    "regime": "REPAIR",
    "adx": 37.4606,
    "note": "-DI 21.721 >= +DI 16.8845 - sellers in control; stop is 0.93x ATR (7.2357) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 374.63,
+   "mark": 369.37,
+   "return_pct": -1.4,
+   "mfe": 0.24,
+   "mae": -1.78,
+   "spy_excess": -1.64
   },
   {
    "date": "2026-07-27",
@@ -4040,7 +4180,14 @@
    "regime": "PASS",
    "adx": 21.6022,
    "note": "stop is 12.4% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 87.04,
+   "mark": 90.3,
+   "return_pct": 3.75,
+   "mfe": 4.72,
+   "mae": -3.38,
+   "spy_excess": 3.51
   },
   {
    "date": "2026-07-27",
@@ -4050,7 +4197,14 @@
    "regime": "PASS",
    "adx": 19.3012,
    "note": "ADX 19.3012 below 20 - no trend to ride",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 245.75,
+   "mark": 247.05,
+   "return_pct": 0.53,
+   "mfe": 2.54,
+   "mae": -1.31,
+   "spy_excess": 0.29
   },
   {
    "date": "2026-07-27",
@@ -4060,7 +4214,14 @@
    "regime": "PASS",
    "adx": 17.1147,
    "note": "ADX 17.1147 below 20 - no trend to ride",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 126.99,
+   "mark": 125.7,
+   "return_pct": -1.02,
+   "mfe": 4.36,
+   "mae": -3.29,
+   "spy_excess": -1.26
   },
   {
    "date": "2026-07-27",
@@ -4070,7 +4231,14 @@
    "regime": "PASS",
    "adx": 28.1835,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 265.95,
+   "mark": 266.73,
+   "return_pct": 0.29,
+   "mfe": 3.36,
+   "mae": -1.73,
+   "spy_excess": 0.05
   },
   {
    "date": "2026-07-27",
@@ -4080,7 +4248,14 @@
    "regime": "DEEP-FAIL",
    "adx": 35.5651,
    "note": "regime DEEP-FAIL (-29.6251% vs 200-day) - watch only, no size",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 114.95,
+   "mark": 118.36,
+   "return_pct": 2.97,
+   "mfe": 3.65,
+   "mae": -2.51,
+   "spy_excess": 2.73
   },
   {
    "date": "2026-07-27",
@@ -4090,7 +4265,14 @@
    "regime": "REPAIR",
    "adx": 21.7097,
    "note": "regime REPAIR (-4.2944% vs 200-day) - starter size only",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 303.48,
+   "mark": 305.2,
+   "return_pct": 0.57,
+   "mfe": 1.78,
+   "mae": -0.82,
+   "spy_excess": 0.33
   },
   {
    "date": "2026-07-27",
@@ -4100,7 +4282,14 @@
    "regime": "PASS",
    "adx": 36.3442,
    "note": "price 27.6613 at/below ZLSMA 28.3492 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 28.09,
+   "mark": 29.74,
+   "return_pct": 5.87,
+   "mfe": 5.98,
+   "mae": -3.52,
+   "spy_excess": 5.63
   },
   {
    "date": "2026-07-27",
@@ -4110,7 +4299,14 @@
    "regime": "PASS",
    "adx": 18.9706,
    "note": "ADX 18.9706 below 20 - no trend to ride",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 383.06,
+   "mark": 383.52,
+   "return_pct": 0.12,
+   "mfe": 0.31,
+   "mae": -2.22,
+   "spy_excess": -0.12
   },
   {
    "date": "2026-07-27",
@@ -4120,7 +4316,14 @@
    "regime": "PASS",
    "adx": 29.5725,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 64.17,
+   "mark": 66.49,
+   "return_pct": 3.62,
+   "mfe": 4.13,
+   "mae": -2.06,
+   "spy_excess": 3.38
   },
   {
    "date": "2026-07-27",
@@ -4130,7 +4333,14 @@
    "regime": "PASS",
    "adx": 24.1399,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 130.76,
+   "mark": 131.82,
+   "return_pct": 0.81,
+   "mfe": 3.28,
+   "mae": -0.24,
+   "spy_excess": 0.57
   },
   {
    "date": "2026-07-27",
@@ -4140,7 +4350,14 @@
    "regime": "REPAIR",
    "adx": 16.2603,
    "note": "ADX 16.2603 below 20 - no trend to ride; -DI 20.4681 >= +DI 19.1456 - sellers in control",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 93.47,
+   "mark": 91.52,
+   "return_pct": -2.09,
+   "mfe": 1.51,
+   "mae": -2.77,
+   "spy_excess": -2.33
   },
   {
    "date": "2026-07-27",
@@ -4150,7 +4367,14 @@
    "regime": "PASS",
    "adx": 36.0115,
    "note": "price 91.1925 at/below ZLSMA 106.1161 - structure has not turned; stop is 0.79x ATR (5.6426) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 90.2,
+   "mark": 90.45,
+   "return_pct": 0.28,
+   "mfe": 3.66,
+   "mae": -3.45,
+   "spy_excess": 0.04
   },
   {
    "date": "2026-07-27",
@@ -4160,7 +4384,14 @@
    "regime": "REPAIR",
    "adx": 33.2324,
    "note": "price 214.3238 at/below ZLSMA 220.6252 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 215.76,
+   "mark": 219.52,
+   "return_pct": 1.74,
+   "mfe": 3.17,
+   "mae": -1.67,
+   "spy_excess": 1.5
   },
   {
    "date": "2026-07-27",
@@ -4170,7 +4401,14 @@
    "regime": "PASS",
    "adx": 18.3133,
    "note": "ADX 18.3133 below 20 - no trend to ride; price 988.3338 at/below ZLSMA 1026.0825 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 987.31,
+   "mark": 990.96,
+   "return_pct": 0.37,
+   "mfe": 1.18,
+   "mae": -1.2,
+   "spy_excess": 0.13
   },
   {
    "date": "2026-07-27",
@@ -4180,7 +4418,14 @@
    "regime": "PASS",
    "adx": 15.9684,
    "note": "ADX 15.9684 below 20 - no trend to ride; -DI 17.2461 >= +DI 16.6231 - sellers in control",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 77.64,
+   "mark": 74.88,
+   "return_pct": -3.55,
+   "mfe": 2.33,
+   "mae": -3.67,
+   "spy_excess": -3.79
   },
   {
    "date": "2026-07-27",
@@ -4190,7 +4435,14 @@
    "regime": "REPAIR",
    "adx": 14.6566,
    "note": "ADX 14.6566 below 20 - no trend to ride",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 305.04,
+   "mark": 322.5,
+   "return_pct": 5.72,
+   "mfe": 6.4,
+   "mae": -5.19,
+   "spy_excess": 5.48
   },
   {
    "date": "2026-07-27",
@@ -4200,7 +4452,14 @@
    "regime": "PASS",
    "adx": 24.7527,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 134.94,
+   "mark": 135.99,
+   "return_pct": 0.78,
+   "mfe": 0.94,
+   "mae": -1.9,
+   "spy_excess": 0.54
   },
   {
    "date": "2026-07-27",
@@ -4210,7 +4469,14 @@
    "regime": "REPAIR",
    "adx": 19.2347,
    "note": "ADX 19.2347 below 20 - no trend to ride; price 373.1875 at/below ZLSMA 381.0544 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 375.02,
+   "mark": 390.92,
+   "return_pct": 4.24,
+   "mfe": 6.99,
+   "mae": -2.0,
+   "spy_excess": 4.0
   },
   {
    "date": "2026-07-27",
@@ -4220,7 +4486,14 @@
    "regime": "PASS",
    "adx": 20.9069,
    "note": "price 81.6899 at/below ZLSMA 83.0452 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 81.24,
+   "mark": 81.03,
+   "return_pct": -0.26,
+   "mfe": 1.55,
+   "mae": -0.26,
+   "spy_excess": -0.5
   },
   {
    "date": "2026-07-27",
@@ -4230,7 +4503,14 @@
    "regime": "PASS",
    "adx": 27.6491,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 121.05,
+   "mark": 123.04,
+   "return_pct": 1.64,
+   "mfe": 3.61,
+   "mae": -2.92,
+   "spy_excess": 1.4
   },
   {
    "date": "2026-07-27",
@@ -4240,7 +4520,14 @@
    "regime": "PASS",
    "adx": 35.672,
    "note": "stop is 4.16x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 12.8% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 51.53,
+   "mark": 49.98,
+   "return_pct": -3.01,
+   "mfe": 3.24,
+   "mae": -3.21,
+   "spy_excess": -3.25
   },
   {
    "date": "2026-07-27",
@@ -4250,7 +4537,14 @@
    "regime": "DEEP-FAIL",
    "adx": 23.4684,
    "note": "regime DEEP-FAIL (-10.3607% vs 200-day) - watch only, no size; stop is 12.5% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 29.81,
+   "mark": 28.45,
+   "return_pct": -4.56,
+   "mfe": 3.79,
+   "mae": -8.99,
+   "spy_excess": -4.8
   },
   {
    "date": "2026-07-27",
@@ -4260,7 +4554,14 @@
    "regime": "PASS",
    "adx": 26.0087,
    "note": "price 58.4025 at/below ZLSMA 59.9254 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 58.68,
+   "mark": 60.56,
+   "return_pct": 3.2,
+   "mfe": 3.39,
+   "mae": -1.33,
+   "spy_excess": 2.96
   },
   {
    "date": "2026-07-27",
@@ -4270,7 +4571,14 @@
    "regime": "PASS",
    "adx": 19.7654,
    "note": "ADX 19.7654 below 20 - no trend to ride; price 652.945 at/below ZLSMA 660.3853 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 651.65,
+   "mark": 649.67,
+   "return_pct": -0.3,
+   "mfe": 1.29,
+   "mae": -1.98,
+   "spy_excess": -0.54
   },
   {
    "date": "2026-07-27",
@@ -4280,7 +4588,14 @@
    "regime": "REPAIR",
    "adx": 19.9356,
    "note": "ADX 19.9356 below 20 - no trend to ride",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 156.38,
+   "mark": 160.8,
+   "return_pct": 2.83,
+   "mfe": 3.24,
+   "mae": -0.79,
+   "spy_excess": 2.59
   },
   {
    "date": "2026-07-27",
@@ -4290,7 +4605,14 @@
    "regime": "DEEP-FAIL",
    "adx": 35.6216,
    "note": "regime DEEP-FAIL (-18.4883% vs 200-day) - watch only, no size; -DI 24.4291 >= +DI 11.9764 - sellers in control; price 40.375 at/below ZLSMA 41.1403 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 40.32,
+   "mark": 38.95,
+   "return_pct": -3.4,
+   "mfe": 2.11,
+   "mae": -6.06,
+   "spy_excess": -3.64
   },
   {
    "date": "2026-07-27",
@@ -4300,7 +4622,14 @@
    "regime": "PASS",
    "adx": 28.7586,
    "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 1127.91,
+   "mark": 1091.26,
+   "return_pct": -3.25,
+   "mfe": 1.08,
+   "mae": -3.61,
+   "spy_excess": -3.49
   },
   {
    "date": "2026-07-27",
@@ -4310,7 +4639,14 @@
    "regime": "REPAIR",
    "adx": 19.8685,
    "note": "ADX 19.8685 below 20 - no trend to ride; stop is 12.2% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 274.82,
+   "mark": 281.15,
+   "return_pct": 2.3,
+   "mfe": 3.63,
+   "mae": -0.69,
+   "spy_excess": 2.06
   },
   {
    "date": "2026-07-27",
@@ -4320,7 +4656,14 @@
    "regime": "REPAIR",
    "adx": 13.9519,
    "note": "ADX 13.9519 below 20 - no trend to ride; price 161.0663 at/below ZLSMA 166.6509 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 157.08,
+   "mark": 148.64,
+   "return_pct": -5.37,
+   "mfe": 5.77,
+   "mae": -6.92,
+   "spy_excess": -5.61
   },
   {
    "date": "2026-07-27",
@@ -4330,7 +4673,14 @@
    "regime": "PASS",
    "adx": 20.8896,
    "note": "price 419.5345 at/below ZLSMA 425.8202 - structure has not turned",
-   "status": "TOO NEW"
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 419.76,
+   "mark": 410.55,
+   "return_pct": -2.19,
+   "mfe": 2.1,
+   "mae": -4.22,
+   "spy_excess": -2.43
   },
   {
    "date": "2026-07-27",
@@ -4340,6 +4690,813 @@
    "regime": "PASS",
    "adx": 16.1539,
    "note": "ADX 16.1539 below 20 - no trend to ride; price 183.02 at/below ZLSMA 184.2774 - structure has not turned",
+   "status": "OPEN",
+   "elapsed": 1,
+   "entry": 183.2,
+   "mark": 182.49,
+   "return_pct": -0.39,
+   "mfe": 0.67,
+   "mae": -1.29,
+   "spy_excess": -0.63
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "ACGL",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: price 105.827 at/below ZLSMA 106.7461",
+   "regime": "PASS",
+   "adx": 30.935,
+   "note": "price 105.827 at/below ZLSMA 106.7461 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "ACTG",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 23.7002,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "AGNC",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: price 10.8838 at/below ZLSMA 11.4639",
+   "regime": "PASS",
+   "adx": 25.3105,
+   "note": "price 10.8838 at/below ZLSMA 11.4639 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "AI",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-23.4779% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 20.4823,
+   "note": "regime DEEP-FAIL (-23.4779% vs 200-day) - watch only, no size; stop is 13.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "AJG",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: price 259.9588 at/below ZLSMA 267.4316",
+   "regime": "REPAIR",
+   "adx": 41.525,
+   "note": "price 259.9588 at/below ZLSMA 267.4316 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "ALSN",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 17.5553 below 20",
+   "regime": "PASS",
+   "adx": 17.5553,
+   "note": "ADX 17.5553 below 20 - no trend to ride; price 121.3975 at/below ZLSMA 125.6032 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "AVT",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 15.5863 below 20",
+   "regime": "REPAIR",
+   "adx": 15.5863,
+   "note": "ADX 15.5863 below 20 - no trend to ride; -DI 19.9507 >= +DI 16.7735 - sellers in control; stop is 0.20x ATR (3.3336) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "AXON",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: price 538.3534 at/below ZLSMA 546.9876",
+   "regime": "REPAIR",
+   "adx": 23.0707,
+   "note": "price 538.3534 at/below ZLSMA 546.9876 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "BUD",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 16.1145 below 20",
+   "regime": "PASS",
+   "adx": 16.1145,
+   "note": "ADX 16.1145 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "CB",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 18.6971 below 20",
+   "regime": "PASS",
+   "adx": 18.6971,
+   "note": "ADX 18.6971 below 20 - no trend to ride; price 362.6364 at/below ZLSMA 363.8733 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "CCL",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: stop is 12.9% away",
+   "regime": "REPAIR",
+   "adx": 22.8602,
+   "note": "stop is 12.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "CHTR",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-29.7033% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 17.8384,
+   "note": "regime DEEP-FAIL (-29.7033% vs 200-day) - watch only, no size; ADX 17.8384 below 20 - no trend to ride; -DI 21.4432 >= +DI 20.6506 - sellers in control; price 136.7275 at/below ZLSMA 140.0049 - structure has not turned; stop is 4.34x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 22.5% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "CLX",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 11.7694 below 20",
+   "regime": "REPAIR",
+   "adx": 11.7694,
+   "note": "ADX 11.7694 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "CNP",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 13.3389 below 20",
+   "regime": "PASS",
+   "adx": 13.3389,
+   "note": "ADX 13.3389 below 20 - no trend to ride; price 44.125 at/below ZLSMA 44.4532 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "COKE",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 17.5305 below 20",
+   "regime": "PASS",
+   "adx": 17.5305,
+   "note": "ADX 17.5305 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "CPRT",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-15.0218% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 29.9979,
+   "note": "regime DEEP-FAIL (-15.0218% vs 200-day) - watch only, no size; stop is 4.11x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 14.5% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "CRCL",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-30.4462% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 21.8118,
+   "note": "regime DEEP-FAIL (-30.4462% vs 200-day) - watch only, no size; -DI 22.4665 >= +DI 16.5725 - sellers in control; stop is 0.97x ATR (5.8632) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "CTM",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-20.7844% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 18.9992,
+   "note": "regime DEEP-FAIL (-20.7844% vs 200-day) - watch only, no size; ADX 18.9992 below 20 - no trend to ride; illiquid - $744,170 avg daily dollar volume; a $85,000 position is 11% of a day's turnover (max $74,417)",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "CTS",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 26.8997,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "DAL",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 23.4068,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "DASH",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: price 190.6013 at/below ZLSMA 200.4091",
+   "regime": "REPAIR",
+   "adx": 26.0363,
+   "note": "price 190.6013 at/below ZLSMA 200.4091 - structure has not turned; stop is 18.4% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "DE",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 25.2974,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "DGX",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 37.7569,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "DLR",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 33.2492,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "DUOL",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: stop is 20.3% away",
+   "regime": "REPAIR",
+   "adx": 26.1925,
+   "note": "stop is 20.3% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "EGBN",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 16.9594 below 20",
+   "regime": "PASS",
+   "adx": 16.9594,
+   "note": "ADX 16.9594 below 20 - no trend to ride; -DI 21.8068 >= +DI 16.2643 - sellers in control",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "EQIX",
+   "cohort": "PASSED",
+   "verdict": "STARTER ONLY - regime REPAIR",
+   "regime": "REPAIR",
+   "adx": 22.3711,
+   "note": "regime REPAIR (12.2941% vs 200-day) - starter size only",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "ERIE",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: stop is 12.1% away",
+   "regime": "REPAIR",
+   "adx": 27.7483,
+   "note": "stop is 12.1% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "F",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 19.4603 below 20",
+   "regime": "PASS",
+   "adx": 19.4603,
+   "note": "ADX 19.4603 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "FCX",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: -DI 20.9979 >= +DI 17.2967",
+   "regime": "REPAIR",
+   "adx": 20.9852,
+   "note": "-DI 20.9979 >= +DI 17.2967 - sellers in control",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "FUTU",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-30.7945% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 20.122,
+   "note": "regime DEEP-FAIL (-30.7945% vs 200-day) - watch only, no size; price 101.3836 at/below ZLSMA 120.7313 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "GDX",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-15.0488% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 18.7921,
+   "note": "regime DEEP-FAIL (-15.0488% vs 200-day) - watch only, no size; ADX 18.7921 below 20 - no trend to ride; -DI 22.1243 >= +DI 19.7966 - sellers in control; price 74.2962 at/below ZLSMA 74.8727 - structure has not turned; stop is 0.86x ATR (3.0468) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "GE",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 26.6914,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "GLD",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-10.2679% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 36.3788,
+   "note": "regime DEEP-FAIL (-10.2679% vs 200-day) - watch only, no size; -DI 25.0176 >= +DI 15.889 - sellers in control; price 369.5463 at/below ZLSMA 370.5136 - structure has not turned; stop is 0.29x ATR (6.8986) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "GM",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: stop is 4.71x ATR",
+   "regime": "PASS",
+   "adx": 24.3861,
+   "note": "stop is 4.71x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 15.6% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "HD",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 17.0477 below 20",
+   "regime": "REPAIR",
+   "adx": 17.0477,
+   "note": "ADX 17.0477 below 20 - no trend to ride; price 344.7838 at/below ZLSMA 350.1776 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "HON",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 21.4463,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "JETS",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: -DI 18.8679 >= +DI 18.7002",
+   "regime": "PASS",
+   "adx": 24.8722,
+   "note": "-DI 18.8679 >= +DI 18.7002 - sellers in control",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "JNJ",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 29.1906,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "LDOS",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-27.1355% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 34.852,
+   "note": "regime DEEP-FAIL (-27.1355% vs 200-day) - watch only, no size",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "LHX",
+   "cohort": "PASSED",
+   "verdict": "STARTER ONLY - regime REPAIR",
+   "regime": "REPAIR",
+   "adx": 21.1878,
+   "note": "regime REPAIR (-3.3842% vs 200-day) - starter size only",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "LLY",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 25.4398,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "LOW",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 18.4206 below 20",
+   "regime": "REPAIR",
+   "adx": 18.4206,
+   "note": "ADX 18.4206 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "LZB",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 19.2329 below 20",
+   "regime": "PASS",
+   "adx": 19.2329,
+   "note": "ADX 19.2329 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "MAR",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 18.1 below 20",
+   "regime": "PASS",
+   "adx": 18.1,
+   "note": "ADX 18.1 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "MCD",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 18.1608 below 20",
+   "regime": "REPAIR",
+   "adx": 18.1608,
+   "note": "ADX 18.1608 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "MDT",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 18.9239 below 20",
+   "regime": "REPAIR",
+   "adx": 18.9239,
+   "note": "ADX 18.9239 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "MLI",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 29.5147,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "MNST",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 35.7746,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "MRK",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 25.7525,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "NCLH",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 13.8889 below 20",
+   "regime": "REPAIR",
+   "adx": 13.8889,
+   "note": "ADX 13.8889 below 20 - no trend to ride; stop is 12.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "NEM",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-11.7086% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 15.6746,
+   "note": "regime DEEP-FAIL (-11.7086% vs 200-day) - watch only, no size; ADX 15.6746 below 20 - no trend to ride; -DI 21.2966 >= +DI 18.1194 - sellers in control; price 91.8625 at/below ZLSMA 93.4831 - structure has not turned; stop is 0.80x ATR (3.3907) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "NFLX",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-21.4512% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 40.0291,
+   "note": "regime DEEP-FAIL (-21.4512% vs 200-day) - watch only, no size; -DI 24.0967 >= +DI 18.169 - sellers in control",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "NOW",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-13.5251% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 17.8776,
+   "note": "regime DEEP-FAIL (-13.5251% vs 200-day) - watch only, no size; ADX 17.8776 below 20 - no trend to ride; stop is 18.6% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "PEP",
+   "cohort": "PASSED",
+   "verdict": "STARTER ONLY - regime REPAIR",
+   "regime": "REPAIR",
+   "adx": 21.3597,
+   "note": "regime REPAIR (-4.3728% vs 200-day) - starter size only",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "PGR",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: price 218.9925 at/below ZLSMA 220.3786",
+   "regime": "REPAIR",
+   "adx": 31.8739,
+   "note": "price 218.9925 at/below ZLSMA 220.3786 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "PH",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 18.9304 below 20",
+   "regime": "PASS",
+   "adx": 18.9304,
+   "note": "ADX 18.9304 below 20 - no trend to ride; price 990.19 at/below ZLSMA 1026.306 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "RACE",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: stop is 4.28x ATR",
+   "regime": "REPAIR",
+   "adx": 21.9781,
+   "note": "stop is 4.28x ATR - so wide the position shrinks to a token (ceiling 4.0x)",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "RCL",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 15.7976 below 20",
+   "regime": "REPAIR",
+   "adx": 15.7976,
+   "note": "ADX 15.7976 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "RMD",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-10.9718% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 16.5689,
+   "note": "regime DEEP-FAIL (-10.9718% vs 200-day) - watch only, no size; ADX 16.5689 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "ROP",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: stop is 14.4% away",
+   "regime": "REPAIR",
+   "adx": 20.7077,
+   "note": "stop is 14.4% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "RSPU",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: price 81.5375 at/below ZLSMA 82.9572",
+   "regime": "PASS",
+   "adx": 21.699,
+   "note": "price 81.5375 at/below ZLSMA 82.9572 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "SHAK",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-24.2082% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 19.0368,
+   "note": "regime DEEP-FAIL (-24.2082% vs 200-day) - watch only, no size; ADX 19.0368 below 20 - no trend to ride; price 62.46 at/below ZLSMA 70.721 - structure has not turned; stop is 16.2% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "SHW",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: stop is 4.61x ATR",
+   "regime": "REPAIR",
+   "adx": 20.9012,
+   "note": "stop is 4.61x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 15.0% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "SLB",
+   "cohort": "PASSED",
+   "verdict": "STARTER ONLY - regime REPAIR",
+   "regime": "REPAIR",
+   "adx": 35.2063,
+   "note": "regime REPAIR (9.3877% vs 200-day) - starter size only",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "SMCI",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-15.0541% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 22.0292,
+   "note": "regime DEEP-FAIL (-15.0541% vs 200-day) - watch only, no size; -DI 19.8726 >= +DI 18.5956 - sellers in control; stop is 0.81x ATR (2.5618) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "SON",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: price 60.0038 at/below ZLSMA 60.393",
+   "regime": "PASS",
+   "adx": 27.5343,
+   "note": "price 60.0038 at/below ZLSMA 60.393 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "SSD",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 21.4359,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "STGW",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: stop is 15.0% away",
+   "regime": "PASS",
+   "adx": 29.1565,
+   "note": "stop is 15.0% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "TDY",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 19.9139 below 20",
+   "regime": "PASS",
+   "adx": 19.9139,
+   "note": "ADX 19.9139 below 20 - no trend to ride; price 646.9375 at/below ZLSMA 662.0004 - structure has not turned; stop is 0.89x ATR (23.3043) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "TJX",
+   "cohort": "PASSED",
+   "verdict": "CANDIDATE - passes every gate",
+   "regime": "PASS",
+   "adx": 20.5277,
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "TOST",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: price 31.835 at/below ZLSMA 33.2923",
+   "regime": "REPAIR",
+   "adx": 32.2744,
+   "note": "price 31.835 at/below ZLSMA 33.2923 - structure has not turned; stop is 13.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "TPR",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 12.9766 below 20",
+   "regime": "PASS",
+   "adx": 12.9766,
+   "note": "ADX 12.9766 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "TYL",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-13.42% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 16.7143,
+   "note": "regime DEEP-FAIL (-13.42% vs 200-day) - watch only, no size; ADX 16.7143 below 20 - no trend to ride; stop is 17.8% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "URA",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-21.3649% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 36.2601,
+   "note": "regime DEEP-FAIL (-21.3649% vs 200-day) - watch only, no size; -DI 28.3588 >= +DI 10.8757 - sellers in control; price 38.9013 at/below ZLSMA 40.9911 - structure has not turned; stop is 0.25x ATR (1.7541) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "URI",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: stop is 0.99x ATR (49.931)",
+   "regime": "PASS",
+   "adx": 27.9877,
+   "note": "stop is 0.99x ATR (49.931) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "VRSN",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 19.2497 below 20",
+   "regime": "REPAIR",
+   "adx": 19.2497,
+   "note": "ADX 19.2497 below 20 - no trend to ride",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "WWD",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 19.9452 below 20",
+   "regime": "PASS",
+   "adx": 19.9452,
+   "note": "ADX 19.9452 below 20 - no trend to ride; price 412.8043 at/below ZLSMA 424.8687 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "XLI",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: ADX 16.269 below 20",
+   "regime": "PASS",
+   "adx": 16.269,
+   "note": "ADX 16.269 below 20 - no trend to ride; price 182.3775 at/below ZLSMA 184.3857 - structure has not turned",
+   "status": "TOO NEW"
+  },
+  {
+   "date": "2026-07-28",
+   "sym": "ZTS",
+   "cohort": "BLOCKED",
+   "verdict": "BLOCKED: regime DEEP-FAIL (-29.9469% vs 200-day)",
+   "regime": "DEEP-FAIL",
+   "adx": 20.6329,
+   "note": "regime DEEP-FAIL (-29.9469% vs 200-day) - watch only, no size; price 78.1275 at/below ZLSMA 84.0428 - structure has not turned",
    "status": "TOO NEW"
   }
  ]
