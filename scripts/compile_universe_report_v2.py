@@ -27,7 +27,7 @@ from openpyxl import Workbook, load_workbook
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from scan_workbook_style import (  # noqa: E402
     Col, write_table, readme_sheet, data_quality_sheet, notes_sheet,
-    verdict_fill, split_note, safe, style_header_row,
+    verdict_fill, split_note, safe, style_header_row, plainify,
     FMT_PRICE, FMT_PCT, FMT_X, FMT_INT, BOLD, RED_FONT, GREEN, AMBER, RED, GREY, SECTION,
 )
 from gate_stack import evaluate, funnel, MissingGateData, DEFAULT_POSITION  # noqa: E402
@@ -38,6 +38,9 @@ from rank_candidates import (  # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATE = sys.argv[1] if len(sys.argv) > 1 else None
+# Optional second arg: explicit output path. Lets a re-compile be checked
+# without touching a workbook Omar may have hand-annotated.
+OUT_OVERRIDE = sys.argv[2] if len(sys.argv) > 2 else None
 if not DATE:
     cands = sorted(f for f in os.listdir(os.path.join(REPO, "watchlists"))
                    if re.match(r"universe-results-\d{4}-\d{2}-\d{2}\.json$", f))
@@ -191,6 +194,11 @@ readme_sheet(
          "If the regime is hostile, everything below gets smaller size or no size."),
         ("2 - Fresh Buys", "Every buy signal 5 sessions old or newer.",
          "The Verdict column is the decision. Green = actionable, amber = conflicted, red = blocked."),
+        ("2b - Gated Longs", "Every stock in BUY mode - of ANY age - that still clears the full gate stack.",
+         "Fresh Buys only lists signals 5 sessions old or newer; this tab is where the",
+         "established, still-valid uptrends live (the DVN/PBR type). Ranked least-stretched",
+         "first, so the best entries sit on top. Check the Extension and Catalyst columns",
+         "before acting - many older uptrends are stretched or about to report earnings."),
         ("3 - Plans", "The sized trades: entry, stop, share count, dollar risk, targets, alerts."),
         ("4 - Blocked", "Fresh signals the gates rejected, and which gate did it.",
          "These are NOT trades. The reason column is the point of this tab."),
@@ -200,8 +208,10 @@ readme_sheet(
          "Anything that reversed or was downgraded since the last run is flagged here."),
         ("8 - Market Movers", "The day's biggest gainers/losers in the WHOLE market, each screened.",
          "Almost all are microcap SKIPs; the few liquid movers get a real buy/short call."),
-        ("9 - Track Record", "How the scanner's past picks have actually done - the honest scorecard.",
-         "Broken down by grade and tab; shows whether a higher grade is worth more (so far, no)."),
+        ("9 - Track Record", "Every past origination pick, one row each, showing how it has done",
+         "since the day it was called - price then, price now, best and worst point along",
+         "the way. The grade scorecard sits below the list (so far a higher grade has NOT",
+         "been worth more)."),
         ("10 - Data Quality", "What was broken or partial in this run, ranked by severity.",
          "READ THE RED ROWS. A BLOCKER means conclusions in this file may be wrong."),
         ("11 - Run Summary", "Counts and run metadata."),
@@ -542,6 +552,7 @@ def fresh_rows():
         # Quoting it as an entry put that error straight into the plan.
         d_last, d_stop, d_risk = plan_display(h, last, stop)
         _, why, _ = split_note(h.get("note"))
+        why = plainify(why)
 
         g = h.get("gates") or {}
         feat = {
@@ -618,8 +629,9 @@ for _i, _g in enumerate(_gated, 1):
         "ext": round(_g["pct_vs_200"], 1) if _g.get("pct_vs_200") is not None else None,
         "magical": _g.get("magical"), "adx": _g.get("adx"), "age": _g.get("bars_back"),
         "regime": _g.get("regime"),
-        "note": (("STARTER (regime REPAIR - half size). "
-                  if str(_g.get("verdict", "")).startswith("STARTER") else "") + (_g.get("note") or "")),
+        "note": plainify(("STARTER (regime REPAIR - half size). "
+                          if str(_g.get("verdict", "")).startswith("STARTER") else "")
+                         + (_g.get("note") or "")),
     })
 _inject_cat(grows)
 ws = wb.create_sheet("2b - Gated Longs")
@@ -652,10 +664,13 @@ PLAN_COLS = [
         "(retired 2026-07-25: targets measured harmful - they cap the tail winners). "
         "Exits are: stop / thesis break / 20% ratchet below the highest close once "
         "well in profit."),
-    Col("h", "Earnings Gate", 26,
+    Col("h", "Earnings Gate", 42,
         "Next earnings date and whether it blocks or shrinks this trade. Never full "
-        "size into a report."),
-    Col("i", "Alert", 14, "The alert ID armed for this level, so the trigger reminds you why."),
+        "size into a report. Fed by the catalyst calendar; 'Clear' still means "
+        "confirm the date yourself."),
+    Col("i", "Alert", 40,
+        "The alert IDs armed for this plan, or the exact price levels to wire on "
+        "entry (entry limit + trend-break stop) and the current board state."),
     Col("j", "Plan Notes", 60, "Conditions attached to the plan - what must be true to take it."),
     Col("k", "Thesis & Break", 62,
         "What this trade is betting on, and the observation that proves it wrong "
@@ -669,29 +684,93 @@ PLAN_COLS = [
 ACCOUNT, RISK_UNIT, MAX_ORDER = 1_000_000.0, 5_000.0, 100_000.0
 
 
-def _earn_txt(h):
-    """Earnings cell - never leave it as a bare 'verify', say what is known."""
+def _earn_txt(sym, h):
+    """Earnings cell - say what is actually KNOWN, not a bare 'verify'.
+
+    Omar 2026-07-28: this column sat useless ('NOT CHECKED') on every row while
+    the catalyst calendar - already built and already joined onto three other
+    tabs - had the answer. Use it.
+    """
     e = h.get("earnings") or {}
-    if not e:
-        return "NOT CHECKED - verify before entry; the scan cannot see earnings"
-    est = e.get("estimate", "?")
-    tag = "CONFIRMED" if e.get("confirmed") else "ESTIMATED"
-    days = e.get("days_out")
-    out = f"{est} ({tag}"
-    if days is not None:
-        out += f", ~{days}d out"
-    out += ")"
-    if e.get("rule"):
-        out += f" - {e['rule']}"
-    return out
+    if e:
+        est = e.get("estimate", "?")
+        tag = "CONFIRMED" if e.get("confirmed") else "ESTIMATED"
+        days = e.get("days_out")
+        out = f"{est} ({tag}"
+        if days is not None:
+            out += f", ~{days}d out"
+        out += ")"
+        if e.get("rule"):
+            out += f" - {e['rule']}"
+        return out
+    c = CATALYST.get(sym)
+    if c and str(c.get("event_type", "")).lower().startswith("earn"):
+        when = c.get("date_or_window", "?")
+        try:
+            days = (datetime.date.fromisoformat(when)
+                    - datetime.date.fromisoformat(DATE)).days
+            when_txt = f"{when} ({days} day{'s' if days != 1 else ''} away)"
+        except ValueError:
+            when_txt = when
+        detail = c.get("detail")
+        return (f"REPORTS {when_txt}" + (f" - {detail}" if detail else "")
+                + ". Inside the 7-day window: do NOT carry full size into the "
+                  "print. Fresh entry only after it reports, beats, and holds.")
+    if c:
+        return (f"{c.get('event_type')} {c.get('date_or_window')} - a binary "
+                "event; see the Catalyst View column on the Fresh Buys tab.")
+    return ("Clear - no earnings on the 7-day catalyst calendar. Still confirm "
+            "the date yourself before entry; the calendar has missed changes.")
 
 
-def _alert_txt(h):
-    """Alert cell - show the armed IDs so the plan and the alert board agree."""
+def _alert_txt(sym, h, entry=None, stop=None):
+    """Alert cell - the LEVELS that matter for this stock, and the board state.
+
+    Omar 2026-07-28: a bare 'NOT ARMED' says nothing. Show the two prices an
+    alert should sit at (entry limit + trend-break stop), and whether the board
+    already has something active on the name so old alerts get retired first.
+    """
     a = h.get("alerts") or {}
-    if not a:
-        return "NOT ARMED"
-    return "; ".join(f"{k} {v.get('level')} (id {v.get('id')})" for k, v in a.items())
+    if a:
+        return "; ".join(f"{k} {v.get('level')} (id {v.get('id')})"
+                         for k, v in a.items())
+    b = ALERT_BOARD.get(sym)
+    board = ("the board already has an ACTIVE alert on this name - re-read its "
+             "message before wiring more, retire it if stale"
+             if b and b.get("active") else "nothing on the board yet")
+    levels = []
+    if entry:
+        levels.append(f"entry limit at {entry:.2f}")
+    if stop:
+        levels.append(f"trend-break at {stop:.2f}")
+    lvl = " and ".join(levels) if levels else "levels TBD"
+    return (f"WIRE ON ENTRY: {lvl}. Right now {board}. Every alert message "
+            "must say what the level means and what to do when it fires.")
+
+
+try:
+    ALERT_BOARD = {r["sym"]: r for r in json.load(
+        open(os.path.join(REPO, "watchlists", "alert-board.json"), encoding="utf-8"))}
+except Exception:
+    ALERT_BOARD = {}
+
+
+def _thesis_txt(r):
+    """Thesis & Break cell, written the way Omar reads: what the bet is, what
+    proves it wrong, and what still has to be added by hand before entry."""
+    g = hits.get(r["sym"], {}).get("gates") or {}
+    regime = g.get("regime") or r.get("regime") or "?"
+    adx = g.get("adx") if g.get("adx") is not None else r.get("adx")
+    adx_txt = f"about {adx:.0f}" if isinstance(adx, (int, float)) else "unknown"
+    return (f"The bet: this stock's uptrend just resumed and should keep going. "
+            f"It is above its 200-day average (health check: {regime}), the "
+            f"trend-strength reading is {adx_txt}, and the Chandelier just "
+            f"flipped to BUY. The bet is WRONG the day the daily Chandelier "
+            f"flips back to SELL, or the health check stops passing - exit that "
+            f"day, even if the stop has not been hit and even if the trade is "
+            f"in profit. Before entering, add the one company-specific reason "
+            f"this should work (the catalyst, or the level that must hold). "
+            f"A plan without that is not takeable - protocol rule 11.")
 
 
 plan_rows = []
@@ -716,21 +795,14 @@ for r in _fresh:
         "e": f"${dollars:,.0f} ({shares:,} sh)",
         "f": round(shares * risk_ps, 0),
         "g": f"{target:.2f} CHECKPOINT (no sell)",
-        "h": _earn_txt(hits.get(r["sym"], {})),
-        "i": _alert_txt(hits.get(r["sym"], {})),
+        "h": _earn_txt(r["sym"], hits.get(r["sym"], {})),
+        "i": _alert_txt(r["sym"], hits.get(r["sym"], {}), last, stop),
         "j": (f"Rank #{r['rank']} of {len(_fresh)}, buy score {r['buy_score']}. "
               f"Stop is the Chandelier level ({r.get('risk_pct')}% away). "
               + ("HALF SIZE: regime REPAIR. " if starter else "")
-              + "Confirm the earnings date and check the ATR floor by hand - "
-                "neither is wired into the gate stack yet."),
-        "k": (lambda g: (
-              f"Thesis: gated trend continuation - regime {g.get('regime') or r.get('regime') or '?'}, "
-              f"ADX {g.get('adx') or '?'}, fresh Chandelier BUY. "
-              f"BREAK = daily O.G Chandelier flips SELL, or regime exits PASS -> "
-              f"EXIT regardless of stop/profit. ADD the name-specific thesis "
-              f"(catalyst / level that must hold) by hand before entry - "
-              f"a plan without one is NOT takeable (protocol rule 11)."))
-             (r.get("gates") or {}),
+              + "Check the stop against a normal day's swing by hand - the ATR "
+                "floor is not wired into the gate stack yet."),
+        "k": _thesis_txt(r),
     })
 
 ws = wb.create_sheet("3 - Plans")
@@ -786,7 +858,8 @@ for sym, h in hits.items():
                            "sym": sym, "company": e.get("description"),
                            "signal_date": h.get("signal_date_est"),
                            "magical": h.get("magical"), "regime": h.get("regime"),
-                           "gate": v.replace("BLOCKED: ", ""), "why": why})
+                           "gate": plainify(v.replace("BLOCKED: ", "")),
+                           "why": plainify(why)})
 block_rows.sort(key=lambda r: -(r["severity"] or 0))
 for i, r in enumerate(block_rows, 1):
     r["rank"] = i
@@ -870,24 +943,173 @@ for line in SHORT_POLICY.strip().split("\n"):
 # ------------------------------------------------------- 6 Tracker Broken ---
 TRACK_COLS = [
     Col("sym", "Ticker", 9, "The stock symbol."),
+    Col("rec_date", "Recommended On", 13, "The date of the origination pick."),
+    Col("grade", "Grade", 8, "The origination grade the pick carried (A+/A/B/C)."),
     Col("since", "% Since Recommended", 16, "Return since the call was made.", FMT_PCT),
     Col("rec", "Recommended At", 13, "The price when it was recommended.", FMT_PRICE),
-    Col("last", "Price Now", 11, "Latest price.", FMT_PRICE),
+    Col("last", "Price Now", 11, "Latest real price from today's scan.", FMT_PRICE),
     Col("magical", "Overbought / Oversold (CCI-20)", 16, "20-period CCI.", FMT_PCT),
-    Col("reason", "Why It Broke", 55, "What changed - the trend condition that failed."),
+    Col("reason", "Why It Broke", 70, "What changed - the trend condition that failed, "
+        "and what the playbook says to do about it."),
 ]
-tw = res.get("tracker_exit_watch", {})
-track_rows = [{"sym": b["sym"], "since": b.get("since_rec_pct"), "rec": b.get("rec"),
-               "last": b.get("last"), "magical": b.get("magical"), "reason": b.get("reason")}
-              for b in sorted(tw.get("broken", []), key=lambda x: x.get("since_rec_pct") or 0)]
+
+
+def _derive_tracker_broken():
+    """Build the broken-picks list the scan pipeline never populated.
+
+    BUG FOUND 2026-07-28 (Omar: 'there has not been any data populating'):
+    build_universe_results.py has ALWAYS written "tracker_exit_watch": {} - a
+    hardcoded empty dict - so this tab compiled to a header row and nothing else
+    on every single run. Nothing ever computed it.
+
+    The inputs were sitting in the repo the whole time: the origination
+    recommendation log (snapshotted daily into research/) says what was picked,
+    when, and at what price; today's scan says which of those names the
+    Chandelier now has in SELL mode. A pick is BROKEN when the indicator has
+    flipped against it - the uptrend the pick was riding is over.
+    """
+    import csv
+    import glob as _glob
+    snaps = sorted(_glob.glob(os.path.join(REPO, "research",
+                                           "recommendations_log-*.csv")))
+    usable = [s for s in snaps
+              if re.search(r"(\d{4}-\d{2}-\d{2})", os.path.basename(s))
+              and re.search(r"(\d{4}-\d{2}-\d{2})", os.path.basename(s)).group(1) <= DATE]
+    if not usable:
+        usable = snaps
+    if not usable:
+        return {"broken": [], "breakage_stat":
+                "No origination recommendation log found in research/ - "
+                "run scripts/track_record.py first.",
+                "coverage": "none", "gap_note": "no log, nothing to check"}
+    snap = usable[-1]
+    rows = list(csv.DictReader(open(snap, encoding="utf-8", errors="replace")))
+    open_rows = [r for r in rows if str(r.get("status", "")).upper() == "OPEN"]
+    # One row per ticker: the most recent open call (a ticker re-picked three
+    # times would otherwise clutter the tab with three identical breaks).
+    latest = {}
+    n_calls = {}
+    for r in sorted(open_rows, key=lambda x: x.get("date") or ""):
+        latest[r["ticker"]] = r
+        n_calls[r["ticker"]] = n_calls.get(r["ticker"], 0) + 1
+    sell_set = set(res.get("sell_mode") or [])
+    scanned = {a["sym"]: a for a in res.get("all_names") or []}
+    in_scan = [t for t in latest if t in scanned]
+    broken = []
+    for t, r in latest.items():
+        if t not in sell_set:
+            continue
+        a = scanned.get(t, {})
+        now = a.get("real_last") or a.get("real_close") or a.get("last")
+        try:
+            rec_price = float(r.get("price"))
+        except (TypeError, ValueError):
+            rec_price = None
+        since = (round((now / rec_price - 1) * 100, 1)
+                 if (now and rec_price) else None)
+        stand = ("The gain that was on the table is being given back - bank "
+                 "what is left rather than round-trip it."
+                 if (since or 0) > 0 else
+                 "It never worked and the trend is now against it - cut it "
+                 "rather than hope.")
+        extra = (f" This name has been picked {n_calls[t]} times; this grades "
+                 f"the latest call." if n_calls[t] > 1 else "")
+        broken.append({
+            "sym": t, "rec_date": r.get("date"), "grade": r.get("grade"),
+            "since": since, "rec": rec_price, "last": now,
+            "magical": a.get("magical"),
+            "reason": (f"Picked {r.get('date')} at ${rec_price:,.2f} as a "
+                       f"grade-{r.get('grade')} name. The Chandelier has since "
+                       f"flipped it to SELL - the uptrend the pick was riding "
+                       f"is over. {stand}{extra}"
+                       if rec_price else
+                       f"Picked {r.get('date')}. The Chandelier has since "
+                       f"flipped it to SELL - the uptrend is over."),
+        })
+    broken.sort(key=lambda x: x.get("since") if x.get("since") is not None else 0)
+    n_open, n_in, n_broken = len(latest), len(in_scan), len(broken)
+    pct = round(100.0 * n_broken / n_in) if n_in else 0
+    return {
+        "broken": broken,
+        "breakage_stat": (
+            f"{n_broken} of the {n_in} open origination picks visible in "
+            f"today's scan ({pct}%) have BROKEN trend - the indicator that "
+            f"justified them has flipped to SELL. Log: {os.path.basename(snap)}."),
+        "coverage": f"{n_in} of {n_open} open picks appear in today's scan universe",
+        "gap_note": ("picks outside the scan universe cannot be checked here - "
+                     "absence from this tab is not a clean bill of health for them"),
+    }
+
+
+tw = res.get("tracker_exit_watch") or {}
+if not tw.get("broken"):
+    tw = _derive_tracker_broken()
+track_rows = [{"sym": b["sym"], "rec_date": b.get("rec_date"), "grade": b.get("grade"),
+               "since": b.get("since_rec_pct", b.get("since")), "rec": b.get("rec"),
+               "last": b.get("last"), "magical": b.get("magical"),
+               "reason": plainify(b.get("reason"))}
+              for b in sorted(tw.get("broken", []),
+                              key=lambda x: x.get("since_rec_pct") or x.get("since") or 0)]
 ws = wb.create_sheet("6 - Tracker Broken")
-write_table(ws, TRACK_COLS, track_rows)
+write_table(ws, TRACK_COLS, track_rows,
+            row_fill=lambda r: RED if (r.get("since") or 0) < 0 else AMBER)
+if not track_rows:
+    ws.append([])
+    ws.append([safe("No open origination pick currently sits in SELL mode - "
+                    "nothing has broken as of this run.")])
 ws.append([])
 ws.append([safe(tw.get("breakage_stat", ""))])
 ws.cell(row=ws.max_row, column=1).font = RED_FONT
 ws.append([safe(f"Coverage: {tw.get('coverage', '?')} - {tw.get('gap_note', '')}")])
 
 # ------------------------------------------------------ 7 Notes & Decisions ---
+# "What Changed" was empty on every row (Omar 2026-07-28): it only ever showed a
+# tag if the scan note happened to START with "REVERSAL."/"DOWNGRADED." etc.,
+# which the pipeline never writes. Compute it properly: compare this run's
+# verdict per name against the PREVIOUS run's results file.
+_prev_hits, _PREV_DATE = {}, None
+_prev_files = sorted(
+    f for f in os.listdir(os.path.join(REPO, "watchlists"))
+    if re.match(r"universe-results-\d{4}-\d{2}-\d{2}\.json$", f) and f[17:-5] < DATE)
+if _prev_files:
+    _PREV_DATE = _prev_files[-1][17:-5]
+    try:
+        _pj = json.load(open(os.path.join(REPO, "watchlists", _prev_files[-1])))
+        _prev_hits = {h["sym"]: str(h.get("verdict") or "") for h in _pj.get("hits", [])}
+    except Exception:
+        _prev_hits, _PREV_DATE = {}, None
+
+
+def _verdict_class(v):
+    v = str(v or "")
+    if v.startswith("CANDIDATE"):
+        return "actionable"
+    if v.startswith("STARTER"):
+        return "starter-size only"
+    if v.startswith("BLOCKED"):
+        return "blocked"
+    return "unknown"
+
+
+def _what_changed(sym, verdict, note_tag):
+    if note_tag:                      # explicit tag written by the scan wins
+        return note_tag
+    if not _PREV_DATE:
+        return "(no earlier run on file to compare against)"
+    prev = _prev_hits.get(sym)
+    if prev is None:
+        return (f"NEW - this name was not a fresh signal in the last run "
+                f"({_PREV_DATE}).")
+    now_c, prev_c = _verdict_class(verdict), _verdict_class(prev)
+    if now_c == prev_c:
+        return f"Same call as {_PREV_DATE} - still {now_c}."
+    order = {"blocked": 0, "starter-size only": 1, "actionable": 2}
+    word = ("UPGRADED" if order.get(now_c, 0) > order.get(prev_c, 0)
+            else "DOWNGRADED")
+    return (f"{word} since {_PREV_DATE}: was {prev_c} "
+            f"('{prev}'), now {now_c}.")
+
+
 _rank_of = {r["sym"]: r["rank"] for r in _fresh}
 note_rows = []
 for sym, h in hits.items():
@@ -895,10 +1117,13 @@ for sym, h in hits.items():
     sc, comp, pros, cons = SCORED.get(sym, (None, {}, [], []))
     note_rows.append({
         "rank": _rank_of.get(sym),
-        "sym": sym, "verdict": h.get("verdict"), "changed": changed,
-        "pros": ("* " + "\n* ".join(pros)) if pros else "(nothing argues for it)",
-        "cons": ("* " + "\n* ".join(cons)) if cons else "(no flags - genuinely clean)",
-        "reasoning": full or "(no narrative recorded)",
+        "sym": sym, "verdict": h.get("verdict"),
+        "changed": _what_changed(sym, h.get("verdict"), changed),
+        "pros": plainify(("* " + "\n* ".join(pros)) if pros
+                         else "(nothing argues for it)"),
+        "cons": plainify(("* " + "\n* ".join(cons)) if cons
+                         else "(no flags - genuinely clean)"),
+        "reasoning": plainify(full) or "(no narrative recorded)",
     })
 note_rows.sort(key=lambda r: (r["rank"] is None, r["rank"] or 999))
 notes_sheet(wb.create_sheet("7 - Notes & Decisions"), note_rows)
@@ -918,8 +1143,9 @@ MOVER_COLS = [
     Col("price", "Price", 10, "Price at the close.", FMT_PRICE),
     Col("pct", "Day Change %", 12, "The move that put it on the list.", FMT_PCT),
     Col("mcap", "Market Cap", 13,
-        "Company size. Under ~$2B = microcap: it gaps, halts, and cannot absorb a "
-        "$100k order. The single biggest reason most movers are untradeable."),
+        "Company size. Standing order: only $2B+ (mid-cap and larger) appears on "
+        "this tab at all - smaller names gap, halt, and cannot absorb a $100k "
+        "order, so they are dropped and counted in the note below the table."),
     Col("dvol", "$ Traded Today", 14,
         "Price x volume. A $100k order needs this to be large, or you move the "
         "price against yourself getting in and out."),
@@ -947,8 +1173,13 @@ if not mv_data:
     ws.append([safe(f"No watchlists/market-movers-{DATE}.json found. Fetch the day's "
                     "gainers/losers (stockanalysis.com) and re-run.")])
 else:
-    mrows = []
-    # liquid movers first (they got full protocol), then the raw microcap movers
+    # Omar 2026-07-28: only MID-CAP OR BIGGER ($2B+) belongs on this tab.
+    # Anything smaller is not investable at our size, so listing forty microcap
+    # pumps was noise. They are DROPPED entirely, and the drop is counted below
+    # so a short list is never mistaken for a quiet day.
+    MIN_INVESTABLE_CAP = 2e9
+    mrows, _dropped = [], {"gainers": 0, "losers": 0}
+    # liquid movers first (they got full protocol) - by definition $2B+
     for lm in mv_data.get("liquid_movers", []):
         mrows.append({
             "side": lm.get("side", "gainer").upper() + " (liquid)",
@@ -958,8 +1189,17 @@ else:
             "verdict": lm.get("protocol", "NEEDS CHART"),
             "why": lm.get("protocol_why", ""),
         })
+    _liquid_syms = {r["sym"] for r in mrows}
     for side_key in ("gainers", "losers"):
         for m in mv_data.get(side_key, []):
+            cap = m.get("market_cap")
+            if cap is None:
+                cap = parse_num(m.get("market_cap_raw"))
+            if m["sym"] in _liquid_syms:
+                continue          # already shown with the full protocol read
+            if cap is None or cap < MIN_INVESTABLE_CAP:
+                _dropped[side_key] += 1
+                continue
             side = m.get("side", side_key[:-1])
             if m.get("tradeable"):
                 verdict, why = "TRADEABLE - see chart", \
@@ -970,7 +1210,7 @@ else:
             mrows.append({
                 "side": side.upper(), "sym": m["sym"], "company": m.get("company"),
                 "price": m.get("price"), "pct": m.get("pct_change"),
-                "mcap": _fmt_cap(m.get("market_cap")),
+                "mcap": _fmt_cap(cap),
                 "dvol": _fmt_cap((m.get("price") or 0) * (m.get("volume") or 0)),
                 "verdict": verdict, "why": why,
             })
@@ -984,16 +1224,21 @@ else:
         return GREY   # the SKIPs - visually recede so the tradeable rows pop
 
     write_table(ws, MOVER_COLS, mrows, autofilter=True, row_fill=_mv_fill)
-    for n in range(2, ws.max_row + 1):
-        ws.row_dimensions[n].height = 44
+    if not mrows:
+        ws.append([])
+        ws.append([safe("NOTHING INVESTABLE MOVED. Every one of today's biggest "
+                        "gainers and losers was below $2B - microcap pumps and "
+                        "crashes, none of them tradeable at our size.")])
+        ws.cell(row=ws.max_row, column=1).font = BOLD
     ws.append([])
     ws.append([safe(f"Source: {mv_data.get('source','?')}, captured {mv_data.get('captured','?')}.")])
-    ws.append([safe("WHY ALMOST EVERYTHING HERE IS 'SKIP': the biggest raw percentage "
-                    "movers in the whole market are nearly always microcaps and penny "
-                    "stocks - pumps, post-halt spikes, Chinese small-caps. They cannot "
-                    "absorb a $100k order and are not shortable (no borrow, squeeze "
-                    "risk). Only names clearing the liquidity screen (price >= $5, cap "
-                    ">= $2B, decent $ volume) get a real buy/short call.")])
+    _n_drop = _dropped["gainers"] + _dropped["losers"]
+    ws.append([safe(f"STANDING ORDER (Omar 2026-07-28): only mid-cap and larger "
+                    f"($2 billion+) is shown here - anything smaller is not "
+                    f"investable at our size. Dropped today on that rule: "
+                    f"{_dropped['gainers']} gainers and {_dropped['losers']} losers "
+                    f"({_n_drop} names, mostly microcap pumps, post-halt spikes "
+                    f"and penny stocks).")])
     ws.cell(row=ws.max_row, column=1).font = BOLD
     ws.append([safe("For the big LIQUID movers that reflect real rotation, the "
                     "'1 - Market & Rotation' tab and the ranked buy list are the "
@@ -1007,65 +1252,148 @@ _trpath = os.path.join(REPO, "research", "track-record.json")
 if os.path.exists(_trpath):
     _tr = json.load(open(_trpath))
 
-TR_COLS = [
-    Col("bucket", "Group", 20, "The pick group being scored - all picks, then by "
-        "grade, then by origination tab."),
-    Col("n", "Picks", 8, "How many recommendations in this group.", FMT_INT),
-    Col("win", "Green %", 9, "Share currently in profit (unrealized).", FMT_PCT),
-    Col("mean", "Mean Return %", 13, "Average unrealized return since the pick.", FMT_PCT),
-    Col("median", "Median Return %", 15, "Median - less distorted by outliers.", FMT_PCT),
-    Col("mfe", "Avg Best %", 11, "Average best excursion reached - upside that was on "
-        "the table.", FMT_PCT),
-    Col("mae", "Avg Worst %", 12, "Average worst drawdown suffered - pain held through.", FMT_PCT),
+# Omar 2026-07-28: this tab must read like the origination scanner's own TRACKER
+# tab - every pick broken out INDIVIDUALLY, showing how it has done since the day
+# it was recommended. The grade/tab averages that used to be the whole tab now
+# sit below the pick list as the summary.
+TRP_COLS = [
+    Col("date", "Picked On", 11, "The date the origination scanner recommended it."),
+    Col("ticker", "Ticker", 9, "The stock symbol."),
+    Col("name", "Company", 28, "Company name."),
+    Col("grade", "Grade", 8, "A+ / A / B / C from the origination scan."),
+    Col("tab", "From Scan Tab", 16, "Which origination-scan tab produced the pick."),
+    Col("rec_price", "Price Then", 11, "The price on the day of the call.", FMT_PRICE),
+    Col("cur_price", "Price Now", 11, "The latest tracked price.", FMT_PRICE),
+    Col("ret_pct", "% Since Picked", 13,
+        "Return from the call to now (unrealized, the scanner's own tracking).", FMT_PCT),
+    Col("best_pct", "Best % Reached", 13,
+        "The most it was ever up - the upside that was on the table.", FMT_PCT),
+    Col("worst_pct", "Worst % Reached", 13,
+        "The most it was ever down - the pain a holder sat through.", FMT_PCT),
+    Col("days_held", "Days", 7, "Days since the call.", FMT_INT),
+    Col("status", "Status", 10, "OPEN = still being tracked."),
 ]
+
+
+def _load_picks():
+    """Per-pick rows: from track-record.json if present, else straight from the
+    dated log snapshot in research/ (older json files predate the picks list)."""
+    if _tr and _tr.get("picks"):
+        return _tr["picks"]
+    import csv
+    import glob as _glob
+    snaps = sorted(_glob.glob(os.path.join(REPO, "research",
+                                           "recommendations_log-*.csv")))
+    if not snaps:
+        return []
+    def _f(x):
+        try:
+            return float(x)
+        except (TypeError, ValueError):
+            return None
+    picks = []
+    for r in csv.DictReader(open(snaps[-1], encoding="utf-8", errors="replace")):
+        picks.append({
+            "date": r.get("date"), "ticker": r.get("ticker"), "name": r.get("name"),
+            "grade": r.get("grade"), "tab": r.get("tab"),
+            "rec_price": _f(r.get("price")), "cur_price": _f(r.get("cur_price")),
+            "ret_pct": round(_f(r.get("cur_ret")) * 100, 2)
+                       if _f(r.get("cur_ret")) is not None else None,
+            "best_pct": round(_f(r.get("best_ret")) * 100, 1)
+                        if _f(r.get("best_ret")) is not None else None,
+            "worst_pct": round(_f(r.get("worst_ret")) * 100, 1)
+                         if _f(r.get("worst_ret")) is not None else None,
+            "days_held": _f(r.get("days_held")), "status": r.get("status"),
+        })
+    picks.sort(key=lambda p: (p["date"] or "", p["ticker"] or ""), reverse=True)
+    return picks
+
+
 ws = wb.create_sheet("9 - Track Record")
-if not _tr or _tr.get("error"):
+_picks = _load_picks()
+if (not _tr or _tr.get("error")) and not _picks:
     style_header_row(ws, ["Track Record"], ["Run track_record.py first."],
                      [40], freeze=None, autofilter=False)
     ws.append([safe("No research/track-record.json - run scripts/track_record.py.")])
 else:
-    o = _tr["overall"]
-    trows = [{"bucket": "ALL PICKS", "n": o["n"], "win": o["win_pct"], "mean": o["mean"],
-              "median": o["median"], "mfe": o["mfe"], "mae": o["mae"]}]
-    for g, v in _tr["by_grade"].items():
-        trows.append({"bucket": f"grade {g}", "n": v["n"], "win": v["win_pct"],
-                      "mean": v["mean"], "median": v["median"], "mfe": v["mfe"], "mae": v["mae"]})
-    for t, v in _tr["by_tab"].items():
-        trows.append({"bucket": f"tab {t}", "n": v["n"], "win": v["win_pct"],
-                      "mean": v["mean"], "median": v["median"], "mfe": v["mfe"], "mae": v["mae"]})
-
-    def _tr_fill(r):
-        if r["bucket"] == "ALL PICKS":
+    def _pick_fill(r):
+        m = r.get("ret_pct")
+        if m is None:
             return None
-        m = r.get("mean") or 0
         return GREEN if m > 0 else (RED if m < -3 else AMBER)
 
-    write_table(ws, TR_COLS, trows, autofilter=False, row_fill=_tr_fill)
+    write_table(ws, TRP_COLS, _picks, autofilter=True, row_fill=_pick_fill)
     ws.append([])
-    ws.append([safe(f"ORIGINATION SCANNER TRACK RECORD - {_tr['total']} picks, "
-                    f"{_tr['date_range'][0]} to {_tr['date_range'][1]}. Returns are "
-                    f"UNREALIZED (matured {o['matured']}/{_tr['total']} at the 21-day "
-                    f"mark; the log only started 7/1). This grades the scanner's own "
-                    f"A/B/C picks, separate from the trade-call ledger.")])
-    ws.cell(row=ws.max_row, column=1).font = BOLD
-    q = _tr.get("score_quartile")
-    if q:
-        ws.append([safe(f"DOES THE SCORE PREDICT? bottom-25% by score mean "
-                        f"{q['bottom_q_mean']:+.2f}%, top-25% mean {q['top_q_mean']:+.2f}%, "
-                        f"spread {q['spread']:+.2f}pt.")])
-        ws.cell(row=ws.max_row, column=1).font = RED_FONT if q["spread"] <= 0 else BOLD
-        if q["spread"] <= 0:
-            ws.append([safe("The origination score does NOT predict returns here - flat/"
-                            "backwards, the SAME result as the BUY SCORE calibration. Two "
-                            "independent scores, same verdict: sort what to look at, do "
-                            "not forecast.")])
-    ws.append([safe("Unrealized reads on OPEN positions, not final results. Grade A "
-                    "(mean -2.8%) is NOT beating grade B (-2.0%) - higher grade has not "
-                    "paid so far. Real win-rates land as the July picks reach 21 days "
-                    "through early August.")])
+    ws.append([safe("SCORECARD - the averages behind the list above. Green share = "
+                    "how many picks are currently in profit.")])
+    ws.cell(row=ws.max_row, column=1).font = SECTION
+    if _tr and not _tr.get("error"):
+        o = _tr["overall"]
+        ws.append([safe(f"ALL {o['n']} PICKS: {o['win_pct']}% green, average "
+                        f"{o['mean']:+.1f}%, median {o['median']:+.1f}%, average "
+                        f"best point +{o['mfe']}%, average worst point {o['mae']}%.")])
+        ws.cell(row=ws.max_row, column=1).font = BOLD
+        for g, v in _tr["by_grade"].items():
+            ws.append([safe(f"  grade {g}: {v['n']} picks, {v['win_pct']}% green, "
+                            f"average {v['mean']:+.1f}%, median {v['median']:+.1f}%")])
+        for t, v in _tr["by_tab"].items():
+            ws.append([safe(f"  tab {t}: {v['n']} picks, {v['win_pct']}% green, "
+                            f"average {v['mean']:+.1f}%, median {v['median']:+.1f}%")])
+    if _tr and not _tr.get("error"):
+        ws.append([])
+        ws.append([safe(f"ORIGINATION SCANNER TRACK RECORD - {_tr['total']} picks, "
+                        f"{_tr['date_range'][0]} to {_tr['date_range'][1]}. Returns are "
+                        f"UNREALIZED (matured {o['matured']}/{_tr['total']} at the 21-day "
+                        f"mark; the log only started 7/1). This grades the scanner's own "
+                        f"A/B/C picks, separate from the trade-call ledger.")])
+        ws.cell(row=ws.max_row, column=1).font = BOLD
+        q = _tr.get("score_quartile")
+        if q:
+            ws.append([safe(f"DOES THE SCORE PREDICT? bottom-25% by score mean "
+                            f"{q['bottom_q_mean']:+.2f}%, top-25% mean {q['top_q_mean']:+.2f}%, "
+                            f"spread {q['spread']:+.2f}pt.")])
+            ws.cell(row=ws.max_row, column=1).font = RED_FONT if q["spread"] <= 0 else BOLD
+            if q["spread"] <= 0:
+                ws.append([safe("The origination score does NOT predict returns here - flat/"
+                                "backwards, the SAME result as the BUY SCORE calibration. Two "
+                                "independent scores, same verdict: sort what to look at, do "
+                                "not forecast.")])
+        ws.append([safe("These are unrealized reads on OPEN positions, not final "
+                        "results. Check the grade lines above before assuming a "
+                        "higher grade is worth more - so far it has not been.")])
 
 # ---------------------------------------------------------- 10 Data Quality ---
-dq = [classify(q) if isinstance(q, str) else q for q in res.get("data_quality", [])]
+def _dq_polish(d):
+    """Every data-quality row reads plainly and no column is left blank.
+
+    Omar 2026-07-28: 'Effect on this run' and 'What to do' arrived empty on
+    INFO rows and the findings carried indicator shorthand. An empty impact
+    cell reads as 'unknown damage', which is worse than saying 'none'.
+    """
+    d = dict(d)
+    sev = str(d.get("severity", "INFO")).upper()
+    d["finding"] = plainify(d.get("finding") or "")
+    if not d.get("impact"):
+        d["impact"] = {
+            "BLOCKER": "Until this is fixed, conclusions in this workbook may "
+                       "simply be wrong - treat the affected numbers as suspect.",
+            "WARNING": "The numbers stand, but do not put money on the affected "
+                       "names before running the check in the next column.",
+        }.get(sev, "No damage to the numbers - this is context you should have "
+                   "while reading, not a defect.")
+    else:
+        d["impact"] = plainify(d["impact"])
+    if not d.get("action"):
+        d["action"] = ("Fix it before trusting this run." if sev == "BLOCKER"
+                       else "Confirm on the live chart before acting."
+                       if sev == "WARNING" else "Nothing to do - context only.")
+    else:
+        d["action"] = plainify(d["action"])
+    return d
+
+
+dq = [_dq_polish(classify(q) if isinstance(q, str) else q)
+      for q in res.get("data_quality", [])]
 data_quality_sheet(wb.create_sheet("10 - Data Quality"), dq)
 
 # ------------------------------------------------------------ 9 Run Summary ---
@@ -1099,9 +1427,11 @@ for n in range(2, ws.max_row + 1):
 _stamp = datetime.datetime.now().strftime("%H%M%S")
 _candidates = [f"universe_{DATE}.xlsx", f"universe_{DATE}_new.xlsx",
                f"universe_{DATE}_{_stamp}.xlsx"]
+if OUT_OVERRIDE:
+    _candidates = [OUT_OVERRIDE]
 out, _err = None, None
 for _name in _candidates:
-    _path = os.path.join(REPO, "reports", _name)
+    _path = _name if os.path.isabs(_name) else os.path.join(REPO, "reports", _name)
     try:
         wb.save(_path)
         out = _path
@@ -1111,7 +1441,9 @@ for _name in _candidates:
         continue
 if out is None:
     raise SystemExit(f"could not write any workbook - all candidates locked: {_err}")
-if out != os.path.join(REPO, "reports", _candidates[0]):
+_first = (_candidates[0] if os.path.isabs(_candidates[0])
+          else os.path.join(REPO, "reports", _candidates[0]))
+if out != _first:
     print(f"NOTE: earlier filename(s) locked in Excel - wrote {os.path.basename(out)} instead.")
 print(f"written {out}")
 print(f"  sheets: {len(wb.sheetnames)} | fresh {len(hits)} | blocked {len(block_rows)} "

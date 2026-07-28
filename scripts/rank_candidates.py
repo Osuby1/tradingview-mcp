@@ -54,23 +54,30 @@ def score_long(r, position=85_000.0):
         x_atr = ((last - stop) / atr) if atr else None
         # best around 4-8% stop: tight enough to size, wide enough to survive noise
         if risk_pct <= 2:
-            v, why = 0.35, f"stop only {risk_pct:.1f}% - likely inside daily noise"
+            v, why = 0.35, (f"the stop is only {risk_pct:.1f}% below the price - "
+                            "an ordinary quiet day could knock the trade out")
             cons.append(why)
         elif risk_pct <= 8:
             v = 1.0
-            pros.append(f"stop {risk_pct:.1f}% supports a full-size position")
+            pros.append(f"the stop sits {risk_pct:.1f}% below the price - close "
+                        "enough to buy a full-size position")
         elif risk_pct <= 12:
             v = 0.6
-            cons.append(f"stop {risk_pct:.1f}% forces a reduced position")
+            cons.append(f"the stop is {risk_pct:.1f}% away, so the position has "
+                        "to shrink to keep the dollar risk at $5k")
         else:
             v = 0.15
-            cons.append(f"stop {risk_pct:.1f}% - position shrinks to a token")
+            cons.append(f"the stop is {risk_pct:.1f}% away - keeping risk at $5k "
+                        "shrinks the position to a token")
         if x_atr is not None:
             if x_atr < 1.0:
                 v *= 0.4
-                cons.append(f"stop is {x_atr:.2f}x ATR - BELOW the floor, noise will hit it")
+                cons.append(f"the stop sits {x_atr:.2f} normal daily swings below "
+                            "the price (under 1.0) - routine wiggle will hit it "
+                            "with nothing actually going wrong")
             elif x_atr >= 1.5:
-                pros.append(f"stop {x_atr:.2f}x ATR - comfortably outside the noise")
+                pros.append(f"the stop sits {x_atr:.2f} normal daily swings away - "
+                            "comfortably outside day-to-day noise")
         c["risk_quality"] = round(30 * v, 1)
         c["_risk_pct"], c["_x_atr"] = round(risk_pct, 1), (round(x_atr, 2) if x_atr else None)
     else:
@@ -82,37 +89,47 @@ def score_long(r, position=85_000.0):
     di_v = _clamp((pdi - ndi) / 20)          # 20-point spread = full marks
     c["trend_strength"] = round(25 * (0.6 * adx_v + 0.4 * di_v), 1)
     if adx >= 25:
-        pros.append(f"ADX {adx:.0f} - a real trend, not chop")
+        pros.append(f"trend-strength reading (ADX) is {adx:.0f} - a real trend "
+                    "is underway, not sideways chop")
     elif adx < ADX_MIN:
-        cons.append(f"ADX {adx:.0f} below {ADX_MIN:.0f} - no trend to ride")
+        cons.append(f"trend-strength reading (ADX) is only {adx:.0f}, under "
+                    f"{ADX_MIN:.0f} - there is no trend here to ride")
     if pdi > ndi:
-        pros.append(f"buyers in control (+DI {pdi:.0f} vs -DI {ndi:.0f})")
+        pros.append(f"buyers are in control - buying pressure {pdi:.0f} vs "
+                    f"selling pressure {ndi:.0f}")
     else:
-        cons.append(f"sellers in control (-DI {ndi:.0f} vs +DI {pdi:.0f})")
+        cons.append(f"sellers are in control - selling pressure {ndi:.0f} vs "
+                    f"buying pressure {pdi:.0f}")
 
     # --- regime (0-20) ------------------------------------------------------
     if regime == "PASS":
         c["regime"] = 20.0
-        pros.append(f"regime PASS, {pct200:+.1f}% vs the 200-day")
+        pros.append(f"passes the long-term health check - price is "
+                    f"{pct200:+.1f}% vs its 200-day average")
     elif regime == "REPAIR":
         c["regime"] = 7.0
-        cons.append(f"regime REPAIR ({pct200:+.1f}% vs 200-day) - starter size only")
+        cons.append(f"still repairing - price is {pct200:+.1f}% vs its 200-day "
+                    "average, so starter size only")
     else:
         c["regime"] = 0.0
-        cons.append(f"regime DEEP-FAIL ({pct200:+.1f}% vs 200-day) - no size")
+        cons.append(f"fails the long-term health check badly ({pct200:+.1f}% vs "
+                    "its 200-day average) - watch only, no size")
 
     # --- structure (0-10) ---------------------------------------------------
     if last and zl and zl > 0:
         above = (last / zl - 1) * 100
         if above <= 0:
             c["structure"] = 0.0
-            cons.append(f"price is {abs(above):.1f}% BELOW the ZLSMA - trend has not turned")
+            cons.append(f"price is {abs(above):.1f}% BELOW its trend line "
+                        "(ZLSMA) - the turn up has not actually happened yet")
         elif above <= 12:
             c["structure"] = 10.0
-            pros.append(f"{above:.1f}% above the ZLSMA - confirmed without chasing")
+            pros.append(f"price is {above:.1f}% above its trend line (ZLSMA) - "
+                        "the turn is confirmed and you are not chasing")
         else:
             c["structure"] = round(_clamp(1 - (above - 12) / 40) * 10, 1)
-            cons.append(f"{above:.0f}% above the ZLSMA - extended")
+            cons.append(f"price is {above:.0f}% above its trend line (ZLSMA) - "
+                        "stretched, a worse entry")
         c["_above_zlsma_pct"] = round(above, 1)
     else:
         c["structure"] = 0.0
@@ -122,24 +139,29 @@ def score_long(r, position=85_000.0):
         c["freshness"] = 0.0
     elif bars == 0:
         c["freshness"] = 4.0
-        cons.append("flipped TODAY - can still repaint before the close")
+        cons.append("the signal fired TODAY - it can still un-print before the "
+                    "close, so treat it as provisional")
     elif bars <= 3:
         c["freshness"] = 10.0
-        pros.append(f"{bars} sessions old - settled but still early")
+        pros.append(f"signal is {bars} sessions old - settled enough to trust, "
+                    "early enough to still be worth entering")
     elif bars <= 5:
         c["freshness"] = 7.0
     else:
         c["freshness"] = 3.0
-        cons.append(f"{bars} sessions old - the easy move may be gone")
+        cons.append(f"signal is {bars} sessions old - the easy part of the move "
+                    "may already be gone")
 
     # --- liquidity (0-5) ----------------------------------------------------
     if adv:
         headroom = adv / 10.0 / position if position else 0
         c["liquidity"] = round(5 * _clamp(headroom / 3), 1)
         if headroom < 1:
-            cons.append(f"illiquid - ${adv:,.0f} ADV cannot absorb ${position:,.0f}")
+            cons.append(f"too thinly traded - about ${adv:,.0f} changes hands "
+                        f"daily, not enough to get a ${position:,.0f} order in "
+                        "and out cleanly")
         elif headroom > 20:
-            pros.append("deeply liquid - size is never the constraint")
+            pros.append("deeply traded - getting in and out is never a problem")
     else:
         c["liquidity"] = 0.0
 
@@ -228,13 +250,15 @@ def score_short(r, position=85_000.0):
     if pct200 is not None:
         if pct200 < -10:
             c["downtrend"] = 30.0
-            pros.append(f"{pct200:.1f}% below the 200-day - established downtrend")
+            pros.append(f"price is {pct200:.1f}% below its 200-day average - an "
+                        "established downtrend")
         elif pct200 < 0:
             c["downtrend"] = 18.0
-            pros.append(f"{pct200:.1f}% below the 200-day")
+            pros.append(f"price is {pct200:.1f}% below its 200-day average")
         else:
             c["downtrend"] = 0.0
-            cons.append(f"still {pct200:+.1f}% ABOVE the 200-day - not a downtrend")
+            cons.append(f"still {pct200:+.1f}% ABOVE its 200-day average - this "
+                        "is not actually a downtrend")
     else:
         c["downtrend"] = 0.0
 
@@ -243,20 +267,24 @@ def score_short(r, position=85_000.0):
     di_v = _clamp((ndi - pdi) / 20)
     c["trend_strength"] = round(25 * (0.6 * adx_v + 0.4 * di_v), 1)
     if adx < ADX_MIN:
-        cons.append(f"ADX {adx:.0f} - no trend; shorting chop bleeds")
+        cons.append(f"trend-strength reading (ADX) is only {adx:.0f} - no real "
+                    "trend, and shorting a sideways chop bleeds money")
     if ndi > pdi:
-        pros.append(f"sellers in control (-DI {ndi:.0f} vs +DI {pdi:.0f})")
+        pros.append(f"sellers are in control - selling pressure {ndi:.0f} vs "
+                    f"buying pressure {pdi:.0f}")
     else:
-        cons.append(f"buyers in control (+DI {pdi:.0f}) - wrong side")
+        cons.append(f"buyers are in control (buying pressure {pdi:.0f}) - "
+                    "wrong side to be short")
 
     # structure (0-15)
     if last and zl and zl > 0:
         below = (1 - last / zl) * 100
         c["structure"] = round(15 * _clamp(below / 8), 1) if below > 0 else 0.0
         if below <= 0:
-            cons.append("price is ABOVE the ZLSMA - not broken")
+            cons.append("price is ABOVE its trend line (ZLSMA) - the structure "
+                        "has not broken down")
         else:
-            pros.append(f"{below:.1f}% below the ZLSMA")
+            pros.append(f"price is {below:.1f}% below its trend line (ZLSMA)")
 
     # stop quality (0-15)
     if last and stop and stop > last:
@@ -265,7 +293,8 @@ def score_short(r, position=85_000.0):
         c["stop_quality"] = round(15 * _clamp(1 - abs(risk_pct - 6) / 10), 1)
         c["_risk_pct"] = round(risk_pct, 1)
         if x_atr and x_atr < 1.0:
-            cons.append(f"stop {x_atr:.2f}x ATR - too tight for a short")
+            cons.append(f"the stop sits only {x_atr:.2f} normal daily swings "
+                        "away - too tight, routine bounces would hit it")
     else:
         c["stop_quality"] = 0.0
         cons.append("no Chandelier short stop available")
@@ -274,10 +303,12 @@ def score_short(r, position=85_000.0):
     risk_pts = 15.0
     if pct200 is not None and pct200 < -45:
         risk_pts -= 8
-        cons.append(f"already {pct200:.0f}% below the 200-day - late, squeeze-prone")
+        cons.append(f"already {pct200:.0f}% below its 200-day average - the "
+                    "move is late, and late shorts are squeeze bait")
     if adv and adv < 20_000_000:
         risk_pts -= 7
-        cons.append(f"thin (${adv:,.0f} ADV) - hard to borrow, easy to squeeze")
+        cons.append(f"thinly traded (about ${adv:,.0f} a day) - shares are hard "
+                    "to borrow and a squeeze moves it violently")
     c["squeeze_safety"] = round(max(0.0, risk_pts), 1)
 
     score = round(sum(v for k, v in c.items() if not k.startswith("_")), 1)

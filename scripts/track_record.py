@@ -90,9 +90,30 @@ def build(date):
         qspread = {"bottom_q_mean": round(bot, 2), "top_q_mean": round(top, 2),
                    "spread": round(top - bot, 2)}
 
+    # Per-pick rows for the workbook. Omar 2026-07-28: the Track Record tab must
+    # read like the origination scanner's TRACKER tab - every pick broken out
+    # individually with how it has done since the day it was called, not just
+    # grade averages. Newest calls first.
+    picks = []
+    for r in rows:
+        picks.append({
+            "date": r.get("date"), "ticker": r.get("ticker"),
+            "name": r.get("name"), "grade": r.get("grade"), "tab": r.get("tab"),
+            "rec_price": _f(r.get("price")), "cur_price": _f(r.get("cur_price")),
+            "ret_pct": round(_f(r.get("cur_ret")) * 100, 2)
+                       if _f(r.get("cur_ret")) is not None else None,
+            "best_pct": round(_f(r.get("best_ret")) * 100, 1)
+                        if _f(r.get("best_ret")) is not None else None,
+            "worst_pct": round(_f(r.get("worst_ret")) * 100, 1)
+                         if _f(r.get("worst_ret")) is not None else None,
+            "days_held": _f(r.get("days_held")),
+            "status": r.get("status"),
+        })
+    picks.sort(key=lambda p: (p["date"] or "", p["ticker"] or ""), reverse=True)
+
     return {"date": date, "source": os.path.basename(SRC), "snapshot": snap,
             "date_range": [dates[0], dates[-1]] if dates else None,
-            "total": len(rows), "overall": overall,
+            "total": len(rows), "overall": overall, "picks": picks,
             "by_grade": by_grade, "by_tab": by_tab, "score_quartile": qspread}
 
 

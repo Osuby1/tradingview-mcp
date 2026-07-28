@@ -253,6 +253,11 @@ def main():
                        "avg_dollar_vol": r.get("avg_dollar_vol")}
                       for r in ok],
         "scanner_enrich": enrich, "scanner_enrich_asof": "n/a (chart reads only)",
+        # Left empty ON PURPOSE since 2026-07-28: compile_universe_report_v2.py
+        # derives the broken-picks list itself (recommendation log snapshot
+        # joined against today's sell-mode set), so old results files get the
+        # tab too. Before that this empty dict silently blanked the tab on
+        # every run - see the note in _derive_tracker_broken().
         "tracker_exit_watch": {},
     }
     path = f"watchlists/universe-results-{date}.json"

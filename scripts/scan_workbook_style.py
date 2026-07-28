@@ -48,14 +48,21 @@ USAGE
             Col("last", "Price", 10, "Latest price.", fmt=FMT_PRICE)]
     write_table(ws, cols, rows)
 """
+import math
+
 from openpyxl.comments import Comment
-from openpyxl.styles import Alignment, Font, PatternFill
+from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
 # --- theme ------------------------------------------------------------------
-NAVY = "1F3A5F"          # header band, matches the origination workbook
-HDR_FONT = Font(bold=True, color="FFFFFF")
-HDR_FILL = PatternFill("solid", fgColor=NAVY)
+# Header band: GREEN with black bold text. Omar restyled universe_2026-07-27 by
+# hand (green band, black text, boxed READ ME sections, auto-fit row heights)
+# and on 2026-07-28 made that the standard for every daily scan workbook. The
+# navy band below survives only as the SECTION font colour.
+NAVY = "1F3A5F"          # section-heading colour (kept from the old theme)
+HDR_GREEN = "92D050"     # header band, per Omar's 2026-07-27 hand-edit
+HDR_FONT = Font(bold=True)
+HDR_FILL = PatternFill("solid", fgColor=HDR_GREEN)
 HDR_ALIGN = Alignment(wrap_text=True, horizontal="center", vertical="center")
 
 GREEN = PatternFill("solid", fgColor="C6EFCE")   # actionable / pass
@@ -67,6 +74,9 @@ BOLD = Font(bold=True)
 TITLE = Font(bold=True, size=14)
 SECTION = Font(bold=True, size=11, color=NAVY)
 RED_FONT = Font(bold=True, color="C00000")
+
+TITLE_FILL = PatternFill("solid", fgColor=HDR_GREEN)   # READ ME banner
+_MEDIUM = Side(style="medium")
 
 # number formats
 FMT_PRICE = "#,##0.00"
@@ -116,6 +126,70 @@ def safe(v):
     return v.encode("ascii", "replace").decode("ascii")
 
 
+def plainify(v):
+    """Translate leftover indicator shorthand into Omar's plain English.
+
+    Applied to long-text cells (why / reasoning / notes). New text should be
+    written plain at the source; this catches strings that already live in old
+    universe-results JSON files, so recompiling an old date reads right too.
+    Each substitution is guarded so already-plain text is not doubled up.
+    """
+    if not isinstance(v, str) or not v:
+        return v
+    t = v
+    if "ZLSMA" in t and "trend line" not in t:
+        t = t.replace("above ZLSMA", "above its trend line (ZLSMA)")
+        t = t.replace("below ZLSMA", "below its trend line (ZLSMA)")
+        t = t.replace("the ZLSMA", "the trend line (ZLSMA)")
+        if "trend line" not in t:
+            t = t.replace("ZLSMA", "trend line (ZLSMA)", 1)
+    if "ADX" in t and "trend strength" not in t and "trend-strength" not in t:
+        t = t.replace("ADX", "trend strength (ADX)", 1)
+    if "x ATR" in t and "day's swing" not in t and "daily noise" not in t:
+        t = t.replace("x ATR", "x ATR (multiples of a normal day's swing)", 1)
+    if ("+DI" in t or "-DI" in t) and "sellers" not in t and "buyers" not in t:
+        t = t.replace("+DI > -DI", "buyers ahead of sellers (+DI > -DI)")
+    if "vs 200-day)" in t:
+        t = t.replace("vs 200-day)", "vs the 200-day average)")
+    return t
+
+
+def autofit_rows(ws, cols, first_row=2, last_row=None, min_h=15, max_h=90):
+    """Approximate Excel's auto-fit so wrapped text is fully visible.
+
+    Omar's 2026-07-27 hand-edit auto-fit every data tab; without it a wrapped
+    cell shows one line and the rest is invisible until you click it. openpyxl
+    cannot measure text, so estimate: lines = chars / usable column width,
+    15pt per line, capped so one monster cell cannot make a 300pt row.
+    """
+    last_row = last_row or ws.max_row
+    for r in range(first_row, last_row + 1):
+        lines = 1
+        for i, c in enumerate(cols, 1):
+            val = ws.cell(row=r, column=i).value
+            if val is None:
+                continue
+            width = max(6.0, (c.width or 10) - 2)
+            need = 0
+            for seg in str(val).split("\n"):
+                need += max(1, math.ceil(len(seg) / width))
+            lines = max(lines, need)
+        ws.row_dimensions[r].height = min(max_h, max(min_h, 15 * lines))
+
+
+def box_region(ws, r1, r2, c1=1, c2=2):
+    """Medium border box around a block - the READ ME section framing Omar added."""
+    for r in range(r1, r2 + 1):
+        for c in range(c1, c2 + 1):
+            cell = ws.cell(row=r, column=c)
+            b = cell.border
+            cell.border = Border(
+                left=_MEDIUM if c == c1 else b.left,
+                right=_MEDIUM if c == c2 else b.right,
+                top=_MEDIUM if r == r1 else b.top,
+                bottom=_MEDIUM if r == r2 else b.bottom)
+
+
 class Col:
     """One column: storage key, display title, width, and the hover tooltip.
 
@@ -151,10 +225,13 @@ def style_header_row(ws, titles, tips=None, widths=None, freeze="A2",
         ws.auto_filter.ref = f"A1:{get_column_letter(len(titles))}1"
 
 
-def write_table(ws, cols, rows, freeze="A2", autofilter=True, row_fill=None):
+def write_table(ws, cols, rows, freeze="A2", autofilter=True, row_fill=None,
+                autofit=True):
     """Write a full table from Col specs + a list of dicts.
 
     row_fill: optional fn(row_dict) -> PatternFill or None, applied across the row.
+    autofit: size data rows to their wrapped text (Omar's 2026-07-27 standard).
+             Sheets that want a fixed height set it after this call, which wins.
     """
     style_header_row(ws, [c.title for c in cols], [c.tip for c in cols],
                      [c.width for c in cols], freeze, autofilter)
@@ -172,6 +249,8 @@ def write_table(ws, cols, rows, freeze="A2", autofilter=True, row_fill=None):
                 horizontal=c.align or ("left" if i <= 2 else "center"))
             if fill:
                 cell.fill = fill
+    if autofit and rows:
+        autofit_rows(ws, cols)
     return ws
 
 
@@ -196,20 +275,30 @@ def readme_sheet(ws, title, stamps, what_this_is, sheet_guide, key_readings,
     ws.column_dimensions["A"].width = 30
     ws.column_dimensions["B"].width = 96
 
+    # Green title banner + medium-border boxes around each section: Omar's
+    # 2026-07-27 hand-edit, now the standard for every daily workbook.
     ws.append([safe(title)])
     ws["A1"].font = TITLE
+    ws["A1"].fill = TITLE_FILL
+    ws["B1"].fill = TITLE_FILL
+    ws.row_dimensions[1].height = 19
     ws.append([])
+    _start = ws.max_row + 1
     for label, value in stamps:
         ws.append([safe(label), safe(value)])
         ws.cell(row=ws.max_row, column=1).font = BOLD
+    box_region(ws, _start, ws.max_row)
     ws.append([])
 
+    _start = ws.max_row + 1
     ws.append(["WHAT THIS IS"])
     ws.cell(row=ws.max_row, column=1).font = SECTION
     for line in what_this_is:
         ws.append(["", safe(line)])
+    box_region(ws, _start, ws.max_row)
     ws.append([])
 
+    _start = ws.max_row + 1
     ws.append(["READ THE TABS IN THIS ORDER"])
     ws.cell(row=ws.max_row, column=1).font = SECTION
     for entry in sheet_guide:
@@ -218,20 +307,25 @@ def readme_sheet(ws, title, stamps, what_this_is, sheet_guide, key_readings,
         ws.cell(row=ws.max_row, column=1).font = BOLD
         for extra in entry[2:]:
             ws.append(["", safe("    " + extra)])
+    box_region(ws, _start, ws.max_row)
     ws.append([])
 
     if how_to_act:
+        _start = ws.max_row + 1
         ws.append(["HOW TO ACT ON IT"])
         ws.cell(row=ws.max_row, column=1).font = SECTION
         for line in how_to_act:
             ws.append(["", safe(line)])
+        box_region(ws, _start, ws.max_row)
         ws.append([])
 
+    _start = ws.max_row + 1
     ws.append(["WHAT THE NUMBERS MEAN"])
     ws.cell(row=ws.max_row, column=1).font = SECTION
     for label, meaning in key_readings:
         ws.append([safe(label), safe(meaning)])
         ws.cell(row=ws.max_row, column=1).font = BOLD
+    box_region(ws, _start, ws.max_row)
 
     for row in ws.iter_rows(min_row=1):
         for c in row:
@@ -294,9 +388,10 @@ def notes_sheet(ws, rows):
         Col("sym", "Ticker", 10, "The stock symbol."),
         Col("verdict", "Verdict", 24,
             "What the frozen rule set says to do with this name."),
-        Col("changed", "What Changed", 24,
-            "How this differs from the previous run - REVERSAL, DOWNGRADED, "
-            "UPGRADED, or NEW. Blank means unchanged."),
+        Col("changed", "What Changed", 34,
+            "How this call differs from the previous run: NEW (was not a fresh "
+            "signal last time), UPGRADED, DOWNGRADED, or same call as before. "
+            "Compared automatically against the prior results file."),
         Col("pros", "PROS - what argues FOR it", 54,
             "Every gate this name passed and how strongly. Derived from the same "
             "components as the buy score, so it cannot drift from the ranking."),
