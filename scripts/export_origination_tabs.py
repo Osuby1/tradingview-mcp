@@ -79,8 +79,24 @@ import re
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-XLSX = os.path.join(os.path.expanduser("~"), "Documents", "Equities_Scanner", "origination_scan.xlsx")
+SCAN_DIR = os.path.join(os.path.expanduser("~"), "Documents", "Equities_Scanner")
 OUT = os.path.join(REPO, "watchlists", "origination-tabs.md")
+
+
+def newest_scan_xlsx():
+    """The freshest scanner output, whatever filename it landed on.
+
+    BUG FOUND 2026-07-28: this script read the fixed name origination_scan.xlsx
+    only. On 7/27 Omar had that file open in Excel, so the scanner - which had
+    fresh Monday data - saved to its fallback name origination_scan_152744.xlsx
+    instead. The export silently read the stale locked file and Monday's
+    workbook joined FRIDAY's origination scores. Pick the newest matching file
+    by modified time so the fallback name is found automatically.
+    """
+    import glob
+    cands = [c for c in glob.glob(os.path.join(SCAN_DIR, "origination_scan*.xlsx"))
+             if not os.path.basename(c).startswith("~$")]   # skip Excel lock stubs
+    return max(cands, key=os.path.getmtime) if cands else None
 
 # case-insensitive substring match per target tab
 TAB_PATTERNS = {"Buy Zone": "buy", "Fresh Ignitions": "ignit", "Coiled": "coil"}
@@ -116,8 +132,13 @@ def main():
         from openpyxl import load_workbook
     except ImportError:
         sys.exit("openpyxl not installed — pip install openpyxl")
-    if not os.path.exists(XLSX):
-        sys.exit(f"Scan output not found: {XLSX} — run the origination scan first.")
+    XLSX = newest_scan_xlsx()
+    if not XLSX:
+        sys.exit(f"No origination_scan*.xlsx in {SCAN_DIR} — run the origination scan first.")
+    if os.path.basename(XLSX) != "origination_scan.xlsx":
+        print(f"NOTE: using fallback-named scan file {os.path.basename(XLSX)} "
+              f"(origination_scan.xlsx was locked when the scanner saved) - it is "
+              f"the newest output on disk.")
 
     wb = load_workbook(XLSX, read_only=True, data_only=True)
     mtime = datetime.datetime.fromtimestamp(os.path.getmtime(XLSX))
@@ -174,10 +195,15 @@ def main():
     if not data_date_str:
         data_date_str = data_session_date(mtime)
         data_date_src = "INFERRED from run time - scanner predates the DATA AS OF stamp"
+    _expected = data_session_date(datetime.datetime.now())
+    if data_date_str < _expected:
+        print(f"WARNING: origination data is STALE - file carries {data_date_str} "
+              f"data but the last completed session is {_expected}. Every "
+              f"downstream join will be a session behind until the scan re-runs.")
     lines = [
         f"# Origination scan tabs — exported {datetime.date.today().isoformat()}",
         "",
-        f"Source: origination_scan.xlsx (modified {mtime:%Y-%m-%d %H:%M}). "
+        f"Source: {os.path.basename(XLSX)} (modified {mtime:%Y-%m-%d %H:%M}). "
         "Feeds the run-the-universe command: these tickers are merged into the "
         "O.G Chandelier scan universe alongside the three watchlists.",
         "",
