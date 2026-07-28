@@ -228,15 +228,35 @@ readme_sheet(
         "5. Size it on tab 3. If the stop is wider than the risk unit allows, skip it.",
     ],
     key_readings=[
-        ("Buyers vs Sellers Margin", "Buying pressure minus selling pressure (+DI - -DI). "
-                                     "Who is winning the daily fight. MEASURED 2026-07-28: "
-                                     "across 170 signals it did NOT predict returns (slightly "
-                                     "backwards), so it is context only - never a rank, never "
-                                     "a veto."),
+        ("Buyers vs Sellers Margin", "Buying pressure minus selling pressure over the last 14 "
+                                     "days - the scoreboard of the daily tug-of-war. HOW TO "
+                                     "READ IT: +15 or more = buyers clearly in charge (SJM was "
+                                     "+18 the day it was bought). Low single digits = buyers "
+                                     "barely ahead - the trend looks strong but nobody really "
+                                     "owns it (MLI's +4 tell). Near zero = stalemate, a yellow "
+                                     "flag on a fresh buy. Negative on a buy signal = sellers "
+                                     "still winning; the gates block these. CAVEAT, measured "
+                                     "2026-07-28 on 170 signals: a big margin did NOT predict "
+                                     "better returns (slightly backwards). Read it like a fuel "
+                                     "gauge, not a map: it describes the current state of who "
+                                     "controls the stock - never a reason by itself to buy, "
+                                     "rank higher, or pay up."),
+        ("Trend Strength (ADX)", "Technically a 0-100 scale but real readings almost never "
+                                 "get near 100, so do NOT read it as a percent. HOW TO READ "
+                                 "IT: below 20 = no trend, sideways chop (our gates require "
+                                 "20+). 20-25 = a trend is forming. 25-40 = a genuine, "
+                                 "tradeable trend - most good entries live here; 35 is "
+                                 "STRONG, not mediocre. 40-60 = powerful and often late. "
+                                 "60+ = rare (panics and parabolas). It measures strength "
+                                 "only, not direction - a crash reads high too. And it is "
+                                 "SLOW (built from smoothed 14-day averages): it confirms a "
+                                 "trend that exists, it does not predict one. A gate and a "
+                                 "ranking aid, never a buy signal by itself."),
         ("Trend Strength vs Today's Best", "Each name's ADX as a share of the day's strongest "
-                                           "(100 = strongest today). Trend strength is the one "
-                                           "measured-to-matter input, so this ranks the batch "
-                                           "by it at a glance."),
+                                           "(100 = strongest today). Fixes the read-as-percent "
+                                           "trap above: a 35 that is today's best reads 100. "
+                                           "Trend strength is the one measured-to-matter "
+                                           "input, so this ranks the batch by it at a glance."),
         ("Magical (CCI-20)", "Above +100 = overbought, below -100 = oversold. NOTE: measured "
                              "2026-07-22 across 1,725 signals, this cut does NOT separate "
                              "returns (0.03pt over 21 days). Treat as context, not a veto."),
