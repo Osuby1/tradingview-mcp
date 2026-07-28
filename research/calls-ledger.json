@@ -15,7 +15,19 @@
    "thesis": "Devon Energy; regime PASS +10% vs 200d, ADX 22, +DI>-DI, HA Chandelier BUY, energy igniting. Stop under Chandelier line; TRIM/exit before 8/4 earnings.",
    "target_status": "RETIRED 2026-07-25 (kept for dual grading)",
    "rule_change_2026-07-25": "2:1 target retired mid-trade per pre-registered exit-redesign test (research/exit-redesign-results.md: no exit beats holding; targets cap the tail winners). New exit rule, Omar-approved 7/25: initial stop unchanged / thesis break / 20 pct ratchet below highest close once well in profit. Target alert rewired to CHECKPOINT-do-not-sell (new alert id 5226932947). GRADE BOTH WAYS at close: vs original stop+target plan AND vs new rule, so the scorecard shows what the change cost or earned.",
-   "stop_change_2026-07-26": "Stop moved to 5 pct below entry = 42.85 (was 43.9, CE line) at Omar direction per stop-sweep result (research/stop-sweep-results.md). Original stop kept in the stop field for dual grading. New stop alert id 5229084017. Total book risk now ~9.7k vs 10k weekly breaker - flagged."
+   "stop_change_2026-07-26": "Stop moved to 5 pct below entry = 42.85 (was 43.9, CE line) at Omar direction per stop-sweep result (research/stop-sweep-results.md). Original stop kept in the stop field for dual grading. New stop alert id 5229084017. Total book risk now ~9.7k vs 10k weekly breaker - flagged.",
+   "close": {
+    "date": "2026-07-28",
+    "fill": 42.8,
+    "shares": 1000,
+    "pnl": -2310,
+    "pnl_pct": -5.12,
+    "reason": "Stop hit. DVN sold off through the 42.85 stop line on the 7/28 session (open 44.36, low 42.56); Omar reported the exit at 42.80 at ~11:05 AM CT.",
+    "execution_grade": "GOOD - 5 cents of slippage vs the 42.85 line ($50 on 1,000 sh), and price traded 24 cents lower after the exit. Night-and-day vs the DELL exit ($1,200 slippage).",
+    "grade_vs_original_plan": "Original CE stop was 43.90 (risk $1,210). The 7/26 stop-widening to 42.85 turned a -$1,210 exit into -$2,310: the widening COST ~$1,100 on this trade. One trade proves nothing - the stop-sweep said wider stops win on net - but log the cost honestly.",
+    "grade_vs_new_rule": "Under the new exit rule the stop was the exit either way: high close since entry was 45.04 (-0.2% vs entry), so the 20% ratchet never armed and the 47.50 checkpoint never fired. Target retirement cost nothing here.",
+    "thesis_postmortem": "Thesis was 'energy #1 igniting' per the rotation radar - the radar demoted energy one session after entry (7/27), consistent with its measured-backwards problem. The regime gates were fine; the sector-timing layer was the weak input."
+   }
   },
   {
    "id": "2026-07-24-HAS-long",
