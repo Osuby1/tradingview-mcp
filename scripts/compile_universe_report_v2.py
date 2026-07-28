@@ -28,6 +28,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from scan_workbook_style import (  # noqa: E402
     Col, write_table, readme_sheet, data_quality_sheet, notes_sheet,
     verdict_fill, split_note, safe, style_header_row, plainify, grid_borders,
+    side_table,
     FMT_PRICE, FMT_PCT, FMT_X, FMT_INT, BOLD, RED_FONT, GREEN, AMBER, RED, GREY, SECTION,
 )
 from gate_stack import evaluate, funnel, MissingGateData, DEFAULT_POSITION  # noqa: E402
@@ -211,7 +212,9 @@ readme_sheet(
         ("9 - Track Record", "Every past origination pick, one row each, showing how it has done",
          "since the day it was called - price then, price now, best and worst point along",
          "the way. The grade scorecard sits below the list (so far a higher grade has NOT",
-         "been worth more)."),
+         "been worth more). To the RIGHT: the MY TRADES block - the recommendations Omar",
+         "actually put money on (open + closed), with real fills and a running tally of",
+         "banked vs paper profit."),
         ("10 - Data Quality", "What was broken or partial in this run, ranked by severity.",
          "READ THE RED ROWS. A BLOCKER means conclusions in this file may be wrong."),
         ("11 - Run Summary", "Counts and run metadata."),
@@ -1314,6 +1317,72 @@ def _load_picks():
     return picks
 
 
+# ---- MY ACTIONED TRADES (Omar 2026-07-28): the recommendations he actually
+# put money on, tracked as their own tally beside the scanner's pick history.
+# Fed by research/calls-ledger.json (fills + close blocks - the standing rule
+# is that every reported fill/close updates the ledger and open-book.json, so
+# this table maintains itself). First entries: DVN (closed 7/28) + HAS/SJM/MLI.
+ACTIONED_COLS = [
+    Col("sym", "MY TRADES - Ticker", 16,
+        "A recommendation Omar actually traded, from the calls ledger. This "
+        "tally measures the ACTED-ON book, separate from the scanner's "
+        "hypothetical pick history to the left."),
+    Col("opened", "Opened", 11, "The date the position was put on."),
+    Col("status", "Status", 14, "OPEN, or CLOSED with the exit date."),
+    Col("shares", "Shares", 8, "Position size in shares.", FMT_INT),
+    Col("entry", "Entry", 10, "Actual fill price.", FMT_PRICE),
+    Col("stop", "Stop", 10, "The live stop (open positions) or '-' once closed.", FMT_PRICE),
+    Col("now", "Now / Exit", 11,
+        "Latest scan price for open positions; the actual exit fill for closed "
+        "ones.", FMT_PRICE),
+    Col("pnl", "P&L $", 11,
+        "Dollars made or lost. Open positions = unrealized (paper); closed = "
+        "banked.", FMT_INT),
+    Col("pnl_pct", "P&L %", 9, "The same, as a percent of entry.", FMT_PCT),
+]
+
+
+def _actioned_rows():
+    try:
+        led = json.load(open(os.path.join(REPO, "research", "calls-ledger.json"),
+                             encoding="utf-8"))
+        calls = led.get("calls", [])
+    except Exception:
+        return []
+    try:
+        book = {p["sym"]: p for p in json.load(
+            open(os.path.join(REPO, "watchlists", "open-book.json"),
+                 encoding="utf-8")).get("positions", [])}
+    except Exception:
+        book = {}
+    out = []
+    for c in calls:
+        m = re.search(r"FILLED\s+([\d,]+)\s*sh\s*@\s*\$?([\d.]+)",
+                      str(c.get("fill") or ""))
+        if not m:
+            continue          # analysis-only call, never traded
+        shares, entry = int(m.group(1).replace(",", "")), float(m.group(2))
+        sym, cl = c.get("sym"), c.get("close") or {}
+        if cl:                # closed - the ledger close block is the truth
+            now, status, stop = cl.get("fill"), f"CLOSED {cl.get('date', '')}", "-"
+            pnl = cl.get("pnl")
+            if pnl is None and now:
+                pnl = round((now - entry) * shares)
+        else:                 # open - live stop from the book, price from today's scan
+            b = book.get(sym, {})
+            a = allrows.get(sym, {})
+            stop = b.get("stop") or c.get("stop")
+            now = a.get("real_last") or a.get("real_close")
+            status = "OPEN"
+            pnl = round((now - entry) * shares) if now else None
+        out.append({"sym": sym, "opened": c.get("date"), "status": status,
+                    "shares": shares, "entry": entry, "stop": stop, "now": now,
+                    "pnl": pnl,
+                    "pnl_pct": round((now / entry - 1) * 100, 1) if now else None})
+    out.sort(key=lambda r: (r["status"] != "OPEN", r["opened"] or ""))
+    return out
+
+
 ws = wb.create_sheet("9 - Track Record")
 _picks = _load_picks()
 if (not _tr or _tr.get("error")) and not _picks:
@@ -1328,6 +1397,27 @@ else:
         return GREEN if m > 0 else (RED if m < -3 else AMBER)
 
     write_table(ws, TRP_COLS, _picks, autofilter=True, row_fill=_pick_fill)
+
+    _acted = _actioned_rows()
+    if _acted:
+        _ac_start = len(TRP_COLS) + 2          # one blank gutter column
+        _last = side_table(
+            ws, ACTIONED_COLS, _acted, _ac_start,
+            row_fill=lambda r: (GREEN if (r.get("pnl") or 0) > 0
+                                else RED if (r.get("pnl") or 0) < 0 else None))
+        _real = sum(r["pnl"] for r in _acted
+                    if r["pnl"] is not None and not r["status"].startswith("OPEN"))
+        _unreal = sum(r["pnl"] for r in _acted
+                      if r["pnl"] is not None and r["status"].startswith("OPEN"))
+        _sum_cell = ws.cell(row=_last + 2, column=_ac_start, value=safe(
+            f"TALLY: banked {_real:+,.0f} on closed trades; open positions "
+            f"marking {_unreal:+,.0f} (paper, not banked)."))
+        _sum_cell.font = BOLD
+        ws.cell(row=_last + 3, column=_ac_start, value=safe(
+            "This block tracks what Omar actually TRADED from the "
+            "recommendations - the left table is every pick, acted on or not. "
+            "Updates itself from the calls ledger and the open book."))
+
     ws.append([])
     ws.append([safe("SCORECARD - the averages behind the list above. Green share = "
                     "how many picks are currently in profit.")])

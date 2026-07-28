@@ -202,6 +202,39 @@ def grid_borders(ws, r1, r2, c1, c2):
             ws.cell(row=r, column=c).border = _GRID
 
 
+def side_table(ws, cols, rows, start_col, row_fill=None, grid=True):
+    """A second table rendered to the RIGHT of a sheet's main table.
+
+    Added 2026-07-28 for Omar's actioned-trades block on the Track Record tab:
+    same header styling and tooltips as write_table, but anchored at start_col
+    instead of column A, with the Plans-style border grid so it reads as its
+    own card. Returns the last row written.
+    """
+    for i, c in enumerate(cols):
+        col_n = start_col + i
+        cell = ws.cell(row=1, column=col_n, value=safe(c.title))
+        cell.font, cell.fill, cell.alignment = HDR_FONT, HDR_FILL, HDR_ALIGN
+        if c.tip:
+            com = Comment(safe(c.tip) + READ_ME_POINTER, "scan")
+            com.width, com.height = 340, 190
+            cell.comment = com
+        ws.column_dimensions[get_column_letter(col_n)].width = c.width
+    for rn, r in enumerate(rows, 2):
+        fill = row_fill(r) if row_fill else None
+        for i, c in enumerate(cols):
+            cell = ws.cell(row=rn, column=start_col + i, value=safe(r.get(c.key)))
+            if c.fmt and isinstance(cell.value, (int, float)):
+                cell.number_format = c.fmt
+            cell.alignment = Alignment(
+                wrap_text=True, vertical="top",
+                horizontal=c.align or ("left" if i == 0 else "center"))
+            if fill:
+                cell.fill = fill
+    if grid:
+        grid_borders(ws, 1, 1 + len(rows), start_col, start_col + len(cols) - 1)
+    return 1 + len(rows)
+
+
 class Col:
     """One column: storage key, display title, width, and the hover tooltip.
 
