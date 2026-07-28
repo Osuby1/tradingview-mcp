@@ -228,6 +228,15 @@ readme_sheet(
         "5. Size it on tab 3. If the stop is wider than the risk unit allows, skip it.",
     ],
     key_readings=[
+        ("Buyers vs Sellers Margin", "Buying pressure minus selling pressure (+DI - -DI). "
+                                     "Who is winning the daily fight. MEASURED 2026-07-28: "
+                                     "across 170 signals it did NOT predict returns (slightly "
+                                     "backwards), so it is context only - never a rank, never "
+                                     "a veto."),
+        ("Trend Strength vs Today's Best", "Each name's ADX as a share of the day's strongest "
+                                           "(100 = strongest today). Trend strength is the one "
+                                           "measured-to-matter input, so this ranks the batch "
+                                           "by it at a glance."),
         ("Magical (CCI-20)", "Above +100 = overbought, below -100 = oversold. NOTE: measured "
                              "2026-07-22 across 1,725 signals, this cut does NOT separate "
                              "returns (0.03pt over 21 days). Treat as context, not a veto."),
@@ -496,6 +505,24 @@ FRESH_COLS = [
         "gets noise-stopped, above 4x is a token position."),
     Col("sym", "Ticker", 9, "The stock symbol."),
     Col("company", "Company", 30, "Company name, so you know what you are buying."),
+    # Omar 2026-07-28, after the HAS-vs-MLI post-mortem: the buyer/seller margin
+    # and relative trend strength were the Friday-visible tells that ranked the
+    # week's winners - and neither was a visible column. Now they are.
+    Col("di_margin", "Buyers vs Sellers Margin", 13,
+        "Buying pressure minus selling pressure (+DI minus -DI, 14-day) - who "
+        "is winning the daily fight. In the week of 7/24 the wide-margin names "
+        "(SJM +18) outran the thin-margin one (MLI +4). BUT MEASURED 2026-07-28 "
+        "on 170 independent signals: the margin did NOT predict forward returns "
+        "- slightly BACKWARDS (-0.12), while raw trend strength stayed the only "
+        "positive input. So this is CONTEXT ONLY: it never ranks, never vetoes. "
+        "Full test: research/di-margin-test-2026-07-28.md.", FMT_PCT),
+    Col("adx_rel", "Trend Strength vs Today's Best", 13,
+        "This name's trend strength (ADX) as a share of the STRONGEST trend "
+        "among today's fresh signals - 100 means it is today's strongest. "
+        "Trend strength is the one input our calibration found with real (if "
+        "weak) predictive signal, so this ranks the batch by the thing "
+        "measured to matter. On 2026-07-24 it would have read: HAS 100, MLI "
+        "84, SJM 71, DVN 61 - the week then played out in nearly that order.", FMT_INT),
     Col("sector", "Sector", 20, "Sector - use it to spot when several signals are the same bet."),
     Col("signal_date", "Signal Date", 12, "The session the Chandelier flipped to BUY."),
     Col("age", "Sessions Old", 11,
@@ -539,6 +566,54 @@ FRESH_COLS = [
 ]
 
 
+def _tv_screen_metrics():
+    """RSI / volume-vs-normal / 52-week-high distance for the whole US market,
+    one public-scanner call, mapped by bare ticker.
+
+    Omar 2026-07-28: the Heat Gauge (RSI), Volume vs Normal and % of 52-Week
+    High columns sat EMPTY on every chart-read run - they were only ever filled
+    from the origination enrich file, which chart-read runs do not produce.
+    The public scanner (already used by rotation_radar / live_picks_radar)
+    has all three. Non-fatal: no network means the columns stay blank and a
+    Data Quality row says so, instead of the blanks passing as normal.
+    """
+    import urllib.request
+    body = json.dumps({
+        "filter": [{"left": "type", "operation": "equal", "right": "stock"},
+                   {"left": "exchange", "operation": "in_range",
+                    "right": ["NASDAQ", "NYSE", "AMEX"]}],
+        "options": {"lang": "en"}, "markets": ["america"],
+        "columns": ["name", "RSI", "relative_volume_10d_calc",
+                    "close", "price_52_week_high"],
+        "range": [0, 9000],
+    }).encode()
+    req = urllib.request.Request(
+        "https://scanner.tradingview.com/america/scan", data=body,
+        headers={"User-Agent": "Mozilla/5.0", "Content-Type": "application/json"})
+    out = {}
+    for r in json.loads(urllib.request.urlopen(req, timeout=45).read()).get("data", []):
+        d = r.get("d") or []
+        if len(d) < 5:
+            continue
+        bare = str(r.get("s", "")).split(":")[-1]
+        rsi, rvol, close, hi52 = d[1], d[2], d[3], d[4]
+        out[bare] = {
+            "rsi": round(rsi, 1) if isinstance(rsi, (int, float)) else None,
+            "relvol": round(rvol, 2) if isinstance(rvol, (int, float)) else None,
+            "pct52": round(close / hi52 * 100, 1)
+                     if (isinstance(close, (int, float)) and isinstance(hi52, (int, float)) and hi52) else None,
+        }
+    return out
+
+
+try:
+    TV_METRICS = _tv_screen_metrics()
+    _TV_METRICS_NOTE = None
+except Exception as _exc:
+    TV_METRICS = {}
+    _TV_METRICS_NOTE = str(_exc)
+
+
 SCORED = {}   # sym -> (score, components, pros, cons); reused by Notes & Plans
 
 
@@ -575,22 +650,34 @@ def fresh_rows():
         risk_txt = (f"{rflag['stop_x_atr']}x ({rflag['stop_pct']}%)"
                     + ("" if rflag.get("ok") else " !") if rflag else "-")
 
+        # Sweep gate data first, origination enrich second, public scanner third
+        # - so these columns are populated on chart-read runs too (Omar 7/28).
+        tv = TV_METRICS.get(sym, {})
+        pdi, ndi = g.get("plus_di"), g.get("minus_di")
+        adx_val = g.get("adx") if g.get("adx") is not None else e.get("adx")
         out.append({
             "buy_score": sc, "risk_flag": risk_txt,
             "sym": sym, "company": e.get("description"), "sector": e.get("sector"),
+            "di_margin": (round(pdi - ndi, 1)
+                          if pdi is not None and ndi is not None else None),
             "signal_date": h.get("signal_date_est"), "age": h.get("bars_back"),
             "last": d_last, "stop": d_stop, "risk_pct": d_risk,
             "magical": h.get("magical"), "zlsma": h.get("zlsma"),
-            "rsi": e.get("rsi") and round(e["rsi"], 1),
-            "relvol": e.get("relvol") and round(e["relvol"], 2),
-            "pct52": e.get("pct_of_52wk_high"), "pct200": e.get("pct_vs_200d"),
-            "adx": e.get("adx") and round(e["adx"], 1),
+            "rsi": (round(e["rsi"], 1) if e.get("rsi") else tv.get("rsi")),
+            "relvol": (round(e["relvol"], 2) if e.get("relvol") else tv.get("relvol")),
+            "pct52": e.get("pct_of_52wk_high") or tv.get("pct52"),
+            "pct200": (g.get("pct_vs_200") if g.get("pct_vs_200") is not None
+                       else e.get("pct_vs_200d")),
+            "adx": round(adx_val, 1) if adx_val is not None else None,
             "score": o.get("score"), "grade": o.get("grade"),
             "regime": h.get("regime"), "verdict": h.get("verdict"), "why": why,
         })
     out.sort(key=lambda r: -(r["buy_score"] or 0))
+    _max_adx = max((r["adx"] for r in out if r["adx"]), default=None)
     for i, r in enumerate(out, 1):
         r["rank"] = i
+        r["adx_rel"] = (round(100 * r["adx"] / _max_adx)
+                        if r["adx"] and _max_adx else None)
     return out
 
 
@@ -1489,6 +1576,13 @@ def _dq_polish(d):
 
 dq = [_dq_polish(classify(q) if isinstance(q, str) else q)
       for q in res.get("data_quality", [])]
+if _TV_METRICS_NOTE:
+    dq.append(_dq_polish({
+        "severity": "WARNING", "area": "Data feed",
+        "finding": ("The public-scanner fetch for RSI, volume-vs-normal and "
+                    f"52-week-high distance failed ({_TV_METRICS_NOTE}), so those "
+                    "three Fresh Buys columns are blank this run."),
+        "impact": "", "action": "Re-run the compile with network access to fill them."}))
 data_quality_sheet(wb.create_sheet("10 - Data Quality"), dq)
 
 # ------------------------------------------------------------ 9 Run Summary ---

@@ -1,0 +1,35 @@
+{
+ "dataset": "buy-score-calibration-2026-07-22-signals.csv",
+ "n_total": 170,
+ "horizons": {
+  "f5": {
+   "n": 170,
+   "spearman_di_margin": -0.112,
+   "spearman_adx": 0.205,
+   "spearman_v2_trend_sub": 0.19,
+   "bottom_quartile_mean_pct": 2.98,
+   "top_quartile_mean_pct": 1.9,
+   "top_minus_bottom_pt": -1.07
+  },
+  "f10": {
+   "n": 170,
+   "spearman_di_margin": -0.134,
+   "spearman_adx": 0.184,
+   "spearman_v2_trend_sub": 0.169,
+   "bottom_quartile_mean_pct": 3.03,
+   "top_quartile_mean_pct": 0.45,
+   "top_minus_bottom_pt": -2.58
+  },
+  "f21": {
+   "n": 170,
+   "spearman_di_margin": -0.121,
+   "spearman_adx": 0.111,
+   "spearman_v2_trend_sub": 0.091,
+   "bottom_quartile_mean_pct": 4.01,
+   "top_quartile_mean_pct": 4.13,
+   "top_minus_bottom_pt": 0.12
+  }
+ },
+ "decision_rule": "margin earns ranking weight only if 21d Spearman beats raw ADX AND >= +0.10",
+ "verdict": "FAIL - margin stays a DISPLAY-ONLY column"
+}
