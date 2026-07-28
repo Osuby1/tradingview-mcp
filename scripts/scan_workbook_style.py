@@ -190,6 +190,18 @@ def box_region(ws, r1, r2, c1=1, c2=2):
                 bottom=_MEDIUM if r == r2 else b.bottom)
 
 
+_GRID = Border(left=_MEDIUM, right=_MEDIUM, top=_MEDIUM, bottom=_MEDIUM)
+
+
+def grid_borders(ws, r1, r2, c1, c2):
+    """Medium border around EVERY cell in the block - each row reads as a boxed
+    card. Omar hand-drew this grid on the Plans tab of universe_2026-07-27_new
+    and made it the standard for that tab (2026-07-28)."""
+    for r in range(r1, r2 + 1):
+        for c in range(c1, c2 + 1):
+            ws.cell(row=r, column=c).border = _GRID
+
+
 class Col:
     """One column: storage key, display title, width, and the hover tooltip.
 

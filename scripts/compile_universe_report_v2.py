@@ -27,7 +27,7 @@ from openpyxl import Workbook, load_workbook
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from scan_workbook_style import (  # noqa: E402
     Col, write_table, readme_sheet, data_quality_sheet, notes_sheet,
-    verdict_fill, split_note, safe, style_header_row, plainify,
+    verdict_fill, split_note, safe, style_header_row, plainify, grid_borders,
     FMT_PRICE, FMT_PCT, FMT_X, FMT_INT, BOLD, RED_FONT, GREEN, AMBER, RED, GREY, SECTION,
 )
 from gate_stack import evaluate, funnel, MissingGateData, DEFAULT_POSITION  # noqa: E402
@@ -652,27 +652,30 @@ for k, v in RANK_RATIONALE.items():
     ws.append([safe(f"  {k}"), safe(v)])
 
 # ---------------------------------------------------------------- 3 Plans ---
+# Column widths + the medium-border grid below are Omar's hand-layout of the
+# Plans tab in universe_2026-07-27_new.xlsx (2026-07-28): number columns tight,
+# Thesis & Break the dominant reading column, every cell boxed.
 PLAN_COLS = [
-    Col("a", "Ticker", 9, "The stock symbol."),
-    Col("b", "Type", 16, "Order type - buy-stop, limit, or starter."),
-    Col("c", "Entry", 10, "The price you are willing to pay.", FMT_PRICE),
-    Col("d", "Stop", 10, "Where the trade is wrong and you are out.", FMT_PRICE),
-    Col("e", "Size", 18, "Dollar size and share count."),
-    Col("f", "Risk $", 10, "Dollars lost if the stop hits. Should be about 0.5% of the account.", FMT_PRICE),
-    Col("g", "Checkpoint", 16,
+    Col("a", "Ticker", 6.1, "The stock symbol."),
+    Col("b", "Type", 9.9, "Order type - buy-stop, limit, or starter."),
+    Col("c", "Entry", 10.1, "The price you are willing to pay.", FMT_PRICE),
+    Col("d", "Stop", 9.6, "Where the trade is wrong and you are out.", FMT_PRICE),
+    Col("e", "Size", 9.1, "Dollar size and share count."),
+    Col("f", "Risk $", 10.6, "Dollars lost if the stop hits. Should be about 0.5% of the account.", FMT_PRICE),
+    Col("g", "Checkpoint", 10.9,
         "NOT a sell level. The old 2:1 target, kept as a progress checkpoint "
         "(retired 2026-07-25: targets measured harmful - they cap the tail winners). "
         "Exits are: stop / thesis break / 20% ratchet below the highest close once "
         "well in profit."),
-    Col("h", "Earnings Gate", 42,
+    Col("h", "Earnings Gate", 28.7,
         "Next earnings date and whether it blocks or shrinks this trade. Never full "
         "size into a report. Fed by the catalyst calendar; 'Clear' still means "
         "confirm the date yourself."),
-    Col("i", "Alert", 40,
+    Col("i", "Alert", 41.9,
         "The alert IDs armed for this plan, or the exact price levels to wire on "
         "entry (entry limit + trend-break stop) and the current board state."),
-    Col("j", "Plan Notes", 60, "Conditions attached to the plan - what must be true to take it."),
-    Col("k", "Thesis & Break", 62,
+    Col("j", "Plan Notes", 32.6, "Conditions attached to the plan - what must be true to take it."),
+    Col("k", "Thesis & Break", 85.7,
         "What this trade is betting on, and the observation that proves it wrong "
         "(protocol rule 11, added 2026-07-26). A thesis BREAK = exit regardless of "
         "stop or profit. A plan without a break condition is not takeable."),
@@ -807,6 +810,8 @@ for r in _fresh:
 
 ws = wb.create_sheet("3 - Plans")
 write_table(ws, PLAN_COLS, plan_rows)
+# Omar's grid: a medium border on every cell of the table, header included.
+grid_borders(ws, 1, 1 + len(plan_rows), 1, len(PLAN_COLS))
 if not plan_rows:
     ws.append([])
     ws.append([safe("NO PLANS - and that is a result, not an omission.")])
