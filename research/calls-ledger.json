@@ -193,6 +193,30 @@
    "fill": "NOT TAKEN (Omar declined 2026-07-27, tranche 1)",
    "source": "spy-midterm-put-spread-plan.md - Nov 20 2026 710/600 vertical put spread",
    "thesis": "AVOID/SKIP: plan called for tranche 1 in the week of Jul 27-31, before the Jul 28-29 FOMC. Quoted debit $1,214 per spread (vs $1,420 modelled 7/6). Max loss $1,214; max gain $9,786; breakeven SPY 697.86 (-5.4% from ref). NONE of the plan's abort clauses had fired at decision time: VIX 19.33 (abort >20), SPY 737.60 (abort well under 735), SPY below its 20d (746.58) and 50d (744.97) but +5.5% over its 200d (698.89) and only -2.9% off its highest close. Omar declined. GRADE WHETHER SKIPPING WAS RIGHT: mark at SPY levels through Nov 20 2026 - a close below 697.86 means the skip cost money; flat or up means the skip saved $1,214."
+  },
+  {
+   "id": "2026-07-28-JNJ-entry-limit",
+   "date": "2026-07-28",
+   "sym": "JNJ",
+   "dir": "long",
+   "ref": 265.95,
+   "stop": 245.17,
+   "target": null,
+   "fill": "PLAN ONLY - resting limit at 265.95, NOT filled. Alert 5244637899.",
+   "source": "og-chandelier universe scan 2026-07-27 (passed every gate)",
+   "thesis": "Gated trend continuation. Passed regime, ADX>=20, +DI>-DI, above ZLSMA and liquidity on 7/27; price well over 50d 243.50 and 200d 225.44. Earnings CLEAR (reported 7/15, next 10/20). Size HALF = 120 sh ~$31.9k, risk ~$2,494; second half only on confirmation. BREAK CONDITION: Chandelier flips SELL, or a close back below the 50-day. NOT taken at market 7/28 - it had gapped +1.7% to ~270.50 and sat 0.1% under its 52-week high, which is a chase (protocol flags >0.50%) with no headroom. CONCENTRATION: filling this breaks the >$10k combined-open-risk flag (book already ~$9,671) - must be an explicit accepted override. GRADE: whether waiting for the level beat buying the gap."
+  },
+  {
+   "id": "2026-07-28-DGX-entry-limit",
+   "date": "2026-07-28",
+   "sym": "DGX",
+   "dir": "long",
+   "ref": 231.84,
+   "stop": 214.02,
+   "target": null,
+   "fill": "PLAN ONLY - resting limit at 231.84, NOT filled. Alert 5244638089.",
+   "source": "og-chandelier universe scan 2026-07-27 (passed every gate)",
+   "thesis": "Gated trend continuation on a post-earnings runner. Passed every gate 7/27; price far over 50d 204.25 and 200d 193.28. Earnings CLEAR (reported 7/23, next 10/27) - the move is post-earnings drift, the one effect we have actually measured as real. Size HALF = 140 sh ~$32.5k, risk ~$2,494; second half only on confirmation. BREAK CONDITION: Chandelier flips SELL, or a close back below the 50-day. NOT taken at market 7/28 - had gapped +2.2% to ~237 and sat 0.8% under its 52-week high. CONCENTRATION: filling this breaks the >$10k combined-open-risk flag - explicit override required. GRADE: whether waiting for the level beat buying the gap."
   }
  ]
 }
