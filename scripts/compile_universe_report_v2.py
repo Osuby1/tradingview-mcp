@@ -252,11 +252,6 @@ readme_sheet(
                                  "SLOW (built from smoothed 14-day averages): it confirms a "
                                  "trend that exists, it does not predict one. A gate and a "
                                  "ranking aid, never a buy signal by itself."),
-        ("Trend Strength vs Today's Best", "Each name's ADX as a share of the day's strongest "
-                                           "(100 = strongest today). Fixes the read-as-percent "
-                                           "trap above: a 35 that is today's best reads 100. "
-                                           "Trend strength is the one measured-to-matter "
-                                           "input, so this ranks the batch by it at a glance."),
         ("Magical (CCI-20)", "Above +100 = overbought, below -100 = oversold. NOTE: measured "
                              "2026-07-22 across 1,725 signals, this cut does NOT separate "
                              "returns (0.03pt over 21 days). Treat as context, not a veto."),
@@ -536,13 +531,13 @@ FRESH_COLS = [
         "- slightly BACKWARDS (-0.12), while raw trend strength stayed the only "
         "positive input. So this is CONTEXT ONLY: it never ranks, never vetoes. "
         "Full test: research/di-margin-test-2026-07-28.md.", FMT_PCT),
-    Col("adx_rel", "Trend Strength vs Today's Best", 13,
-        "This name's trend strength (ADX) as a share of the STRONGEST trend "
-        "among today's fresh signals - 100 means it is today's strongest. "
-        "Trend strength is the one input our calibration found with real (if "
-        "weak) predictive signal, so this ranks the batch by the thing "
-        "measured to matter. On 2026-07-24 it would have read: HAS 100, MLI "
-        "84, SJM 71, DVN 61 - the week then played out in nearly that order.", FMT_INT),
+    Col("adx", "Trend Strength (ADX)", 12,
+        "The RAW ADX reading, deliberately unconverted (Omar 2026-07-28: 'if "
+        "it is 36, I want to know that clearly'). How to read it: below 20 = "
+        "no trend (gates require 20+), 20-25 = forming, 25-40 = a real trend "
+        "where 35 is STRONG, 40-60 = powerful but often late, 60+ = rare. Not "
+        "a percent. Strength only, not direction. The one input measured to "
+        "actually predict returns (weakly). Full guide on the READ ME tab.", FMT_PCT),
     Col("sector", "Sector", 20, "Sector - use it to spot when several signals are the same bet."),
     Col("signal_date", "Signal Date", 12, "The session the Chandelier flipped to BUY."),
     Col("age", "Sessions Old", 11,
@@ -570,8 +565,6 @@ FRESH_COLS = [
         "100% means at the yearly high. Leaders live within about 15% of it.", FMT_PCT),
     Col("pct200", "% vs 200-Day Average", 14,
         "Above zero = long-term uptrend. Below = you are buying inside a downtrend.", FMT_PCT),
-    Col("adx", "Trend Strength (ADX)", 12,
-        "Above 20-25 means a real trend exists. Below that the move is noise.", FMT_PCT),
     Col("score", "Origination Score", 12,
         "The origination scanner's 0-100 quality score, if it also found this name.", FMT_PCT),
     Col("grade", "Origination Grade", 12, "A+ / A / B / C / SKIP from the origination scan."),
@@ -694,11 +687,8 @@ def fresh_rows():
             "regime": h.get("regime"), "verdict": h.get("verdict"), "why": why,
         })
     out.sort(key=lambda r: -(r["buy_score"] or 0))
-    _max_adx = max((r["adx"] for r in out if r["adx"]), default=None)
     for i, r in enumerate(out, 1):
         r["rank"] = i
-        r["adx_rel"] = (round(100 * r["adx"] / _max_adx)
-                        if r["adx"] and _max_adx else None)
     return out
 
 
