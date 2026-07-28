@@ -147,6 +147,10 @@ rem Added to the chain 2026-07-25 because nothing called it, so when the results
 rem schema changed on 7/21 it silently exited "nothing to grade" for four days.
 python scripts\og_shadow.py %TODAY% >> "%LOG%" 2>&1                    || echo WARNING: og_shadow failed >> "%LOG%"
 python scripts\build_catalyst_calendar.py >> "%LOG%" 2>&1             || echo WARNING: catalyst_calendar failed >> "%LOG%"
+rem market_structure (added 2026-07-28): the day's path, close-within-range, and
+rem rebound-vs-giveback that the Market ^& Rotation tab needs. Non-fatal - without
+rem it that tab degrades to the old radar-only view rather than blocking the run.
+python scripts\market_structure.py %TODAY% >> "%LOG%" 2>&1            || echo WARNING: market_structure failed - tab 1 will be radar-only >> "%LOG%"
 rem ratchet watch (added 2026-07-25): maintains the 20%% trailing-ratchet exit
 rem alerts on the REAL open book (watchlists\open-book.json). The Python step
 rem decides, the Node/CDP step does the TradingView REST work in page context.

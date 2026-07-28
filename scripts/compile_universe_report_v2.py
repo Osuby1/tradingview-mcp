@@ -75,7 +75,18 @@ if os.path.exists(opath):
                                               "cat": row[icat], "tab": ws0.title}
 
 # --- radar parse ---
+# BUG FOUND 2026-07-28: this only ever understood a {"groups":[{group,state,accel,
+# perf_w,perf_1m,perf_6m}]} shape. rotation_radar.py has never written that - it
+# writes {"date":..., "states": {"AMEX:XLE": "IGNITING", ...}}, a ticker->state map
+# and nothing else. So `groups` was always [], radar_lines was always empty, and
+# the workbook printed "(rotation radar did not run)" on every single run while the
+# radar was in fact running fine. Classic silent schema drift.
+#
+# Fix: read the states map as well. The numbers it lacks (accel / 1W / 1M / 6M) are
+# already computed by market_structure.py against the SAME universe, so the table is
+# joined from the two at render time. Old shape still honoured if it ever appears.
 radar_lines = []
+radar_states = {}
 rpath = os.path.join(REPO, "watchlists", "rotation-radar-state.md")
 if os.path.exists(rpath):
     txt = open(rpath, encoding="utf-8").read()
@@ -83,6 +94,8 @@ if os.path.exists(rpath):
     if m:
         try:
             rj = json.loads(m.group(1))
+            if isinstance(rj, dict) and isinstance(rj.get("states"), dict):
+                radar_states = rj["states"]
             groups = rj.get("groups", rj if isinstance(rj, list) else [])
             for g in sorted(groups, key=lambda x: -(x.get("accel") or 0)):
                 radar_lines.append({"group": g.get("group", g.get("name", "?")),
@@ -246,6 +259,102 @@ if _fresh_n:
     ws.append(["Signal survival rate", f"{100.0*_pass_n/_fresh_n:.0f}%",
                "Low survival means the indicator is firing into a hostile tape."])
 
+# --- Market structure (Omar 2026-07-28): the day's PATH, the close-within-range
+# tell, rebound-vs-giveback and leadership concentration. A sector list with no
+# daily change and no sense of HOW the day traded is data, not a read.
+# Produced by scripts/market_structure.py; absent = tab degrades, never blocks.
+try:
+    MS = json.load(open(os.path.join(
+        REPO, "watchlists", f"market-structure-{DATE}.json"), encoding="utf-8"))
+except Exception:
+    MS = None
+
+if MS:
+    _p = MS.get("index_path") or {}
+    ws.append([])
+    ws.append(["HOW THE DAY ACTUALLY TRADED"])
+    ws.cell(row=ws.max_row, column=1).font = SECTION
+    if _p.get("shape"):
+        ws.append(["The session's path", safe(_p["shape"]),
+                   "The closing number alone hides the shape. A flat close after a "
+                   "big intraday swing is a very different day from a quiet one."])
+    if _p.get("close_quality") is not None:
+        ws.append(["Where it closed in its range",
+                   f"{_p.get('range_pos')}% of the day's range",
+                   safe(_p["close_quality"]) + " - close near the low means sellers "
+                   "never let up, near the high means buyers pressed."])
+    if _p.get("range_pct") is not None:
+        ws.append(["Day's full range", f"{_p['range_pct']:.2f}%",
+                   f"High {_p.get('high_pct'):+.2f}% / low {_p.get('low_pct'):+.2f}% "
+                   "against the prior close."])
+    _c = MS.get("concentration") or {}
+    if _c:
+        ws.append(["Groups up / down today",
+                   f"{_c.get('n_up_today')} up, {_c.get('n_down_today')} down "
+                   f"of {_c.get('groups')}",
+                   "Breadth ACROSS GROUPS. A flat index with most groups up means "
+                   "a few heavyweights did the damage, not broad selling."])
+        ws.append(["Leadership concentration",
+                   f"{_c.get('igniting_count')} group(s) clearly ahead "
+                   f"(spread {_c.get('accel_spread')})",
+                   safe(_c.get("read", ""))])
+    _u = MS.get("unwind") or {}
+    if _u.get("verdict"):
+        ws.append(["Was this rotation or unwinding?", _u["verdict"].split(" - ")[0],
+                   safe(_u["verdict"])])
+        ws.append(["  - day's 3 best",
+                   safe(", ".join(_u.get("top3", []))),
+                   safe("Character: " + ", ".join(_u.get("top3_character", [])))])
+        ws.append(["  - day's 3 worst",
+                   safe(", ".join(_u.get("bottom3", []))),
+                   safe("Character: " + ", ".join(_u.get("bottom3_character", [])))])
+
+    # The judgement slot. Deliberately NOT auto-generated - a script naming what a
+    # day "meant" would be confident noise. Written by hand with the EOD brief.
+    ws.append([])
+    ws.append(["NARRATIVE - written by hand each evening"])
+    ws.cell(row=ws.max_row, column=1).font = SECTION
+    _narr_path = os.path.join(REPO, "watchlists", f"market-narrative-{DATE}.md")
+    if os.path.exists(_narr_path):
+        for _ln in open(_narr_path, encoding="utf-8").read().splitlines():
+            if _ln.strip():
+                ws.append(["", safe(_ln.strip())])
+    else:
+        ws.append(["", "NOT WRITTEN YET - see the EOD brief for the written read. "
+                       f"(Drop it in watchlists/market-narrative-{DATE}.md to have "
+                       "it appear here.)"])
+
+    # Sector table sorted by TODAY's move, with the benchmark left in place so
+    # out/under-performance is readable at a glance.
+    ws.append([])
+    ws.append(["SECTORS BY TODAY'S MOVE"])
+    ws.cell(row=ws.max_row, column=1).font = SECTION
+    _hdr = ws.max_row + 1
+    ws.append(["Group", "Today %", "Close in range %", "Volume vs normal",
+               "1 Month %", "6 Month %", "Character"])
+    for c in ws[_hdr]:
+        c.font = BOLD
+    _BENCH = MS.get("benchmark")
+    for r in MS.get("rows", []):
+        ws.append([safe(r.get("group")), r.get("day_pct"), r.get("range_pos"),
+                   r.get("vol_x"),
+                   round(r["m1"], 1) if r.get("m1") is not None else None,
+                   round(r["m6"], 1) if r.get("m6") is not None else None,
+                   safe(r.get("character"))])
+        if r.get("ticker") == _BENCH:
+            for c in ws[ws.max_row]:
+                c.font = BOLD
+    ws.append([])
+    ws.append(["", safe("Character: REBOUND = up lately but still underwater over 6 "
+                        "months (climbing out of a hole, not leading). GIVE-BACK = "
+                        "down lately after a big 6-month run. LEADING = up on both. "
+                        "LAGGING = neither. When the day's winners are REBOUND and "
+                        "the losers are GIVE-BACK, money is unwinding what worked "
+                        "rather than entering a new theme.")])
+    ws.append(["", safe("Close in range: 0% = closed on the low (sellers had the last "
+                        "word), 100% = closed on the high. Volume vs normal: 1.0 = an "
+                        "average day; 2.0+ means the move had real conviction.")])
+
 # Pull the headline lines straight out of the radar / ignition state files.
 def _state_headlines(path, limit=8, section_kw="NEW"):
     """Pull the bullet lines out of a state file's 'NEW since prior run' section.
@@ -285,6 +394,20 @@ else:
 ws.append([])
 ws.append(["ROTATION RADAR"])
 ws.cell(row=ws.max_row, column=1).font = BOLD
+# Join the radar's ticker->state map onto market_structure's numbers (same universe,
+# same source) when the rich shape is absent - which is always. See the parse note.
+if not radar_lines and radar_states and MS:
+    _by_tk = {r.get("ticker"): r for r in MS.get("rows", [])}
+    for _tk, _state in radar_states.items():
+        _r = _by_tk.get(_tk)
+        if not _r:
+            continue
+        radar_lines.append({"group": _r.get("group", _tk), "state": _state,
+                            "accel": _r.get("accel"),
+                            "w": round(_r["w"], 1) if _r.get("w") is not None else None,
+                            "m1": round(_r["m1"], 1) if _r.get("m1") is not None else None,
+                            "m6": round(_r["m6"], 1) if _r.get("m6") is not None else None})
+    radar_lines.sort(key=lambda x: -(x["accel"] if x["accel"] is not None else -999))
 if radar_lines:
     hdr = ws.max_row + 1
     ws.append(["Group", "State", "Acceleration", "1 Week %", "1 Month %", "6 Month %"])
@@ -298,6 +421,19 @@ if radar_lines:
                 c.fill = fill
 else:
     ws.append(["(rotation radar did not run - see Data Quality tab)"])
+
+# The radar was MEASURED and came out inverted - groups it flagged as heating up
+# did not go on to outperform. It must never be presented as a buy signal, and the
+# caveat travels WITH the table so it cannot be read without it. (Omar 2026-07-28)
+ws.append([])
+ws.append(["", safe("READ THIS BEFORE ACTING ON THE TABLE ABOVE: these states were "
+                    "back-tested and came out BACKWARDS - groups flagged as heating "
+                    "up did NOT go on to outperform. Two same-week proofs: energy "
+                    "went IGNITING on 7/24 and was demoted one session later on "
+                    "7/27; airlines were demoted to ROLLING on 7/27, the day "
+                    "airlines were the second-best group in the market at +2.9%. "
+                    "Use this to see WHERE YOU ARE EXPOSED. Never as a reason to "
+                    "buy or sell.")])
 for row in ctx.get("rotation_commentary", []):
     ws.append([safe(row[0] if isinstance(row, list) else row)])
 
