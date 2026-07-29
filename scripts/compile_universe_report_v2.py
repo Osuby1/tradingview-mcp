@@ -1519,6 +1519,47 @@ else:
             "recommendations - the left table is every pick, acted on or not. "
             "Updates itself from the calls ledger and the open book."))
 
+        # ---- TOP SKIPPED RUNNERS (Omar 2026-07-28): the missed-money
+        # leaderboard, pre-sorted so it never has to be dug out with a filter.
+        # One row per ticker (earliest open pick = the full run), excluding
+        # anything actioned. This is the raw material for the pre-registered
+        # does-my-selection-beat-the-pool question.
+        SKIP_COLS = [
+            Col("ticker", "TOP SKIPPED RUNNERS", 16,
+                "Recommendations Omar did NOT act on, ranked by how far they "
+                "have run since the earliest still-open pick. The honest "
+                "missed-money scorecard: it exists so skips get graded, not "
+                "to feel good. Compare against MY TRADES above - that "
+                "comparison is the test of whether hand-picking beats the "
+                "pool it picks from."),
+            Col("date", "Picked On", 11, "The earliest open recommendation date."),
+            Col("rec_price", "Price Then", 10, "Price on the pick date.", FMT_PRICE),
+            Col("cur_price", "Price Now", 10, "Latest tracked price.", FMT_PRICE),
+            Col("ret_pct", "% Since", 9, "The run that was skipped.", FMT_PCT),
+            Col("best_pct", "Best %", 8, "Best point reached since the pick.", FMT_PCT),
+            Col("days_held", "Days", 6, "Days since the pick.", FMT_INT),
+        ]
+        _acted_syms = {r["sym"] for r in _acted}
+        _seen, _skip = set(), []
+        for p in sorted(_picks, key=lambda x: x.get("date") or ""):
+            t = p.get("ticker")
+            if (t in _acted_syms or t in _seen
+                    or str(p.get("status", "")).upper() != "OPEN"):
+                continue
+            _seen.add(t)
+            _skip.append(p)
+        _skip.sort(key=lambda p: -(p.get("ret_pct")
+                                   if p.get("ret_pct") is not None else -999))
+        _top = _skip[:10]
+        if _top:
+            _sk_last = side_table(
+                ws, SKIP_COLS, _top, _ac_start, start_row=_last + 5,
+                row_fill=lambda r: GREEN if (r.get("ret_pct") or 0) > 0 else None)
+            ws.cell(row=_sk_last + 1, column=_ac_start, value=safe(
+                f"Top 10 of {len(_skip)} skipped open picks. A skip that ran "
+                "is a graded miss, not a non-event - and a skip that fell is "
+                "risk avoided. Both belong on the Friday scorecard."))
+
     ws.append([])
     ws.append([safe("SCORECARD - the averages behind the list above. Green share = "
                     "how many picks are currently in profit.")])
