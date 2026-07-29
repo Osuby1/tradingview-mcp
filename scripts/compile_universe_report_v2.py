@@ -597,7 +597,7 @@ def _tv_screen_metrics():
                     "right": ["NASDAQ", "NYSE", "AMEX"]}],
         "options": {"lang": "en"}, "markets": ["america"],
         "columns": ["name", "RSI", "relative_volume_10d_calc",
-                    "close", "price_52_week_high"],
+                    "close", "price_52_week_high", "sector"],
         "range": [0, 9000],
     }).encode()
     req = urllib.request.Request(
@@ -606,16 +606,17 @@ def _tv_screen_metrics():
     out = {}
     for r in json.loads(urllib.request.urlopen(req, timeout=45).read()).get("data", []):
         d = r.get("d") or []
-        if len(d) < 5:
+        if len(d) < 6:
             continue
         bare = str(r.get("s", "")).split(":")[-1]
-        rsi, rvol, close, hi52 = d[1], d[2], d[3], d[4]
+        rsi, rvol, close, hi52, sector = d[1], d[2], d[3], d[4], d[5]
         out[bare] = {
             "rsi": round(rsi, 1) if isinstance(rsi, (int, float)) else None,
             "relvol": round(rvol, 2) if isinstance(rvol, (int, float)) else None,
             "close": round(close, 2) if isinstance(close, (int, float)) else None,
             "pct52": round(close / hi52 * 100, 1)
                      if (isinstance(close, (int, float)) and isinstance(hi52, (int, float)) and hi52) else None,
+            "sector": sector if isinstance(sector, str) else None,
         }
     return out
 
@@ -671,7 +672,8 @@ def fresh_rows():
         adx_val = g.get("adx") if g.get("adx") is not None else e.get("adx")
         out.append({
             "buy_score": sc, "risk_flag": risk_txt,
-            "sym": sym, "company": e.get("description"), "sector": e.get("sector"),
+            "sym": sym, "company": e.get("description"),
+            "sector": e.get("sector") or tv.get("sector"),
             "di_margin": (round(pdi - ndi, 1)
                           if pdi is not None and ndi is not None else None),
             "signal_date": h.get("signal_date_est"), "age": h.get("bars_back"),
@@ -1440,6 +1442,62 @@ ACTIONED_COLS = [
 ]
 
 
+def _rec_day_dmi(pairs):
+    """(sym, rec_date) -> {'sym|date': [DI margin, ADX]} at the pick-day close.
+
+    Omar 2026-07-29: the Top Skipped Runners block must show what the buyer/
+    seller margin and trend strength WERE on the day each name was recommended.
+    Wilder 14-day math matching the chart's DMI; Yahoo daily bars (the same
+    source the origination scanner scans from). Cached per pick in
+    research/rec-day-dmi-cache.json so each (sym, date) is computed exactly
+    once - nightly runs only fetch history for genuinely new picks.
+    Non-fatal: any failure leaves the cells blank rather than blocking.
+    """
+    cache_path = os.path.join(REPO, "research", "rec-day-dmi-cache.json")
+    try:
+        cache = json.load(open(cache_path))
+    except Exception:
+        cache = {}
+    need = [(s, d) for s, d in pairs if s and d and f"{s}|{d}" not in cache]
+    if need:
+        try:
+            import pandas as pd
+            import yfinance as yf
+            _dates = [datetime.date.fromisoformat(d) for _, d in need]
+            start = (min(_dates) - datetime.timedelta(days=150)).isoformat()
+            end = (max(_dates) + datetime.timedelta(days=3)).isoformat()
+            syms = sorted({s for s, _ in need})
+            raw = yf.download(syms, start=start, end=end, group_by="ticker",
+                              auto_adjust=False, progress=False)
+
+            def wilder(s, n=14):
+                return s.ewm(alpha=1.0 / n, adjust=False).mean()
+
+            for sym, rec in need:
+                key = f"{sym}|{rec}"
+                try:
+                    df = (raw[sym] if len(syms) > 1 else raw).dropna()
+                    h, l, c = df["High"], df["Low"], df["Close"]
+                    up, dn = h.diff(), -l.diff()
+                    pdm = ((up > dn) & (up > 0)) * up
+                    ndm = ((dn > up) & (dn > 0)) * dn
+                    tr = pd.concat([h - l, (h - c.shift()).abs(),
+                                    (l - c.shift()).abs()], axis=1).max(axis=1)
+                    atr = wilder(tr)
+                    pdi, ndi = 100 * wilder(pdm) / atr, 100 * wilder(ndm) / atr
+                    dx = 100 * (pdi - ndi).abs() / (pdi + ndi)
+                    adx = wilder(dx)
+                    ts = df.index[df.index <= rec][-1]
+                    cache[key] = [round(float(pdi[ts] - ndi[ts]), 1),
+                                  round(float(adx[ts]), 1)]
+                except Exception:
+                    cache[key] = None
+            json.dump(cache, open(cache_path, "w"), indent=0)
+        except Exception:
+            pass
+    return {f"{s}|{d}": cache.get(f"{s}|{d}") for s, d in pairs}
+
+
 def _actioned_rows():
     try:
         led = json.load(open(os.path.join(REPO, "research", "calls-ledger.json"),
@@ -1538,6 +1596,16 @@ else:
             Col("ret_pct", "% Since", 9, "The run that was skipped.", FMT_PCT),
             Col("best_pct", "Best %", 8, "Best point reached since the pick.", FMT_PCT),
             Col("days_held", "Days", 6, "Days since the pick.", FMT_INT),
+            Col("rec_margin", "Buyers vs Sellers @ Pick", 12,
+                "The buyer/seller margin (+DI - -DI) on the DAY this name was "
+                "recommended - the state of the fight when the pick was made. "
+                "Computed once from daily history and cached. Context only: "
+                "measured 2026-07-28, the margin does not predict returns.", FMT_PCT),
+            Col("rec_adx", "ADX @ Pick", 9,
+                "Raw trend strength (ADX) on the recommendation day. The 7/29 "
+                "look at the top-10 runners found birthdays of every kind - "
+                "from 17 (below our own gate; PBF, the biggest runner) to 56. "
+                "Winners-only sample: describes the pool, predicts nothing.", FMT_PCT),
         ]
         _acted_syms = {r["sym"] for r in _acted}
         _seen, _skip = set(), []
@@ -1552,6 +1620,11 @@ else:
                                    if p.get("ret_pct") is not None else -999))
         _top = _skip[:10]
         if _top:
+            _dmi = _rec_day_dmi([(p.get("ticker"), p.get("date")) for p in _top])
+            for p in _top:
+                v = _dmi.get(f"{p.get('ticker')}|{p.get('date')}")
+                p["rec_margin"] = v[0] if v else None
+                p["rec_adx"] = v[1] if v else None
             _sk_last = side_table(
                 ws, SKIP_COLS, _top, _ac_start, start_row=_last + 5,
                 row_fill=lambda r: GREEN if (r.get("ret_pct") or 0) > 0 else None)
