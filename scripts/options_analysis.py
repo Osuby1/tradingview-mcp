@@ -125,6 +125,98 @@ def chain_row(sym, expiry, strike, kind):
     return None if row.empty else row.iloc[0]
 
 
+# ---------------------------------------------------------------- readiness ---
+_SPY_CACHE = {}
+
+
+def _spy_hist():
+    if "h" not in _SPY_CACHE:
+        _SPY_CACHE["h"] = yf.Ticker("SPY").history(period="1y", auto_adjust=True)
+    return _SPY_CACHE["h"]
+
+
+def readiness(sym, kind):
+    """Is the stock POISED to move soon in the trade's direction? Five
+    direction-aware components, 0-20 points each, composite 0-100.
+
+    UNCALIBRATED (2026-07-29): built on the standard imminence toolkit
+    (volatility compression, trigger proximity, OBV accumulation, MACD
+    inflection, relative strength). Our own studies killed two timing myths
+    already (DI margin and ADX at pick predict nothing), so this score RANKS
+    candidates and is graded in the Friday reviews - it does not gate/veto
+    until the data earns it that power.
+    """
+    h = yf.Ticker(sym).history(period="1y", auto_adjust=True)
+    if h.empty or len(h) < 130:
+        return {"score": None, "note": "insufficient history (<130 sessions)"}
+    c, hi, lo, vol = h.Close, h.High, h.Low, h.Volume
+    up = kind == "CALL"
+    notes, pts = [], {}
+
+    # 1. volatility compression - BB(20,2) width percentile vs trailing 120
+    sma, sd = c.rolling(20).mean(), c.rolling(20).std()
+    width = (4 * sd / sma).dropna()
+    w120 = width.tail(120)
+    pctile = float((w120 <= w120.iloc[-1]).mean() * 100)
+    pts["squeeze"] = 20 if pctile <= 10 else 15 if pctile <= 25 else 8 if pctile <= 50 else 0
+    # TTM squeeze: BB inside Keltner (EMA20 +/- 1.5*ATR14)
+    tr = np.maximum(hi - lo, np.maximum(abs(hi - c.shift(1)), abs(lo - c.shift(1))))
+    atr = tr.ewm(alpha=1 / 14, adjust=False).mean()
+    ema20 = c.ewm(span=20, adjust=False).mean()
+    sq_on = bool((sma.iloc[-1] + 2 * sd.iloc[-1] < ema20.iloc[-1] + 1.5 * atr.iloc[-1])
+                 and (sma.iloc[-1] - 2 * sd.iloc[-1] > ema20.iloc[-1] - 1.5 * atr.iloc[-1]))
+    notes.append(f"band width in the {pctile:.0f}th percentile of the last 120 "
+                 f"sessions{' + TTM squeeze ON (bands inside Keltner)' if sq_on else ''}")
+
+    # 2. proximity to the trigger level (20-day extreme in trade direction)
+    if up:
+        dist = float((hi.tail(20).max() - c.iloc[-1]) / c.iloc[-1] * 100)
+        lbl = "below the 20-day high"
+    else:
+        dist = float((c.iloc[-1] - lo.tail(20).min()) / c.iloc[-1] * 100)
+        lbl = "above the 20-day low"
+    pts["trigger"] = 20 if dist <= 1 else 12 if dist <= 3 else 6 if dist <= 5 else 0
+    notes.append(f"{dist:.1f}% {lbl}")
+
+    # 3. volume accumulation/distribution - OBV extreme + 20d slope, direction-aware
+    obv = (np.sign(c.diff()).fillna(0) * vol).cumsum()
+    o20 = obv.tail(20)
+    at_ext = bool(o20.iloc[-1] >= o20.max()) if up else bool(o20.iloc[-1] <= o20.min())
+    slope_dir = bool((o20.iloc[-1] - o20.iloc[0]) > 0) == up
+    pts["volume"] = 20 if at_ext else 10 if slope_dir else 0
+    notes.append("volume flow at a fresh 20-day extreme in trade direction"
+                 if at_ext else ("volume flow leaning with the trade" if slope_dir
+                                 else "volume flow NOT confirming"))
+
+    # 4. momentum inflection - MACD(12,26,9) histogram slope + sign
+    macd = c.ewm(span=12, adjust=False).mean() - c.ewm(span=26, adjust=False).mean()
+    hist = macd - macd.ewm(span=9, adjust=False).mean()
+    slope_ok = bool((hist.iloc[-1] - hist.iloc[-3]) > 0) == up
+    sign_ok = bool(hist.iloc[-1] > 0) == up
+    pts["momentum"] = (10 if slope_ok else 0) + (10 if sign_ok else 0)
+    notes.append(f"momentum {'turning with' if slope_ok else 'turning against'} "
+                 f"the trade, {'already' if sign_ok else 'not yet'} on its side")
+
+    # 5. relative strength vs SPY - ratio near its 60-day extreme in direction
+    spy = _spy_hist().Close.reindex(c.index).ffill()
+    ratio = (c / spy).dropna().tail(60)
+    if up:
+        near = float(ratio.iloc[-1] / ratio.max())
+        pts["rel_strength"] = 20 if near >= 0.98 else 10 if near >= 0.95 else 0
+    else:
+        near = float(ratio.iloc[-1] / ratio.min())
+        pts["rel_strength"] = 20 if near <= 1.02 else 10 if near <= 1.05 else 0
+    notes.append("beating the market at a 60-day extreme" if pts["rel_strength"] == 20
+                 else ("near its relative extreme" if pts["rel_strength"] == 10
+                       else "relative strength not at an extreme"))
+
+    return {"score": int(sum(pts.values())), "components": pts,
+            "squeeze_pctile": round(pctile), "squeeze_on": sq_on,
+            "dist_to_trigger_pct": round(dist, 1),
+            "label": "UNCALIBRATED - ranks candidates, does not veto",
+            "notes": notes}
+
+
 # --------------------------------------------------------------- validation ---
 def validate_quote(row, spot_scan, spot_yf, strike, kind, session_date):
     """Battery of data-quality checks. Returns (verdict, [reasons])."""
@@ -199,7 +291,7 @@ def analyze(sym, kind, expiry, strike, contracts=None, entry=None,
     if abs(be_move) > exp_move:
         gates.append(f"breakeven needs {be_move:+.1f}% but expected move to "
                      f"expiry is only ±{exp_move:.1f}%")
-    return {
+    out = {
         "sym": sym, "kind": kind, "expiry": expiry, "strike": strike,
         "session": session_date, "spot": round(spot, 2),
         "bid": bid, "ask": ask, "mid": mid,
@@ -219,6 +311,19 @@ def analyze(sym, kind, expiry, strike, contracts=None, entry=None,
         "iv_rank": None,  # honest n/a until iv-history has ~60 sessions
         "validation": verdict, "reasons": reasons + gates,
     }
+    rd = readiness(sym, kind)
+    out["readiness"] = rd
+    # PRIME SETUP: compression + cheap premium together attack both enemies of
+    # long options (time decay while waiting, and overpaying for movement).
+    out["prime_setup"] = bool(rd.get("squeeze_pctile") is not None
+                              and rd["squeeze_pctile"] <= 25
+                              and ivrv is not None and ivrv <= 1.2)
+    if out["prime_setup"]:
+        out["reasons"] = ["PRIME SETUP: volatility compressed (squeeze "
+                          f"{rd['squeeze_pctile']}th pctile) AND premium cheap "
+                          f"vs realized (IV/RV {ivrv}) - the textbook long-"
+                          "options pairing"] + out["reasons"]
+    return out
 
 
 def select_contract(sym, kind, session_date=None):

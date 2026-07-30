@@ -14,7 +14,8 @@
     "fills": "Official paper entry = live bid/ask mid at the morning fill (~8:50 AM CT), never a stale after-hours mark. Daily mark = EOD mid (Yahoo closing book acceptable for marks - verified within pennies of TS on 7/29). Honest fills only - never mark at the ask on entry or bid on exit favorably. NIGHT-ONE EXCEPTION: the three 7/29 picks were recorded at stale close mids before this rule existed; their entries get restated at the 7/30 morning live mids per the verification report, correction logged.",
     "analysis_gates": "UPGRADED 2026-07-29 (scripts/options_analysis.py runs on every candidate and every open trade): (1) Black-Scholes delta computed from the strike's own market IV - no moneyness eyeballing - must land 0.60-0.75; (2) IV/RV20 (option's implied vol vs the stock's realized 20-day movement) <= 1.4 pass, 1.4-1.8 flag as paying-up, > 1.8 reject unless a flagged catalyst justifies it; (3) breakeven move must fit inside the expected move to expiry (S*IV*sqrt(T)); (4) report the underlying move needed to double the premium by the time-exit and the weekly theta bleed as % of premium; (5) IV rank stays honestly n/a until research/iv-history.json accumulates ~60 sessions (collector runs at EOD) - never faked from proxies.",
     "data_validation": "Every quote must pass the battery before it can become an entry or a mark: live bid > 0, market not crossed, mid >= intrinsic value (stale-quote tell), IV in the 5%-250% plausible band, spread <= 10% clean / 10-15% flag / > 15% REJECT, OI >= 100, cross-source spot agreement within 0.5% (scan close vs yfinance), last-trade freshness noted. A REJECT price never enters the ledger; the reasons are logged on the trade.",
-    "prereg": "Every new pick is committed to git the day it is made (anti-sycophancy mandate). No backdating, no silent deletions - a bad pick closes at its stop and stays on the record."
+    "prereg": "Every new pick is committed to git the day it is made (anti-sycophancy mandate). No backdating, no silent deletions - a bad pick closes at its stop and stays on the record.",
+    "readiness": "ADDED 2026-07-29 (Omar: measure whether the stock is POISED to move soon in our direction): five direction-aware components, 20 pts each - volatility compression (Bollinger width percentile + TTM squeeze), distance to the 20-day trigger level, OBV volume accumulation, MACD histogram inflection, relative strength vs SPY at a 60-day extreme. UNCALIBRATED: ranks candidates (pick the higher score when gates tie), logged on every trade, graded in Friday reviews - it does NOT veto until measurement earns it that power. Context: our own studies showed ADX and the buyers-vs-sellers margin at pick time predict nothing - they stay gates only. PRIME SETUP tag = squeeze pctile <= 25 AND IV/RV <= 1.2 together (cheap premium + stored energy - the textbook long-options pairing); prefer these when available."
   },
   "trades": [
     {
@@ -62,7 +63,29 @@
         "validation": "FLAG",
         "reasons": [
           "spread 13.6% (10-15%) - watch fill quality"
-        ]
+        ],
+        "readiness": {
+          "score": 56,
+          "components": {
+            "squeeze": 0,
+            "trigger": 6,
+            "volume": 10,
+            "momentum": 20,
+            "rel_strength": 20
+          },
+          "squeeze_pctile": 62,
+          "squeeze_on": false,
+          "dist_to_trigger_pct": 3.5,
+          "label": "UNCALIBRATED - ranks candidates, does not veto",
+          "notes": [
+            "band width in the 62th percentile of the last 120 sessions",
+            "3.5% below the 20-day high",
+            "volume flow leaning with the trade",
+            "momentum turning with the trade, already on its side",
+            "beating the market at a 60-day extreme"
+          ]
+        },
+        "prime_setup": false
       }
     },
     {
@@ -110,7 +133,29 @@
         "validation": "PASS",
         "reasons": [
           "delta +0.76 outside 0.60-0.75 band"
-        ]
+        ],
+        "readiness": {
+          "score": 20,
+          "components": {
+            "squeeze": 0,
+            "trigger": 0,
+            "volume": 10,
+            "momentum": 10,
+            "rel_strength": 0
+          },
+          "squeeze_pctile": 63,
+          "squeeze_on": false,
+          "dist_to_trigger_pct": 8.7,
+          "label": "UNCALIBRATED - ranks candidates, does not veto",
+          "notes": [
+            "band width in the 63th percentile of the last 120 sessions",
+            "8.7% below the 20-day high",
+            "volume flow leaning with the trade",
+            "momentum turning against the trade, already on its side",
+            "relative strength not at an extreme"
+          ]
+        },
+        "prime_setup": false
       }
     },
     {
@@ -159,7 +204,29 @@
         "reasons": [
           "spread 15.2% > 15% - mid fill not realistic",
           "delta -0.51 outside 0.60-0.75 band"
-        ]
+        ],
+        "readiness": {
+          "score": 28,
+          "components": {
+            "squeeze": 8,
+            "trigger": 0,
+            "volume": 10,
+            "momentum": 10,
+            "rel_strength": 0
+          },
+          "squeeze_pctile": 27,
+          "squeeze_on": false,
+          "dist_to_trigger_pct": 5.7,
+          "label": "UNCALIBRATED - ranks candidates, does not veto",
+          "notes": [
+            "band width in the 27th percentile of the last 120 sessions",
+            "5.7% above the 20-day low",
+            "volume flow leaning with the trade",
+            "momentum turning against the trade, already on its side",
+            "relative strength not at an extreme"
+          ]
+        },
+        "prime_setup": false
       },
       "standards_note": "FAILS the upgraded 7/29 analysis gates, found the same night it was picked: true BS delta -0.51 (the -0.57 estimate was optimistic; band floor is 0.60) and 15.2% spread breaches the new 15% cap. Grandfathered as a pre-registered night-one trade - decision at 7/30 EOD after the morning restatement: retire under upgraded standards or hold to plan. Either way it stays on the record and counts in the Friday review. The new engine would not have selected this contract."
     }

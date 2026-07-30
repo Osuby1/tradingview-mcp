@@ -1718,6 +1718,12 @@ OPT_COLS = [
         "validation battery (live bid, uncrossed market, mid vs intrinsic, "
         "spread cap, open interest, cross-source price agreement) plus the "
         "analysis gates. The top reason is shown."),
+    Col("readiness", "Poised? (0-100)", 11, "How ready the stock looks to move "
+        "SOON in the trade's direction: volatility compression + distance to "
+        "its trigger level + volume accumulation + momentum inflection + "
+        "relative strength vs the market, 20 points each. UNCALIBRATED - it "
+        "ranks candidates and gets graded in Friday reviews; it does not veto. "
+        "PRIME = compressed AND premium cheap vs realized movement at once."),
     Col("mark_premium", "Worth Now", 10, "Latest end-of-day midpoint from "
         "TradeStation (or the closing fill if the trade is done).", FMT_PRICE),
     Col("pnl_pct", "% P&L", 9, "Percent gain/loss on the premium paid.", FMT_PCT),
@@ -1777,6 +1783,9 @@ def _options_rows():
             "ivrv": a.get("iv_over_rv20"),
             "data_check": (a.get("validation", "") +
                            (f": {_reasons[0]}" if _reasons else "")) or None,
+            "readiness": (("PRIME " if a.get("prime_setup") else "")
+                          + str((a.get("readiness") or {}).get("score", ""))
+                          ) or None,
             "mark_premium": mark, "pnl_pct": pnl_pct, "pnl_usd": pnl_usd,
             "target_premium": t.get("target_premium"),
             "stop_premium": t.get("stop_premium"),
