@@ -1300,7 +1300,14 @@ else:
     _liquid_syms = {r["sym"] for r in mrows}
     for side_key in ("gainers", "losers"):
         for m in mv_data.get(side_key, []):
-            cap = m.get("market_cap")
+            # The movers JSON is written by a web-fetch step whose number
+            # formatting DRIFTS - on 2026-07-29 price/volume arrived as strings
+            # ("13,162,141") and the raw multiply crashed the whole compile.
+            # Coerce every numeric field through parse_num, always.
+            _price = parse_num(m.get("price"))
+            _vol = parse_num(m.get("volume"))
+            _pct = parse_num(m.get("pct_change"))
+            cap = parse_num(m.get("market_cap"))
             if cap is None:
                 cap = parse_num(m.get("market_cap_raw"))
             if m["sym"] in _liquid_syms:
@@ -1317,9 +1324,9 @@ else:
                 why = f"{m.get('skip_reason','')}. {why}"
             mrows.append({
                 "side": side.upper(), "sym": m["sym"], "company": m.get("company"),
-                "price": m.get("price"), "pct": m.get("pct_change"),
+                "price": _price, "pct": _pct,
                 "mcap": _fmt_cap(cap),
-                "dvol": _fmt_cap((m.get("price") or 0) * (m.get("volume") or 0)),
+                "dvol": _fmt_cap((_price or 0) * (_vol or 0)),
                 "verdict": verdict, "why": why,
             })
 

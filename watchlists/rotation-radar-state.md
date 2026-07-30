@@ -1,79 +1,78 @@
-# Rotation Radar — 2026-07-28
+# Rotation Radar — 2026-07-29
 
-accel = Perf.1M − Perf.6M/6 (excess vs own run-rate). Prev state: 2026-07-27.
+accel = Perf.1M − Perf.6M/6 (excess vs own run-rate). Prev state: 2026-07-28.
 **NEW IGNITING ⇒ run the Early Ignition single-name screen on that group (drill column).**
 
 ## ⚡ STATE CHANGES vs prior run
-🔥 **Software (IGV)**: WATCH → IGNITING (accel +8.3)
-🔥 **Cloud (SKYY)**: WATCH → IGNITING (accel +8.1)
-· **Healthcare (XLV)**: NEUTRAL → WATCH (accel +5.6)
-· **Gold miners (GDX)**: WATCH → NEUTRAL (accel +2.6)
-· **Airlines (JETS)**: ROLLING → NEUTRAL (accel -5.6)
+· **Cloud (SKYY)**: IGNITING → NEUTRAL (accel +2.7)
+· **Software (IGV)**: IGNITING → NEUTRAL (accel +2.7)
+· **Healthcare (XLV)**: WATCH → NEUTRAL (accel +2.1)
+⚠ **Biotech (eq-wt) (XBI)**: NEUTRAL → ROLLING (accel -7.8)
 
 | Group | ETF | State | accel | 1W% | 1M% | 3M% | 6M% | rel1M | Drill-down |
 |-------|-----|-------|-------|-----|-----|-----|-----|-------|------------|
-| China internet | KWEB | IGNITING | +21.7 | +0.1 | +17.5 | -3.5 | -25.1 | +15.9 | BABA FUTU NIO |
-| Software | IGV | IGNITING | +8.3 | -0.2 | +7.8 | +8.6 | -2.9 | +6.2 | NET CRWD PANW NOW SNOW |
-| Cloud | SKYY | IGNITING | +8.1 | +1.3 | +9.8 | +17.3 | +10.2 | +8.2 | NET SNOW |
-| Financials | XLF | WATCH | +6.2 | +2.9 | +7.5 | +10.5 | +8.0 | +5.9 | GS BAC C BLK BX + insurance PGR ACGL CB ERIE |
-| Healthcare | XLV | WATCH | +5.6 | +6.2 | +7.0 | +17.6 | +8.4 | +5.4 | LLY ABBV JNJ AMGN BSX MDT WST ZTS |
-| Oil E&P | XOP | WATCH | +5.2 | -2.6 | +8.2 | -4.5 | +18.2 | +6.6 | E&P names |
-| Energy | XLE | WATCH | +4.5 | -1.0 | +6.6 | -1.2 | +12.6 | +5.0 | XOM CVX COP OXY DVN + refiners |
-| Retail | XRT | NEUTRAL | +3.8 | +2.6 | +4.6 | +8.5 | +4.9 | +3.0 | TPR ANF GRMN |
-| Defense/aero | ITA | NEUTRAL | +2.7 | +6.8 | +3.4 | +13.0 | +4.3 | +1.8 | GD LHX LDOS HWM TDY AXON BWXT |
-| Cybersecurity | CIBR | NEUTRAL | +2.6 | -3.1 | +6.8 | +33.0 | +25.7 | +5.2 | CRWD PANW |
-| Gold miners | GDX | NEUTRAL | +2.6 | +2.4 | -3.2 | -14.8 | -34.5 | -4.8 | NEM GOLD |
-| Biotech (cap-wt) | IBB | NEUTRAL | +2.1 | +2.3 | +3.6 | +14.6 | +9.3 | +2.0 | VRTX REGN GILD AMGN |
-| Staples | XLP | NEUTRAL | +1.9 | +3.1 | +2.8 | +5.2 | +5.7 | +1.2 | KO PEP PM CLX COST SFM |
-| Materials | XLB | NEUTRAL | +0.9 | +3.6 | +1.5 | +1.7 | +3.7 | -0.1 | ALB FCX NUE DOW SHW BALL |
-| Discretionary | XLY | NEUTRAL | +0.7 | -1.9 | -0.6 | -3.2 | -8.2 | -2.3 | MCD SBUX NKE HD LOW CMG BROS SHAK |
-| SPY baseline | SPY | - | +0.6 | -0.7 | +1.6 | +4.2 | +6.4 | +0.0 | - |
-| Regional banks | KRE | NEUTRAL | +0.4 | +1.5 | +2.5 | +9.4 | +12.6 | +0.8 | KRE holdings + HOPE FHB BCBP NTRS |
-| Utilities | XLU | NEUTRAL | -1.8 | +1.4 | -1.0 | -1.2 | +4.6 | -2.7 | DTE NEE CEG VST TLN |
-| Industrials | XLI | NEUTRAL | -1.8 | +1.7 | -0.1 | +6.6 | +10.4 | -1.7 | GE URI UNP CAT DE EME FIX HWM MLI |
-| Metals/mining | XME | NEUTRAL | -2.0 | +2.0 | -5.7 | -13.3 | -22.3 | -7.3 | FCX CENX MP BHP |
-| Transports | IYT | NEUTRAL | -2.1 | -1.8 | +0.3 | +8.0 | +14.3 | -1.3 | UNP ODFL JBHT XPO CAR |
-| Oil services | OIH | NEUTRAL | -2.2 | -1.3 | -1.3 | -17.0 | +5.1 | -2.9 | BKR HAL SLB |
-| Spec growth | ARKK | NEUTRAL | -2.8 | -4.3 | -4.2 | -2.7 | -8.3 | -5.8 | HOOD COIN ROKU TDOC RXRX |
-| Robotics | BOTZ | NEUTRAL | -3.5 | -2.1 | -5.3 | -9.7 | -11.3 | -7.0 | SYM |
-| Uranium | URA | NEUTRAL | -3.5 | -0.6 | -9.7 | -28.7 | -37.3 | -11.3 | CCJ OKLO SMR CEG |
-| Homebuilders | ITB | NEUTRAL | -3.7 | +5.1 | -4.2 | +2.6 | -2.6 | -5.8 | DHI LEN |
-| Biotech (eq-wt) | XBI | NEUTRAL | -4.1 | -0.8 | -1.0 | +15.2 | +18.9 | -2.6 | XBI top-25 + TGTX SMMT ARQT — see ignition-biotech scan |
-| Airlines | JETS | NEUTRAL | -5.6 | +3.9 | -3.2 | +27.4 | +14.2 | -4.9 | DAL UAL LUV |
-| Tech broad | XLK | ROLLING | -8.1 | -4.7 | -5.5 | +7.7 | +15.7 | -7.1 | megacap tech |
-| Semis | SMH | ROLLING | -18.6 | -8.8 | -14.1 | +6.7 | +26.9 | -15.8 | NVDA AMD MU STX DELL AMAT ARM INTC + repair list |
+| China internet | KWEB | IGNITING | +17.7 | +4.2 | +14.0 | -1.2 | -22.5 | +14.9 | BABA FUTU NIO |
+| Oil E&P | XOP | WATCH | +7.0 | -2.4 | +11.0 | -1.2 | +24.0 | +11.9 | E&P names |
+| Energy | XLE | WATCH | +5.9 | -1.0 | +8.7 | +0.8 | +16.5 | +9.6 | XOM CVX COP OXY DVN + refiners |
+| Financials | XLF | WATCH | +4.5 | +1.0 | +5.5 | +10.0 | +6.2 | +6.5 | GS BAC C BLK BX + insurance PGR ACGL CB ERIE |
+| Cloud | SKYY | NEUTRAL | +2.7 | +2.1 | +5.2 | +16.6 | +14.8 | +6.2 | NET SNOW |
+| Software | IGV | NEUTRAL | +2.7 | +0.6 | +2.8 | +10.1 | +0.5 | +3.8 | NET CRWD PANW NOW SNOW |
+| Healthcare | XLV | NEUTRAL | +2.1 | +3.3 | +3.4 | +15.7 | +7.9 | +4.4 | LLY ABBV JNJ AMGN BSX MDT WST ZTS |
+| Retail | XRT | NEUTRAL | +1.9 | +2.9 | +3.0 | +8.4 | +6.2 | +3.9 | TPR ANF GRMN |
+| Staples | XLP | NEUTRAL | +1.8 | +3.3 | +2.9 | +4.9 | +6.3 | +3.9 | KO PEP PM CLX COST SFM |
+| Gold miners | GDX | NEUTRAL | +0.9 | -3.1 | -3.4 | -17.2 | -25.6 | -2.4 | NEM GOLD |
+| Regional banks | KRE | NEUTRAL | +0.1 | +0.4 | +1.9 | +11.0 | +10.8 | +2.8 | KRE holdings + HOPE FHB BCBP NTRS |
+| Materials | XLB | NEUTRAL | +0.0 | +2.8 | +0.9 | +1.6 | +5.1 | +1.9 | ALB FCX NUE DOW SHW BALL |
+| Defense/aero | ITA | NEUTRAL | -1.2 | +2.2 | -0.9 | +10.4 | +2.3 | +0.1 | GD LHX LDOS HWM TDY AXON BWXT |
+| Biotech (cap-wt) | IBB | NEUTRAL | -1.4 | +0.1 | +0.1 | +13.4 | +8.8 | +1.0 | VRTX REGN GILD AMGN |
+| Discretionary | XLY | NEUTRAL | -1.8 | -2.9 | -3.1 | -5.8 | -8.0 | -2.2 | MCD SBUX NKE HD LOW CMG BROS SHAK |
+| SPY baseline | SPY | - | -1.9 | -2.3 | -1.0 | +2.1 | +5.4 | +0.0 | - |
+| Cybersecurity | CIBR | NEUTRAL | -2.1 | -2.0 | +2.6 | +31.3 | +28.2 | +3.5 | CRWD PANW |
+| Oil services | OIH | NEUTRAL | -3.2 | -4.9 | -2.2 | -16.3 | +6.3 | -1.2 | BKR HAL SLB |
+| Utilities | XLU | NEUTRAL | -3.4 | -0.8 | -2.8 | -2.1 | +3.9 | -1.8 | DTE NEE CEG VST TLN |
+| Industrials | XLI | NEUTRAL | -3.9 | -0.9 | -2.7 | +3.0 | +7.3 | -1.7 | GE URI UNP CAT DE EME FIX HWM MLI |
+| Transports | IYT | NEUTRAL | -4.1 | -2.8 | -2.1 | +7.3 | +12.0 | -1.1 | UNP ODFL JBHT XPO CAR |
+| Robotics | BOTZ | NEUTRAL | -5.7 | -3.5 | -7.4 | -11.0 | -10.5 | -6.5 | SYM |
+| Metals/mining | XME | NEUTRAL | -6.2 | -4.4 | -9.4 | -15.8 | -19.5 | -8.5 | FCX CENX MP BHP |
+| Homebuilders | ITB | NEUTRAL | -6.5 | +1.0 | -7.5 | +1.1 | -5.9 | -6.6 | DHI LEN |
+| Biotech (eq-wt) | XBI | ROLLING | -7.8 | -3.7 | -4.9 | +14.0 | +17.2 | -3.9 | XBI top-25 + TGTX SMMT ARQT — see ignition-biotech scan |
+| Airlines | JETS | NEUTRAL | -7.8 | +2.6 | -6.1 | +22.5 | +9.7 | -5.2 | DAL UAL LUV |
+| Uranium | URA | NEUTRAL | -9.1 | -7.9 | -14.8 | -30.1 | -34.6 | -13.9 | CCJ OKLO SMR CEG |
+| Spec growth | ARKK | NEUTRAL | -9.4 | -8.1 | -10.7 | -4.8 | -8.3 | -9.8 | HOOD COIN ROKU TDOC RXRX |
+| Tech broad | XLK | ROLLING | -11.4 | -6.5 | -9.0 | +4.3 | +14.1 | -8.1 | megacap tech |
+| Semis | SMH | ROLLING | -21.8 | -11.7 | -18.0 | -0.1 | +22.6 | -17.1 | NVDA AMD MU STX DELL AMAT ARM INTC + repair list |
 
 ```json
 {
- "date": "2026-07-28",
+ "date": "2026-07-29",
  "states": {
   "AMEX:KWEB": "IGNITING",
-  "CBOE:IGV": "IGNITING",
-  "NASDAQ:SKYY": "IGNITING",
-  "AMEX:XLF": "WATCH",
-  "AMEX:XLV": "WATCH",
   "AMEX:XOP": "WATCH",
   "AMEX:XLE": "WATCH",
+  "AMEX:XLF": "WATCH",
+  "NASDAQ:SKYY": "NEUTRAL",
+  "CBOE:IGV": "NEUTRAL",
+  "AMEX:XLV": "NEUTRAL",
   "AMEX:XRT": "NEUTRAL",
-  "CBOE:ITA": "NEUTRAL",
-  "NASDAQ:CIBR": "NEUTRAL",
-  "AMEX:GDX": "NEUTRAL",
-  "NASDAQ:IBB": "NEUTRAL",
   "AMEX:XLP": "NEUTRAL",
-  "AMEX:XLB": "NEUTRAL",
-  "AMEX:XLY": "NEUTRAL",
+  "AMEX:GDX": "NEUTRAL",
   "AMEX:KRE": "NEUTRAL",
+  "AMEX:XLB": "NEUTRAL",
+  "CBOE:ITA": "NEUTRAL",
+  "NASDAQ:IBB": "NEUTRAL",
+  "AMEX:XLY": "NEUTRAL",
+  "NASDAQ:CIBR": "NEUTRAL",
+  "AMEX:OIH": "NEUTRAL",
   "AMEX:XLU": "NEUTRAL",
   "AMEX:XLI": "NEUTRAL",
-  "AMEX:XME": "NEUTRAL",
   "CBOE:IYT": "NEUTRAL",
-  "AMEX:OIH": "NEUTRAL",
-  "CBOE:ARKK": "NEUTRAL",
   "NASDAQ:BOTZ": "NEUTRAL",
-  "AMEX:URA": "NEUTRAL",
+  "AMEX:XME": "NEUTRAL",
   "CBOE:ITB": "NEUTRAL",
-  "AMEX:XBI": "NEUTRAL",
+  "AMEX:XBI": "ROLLING",
   "AMEX:JETS": "NEUTRAL",
+  "AMEX:URA": "NEUTRAL",
+  "CBOE:ARKK": "NEUTRAL",
   "AMEX:XLK": "ROLLING",
   "NASDAQ:SMH": "ROLLING"
  }
