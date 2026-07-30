@@ -326,6 +326,106 @@ def analyze(sym, kind, expiry, strike, contracts=None, entry=None,
     return out
 
 
+def market_regime():
+    """SPY vs its own 200-day: the one filter our backtests showed IS the
+    edge (HQ Swing study). PASS = above a rising 200-day; REPAIR = below it;
+    DEEP-FAIL = >10% below. Overlay rule: REPAIR blocks new CALLS unless the
+    pick is a PRIME SETUP; DEEP-FAIL blocks new calls entirely (puts allowed,
+    flagged as late-trend)."""
+    if "regime" in _SPY_CACHE:
+        return _SPY_CACHE["regime"]
+    h = _spy_hist().Close
+    sma200 = h.rolling(200).mean()
+    spy, ma = float(h.iloc[-1]), float(sma200.iloc[-1])
+    rising = bool(ma > float(sma200.iloc[-21]))
+    if spy < ma * 0.90:
+        state = "DEEP-FAIL"
+    elif spy < ma or not rising:
+        state = "REPAIR"
+    else:
+        state = "PASS"
+    out = {"state": state, "spy": round(spy, 2), "sma200": round(ma, 2),
+           "sma200_rising": rising,
+           "spy_vs_200d_pct": round((spy / ma - 1) * 100, 1)}
+    _SPY_CACHE["regime"] = out
+    return out
+
+
+def macro_blackout(session_date=None):
+    """Is the NEXT session (the morning fill day) the day before or day of a
+    macro binary (Fed decision, CPI, jobs report)? Known events from
+    research/macro-calendar-2026H2.json; jobs report computed as the first
+    Friday of each month. Blocks NEW entries only - open trades just get a
+    heads-up."""
+    d = dt.date.fromisoformat(session_date) if session_date else dt.date.today()
+    fill = d + dt.timedelta(days=1)
+    while fill.weekday() >= 5:
+        fill += dt.timedelta(days=1)
+    watch = {fill, fill + dt.timedelta(days=1)}
+    hits = []
+    cal = os.path.join(REPO, "research", "macro-calendar-2026H2.json")
+    if os.path.exists(cal):
+        for e in json.load(open(cal, encoding="utf-8"))["events"]:
+            if dt.date.fromisoformat(e["date"]) in watch:
+                hits.append(f"{e['event']} {e['date']} ({e['confidence']})")
+    for w in watch:  # first-Friday jobs report
+        if w.weekday() == 4 and w.day <= 7:
+            hits.append(f"Jobs report (NFP) {w.isoformat()} (computed)")
+    return {"blocked": bool(hits), "fill_day": fill.isoformat(), "events": hits}
+
+
+def entry_gates(kind, prime_setup, session_date=None):
+    """Overlay-level gates for NEW picks (not applied to open positions):
+    market regime + macro-event blackout. Returns list of blocking reasons."""
+    blocks = []
+    reg = market_regime()
+    if kind == "CALL" and reg["state"] == "DEEP-FAIL":
+        blocks.append(f"regime {reg['state']} (SPY {reg['spy_vs_200d_pct']:+.1f}% "
+                      "vs 200-day) - no new calls in a broken tape")
+    elif kind == "CALL" and reg["state"] == "REPAIR" and not prime_setup:
+        blocks.append(f"regime {reg['state']} - new calls need a PRIME SETUP")
+    bo = macro_blackout(session_date)
+    if bo["blocked"]:
+        blocks.append("macro blackout - " + "; ".join(bo["events"]) +
+                      " sits on/next to the fill day; do not open into a coin-flip")
+    return blocks, reg, bo
+
+
+def scorecard():
+    """Friday-review expectancy math + pre-registered kill criteria."""
+    led = json.load(open(LEDGER, encoding="utf-8"))
+    closed = [t for t in led["trades"] if t.get("close")
+              and t.get("status") != "VOIDED"]
+    opens = [t for t in led["trades"] if not t.get("close")
+             and t.get("status") not in ("VOIDED", "PLANNED")]
+    def pnl(t, prem):
+        return (prem - t["entry_premium"]) * 100 * t["contracts"]
+    banked = [pnl(t, t["close"]["premium"]) for t in closed]
+    marking = [pnl(t, t["mark_premium"]) for t in opens if t.get("mark_premium")]
+    wins = [p for p in banked if p > 0]
+    losses = [p for p in banked if p <= 0]
+    exp = (sum(banked) / len(banked)) if banked else None
+    total = sum(banked) + sum(marking)
+    out = {"closed": len(closed), "wins": len(wins),
+           "win_pct": round(len(wins) / len(closed) * 100) if closed else None,
+           "avg_win": round(sum(wins) / len(wins)) if wins else None,
+           "avg_loss": round(sum(losses) / len(losses)) if losses else None,
+           "expectancy_per_trade": round(exp) if exp is not None else None,
+           "banked": round(sum(banked)), "open_marking": round(sum(marking)),
+           "total_paper_pnl": round(total), "verdicts": []}
+    # pre-registered kill criteria (research/options-exit-policy-preregistration.md)
+    if len(closed) >= 30 and exp is not None and exp < 0:
+        out["verdicts"].append("KILL CRITERIA MET: 30+ closed trades with "
+                              "negative expectancy - overlay STOPS pending redesign")
+    if total <= -12500:
+        out["verdicts"].append("DRAWDOWN BREAKER: paper P&L below -$12,500 "
+                              "(five max losses) - pause + red-team before any new pick")
+    if not out["verdicts"]:
+        out["verdicts"].append(f"experiment continues ({len(closed)}/30 closed "
+                               "trades toward the pre-registered verdict)")
+    return out
+
+
 def select_contract(sym, kind, session_date=None):
     """EOD selection: find the compliant contract for a candidate name.
     Expiry 45-90 DTE (prefer monthlies = deepest OI), strike whose BS delta
@@ -360,7 +460,14 @@ def select_contract(sym, kind, session_date=None):
     if best is None:
         return {"sym": sym, "error": f"no strike with BS delta 0.60-0.75 and a "
                                      f"live bid on {expiry} - do not force"}
-    return analyze(sym, kind, expiry, best, session_date=session_date)
+    res = analyze(sym, kind, expiry, best, session_date=session_date)
+    blocks, reg, bo = entry_gates(kind, res.get("prime_setup"), session_date)
+    res["market_regime"] = reg["state"]
+    res["macro_fill_day"] = bo["fill_day"]
+    if blocks:
+        res["validation"] = "REJECT"
+        res["reasons"] = blocks + res.get("reasons", [])
+    return res
 
 
 # ------------------------------------------------------------------ drivers ---
@@ -414,8 +521,19 @@ if __name__ == "__main__":
     ap.add_argument("--ledger", action="store_true")
     ap.add_argument("--collect-iv", action="store_true")
     ap.add_argument("--analyze", nargs="+", metavar="SYM DIR")
+    ap.add_argument("--scorecard", action="store_true")
+    ap.add_argument("--gates", action="store_true",
+                    help="print tonight's overlay-level regime + macro gates")
     args, _ = ap.parse_known_args()
-    if args.ledger:
+    if args.scorecard:
+        print(json.dumps(scorecard(), indent=1))
+    elif args.gates:
+        blocks_c, reg, bo = entry_gates("CALL", False)
+        blocks_p, _, _ = entry_gates("PUT", False)
+        print(json.dumps({"regime": reg, "macro": bo,
+                          "new_calls": blocks_c or ["allowed"],
+                          "new_puts": blocks_p or ["allowed"]}, indent=1))
+    elif args.ledger:
         run_ledger()
     elif args.collect_iv:
         collect_iv()

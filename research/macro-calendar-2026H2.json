@@ -1,0 +1,13 @@
+{
+  "note": "Macro binary events for the options-overlay blackout gate. FOMC decision days are from the Fed's published 2026 schedule (the 7/28-29 meeting just occurred as listed, confirming it). CPI dates are APPROXIMATE from the usual BLS mid-month cadence - VERIFY in the AM brief the week before and correct here. Jobs report (NFP) is computed as the first Friday of each month by the engine, not listed. Rule: no NEW options entries when the morning fill day is the day before or day of a listed event.",
+  "events": [
+    {"date": "2026-09-16", "event": "FOMC decision", "confidence": "published"},
+    {"date": "2026-10-28", "event": "FOMC decision", "confidence": "published"},
+    {"date": "2026-12-09", "event": "FOMC decision", "confidence": "published"},
+    {"date": "2026-08-12", "event": "CPI (inflation report)", "confidence": "approximate - verify"},
+    {"date": "2026-09-11", "event": "CPI (inflation report)", "confidence": "approximate - verify"},
+    {"date": "2026-10-13", "event": "CPI (inflation report)", "confidence": "approximate - verify"},
+    {"date": "2026-11-10", "event": "CPI (inflation report)", "confidence": "approximate - verify"},
+    {"date": "2026-12-10", "event": "CPI (inflation report)", "confidence": "approximate - verify"}
+  ]
+}

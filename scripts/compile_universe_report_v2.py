@@ -1827,6 +1827,9 @@ else:
     ws.append([safe(
         f"SCORECARD: {len(_o_closed)} closed ({_o_wins} winners), paper-banked "
         f"{_o_banked:+,.0f}. {len(_o_open)} open, marking {_o_marking:+,.0f}."
+        + (f" Expectancy {_o_banked/len(_o_closed):+,.0f}/trade "
+           f"({len(_o_closed)}/30 toward the pre-registered verdict)."
+           if _o_closed else "")
         + (f" {len(_o_planned)} planned (fill at next open)."
            if _o_planned else "")
         + (f" {len(_o_void)} voided by the no-chase rule - logged, "
