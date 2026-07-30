@@ -1734,15 +1734,24 @@ def _options_rows():
     for t in led.get("trades", []):
         cl = t.get("close") or {}
         mark = cl.get("premium") or t.get("mark_premium")
-        entry = t.get("entry_premium")
+        # PLANNED picks carry only a planned close-book premium until the
+        # morning routine fills them at the live mid (two-step rule, 7/29).
+        entry = t.get("entry_premium") or t.get("planned_premium")
         n = t.get("contracts") or 0
         pnl_pct = pnl_usd = None
-        if mark is not None and entry:
+        if (mark is not None and entry
+                and t.get("status") not in ("PLANNED", "VOIDED")):
             pnl_pct = round((mark / entry - 1) * 100, 1)
             pnl_usd = round((mark - entry) * 100 * n)
         status = "OPEN"
         if cl:
             status = f"CLOSED {cl.get('date', '')} ({cl.get('reason', '?')})"
+        elif t.get("status") == "PLANNED":
+            status = "PLANNED - fills ~8:50 AM"
+        elif t.get("status") == "VOIDED":
+            status = f"VOIDED ({t.get('void_reason', 'no-chase rule')})"
+        elif t.get("entry_provisional"):
+            status = "OPEN (entry provisional)"
         out.append({
             "date": t.get("date"), "sym": t.get("sym"),
             "direction": t.get("direction"),
@@ -1757,7 +1766,8 @@ def _options_rows():
             "thesis": " ".join(x for x in
                                [t.get("thesis"), t.get("exit_plan")] if x),
         })
-    out.sort(key=lambda r: (not r["status"].startswith("OPEN"),
+    _ord = {"PLANNED": 0, "OPEN": 1}
+    out.sort(key=lambda r: (_ord.get(r["status"].split(" ")[0], 2),
                             r["date"] or ""))
     return led, out
 
@@ -1779,15 +1789,21 @@ else:
                 row_fill=lambda r: (GREEN if (r.get("pnl_usd") or 0) > 0
                                     else RED if (r.get("pnl_usd") or 0) < 0
                                     else None))
-    _o_closed = [r for r in _opt_rows if not r["status"].startswith("OPEN")]
+    _o_closed = [r for r in _opt_rows if r["status"].startswith("CLOSED")]
     _o_open = [r for r in _opt_rows if r["status"].startswith("OPEN")]
+    _o_planned = [r for r in _opt_rows if r["status"].startswith("PLANNED")]
+    _o_void = [r for r in _opt_rows if r["status"].startswith("VOIDED")]
     _o_banked = sum(r["pnl_usd"] or 0 for r in _o_closed)
     _o_marking = sum(r["pnl_usd"] or 0 for r in _o_open)
     _o_wins = sum(1 for r in _o_closed if (r["pnl_usd"] or 0) > 0)
     ws.append([])
     ws.append([safe(
         f"SCORECARD: {len(_o_closed)} closed ({_o_wins} winners), paper-banked "
-        f"{_o_banked:+,.0f}. {len(_o_open)} open, marking {_o_marking:+,.0f}.")])
+        f"{_o_banked:+,.0f}. {len(_o_open)} open, marking {_o_marking:+,.0f}."
+        + (f" {len(_o_planned)} planned (fill at next open)."
+           if _o_planned else "")
+        + (f" {len(_o_void)} voided by the no-chase rule - logged, "
+           f"counted in the Friday review." if _o_void else ""))])
     ws.cell(row=ws.max_row, column=1).font = BOLD
 ws.append([])
 ws.append([safe(
@@ -1796,8 +1812,11 @@ ws.append([safe(
     "and long puts only; the premium paid is the whole risk. Picks come from "
     "names that passed the day's gates, contracts are chosen in-the-money "
     "leaning (delta ~0.60-0.75), 45-90 days out, liquid strikes only, and every "
-    "trade gets its take-profit, stop, and exit-by date set AT ENTRY. Marks "
-    "come from TradeStation end-of-day quotes at the bid/ask midpoint.")])
+    "trade gets its take-profit, stop, and exit-by date set AT ENTRY. "
+    "TWO-STEP TIMING: the evening run SELECTS (status PLANNED); the morning "
+    "routine ~8:50 AM fills at the live TradeStation midpoint - or VOIDS the "
+    "pick if it gapped >2% against us, costs >20% more than planned, or no "
+    "longer passes the standards. Daily marks use end-of-day midpoints.")])
 ws.cell(row=ws.max_row, column=1).font = RED_FONT
 
 
