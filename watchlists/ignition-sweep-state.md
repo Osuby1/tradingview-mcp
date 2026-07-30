@@ -1,10 +1,11 @@
 # Ignition Sweep — 2026-07-30 (market-wide, 400 pre-filtered)
 
-Prev state: 2026-07-29. FIRED = early_ignition.pine signal in last 5 sessions; LOADED = all structure lit except the RVOL>3 bar.
+Prev state: 2026-07-30. FIRED = early_ignition.pine signal in last 5 sessions; LOADED = all structure lit except the RVOL>3 bar.
 
 ## 🔥 NEW since prior run
-- **LILA** LOADED @ 8.52 (Communications) — d60 +2.6%, ADX 34
-- **LILAK** LOADED @ 8.38 (Communications) — d60 +2.4%, ADX 33
+- **BPOP** LOADED @ 172.22 (Finance) — d60 -1.1%, ADX 37
+- **OSBC** LOADED @ 25.29 (Finance) — d60 +0.3%, ADX 37
+- **RUSHA** LOADED @ 81.62 (Retail Trade) — d60 +2.5%, ADX 30
 
 | Sym | State | Close | vs60dHi | ADX | fired | Sector |
 |-----|-------|-------|---------|-----|-------|--------|
@@ -44,7 +45,9 @@ Prev state: 2026-07-29. FIRED = early_ignition.pine signal in last 5 sessions; L
 | SN | LOADED | 159.22 | -0.4% | 38 |  | Consumer Durables |
 | WSBC | LOADED | 41.90 | -0.3% | 38 |  | Finance |
 | ACIW | LOADED | 60.18 | +0.4% | 38 |  | Technology Services |
+| BPOP | LOADED | 172.22 | -1.1% | 37 |  | Finance |
 | VSXY | LOADED | 89.13 | -0.2% | 37 |  | Retail Trade |
+| OSBC | LOADED | 25.29 | +0.3% | 37 |  | Finance |
 | NEO | LOADED | 15.27 | +0.7% | 37 |  | Health Services |
 | AMLX | LOADED | 19.73 | +0.9% | 36 |  | Health Technology |
 | LXP | LOADED | 60.67 | -0.8% | 36 |  | Finance |
@@ -68,13 +71,13 @@ Prev state: 2026-07-29. FIRED = early_ignition.pine signal in last 5 sessions; L
 | XHR | LOADED | 21.82 | +0.0% | 33 |  | Finance |
 | HQY | LOADED | 104.13 | +2.9% | 31 |  | Finance |
 | CNI | LOADED | 129.84 | -0.6% | 31 |  | Transportation |
+| RUSHA | LOADED | 81.62 | +2.5% | 30 |  | Retail Trade |
 | ELVN | LOADED | 52.97 | -2.5% | 30 |  | Health Technology |
 | CNK | LOADED | 34.89 | -0.5% | 30 |  | Consumer Services |
 | NBIX | LOADED | 180.79 | -1.1% | 29 |  | Health Technology |
 | MET | LOADED | 97.02 | -0.5% | 29 |  | Finance |
 | TFSL | LOADED | 18.21 | -1.5% | 29 |  | Finance |
 | MD | LOADED | 26.73 | -2.4% | 28 |  | Health Services |
-| HOPE | LOADED | 14.12 | +0.0% | 28 |  | Finance |
 | AAPL | LOADED | 338.19 | -0.6% | 28 |  | Electronic Technolog |
 | CNO | LOADED | 52.95 | -1.2% | 28 |  | Finance |
 | IMAX | LOADED | 48.66 | +2.9% | 28 |  | Consumer Durables |
@@ -143,7 +146,9 @@ Prev state: 2026-07-29. FIRED = early_ignition.pine signal in last 5 sessions; L
   "SN": "LOADED",
   "WSBC": "LOADED",
   "ACIW": "LOADED",
+  "BPOP": "LOADED",
   "VSXY": "LOADED",
+  "OSBC": "LOADED",
   "NEO": "LOADED",
   "AMLX": "LOADED",
   "LXP": "LOADED",
@@ -167,13 +172,13 @@ Prev state: 2026-07-29. FIRED = early_ignition.pine signal in last 5 sessions; L
   "XHR": "LOADED",
   "HQY": "LOADED",
   "CNI": "LOADED",
+  "RUSHA": "LOADED",
   "ELVN": "LOADED",
   "CNK": "LOADED",
   "NBIX": "LOADED",
   "MET": "LOADED",
   "TFSL": "LOADED",
   "MD": "LOADED",
-  "HOPE": "LOADED",
   "AAPL": "LOADED",
   "CNO": "LOADED",
   "IMAX": "LOADED",
