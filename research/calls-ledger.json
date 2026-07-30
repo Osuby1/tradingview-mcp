@@ -14,7 +14,7 @@
    "source": "Omar-directed add 7/29 eve for 7/30; full gate pass at the 7/29 close; dip alert level already touched",
    "thesis": "Healthcare defensive leadership in a two-hikes world (Fed 7/29 hawkish hold, Sept+Dec hikes priced). Buyers dominant (+DI 30 vs -DI 12), fresh 7/24 Chandelier BUY, earnings behind it. BREAK (rule 11): daily Chandelier flips SELL or regime exits PASS - exit regardless of stop/profit.",
    "risk_note": "OVERRIDE FLAG raised and accepted: week of 7/27 already carries -$2,310 realized + ~$7.4k open-stop risk; this add + DGX put worst-case week ~-$19.7k vs the -$10k breaker line (breaker letter counts realized only). Flagged per the 7/26 rule before a 5th position; Omar directed the add 7/29 evening.",
-   "fill": "PENDING - limit 265.95 for the 7/30 session"
+   "fill": "SKIPPED - Omar's deliberate call 2026-07-30 ~10:30 CT: defensive name, tape rallying (MSFT-led), counterproductive to add defense into it. The level WAS reached: JNJ fell through 265.95 at the open and traded to a 254.56 low, ~257.58 at decision time - the skip avoided an instant ~-$3,100 vs the limit and a position only ~2% above the 252.65 stop. Entry alert spent (fired 7/29 10:06 CT, one-shot). Grade in Friday review vs limit 265.95; re-entry only via a fresh Monday gate pass."
   },
   {
    "id": "2026-07-29-DGX-long",
@@ -28,7 +28,7 @@
    "source": "Omar-directed add 7/29 eve for 7/30; full gate pass at the 7/29 close; needs a ~1.4% dip to fill - no chasing",
    "thesis": "Quest Diagnostics - defensive health services shelter in the two-hikes regime; full gate pass, no earnings near. Entry is the pullback limit only; if the dip never comes there is no trade. BREAK (rule 11): daily Chandelier flips SELL or regime exits PASS - exit regardless of stop/profit.",
    "risk_note": "Same override flag as the JNJ call - see 2026-07-29-JNJ-long.",
-   "fill": "PENDING - limit 231.84 for the 7/30 session"
+   "fill": "SKIPPED - Omar's deliberate call 2026-07-30 ~10:30 CT, same reasoning as the JNJ skip (defensive adds into a rally day). The level WAS reached: entry alert fired 8:30:09 CT at the open, DGX ~231.66 at decision time = skip roughly neutral so far vs the 231.84 limit. Entry alert spent. Grade in Friday review vs limit 231.84; re-entry only via a fresh Monday gate pass."
   },
   {
    "id": "2026-07-24-DVN-long",
