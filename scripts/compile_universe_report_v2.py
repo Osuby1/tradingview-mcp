@@ -1706,6 +1706,18 @@ OPT_COLS = [
         "risk. This IS the max loss.", FMT_INT),
     Col("entry_underlying", "Stock Then", 10, "Stock price when the trade was "
         "picked.", FMT_PRICE),
+    Col("bs_delta", "Delta", 7, "How closely the option tracks its stock, "
+        "computed with Black-Scholes from the market's own implied volatility "
+        "(not eyeballed). Standard: 0.60-0.75 - moves with the stock without "
+        "being a lottery ticket.", FMT_X),
+    Col("ivrv", "Priced vs Real Movement", 10, "The option's implied "
+        "volatility divided by how much the stock has ACTUALLY moved over 20 "
+        "days. Under 1.0 = buying movement at a discount. Over 1.4 = paying "
+        "up (flag). Over 1.8 = overpaying (reject).", FMT_X),
+    Col("data_check", "Data Check", 30, "PASS / FLAG / REJECT from the quote "
+        "validation battery (live bid, uncrossed market, mid vs intrinsic, "
+        "spread cap, open interest, cross-source price agreement) plus the "
+        "analysis gates. The top reason is shown."),
     Col("mark_premium", "Worth Now", 10, "Latest end-of-day midpoint from "
         "TradeStation (or the closing fill if the trade is done).", FMT_PRICE),
     Col("pnl_pct", "% P&L", 9, "Percent gain/loss on the premium paid.", FMT_PCT),
@@ -1752,6 +1764,8 @@ def _options_rows():
             status = f"VOIDED ({t.get('void_reason', 'no-chase rule')})"
         elif t.get("entry_provisional"):
             status = "OPEN (entry provisional)"
+        a = t.get("analysis") or {}
+        _reasons = a.get("reasons") or []
         out.append({
             "date": t.get("date"), "sym": t.get("sym"),
             "direction": t.get("direction"),
@@ -1759,6 +1773,10 @@ def _options_rows():
             "contracts": n, "entry_premium": entry,
             "cost": round((entry or 0) * 100 * n),
             "entry_underlying": t.get("entry_underlying"),
+            "bs_delta": a.get("bs_delta"),
+            "ivrv": a.get("iv_over_rv20"),
+            "data_check": (a.get("validation", "") +
+                           (f": {_reasons[0]}" if _reasons else "")) or None,
             "mark_premium": mark, "pnl_pct": pnl_pct, "pnl_usd": pnl_usd,
             "target_premium": t.get("target_premium"),
             "stop_premium": t.get("stop_premium"),

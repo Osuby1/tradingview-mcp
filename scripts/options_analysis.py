@@ -1,0 +1,320 @@
+#!/usr/bin/env python3
+"""Options analysis + data-validation engine for the paper-trading overlay.
+
+Standing order 2026-07-29 (Omar): "state of the art, gold standard analysis
+and data validation." What that concretely means here:
+
+  ANALYSIS (per contract)
+  - Black-Scholes delta/theta computed from the market's own implied vol -
+    replaces the moneyness eyeballing used on night one. No dividend
+    adjustment (labeled; ~2% yield names skew delta slightly high).
+  - IV vs realized movement (IV / 20d and 60d historical vol): the price of
+    the option relative to how much the stock ACTUALLY moves. Buying premium
+    at IV >> realized is paying for movement that historically doesn't happen.
+  - Expected move to expiry (S * IV * sqrt(T)) vs the move the trade NEEDS:
+    breakeven at expiry, and the underlying move required for the +100%
+    premium target (BS-repriced at the time-exit date, same IV).
+  - Theta burden: % of premium that bleeds per week if the stock sits still.
+
+  VALIDATION (every quote, before it may enter the ledger)
+  - market not crossed (bid < ask), bid > 0, mid >= intrinsic (stale-quote
+    tell), IV in a plausible band, quote from the current session,
+    cross-source spot check (chain's implied spot vs the scan's close).
+  - Every check logged PASS/FLAG/REJECT with reasons - a REJECT price never
+    becomes an entry or a mark.
+
+  GATES (documented in research/options-paper-ledger.json rules)
+  - BS delta in 0.60-0.75 band | spread <=10% pass, 10-15% FLAG, >15% REJECT
+  - OI >= 100 hard | IV/RV20 <= 1.4 pass, 1.4-1.8 FLAG (paying up), > 1.8
+    REJECT unless a flagged catalyst justifies it
+  - breakeven move must sit inside the expected move to expiry
+
+  IV HISTORY (--collect-iv): appends today's ATM IV per symbol to
+  research/iv-history.json. IV *rank* (today's IV vs its own past year) is the
+  real gold-standard entry filter, but it needs history we don't have yet -
+  this starts the archive; the rank column stays honest ("n/a, collecting")
+  until ~60 sessions accumulate. Do not fake it from proxies.
+
+Usage:
+  python scripts/options_analysis.py --analyze SYM DIR [SYM DIR ...]
+  python scripts/options_analysis.py --ledger        # analyze open ledger trades
+  python scripts/options_analysis.py --collect-iv    # append today's ATM IVs
+"""
+import argparse
+import datetime as dt
+import json
+import math
+import os
+import sys
+
+import numpy as np
+import yfinance as yf
+
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LEDGER = os.path.join(REPO, "research", "options-paper-ledger.json")
+IV_HIST = os.path.join(REPO, "research", "iv-history.json")
+RISK_FREE = 0.04  # ~13wk bill zone under a 3.50-3.75% funds rate; constant, labeled
+
+
+# ------------------------------------------------------------ Black-Scholes ---
+def _n(x):
+    return 0.5 * (1 + math.erf(x / math.sqrt(2)))
+
+
+def _phi(x):
+    return math.exp(-x * x / 2) / math.sqrt(2 * math.pi)
+
+
+def bs_price(S, K, T, iv, kind, r=RISK_FREE):
+    if T <= 0 or iv <= 0:
+        intr = max(S - K, 0) if kind == "CALL" else max(K - S, 0)
+        return intr
+    d1 = (math.log(S / K) + (r + iv * iv / 2) * T) / (iv * math.sqrt(T))
+    d2 = d1 - iv * math.sqrt(T)
+    if kind == "CALL":
+        return S * _n(d1) - K * math.exp(-r * T) * _n(d2)
+    return K * math.exp(-r * T) * _n(-d2) - S * _n(-d1)
+
+
+def bs_greeks(S, K, T, iv, kind, r=RISK_FREE):
+    """Returns (delta, theta_per_day)."""
+    d1 = (math.log(S / K) + (r + iv * iv / 2) * T) / (iv * math.sqrt(T))
+    d2 = d1 - iv * math.sqrt(T)
+    delta = _n(d1) if kind == "CALL" else _n(d1) - 1
+    core = -S * _phi(d1) * iv / (2 * math.sqrt(T))
+    if kind == "CALL":
+        theta = core - r * K * math.exp(-r * T) * _n(d2)
+    else:
+        theta = core + r * K * math.exp(-r * T) * _n(-d2)
+    return delta, theta / 365.0
+
+
+def implied_move_for_double(S, K, T_entry, T_exit, iv, kind, entry_premium):
+    """Underlying move (%) needed for the premium to double by the time-exit
+    date, repriced with Black-Scholes at the same IV. Bisection on spot."""
+    target = 2 * entry_premium
+    lo, hi = (S, S * 2.0) if kind == "CALL" else (S * 0.4, S)
+    for _ in range(60):
+        mid = (lo + hi) / 2
+        v = bs_price(mid, K, T_exit, iv, kind)
+        if kind == "CALL":
+            lo, hi = (mid, hi) if v < target else (lo, mid)
+        else:
+            lo, hi = (lo, mid) if v < target else (mid, hi)
+    spot_needed = (lo + hi) / 2
+    return (spot_needed / S - 1) * 100
+
+
+# ------------------------------------------------------------- market data ---
+def realized_vol(sym, sessions):
+    h = yf.Ticker(sym).history(period="6mo", auto_adjust=True)
+    if h.empty or len(h) < sessions + 2:
+        return None, None
+    r = np.log(h.Close / h.Close.shift(1)).dropna()
+    rv = float(r.tail(sessions).std() * math.sqrt(252))
+    return rv, float(h.Close.iloc[-1])
+
+
+def chain_row(sym, expiry, strike, kind):
+    t = yf.Ticker(sym)
+    if expiry not in t.options:
+        return None
+    ch = t.option_chain(expiry)
+    df = ch.calls if kind == "CALL" else ch.puts
+    row = df[df.strike == strike]
+    return None if row.empty else row.iloc[0]
+
+
+# --------------------------------------------------------------- validation ---
+def validate_quote(row, spot_scan, spot_yf, strike, kind, session_date):
+    """Battery of data-quality checks. Returns (verdict, [reasons])."""
+    flags, rejects = [], []
+    bid, ask = float(row.bid or 0), float(row.ask or 0)
+    mid = (bid + ask) / 2 if bid and ask else None
+    iv = float(row.impliedVolatility or 0)
+    if bid <= 0:
+        rejects.append("no live bid - quote unusable (bid=0)")
+    if bid and ask and bid >= ask:
+        rejects.append(f"crossed market (bid {bid} >= ask {ask}) - stale book")
+    spot = spot_yf or spot_scan
+    intr = max(spot - strike, 0) if kind == "CALL" else max(strike - spot, 0)
+    if mid and intr and mid < intr * 0.98:
+        rejects.append(f"mid {mid:.2f} below intrinsic {intr:.2f} - stale/bad quote")
+    if not 0.05 <= iv <= 2.5:
+        rejects.append(f"implied vol {iv:.0%} outside plausible band (5%-250%)")
+    if mid and ask and bid:
+        spr = (ask - bid) / mid * 100
+        if spr > 15:
+            rejects.append(f"spread {spr:.1f}% > 15% - mid fill not realistic")
+        elif spr > 10:
+            flags.append(f"spread {spr:.1f}% (10-15%) - watch fill quality")
+    oi = int(row.openInterest) if row.openInterest == row.openInterest else 0
+    if oi < 100:
+        rejects.append(f"open interest {oi} < 100")
+    if spot_scan and spot_yf and abs(spot_yf / spot_scan - 1) > 0.005:
+        flags.append(f"cross-source spot gap {abs(spot_yf/spot_scan-1)*100:.2f}% "
+                     f"(scan {spot_scan} vs yf {spot_yf:.2f}) - sources disagree")
+    lt = getattr(row, "lastTradeDate", None)
+    if lt is not None and str(lt)[:10] < session_date:
+        flags.append(f"last trade {str(lt)[:10]} (before this session) - "
+                     "quote is book-only, no prints today")
+    verdict = "REJECT" if rejects else ("FLAG" if flags else "PASS")
+    return verdict, rejects + flags
+
+
+# ----------------------------------------------------------------- analysis ---
+def analyze(sym, kind, expiry, strike, contracts=None, entry=None,
+            spot_scan=None, time_exit=None, session_date=None):
+    session_date = session_date or dt.date.today().isoformat()
+    rv20, spot_yf = realized_vol(sym, 20)
+    rv60, _ = realized_vol(sym, 60)
+    row = chain_row(sym, expiry, strike, kind)
+    if row is None:
+        return {"sym": sym, "error": f"no {kind} {strike} {expiry} in chain"}
+    spot = spot_yf or spot_scan
+    bid, ask = float(row.bid or 0), float(row.ask or 0)
+    mid = round((bid + ask) / 2, 2) if bid and ask else None
+    iv = float(row.impliedVolatility or 0)
+    today = dt.date.fromisoformat(session_date)
+    T = max(( dt.date.fromisoformat(expiry) - today).days, 1) / 365.0
+    T_exit = (max((dt.date.fromisoformat(time_exit) - today).days, 1) / 365.0
+              if time_exit else T)
+    delta, theta_d = bs_greeks(spot, strike, T, iv, kind)
+    prem = entry or mid
+    exp_move = iv * math.sqrt(T) * 100                       # % expected by expiry
+    be_spot = strike + prem if kind == "CALL" else strike - prem
+    be_move = (be_spot / spot - 1) * 100
+    dbl_move = (implied_move_for_double(spot, strike, T, T_exit, iv, kind, prem)
+                if prem else None)
+    verdict, reasons = validate_quote(row, spot_scan, spot_yf, strike, kind,
+                                      session_date)
+    ivrv = round(iv / rv20, 2) if rv20 else None
+    gates = []
+    if not 0.60 <= abs(delta) <= 0.75:
+        gates.append(f"delta {delta:+.2f} outside 0.60-0.75 band")
+    if ivrv and ivrv > 1.8:
+        gates.append(f"IV/RV20 {ivrv} > 1.8 - paying far above realized movement")
+    elif ivrv and ivrv > 1.4:
+        gates.append(f"IV/RV20 {ivrv} (1.4-1.8) - paying up vs realized, FLAG")
+    if abs(be_move) > exp_move:
+        gates.append(f"breakeven needs {be_move:+.1f}% but expected move to "
+                     f"expiry is only ±{exp_move:.1f}%")
+    return {
+        "sym": sym, "kind": kind, "expiry": expiry, "strike": strike,
+        "session": session_date, "spot": round(spot, 2),
+        "bid": bid, "ask": ask, "mid": mid,
+        "iv_pct": round(iv * 100, 1),
+        "rv20_pct": round(rv20 * 100, 1) if rv20 else None,
+        "rv60_pct": round(rv60 * 100, 1) if rv60 else None,
+        "iv_over_rv20": ivrv,
+        "bs_delta": round(delta, 2),
+        "theta_day": round(theta_d, 3),
+        "theta_week_pct_of_prem": (round(-theta_d * 7 / prem * 100, 1)
+                                   if prem else None),
+        "oi": int(row.openInterest) if row.openInterest == row.openInterest else 0,
+        "spread_pct": round((ask - bid) / mid * 100, 1) if mid else None,
+        "expected_move_to_expiry_pct": round(exp_move, 1),
+        "breakeven_move_pct": round(be_move, 1),
+        "move_needed_for_double_pct": round(dbl_move, 1) if dbl_move else None,
+        "iv_rank": None,  # honest n/a until iv-history has ~60 sessions
+        "validation": verdict, "reasons": reasons + gates,
+    }
+
+
+def select_contract(sym, kind, session_date=None):
+    """EOD selection: find the compliant contract for a candidate name.
+    Expiry 45-90 DTE (prefer monthlies = deepest OI), strike whose BS delta
+    (from that strike's own market IV) lands nearest 0.67 inside the
+    0.60-0.75 band, then full analysis + validation on the winner."""
+    session_date = session_date or dt.date.today().isoformat()
+    today = dt.date.fromisoformat(session_date)
+    t = yf.Ticker(sym)
+    _, spot = realized_vol(sym, 20)
+    if not spot:
+        return {"sym": sym, "error": "no price history"}
+    exps = [e for e in t.options
+            if 45 <= (dt.date.fromisoformat(e) - today).days <= 90]
+    if not exps:
+        return {"sym": sym, "error": "no expiry in the 45-90 day window"}
+    # third-Friday monthlies have the deepest open interest; prefer them
+    monthly = [e for e in exps
+               if 15 <= dt.date.fromisoformat(e).day <= 21
+               and dt.date.fromisoformat(e).weekday() == 4]
+    expiry = (monthly or exps)[0]
+    T = (dt.date.fromisoformat(expiry) - today).days / 365.0
+    ch = t.option_chain(expiry)
+    df = ch.calls if kind == "CALL" else ch.puts
+    best, best_gap = None, 9e9
+    for _, r in df.iterrows():
+        iv = float(r.impliedVolatility or 0)
+        if not 0.05 <= iv <= 2.5 or not r.bid:
+            continue
+        d, _th = bs_greeks(spot, float(r.strike), T, iv, kind)
+        if 0.60 <= abs(d) <= 0.75 and abs(abs(d) - 0.67) < best_gap:
+            best, best_gap = float(r.strike), abs(abs(d) - 0.67)
+    if best is None:
+        return {"sym": sym, "error": f"no strike with BS delta 0.60-0.75 and a "
+                                     f"live bid on {expiry} - do not force"}
+    return analyze(sym, kind, expiry, best, session_date=session_date)
+
+
+# ------------------------------------------------------------------ drivers ---
+def run_ledger(write=True):
+    led = json.load(open(LEDGER, encoding="utf-8"))
+    out = []
+    for t in led["trades"]:
+        if t.get("close") or t.get("status") == "VOIDED":
+            continue
+        a = analyze(t["sym"], t["direction"], t["expiry"], t["strike"],
+                    t.get("contracts"), t.get("entry_premium") or t.get("planned_premium"),
+                    t.get("entry_underlying"), t.get("time_exit"))
+        t["analysis"] = a
+        out.append(a)
+        print(json.dumps(a, indent=1))
+    if write:
+        json.dump(led, open(LEDGER, "w", encoding="utf-8"), indent=2)
+        print(f"\nanalysis blocks written into {LEDGER}")
+    return out
+
+
+def collect_iv():
+    """Append today's ~ATM IV per symbol (open trades + gate list arg) to the
+    history file that will eventually power a real IV-rank entry filter."""
+    led = json.load(open(LEDGER, encoding="utf-8"))
+    syms = sorted({t["sym"] for t in led["trades"] if not t.get("close")}
+                  | set(sys.argv[2:]))
+    hist = json.load(open(IV_HIST, encoding="utf-8")) if os.path.exists(IV_HIST) else {}
+    today = dt.date.today().isoformat()
+    for s in syms:
+        try:
+            t = yf.Ticker(s)
+            exps = [e for e in t.options
+                    if 30 <= (dt.date.fromisoformat(e) - dt.date.today()).days <= 90]
+            if not exps:
+                continue
+            ch = t.option_chain(exps[0]).calls
+            spot = float(t.history(period="1d").Close.iloc[-1])
+            atm = ch.iloc[(ch.strike - spot).abs().argsort()[:1]]
+            iv = float(atm.impliedVolatility.iloc[0])
+            hist.setdefault(s, {})[today] = round(iv * 100, 1)
+            print(f"{s}: ATM IV {iv:.0%} ({exps[0]})")
+        except Exception as e:
+            print(f"{s}: collect failed - {e}")
+    json.dump(hist, open(IV_HIST, "w", encoding="utf-8"), indent=1)
+    print(f"wrote {IV_HIST} ({len(hist)} symbols)")
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--ledger", action="store_true")
+    ap.add_argument("--collect-iv", action="store_true")
+    ap.add_argument("--analyze", nargs="+", metavar="SYM DIR")
+    args, _ = ap.parse_known_args()
+    if args.ledger:
+        run_ledger()
+    elif args.collect_iv:
+        collect_iv()
+    elif args.analyze:
+        pairs = list(zip(args.analyze[::2], args.analyze[1::2]))
+        for sym, d in pairs:
+            print(json.dumps(select_contract(sym, d.upper()), indent=1))
