@@ -215,6 +215,10 @@ readme_sheet(
          "been worth more). To the RIGHT: the MY TRADES block - the recommendations Omar",
          "actually put money on (open + closed), with real fills and a running tally of",
          "banked vs paper profit."),
+        ("9b - Options Paper", "The options paper-trading overlay: 2-3 long call/put picks per",
+         "day drawn from names that passed the gates, sized, with take-profit / stop /",
+         "time-exit set at entry and P&L marked daily from TradeStation quotes.",
+         "PAPER ONLY - no real money on options until this tab proves itself."),
         ("10 - Data Quality", "What was broken or partial in this run, ranked by severity.",
          "READ THE RED ROWS. A BLOCKER means conclusions in this file may be wrong."),
         ("11 - Run Summary", "Counts and run metadata."),
@@ -1678,6 +1682,124 @@ else:
         ws.append([safe("These are unrealized reads on OPEN positions, not final "
                         "results. Check the grade lines above before assuming a "
                         "higher grade is worth more - so far it has not been.")])
+
+# --------------------------------------------------------- 9b Options Paper ---
+# Standing order 2026-07-29: after each EOD data pull, study the TradeStation
+# option chains for the names that passed the gates and recommend 2-3 long
+# call/put trades. PAPER ONLY until the scorecard proves the overlay works.
+# This tab renders research/options-paper-ledger.json - the EOD flow appends
+# new picks and marks open ones from TradeStation EOD quotes before compiling.
+OPT_COLS = [
+    Col("date", "Picked On", 11, "The date this options trade was recommended."),
+    Col("sym", "Ticker", 8, "The underlying stock. Must have passed that day's "
+        "gate stack (or be a flagged Sell Mode name for puts)."),
+    Col("direction", "Call / Put", 9, "CALL = betting the stock rises. "
+        "PUT = betting it falls. We only BUY options - the premium paid "
+        "is the most that can be lost."),
+    Col("contract", "Contract", 18, "Expiry date and strike price of the option."),
+    Col("contracts", "# Contracts", 9, "How many contracts (each = 100 shares of "
+        "exposure). Sized so total premium stays under $2,500 - half the normal "
+        "$5k risk unit, because long options can go to zero.", FMT_INT),
+    Col("entry_premium", "Paid / Share", 10, "The paper fill: bid/ask midpoint "
+        "per share at recommendation time.", FMT_PRICE),
+    Col("cost", "Total Paid", 10, "Contracts x 100 x premium = total dollars at "
+        "risk. This IS the max loss.", FMT_INT),
+    Col("entry_underlying", "Stock Then", 10, "Stock price when the trade was "
+        "picked.", FMT_PRICE),
+    Col("mark_premium", "Worth Now", 10, "Latest end-of-day midpoint from "
+        "TradeStation (or the closing fill if the trade is done).", FMT_PRICE),
+    Col("pnl_pct", "% P&L", 9, "Percent gain/loss on the premium paid.", FMT_PCT),
+    Col("pnl_usd", "P&L $", 10, "Dollar gain/loss on the position.", FMT_INT),
+    Col("target_premium", "Take Profit At", 11, "Sell when the option is worth "
+        "this much (default: double the entry).", FMT_PRICE),
+    Col("stop_premium", "Get Out At", 11, "Cut the loss if the option falls to "
+        "this (default: half the entry).", FMT_PRICE),
+    Col("time_exit", "Exit By", 11, "Sell by this date no matter what - about 21 "
+        "days before expiry, where time decay starts eating the premium fast."),
+    Col("status", "Status", 16, "OPEN, or CLOSED with the date and reason "
+        "(target hit / stopped / time exit)."),
+    Col("thesis", "Why This Trade & Exit Plan", 70, "The market read behind the "
+        "pick, in plain English, plus exactly what has to happen to get out."),
+]
+
+
+def _options_rows():
+    try:
+        led = json.load(open(os.path.join(REPO, "research",
+                                          "options-paper-ledger.json"),
+                             encoding="utf-8"))
+    except Exception:
+        return None, []
+    out = []
+    for t in led.get("trades", []):
+        cl = t.get("close") or {}
+        mark = cl.get("premium") or t.get("mark_premium")
+        entry = t.get("entry_premium")
+        n = t.get("contracts") or 0
+        pnl_pct = pnl_usd = None
+        if mark is not None and entry:
+            pnl_pct = round((mark / entry - 1) * 100, 1)
+            pnl_usd = round((mark - entry) * 100 * n)
+        status = "OPEN"
+        if cl:
+            status = f"CLOSED {cl.get('date', '')} ({cl.get('reason', '?')})"
+        out.append({
+            "date": t.get("date"), "sym": t.get("sym"),
+            "direction": t.get("direction"),
+            "contract": f"{t.get('expiry', '?')} ${t.get('strike', '?')}",
+            "contracts": n, "entry_premium": entry,
+            "cost": round((entry or 0) * 100 * n),
+            "entry_underlying": t.get("entry_underlying"),
+            "mark_premium": mark, "pnl_pct": pnl_pct, "pnl_usd": pnl_usd,
+            "target_premium": t.get("target_premium"),
+            "stop_premium": t.get("stop_premium"),
+            "time_exit": t.get("time_exit"), "status": status,
+            "thesis": " ".join(x for x in
+                               [t.get("thesis"), t.get("exit_plan")] if x),
+        })
+    out.sort(key=lambda r: (not r["status"].startswith("OPEN"),
+                            r["date"] or ""))
+    return led, out
+
+
+ws = wb.create_sheet("9b - Options Paper")
+_opt_led, _opt_rows = _options_rows()
+if _opt_led is None:
+    style_header_row(ws, ["Options Paper Trades"], ["Ledger file missing."],
+                     [44], freeze=None, autofilter=False)
+    ws.append([safe("research/options-paper-ledger.json not found - the EOD "
+                    "options step has not run yet.")])
+elif not _opt_rows:
+    write_table(ws, OPT_COLS, [])
+    ws.append([safe("No options recommendations yet. The first 2-3 picks land "
+                    "with the next EOD run - and zero picks on a day the gates "
+                    "produce nothing worth betting on is a valid answer.")])
+else:
+    write_table(ws, OPT_COLS, _opt_rows,
+                row_fill=lambda r: (GREEN if (r.get("pnl_usd") or 0) > 0
+                                    else RED if (r.get("pnl_usd") or 0) < 0
+                                    else None))
+    _o_closed = [r for r in _opt_rows if not r["status"].startswith("OPEN")]
+    _o_open = [r for r in _opt_rows if r["status"].startswith("OPEN")]
+    _o_banked = sum(r["pnl_usd"] or 0 for r in _o_closed)
+    _o_marking = sum(r["pnl_usd"] or 0 for r in _o_open)
+    _o_wins = sum(1 for r in _o_closed if (r["pnl_usd"] or 0) > 0)
+    ws.append([])
+    ws.append([safe(
+        f"SCORECARD: {len(_o_closed)} closed ({_o_wins} winners), paper-banked "
+        f"{_o_banked:+,.0f}. {len(_o_open)} open, marking {_o_marking:+,.0f}.")])
+    ws.cell(row=ws.max_row, column=1).font = BOLD
+ws.append([])
+ws.append([safe(
+    "PAPER TRADING ONLY - not one real dollar goes into options until this tab "
+    "shows a positive record over enough trades to mean something. Long calls "
+    "and long puts only; the premium paid is the whole risk. Picks come from "
+    "names that passed the day's gates, contracts are chosen in-the-money "
+    "leaning (delta ~0.60-0.75), 45-90 days out, liquid strikes only, and every "
+    "trade gets its take-profit, stop, and exit-by date set AT ENTRY. Marks "
+    "come from TradeStation end-of-day quotes at the bid/ask midpoint.")])
+ws.cell(row=ws.max_row, column=1).font = RED_FONT
+
 
 # ---------------------------------------------------------- 10 Data Quality ---
 def _dq_polish(d):

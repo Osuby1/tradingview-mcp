@@ -1,0 +1,16 @@
+{
+  "kind": "options-paper-ledger",
+  "version": 1,
+  "started": "2026-07-29",
+  "mode": "PAPER ONLY - no real money until the Friday scorecard proves the overlay works",
+  "rules": {
+    "instruments": "Long calls or long puts only. No spreads, no selling premium.",
+    "selection": "Underlying must have passed the day's gate stack (Fresh Buys green verdict or top Gated Longs for calls; Sell Mode names with a catalyst for puts). 2-3 picks per EOD, fewer if nothing qualifies - zero is a valid answer.",
+    "contract_standards": "Delta roughly 0.60-0.75 (in-the-money leaning, not lottery tickets), 45-90 days to expiry, tight bid/ask (mid fill must be realistic), open interest 100+. No holding through earnings unless the earnings IS the stated thesis and is flagged.",
+    "sizing": "Max $2,500 premium outlay per trade (half the $5k equity risk unit - long options routinely lose 100%, so the premium IS the risk).",
+    "exits": "Every trade gets all three at entry: take-profit premium (default +100%), stop premium (default -50%), and a time exit at ~21 days to expiry regardless of P&L (theta decay accelerates there).",
+    "fills": "Paper entry = bid/ask mid at recommendation time from TradeStation. Daily mark = EOD mid. Honest fills only - never mark at the ask on entry or bid on exit favorably.",
+    "prereg": "Every new pick is committed to git the day it is made (anti-sycophancy mandate). No backdating, no silent deletions - a bad pick closes at its stop and stays on the record."
+  },
+  "trades": []
+}
