@@ -3,6 +3,34 @@
  "holding_days": 21,
  "calls": [
   {
+   "id": "2026-07-29-JNJ-long",
+   "date": "2026-07-29",
+   "sym": "JNJ",
+   "dir": "long",
+   "ref": 265.53,
+   "entry_limit": 265.95,
+   "stop": 252.65,
+   "size_plan": "375 sh (~$99.7k), risk ~$4,990 (5% stop per stop-sweep standard)",
+   "source": "Omar-directed add 7/29 eve for 7/30; full gate pass at the 7/29 close; dip alert level already touched",
+   "thesis": "Healthcare defensive leadership in a two-hikes world (Fed 7/29 hawkish hold, Sept+Dec hikes priced). Buyers dominant (+DI 30 vs -DI 12), fresh 7/24 Chandelier BUY, earnings behind it. BREAK (rule 11): daily Chandelier flips SELL or regime exits PASS - exit regardless of stop/profit.",
+   "risk_note": "OVERRIDE FLAG raised and accepted: week of 7/27 already carries -$2,310 realized + ~$7.4k open-stop risk; this add + DGX put worst-case week ~-$19.7k vs the -$10k breaker line (breaker letter counts realized only). Flagged per the 7/26 rule before a 5th position; Omar directed the add 7/29 evening.",
+   "fill": "PENDING - limit 265.95 for the 7/30 session"
+  },
+  {
+   "id": "2026-07-29-DGX-long",
+   "date": "2026-07-29",
+   "sym": "DGX",
+   "dir": "long",
+   "ref": 235.22,
+   "entry_limit": 231.84,
+   "stop": 220.25,
+   "size_plan": "431 sh (~$99.9k), risk ~$5,000 (5% stop per stop-sweep standard)",
+   "source": "Omar-directed add 7/29 eve for 7/30; full gate pass at the 7/29 close; needs a ~1.4% dip to fill - no chasing",
+   "thesis": "Quest Diagnostics - defensive health services shelter in the two-hikes regime; full gate pass, no earnings near. Entry is the pullback limit only; if the dip never comes there is no trade. BREAK (rule 11): daily Chandelier flips SELL or regime exits PASS - exit regardless of stop/profit.",
+   "risk_note": "Same override flag as the JNJ call - see 2026-07-29-JNJ-long.",
+   "fill": "PENDING - limit 231.84 for the 7/30 session"
+  },
+  {
    "id": "2026-07-24-DVN-long",
    "date": "2026-07-24",
    "sym": "DVN",
