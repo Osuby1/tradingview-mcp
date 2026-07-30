@@ -12,5 +12,63 @@
     "fills": "Paper entry = bid/ask mid at recommendation time from TradeStation. Daily mark = EOD mid. Honest fills only - never mark at the ask on entry or bid on exit favorably.",
     "prereg": "Every new pick is committed to git the day it is made (anti-sycophancy mandate). No backdating, no silent deletions - a bad pick closes at its stop and stays on the record."
   },
-  "trades": []
+  "trades": [
+    {
+      "id": "2026-07-29-JNJ-CALL",
+      "date": "2026-07-29",
+      "sym": "JNJ",
+      "direction": "CALL",
+      "expiry": "2026-09-18",
+      "strike": 250,
+      "contracts": 1,
+      "entry_premium": 19.48,
+      "entry_underlying": 265.53,
+      "thesis": "Top gate pass of Fed day: defensive healthcare leadership in a two-hikes world, fresh 7/24 buy signal, buyers dominant (+DI 30 vs 12), earnings behind it (next report mid-Oct, AFTER this option expires). Deep-ITM Sep call, delta est ~0.70 at the close. CAVEATS logged at entry: stock slipped ~2% after hours on no company news (broad post-META drift) - entry premium is the 4PM closing mid, conservative/rich vs the likely open; TradeStation greeks were offline after hours so delta is estimated from moneyness, verify on tomorrow's live chain. OI 5,628, spread 13.6% at the close.",
+      "exit_plan": "Sell at $38.95 (premium doubled), cut at $9.75 (premium halved), or out by 2026-08-28 (21 days to expiry) no matter what. Thesis break = daily Chandelier flips SELL on JNJ - exit early regardless of premium.",
+      "target_premium": 38.95,
+      "stop_premium": 9.75,
+      "time_exit": "2026-08-28",
+      "status": "OPEN",
+      "mark_premium": null,
+      "mark_date": null
+    },
+    {
+      "id": "2026-07-29-SLB-CALL",
+      "date": "2026-07-29",
+      "sym": "SLB",
+      "direction": "CALL",
+      "expiry": "2026-09-18",
+      "strike": 45,
+      "contracts": 5,
+      "entry_premium": 4.92,
+      "entry_underlying": 48.96,
+      "thesis": "Energy with the Middle East supply premium at its back: oil E&P group +3.4% on Fed day while nearly everything else bled, SLB in buy mode with a full gate pass, earnings behind it (reported mid-July, next mid-Oct after expiry). The most liquid chain of tonight's three: OI 8,143 on this strike, 7.1% spread. Deep-ITM Sep call, delta est ~0.72 (estimated - TS greeks offline after hours, verify tomorrow).",
+      "exit_plan": "Sell at $9.85 (premium doubled), cut at $2.45 (premium halved), or out by 2026-08-28 (21 days to expiry) no matter what. Thesis break = daily Chandelier flips SELL on SLB - exit early regardless of premium.",
+      "target_premium": 9.85,
+      "stop_premium": 2.45,
+      "time_exit": "2026-08-28",
+      "status": "OPEN",
+      "mark_premium": null,
+      "mark_date": null
+    },
+    {
+      "id": "2026-07-29-DHI-PUT",
+      "date": "2026-07-29",
+      "sym": "DHI",
+      "direction": "PUT",
+      "expiry": "2026-09-18",
+      "strike": 150,
+      "contracts": 2,
+      "entry_premium": 9.20,
+      "entry_underlying": 147.16,
+      "thesis": "Rate-victim short: the Fed just priced TWO more hikes, homebuilders fell 3.7% as a group, DHI -2.7% closing near its low, in sell mode on the scan. The bet is mortgage-rate repricing keeps grinding builders down into fall. Earnings behind it (reported 7/21, next late Oct after expiry). DEVIATIONS logged at entry: chain is thin - the 150 strike is the ONLY one passing the OI-100 rule (OI 122); spread 15.2% at the close, wide; delta est ~-0.57, a touch under the 0.60 floor - closest compliant strike. Greeks estimated (TS offline), verify tomorrow.",
+      "exit_plan": "Sell at $18.40 (premium doubled), cut at $4.60 (premium halved), or out by 2026-08-28 (21 days to expiry) no matter what. Thesis break = daily Chandelier flips BUY on DHI - exit early regardless of premium.",
+      "target_premium": 18.40,
+      "stop_premium": 4.60,
+      "time_exit": "2026-08-28",
+      "status": "OPEN",
+      "mark_premium": null,
+      "mark_date": null
+    }
+  ]
 }
