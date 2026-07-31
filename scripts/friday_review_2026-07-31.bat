@@ -1,0 +1,3 @@
+@echo off
+cd /d C:\Users\osuby\tradingview-mcp
+claude -p "Run the Friday weekly hard-stats review + red-team (2026-07-31, after close). FULL DOCKET is in memory session-pending-tasks.md item FRIDAY-REVIEW-DOCKET: both pre-registered studies (extended-runner ec38b32, momentum-flag 841f13f) with locked thresholds; weekly grades (JNJ/DGX skips, DHI retirement, book vs SPY); put-spread final call (window expires today, standing read SKIP); cap-exception amendment adopt/reject; VLO/XOM/CVX reactions. Deliverables: review file in research/, ledger updates, commits, plain-English summary saved to daily-ignition-brief/2026-07-31-friday-review.md."
