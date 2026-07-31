@@ -1,0 +1,800 @@
+Received: from DM6NAM12HT032.eop-nam12.prod.protection.outlook.com
+ (2603:10b6:a03:2c1::35) by PH0PR04MB7303.namprd04.prod.outlook.com with HTTPS
+ via SJ0PR13CA0240.NAMPRD13.PROD.OUTLOOK.COM; Fri, 29 Jan 2021 20:01:58 +0000
+Received: from DM6NAM12FT044.eop-nam12.prod.protection.outlook.com
+ (2a01:111:e400:fc64::47) by
+ DM6NAM12HT032.eop-nam12.prod.protection.outlook.com (2a01:111:e400:fc64::207)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3805.11; Fri, 29 Jan
+ 2021 20:01:57 +0000
+Authentication-Results: spf=pass (sender IP is 198.2.187.17)
+ smtp.mailfrom=mandrillapp.com; hotmail.com; dkim=pass (signature was
+ verified) header.d=markmancapital.net;hotmail.com; dmarc=bestguesspass
+ action=none header.from=markmancapital.net;compauth=pass reason=109
+Received-SPF: Pass (protection.outlook.com: domain of mandrillapp.com
+ designates 198.2.187.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=198.2.187.17; helo=mail187-17.suw11.mandrillapp.com;
+Received: from mail187-17.suw11.mandrillapp.com (198.2.187.17) by
+ DM6NAM12FT044.mail.protection.outlook.com (10.13.178.204) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.3805.6 via Frontend Transport; Fri, 29 Jan 2021 20:01:57 +0000
+X-IncomingTopHeaderMarker: OriginalChecksum:7A8F68B11A1FAFFACCDF07AA9D35A93A9339B370BD0767F64914989242E79EFC;UpperCasedChecksum:F9BF82D574F8DFDBE5CB3C96A7D2A0E06618247A361C3E77A392DC707BF1D9C1;SizeAsReceived:2083;Count:15
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=mandrill; d=markmancapital.net;
+ h=From:Subject:To:Message-Id:Date:MIME-Version:Content-Type; i=subscriptions@markmancapital.net;
+ bh=Fm51lEQFVQfilIyMdfTFLIgKOneJNEjOli/EPrF57wY=;
+ b=IrBqDNbQ0GYVXc4x9JorZhnDTE9MrQ5+5KwT9XbvF0NdEw/oq6Hlg6KQlDDkdSe08/ab+6PlNFcI
+   DI6UY32XOmGofKLORIW8KwNDt9gU3/JzSm3uQr37aqxsVgG3Qrt76L3oXCu6sUS1+WEOliIn0yzx
+   Fwx1qQ+wIZ1UD4g9uS8=
+Received: from pmta01.mandrill.prod.suw01.rsglab.com (127.0.0.1) by mail187-17.suw11.mandrillapp.com id h2hkra174i4j for <osuby@hotmail.com>; Fri, 29 Jan 2021 20:01:56 +0000 (envelope-from <bounce-md_30905169.601469b4.v1-496bce90d81344abbc5ca5fec4d2d229@mandrillapp.com>)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mandrillapp.com; 
+ i=@mandrillapp.com; q=dns/txt; s=mandrill; t=1611950516; h=From : 
+ Subject : To : Message-Id : Date : MIME-Version : Content-Type : From : 
+ Subject : Date : X-Mandrill-User : List-Unsubscribe; 
+ bh=Fm51lEQFVQfilIyMdfTFLIgKOneJNEjOli/EPrF57wY=; 
+ b=EVS2fX3jAbBzMqbTKhqUq/wgzCKI9g3HyLMjCMv91gBfOrj3EjQ1NxwlVyPV5eVZoqDQlJ
+ IY9dXE/qX2rMVoBzWAdB6rwAt7efl8g2BqVaQlnlTMTZa13t181IEAQflpOX7G730ignxvnF
+ W+VVp7aKKEwBQRhVmtRnwd4FAEhHE=
+From: Markman Capital Insight <subscriptions@markmancapital.net>
+Subject: Tactical Options / January 29, 2021 - Friday Update
+Return-Path: bounce-md_30905169.601469b4.v1-496bce90d81344abbc5ca5fec4d2d229@mandrillapp.com
+Received: from [52.203.66.180] by mandrillapp.com id 496bce90d81344abbc5ca5fec4d2d229; Fri, 29 Jan 2021 20:01:56 +0000
+To: Omar  Suby <osuby@hotmail.com>
+X-Report-Abuse: Please forward a copy of this message, including all headers, to abuse@mandrill.com
+X-Report-Abuse: You can also report abuse here: http://mandrillapp.com/contact/abuse?id=30905169.496bce90d81344abbc5ca5fec4d2d229
+X-Mandrill-User: md_30905169
+Message-Id: <30905169.20210129200156.601469b4a3d7a9.87481186@mail187-17.suw11.mandrillapp.com>
+Date: Fri, 29 Jan 2021 20:01:56 +0000
+Content-Type: multipart/alternative; boundary="_av-AvFZFHttRPGYXS2mDyJf7A"
+X-IncomingHeaderCount: 15
+X-MS-Exchange-Organization-ExpirationStartTime: 29 Jan 2021 20:01:57.2183
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: caab799a-be2e-461b-ba28-08d8c490bb73
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-AuthSource: DM6NAM12FT044.eop-nam12.prod.protection.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-UserLastLogonTime: 1/29/2021 7:57:22 PM
+X-MS-Office365-Filtering-Correlation-Id: caab799a-be2e-461b-ba28-08d8c490bb73
+X-MS-TrafficTypeDiagnostic: DM6NAM12HT032:
+X-MS-Exchange-EOPDirect: true
+X-Sender-IP: 198.2.187.17
+X-SID-PRA: SUBSCRIPTIONS@MARKMANCAPITAL.NET
+X-SID-Result: PASS
+X-MS-Exchange-Organization-PCL: 2
+X-MS-Exchange-Organization-SCL: 0
+X-Microsoft-Antispam: BCL:0;
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Jan 2021 20:01:57.1174
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: caab799a-be2e-461b-ba28-08d8c490bb73
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-AuthSource: DM6NAM12FT044.eop-nam12.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6NAM12HT032
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:01.1243046
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.3805.017
+X-Microsoft-Antispam-Mailbox-Delivery:
+	abwl:0;wl:0;pcwl:0;kl:0;iwl:0;ijl:0;dwl:0;dkl:0;rwl:0;ucf:0;jmr:0;ex:0;auth:1;dest:I;ENG:(5062000282)(90000117)(90012020)(91020020)(91040095)(9000001)(9050020)(9100273)(5061607266)(5061608174)(4900115)(98392012)(4920090)(6515079)(4950131)(4990090);
+X-Message-Delivery: Vj0xLjE7dXM9MDtsPTA7YT0xO0Q9MTtHRD0xO1NDTD0z
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?RnU5LzNhOG5OZW5KeHJ3SnFBekowOWF5Wkg5NnlGaEZJRUtENUJKK0lVUmhE?=
+ =?utf-8?B?eXlWdExUcU95N2dFUytJRmpPdXg2WDZpNzJ1d1Q5UW9Sbkpxa2l0TjhFZTBt?=
+ =?utf-8?B?VHZvekcrdTFSdXc5MDljV1JzQStBY24ydGlJYlpiKy9NY3MxcGhXOUVXcmox?=
+ =?utf-8?B?U1JXTEtYZGxlblpjd0M5ZlRveDlsRTNvSGdYUEw5TFRJZ2w2RmpjWndYbGlN?=
+ =?utf-8?B?clREZzlXeExPbys0dHd1UjVhaGhXRTIvVFNMMmM2cjdPTVZtZDFxM01HSlV3?=
+ =?utf-8?B?M3ZPVUNTZnlUbzZERjhBQ1laYk81WDJUQzBKTlZjTVNRMDZSekZ3aDFRbEdP?=
+ =?utf-8?B?NjdiUzRXNStzTjFtSHN1eVhQeGhHdEFhUC9iN1dOY2pkT3hzc3NWUlUxVkdz?=
+ =?utf-8?B?WDh0eE5HUUVRN3N3UUZNTFBrVmhMZ0U5cWIxRE00R3NBRHV2S2k4djNES2Vr?=
+ =?utf-8?B?S052WVM1TzRDbk5UWUdCMkxDYTFWdXdPSitlMVI3UDVTekRoeUJPSlFvL3BU?=
+ =?utf-8?B?K1VLTXBWUjRCN0tydWV2RVg4dmNhTVdyeUtkYlRBQzNZYXI3b1RNQ21NWjky?=
+ =?utf-8?B?NUhCN1ZhMnlROFZFRkdGNVRvMXdMSUxFR0ppTXNOcjBNUFc3cittTFozcHpw?=
+ =?utf-8?B?NjN4b0EyZ3lUUHdPQ1R5Qjd5Zkh2dEkrWHpjdTQ0aktTOERPSG9wVUpuQXZl?=
+ =?utf-8?B?b2o2VnVGNU9WNEE3TFNIcmQ3SjE4UHUvNkNzdjIwVWhZT1RNeGJyTUt4K1NV?=
+ =?utf-8?B?V1JKWlpJckVmTGhuaWRXNVNRMDhmU2dhL01oMVJHNThpQUxnTEFkajkvVU4w?=
+ =?utf-8?B?SHV5RUpMZ3J6b2h2VEVBemlkMWlaSDg5ZG9UREFDQUJ4SEZpdXpIdWdENUFn?=
+ =?utf-8?B?RGlncmNnKzVhSFhSSW1XVXBIaUpvdjM4ZkdyNlA4ZXRCUzhqRWwxTkhOVDh0?=
+ =?utf-8?B?SWpKOXIyREt4QUpNNkJiUzh2NWNzdHJuWFpJUXBVMVVXNXhKZi9OeCsxUzBy?=
+ =?utf-8?B?c0tzbDYwMm5WeVI3Z2hFN3B0UlhzeTBEbzJoa1lkckZURmRySTlFL1p5VEdF?=
+ =?utf-8?B?UUkzbVVTYTZXRDZiK0x0TERUa0xsRkk1TW80UjFJMW0yUWFxSDVyYU1EM1NK?=
+ =?utf-8?B?UFFrM2pBeWZBZ1NlQ3dHSERHUkpFTENTNUFUUFpzNjJSczZ0ck83ZFNMQ1g1?=
+ =?utf-8?B?SGlvWFlYQ1Rmc0hPK0pOanBTVlhEOHRlbG9BN3FxRG5MU1JsZUJUQVd4MmlU?=
+ =?utf-8?B?U1U1VzhHTEErc0g0elFST0lFSllQRTkxUStMa2VyUkFjS0RyZ0xVOGFzWHdN?=
+ =?utf-8?B?YTduaVVGa2hFTHk1RDRJYThQeW1ZOE10TlBOZTlTWHo2b3BWZzhsT2p6Wk5O?=
+ =?utf-8?B?T2pXV05XRnNEbWkzdE8zWmY2QUNSMEQyVTRnb2pyU1hyTElWSjVuc2E0WFFr?=
+ =?utf-8?B?eVRKOU9zR01STGNFTEo5dDkrNlZLTC9JWks4NDIvYS8yU0tpUlhleUZPWm14?=
+ =?utf-8?B?T2ZjK3dsZmttbzZjaTFxSG43YkhWN2krd2dxa3ZSdHdvZDJhTDFyekY1Tmps?=
+ =?utf-8?B?QXJRV1k5ZXNwdXU4cUtqU3NWSWdXeGhCKzIzOWdzTjZLM1REalF0VDgvak9E?=
+ =?utf-8?B?b0MveGYrNFgyS1R4eGNSRGxRYTRERndrK0FsbkJCOGxkam1vOTcrZzZkNkhI?=
+ =?utf-8?Q?kog2sl1DgIsTD15DiOwo?=
+MIME-Version: 1.0
+
+--_av-AvFZFHttRPGYXS2mDyJf7A
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Friday Update
+* Trade Alert: Sold half of Bit Digital calls for 38% gain* Stocks slide as=
+ investors resume worrying about vaccination pace and market volatilityStoc=
+ks around the world sank into a broad retreat that extended across industri=
+es amid lingering concerns that a surge of retail trading was creating havo=
+c and as traders mulled an uncertain outlook for deploying coronavirus vacc=
+ines.The S&amp;P 500 Index fell about 2%, turning negative for the year and=
+ heading to its biggest weekly decline in three months, Bloomberg reported,=
+ as day traders=E2=80=99 bids for heavily shorted stocks fueled speculation=
+ hedge funds would need to reduce their market exposure. Small-cap stocks o=
+utperformed as Johnson &amp; Johnson said its one-shot vaccine generated st=
+rong protection against Covid-19, though it was less effective against the =
+South Africa variant.GameStop (GME) and AMC Entertainment (AMC) soared, sig=
+naling a return of volatility for stocks popular in internet chat rooms as =
+brokerages said they would start to ease trading restrictions imposed after=
+ wild swings this week. Bitcoin surged as much as 16% after Tesla Inc. foun=
+der Elon Musk mentioned it on his Twitter profile.Global stocks are set for=
+ their worst weekly slide in about three months, partly on the turmoil caus=
+ed by hoards of day traders hatching stock bets that roiled hedge funds and=
+ strained trading platforms. Some strategists say investors should buy the =
+dip because they expect stimulus-fueled economic recovery from the pandemic=
+. Others fear an uneven vaccine rollout signals a fragile outlook amid stre=
+tched valuations.Through 2:45 pm ET, the Dow was down 550 points, or 1.8%, =
+while the S&amp;P 500 was off 1.95%, the Nasdaq 100 was down 2% and the Rus=
+sell was off 1.8%.Portfolio: We sold first half of BTBT calls at the open o=
+n a gap up for 38.5% gain, which is great. Adjust target and stop. No new r=
+ecommendations going into the weekend. *NEW RECOMMENDATIONBit Digital Inc. =
+(BTBT) February $17.50 calls-- Symbol: BTBT210219C00017500-- Bought at $5.7=
+0 on Thursday, Jan 28. -- Sold half at $7.90 at the open for a gain of 38.5=
+%!-- Now trading at $4.75-- Sell second half at new $8 lmt gtc-- Set stop a=
+t new $4.50 stp *Jon D. MarkmanAll recommendations are for monthly options =
+expiring on the third Friday of the specified month unless otherwise noted.=
+ All stops are good after 10:30 a.m. Eastern only unless otherwise specifie=
+d. All orders are good for the day only unless otherwise noted. "Day only" =
+orders expire at the close of the current session. Past results are no guar=
+antee of future returns. All accounts may not achieve comparable results. R=
+ecommendations are leveraged and speculative, so only use risk capital =E2=
+=80=94 i.e., money you can afford to lose. All results are shown ex-commiss=
+ions and fees. Options trading involves the risk of substantial loss. Some =
+news and research provided by Wall Street Journal, Bloomberg, Associated Pr=
+ess, MT Newswires and Reuters.&nbsp;
+
+--_av-AvFZFHttRPGYXS2mDyJf7A
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns=3D"http://www.w3.=
+org/1999/xhtml"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+        <title>
+                      Message from Markman Capital Insight
+                  </title>
+        <style type=3D"text/css">
+      /* /\/\/\/\/\/\/\/\/ CLIENT-SPECIFIC STYLES /\/\/\/\/\/\/\/\/ */
+      #outlook a{padding:0;} /* Force Outlook to provide a "view in browser=
+" message */
+      .ReadMsgBody{width:100%;} .ExternalClass{width:100%;} /* Force Hotmai=
+l to display emails at full width */
+      .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass=
+ font, .ExternalClass td, .ExternalClass div {line-height: 100%;} /* Force =
+Hotmail to display normal line spacing */
+      body, table, td, p, a, li, blockquote{-webkit-text-size-adjust:100%; =
+-ms-text-size-adjust:100%;} /* Prevent WebKit and Windows mobile changing d=
+efault text sizes */
+      table, td{mso-table-lspace:0pt; mso-table-rspace:0pt;} /* Remove spac=
+ing between tables in Outlook 2007 and up */
+      img{-ms-interpolation-mode:bicubic;} /* Allow smoother rendering of r=
+esized image in Internet Explorer */
+
+      /* /\/\/\/\/\/\/\/\/ RESET STYLES /\/\/\/\/\/\/\/\/ */
+      body{margin:0; padding:0;}
+      img{border:0; height:auto; line-height:100%; outline:none; text-decor=
+ation:none;}
+      table{border-collapse:collapse !important;}
+      body, #bodyTable, #bodyCell{height:100% !important; margin:0; padding=
+:0; width:100% !important;}
+
+      /* /\/\/\/\/\/\/\/\/ TEMPLATE STYLES /\/\/\/\/\/\/\/\/ */
+
+      #bodyCell{padding:20px;}
+      #templateContainer,
+      #templatePreheader,
+      #fineprint{width:600px;}
+
+      /* =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D Page Styles =3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D */
+
+
+      body, #bodyTable{
+        background-color:#4D4D4F;
+      }
+
+      #templateContainer{
+        border:1px solid #BBBBBB;
+        background-color: #fff;
+      }
+
+      h1{
+        color:#4d4d4f !important;
+        display:block;
+        font-family:Arial,Helvetica;
+        font-size:28px;
+        font-style:normal;
+        font-weight:normal;
+        line-height:100%;
+        letter-spacing:normal;
+        margin-top:0;
+        margin-right:0;
+        margin-bottom:10px;
+        margin-left:0;
+        text-align:left;
+      }
+
+      h2{
+        color:#4d4d4f !important;
+        display:block;
+        font-family:Arial, Helvetica;
+        font-size:16px;
+        font-style:normal;
+        font-weight:bold;
+        line-height:100%;
+        letter-spacing:normal;
+        margin-top:0;
+        margin-right:0;
+        margin-bottom:10px;
+        margin-left:0;
+        text-align:left;
+      }
+
+      h3{
+        color:#4d4d4f !important;
+        display:block;
+        font-family:Arial, Helvetica;
+        font-size:18px;
+        font-style:italic;
+        font-weight:normal;
+        line-height:100%;
+        letter-spacing:normal;
+        margin-top:0;
+        margin-right:0;
+        margin-bottom:10px;
+        margin-left:0;
+        text-align:left;
+      }
+
+      h4{
+        color:#4d4d4f !important;
+        display:block;
+        font-family:Arial, Helvetica;
+        font-size:14px;
+        font-style:italic;
+        font-weight:normal;
+        line-height:100%;
+        letter-spacing:normal;
+        margin-top:0;
+        margin-right:0;
+        margin-bottom:10px;
+        margin-left:0;
+        text-align:left;
+      }
+
+      hr {
+        display: block;
+        margin: 20px 0;
+        border: 0;
+        background: #92BA4C;
+        height: 1px;
+        width: 100%;
+      }
+
+      /* =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D Header Styles =3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D */
+
+      #templatePreheader,
+      #fineprint {
+        background: transparent;
+      }
+
+      .preheaderContent,
+      .fineprintContent{
+        color:#898989;
+        font-family:Arial, Helvetica;
+        font-size:11px;
+        line-height:125%;
+        text-align:left;
+      }
+
+      .preheaderContent a:link, .preheaderContent a:visited, /* Yahoo! Mail=
+ Override */ .preheaderContent a .yshortcuts /* Yahoo! Mail Override */{
+        color:#898989;
+        font-weight:normal;
+        text-decoration:underline;
+      }
+
+      .headerContent{
+        color:#4d4d4f;
+        font-family:Arial, Helvetica;
+        font-size:20px;
+        font-weight:bold;
+        line-height:100%;
+        padding-top:0;
+        padding-right:0;
+        padding-bottom:0;
+        padding-left:0;
+        text-align:left;
+        vertical-align:middle;
+      }
+
+      .headerContent a:link, .headerContent a:visited, /* Yahoo! Mail Overr=
+ide */ .headerContent a .yshortcuts /* Yahoo! Mail Override */{
+        color:#4d4d4f;
+        font-weight:normal;
+        text-decoration:underline;
+      }
+
+      #headerImage{
+        display: block;
+        padding: 8px;
+        height:auto;
+        max-width: 584px;
+      }
+
+      /* =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D Body Styles =3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D */
+
+      #templateBody{
+      }
+
+      .bodyContent{
+        color:#4d4d4f;
+        font-family:Arial, Helvetica;
+        font-size:14px;
+        line-height:150%;
+        padding-top:34px;
+        padding-right:20px;
+        padding-bottom:20px;
+        padding-left:20px;
+        text-align:left;
+      }
+
+      .bodyContent a:link, .bodyContent a:visited, /* Yahoo! Mail Override =
+*/ .bodyContent a .yshortcuts /* Yahoo! Mail Override */{
+        color:#4495d1;
+        font-weight:normal;
+        text-decoration:underline;
+      }
+
+      .bodyContent img{
+        display:inline;
+        height:auto;
+        max-width:560px;
+      }
+
+      /* =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D Footer Styles =3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D */
+
+      #templateFooter{
+        /*@editable*/ background-color:#F4F4F4;
+        /*@editable*/ border-top:1px solid #FFFFFF;
+      }
+
+      .mobileFooter {
+        display: none;
+      }
+
+      .footerContent{
+        color:#4d4d4f;
+        font-family:Arial,Helvetica;
+        font-size:12px;
+        line-height:150%;
+        padding-top:20px;
+        padding-right:20px;
+        padding-bottom:20px;
+        padding-left:20px;
+        text-align:left;
+      }
+
+      .footerLinks {
+        text-align: right;
+      }
+
+      .footerContent a:link, .footerContent a:visited, /* Yahoo! Mail Overr=
+ide */ .footerContent a .yshortcuts, .footerContent a span /* Yahoo! Mail O=
+verride */ {
+        color:#4d4d4f;
+        font-weight:normal;
+        text-decoration:underline;
+      }
+
+      .fineprintContent a:link, .fineprintContent a:visited, /* Yahoo! Mail=
+ Override */ .fineprintContent a .yshortcuts, .fineprintContent a span /* Y=
+ahoo! Mail Override */ {
+        color:#96BC33;
+        font-weight:normal;
+        text-decoration:underline;
+      }
+
+      /* /\/\/\/\/\/\/\/\/ MOBILE STYLES /\/\/\/\/\/\/\/\/ */
+
+      @media  only screen and (max-width: 480px){
+        /* /\/\/\/\/\/\/ CLIENT-SPECIFIC MOBILE STYLES /\/\/\/\/\/\/ */
+        body, table, td, p, a, li, blockquote{-webkit-text-size-adjust:none=
+ !important;} /* Prevent Webkit platforms from changing default text sizes =
+*/
+                body{width:100% !important; min-width:100% !important;} /* =
+Prevent iOS Mail from adding padding to the body */
+
+        /* /\/\/\/\/\/\/ MOBILE RESET STYLES /\/\/\/\/\/\/ */
+        #bodyCell{padding:10px !important;}
+
+        /* /\/\/\/\/\/\/ MOBILE TEMPLATE STYLES /\/\/\/\/\/\/ */
+
+        /* =3D=3D=3D=3D=3D=3D=3D=3D Page Styles =3D=3D=3D=3D=3D=3D=3D=3D */
+
+        #templateContainer,
+        #fineprint {
+          max-width:600px !important;
+          /*@editable*/ width:100% !important;
+        }
+
+        #templateContainer {
+          border: solid 1px #C2C2C2;
+        }
+
+        h1{
+          /*@editable*/ font-size:24px !important;
+          /*@editable*/ line-height:100% !important;
+        }
+
+        h2{
+          /*@editable*/ font-size:20px !important;
+          /*@editable*/ line-height:100% !important;
+        }
+
+        h3{
+          /*@editable*/ font-size:18px !important;
+          /*@editable*/ line-height:100% !important;
+        }
+
+        h4{
+          /*@editable*/ font-size:16px !important;
+          /*@editable*/ line-height:100% !important;
+        }
+
+        /* =3D=3D=3D=3D=3D=3D=3D=3D Header Styles =3D=3D=3D=3D=3D=3D=3D=3D =
+*/
+
+        #templatePreheader{display:none !important;} /* Hide the template p=
+reheader to save space */
+
+        #headerImage{
+          padding: 0 !important;
+          height:auto !important;
+          /*@editable*/ max-width:600px !important;
+          /*@editable*/ width:100% !important;
+        }
+
+        .headerContent{
+          /*@editable*/ font-size:20px !important;
+          /*@editable*/ line-height:125% !important;
+        }
+
+        /* =3D=3D=3D=3D=3D=3D=3D=3D Body Styles =3D=3D=3D=3D=3D=3D=3D=3D */
+
+        #bodyImage{
+          height:auto !important;
+          /*@editable*/ max-width:560px !important;
+          /*@editable*/ width:100% !important;
+        }
+
+        .bodyContent{
+          /*@editable*/ font-size:18px !important;
+          /*@editable*/ line-height:125% !important;
+        }
+
+        /* =3D=3D=3D=3D=3D=3D=3D=3D Footer Styles =3D=3D=3D=3D=3D=3D=3D=3D =
+*/
+
+        .footerContent{
+          /*@editable*/ font-size:14px !important;
+          /*@editable*/ line-height:115% !important;
+        }
+
+        #footerPipe {
+          display: none !important;
+        }
+
+        #desktopFooter {
+          display: none !important;
+        }
+
+        .mobileFooter {
+          display: table-row !important;
+        }
+
+        .footerLinks, .footerBanner {
+          text-align: center !important;
+        }
+
+        .footerContent a{
+          display:block !important;
+          margin-bottom: 10px;
+        } /* Place footer social and utility links on their own lines, for =
+easier access */
+      }
+    </style>
+    </head>
+    <body leftmargin=3D"0" marginwidth=3D"0" topmargin=3D"0" marginheight=
+=3D"0" offset=3D"0" style=3D"-webkit-text-size-adjust:100%;-ms-text-size-ad=
+just:100%;margin:0;padding:0;height:100% ;width:100% ;background-color:#4D4=
+D4F;">
+      <center>
+          <table align=3D"center" border=3D"0" cellpadding=3D"0" cellspacin=
+g=3D"0" height=3D"100%" width=3D"100%" id=3D"bodyTable" style=3D"-webkit-te=
+xt-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-tabl=
+e-rspace:0pt;border-collapse:collapse ;height:100% ;margin:0;padding:0;widt=
+h:100% ;background-color:#4D4D4F;">
+              <tr>
+                  <td align=3D"center" valign=3D"top" id=3D"bodyCell" style=
+=3D"-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspac=
+e:0pt;mso-table-rspace:0pt;height:100% ;margin:0;padding:20px;width:100% ;"=
+>
+
+                    <!-- BEGIN PREHEADER // -->
+                      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" width=3D"100%" id=3D"templatePreheader" style=3D"-webkit-text-size-adjus=
+t:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;=
+border-collapse:collapse ;width:600px;background:transparent;">
+                          <tr>
+                              <td valign=3D"top" class=3D"preheaderContent"=
+ style=3D"padding-top:10px;padding-right:20px;padding-bottom:10px;padding-l=
+eft:20px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-=
+lspace:0pt;mso-table-rspace:0pt;color:#898989;font-family:Arial, Helvetica;=
+font-size:11px;line-height:125%;text-align:left;">
+                                  Your latest newsletter from MCI is here.
+                              </td>
+                          </tr>
+                      </table>
+                      <!-- // END PREHEADER -->
+                      <!-- BEGIN TEMPLATE // -->
+                      <table border=3D"0" cellpadding=3D"0" cellspacing=3D"=
+0" id=3D"templateContainer" style=3D"-webkit-text-size-adjust:100%;-ms-text=
+-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse=
+:collapse ;width:600px;border:1px solid #BBBBBB;background-color:#fff;">
+                          <tr>
+                              <td align=3D"center" valign=3D"top" style=3D"=
+-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0p=
+t;mso-table-rspace:0pt;">
+                                  <!-- BEGIN HEADER // -->
+                                    <table border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" width=3D"100%" id=3D"templateHeader" style=3D"-webkit-text=
+-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-=
+rspace:0pt;border-collapse:collapse ;">
+                                        <tr>
+                                            <td valign=3D"top" class=3D"hea=
+derContent" style=3D"-webkit-text-size-adjust:100%;-ms-text-size-adjust:100=
+%;mso-table-lspace:0pt;mso-table-rspace:0pt;color:#4d4d4f;font-family:Arial=
+, Helvetica;font-size:20px;font-weight:bold;line-height:100%;padding-top:0;=
+padding-right:0;padding-bottom:0;padding-left:0;text-align:left;vertical-al=
+ign:middle;">
+                                                  <img src=3D"https://markm=
+an-live.s3.amazonaws.com/1437152784_6040044780.jpg" alt=3D"Tactical Options=
+" style=3D"-ms-interpolation-mode:bicubic;border:0;height:auto;line-height:=
+100%;outline:none;text-decoration:none;">
+                                              </td>
+                                        </tr>
+                                    </table>
+                                    <!-- // END HEADER -->
+                                </td>
+                            </tr>
+                          <tr>
+                              <td align=3D"center" valign=3D"top" style=3D"=
+-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0p=
+t;mso-table-rspace:0pt;">
+                                  <!-- BEGIN BODY // -->
+                                    <table border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" width=3D"100%" id=3D"templateBody" style=3D"-webkit-text-s=
+ize-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rs=
+pace:0pt;border-collapse:collapse ;">
+                                        <tr>
+                                            <td valign=3D"top" class=3D"bod=
+yContent" style=3D"-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;=
+mso-table-lspace:0pt;mso-table-rspace:0pt;color:#4d4d4f;font-family:Arial, =
+Helvetica;font-size:14px;line-height:150%;padding-top:34px;padding-right:20=
+px;padding-bottom:20px;padding-left:20px;text-align:left;">
+                                                  <h1 style=3D"color:#4d4d4=
+f ;display:block;font-family:Arial,Helvetica;font-size:28px;font-style:norm=
+al;font-weight:normal;line-height:100%;letter-spacing:normal;margin-top:0;m=
+argin-right:0;margin-bottom:10px;margin-left:0;text-align:left;">
+    Friday Update
+  </h1>
+
+  <p style=3D"-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;"><st=
+rong>* Trade Alert: Sold half of Bit Digital calls for 38% gain</strong><st=
+rong><br></strong><strong>* Stocks slide as investors resume worrying about=
+ vaccination pace and market volatility<br></strong><strong><br></strong></=
+p><p style=3D"-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">Sto=
+cks around the world sank into a broad retreat that extended across industr=
+ies amid lingering concerns that a surge of retail trading was creating hav=
+oc and as traders mulled an uncertain outlook for deploying coronavirus vac=
+cines.</p><p style=3D"-webkit-text-size-adjust:100%;-ms-text-size-adjust:10=
+0%;">The S&amp;P 500 Index fell about 2%, turning negative for the year and=
+ heading to its biggest weekly decline in three months, Bloomberg reported,=
+ as day traders=E2=80=99 bids for heavily shorted stocks fueled speculation=
+ hedge funds would need to reduce their market exposure. Small-cap stocks o=
+utperformed as Johnson &amp; Johnson said its one-shot vaccine generated st=
+rong protection against Covid-19, though it was less effective against the =
+South Africa variant.</p><p style=3D"-webkit-text-size-adjust:100%;-ms-text=
+-size-adjust:100%;"><strong>GameStop </strong>(GME) and <strong>AMC Enterta=
+inment (AMC)</strong> soared, signaling a return of volatility for stocks p=
+opular in internet chat rooms as brokerages said they would start to ease t=
+rading restrictions imposed after wild swings this week. Bitcoin surged as =
+much as 16% after Tesla Inc. founder Elon Musk mentioned it on his Twitter =
+profile.</p><p style=3D"-webkit-text-size-adjust:100%;-ms-text-size-adjust:=
+100%;">Global stocks are set for their worst weekly slide in about three mo=
+nths, partly on the turmoil caused by hoards of day traders hatching stock =
+bets that roiled hedge funds and strained trading platforms. Some strategis=
+ts say investors should buy the dip because they expect stimulus-fueled eco=
+nomic recovery from the pandemic. Others fear an uneven vaccine rollout sig=
+nals a fragile outlook amid stretched valuations.</p><p style=3D"-webkit-te=
+xt-size-adjust:100%;-ms-text-size-adjust:100%;">Through 2:45 pm ET, the Dow=
+ was down 550 points, or 1.8%, while the S&amp;P 500 was off 1.95%, the Nas=
+daq 100 was down 2% and the Russell was off 1.8%.</p><p style=3D"-webkit-te=
+xt-size-adjust:100%;-ms-text-size-adjust:100%;"><strong>Portfolio:</strong>=
+ We sold first half of BTBT calls at the open on a gap up for 38.5% gain, w=
+hich is great. Adjust target and stop. No new recommendations going into th=
+e weekend. <br><br><strong>*</strong></p><p style=3D"-webkit-text-size-adju=
+st:100%;-ms-text-size-adjust:100%;"><strong>NEW RECOMMENDATION</strong></p>=
+<p style=3D"-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;"><stro=
+ng>Bit Digital Inc. (BTBT) </strong><a href=3D"https://mandrillapp.com/trac=
+k/click/30905169/finance.yahoo.com?p=3DeyJzIjoiaGVDYUZEYTFCcGtObFY4bEdUUFFi=
+eVJvQ1prIiwidiI6MSwicCI6IntcInVcIjozMDkwNTE2OSxcInZcIjoxLFwidXJsXCI6XCJodHR=
+wczpcXFwvXFxcL2ZpbmFuY2UueWFob28uY29tXFxcL3F1b3RlXFxcL0JUQlQyMTAyMTlDMDAwMT=
+c1MDA_cD1CVEJUMjEwMjE5QzAwMDE3NTAwJi50c3JjPWZpbi1zcmNoXCIsXCJpZFwiOlwiNDk2Y=
+mNlOTBkODEzNDRhYmJjNWNhNWZlYzRkMmQyMjlcIixcInVybF9pZHNcIjpbXCI3NzM2MDI2OTU0=
+OWY4N2EzMjYxOTZmYjE1MjA5ZGQ1Zjk4NDRiZTRjXCJdfSJ9" style=3D"-webkit-text-siz=
+e-adjust:100%;-ms-text-size-adjust:100%;color:#4495d1;font-weight:normal;te=
+xt-decoration:underline;"><strong>February $17.50 calls</strong></a></p><p =
+style=3D"-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">-- Symbo=
+l: BTBT210219C00017500<br>-- Bought at $5.70 on Thursday, Jan 28. <br>-- So=
+ld half at $7.90 at the open for a <strong>gain of 38.5%!</strong><strong><=
+br></strong>-- Now trading at $4.75<br>-- Sell second half at <strong>new $=
+8</strong> lmt gtc<br>-- Set stop at <strong>new $4.50 stp</strong><br><br>=
+ *</p><p style=3D"-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;"=
+>Jon D. Markman</p><p style=3D"-webkit-text-size-adjust:100%;-ms-text-size-=
+adjust:100%;">All recommendations are for monthly options expiring on the t=
+hird Friday of the specified month unless otherwise noted. All stops are go=
+od after 10:30 a.m. Eastern only unless otherwise specified. All orders are=
+ good for the day only unless otherwise noted. &quot;Day only&quot; orders =
+expire at the close of the current session. Past results are no guarantee o=
+f future returns. All accounts may not achieve comparable results. Recommen=
+dations are leveraged and speculative, so only use risk capital =E2=80=94 i=
+.e., money you can afford to lose. All results are shown ex-commissions and=
+ fees. Options trading involves the risk of substantial loss. Some news and=
+ research provided by Wall Street Journal, Bloomberg, Associated Press, MT =
+Newswires and Reuters.&nbsp;</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- // END BODY -->
+                                </td>
+                            </tr>
+                          <tr>
+                              <td align=3D"center" valign=3D"top" style=3D"=
+-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0p=
+t;mso-table-rspace:0pt;">
+                                  <!-- BEGIN FOOTER // -->
+                                    <table border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" width=3D"100%" id=3D"templateFooter" style=3D"-webkit-text=
+-size-adjust:100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-=
+rspace:0pt;border-collapse:collapse ;background-color:#F4F4F4;border-top:1p=
+x solid #FFFFFF;">
+                                        <tr id=3D"desktopFooter">
+                                            <td valign=3D"top" class=3D"foo=
+terContent footerBanner" style=3D"-webkit-text-size-adjust:100%;-ms-text-si=
+ze-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;color:#4d4d4f;font=
+-family:Arial,Helvetica;font-size:12px;line-height:150%;padding-top:20px;pa=
+dding-right:20px;padding-bottom:20px;padding-left:20px;text-align:left;">
+                                                <img src=3D"https://www.mar=
+kmancapital.net/images/email_logo.png" alt=3D"Markman Capital Insight" styl=
+e=3D"max-width:100%;margin-bottom:20px;-ms-interpolation-mode:bicubic;borde=
+r:0;height:auto;line-height:100%;outline:none;text-decoration:none;">
+                                                <div>600 University Street,=
+ Suite 3011, Seattle WA 98101</div>
+                                            </td>
+                                            <td valign=3D"top" class=3D"foo=
+terContent footerLinks" style=3D"padding-top:20px;-webkit-text-size-adjust:=
+100%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;co=
+lor:#4d4d4f;font-family:Arial,Helvetica;font-size:12px;line-height:150%;pad=
+ding-right:20px;padding-bottom:20px;padding-left:20px;text-align:right;">
+                                              <a href=3D"https://mandrillap=
+p.com/track/click/30905169/www.markmancapital.net?p=3DeyJzIjoiMTk3MGpnbjQtN=
+npiVVRhbTAwa1hqaGVqSnB3IiwidiI6MSwicCI6IntcInVcIjozMDkwNTE2OSxcInZcIjoxLFwi=
+dXJsXCI6XCJodHRwczpcXFwvXFxcL3d3dy5tYXJrbWFuY2FwaXRhbC5uZXRcXFwvc3Vic2NyaXB=
+0aW9uc1wiLFwiaWRcIjpcIjQ5NmJjZTkwZDgxMzQ0YWJiYzVjYTVmZWM0ZDJkMjI5XCIsXCJ1cm=
+xfaWRzXCI6W1wiZTZmNGI1ZWM4MTA3N2EyMDdiOWQzNmQ5ZTg0MDc0MTJlYjE5YmIzZVwiXX0if=
+Q" style=3D"-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#=
+4d4d4f;font-weight:normal;text-decoration:underline;">Manage Preferences</a=
+>
+                                              <span id=3D"footerPipe">|</sp=
+an>
+                                              <a href=3D"https://mandrillap=
+p.com/track/click/30905169/www.markmancapital.net?p=3DeyJzIjoiR0V0TVJvNmhNd=
+GlZUjdSOHlUMk5zRkVleEZZIiwidiI6MSwicCI6IntcInVcIjozMDkwNTE2OSxcInZcIjoxLFwi=
+dXJsXCI6XCJodHRwczpcXFwvXFxcL3d3dy5tYXJrbWFuY2FwaXRhbC5uZXRcXFwvc2V0dGluZ3N=
+cIixcImlkXCI6XCI0OTZiY2U5MGQ4MTM0NGFiYmM1Y2E1ZmVjNGQyZDIyOVwiLFwidXJsX2lkc1=
+wiOltcIjFmOGVhOWNhM2QzMDg1ZTI2OTdiNTNiNjU3M2UwMzkzN2I0MTAwZDhcIl19In0" styl=
+e=3D"-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;color:#4d4d4f;=
+font-weight:normal;text-decoration:underline;">Update Profile</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <!-- // END FOOTER -->
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- // END TEMPLATE -->
+                        <!-- BEGIN FINEPRINT // -->
+                        <table border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" width=3D"100%" id=3D"fineprint" style=3D"-webkit-text-size-adjust:10=
+0%;-ms-text-size-adjust:100%;mso-table-lspace:0pt;mso-table-rspace:0pt;bord=
+er-collapse:collapse ;width:600px;background:transparent;">
+                            <tr>
+                                <td valign=3D"top" class=3D"fineprintConten=
+t" style=3D"padding-top:10px;padding-right:20px;padding-bottom:10px;padding=
+-left:20px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;mso-tabl=
+e-lspace:0pt;mso-table-rspace:0pt;color:#898989;font-family:Arial, Helvetic=
+a;font-size:11px;line-height:125%;text-align:left;">
+                                        <p style=3D"-webkit-text-size-adjus=
+t:100%;-ms-text-size-adjust:100%;">=C2=A9 2016 Markman Capital Insight LLC.=
+ All Rights Reserved. </p><p style=3D"-webkit-text-size-adjust:100%;-ms-tex=
+t-size-adjust:100%;">You are receiving this email because you signed up for=
+ a subscription on the website <a href=3D"https://mandrillapp.com/track/cli=
+ck/30905169/www.markmancapital.net?p=3DeyJzIjoiSUtObVVjU1laT1gxNUtnYmNQV242=
+ZzMwRjBZIiwidiI6MSwicCI6IntcInVcIjozMDkwNTE2OSxcInZcIjoxLFwidXJsXCI6XCJodHR=
+wOlxcXC9cXFwvd3d3Lm1hcmttYW5jYXBpdGFsLm5ldFwiLFwiaWRcIjpcIjQ5NmJjZTkwZDgxMz=
+Q0YWJiYzVjYTVmZWM0ZDJkMjI5XCIsXCJ1cmxfaWRzXCI6W1wiMDA0MTU3NjA5NGI0NmYxNGQ3N=
+TZmM2Y1NTVmYTgyZGU3YjUyOTU3MVwiXX0ifQ" target=3D"_blank" style=3D"-webkit-t=
+ext-size-adjust:100%;-ms-text-size-adjust:100%;color:#96BC33;font-weight:no=
+rmal;text-decoration:underline;">www.markmancapital.net</a>. If you wish to=
+ change your subscription preferences, email us at <a href=3D"mailto:subscr=
+iptions@markmancapital.net" style=3D"-webkit-text-size-adjust:100%;-ms-text=
+-size-adjust:100%;color:#96BC33;font-weight:normal;text-decoration:underlin=
+e;">subscriptions@markmancapital.net</a>.</p><p style=3D"-webkit-text-size-=
+adjust:100%;-ms-text-size-adjust:100%;">Recommendations and strategies repo=
+rted in this letter are believed to be accurate, but are not guaranteed to =
+be accurate or certain to result in profits. The managers, authors and edit=
+ors at Markman Capital Insight LLC may now or in the future have positions =
+in recommended securities. Past performance is not necessarily indicative o=
+f future results.  Trading involves substantial risk.   No representation i=
+s made that any account is likely to achieve profits or losses similar to t=
+hose described. Use and reliance on this service is strictly at the subscri=
+ber's own risk. Markman Capital Insight does not offer refunds for subscrip=
+tions in whole or in part.</p><p style=3D"-webkit-text-size-adjust:100%;-ms=
+-text-size-adjust:100%;">No portion of the above message may be republished=
+, retransmitted or forwarded without express written consent from Markman C=
+apital Insight. Violation of this copyright may result in service cancellat=
+ion, and/or collection of full subscription charges from unauthorized users=
+, and legal action. </p> <p style=3D"-webkit-text-size-adjust:100%;-ms-text=
+-size-adjust:100%;">Markman Capital Insight will not be liable for the acts=
+ or omissions of any third party with regards to delay or non-delivery of t=
+he report. Markman Capital Insight shall not be liable for incidental, indi=
+rect, special or consequential damages or for lost profits, savings or reve=
+nues of any kind.</p>
+                                  </td>
+                            </tr>
+                        </table>
+                        <!-- // END FINEPRINT -->
+
+                    </td>
+                </tr>
+            </table>
+        </center>
+    <img src=3D"https://mandrillapp.com/track/open.php?u=3D30905169&amp;id=
+=3D496bce90d81344abbc5ca5fec4d2d229" height=3D"1" width=3D"1"></body>
+</html>
+
+--_av-AvFZFHttRPGYXS2mDyJf7A--

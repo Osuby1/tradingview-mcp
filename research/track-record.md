@@ -1,24 +1,24 @@
 # Origination TRACKER - track record
 
-Source recommendations_log.csv, 513 picks, 2026-07-01 to 2026-07-30. Returns are UNREALIZED (matured=0 of 513 at fwd21).
+Source recommendations_log.csv, 526 picks, 2026-07-01 to 2026-07-31. Returns are UNREALIZED (matured=14 of 526 at fwd21).
 
-**ALL 513 picks: 39% green, mean -2.82%, median -1.72%, avg 12 days held, 0 stop-hits.**
+**ALL 526 picks: 35% green, mean -3.60%, median -1.60%, avg 12 days held, 0 stop-hits.**
 
 ## By grade - is a higher grade worth more?
 | Grade | n | win% | mean | median | MFE | MAE |
 |---|---|---|---|---|---|---|
-| A+ | 2 | 50% | -14.62% | -14.62% | +5.7% | -27.3% |
-| A | 62 | 29% | -3.75% | -4.48% | +7.4% | -11.7% |
-| B | 449 | 40% | -2.64% | -1.42% | +5.4% | -8.6% |
+| A+ | 2 | 50% | -16.85% | -16.85% | +5.7% | -27.3% |
+| A | 66 | 29% | -5.43% | -4.00% | +7.5% | -13.0% |
+| B | 458 | 36% | -3.28% | -1.45% | +5.5% | -9.0% |
 
 ## By tab
 | Tab | n | win% | mean | median |
 |---|---|---|---|---|
-| BUY ZONE | 35 | 46% | -4.52% | -3.25% |
-| COILED | 199 | 45% | -1.49% | -0.37% |
-| COOLING | 222 | 32% | -4.30% | -3.32% |
-| FRESH IGNITION | 57 | 39% | -0.65% | -1.42% |
+| BUY ZONE | 35 | 40% | -5.83% | -3.15% |
+| COILED | 203 | 40% | -1.82% | -0.93% |
+| COOLING | 225 | 31% | -5.56% | -4.07% |
+| FRESH IGNITION | 63 | 35% | -1.13% | -0.87% |
 
 ## Does the score predict? Top-25% vs bottom-25% by score
-- bottom quartile mean -3.05%, top quartile mean -3.61%, **spread -0.55pt**
+- bottom quartile mean -3.26%, top quartile mean -4.70%, **spread -1.44pt**
 - **The score does NOT predict returns - the spread is flat or backwards, the same result as the BUY SCORE calibration.**
