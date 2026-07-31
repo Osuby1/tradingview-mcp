@@ -42,3 +42,13 @@ Omar's H2-2026 correction expression. Reminder routine fires Mon 2026-07-27 ~9:0
   reached the local session. Nothing in the nightly chain or the morning brief reads
   this file, so its own dated entry week passed unflagged until Omar asked. Tranche 2
   (Aug 10–21) has the same exposure. See "commitments due today" TODO.
+
+
+## EXECUTION RECORD - Tranche 1 (2026-07-31)
+FILLED as LONG 710 PUT ONLY (structure deviation, documented in calls-ledger id
+2026-07-31-SPY-put-tranche1): cash account could not margin the spread (short
+leg demanded $60k cash-secured; rejected order 1292217286 on the record).
+1 SPY Nov 20 2026 710P @ $14.87 = $1,487, TS acct 12075036, order 1292226101,
+10:29 CT, final day of the entry window with entry conditions back in
+compliance (VIX 17.4, SPY 742.55). Exits per plan unchanged; flat by early Nov.
+Tranche 2 (Aug 10-21, VIX <15): use margin/main broker if the spread is wanted.

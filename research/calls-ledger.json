@@ -257,6 +257,17 @@
    "fill": "PLAN ONLY - resting limit at 231.84, NOT filled. Alert 5244638089.",
    "source": "og-chandelier universe scan 2026-07-27 (passed every gate)",
    "thesis": "Gated trend continuation on a post-earnings runner. Passed every gate 7/27; price far over 50d 204.25 and 200d 193.28. Earnings CLEAR (reported 7/23, next 10/27) - the move is post-earnings drift, the one effect we have actually measured as real. Size HALF = 140 sh ~$32.5k, risk ~$2,494; second half only on confirmation. BREAK CONDITION: Chandelier flips SELL, or a close back below the 50-day. NOT taken at market 7/28 - had gapped +2.2% to ~237 and sat 0.8% under its 52-week high. CONCENTRATION: filling this breaks the >$10k combined-open-risk flag - explicit override required. GRADE: whether waiting for the level beat buying the gap."
+  },
+  {
+   "id": "2026-07-31-SPY-put-tranche1",
+   "date": "2026-07-31",
+   "sym": "SPY",
+   "dir": "long-put-hedge",
+   "fill": "FILLED 2026-07-31 10:29:38 CT - BOUGHT 1 SPY Nov 20 2026 710 PUT @ 14.87 ($1,487 + $0.60 comm), TradeStation cash acct 12075036, order 1292226101, filled AT limit (no slippage vs own limit).",
+   "structure_deviation": "Plan specified a 710/600 bear put SPREAD (~$1,420). The spread was staged at 10.70 net ($1,070) and REJECTED (order 1292217286): cash account requires the short 600 leg cash-secured ($60k) - spreads need margin. Omar authorized the fallback: LONG 710 PUT ONLY at $1,487 vs plan budget $1,420 (+$67, +4.7%). Same thesis, same defined risk (premium = max loss), uncapped payoff, faster theta bleed - deviation documented, not hidden.",
+   "thesis": "Midterm-correction insurance per research/spy-midterm-put-spread-plan.md (pre-registered July). Entered on the FINAL day of the tranche-1 window with the plan's own entry conditions back in compliance: VIX 17.4 (<20 abort line), SPY 742.55 (>735 line), Sept hike odds 56%.",
+   "exits": "Per plan: sell into panic (VIX >28-30 or SPY -10% to -12%); reassess if hike odds collapse; FLAT BY EARLY NOVEMBER regardless (position is insurance, not a keeper). Tranche 2 window Aug 10-21 on VIX <15 - requires margin account or main-broker execution for the spread version.",
+   "risk_note": "Max loss $1,487 (0.15% of acct). Held in TS cash acct - $513 cash remains there."
   }
  ]
 }
