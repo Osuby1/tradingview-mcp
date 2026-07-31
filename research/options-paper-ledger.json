@@ -126,8 +126,8 @@
    "stop_premium": 2.45,
    "time_exit": "2026-08-28",
    "status": "OPEN",
-   "mark_premium": 4.775,
-   "mark_date": "2026-07-30",
+   "mark_premium": 5.45,
+   "mark_date": "2026-07-31",
    "entry_provisional": false,
    "analysis": {
     "sym": "SLB",
@@ -193,9 +193,14 @@
     {
      "date": "2026-07-30",
      "premium": 4.775
+    },
+    {
+     "date": "2026-07-31",
+     "premium": 5.45
     }
    ],
-   "restatement_note": "Morning-fill restatement 7/30: cloud routine report not accessible locally; entry STANDS at the 7/29 close-book mid 4.92 (TS OPRA prev-close marks validated the Yahoo close book within cents once entitlement went live 7/30 ~2:55 CT). Underlying moved <2% against at the open - fill valid, no void."
+   "restatement_note": "Morning-fill restatement 7/30: cloud routine report not accessible locally; entry STANDS at the 7/29 close-book mid 4.92 (TS OPRA prev-close marks validated the Yahoo close book within cents once entitlement went live 7/30 ~2:55 CT). Underlying moved <2% against at the open - fill valid, no void.",
+   "mark_note_2026_07_31": "7/31 mark = the day's last real print 5.45 (12:26 CT) rather than the closing-book mid: the after-hours book was 4.80/6.75 (33.8% spread = REJECT quality under the validation battery) and its 5.78 mid would have marked the position HIGHER - conservative side taken. Underlying closed 49.59 (+1.3% on the day)."
   },
   {
    "id": "2026-07-29-DHI-PUT",
@@ -291,6 +296,254 @@
     "reason": "RETIRED UNDER UPGRADED STANDARDS (the 7/29 pre-registered decision point): first live-greeks read confirmed the disqualifiers were real, not estimation error - true delta -0.537 vs the 0.60 floor, spread 12.8% (flag), zero contracts traded today on OI 122. Closed at the 7/30 closing mid IN PROFIT (+$190) precisely because standards must bind on winners or they bind on nothing. Shadow: keep noting its marks in Friday reviews to grade the retirement honestly.",
     "realized_pnl": 190.0
    }
+  },
+  {
+   "id": "2026-07-31-GE-CALL",
+   "date": "2026-07-31",
+   "sym": "GE",
+   "direction": "CALL",
+   "expiry": "2026-09-18",
+   "strike": 350,
+   "contracts": 1,
+   "planned_premium": 24.05,
+   "entry_underlying": 360.07,
+   "thesis": "The night's only clean full-gate CALL: GE passed every equity gate on the 7/31 universe run and was already first in line from 7/30, when the only blocker was sizing (no compliant contract fit the cap). Today's rally to ~360 fixed that WITHOUT the new exception: the Sep 350 call now carries live TradeStation delta 0.63 at a $2,405 mid - inside the original $2,500 cap, cap_exception NOT needed. PRIME SETUP: Bollinger band width in the 2nd percentile of the last 120 sessions (tight coil) with implied vol only 1.18x realized - cheap premium on stored energy, the exact pairing the playbook prefers. Readiness 60, highest scored tonight (volume flow at a fresh 20-day extreme with the trade). Needs +8.5% by the time exit to double vs a 13.7% expected move - fits. Earnings ~10/20, a month AFTER expiry. OI 2,234, close spread 8.7%. FILL NOTE: tomorrow is SATURDAY - the morning routine fills this at the live mid MONDAY 8/3 at 8:50 CT (macro calendar clear that day).",
+   "exit_plan": "Sell at $48.10 (premium doubled), cut at $12.05 (premium halved), or out by 2026-08-28 (21 days to expiry) no matter what. Thesis break = daily Chandelier flips SELL on GE - exit early regardless of premium.",
+   "target_premium": 48.1,
+   "stop_premium": 12.05,
+   "time_exit": "2026-08-28",
+   "status": "PLANNED",
+   "cap_exception": false,
+   "mark_premium": null,
+   "mark_date": null,
+   "analysis": {
+    "sym": "GE",
+    "kind": "CALL",
+    "expiry": "2026-09-18",
+    "strike": 350,
+    "session": "2026-07-31",
+    "spot": 360.07,
+    "bid": 23.0,
+    "ask": 25.1,
+    "mid": 24.05,
+    "iv_pct": 37.5,
+    "rv20_pct": 31.9,
+    "rv60_pct": 33.9,
+    "iv_over_rv20": 1.18,
+    "bs_delta": 0.62,
+    "theta_day": -0.214,
+    "theta_week_pct_of_prem": 6.2,
+    "oi": 2234,
+    "spread_pct": 8.7,
+    "expected_move_to_expiry_pct": 13.7,
+    "breakeven_move_pct": 3.9,
+    "move_needed_for_double_pct": 8.5,
+    "iv_rank": null,
+    "validation": "PASS",
+    "reasons": [
+     "PRIME SETUP: volatility compressed (squeeze 2th pctile) AND premium cheap vs realized (IV/RV 1.18) - the textbook long-options pairing"
+    ],
+    "readiness": {
+     "score": 60,
+     "components": {
+      "squeeze": 20,
+      "trigger": 0,
+      "volume": 20,
+      "momentum": 10,
+      "rel_strength": 10
+     },
+     "squeeze_pctile": 2,
+     "squeeze_on": false,
+     "dist_to_trigger_pct": 5.6,
+     "label": "UNCALIBRATED - ranks candidates, does not veto",
+     "notes": [
+      "band width in the 2th percentile of the last 120 sessions",
+      "5.6% below the 20-day high",
+      "volume flow at a fresh 20-day extreme in trade direction",
+      "momentum turning with the trade, not yet on its side",
+      "near its relative extreme"
+     ]
+    },
+    "prime_setup": true,
+    "market_regime": "PASS",
+    "macro_fill_day": "2026-08-03",
+    "live_greeks_2026_07_31": {
+     "delta": 0.6295,
+     "iv_pct": 35.5,
+     "theta_day": -0.201,
+     "mid": 24.05,
+     "spread_pct": 8.7,
+     "oi": 2234,
+     "source": "TradeStation OPRA live 16:28 CT - matches close book to the penny"
+    }
+   },
+   "theme": "aerospace-industrial",
+   "mark_history": []
+  },
+  {
+   "id": "2026-07-31-INTC-PUT",
+   "date": "2026-07-31",
+   "sym": "INTC",
+   "direction": "PUT",
+   "expiry": "2026-09-18",
+   "strike": 105,
+   "contracts": 1,
+   "planned_premium": 19.9,
+   "entry_underlying": 90.2,
+   "thesis": "Sector-rolling short, the cleanest chain of the night. Catalyst: semiconductors are the worst-decelerating group on the rotation radar - SMH state ROLLING with acceleration -20.0 (worst on the board), -14.8% on the month, -5.9% on the week - and INTC is in sell mode on the scan, still ~9% above its 20-day low so the down-leg has room. Earnings 10/22, five weeks AFTER expiry - clear. Chain quality is the draw: OI 8,278, spread 2.5%, and the put costs only 0.91x what the stock actually moves (IV/RV) - not paying up for a crowded short. Live TS delta -0.64. Needs -27.9% to double vs a 28.0% expected move - a full-throated breakdown bet, sized small at $1,990. FILL NOTE: tomorrow is SATURDAY - morning routine fills at the live mid MONDAY 8/3 at 8:50 CT.",
+   "exit_plan": "Sell at $39.80 (premium doubled), cut at $9.95 (premium halved), or out by 2026-08-28 (21 days to expiry) no matter what. Thesis break = daily Chandelier flips BUY on INTC or SMH leaves ROLLING - exit early regardless of premium.",
+   "target_premium": 39.8,
+   "stop_premium": 9.95,
+   "time_exit": "2026-08-28",
+   "status": "PLANNED",
+   "cap_exception": false,
+   "mark_premium": null,
+   "mark_date": null,
+   "analysis": {
+    "sym": "INTC",
+    "kind": "PUT",
+    "expiry": "2026-09-18",
+    "strike": 105,
+    "session": "2026-07-31",
+    "spot": 90.2,
+    "bid": 19.65,
+    "ask": 20.15,
+    "mid": 19.9,
+    "iv_pct": 76.4,
+    "rv20_pct": 83.7,
+    "rv60_pct": 88.6,
+    "iv_over_rv20": 0.91,
+    "bs_delta": -0.65,
+    "theta_day": -0.087,
+    "theta_week_pct_of_prem": 3.1,
+    "oi": 8278,
+    "spread_pct": 2.5,
+    "expected_move_to_expiry_pct": 28.0,
+    "breakeven_move_pct": -5.7,
+    "move_needed_for_double_pct": -27.9,
+    "iv_rank": null,
+    "validation": "PASS",
+    "reasons": [],
+    "readiness": {
+     "score": 20,
+     "components": {
+      "squeeze": 0,
+      "trigger": 0,
+      "volume": 10,
+      "momentum": 10,
+      "rel_strength": 0
+     },
+     "squeeze_pctile": 63,
+     "squeeze_on": false,
+     "dist_to_trigger_pct": 9.3,
+     "label": "UNCALIBRATED - ranks candidates, does not veto",
+     "notes": [
+      "band width in the 63th percentile of the last 120 sessions",
+      "9.3% above the 20-day low",
+      "volume flow leaning with the trade",
+      "momentum turning against the trade, already on its side",
+      "relative strength not at an extreme"
+     ]
+    },
+    "prime_setup": false,
+    "market_regime": "PASS",
+    "macro_fill_day": "2026-08-03",
+    "live_greeks_2026_07_31": {
+     "delta": -0.644,
+     "iv_pct": 80.1,
+     "theta_day": -0.092,
+     "mid": 19.9,
+     "spread_pct": 2.5,
+     "oi": 8278,
+     "source": "TradeStation OPRA live 16:28 CT - matches close book to the penny"
+    }
+   },
+   "theme": "tech-rotation-short",
+   "mark_history": []
+  },
+  {
+   "id": "2026-07-31-AAPL-PUT",
+   "date": "2026-07-31",
+   "sym": "AAPL",
+   "direction": "PUT",
+   "expiry": "2026-09-18",
+   "strike": 325,
+   "contracts": 1,
+   "planned_premium": 20.75,
+   "entry_underlying": 308.91,
+   "thesis": "Megacap-tech rolling short. Catalyst: broad tech (XLK) is ROLLING on the rotation radar (acceleration -9.5, -6.1% on the month) and AAPL is in sell mode on the scan, sitting just 2.9% above its 20-day low with momentum (MACD histogram) already turned down. The put is CHEAP: implied vol is only 0.71x the stock's realized movement - the market is underpricing how much AAPL actually moves. Needs only -8.4% by the time exit to double vs a 9.7% expected move. Earnings 10/29, six weeks AFTER expiry - clear. Live TS delta -0.71, OI 2,856, 1,047 contracts traded today. FLAG: 12% close spread - watch fill quality (the two-step morning fill at the live mid is the protection). CONCENTRATION NOTE: 2nd of max 2 in tech-rotation-short with INTC - the theme cap is now FULL. FILL NOTE: tomorrow is SATURDAY - morning routine fills at the live mid MONDAY 8/3 at 8:50 CT.",
+   "exit_plan": "Sell at $41.50 (premium doubled), cut at $10.40 (premium halved), or out by 2026-08-28 (21 days to expiry) no matter what. Thesis break = daily Chandelier flips BUY on AAPL or XLK leaves ROLLING - exit early regardless of premium.",
+   "target_premium": 41.5,
+   "stop_premium": 10.4,
+   "time_exit": "2026-08-28",
+   "status": "PLANNED",
+   "cap_exception": false,
+   "mark_premium": null,
+   "mark_date": null,
+   "analysis": {
+    "sym": "AAPL",
+    "kind": "PUT",
+    "expiry": "2026-09-18",
+    "strike": 325,
+    "session": "2026-07-31",
+    "spot": 308.91,
+    "bid": 19.5,
+    "ask": 22.0,
+    "mid": 20.75,
+    "iv_pct": 26.3,
+    "rv20_pct": 37.3,
+    "rv60_pct": 32.3,
+    "iv_over_rv20": 0.71,
+    "bs_delta": -0.66,
+    "theta_day": -0.086,
+    "theta_week_pct_of_prem": 2.9,
+    "oi": 2856,
+    "spread_pct": 12.0,
+    "expected_move_to_expiry_pct": 9.7,
+    "breakeven_move_pct": -1.5,
+    "move_needed_for_double_pct": -8.4,
+    "iv_rank": null,
+    "validation": "FLAG",
+    "reasons": [
+     "spread 12.0% (10-15%) - watch fill quality"
+    ],
+    "readiness": {
+     "score": 32,
+     "components": {
+      "squeeze": 0,
+      "trigger": 12,
+      "volume": 0,
+      "momentum": 20,
+      "rel_strength": 0
+     },
+     "squeeze_pctile": 60,
+     "squeeze_on": false,
+     "dist_to_trigger_pct": 2.9,
+     "label": "UNCALIBRATED - ranks candidates, does not veto",
+     "notes": [
+      "band width in the 60th percentile of the last 120 sessions",
+      "2.9% above the 20-day low",
+      "volume flow NOT confirming",
+      "momentum turning with the trade, already on its side",
+      "relative strength not at an extreme"
+     ]
+    },
+    "prime_setup": false,
+    "market_regime": "PASS",
+    "macro_fill_day": "2026-08-03",
+    "live_greeks_2026_07_31": {
+     "delta": -0.7102,
+     "iv_pct": 24.6,
+     "theta_day": -0.072,
+     "mid": 20.75,
+     "spread_pct": 12.0,
+     "oi": 2856,
+     "volume_today": 1047,
+     "source": "TradeStation OPRA live 16:28 CT - matches close book to the penny"
+    }
+   },
+   "theme": "tech-rotation-short",
+   "mark_history": []
   }
  ],
  "data_note_2026_07_30": "OPRA entitlement went LIVE ~2:55 PM CT 7/30 - all marks/fills now from the real TradeStation chain; Yahoo-mid fallback retired.",
@@ -300,5 +553,6 @@
    "picks": 0,
    "reason": "10 gate-passing scan candidates -> earnings blackout removed MNST (8/6) + TJX (8/19); analysis gates REJECTED EQIX (OI 10, stale book, IV/RV 2.43) and ST (spread 47%, OI 56); GE PASSED all quality gates but NO compliant contract exists: Sep 340C delta 0.66 costs $2,800 (> $2,500 cap), Sep 350C fits the cap at $2,113 but live TS delta 0.584 < 0.60 floor. Same-night consistency with the DHI retirement: no knowingly-tolerated violations. Zero is a valid answer (rules.selection). GE stays first in line if premium/delta drift into compliance."
   }
- ]
+ ],
+ "selection_note_2026_07_31": "5 full-gate CALL candidates -> earnings blackout removed FIVN (8/6), KDP (8/6), TJX (8/19); CTS engine-REJECTED (61.5% spread, illiquid chain - do not force); GE selected, and the 7/30 sizing block resolved itself: spot rallied to 360 so the Sep 350C is delta-compliant at $2,405 - cap exception adopted this morning was NOT needed. PUT side (sell-mode + nameable catalyst only): semis/tech ROLLING gave INTC (selected) and AAPL (selected); NVDA (8/26), AMD (8/4), AMAT (8/13), DELL (9/3), ORCL (9/9) earnings-blocked; LEN (9/17) earnings-blocked inside expiry week; MU sized out (0.60-delta contract = $21k premium on an $823 stock); STX engine-REJECTED (OI 23); META sized out (0.60-delta contract mid $5.6k, no compliant contract under any cap); airlines rolling but +5.6% week bounce = no entry timing; DHI chain already proven non-compliant 7/29-30. Regime PASS (SPY +7.1% over a rising 200-day), macro calendar clear for the 8/3 fill day."
 }
