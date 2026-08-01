@@ -614,7 +614,12 @@ FRESH_COLS = [
         "a percent. Strength only, not direction. The one input measured to "
         "actually predict returns (weakly). Full guide on the READ ME tab.", FMT_PCT),
     READY_COL,
-    Col("sector", "Sector", 20, "Sector - use it to spot when several signals are the same bet."),
+    Col("sector", "Sector", 20, "Sector - use it to spot when several signals are the same bet. "
+        "GREEN cell = a rotation-radar group covering this sector is IGNITING "
+        "right now (money flowing in) - the pick has the sector wind behind it. "
+        "Thematic groups (China internet, spec growth) have no sector cell to "
+        "light. Radar state is measured daily; uncolored = not in rotation "
+        "today, not a defect."),
     Col("signal_date", "Signal Date", 12, "The session the Chandelier flipped to BUY."),
     Col("age", "Sessions Old", 11,
         "How many sessions ago the signal fired. 0 = today's bar, which can still "
@@ -775,6 +780,39 @@ _fresh = fresh_rows()
 ws = wb.create_sheet("2 - Fresh Buys")
 _inject_cat(_fresh)
 write_table(ws, FRESH_COLS + [CAT_COL, CATVIEW_COL], _fresh, row_fill=verdict_fill)
+
+# ---- sector-in-rotation highlight (Omar 2026-08-01): green Sector cell when a
+# radar group covering that TradingView sector is IGNITING today. Mapping is
+# sector -> the radar ETFs that genuinely represent it; thematic groups (KWEB,
+# ARKK) map to no sector on purpose - their ignition says nothing about every
+# US name sharing a sector label with them.
+SECTOR_RADAR_MAP = {
+    "Energy Minerals": ["AMEX:XLE", "AMEX:XOP"],
+    "Industrial Services": ["AMEX:OIH", "AMEX:XLE"],   # oil-field services + E&C
+    "Finance": ["AMEX:XLF", "AMEX:KRE"],
+    "Electronic Technology": ["NASDAQ:SMH", "AMEX:XLK", "CBOE:ITA"],
+    "Technology Services": ["CBOE:IGV", "NASDAQ:SKYY", "NASDAQ:CIBR", "AMEX:XLK"],
+    "Health Technology": ["AMEX:XBI", "NASDAQ:IBB", "AMEX:XLV"],
+    "Health Services": ["AMEX:XLV"],
+    "Producer Manufacturing": ["AMEX:XLI", "NASDAQ:BOTZ"],
+    "Transportation": ["AMEX:JETS", "CBOE:IYT"],
+    "Utilities": ["AMEX:XLU"],
+    "Consumer Non-Durables": ["AMEX:XLP"],
+    "Consumer Services": ["AMEX:XLY"],
+    "Consumer Durables": ["AMEX:XLY", "CBOE:ITB"],
+    "Retail Trade": ["AMEX:XRT", "AMEX:XLY"],
+    "Process Industries": ["AMEX:XLB"],
+    "Non-Energy Minerals": ["AMEX:XLB", "AMEX:XME", "AMEX:GDX", "AMEX:URA"],
+}
+_igniting = {tk for tk, st in radar_states.items() if st == "IGNITING"}
+_hot_sectors = {sec for sec, tks in SECTOR_RADAR_MAP.items()
+                if any(tk in _igniting for tk in tks)}
+_sector_col = next(i for i, c in enumerate(FRESH_COLS + [CAT_COL, CATVIEW_COL], 1)
+                   if c.key == "sector")
+for _r in range(2, ws.max_row + 1):
+    _cell = ws.cell(row=_r, column=_sector_col)
+    if _cell.value in _hot_sectors:
+        _cell.fill = GREEN
 
 # ------------------------------------------------- 2b Gated Longs (all ages) ---
 # Every BUY-mode name that clears the FULL gate stack, regardless of how long ago it
@@ -1671,9 +1709,11 @@ else:
         # anything actioned. This is the raw material for the pre-registered
         # does-my-selection-beat-the-pool question.
         SKIP_COLS = [
-            Col("ticker", "TOP SKIPPED RUNNERS", 16,
+            Col("ticker", "SKIPPED RUNNERS", 16,
                 "Recommendations Omar did NOT act on, ranked by how far they "
-                "have run since the earliest still-open pick. The honest "
+                "have run since the earliest still-open pick. Every skip up "
+                "10%+ makes the list, so it GROWS as runners grow (Omar "
+                "2026-08-01) - no runner falls off the bottom. The honest "
                 "missed-money scorecard: it exists so skips get graded, not "
                 "to feel good. Compare against MY TRADES above - that "
                 "comparison is the test of whether hand-picking beats the "
@@ -1706,7 +1746,12 @@ else:
             _skip.append(p)
         _skip.sort(key=lambda p: -(p.get("ret_pct")
                                    if p.get("ret_pct") is not None else -999))
-        _top = _skip[:10]
+        # Omar 2026-08-01: no longer a fixed top-10 - EVERY skipped pick up
+        # >=10% since its pick date qualifies as a runner and stays on the
+        # list, so the board grows as runners grow. Floor of 10 rows so the
+        # table never goes thin when runners are scarce.
+        _runners = [p for p in _skip if (p.get("ret_pct") or 0) >= 10]
+        _top = _runners if len(_runners) >= 10 else _skip[:10]
         if _top:
             _dmi = _rec_day_dmi([(p.get("ticker"), p.get("date")) for p in _top])
             for p in _top:
@@ -1717,7 +1762,9 @@ else:
                 ws, SKIP_COLS, _top, _ac_start, start_row=_last + 5,
                 row_fill=lambda r: GREEN if (r.get("ret_pct") or 0) > 0 else None)
             ws.cell(row=_sk_last + 1, column=_ac_start, value=safe(
-                f"Top 10 of {len(_skip)} skipped open picks. A skip that ran "
+                f"{len(_top)} rows - every skipped open pick up 10%+ since "
+                f"its pick date (grows as runners grow; floor of 10 rows), "
+                f"out of {len(_skip)} skipped open picks. A skip that ran "
                 "is a graded miss, not a non-event - and a skip that fell is "
                 "risk avoided. Both belong on the Friday scorecard."))
 
