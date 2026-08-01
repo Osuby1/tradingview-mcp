@@ -1,16 +1,8 @@
 # Ignition Sweep — 2026-07-31 (market-wide, 400 pre-filtered)
 
-Prev state: 2026-07-30. FIRED = early_ignition.pine signal in last 5 sessions; LOADED = all structure lit except the RVOL>3 bar.
+Prev state: 2026-07-31. FIRED = early_ignition.pine signal in last 5 sessions; LOADED = all structure lit except the RVOL>3 bar.
 
-## 🔥 NEW since prior run
-- **XNCR** LOADED @ 21.49 (Health Technology) — d60 +5.1%, ADX 58
-- **PBF** LOADED @ 73.10 (Energy Minerals) — d60 +10.7%, ADX 50
-- **TXG** LOADED @ 49.43 (Health Technology) — d60 +2.9%, ADX 46
-- **DK** LOADED @ 67.71 (Energy Minerals) — d60 +0.8%, ADX 45
-- **ORKA** LOADED @ 97.86 (Health Technology) — d60 +2.8%, ADX 39
-- **CORT** LOADED @ 118.32 (Health Technology) — d60 +22.4%, ADX 36
-- **BFH** LOADED @ 110.62 (Finance) — d60 +1.7%, ADX 25
-- **BRKR** LOADED @ 64.34 (Health Technology) — d60 +2.3%, ADX 24
+## No new fires/LOADED vs prior run
 
 | Sym | State | Close | vs60dHi | ADX | fired | Sector |
 |-----|-------|-------|---------|-----|-------|--------|
