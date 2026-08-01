@@ -128,6 +128,11 @@ if errorlevel 1 (
 
 rem -- 4. Deterministic analysis (supplementary: warn, do not fail the run) ------
 echo [4/6] analysis: rotation radar, ignition sweep, HQ Swing lens, track record, outcome tracker... >> "%LOG%"
+rem readiness_batch (Omar standing order 2026-07-31, DGX post-mortem): score every
+rem hit + gated long 0-100 on poised-to-move BEFORE the compile, so the workbook's
+rem Readiness column is filled. NON-FATAL: on failure the column reads "n/a" and
+rem the compiler will also try to compute it inline itself.
+python scripts\readiness_batch.py %TODAY% >> "%LOG%" 2>&1              || echo WARNING: readiness_batch failed - Readiness column will read n/a >> "%LOG%"
 python scripts\rotation_radar.py >> "%LOG%" 2>&1                       || echo WARNING: rotation_radar failed >> "%LOG%"
 python scripts\ignition_sweep.py >> "%LOG%" 2>&1                       || echo WARNING: ignition_sweep failed >> "%LOG%"
 if exist "%RAWSWEEP%" (

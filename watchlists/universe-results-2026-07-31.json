@@ -67,7 +67,12 @@
     "atr": 5.6061,
     "stop_x_atr": 1.08
    },
-   "note": "price 151.1525 at/below ZLSMA 154.0157 - structure has not turned"
+   "note": "price 151.1525 at/below ZLSMA 154.0157 - structure has not turned",
+   "readiness": {
+    "score": 36,
+    "driver": "band width in the 51th percentile of the last 120 sessions; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "ACGL",
@@ -98,7 +103,12 @@
     "atr": 3.2018,
     "stop_x_atr": 0.74
    },
-   "note": "price 100.5175 at/below ZLSMA 107.1078 - structure has not turned; stop is 0.74x ATR (3.2018) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "price 100.5175 at/below ZLSMA 107.1078 - structure has not turned; stop is 0.74x ATR (3.2018) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 8,
+    "driver": "6.5% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "AGNC",
@@ -129,7 +139,12 @@
     "atr": 0.2957,
     "stop_x_atr": 0.48
    },
-   "note": "-DI 19.2266 >= +DI 18.3181 - sellers in control; price 10.7 at/below ZLSMA 11.3595 - structure has not turned; stop is 0.48x ATR (0.2957) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "-DI 19.2266 >= +DI 18.3181 - sellers in control; price 10.7 at/below ZLSMA 11.3595 - structure has not turned; stop is 0.48x ATR (0.2957) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 18,
+    "driver": "6.2% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "AI",
@@ -160,7 +175,12 @@
     "atr": 0.5307,
     "stop_x_atr": 2.14
    },
-   "note": "regime DEEP-FAIL (-19.7291% vs 200-day) - watch only, no size; ADX 17.6438 below 20 - no trend to ride; stop is 12.4% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token"
+   "note": "regime DEEP-FAIL (-19.7291% vs 200-day) - watch only, no size; ADX 17.6438 below 20 - no trend to ride; stop is 12.4% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "readiness": {
+    "score": 46,
+    "driver": "volume flow NOT confirming; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "AJG",
@@ -191,7 +211,12 @@
     "atr": 10.0241,
     "stop_x_atr": 1.46
    },
-   "note": "price 248.34 at/below ZLSMA 267.7119 - structure has not turned"
+   "note": "price 248.34 at/below ZLSMA 267.7119 - structure has not turned",
+   "readiness": {
+    "score": 15,
+    "driver": "8.2% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "AMZN",
@@ -222,7 +247,12 @@
     "atr": 8.0671,
     "stop_x_atr": 5.81
    },
-   "note": "stop is 5.81x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 17.5% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token"
+   "note": "stop is 5.81x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 17.5% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "readiness": {
+    "score": 60,
+    "driver": "momentum turning with the trade, already on its side; 0.6% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "APD",
@@ -253,7 +283,12 @@
     "atr": 7.339,
     "stop_x_atr": 1.04
    },
-   "note": "ADX 15.0931 below 20 - no trend to ride; price 296.8964 at/below ZLSMA 311.9719 - structure has not turned"
+   "note": "ADX 15.0931 below 20 - no trend to ride; price 296.8964 at/below ZLSMA 311.9719 - structure has not turned",
+   "readiness": {
+    "score": 35,
+    "driver": "6.8% below the 20-day high; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "APH",
@@ -284,7 +319,12 @@
     "atr": 7.8675,
     "stop_x_atr": 3.16
    },
-   "note": "-DI 19.8414 >= +DI 18.5857 - sellers in control; stop is 15.2% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token"
+   "note": "-DI 19.8414 >= +DI 18.5857 - sellers in control; stop is 15.2% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "readiness": {
+    "score": 30,
+    "driver": "5.4% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "AXON",
@@ -315,7 +355,12 @@
     "atr": 33.2767,
     "stop_x_atr": 0.97
    },
-   "note": "price 523.136 at/below ZLSMA 535.5478 - structure has not turned; stop is 0.97x ATR (33.2767) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "price 523.136 at/below ZLSMA 535.5478 - structure has not turned; stop is 0.97x ATR (33.2767) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 18,
+    "driver": "26.0% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "BABA",
@@ -346,7 +391,12 @@
     "atr": 4.1223,
     "stop_x_atr": 2.68
    },
-   "note": "regime DEEP-FAIL (-14.2162% vs 200-day) - watch only, no size; price 121.0413 at/below ZLSMA 121.9243 - structure has not turned"
+   "note": "regime DEEP-FAIL (-14.2162% vs 200-day) - watch only, no size; price 121.0413 at/below ZLSMA 121.9243 - structure has not turned",
+   "readiness": {
+    "score": 50,
+    "driver": "band width in the 59th percentile of the last 120 sessions; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "CB",
@@ -377,7 +427,12 @@
     "atr": 10.658,
     "stop_x_atr": 0.02
    },
-   "note": "ADX 16.9636 below 20 - no trend to ride; -DI 20.7364 >= +DI 18.12 - sellers in control; price 350.3325 at/below ZLSMA 365.2531 - structure has not turned; stop is 0.02x ATR (10.658) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "ADX 16.9636 below 20 - no trend to ride; -DI 20.7364 >= +DI 18.12 - sellers in control; price 350.3325 at/below ZLSMA 365.2531 - structure has not turned; stop is 0.02x ATR (10.658) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 16,
+    "driver": "band width in the 52th percentile of the last 120 sessions; momentum turning against the trade, not yet on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "CCL",
@@ -408,7 +463,12 @@
     "atr": 1.0174,
     "stop_x_atr": 1.4
    },
-   "note": "ADX 19.9053 below 20 - no trend to ride"
+   "note": "ADX 19.9053 below 20 - no trend to ride",
+   "readiness": {
+    "score": 52,
+    "driver": "volume flow NOT confirming; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "CHTR",
@@ -439,7 +499,12 @@
     "atr": 8.2523,
     "stop_x_atr": 1.67
    },
-   "note": "regime DEEP-FAIL (-25.9228% vs 200-day) - watch only, no size; ADX 16.5719 below 20 - no trend to ride"
+   "note": "regime DEEP-FAIL (-25.9228% vs 200-day) - watch only, no size; ADX 16.5719 below 20 - no trend to ride",
+   "readiness": {
+    "score": 32,
+    "driver": "band width in the 54th percentile of the last 120 sessions; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "CLX",
@@ -470,7 +535,12 @@
     "atr": 3.4252,
     "stop_x_atr": 0.69
    },
-   "note": "ADX 11.9623 below 20 - no trend to ride; price 95.4125 at/below ZLSMA 95.4299 - structure has not turned; stop is 0.69x ATR (3.4252) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "ADX 11.9623 below 20 - no trend to ride; price 95.4125 at/below ZLSMA 95.4299 - structure has not turned; stop is 0.69x ATR (3.4252) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 25,
+    "driver": "6.1% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "CMG",
@@ -501,7 +571,12 @@
     "atr": 1.9749,
     "stop_x_atr": 2.89
    },
-   "note": "stop is 15.1% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token"
+   "note": "stop is 15.1% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "readiness": {
+    "score": 40,
+    "driver": "band width in the 82th percentile of the last 120 sessions; 5.0% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "COKE",
@@ -532,7 +607,12 @@
     "atr": 6.9644,
     "stop_x_atr": 1.36
    },
-   "note": "ADX 16.1122 below 20 - no trend to ride; price 188.3075 at/below ZLSMA 189.3949 - structure has not turned"
+   "note": "ADX 16.1122 below 20 - no trend to ride; price 188.3075 at/below ZLSMA 189.3949 - structure has not turned",
+   "readiness": {
+    "score": 25,
+    "driver": "6.4% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "CPRT",
@@ -563,7 +643,12 @@
     "atr": 1.3091,
     "stop_x_atr": 1.66
    },
-   "note": "regime DEEP-FAIL (-19.1307% vs 200-day) - watch only, no size"
+   "note": "regime DEEP-FAIL (-19.1307% vs 200-day) - watch only, no size",
+   "readiness": {
+    "score": 20,
+    "driver": "band width in the 78th percentile of the last 120 sessions; 7.9% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "CPT",
@@ -594,7 +679,12 @@
     "atr": 2.1246,
     "stop_x_atr": 0.15
    },
-   "note": "-DI 21.4858 >= +DI 18.3012 - sellers in control; price 111.17 at/below ZLSMA 112.5104 - structure has not turned; stop is 0.15x ATR (2.1246) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "-DI 21.4858 >= +DI 18.3012 - sellers in control; price 111.17 at/below ZLSMA 112.5104 - structure has not turned; stop is 0.15x ATR (2.1246) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 8,
+    "driver": "8.1% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "CTM",
@@ -625,7 +715,12 @@
     "atr": 0.0479,
     "stop_x_atr": 2.09
    },
-   "note": "regime DEEP-FAIL (-16.4329% vs 200-day) - watch only, no size; stop is 13.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token; illiquid - $775,720 avg daily dollar volume; a $85,000 position is 11% of a day's turnover (max $77,572)"
+   "note": "regime DEEP-FAIL (-16.4329% vs 200-day) - watch only, no size; stop is 13.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token; illiquid - $775,720 avg daily dollar volume; a $85,000 position is 11% of a day's turnover (max $77,572)",
+   "readiness": {
+    "score": 67,
+    "driver": "momentum turning with the trade, already on its side; volume flow at a fresh 20-day extreme in trade direction",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "CTS",
@@ -656,7 +751,12 @@
     "atr": 2.4698,
     "stop_x_atr": 2.28
    },
-   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position."
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "readiness": {
+    "score": 41,
+    "driver": "volume flow NOT confirming; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "DAL",
@@ -687,7 +787,12 @@
     "atr": 2.8687,
     "stop_x_atr": 0.88
    },
-   "note": "stop is 0.88x ATR (2.8687) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "stop is 0.88x ATR (2.8687) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 30,
+    "driver": "9.0% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "DASH",
@@ -718,7 +823,12 @@
     "atr": 10.3994,
     "stop_x_atr": 1.3
    },
-   "note": "price 196.435 at/below ZLSMA 201.9239 - structure has not turned"
+   "note": "price 196.435 at/below ZLSMA 201.9239 - structure has not turned",
+   "readiness": {
+    "score": 67,
+    "driver": "beating the market at a 60-day extreme; momentum turning with the trade, already on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "DE",
@@ -749,7 +859,12 @@
     "atr": 21.3648,
     "stop_x_atr": 0.29
    },
-   "note": "price 596.5877 at/below ZLSMA 627.1908 - structure has not turned; stop is 0.29x ATR (21.3648) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "price 596.5877 at/below ZLSMA 627.1908 - structure has not turned; stop is 0.29x ATR (21.3648) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 15,
+    "driver": "8.7% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "DUOL",
@@ -780,7 +895,12 @@
     "atr": 8.8841,
     "stop_x_atr": 1.01
    },
-   "note": "price 133.0125 at/below ZLSMA 133.9452 - structure has not turned"
+   "note": "price 133.0125 at/below ZLSMA 133.9452 - structure has not turned",
+   "readiness": {
+    "score": 28,
+    "driver": "6.7% below the 20-day high; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "EGBN",
@@ -811,7 +931,12 @@
     "atr": 1.1434,
     "stop_x_atr": 0.94
    },
-   "note": "ADX 17.5543 below 20 - no trend to ride; -DI 22.6262 >= +DI 13.9685 - sellers in control; stop is 0.94x ATR (1.1434) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "ADX 17.5543 below 20 - no trend to ride; -DI 22.6262 >= +DI 13.9685 - sellers in control; stop is 0.94x ATR (1.1434) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 41,
+    "driver": "relative strength not at an extreme; 4.5% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "EME",
@@ -842,7 +967,12 @@
     "atr": 38.1438,
     "stop_x_atr": 4.7
    },
-   "note": "-DI 22.0013 >= +DI 20.7429 - sellers in control; stop is 4.70x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 21.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token"
+   "note": "-DI 22.0013 >= +DI 20.7429 - sellers in control; stop is 4.70x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 21.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "readiness": {
+    "score": 28,
+    "driver": "5.3% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "EQIX",
@@ -873,7 +1003,12 @@
     "atr": 34.1937,
     "stop_x_atr": 1.11
    },
-   "note": "ADX 19.4184 below 20 - no trend to ride"
+   "note": "ADX 19.4184 below 20 - no trend to ride",
+   "readiness": {
+    "score": 18,
+    "driver": "8.4% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "ERIE",
@@ -904,7 +1039,12 @@
     "atr": 15.8201,
     "stop_x_atr": 1.87
    },
-   "note": "stop is 12.3% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token"
+   "note": "stop is 12.3% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "readiness": {
+    "score": 40,
+    "driver": "band width in the 88th percentile of the last 120 sessions; 8.5% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "FIVN",
@@ -935,7 +1075,12 @@
     "atr": 2.1775,
     "stop_x_atr": 1.11
    },
-   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position."
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "readiness": {
+    "score": 54,
+    "driver": "volume flow NOT confirming; 4.9% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "GE",
@@ -966,7 +1111,12 @@
     "atr": 12.1096,
     "stop_x_atr": 1.47
    },
-   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position."
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "readiness": {
+    "score": 60,
+    "driver": "volume flow at a fresh 20-day extreme in trade direction; band width in the 2th percentile of the last 120 sessions",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "GH",
@@ -997,7 +1147,12 @@
     "atr": 7.5815,
     "stop_x_atr": 3.16
    },
-   "note": "stop is 14.5% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token"
+   "note": "stop is 14.5% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "readiness": {
+    "score": 18,
+    "driver": "9.0% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "GME",
@@ -1028,7 +1183,12 @@
     "atr": 0.504,
     "stop_x_atr": 1.33
    },
-   "note": "ADX 10.1704 below 20 - no trend to ride; price 21.8037 at/below ZLSMA 22.658 - structure has not turned"
+   "note": "ADX 10.1704 below 20 - no trend to ride; price 21.8037 at/below ZLSMA 22.658 - structure has not turned",
+   "readiness": {
+    "score": 40,
+    "driver": "5.4% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "GOOG",
@@ -1059,7 +1219,12 @@
     "atr": 14.1534,
     "stop_x_atr": 1.9
    },
-   "note": "ADX 18.9553 below 20 - no trend to ride"
+   "note": "ADX 18.9553 below 20 - no trend to ride",
+   "readiness": {
+    "score": 26,
+    "driver": "band width in the 72th percentile of the last 120 sessions; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "GRND",
@@ -1090,7 +1255,12 @@
     "atr": 0.8467,
     "stop_x_atr": 1.67
    },
-   "note": "price 17.075 at/below ZLSMA 18.102 - structure has not turned"
+   "note": "price 17.075 at/below ZLSMA 18.102 - structure has not turned",
+   "readiness": {
+    "score": 68,
+    "driver": "beating the market at a 60-day extreme; momentum turning with the trade, already on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "HD",
@@ -1121,7 +1291,12 @@
     "atr": 10.7993,
     "stop_x_atr": 0.76
    },
-   "note": "ADX 14.7655 below 20 - no trend to ride; -DI 18.0212 >= +DI 17.4126 - sellers in control; price 331.7976 at/below ZLSMA 341.1537 - structure has not turned; stop is 0.76x ATR (10.7993) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "ADX 14.7655 below 20 - no trend to ride; -DI 18.0212 >= +DI 17.4126 - sellers in control; price 331.7976 at/below ZLSMA 341.1537 - structure has not turned; stop is 0.76x ATR (10.7993) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 15,
+    "driver": "8.1% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "IBM",
@@ -1152,7 +1327,12 @@
     "atr": 19.7751,
     "stop_x_atr": 0.68
    },
-   "note": "regime DEEP-FAIL (-18.0618% vs 200-day) - watch only, no size; -DI 23.8609 >= +DI 14.7481 - sellers in control; stop is 0.68x ATR (19.7751) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "regime DEEP-FAIL (-18.0618% vs 200-day) - watch only, no size; -DI 23.8609 >= +DI 14.7481 - sellers in control; stop is 0.68x ATR (19.7751) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 20,
+    "driver": "band width in the 97th percentile of the last 120 sessions; 39.4% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "IGV",
@@ -1183,7 +1363,12 @@
     "atr": 2.9752,
     "stop_x_atr": 1.62
    },
-   "note": "ADX 11.5189 below 20 - no trend to ride"
+   "note": "ADX 11.5189 below 20 - no trend to ride",
+   "readiness": {
+    "score": 72,
+    "driver": "momentum turning with the trade, already on its side; volume flow at a fresh 20-day extreme in trade direction",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "JBLU",
@@ -1214,7 +1399,12 @@
     "atr": 0.4166,
     "stop_x_atr": 1.98
    },
-   "note": "ADX 19.2408 below 20 - no trend to ride; stop is 13.5% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token"
+   "note": "ADX 19.2408 below 20 - no trend to ride; stop is 13.5% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "readiness": {
+    "score": 61,
+    "driver": "beating the market at a 60-day extreme; momentum turning with the trade, already on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "JETS",
@@ -1245,7 +1435,12 @@
     "atr": 0.9547,
     "stop_x_atr": 0.94
    },
-   "note": "stop is 0.94x ATR (0.9547) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "stop is 0.94x ATR (0.9547) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 25,
+    "driver": "8.4% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "KDP",
@@ -1276,7 +1471,12 @@
     "atr": 0.9715,
     "stop_x_atr": 1.26
    },
-   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position."
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "readiness": {
+    "score": 35,
+    "driver": "6.7% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "KWEB",
@@ -1307,7 +1507,12 @@
     "atr": 0.7734,
     "stop_x_atr": 2.22
    },
-   "note": "regime DEEP-FAIL (-11.3595% vs 200-day) - watch only, no size; price 28.31 at/below ZLSMA 28.5005 - structure has not turned"
+   "note": "regime DEEP-FAIL (-11.3595% vs 200-day) - watch only, no size; price 28.31 at/below ZLSMA 28.5005 - structure has not turned",
+   "readiness": {
+    "score": 68,
+    "driver": "momentum turning with the trade, already on its side; volume flow at a fresh 20-day extreme in trade direction",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "LDOS",
@@ -1338,7 +1543,12 @@
     "atr": 4.5125,
     "stop_x_atr": 1.12
    },
-   "note": "regime DEEP-FAIL (-29.1609% vs 200-day) - watch only, no size"
+   "note": "regime DEEP-FAIL (-29.1609% vs 200-day) - watch only, no size",
+   "readiness": {
+    "score": 34,
+    "driver": "relative strength not at an extreme; 3.1% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "LOW",
@@ -1369,7 +1579,12 @@
     "atr": 7.7117,
     "stop_x_atr": 0.88
    },
-   "note": "regime DEEP-FAIL (-13.1518% vs 200-day) - watch only, no size; ADX 16.3357 below 20 - no trend to ride; -DI 18.6475 >= +DI 18.348 - sellers in control; price 207.9179 at/below ZLSMA 214.7727 - structure has not turned; stop is 0.88x ATR (7.7117) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "regime DEEP-FAIL (-13.1518% vs 200-day) - watch only, no size; ADX 16.3357 below 20 - no trend to ride; -DI 18.6475 >= +DI 18.348 - sellers in control; price 207.9179 at/below ZLSMA 214.7727 - structure has not turned; stop is 0.88x ATR (7.7117) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 18,
+    "driver": "9.4% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "LYV",
@@ -1400,7 +1615,12 @@
     "atr": 4.3578,
     "stop_x_atr": 1.19
    },
-   "note": "-DI 21.6818 >= +DI 16.4664 - sellers in control; price 179.3075 at/below ZLSMA 183.5418 - structure has not turned"
+   "note": "-DI 21.6818 >= +DI 16.4664 - sellers in control; price 179.3075 at/below ZLSMA 183.5418 - structure has not turned",
+   "readiness": {
+    "score": 30,
+    "driver": "8.0% below the 20-day high; momentum turning against the trade, not yet on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "LZB",
@@ -1431,7 +1651,12 @@
     "atr": 1.3041,
     "stop_x_atr": 0.39
    },
-   "note": "ADX 19.2905 below 20 - no trend to ride; price 39.64 at/below ZLSMA 39.8437 - structure has not turned; stop is 0.39x ATR (1.3041) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "ADX 19.2905 below 20 - no trend to ride; price 39.64 at/below ZLSMA 39.8437 - structure has not turned; stop is 0.39x ATR (1.3041) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 20,
+    "driver": "6.6% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "MAR",
@@ -1462,7 +1687,12 @@
     "atr": 9.857,
     "stop_x_atr": 1.07
    },
-   "note": "ADX 15.3446 below 20 - no trend to ride; -DI 17.2802 >= +DI 16.2219 - sellers in control"
+   "note": "ADX 15.3446 below 20 - no trend to ride; -DI 17.2802 >= +DI 16.2219 - sellers in control",
+   "readiness": {
+    "score": 46,
+    "driver": "relative strength not at an extreme; 3.1% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "MCD",
@@ -1493,7 +1723,12 @@
     "atr": 6.6557,
     "stop_x_atr": 0.9
    },
-   "note": "regime DEEP-FAIL (-10.6727% vs 200-day) - watch only, no size; ADX 16.1533 below 20 - no trend to ride; stop is 0.90x ATR (6.6557) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "regime DEEP-FAIL (-10.6727% vs 200-day) - watch only, no size; ADX 16.1533 below 20 - no trend to ride; stop is 0.90x ATR (6.6557) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 28,
+    "driver": "6.1% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "MDT",
@@ -1524,7 +1759,12 @@
     "atr": 2.7013,
     "stop_x_atr": 1.29
    },
-   "note": "price 85.1313 at/below ZLSMA 85.5862 - structure has not turned"
+   "note": "price 85.1313 at/below ZLSMA 85.5862 - structure has not turned",
+   "readiness": {
+    "score": 44,
+    "driver": "4.2% below the 20-day high; band width in the 41th percentile of the last 120 sessions",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "MIDD",
@@ -1555,7 +1795,12 @@
     "atr": 4.5202,
     "stop_x_atr": 0.78
    },
-   "note": "price 133.165 at/below ZLSMA 133.5495 - structure has not turned; stop is 0.78x ATR (4.5202) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "price 133.165 at/below ZLSMA 133.5495 - structure has not turned; stop is 0.78x ATR (4.5202) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 30,
+    "driver": "11.2% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "MRK",
@@ -1586,7 +1831,12 @@
     "atr": 3.9967,
     "stop_x_atr": 1.08
    },
-   "note": "price 129.575 at/below ZLSMA 129.7069 - structure has not turned"
+   "note": "price 129.575 at/below ZLSMA 129.7069 - structure has not turned",
+   "readiness": {
+    "score": 44,
+    "driver": "3.7% below the 20-day high; band width in the 42th percentile of the last 120 sessions",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "MSFT",
@@ -1617,7 +1867,12 @@
     "atr": 15.995,
     "stop_x_atr": 5.37
    },
-   "note": "ADX 19.0248 below 20 - no trend to ride; stop is 5.37x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 18.8% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token"
+   "note": "ADX 19.0248 below 20 - no trend to ride; stop is 5.37x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 18.8% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "readiness": {
+    "score": 80,
+    "driver": "beating the market at a 60-day extreme; momentum turning with the trade, already on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "NCLH",
@@ -1648,7 +1903,12 @@
     "atr": 0.935,
     "stop_x_atr": 0.43
    },
-   "note": "ADX 13.8388 below 20 - no trend to ride; -DI 21.9574 >= +DI 16.4501 - sellers in control; price 18.7225 at/below ZLSMA 19.0617 - structure has not turned; stop is 0.43x ATR (0.935) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "ADX 13.8388 below 20 - no trend to ride; -DI 21.9574 >= +DI 16.4501 - sellers in control; price 18.7225 at/below ZLSMA 19.0617 - structure has not turned; stop is 0.43x ATR (0.935) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 20,
+    "driver": "14.8% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "NFLX",
@@ -1679,7 +1939,12 @@
     "atr": 2.9857,
     "stop_x_atr": 1.1
    },
-   "note": "regime DEEP-FAIL (-21.3289% vs 200-day) - watch only, no size; -DI 21.5394 >= +DI 15.2549 - sellers in control"
+   "note": "regime DEEP-FAIL (-21.3289% vs 200-day) - watch only, no size; -DI 21.5394 >= +DI 15.2549 - sellers in control",
+   "readiness": {
+    "score": 28,
+    "driver": "9.0% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "NIO",
@@ -1710,7 +1975,12 @@
     "atr": 0.1982,
     "stop_x_atr": 1.73
    },
-   "note": "regime DEEP-FAIL (-11.8072% vs 200-day) - watch only, no size; price 4.875 at/below ZLSMA 4.9064 - structure has not turned"
+   "note": "regime DEEP-FAIL (-11.8072% vs 200-day) - watch only, no size; price 4.875 at/below ZLSMA 4.9064 - structure has not turned",
+   "readiness": {
+    "score": 45,
+    "driver": "6.8% below the 20-day high; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "NOW",
@@ -1741,7 +2011,12 @@
     "atr": 7.3405,
     "stop_x_atr": 1.73
    },
-   "note": "regime DEEP-FAIL (-12.4149% vs 200-day) - watch only, no size; ADX 17.1454 below 20 - no trend to ride"
+   "note": "regime DEEP-FAIL (-12.4149% vs 200-day) - watch only, no size; ADX 17.1454 below 20 - no trend to ride",
+   "readiness": {
+    "score": 35,
+    "driver": "6.4% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "PEP",
@@ -1772,7 +2047,12 @@
     "atr": 4.0484,
     "stop_x_atr": 1.44
    },
-   "note": "price 139.405 at/below ZLSMA 140.6837 - structure has not turned"
+   "note": "price 139.405 at/below ZLSMA 140.6837 - structure has not turned",
+   "readiness": {
+    "score": 10,
+    "driver": "band width in the 63th percentile of the last 120 sessions; 6.8% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "PGR",
@@ -1803,7 +2083,12 @@
     "atr": 9.071,
     "stop_x_atr": 0.78
    },
-   "note": "price 211.5075 at/below ZLSMA 218.7627 - structure has not turned; stop is 0.78x ATR (9.071) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "price 211.5075 at/below ZLSMA 218.7627 - structure has not turned; stop is 0.78x ATR (9.071) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 10,
+    "driver": "band width in the 91th percentile of the last 120 sessions; 13.2% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "PH",
@@ -1834,7 +2119,12 @@
     "atr": 25.7304,
     "stop_x_atr": 0.95
    },
-   "note": "ADX 16.123 below 20 - no trend to ride; -DI 16.4196 >= +DI 15.6242 - sellers in control; price 971.9825 at/below ZLSMA 1008.3761 - structure has not turned; stop is 0.95x ATR (25.7304) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "ADX 16.123 below 20 - no trend to ride; -DI 16.4196 >= +DI 15.6242 - sellers in control; price 971.9825 at/below ZLSMA 1008.3761 - structure has not turned; stop is 0.95x ATR (25.7304) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 57,
+    "driver": "momentum turning against the trade, not yet on its side; near its relative extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "PLPC",
@@ -1865,7 +2155,12 @@
     "atr": 23.6819,
     "stop_x_atr": 4.92
    },
-   "note": "stop is 4.92x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 31.8% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token"
+   "note": "stop is 4.92x ATR - so wide the position shrinks to a token (ceiling 4.0x); stop is 31.8% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "readiness": {
+    "score": 20,
+    "driver": "band width in the 76th percentile of the last 120 sessions; 7.7% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "PWR",
@@ -1896,7 +2191,12 @@
     "atr": 36.5827,
     "stop_x_atr": 3.49
    },
-   "note": "-DI 22.8119 >= +DI 17.973 - sellers in control; stop is 18.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token"
+   "note": "-DI 22.8119 >= +DI 17.973 - sellers in control; stop is 18.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "readiness": {
+    "score": 26,
+    "driver": "band width in the 62th percentile of the last 120 sessions; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "RACE",
@@ -1927,7 +2227,12 @@
     "atr": 11.3881,
     "stop_x_atr": 1.84
    },
-   "note": "regime REPAIR (8.4497% vs 200-day) - starter size only"
+   "note": "regime REPAIR (8.4497% vs 200-day) - starter size only",
+   "readiness": {
+    "score": 67,
+    "driver": "beating the market at a 60-day extreme; momentum turning with the trade, already on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "RCL",
@@ -1958,7 +2263,12 @@
     "atr": 13.4615,
     "stop_x_atr": 0.85
    },
-   "note": "ADX 19.4768 below 20 - no trend to ride; stop is 0.85x ATR (13.4615) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "ADX 19.4768 below 20 - no trend to ride; stop is 0.85x ATR (13.4615) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 36,
+    "driver": "band width in the 54th percentile of the last 120 sessions; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "RMD",
@@ -1989,7 +2299,12 @@
     "atr": 8.2685,
     "stop_x_atr": 1.11
    },
-   "note": "regime DEEP-FAIL (-10.0651% vs 200-day) - watch only, no size; ADX 18.4779 below 20 - no trend to ride"
+   "note": "regime DEEP-FAIL (-10.0651% vs 200-day) - watch only, no size; ADX 18.4779 below 20 - no trend to ride",
+   "readiness": {
+    "score": 30,
+    "driver": "band width in the 71th percentile of the last 120 sessions; 5.4% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "ROKU",
@@ -2020,7 +2335,12 @@
     "atr": 1.9699,
     "stop_x_atr": 1.2
    },
-   "note": "price 145.1075 at/below ZLSMA 148.9537 - structure has not turned"
+   "note": "price 145.1075 at/below ZLSMA 148.9537 - structure has not turned",
+   "readiness": {
+    "score": 70,
+    "driver": "0.5% below the 20-day high; band width in the 2th percentile of the last 120 sessions",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "ROP",
@@ -2051,7 +2371,12 @@
     "atr": 17.683,
     "stop_x_atr": 1.4
    },
-   "note": "price 387.9925 at/below ZLSMA 394.2479 - structure has not turned"
+   "note": "price 387.9925 at/below ZLSMA 394.2479 - structure has not turned",
+   "readiness": {
+    "score": 26,
+    "driver": "band width in the 89th percentile of the last 120 sessions; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "SFM",
@@ -2082,7 +2407,12 @@
     "atr": 5.0594,
     "stop_x_atr": 2.2
    },
-   "note": "stop is 12.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token"
+   "note": "stop is 12.9% away - volatility cap 12%: a name this wild shrinks a fixed-risk position to a token",
+   "readiness": {
+    "score": 40,
+    "driver": "band width in the 77th percentile of the last 120 sessions; 7.1% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "SHAK",
@@ -2113,7 +2443,12 @@
     "atr": 3.335,
     "stop_x_atr": 1.26
    },
-   "note": "regime DEEP-FAIL (-23.1574% vs 200-day) - watch only, no size; price 63.0125 at/below ZLSMA 69.9927 - structure has not turned"
+   "note": "regime DEEP-FAIL (-23.1574% vs 200-day) - watch only, no size; price 63.0125 at/below ZLSMA 69.9927 - structure has not turned",
+   "readiness": {
+    "score": 32,
+    "driver": "band width in the 62th percentile of the last 120 sessions; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "SHW",
@@ -2144,7 +2479,12 @@
     "atr": 13.1473,
     "stop_x_atr": 0.74
    },
-   "note": "price 341.1725 at/below ZLSMA 345.7113 - structure has not turned; stop is 0.74x ATR (13.1473) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "price 341.1725 at/below ZLSMA 345.7113 - structure has not turned; stop is 0.74x ATR (13.1473) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 36,
+    "driver": "band width in the 66th percentile of the last 120 sessions; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "SKYY",
@@ -2175,7 +2515,12 @@
     "atr": 4.3738,
     "stop_x_atr": 2.01
    },
-   "note": "ADX 17.7118 below 20 - no trend to ride"
+   "note": "ADX 17.7118 below 20 - no trend to ride",
+   "readiness": {
+    "score": 58,
+    "driver": "relative strength not at an extreme; band width in the 27th percentile of the last 120 sessions",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "SSD",
@@ -2206,7 +2551,12 @@
     "atr": 7.4025,
     "stop_x_atr": 0.44
    },
-   "note": "price 186.8038 at/below ZLSMA 189.1902 - structure has not turned; stop is 0.44x ATR (7.4025) - inside daily noise, it gets hit by nothing happening (floor 1.0x)"
+   "note": "price 186.8038 at/below ZLSMA 189.1902 - structure has not turned; stop is 0.44x ATR (7.4025) - inside daily noise, it gets hit by nothing happening (floor 1.0x)",
+   "readiness": {
+    "score": 30,
+    "driver": "11.5% below the 20-day high; momentum turning against the trade, not yet on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "ST",
@@ -2237,7 +2587,12 @@
     "atr": 1.8727,
     "stop_x_atr": 2.3
    },
-   "note": "regime REPAIR (23.0346% vs 200-day) - starter size only"
+   "note": "regime REPAIR (23.0346% vs 200-day) - starter size only",
+   "readiness": {
+    "score": 40,
+    "driver": "10.2% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "TJX",
@@ -2268,7 +2623,12 @@
     "atr": 4.0342,
     "stop_x_atr": 1.08
    },
-   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position."
+   "note": "Passes every gate: regime, ADX>=20, +DI>-DI, above ZLSMA, and liquid enough for a $85,000 position.",
+   "readiness": {
+    "score": 26,
+    "driver": "band width in the 55th percentile of the last 120 sessions; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "TOST",
@@ -2299,7 +2659,12 @@
     "atr": 1.6007,
     "stop_x_atr": 1.22
    },
-   "note": "price 32.2557 at/below ZLSMA 33.6072 - structure has not turned"
+   "note": "price 32.2557 at/below ZLSMA 33.6072 - structure has not turned",
+   "readiness": {
+    "score": 60,
+    "driver": "momentum turning with the trade, already on its side; 2.4% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "TPR",
@@ -2330,7 +2695,12 @@
     "atr": 5.2224,
     "stop_x_atr": 1.93
    },
-   "note": "ADX 15.9956 below 20 - no trend to ride"
+   "note": "ADX 15.9956 below 20 - no trend to ride",
+   "readiness": {
+    "score": 62,
+    "driver": "beating the market at a 60-day extreme; momentum turning with the trade, already on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "TYL",
@@ -2361,7 +2731,12 @@
     "atr": 18.7346,
     "stop_x_atr": 1.81
    },
-   "note": "regime DEEP-FAIL (-16.4518% vs 200-day) - watch only, no size; ADX 18.6733 below 20 - no trend to ride; price 314.3275 at/below ZLSMA 325.2996 - structure has not turned"
+   "note": "regime DEEP-FAIL (-16.4518% vs 200-day) - watch only, no size; ADX 18.6733 below 20 - no trend to ride; price 314.3275 at/below ZLSMA 325.2996 - structure has not turned",
+   "readiness": {
+    "score": 28,
+    "driver": "12.6% below the 20-day high; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "VRSN",
@@ -2392,7 +2767,12 @@
     "atr": 11.3189,
     "stop_x_atr": 1.93
    },
-   "note": "regime REPAIR (11.8104% vs 200-day) - starter size only"
+   "note": "regime REPAIR (11.8104% vs 200-day) - starter size only",
+   "readiness": {
+    "score": 50,
+    "driver": "relative strength not at an extreme; band width in the 30th percentile of the last 120 sessions",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "XLY",
@@ -2423,7 +2803,12 @@
     "atr": 2.2409,
     "stop_x_atr": 2.76
    },
-   "note": "ADX 18.9276 below 20 - no trend to ride"
+   "note": "ADX 18.9276 below 20 - no trend to ride",
+   "readiness": {
+    "score": 32,
+    "driver": "band width in the 79th percentile of the last 120 sessions; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "ZTS",
@@ -2454,7 +2839,12 @@
     "atr": 2.3167,
     "stop_x_atr": 1.17
    },
-   "note": "regime DEEP-FAIL (-30.9453% vs 200-day) - watch only, no size; ADX 17.7745 below 20 - no trend to ride; -DI 17.543 >= +DI 17.4407 - sellers in control; price 76.3325 at/below ZLSMA 80.8154 - structure has not turned"
+   "note": "regime DEEP-FAIL (-30.9453% vs 200-day) - watch only, no size; ADX 17.7745 below 20 - no trend to ride; -DI 17.543 >= +DI 17.4407 - sellers in control; price 76.3325 at/below ZLSMA 80.8154 - structure has not turned",
+   "readiness": {
+    "score": 57,
+    "driver": "relative strength not at an extreme; momentum turning against the trade, already on its side",
+    "label": "uncalibrated"
+   }
   }
  ],
  "sell_mode": [
@@ -2705,7 +3095,12 @@
    "zlsma": 24.6219,
    "avg_dollar_vol": 992741590,
    "verdict": "STARTER ONLY - regime REPAIR",
-   "note": "regime REPAIR (-3.5624% vs 200-day) - starter size only"
+   "note": "regime REPAIR (-3.5624% vs 200-day) - starter size only",
+   "readiness": {
+    "score": 42,
+    "driver": "band width in the 79th percentile of the last 120 sessions; volume flow leaning with the trade",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "AMT",
@@ -2726,7 +3121,12 @@
    "zlsma": 160.1723,
    "avg_dollar_vol": 547859576,
    "verdict": "STARTER ONLY - regime REPAIR",
-   "note": "regime REPAIR (-3.4519% vs 200-day) - starter size only"
+   "note": "regime REPAIR (-3.4519% vs 200-day) - starter size only",
+   "readiness": {
+    "score": 44,
+    "driver": "relative strength not at an extreme; 4.0% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "COST",
@@ -2747,7 +3147,12 @@
    "zlsma": 945.7379,
    "avg_dollar_vol": 2150594036,
    "verdict": "STARTER ONLY - regime REPAIR",
-   "note": "regime REPAIR (-1.0484% vs 200-day) - starter size only"
+   "note": "regime REPAIR (-1.0484% vs 200-day) - starter size only",
+   "readiness": {
+    "score": 16,
+    "driver": "band width in the 62th percentile of the last 120 sessions; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "TJX",
@@ -2768,7 +3173,12 @@
    "zlsma": 150.823,
    "avg_dollar_vol": 785668461,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 26,
+    "driver": "band width in the 55th percentile of the last 120 sessions; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "MSI",
@@ -2789,7 +3199,12 @@
    "zlsma": 428.7975,
    "avg_dollar_vol": 369752918,
    "verdict": "STARTER ONLY - regime REPAIR",
-   "note": "regime REPAIR (3.8185% vs 200-day) - starter size only"
+   "note": "regime REPAIR (3.8185% vs 200-day) - starter size only",
+   "readiness": {
+    "score": 50,
+    "driver": "volume flow NOT confirming; band width in the 48th percentile of the last 120 sessions",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "HON",
@@ -2810,7 +3225,12 @@
    "zlsma": 231.6502,
    "avg_dollar_vol": 894692785,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 46,
+    "driver": "band width in the 87th percentile of the last 120 sessions; 3.7% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "BKR",
@@ -2831,7 +3251,12 @@
    "zlsma": 57.7977,
    "avg_dollar_vol": 635130355,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 54,
+    "driver": "relative strength not at an extreme; 3.6% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "RACE",
@@ -2852,7 +3277,12 @@
    "zlsma": 386.0664,
    "avg_dollar_vol": 176603893,
    "verdict": "STARTER ONLY - regime REPAIR",
-   "note": "regime REPAIR (8.4497% vs 200-day) - starter size only"
+   "note": "regime REPAIR (8.4497% vs 200-day) - starter size only",
+   "readiness": {
+    "score": 67,
+    "driver": "beating the market at a 60-day extreme; momentum turning with the trade, already on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "KDP",
@@ -2873,7 +3303,12 @@
    "zlsma": 30.1693,
    "avg_dollar_vol": 407329667,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 35,
+    "driver": "6.7% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "F",
@@ -2894,7 +3329,12 @@
    "zlsma": 13.2882,
    "avg_dollar_vol": 808813755,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 28,
+    "driver": "11.0% below the 20-day high; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "CVX",
@@ -2915,7 +3355,12 @@
    "zlsma": 191.3774,
    "avg_dollar_vol": 1478705147,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 60,
+    "driver": "volume flow at a fresh 20-day extreme in trade direction; 0.4% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "AMGN",
@@ -2936,7 +3381,12 @@
    "zlsma": 382.9054,
    "avg_dollar_vol": 910768275,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 36,
+    "driver": "band width in the 74th percentile of the last 120 sessions; 3.3% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "VRSN",
@@ -2957,7 +3407,12 @@
    "zlsma": 273.6226,
    "avg_dollar_vol": 231462706,
    "verdict": "STARTER ONLY - regime REPAIR",
-   "note": "regime REPAIR (11.8104% vs 200-day) - starter size only"
+   "note": "regime REPAIR (11.8104% vs 200-day) - starter size only",
+   "readiness": {
+    "score": 50,
+    "driver": "relative strength not at an extreme; band width in the 30th percentile of the last 120 sessions",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "MLI",
@@ -2978,7 +3433,12 @@
    "zlsma": 62.8119,
    "avg_dollar_vol": 112902285,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 26,
+    "driver": "band width in the 77th percentile of the last 120 sessions; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "XLE",
@@ -2999,7 +3459,12 @@
    "zlsma": 58.7395,
    "avg_dollar_vol": 1807618234,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 52,
+    "driver": "band width in the 68th percentile of the last 120 sessions; momentum turning against the trade, already on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "ZETA",
@@ -3020,7 +3485,12 @@
    "zlsma": 20.0088,
    "avg_dollar_vol": 164005517,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 50,
+    "driver": "8.1% below the 20-day high; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "GE",
@@ -3041,7 +3511,12 @@
    "zlsma": 348.0203,
    "avg_dollar_vol": 1421467228,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 60,
+    "driver": "volume flow at a fresh 20-day extreme in trade direction; band width in the 2th percentile of the last 120 sessions",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "HQY",
@@ -3062,7 +3537,12 @@
    "zlsma": 100.4008,
    "avg_dollar_vol": 77491017,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 26,
+    "driver": "band width in the 62th percentile of the last 120 sessions; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "GM",
@@ -3083,7 +3563,12 @@
    "zlsma": 82.2716,
    "avg_dollar_vol": 660072592,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 36,
+    "driver": "band width in the 100th percentile of the last 120 sessions; 3.4% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "FANG",
@@ -3104,7 +3589,12 @@
    "zlsma": 200.0917,
    "avg_dollar_vol": 388844817,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 36,
+    "driver": "band width in the 84th percentile of the last 120 sessions; 3.7% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "EOG",
@@ -3125,7 +3615,12 @@
    "zlsma": 143.8916,
    "avg_dollar_vol": 428693419,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 70,
+    "driver": "beating the market at a 60-day extreme; momentum turning with the trade, already on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "CTS",
@@ -3146,7 +3641,12 @@
    "zlsma": 57.7349,
    "avg_dollar_vol": 16639773,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 41,
+    "driver": "volume flow NOT confirming; relative strength not at an extreme",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "ST",
@@ -3167,7 +3667,12 @@
    "zlsma": 42.6716,
    "avg_dollar_vol": 85869802,
    "verdict": "STARTER ONLY - regime REPAIR",
-   "note": "regime REPAIR (23.0346% vs 200-day) - starter size only"
+   "note": "regime REPAIR (23.0346% vs 200-day) - starter size only",
+   "readiness": {
+    "score": 40,
+    "driver": "10.2% below the 20-day high; volume flow NOT confirming",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "OILU",
@@ -3188,7 +3693,12 @@
    "zlsma": 43.5271,
    "avg_dollar_vol": 9451639,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 30,
+    "driver": "band width in the 60th percentile of the last 120 sessions; 5.4% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "SFL",
@@ -3209,7 +3719,12 @@
    "zlsma": 12.1873,
    "avg_dollar_vol": 16431043,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 60,
+    "driver": "volume flow at a fresh 20-day extreme in trade direction; 0.3% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "NET",
@@ -3230,7 +3745,12 @@
    "zlsma": 274.2994,
    "avg_dollar_vol": 850836554,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 50,
+    "driver": "5.3% below the 20-day high; volume flow leaning with the trade",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "FIVN",
@@ -3251,7 +3771,12 @@
    "zlsma": 26.4131,
    "avg_dollar_vol": 67479717,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 54,
+    "driver": "volume flow NOT confirming; 4.9% below the 20-day high",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "LPG",
@@ -3272,7 +3797,12 @@
    "zlsma": 43.806,
    "avg_dollar_vol": 30011614,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 80,
+    "driver": "beating the market at a 60-day extreme; momentum turning with the trade, already on its side",
+    "label": "uncalibrated"
+   }
   },
   {
    "sym": "NTAP",
@@ -3293,7 +3823,12 @@
    "zlsma": 154.4198,
    "avg_dollar_vol": 471913159,
    "verdict": "CANDIDATE - passes every gate",
-   "note": "Passes every gate."
+   "note": "Passes every gate.",
+   "readiness": {
+    "score": 78,
+    "driver": "beating the market at a 60-day extreme; momentum turning with the trade, already on its side",
+    "label": "uncalibrated"
+   }
   }
  ],
  "all_names": [
@@ -12434,5 +12969,6 @@
    "graded": 456,
    "grade_file": "shadow-og-grade-2026-07-31.md"
   }
- ]
+ ],
+ "readiness_asof": "2026-07-31 22:49"
 }

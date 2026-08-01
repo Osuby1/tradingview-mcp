@@ -135,7 +135,7 @@ def _spy_hist():
     return _SPY_CACHE["h"]
 
 
-def readiness(sym, kind):
+def readiness(sym, kind, hist=None):
     """Is the stock POISED to move soon in the trade's direction? Five
     direction-aware components, 0-20 points each, composite 0-100.
 
@@ -145,8 +145,14 @@ def readiness(sym, kind):
     already (DI margin and ADX at pick predict nothing), so this score RANKS
     candidates and is graded in the Friday reviews - it does not gate/veto
     until the data earns it that power.
+
+    `hist` (2026-07-31, for the nightly batch): an optional pre-fetched
+    ~1y daily OHLCV DataFrame (auto-adjusted, columns Close/High/Low/Volume).
+    Lets scripts/readiness_batch.py download ~100 names in one batched call
+    instead of 100 serial ones. When omitted, fetches exactly as before.
+    The scoring maths is untouched.
     """
-    h = yf.Ticker(sym).history(period="1y", auto_adjust=True)
+    h = hist if hist is not None else yf.Ticker(sym).history(period="1y", auto_adjust=True)
     if h.empty or len(h) < 130:
         return {"score": None, "note": "insufficient history (<130 sessions)"}
     c, hi, lo, vol = h.Close, h.High, h.Low, h.Volume

@@ -38,10 +38,14 @@ from rank_candidates import (  # noqa: E402
 )
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATE = sys.argv[1] if len(sys.argv) > 1 else None
+# --no-readiness: skip the inline readiness computation (see below). Stripped
+# before the positional args are read so it can appear anywhere.
+NO_READINESS = "--no-readiness" in sys.argv[1:]
+_ARGV = [a for a in sys.argv[1:] if a != "--no-readiness"]
+DATE = _ARGV[0] if len(_ARGV) > 0 else None
 # Optional second arg: explicit output path. Lets a re-compile be checked
 # without touching a workbook Omar may have hand-annotated.
-OUT_OVERRIDE = sys.argv[2] if len(sys.argv) > 2 else None
+OUT_OVERRIDE = _ARGV[1] if len(_ARGV) > 1 else None
 if not DATE:
     cands = sorted(f for f in os.listdir(os.path.join(REPO, "watchlists"))
                    if re.match(r"universe-results-\d{4}-\d{2}-\d{2}\.json$", f))
@@ -51,6 +55,27 @@ import schema  # noqa: E402
 
 _RES_PATH = os.path.join(REPO, "watchlists", f"universe-results-{DATE}.json")
 res = json.load(open(_RES_PATH))
+
+# --- Readiness (Omar standing order 2026-07-31, the DGX post-mortem) ---------
+# Every candidate row must carry the 0-100 poised-to-move score. The chain runs
+# scripts/readiness_batch.py before this compile; if that step was skipped or
+# failed, compute it inline here so the column still appears. A failure here is
+# NEVER fatal - the column degrades to "n/a", the workbook always compiles.
+# Escape hatch: --no-readiness (offline re-compiles, unit tests, old dates).
+if not NO_READINESS:
+    _hits_raw = res.get("hits") or []
+    if _hits_raw and not any("readiness" in h for h in _hits_raw):
+        import subprocess
+        try:
+            print("hits carry no readiness scores - running readiness_batch inline "
+                  "(skip with --no-readiness)...")
+            subprocess.run([sys.executable,
+                            os.path.join(REPO, "scripts", "readiness_batch.py"),
+                            DATE], timeout=900, check=False)
+            res = json.load(open(_RES_PATH))   # pick up the augmented file
+        except Exception as _rexc:
+            print(f"NOTE: inline readiness computation failed ({_rexc}) - "
+                  f"the Readiness column will read n/a.")
 # The workbook is the deliverable Omar acts on, so it must never be built from a
 # file shape it does not understand. Legacy files still compile (with a note).
 schema.require(res, understood=(2, 3), path=_RES_PATH)
@@ -256,6 +281,20 @@ readme_sheet(
                                  "SLOW (built from smoothed 14-day averages): it confirms a "
                                  "trend that exists, it does not predict one. A gate and a "
                                  "ranking aid, never a buy signal by itself."),
+        ("Readiness 0-100", "Readiness 0-100 = poised-to-move (UNCALIBRATED - ranks, does "
+                            "not veto). The gates answer 'is it SAFE to buy'; this answers "
+                            "'does it MOVE soon'. Five checks worth 20 points each: bands "
+                            "coiled tight, price within reach of its trigger (the 20-day "
+                            "high), volume flowing in, momentum turning up, beating the "
+                            "market. HOW TO READ IT: 60+ = the spring is loading. Below "
+                            "40 = expect sideways first - DGX read 26/100 the night it "
+                            "topped the gate list on trend strength (ADX 42) and then "
+                            "went nowhere, exactly as scored (the 7/31 post-mortem that "
+                            "created this column). The text after the number names the "
+                            "strongest or weakest ingredients. It RANKS which candidate "
+                            "to look at first; it never blocks a trade on its own until "
+                            "the Friday reviews prove it deserves that power. 'n/a' = "
+                            "the overnight scoring step did not run for that name."),
         ("Magical (CCI-20)", "Above +100 = overbought, below -100 = oversold. NOTE: measured "
                              "2026-07-22 across 1,725 signals, this cut does NOT separate "
                              "returns (0.03pt over 21 days). Treat as context, not a veto."),
@@ -505,6 +544,38 @@ def _inject_cat(rows):
         r["catview"] = c["view"] if c else ""
 
 
+# --- Readiness column (Omar standing order 2026-07-31, the DGX post-mortem:
+# the scan's top gate-passer had ADX 42 but readiness 26/100 - and went
+# sideways exactly as the score implied). Score computed by readiness_batch.py
+# (same five-component maths as the options overlay), stored on each hit /
+# gated-long entry in the results JSON. Missing = "n/a", never a crash. ---
+READY_COL = Col("readiness", "Readiness 0-100", 42,
+                "Readiness 0-100 = poised-to-move (UNCALIBRATED - ranks, does "
+                "not veto). Five checks, 20 points each: volatility coiled "
+                "(tight bands), price near its trigger level (20-day high), "
+                "volume flowing in, momentum turning up, and beating the "
+                "market. HOW TO READ IT: 60+ = the spring is loading, a move "
+                "soon is plausible. Below 40 = expect sideways first - DGX "
+                "read 26 the night it topped the gate list and then drifted, "
+                "exactly as scored. The text after the number names what is "
+                "driving the score. The GATES answer 'is it safe to buy'; "
+                "READINESS answers 'does it move soon' - never let one wear "
+                "the other's jersey. Graded in the Friday reviews; it earns "
+                "veto power only if the data proves it.")
+
+
+def _readiness_cell(entry):
+    """'62 - <driver>' from an augmented entry, or 'n/a' if the batch has not
+    run / failed for this name. Must never raise - a workbook without the
+    column's data still compiles."""
+    rd = (entry or {}).get("readiness") or {}
+    sc = rd.get("score")
+    if sc is None:
+        return "n/a"
+    drv = rd.get("driver") or ""
+    return f"{sc} - {drv}" if drv else str(sc)
+
+
 FRESH_COLS = [
     Col("rank", "RANK", 7,
         "Priority order, 1 = look at this first. Ranked by the composite BUY SCORE. "
@@ -542,6 +613,7 @@ FRESH_COLS = [
         "where 35 is STRONG, 40-60 = powerful but often late, 60+ = rare. Not "
         "a percent. Strength only, not direction. The one input measured to "
         "actually predict returns (weakly). Full guide on the READ ME tab.", FMT_PCT),
+    READY_COL,
     Col("sector", "Sector", 20, "Sector - use it to spot when several signals are the same bet."),
     Col("signal_date", "Signal Date", 12, "The session the Chandelier flipped to BUY."),
     Col("age", "Sessions Old", 11,
@@ -689,6 +761,7 @@ def fresh_rows():
             "pct200": (g.get("pct_vs_200") if g.get("pct_vs_200") is not None
                        else e.get("pct_vs_200d")),
             "adx": round(adx_val, 1) if adx_val is not None else None,
+            "readiness": _readiness_cell(h),
             "score": o.get("score"), "grade": o.get("grade"),
             "regime": h.get("regime"), "verdict": h.get("verdict"), "why": why,
         })
@@ -721,6 +794,7 @@ GATED_COLS = [
     Col("magical", "Overbought (CCI-20)", 14, "Above +100 = stretched. Measured NOT to predict "
         "returns - context only, never the sole reason to skip.", FMT_PCT),
     Col("adx", "Trend (ADX)", 11, "20+ = a real trend is present.", FMT_PCT),
+    READY_COL,
     Col("age", "Sessions Old", 11, "Sessions since the Chandelier flipped BUY. Fresh Buys shows "
         "<=5; THIS tab shows every age."),
     Col("regime", "Regime", 10, "PASS = above a rising 200-day. REPAIR = below it, starter size only."),
@@ -734,7 +808,8 @@ for _i, _g in enumerate(_gated, 1):
         "rank": _i, "sym": _g["sym"], "last": _last, "stop": _stop,
         "stop_pct": _spct,
         "ext": round(_g["pct_vs_200"], 1) if _g.get("pct_vs_200") is not None else None,
-        "magical": _g.get("magical"), "adx": _g.get("adx"), "age": _g.get("bars_back"),
+        "magical": _g.get("magical"), "adx": _g.get("adx"),
+        "readiness": _readiness_cell(_g), "age": _g.get("bars_back"),
         "regime": _g.get("regime"),
         "note": plainify(("STARTER (regime REPAIR - half size). "
                           if str(_g.get("verdict", "")).startswith("STARTER") else "")
@@ -908,6 +983,8 @@ for r in _fresh:
         "h": _earn_txt(r["sym"], hits.get(r["sym"], {})),
         "i": _alert_txt(r["sym"], hits.get(r["sym"], {}), last, stop),
         "j": (f"Rank #{r['rank']} of {len(_fresh)}, buy score {r['buy_score']}. "
+              f"Readiness {r.get('readiness', 'n/a')} (0-100 poised-to-move; "
+              f"uncalibrated - ranks, does not veto). "
               f"Stop is the Chandelier level ({r.get('risk_pct')}% away). "
               + ("HALF SIZE: regime REPAIR. " if starter else "")
               + "Check the stop against a normal day's swing by hand - the ATR "
@@ -1907,6 +1984,8 @@ sum_rows = [
     {"field": "Sell-mode count", "value": len(res.get("sell_mode", []))},
     {"field": "Blocked count", "value": len(block_rows)},
     {"field": "Combined risk", "value": res.get("combined_risk_new_actives", "")},
+    {"field": "Readiness scores as of", "value":
+        res.get("readiness_asof", "not computed this run - column reads n/a")},
     {"field": "Data-quality BLOCKERS", "value":
         sum(1 for d in dq if str(d.get("severity")).upper() == "BLOCKER")},
     {"field": "Run note", "value": res.get("run_note", "")},
