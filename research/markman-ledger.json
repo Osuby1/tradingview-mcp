@@ -1,0 +1,3691 @@
+{
+ "meta": {
+  "built": "2026-07-30 (audit run per session-pending-tasks MARKMAN items)",
+  "dataset": "31 .eml letters, research/markman-history/, Markman Capital Insight 'Tactical Options', 2021-01-07 .. 2021-03-11. CONFIRMED COMPLETE - no more emails exist.",
+  "caveats": [
+   "The 31 letters skip many trading days (Jan 13-19, Jan 21-25, Jan 27, Feb 10-11, Feb 17, Feb 19-22, Mar 2 absent). Recs first seen in follow-ups are flagged missing_alert_email.",
+   "All prices marked kind=claimed are the newsletter's OWN statements, not independently verified fills.",
+   "kind=SYNTHETIC legs are Black-Scholes reconstructions (IV = max(RV20,RV60) x 1.2, close-to-close walk) - labeled, never mixed with claimed numbers silently.",
+   "The 2/4 Deere correction letter is applied: DE Feb 19 310C @7.50 replaces the erroneous Feb-5-weekly 305C @3.70.",
+   "BBBY is delisted; best-effort handling flagged on R39."
+  ],
+  "sample_regime": "10 weeks of raging early-2021 bull market. Verdicts are bounded to this sample."
+ },
+ "pre_dataset_claims": [
+  {
+   "ticker": "TSM",
+   "contract": "TSM210115C00110000",
+   "note": "bought 1/4 @4.60 (before dataset); sold 1/5 @6.30 (+37%) and 1/7 @9.15 open (+98.9%) - the '99% gain' subject-line brag. Entry alert not in dataset; excluded from stats."
+  },
+  {
+   "ticker": "MS",
+   "contract": "unknown",
+   "note": "'Sold MS calls yesterday for gains of 29% to 80%' (1/7). No contract details in dataset; excluded."
+  },
+  {
+   "ticker": "DD",
+   "contract": "unknown",
+   "note": "'Sold DD calls yesterday for gains of 29% to 80%' (1/7). No contract details in dataset; excluded."
+  }
+ ],
+ "recommendations": [
+  {
+   "id": "R01",
+   "alert_date": "2021-01-07",
+   "ticker": "CCL",
+   "company": "Carnival",
+   "otype": "call",
+   "strike": 15.0,
+   "expiry": "2021-01-15",
+   "occ": "CCL210115C00015000",
+   "limit": 5.8,
+   "targets": [
+    7.55,
+    9.9
+   ],
+   "stop": 4.05,
+   "filled": true,
+   "fill_date": "2021-01-07",
+   "fill_price": 5.8,
+   "exits": [
+    {
+     "date": "2021-01-11",
+     "price": 4.85,
+     "fraction": 1.0,
+     "kind": "claimed",
+     "note": "stopped at open"
+    }
+   ],
+   "claimed": "-18% loss (their arithmetic; 4.85/5.80 = -16.4%)",
+   "source": "2021-01-07 / exits 2021-01-08, 2021-01-11",
+   "computed": {
+    "id": "R01",
+    "S_alert": 20.74,
+    "alert_px_date": "2021-01-07",
+    "rv20": 0.4843321121105772,
+    "rv60": 1.107052321333908,
+    "syn_iv": 1.3285,
+    "dte": 8,
+    "syn_delta": 0.96,
+    "syn_bs_value": 5.81,
+    "stated_premium": 5.8,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.96,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 8,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-01-15",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0029,
+      "expected_move": 0.2367,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 20.74,
+      "sma200": 16.13,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 5.8,
+     "legs": [
+      {
+       "fraction": 1.0,
+       "exit_price": 4.85,
+       "ret_pct": -16.4,
+       "kind": "claimed",
+       "date": "2021-01-11"
+      }
+     ],
+     "overall_ret_pct": -16.4
+    }
+   }
+  },
+  {
+   "id": "R02",
+   "alert_date": "2021-01-07",
+   "ticker": "TSM",
+   "company": "Taiwan Semiconductor",
+   "otype": "call",
+   "strike": 115.0,
+   "expiry": "2021-01-08",
+   "occ": "TSM210108C00115000",
+   "limit": 6.8,
+   "targets": [
+    8.9,
+    11.9
+   ],
+   "stop": 4.8,
+   "filled": false,
+   "source": "2021-01-07; no-fill per 2021-01-08",
+   "flags": [
+    "WEEKLY expiry - 1 DTE"
+   ],
+   "computed": {
+    "id": "R02",
+    "S_alert": 121.43,
+    "alert_px_date": "2021-01-07",
+    "rv20": 0.25708564433602227,
+    "rv60": 0.3220777125741135,
+    "syn_iv": 0.3865,
+    "dte": 1,
+    "syn_delta": 0.997,
+    "syn_bs_value": 6.43,
+    "stated_premium": 6.8,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.997,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 1,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-01-08",
+      "passed": false
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.003,
+      "expected_move": 0.0243,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 121.43,
+      "sma200": 74.78,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90",
+     "monthly_expiry"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R03",
+   "alert_date": "2021-01-08",
+   "ticker": "MCD",
+   "company": "McDonald's",
+   "otype": "call",
+   "strike": 220.0,
+   "expiry": "2021-02-19",
+   "occ": "MCD210219C00220000",
+   "limit": 4.3,
+   "targets": [
+    5.6,
+    7.3
+   ],
+   "stop": 3.0,
+   "filled": false,
+   "source": "2021-01-08; no-fill per 2021-01-11",
+   "computed": {
+    "id": "R03",
+    "S_alert": 215.87,
+    "alert_px_date": "2021-01-08",
+    "rv20": 0.16637822180387873,
+    "rv60": 0.17953399595708508,
+    "syn_iv": 0.2154,
+    "dte": 42,
+    "syn_delta": 0.412,
+    "syn_bs_value": 4.51,
+    "stated_premium": 4.3,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.412,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 42,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [
+       "2021-01-28"
+      ],
+      "passed": false
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0391,
+      "expected_move": 0.088,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 215.87,
+      "sma200": 201.67,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90",
+     "earnings_blackout"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R04",
+   "alert_date": "2021-01-11",
+   "ticker": "BLNK",
+   "company": "Blink Charging",
+   "otype": "call",
+   "strike": 65.0,
+   "expiry": "2021-02-19",
+   "occ": "BLNK210219C00065000",
+   "limit": 5.0,
+   "targets": [
+    6.5,
+    8.5
+   ],
+   "stop": 3.5,
+   "filled": true,
+   "fill_date": "2021-01-11",
+   "fill_price": 4.9,
+   "exits": [
+    {
+     "date": "2021-01-12",
+     "price": 6.5,
+     "fraction": 0.5,
+     "kind": "claimed"
+    },
+    {
+     "date": "2021-01-12",
+     "price": 5.15,
+     "fraction": 0.5,
+     "kind": "estimated",
+     "note": "'sell second half at market now (around $5 to 5.30)' - midpoint 5.15 used, LABELED estimate"
+    }
+   ],
+   "claimed": "half +32.6%; second half 'at market'",
+   "source": "2021-01-11, 2021-01-12",
+   "computed": {
+    "id": "R04",
+    "S_alert": 52.0,
+    "alert_px_date": "2021-01-11",
+    "rv20": 1.7339899927275002,
+    "rv60": 1.856413925756852,
+    "syn_iv": 2.2277,
+    "dte": 39,
+    "syn_delta": 0.523,
+    "syn_bs_value": 10.87,
+    "stated_premium": 5.0,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.523,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 39,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.3462,
+      "expected_move": 0.8764,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 52.0,
+      "sma200": 10.89,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 4.9,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 6.5,
+       "ret_pct": 32.7,
+       "kind": "claimed",
+       "date": "2021-01-12"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 5.15,
+       "ret_pct": 5.1,
+       "kind": "estimated",
+       "date": "2021-01-12"
+      }
+     ],
+     "overall_ret_pct": 18.9
+    }
+   }
+  },
+  {
+   "id": "R05",
+   "alert_date": "2021-01-12",
+   "ticker": "OXY",
+   "company": "Occidental",
+   "otype": "call",
+   "strike": 20.0,
+   "expiry": "2021-02-19",
+   "occ": "OXY210219C00020000",
+   "limit": 3.4,
+   "targets": [
+    4.4,
+    5.8
+   ],
+   "stop": 2.35,
+   "filled": "unknown",
+   "source": "2021-01-12; NO follow-up in dataset (Jan 13-19 letters absent)",
+   "flags": [
+    "fate unknown - follow-up letters not in dataset"
+   ],
+   "computed": {
+    "id": "R05",
+    "S_alert": 22.62,
+    "alert_px_date": "2021-01-12",
+    "rv20": 0.8072335632503519,
+    "rv60": 0.9163671413069466,
+    "syn_iv": 1.0996,
+    "dte": 38,
+    "syn_delta": 0.7,
+    "syn_bs_value": 4.49,
+    "stated_premium": 3.4,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.7,
+      "passed": true,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 38,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0345,
+      "expected_move": 0.427,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 22.62,
+      "sma200": 14.68,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "HYPOTHETICAL (fill unverifiable)",
+     "fill_price": 3.4,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 4.4,
+       "ret_pct": 29.4,
+       "kind": "SYNTHETIC",
+       "date": "2021-01-12",
+       "how": "target1"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 2.35,
+       "ret_pct": -30.9,
+       "kind": "SYNTHETIC",
+       "date": "2021-01-29",
+       "how": "stop"
+      }
+     ],
+     "overall_ret_pct": -0.8
+    }
+   }
+  },
+  {
+   "id": "R06",
+   "alert_date": "2021-01-12",
+   "ticker": "DG",
+   "company": "Dollar General",
+   "otype": "call",
+   "strike": 220.0,
+   "expiry": "2021-02-19",
+   "occ": "DG210219C00220000",
+   "limit": 5.0,
+   "targets": [
+    6.5,
+    8.5
+   ],
+   "stop": 3.5,
+   "filled": "unknown",
+   "source": "2021-01-12; NO follow-up in dataset",
+   "flags": [
+    "fate unknown - follow-up letters not in dataset"
+   ],
+   "computed": {
+    "id": "R06",
+    "S_alert": 218.38,
+    "alert_px_date": "2021-01-12",
+    "rv20": 0.19765682460800782,
+    "rv60": 0.2087587450568937,
+    "syn_iv": 0.2505,
+    "dte": 38,
+    "syn_delta": 0.48,
+    "syn_bs_value": 6.3,
+    "stated_premium": 5.0,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.48,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 38,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0303,
+      "expected_move": 0.0973,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 218.38,
+      "sma200": 197.27,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "HYPOTHETICAL (fill unverifiable)",
+     "fill_price": 5.0,
+     "legs": [
+      {
+       "fraction": 1.0,
+       "exit_price": 3.5,
+       "ret_pct": -30.0,
+       "kind": "SYNTHETIC",
+       "date": "2021-01-15",
+       "how": "stop"
+      }
+     ],
+     "overall_ret_pct": -30.0
+    }
+   }
+  },
+  {
+   "id": "R07",
+   "alert_date": "~2021-01-14",
+   "ticker": "LYV",
+   "company": "Live Nation",
+   "otype": "call",
+   "strike": null,
+   "expiry": null,
+   "occ": null,
+   "limit": null,
+   "filled": false,
+   "source": "missing_alert_email; 'LYV order did not fill' per 2021-01-20",
+   "flags": [
+    "contract unknown - alert letter not in dataset"
+   ],
+   "computed": {
+    "id": "R07",
+    "note": "contract unknown (alert letter not in dataset) - gates/outcome not computable"
+   }
+  },
+  {
+   "id": "R08",
+   "alert_date": "~2021-01-19",
+   "ticker": "XPEV",
+   "company": "Xpeng",
+   "otype": "call",
+   "strike": 60.0,
+   "expiry": "2021-02-19",
+   "occ": "XPEV210219C00060000",
+   "limit": null,
+   "targets": [
+    6.1,
+    7.5
+   ],
+   "stop": 3.6,
+   "filled": true,
+   "fill_date": "2021-01-19",
+   "fill_price": 4.6,
+   "exits": [
+    {
+     "date": "2021-01-20",
+     "price": 6.1,
+     "fraction": 0.5,
+     "kind": "claimed"
+    }
+   ],
+   "open_tail": {
+    "fraction": 0.5,
+    "from_date": "2021-01-21",
+    "target": 7.5,
+    "stop": 3.6
+   },
+   "claimed": "half +32%; second half fate not in dataset (Jan 21-25 letters absent)",
+   "source": "missing_alert_email; position detailed 2021-01-20",
+   "flags": [
+    "alert letter not in dataset",
+    "second-half exit reconstructed synthetically"
+   ],
+   "computed": {
+    "id": "R08",
+    "S_alert": 53.84,
+    "alert_px_date": "2021-01-19",
+    "rv20": 1.1741390919812478,
+    "rv60": 1.5799925873228544,
+    "syn_iv": 1.896,
+    "dte": 31,
+    "syn_delta": 0.532,
+    "syn_bs_value": 9.54,
+    "stated_premium": 4.6,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.532,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 31,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.1999,
+      "expected_move": 0.665,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 53.84,
+      "sma200": 33.74,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 4.6,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 6.1,
+       "ret_pct": 32.6,
+       "kind": "claimed",
+       "date": "2021-01-20"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 7.5,
+       "ret_pct": 63.0,
+       "kind": "SYNTHETIC",
+       "date": "2021-01-21",
+       "how": "target (synthetic path)"
+      }
+     ],
+     "overall_ret_pct": 47.8
+    }
+   }
+  },
+  {
+   "id": "R09",
+   "alert_date": "2021-01-20",
+   "ticker": "TDOC",
+   "company": "Teladoc",
+   "otype": "call",
+   "strike": 280.0,
+   "expiry": "2021-02-19",
+   "occ": "TDOC210219C00280000",
+   "limit": 4.5,
+   "targets": [
+    5.9,
+    7.6
+   ],
+   "stop": 3.15,
+   "filled": "unknown",
+   "source": "2021-01-20; no follow-up (Jan 21-25 absent; portfolio FUBO-only by Jan 26)",
+   "flags": [
+    "fate unknown - probably no fill (never appears again)"
+   ],
+   "computed": {
+    "id": "R09",
+    "S_alert": 246.74,
+    "alert_px_date": "2021-01-20",
+    "rv20": 0.5753385861227207,
+    "rv60": 0.6231623858125636,
+    "syn_iv": 0.7478,
+    "dte": 30,
+    "syn_delta": 0.315,
+    "syn_bs_value": 9.64,
+    "stated_premium": 4.5,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.315,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 30,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.153,
+      "expected_move": 0.258,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 246.74,
+      "sma200": 199.02,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "HYPOTHETICAL (fill unverifiable)",
+     "fill_price": 4.5,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 5.9,
+       "ret_pct": 31.1,
+       "kind": "SYNTHETIC",
+       "date": "2021-01-20",
+       "how": "target1"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 7.6,
+       "ret_pct": 68.9,
+       "kind": "SYNTHETIC",
+       "date": "2021-01-21",
+       "how": "target2"
+      }
+     ],
+     "overall_ret_pct": 50.0
+    }
+   }
+  },
+  {
+   "id": "R10",
+   "alert_date": "2021-01-20",
+   "ticker": "DDOG",
+   "company": "Datadog",
+   "otype": "call",
+   "strike": 110.0,
+   "expiry": "2021-02-19",
+   "occ": "DDOG210219C00110000 (printed truncated as ...C0011000)",
+   "limit": 5.9,
+   "targets": [
+    7.7,
+    10.0
+   ],
+   "stop": 4.1,
+   "filled": "unknown",
+   "source": "2021-01-20; no follow-up",
+   "flags": [
+    "fate unknown - probably no fill (never appears again)"
+   ],
+   "computed": {
+    "id": "R10",
+    "S_alert": 104.28,
+    "alert_px_date": "2021-01-20",
+    "rv20": 0.5571095707516064,
+    "rv60": 0.5590223869014471,
+    "syn_iv": 0.6708,
+    "dte": 30,
+    "syn_delta": 0.428,
+    "syn_bs_value": 5.66,
+    "stated_premium": 5.9,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.428,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 30,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [
+       "2021-02-11"
+      ],
+      "passed": false
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.1114,
+      "expected_move": 0.2315,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 104.28,
+      "sma200": 84.41,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90",
+     "earnings_blackout"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "HYPOTHETICAL (fill unverifiable)",
+     "fill_price": 5.9,
+     "legs": [
+      {
+       "fraction": 1.0,
+       "exit_price": 4.1,
+       "ret_pct": -30.5,
+       "kind": "SYNTHETIC",
+       "date": "2021-01-27",
+       "how": "stop"
+      }
+     ],
+     "overall_ret_pct": -30.5
+    }
+   }
+  },
+  {
+   "id": "R11",
+   "alert_date": "~2021-01-25",
+   "ticker": "AAPL",
+   "company": "Apple",
+   "otype": "call",
+   "strike": null,
+   "expiry": null,
+   "occ": null,
+   "limit": null,
+   "filled": false,
+   "source": "missing_alert_email; 'AAPL order did not fill' per 2021-01-26",
+   "flags": [
+    "contract unknown - alert letter not in dataset"
+   ],
+   "computed": {
+    "id": "R11",
+    "note": "contract unknown (alert letter not in dataset) - gates/outcome not computable"
+   }
+  },
+  {
+   "id": "R12",
+   "alert_date": "~2021-01-25",
+   "ticker": "FUBO",
+   "company": "fuboTV",
+   "otype": "call",
+   "strike": 40.0,
+   "expiry": "2021-02-19",
+   "occ": "FUBO210219C00040000",
+   "limit": 7.1,
+   "targets": [
+    10.3,
+    12.4
+   ],
+   "stop": 5.9,
+   "filled": true,
+   "fill_date": "2021-01-25",
+   "fill_price": 7.1,
+   "exits": [
+    {
+     "date": "2021-01-27",
+     "price": 10.3,
+     "fraction": 0.5,
+     "kind": "claimed"
+    },
+    {
+     "date": "2021-01-27",
+     "price": 12.4,
+     "fraction": 0.5,
+     "kind": "claimed",
+     "note": "letter says 'Wednesday Jan 17' - typo for Jan 27"
+    }
+   ],
+   "claimed": "overall +60%",
+   "source": "missing_alert_email; detailed 2021-01-26/28",
+   "flags": [
+    "alert letter not in dataset"
+   ],
+   "computed": {
+    "id": "R12",
+    "S_alert": 49.18,
+    "alert_px_date": "2021-01-25",
+    "rv20": 1.973427093200602,
+    "rv60": 1.6087585782980922,
+    "syn_iv": 2.3681,
+    "dte": 25,
+    "syn_delta": 0.74,
+    "syn_bs_value": 16.02,
+    "stated_premium": 7.1,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.74,
+      "passed": true,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 25,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": -0.0422,
+      "expected_move": 0.7459,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 49.18,
+      "sma200": 18.81,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 7.1,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 10.3,
+       "ret_pct": 45.1,
+       "kind": "claimed",
+       "date": "2021-01-27"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 12.4,
+       "ret_pct": 74.6,
+       "kind": "claimed",
+       "date": "2021-01-27"
+      }
+     ],
+     "overall_ret_pct": 59.9
+    }
+   }
+  },
+  {
+   "id": "R13",
+   "alert_date": "2021-01-26",
+   "ticker": "WDAY",
+   "company": "Workday",
+   "otype": "call",
+   "strike": 250.0,
+   "expiry": "2021-02-19",
+   "occ": "WDAY210219C00250000",
+   "limit": 4.0,
+   "targets": [
+    5.1,
+    6.6
+   ],
+   "stop": 2.7,
+   "filled": false,
+   "source": "2021-01-26; inferred no-fill ('came into today flat' 2021-01-28)",
+   "flags": [
+    "no-fill inferred, not stated"
+   ],
+   "computed": {
+    "id": "R13",
+    "S_alert": 235.6,
+    "alert_px_date": "2021-01-26",
+    "rv20": 0.3147258604498403,
+    "rv60": 0.41515988768089224,
+    "syn_iv": 0.4982,
+    "dte": 24,
+    "syn_delta": 0.345,
+    "syn_bs_value": 6.48,
+    "stated_premium": 4.0,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.345,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 24,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0781,
+      "expected_move": 0.1537,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 235.6,
+      "sma200": 199.78,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R14",
+   "alert_date": "2021-01-28",
+   "ticker": "BTBT",
+   "company": "Bit Digital",
+   "otype": "call",
+   "strike": 17.5,
+   "expiry": "2021-02-19",
+   "occ": "BTBT210219C00017500",
+   "limit": 5.7,
+   "targets": [
+    7.55,
+    9.8
+   ],
+   "stop": 4.0,
+   "filled": true,
+   "fill_date": "2021-01-28",
+   "fill_price": 5.7,
+   "exits": [
+    {
+     "date": "2021-01-29",
+     "price": 7.9,
+     "fraction": 0.5,
+     "kind": "claimed"
+    },
+    {
+     "date": "2021-01-29",
+     "price": 4.5,
+     "fraction": 0.5,
+     "kind": "claimed",
+     "note": "stop"
+    }
+   ],
+   "claimed": "overall +17.5%",
+   "source": "2021-01-28/29, 2021-02-01",
+   "computed": {
+    "id": "R14",
+    "S_alert": 19.54,
+    "alert_px_date": "2021-01-28",
+    "rv20": 2.8597953453698244,
+    "rv60": 2.5895033353758645,
+    "syn_iv": 3.4318,
+    "dte": 22,
+    "syn_delta": 0.71,
+    "syn_bs_value": 7.11,
+    "stated_premium": 5.7,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.71,
+      "passed": true,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 22,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.1873,
+      "expected_move": 1.014,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 19.54,
+      "sma200": 5.12,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 5.7,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 7.9,
+       "ret_pct": 38.6,
+       "kind": "claimed",
+       "date": "2021-01-29"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 4.5,
+       "ret_pct": -21.1,
+       "kind": "claimed",
+       "date": "2021-01-29"
+      }
+     ],
+     "overall_ret_pct": 8.8
+    }
+   }
+  },
+  {
+   "id": "R15",
+   "alert_date": "2021-02-01",
+   "ticker": "AG",
+   "company": "First Majestic Silver",
+   "otype": "call",
+   "strike": 17.0,
+   "expiry": "2021-02-19",
+   "occ": "AG210219C00017000",
+   "limit": 6.4,
+   "targets": [
+    8.3,
+    11.2
+   ],
+   "stop": 4.4,
+   "filled": true,
+   "fill_date": "2021-02-01",
+   "fill_price": 6.1,
+   "exits": [
+    {
+     "date": "2021-02-02",
+     "price": 1.6,
+     "fraction": 1.0,
+     "kind": "claimed",
+     "note": "stop; silver-squeeze collapse"
+    }
+   ],
+   "claimed": "-73% loss (letter body; -71% in portfolio note)",
+   "source": "2021-02-01/02",
+   "computed": {
+    "id": "R15",
+    "S_alert": 22.12,
+    "alert_px_date": "2021-02-01",
+    "rv20": 1.257593983602349,
+    "rv60": 0.8932166625373266,
+    "syn_iv": 1.5091,
+    "dte": 18,
+    "syn_delta": 0.83,
+    "syn_bs_value": 5.92,
+    "stated_premium": 6.4,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.83,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 18,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [
+       "2021-02-18"
+      ],
+      "passed": false
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0579,
+      "expected_move": 0.4033,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 22.12,
+      "sma200": 10.96,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90",
+     "earnings_blackout"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 6.1,
+     "legs": [
+      {
+       "fraction": 1.0,
+       "exit_price": 1.6,
+       "ret_pct": -73.8,
+       "kind": "claimed",
+       "date": "2021-02-02"
+      }
+     ],
+     "overall_ret_pct": -73.8
+    }
+   }
+  },
+  {
+   "id": "R16",
+   "alert_date": "2021-02-01",
+   "ticker": "CAT",
+   "company": "Caterpillar",
+   "otype": "call",
+   "strike": 185.0,
+   "expiry": "2021-02-19",
+   "occ": "CAT210219C00185000",
+   "limit": 4.8,
+   "targets": [
+    6.25,
+    8.2
+   ],
+   "stop": 3.35,
+   "filled": false,
+   "source": "2021-02-01; no-fill per 2021-02-02",
+   "computed": {
+    "id": "R16",
+    "S_alert": 184.72,
+    "alert_px_date": "2021-02-01",
+    "rv20": 0.2899243576039768,
+    "rv60": 0.31699720393578984,
+    "syn_iv": 0.3804,
+    "dte": 18,
+    "syn_delta": 0.51,
+    "syn_bs_value": 6.09,
+    "stated_premium": 4.8,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.51,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 18,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0275,
+      "expected_move": 0.1017,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 184.72,
+      "sma200": 149.12,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R17",
+   "alert_date": "2021-02-02",
+   "ticker": "CRM",
+   "company": "Salesforce",
+   "otype": "call",
+   "strike": 235.0,
+   "expiry": "2021-02-19",
+   "occ": "CRM210219C00235000",
+   "limit": 5.5,
+   "targets": [
+    7.15,
+    9.35
+   ],
+   "stop": 3.85,
+   "filled": false,
+   "source": "2021-02-02; no-fill per 2021-02-03",
+   "computed": {
+    "id": "R17",
+    "S_alert": 234.2,
+    "alert_px_date": "2021-02-02",
+    "rv20": 0.2348102955911707,
+    "rv60": 0.3251732797375523,
+    "syn_iv": 0.3902,
+    "dte": 17,
+    "syn_delta": 0.501,
+    "syn_bs_value": 7.49,
+    "stated_premium": 5.5,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.501,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 17,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0269,
+      "expected_move": 0.1013,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 234.2,
+      "sma200": 215.3,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R18",
+   "alert_date": "2021-02-04",
+   "ticker": "DE",
+   "company": "Deere",
+   "otype": "call",
+   "strike": 310.0,
+   "expiry": "2021-02-19",
+   "occ": "DE210219C00310000",
+   "limit": 7.5,
+   "targets": [
+    10.75,
+    12.75
+   ],
+   "stop": 5.25,
+   "filled": false,
+   "source": "2021-02-04 CORRECTION letter (original letter had wrong Feb-5 weekly 305 strike @3.70; corrected values used)",
+   "flags": [
+    "correction email applied"
+   ],
+   "computed": {
+    "id": "R18",
+    "S_alert": 309.27,
+    "alert_px_date": "2021-02-04",
+    "rv20": 0.3740356368272431,
+    "rv60": 0.30162696302770425,
+    "syn_iv": 0.4488,
+    "dte": 15,
+    "syn_delta": 0.508,
+    "syn_bs_value": 10.88,
+    "stated_premium": 7.5,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.508,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 15,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [
+       "2021-02-19"
+      ],
+      "passed": false
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0266,
+      "expected_move": 0.1095,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 309.27,
+      "sma200": 211.19,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90",
+     "earnings_blackout"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R19",
+   "alert_date": "2021-02-05",
+   "ticker": "XOM",
+   "company": "Exxon Mobil",
+   "otype": "call",
+   "strike": 45.0,
+   "expiry": "2021-02-19",
+   "occ": "XOM210219C00045000",
+   "limit": 5.0,
+   "targets": [
+    6.5,
+    8.5
+   ],
+   "stop": 3.5,
+   "filled": true,
+   "fill_date": "2021-02-05",
+   "fill_price": 5.0,
+   "exits": [
+    {
+     "date": "2021-02-08",
+     "price": 6.5,
+     "fraction": 0.5,
+     "kind": "claimed"
+    },
+    {
+     "date": "2021-02-09",
+     "price": 5.4,
+     "fraction": 0.5,
+     "kind": "claimed",
+     "note": "trailed stop"
+    }
+   ],
+   "claimed": "+30% and +8% halves (~+19% overall)",
+   "source": "2021-02-05/08/09",
+   "computed": {
+    "id": "R19",
+    "S_alert": 49.95,
+    "alert_px_date": "2021-02-05",
+    "rv20": 0.38994392262937905,
+    "rv60": 0.4203636905868111,
+    "syn_iv": 0.5044,
+    "dte": 14,
+    "syn_delta": 0.866,
+    "syn_bs_value": 5.3,
+    "stated_premium": 5.0,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.866,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 14,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.001,
+      "expected_move": 0.1189,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 49.95,
+      "sma200": 41.72,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 5.0,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 6.5,
+       "ret_pct": 30.0,
+       "kind": "claimed",
+       "date": "2021-02-08"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 5.4,
+       "ret_pct": 8.0,
+       "kind": "claimed",
+       "date": "2021-02-09"
+      }
+     ],
+     "overall_ret_pct": 19.0
+    }
+   }
+  },
+  {
+   "id": "R20",
+   "alert_date": "2021-02-05",
+   "ticker": "CAT",
+   "company": "Caterpillar",
+   "otype": "call",
+   "strike": 190.0,
+   "expiry": "2021-02-19",
+   "occ": "CAT210219C00190000 (printed truncated ...C0019000)",
+   "limit": 5.5,
+   "targets": [
+    7.15,
+    9.6
+   ],
+   "stop": 3.85,
+   "filled": true,
+   "fill_date": "2021-02-05",
+   "fill_price": 5.14,
+   "exits": [
+    {
+     "date": "2021-02-08",
+     "price": 7.15,
+     "fraction": 0.5,
+     "kind": "claimed"
+    },
+    {
+     "date": "2021-02-10",
+     "price": 8.0,
+     "fraction": 0.5,
+     "kind": "inferred",
+     "note": "last seen 2/9 with stop 8.00 / target 9.45; gone from portfolio by 2/12 (Feb 10-11 letters absent). Conservative assumption: exited at the 8.00 stop, LABELED inferred"
+    }
+   ],
+   "claimed": "half +39%; second-half exit in missing letters (somewhere between 8.00 stop and 9.45 target)",
+   "source": "2021-02-05/08/09; absence by 2021-02-12",
+   "flags": [
+    "second-half exit inferred (conservative stop 8.00)",
+    "letter dates entry as 'Fri Jan 5' - typo for Feb 5"
+   ],
+   "computed": {
+    "id": "R20",
+    "S_alert": 193.0,
+    "alert_px_date": "2021-02-05",
+    "rv20": 0.258518276484047,
+    "rv60": 0.2410378673964706,
+    "syn_iv": 0.3102,
+    "dte": 14,
+    "syn_delta": 0.614,
+    "syn_bs_value": 6.3,
+    "stated_premium": 5.5,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.614,
+      "passed": true,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 14,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.013,
+      "expected_move": 0.0731,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 193.0,
+      "sma200": 150.71,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 5.14,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 7.15,
+       "ret_pct": 39.1,
+       "kind": "claimed",
+       "date": "2021-02-08"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 8.0,
+       "ret_pct": 55.6,
+       "kind": "inferred",
+       "date": "2021-02-10"
+      }
+     ],
+     "overall_ret_pct": 47.4
+    }
+   }
+  },
+  {
+   "id": "R21",
+   "alert_date": "2021-02-08",
+   "ticker": "AMAT",
+   "company": "Applied Materials",
+   "otype": "call",
+   "strike": 105.0,
+   "expiry": "2021-02-19",
+   "occ": "AMAT210219C00105000",
+   "limit": 3.3,
+   "targets": [
+    4.3,
+    5.6
+   ],
+   "stop": 2.3,
+   "filled": false,
+   "source": "2021-02-08; inferred no-fill (absent from 2021-02-09 portfolio)",
+   "flags": [
+    "no-fill inferred, not stated"
+   ],
+   "computed": {
+    "id": "R21",
+    "S_alert": 106.19,
+    "alert_px_date": "2021-02-08",
+    "rv20": 0.6099235814786493,
+    "rv60": 0.42025085622965663,
+    "syn_iv": 0.7319,
+    "dte": 11,
+    "syn_delta": 0.561,
+    "syn_bs_value": 5.97,
+    "stated_premium": 3.3,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.561,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 11,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-02-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [
+       "2021-02-18"
+      ],
+      "passed": false
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0199,
+      "expected_move": 0.1529,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 106.19,
+      "sma200": 69.09,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90",
+     "earnings_blackout"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R22",
+   "alert_date": "2021-02-09",
+   "ticker": "SPWR",
+   "company": "SunPower",
+   "otype": "call",
+   "strike": 48.0,
+   "expiry": "2021-02-19",
+   "occ": "SPWR210219C00048000",
+   "limit": 5.5,
+   "targets": [
+    6.9,
+    8.9
+   ],
+   "stop": 3.6,
+   "filled": true,
+   "fill_date": "2021-02-09",
+   "fill_price": 5.5,
+   "exits": [
+    {
+     "date": "2021-02-11",
+     "price": 6.9,
+     "fraction": 0.5,
+     "kind": "claimed"
+    },
+    {
+     "date": "2021-02-12",
+     "price": 4.9,
+     "fraction": 0.5,
+     "kind": "claimed",
+     "note": "trailed stop"
+    }
+   ],
+   "claimed": "+25.4% and -11% halves; overall +14%",
+   "source": "2021-02-09/12/16",
+   "computed": {
+    "id": "R22",
+    "note": "no yfinance price data (delisted) - gates NOT computable; claimed outcome used",
+    "gate_overall": "UNKNOWN (no price data)",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 5.5,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 6.9,
+       "ret_pct": 25.5,
+       "kind": "claimed",
+       "date": "2021-02-11"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 4.9,
+       "ret_pct": -10.9,
+       "kind": "claimed",
+       "date": "2021-02-12"
+      }
+     ],
+     "overall_ret_pct": 7.3
+    }
+   }
+  },
+  {
+   "id": "R23",
+   "alert_date": "~2021-02-10",
+   "ticker": "AMD",
+   "company": "AMD",
+   "otype": "call",
+   "strike": 95.0,
+   "expiry": "2021-03-19",
+   "occ": "AMD210319C00095000",
+   "limit": null,
+   "targets": [
+    5.35,
+    6.15
+   ],
+   "stop": 3.55,
+   "filled": true,
+   "fill_date": "2021-02-10",
+   "fill_price": 4.7,
+   "exits": [
+    {
+     "date": "2021-02-17",
+     "price": 3.55,
+     "fraction": 1.0,
+     "kind": "inferred",
+     "note": "last seen 2/16 at 3.85 with 3.55 stop; 'came into today flat' 2/18 (Feb 17 letter absent). Stop exit inferred, LABELED"
+    }
+   ],
+   "claimed": "never stated - the loss simply disappears from the letters",
+   "source": "missing_alert_email; position detailed 2021-02-12/16; flat by 2021-02-18",
+   "flags": [
+    "alert letter not in dataset",
+    "exit inferred at stop 3.55 (~-24%)"
+   ],
+   "computed": {
+    "id": "R23",
+    "S_alert": 92.35,
+    "alert_px_date": "2021-02-10",
+    "rv20": 0.3871322487240349,
+    "rv60": 0.3489225307097854,
+    "syn_iv": 0.4646,
+    "dte": 37,
+    "syn_delta": 0.454,
+    "syn_bs_value": 4.3,
+    "stated_premium": 4.7,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.454,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 37,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0796,
+      "expected_move": 0.178,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 92.35,
+      "sma200": 75.7,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 4.7,
+     "legs": [
+      {
+       "fraction": 1.0,
+       "exit_price": 3.55,
+       "ret_pct": -24.5,
+       "kind": "inferred",
+       "date": "2021-02-17"
+      }
+     ],
+     "overall_ret_pct": -24.5
+    }
+   }
+  },
+  {
+   "id": "R24",
+   "alert_date": "2021-02-12",
+   "ticker": "PTON",
+   "company": "Peloton",
+   "otype": "call",
+   "strike": 180.0,
+   "expiry": "2021-03-19",
+   "occ": "PTON210319C00180000",
+   "limit": 3.7,
+   "targets": [
+    5.2,
+    6.6
+   ],
+   "stop": 2.75,
+   "filled": false,
+   "source": "2021-02-12; no-fill per 2021-02-16",
+   "computed": {
+    "id": "R24",
+    "S_alert": 154.67,
+    "alert_px_date": "2021-02-12",
+    "rv20": 0.5534266182644377,
+    "rv60": 0.6114758113820362,
+    "syn_iv": 0.7338,
+    "dte": 35,
+    "syn_delta": 0.29,
+    "syn_bs_value": 5.7,
+    "stated_premium": 3.7,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.29,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 35,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.1877,
+      "expected_move": 0.2735,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 154.67,
+      "sma200": 94.5,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R25",
+   "alert_date": "~2021-02-17",
+   "ticker": "HD",
+   "company": "Home Depot",
+   "otype": "call",
+   "strike": null,
+   "expiry": null,
+   "occ": null,
+   "limit": null,
+   "filled": false,
+   "source": "missing_alert_email; 'order for HD calls did not fill' per 2021-02-18",
+   "flags": [
+    "contract unknown - alert letter not in dataset"
+   ],
+   "computed": {
+    "id": "R25",
+    "note": "contract unknown (alert letter not in dataset) - gates/outcome not computable"
+   }
+  },
+  {
+   "id": "R26",
+   "alert_date": "2021-02-18",
+   "ticker": "MMM",
+   "company": "3M",
+   "otype": "call",
+   "strike": 180.0,
+   "expiry": "2021-03-19",
+   "occ": "MMM210319C00180000",
+   "limit": 4.2,
+   "targets": [
+    5.5,
+    7.2
+   ],
+   "stop": 2.95,
+   "filled": false,
+   "source": "2021-02-18; inferred no-fill (absent from 2021-02-23 portfolio; Feb 19/22 letters absent)",
+   "flags": [
+    "no-fill inferred, not stated"
+   ],
+   "computed": {
+    "id": "R26",
+    "S_alert": 149.97,
+    "alert_px_date": "2021-02-18",
+    "rv20": 0.3276191016664836,
+    "rv60": 0.23217305382073772,
+    "syn_iv": 0.3931,
+    "dte": 29,
+    "syn_delta": 0.056,
+    "syn_bs_value": 0.38,
+    "stated_premium": 4.2,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.056,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 29,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.2282,
+      "expected_move": 0.1334,
+      "passed": false,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 149.97,
+      "sma200": 137.4,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90",
+     "breakeven_vs_expected_move"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R27",
+   "alert_date": "~2021-02-19",
+   "ticker": "CI",
+   "company": "Cigna",
+   "otype": "call",
+   "strike": 210.0,
+   "expiry": "2021-03-19",
+   "occ": "CI210319C00210000",
+   "limit": null,
+   "targets": [
+    8.1,
+    9.75
+   ],
+   "stop": 6.5,
+   "filled": true,
+   "fill_date": "2021-02-22",
+   "fill_price": 5.9,
+   "exits": [
+    {
+     "date": "2021-02-23",
+     "price": 8.1,
+     "fraction": 0.5,
+     "kind": "claimed"
+    },
+    {
+     "date": "2021-02-25",
+     "price": 9.75,
+     "fraction": 0.5,
+     "kind": "claimed"
+    }
+   ],
+   "claimed": "overall +51.3%",
+   "source": "missing_alert_email; detailed 2021-02-23/24/25/26",
+   "flags": [
+    "alert letter not in dataset"
+   ],
+   "computed": {
+    "id": "R27",
+    "S_alert": 204.26,
+    "alert_px_date": "2021-02-19",
+    "rv20": 0.3192738636285552,
+    "rv60": 0.2985612502835758,
+    "syn_iv": 0.3831,
+    "dte": 28,
+    "syn_delta": 0.418,
+    "syn_bs_value": 6.2,
+    "stated_premium": 5.9,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.418,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 28,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.057,
+      "expected_move": 0.1277,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 204.26,
+      "sma200": 192.16,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 5.9,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 8.1,
+       "ret_pct": 37.3,
+       "kind": "claimed",
+       "date": "2021-02-23"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 9.75,
+       "ret_pct": 65.3,
+       "kind": "claimed",
+       "date": "2021-02-25"
+      }
+     ],
+     "overall_ret_pct": 51.3
+    }
+   }
+  },
+  {
+   "id": "R28",
+   "alert_date": "~2021-02-19",
+   "ticker": "ORCL",
+   "company": "Oracle",
+   "otype": "call",
+   "strike": 60.0,
+   "expiry": "2021-03-19",
+   "occ": "ORCL210319C00060000",
+   "limit": null,
+   "targets": [
+    6.55,
+    7.5
+   ],
+   "stop": 5.3,
+   "filled": true,
+   "fill_date": "2021-02-22",
+   "fill_price": 5.15,
+   "exits": [
+    {
+     "date": "2021-02-26",
+     "price": 6.55,
+     "fraction": 0.5,
+     "kind": "claimed"
+    },
+    {
+     "date": "2021-02-26",
+     "price": 5.3,
+     "fraction": 0.5,
+     "kind": "claimed",
+     "note": "trailed stop, +3%"
+    }
+   ],
+   "claimed": "+27.4% and +3% halves (~+15% overall)",
+   "source": "missing_alert_email; detailed 2021-02-23..2021-03-01",
+   "flags": [
+    "alert letter not in dataset",
+    "ORCL earnings 3/10 was inside rec-to-expiry window"
+   ],
+   "computed": {
+    "id": "R28",
+    "S_alert": 61.13,
+    "alert_px_date": "2021-02-19",
+    "rv20": 0.19631599590512738,
+    "rv60": 0.1740268426804765,
+    "syn_iv": 0.2356,
+    "dte": 28,
+    "syn_delta": 0.625,
+    "syn_bs_value": 2.21,
+    "stated_premium": 5.15,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.625,
+      "passed": true,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 28,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [
+       "2021-03-10"
+      ],
+      "passed": false
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0658,
+      "expected_move": 0.0785,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 61.13,
+      "sma200": 57.91,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "dte_45_90",
+     "earnings_blackout"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 5.15,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 6.55,
+       "ret_pct": 27.2,
+       "kind": "claimed",
+       "date": "2021-02-26"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 5.3,
+       "ret_pct": 2.9,
+       "kind": "claimed",
+       "date": "2021-02-26"
+      }
+     ],
+     "overall_ret_pct": 15.0
+    }
+   }
+  },
+  {
+   "id": "R29",
+   "alert_date": "2021-02-24",
+   "ticker": "BA",
+   "company": "Boeing",
+   "otype": "call",
+   "strike": 235.0,
+   "expiry": "2021-03-19",
+   "occ": "BA210319C00235000",
+   "limit": 5.9,
+   "targets": [
+    7.7,
+    10.0
+   ],
+   "stop": 4.1,
+   "filled": false,
+   "source": "2021-02-24; no-fill per 2021-02-25",
+   "computed": {
+    "id": "R29",
+    "S_alert": 229.34,
+    "alert_px_date": "2021-02-24",
+    "rv20": 0.4479632338749101,
+    "rv60": 0.37874337960084614,
+    "syn_iv": 0.5376,
+    "dte": 23,
+    "syn_delta": 0.455,
+    "syn_bs_value": 9.87,
+    "stated_premium": 5.9,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.455,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 23,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0504,
+      "expected_move": 0.1624,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 229.34,
+      "sma200": 183.57,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R30",
+   "alert_date": "2021-02-26",
+   "ticker": "WW",
+   "company": "WW International",
+   "otype": "call",
+   "strike": 27.5,
+   "expiry": "2021-03-19",
+   "occ": "WW210319C00027500",
+   "limit": 2.7,
+   "targets": [
+    3.55,
+    4.6
+   ],
+   "stop": 1.9,
+   "filled": false,
+   "source": "2021-02-26; no-fill per 2021-03-01",
+   "computed": {
+    "id": "R30",
+    "note": "no yfinance price data (delisted) - gates NOT computable; claimed outcome used",
+    "gate_overall": "UNKNOWN (no price data)",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R31",
+   "alert_date": "2021-02-26",
+   "ticker": "SBUX",
+   "company": "Starbucks",
+   "otype": "call",
+   "strike": 105.0,
+   "expiry": "2021-03-19",
+   "occ": "SBUX210319C00105000",
+   "limit": 4.2,
+   "targets": [
+    5.5,
+    7.15
+   ],
+   "stop": 2.95,
+   "filled": false,
+   "source": "2021-02-26; no-fill per 2021-03-01",
+   "computed": {
+    "id": "R31",
+    "S_alert": 108.03,
+    "alert_px_date": "2021-02-26",
+    "rv20": 0.2875137451193593,
+    "rv60": 0.28591558825422236,
+    "syn_iv": 0.345,
+    "dte": 21,
+    "syn_delta": 0.65,
+    "syn_bs_value": 5.24,
+    "stated_premium": 4.2,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.65,
+      "passed": true,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 21,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0108,
+      "expected_move": 0.0996,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 108.03,
+      "sma200": 88.79,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R32",
+   "alert_date": "2021-03-01",
+   "ticker": "DKNG",
+   "company": "DraftKings",
+   "otype": "call",
+   "strike": 65.0,
+   "expiry": "2021-03-19",
+   "occ": "DKNG210319C00065000",
+   "limit": 4.4,
+   "targets": [
+    5.75,
+    7.7
+   ],
+   "stop": 3.1,
+   "filled": false,
+   "source": "2021-03-01; inferred no-fill (absent from 2021-03-03 portfolio; Mar 2 letter absent)",
+   "flags": [
+    "no-fill inferred, not stated"
+   ],
+   "computed": {
+    "id": "R32",
+    "S_alert": 68.72,
+    "alert_px_date": "2021-03-01",
+    "rv20": 0.6776685281494174,
+    "rv60": 0.576112754988847,
+    "syn_iv": 0.8132,
+    "dte": 18,
+    "syn_delta": 0.655,
+    "syn_bs_value": 6.9,
+    "stated_premium": 4.4,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.655,
+      "passed": true,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 18,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0099,
+      "expected_move": 0.2173,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 68.72,
+      "sma200": 44.71,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R33",
+   "alert_date": "2021-03-01",
+   "ticker": "AAL",
+   "company": "American Airlines",
+   "otype": "put",
+   "strike": 23.0,
+   "expiry": "2021-03-19",
+   "occ": "AAL210319P00023000",
+   "limit": 2.4,
+   "targets": [
+    3.15,
+    4.1
+   ],
+   "stop": 1.7,
+   "filled": true,
+   "fill_date": "2021-03-01",
+   "fill_price": 2.4,
+   "exits": [
+    {
+     "date": "2021-03-03",
+     "price": 1.75,
+     "fraction": 1.0,
+     "kind": "claimed",
+     "note": "stop"
+    }
+   ],
+   "claimed": "-27% loss ('go lighter than usual - more speculative')",
+   "source": "2021-03-01/03",
+   "flags": [
+    "only PUT in sample"
+   ],
+   "computed": {
+    "id": "R33",
+    "S_alert": 21.18,
+    "alert_px_date": "2021-03-01",
+    "rv20": 0.552513638050149,
+    "rv60": 0.5525519308220195,
+    "syn_iv": 0.6631,
+    "dte": 18,
+    "syn_delta": -0.686,
+    "syn_bs_value": 2.4,
+    "stated_premium": 2.4,
+    "gates": {
+     "delta_060_075": {
+      "value": -0.686,
+      "passed": true,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 18,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0274,
+      "expected_move": 0.1772,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 21.18,
+      "sma200": 14.03,
+      "passed": false
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "dte_45_90",
+     "regime_200sma"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 2.4,
+     "legs": [
+      {
+       "fraction": 1.0,
+       "exit_price": 1.75,
+       "ret_pct": -27.1,
+       "kind": "claimed",
+       "date": "2021-03-03"
+      }
+     ],
+     "overall_ret_pct": -27.1
+    }
+   }
+  },
+  {
+   "id": "R34",
+   "alert_date": "~2021-03-02",
+   "ticker": "GM",
+   "company": "General Motors",
+   "otype": "call",
+   "strike": null,
+   "expiry": null,
+   "occ": null,
+   "limit": null,
+   "filled": false,
+   "source": "missing_alert_email; 'order for GM calls did not fill' per 2021-03-03 (before the re-issue)",
+   "flags": [
+    "contract unknown - alert letter not in dataset"
+   ],
+   "computed": {
+    "id": "R34",
+    "note": "contract unknown (alert letter not in dataset) - gates/outcome not computable"
+   }
+  },
+  {
+   "id": "R35",
+   "alert_date": "2021-03-03",
+   "ticker": "DY",
+   "company": "Dycom",
+   "otype": "call",
+   "strike": 85.0,
+   "expiry": "2021-03-19",
+   "occ": "DY210319C00085000",
+   "limit": 4.0,
+   "targets": [
+    5.2,
+    6.8
+   ],
+   "stop": 2.8,
+   "filled": false,
+   "source": "2021-03-03; no-fill per 2021-03-04",
+   "computed": {
+    "id": "R35",
+    "S_alert": 87.15,
+    "alert_px_date": "2021-03-03",
+    "rv20": 0.6865665877102459,
+    "rv60": 0.6292960804422459,
+    "syn_iv": 0.8239,
+    "dte": 16,
+    "syn_delta": 0.591,
+    "syn_bs_value": 7.05,
+    "stated_premium": 4.0,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.591,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 16,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0212,
+      "expected_move": 0.2076,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 87.15,
+      "sma200": 61.2,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R36",
+   "alert_date": "2021-03-03",
+   "ticker": "GM",
+   "company": "General Motors",
+   "otype": "call",
+   "strike": 50.0,
+   "expiry": "2021-03-19",
+   "occ": "GM210319C00050000",
+   "limit": 4.1,
+   "targets": [
+    5.3,
+    7.0
+   ],
+   "stop": 2.9,
+   "filled": true,
+   "fill_date": "2021-03-03",
+   "fill_price": 4.1,
+   "exits": [
+    {
+     "date": "2021-03-04",
+     "price": 2.9,
+     "fraction": 1.0,
+     "kind": "claimed",
+     "note": "stop"
+    }
+   ],
+   "claimed": "-29% loss",
+   "source": "2021-03-03/04",
+   "computed": {
+    "id": "R36",
+    "S_alert": 52.67,
+    "alert_px_date": "2021-03-03",
+    "rv20": 0.37284673179613304,
+    "rv60": 0.43735395411205147,
+    "syn_iv": 0.5248,
+    "dte": 16,
+    "syn_delta": 0.702,
+    "syn_bs_value": 3.83,
+    "stated_premium": 4.1,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.702,
+      "passed": true,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 16,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0272,
+      "expected_move": 0.1322,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 52.67,
+      "sma200": 36.12,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 4.1,
+     "legs": [
+      {
+       "fraction": 1.0,
+       "exit_price": 2.9,
+       "ret_pct": -29.3,
+       "kind": "claimed",
+       "date": "2021-03-04"
+      }
+     ],
+     "overall_ret_pct": -29.3
+    }
+   }
+  },
+  {
+   "id": "R37",
+   "alert_date": "2021-03-05",
+   "ticker": "MSFT",
+   "company": "Microsoft",
+   "otype": "call",
+   "strike": 230.0,
+   "expiry": "2021-03-19",
+   "occ": "MSFT210319C00230000",
+   "limit": 5.9,
+   "targets": [
+    8.1,
+    10.9
+   ],
+   "stop": 4.1,
+   "filled": false,
+   "source": "2021-03-05; no-fill per 2021-03-08",
+   "computed": {
+    "id": "R37",
+    "S_alert": 231.6,
+    "alert_px_date": "2021-03-05",
+    "rv20": 0.21515824464960082,
+    "rv60": 0.23554495638723874,
+    "syn_iv": 0.2827,
+    "dte": 14,
+    "syn_delta": 0.561,
+    "syn_bs_value": 5.94,
+    "stated_premium": 5.9,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.561,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 14,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0186,
+      "expected_move": 0.0666,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 231.6,
+      "sma200": 213.3,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R38",
+   "alert_date": "2021-03-08",
+   "ticker": "DKS",
+   "company": "Dick's Sporting Goods",
+   "otype": "call",
+   "strike": 75.0,
+   "expiry": "2021-03-19",
+   "occ": "DKS210319C00075000",
+   "limit": 4.6,
+   "targets": [
+    6.0,
+    7.85
+   ],
+   "stop": 3.25,
+   "filled": false,
+   "source": "2021-03-08; no-fill per 2021-03-09",
+   "flags": [
+    "DKS earnings 3/9 next morning - inside window"
+   ],
+   "computed": {
+    "id": "R38",
+    "S_alert": 76.68,
+    "alert_px_date": "2021-03-08",
+    "rv20": 0.4098294790801624,
+    "rv60": 0.3601475020881134,
+    "syn_iv": 0.4918,
+    "dte": 11,
+    "syn_delta": 0.619,
+    "syn_bs_value": 3.51,
+    "stated_premium": 4.6,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.619,
+      "passed": true,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 11,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [
+       "2021-03-09"
+      ],
+      "passed": false
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0381,
+      "expected_move": 0.1027,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 76.68,
+      "sma200": 54.62,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "dte_45_90",
+     "earnings_blackout"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R39",
+   "alert_date": "2021-03-08",
+   "ticker": "BBBY",
+   "company": "Bed Bath & Beyond",
+   "otype": "call",
+   "strike": 25.0,
+   "expiry": "2021-03-19",
+   "occ": "BBBY210319C00025000",
+   "limit": 5.4,
+   "targets": [
+    7.1,
+    9.2
+   ],
+   "stop": 3.8,
+   "filled": false,
+   "source": "2021-03-08; no-fill per 2021-03-09",
+   "flags": [
+    "DELISTED ticker - price data best-effort; gate audit may be incomplete"
+   ],
+   "computed": {
+    "id": "R39",
+    "note": "no yfinance price data (delisted) - gates NOT computable; claimed outcome used",
+    "gate_overall": "UNKNOWN (no price data)",
+    "outcome": {
+     "status": "no fill"
+    }
+   }
+  },
+  {
+   "id": "R40",
+   "alert_date": "2021-03-09",
+   "ticker": "GM",
+   "company": "General Motors",
+   "otype": "call",
+   "strike": 50.0,
+   "expiry": "2021-03-19",
+   "occ": "GM210319C00050000",
+   "limit": 5.0,
+   "targets": [
+    6.5,
+    8.5
+   ],
+   "stop": 3.5,
+   "filled": true,
+   "fill_date": "2021-03-09",
+   "fill_price": 5.0,
+   "exits": [
+    {
+     "date": "2021-03-10",
+     "price": 6.5,
+     "fraction": 0.5,
+     "kind": "claimed"
+    }
+   ],
+   "open_tail": {
+    "fraction": 0.5,
+    "from_date": "2021-03-12",
+    "target": 8.5,
+    "stop": 5.2
+   },
+   "claimed": "half +30%; second half still open when the dataset ends 3/11",
+   "source": "2021-03-09/10/11",
+   "flags": [
+    "second-half exit reconstructed synthetically (dataset ends)"
+   ],
+   "computed": {
+    "id": "R40",
+    "S_alert": 54.65,
+    "alert_px_date": "2021-03-09",
+    "rv20": 0.35816567157965845,
+    "rv60": 0.4449902712225758,
+    "syn_iv": 0.534,
+    "dte": 10,
+    "syn_delta": 0.853,
+    "syn_bs_value": 5.03,
+    "stated_premium": 5.0,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.853,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 10,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0064,
+      "expected_move": 0.1064,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 54.65,
+      "sma200": 36.7,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 5.0,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 6.5,
+       "ret_pct": 30.0,
+       "kind": "claimed",
+       "date": "2021-03-10"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 8.5,
+       "ret_pct": 70.0,
+       "kind": "SYNTHETIC",
+       "date": "2021-03-12",
+       "how": "target (synthetic path)"
+      }
+     ],
+     "overall_ret_pct": 50.0
+    }
+   }
+  },
+  {
+   "id": "R41",
+   "alert_date": "2021-03-09",
+   "ticker": "MSFT",
+   "company": "Microsoft",
+   "otype": "call",
+   "strike": 232.5,
+   "expiry": "2021-03-19",
+   "occ": "MSFT210319C00232500",
+   "limit": 5.0,
+   "targets": [
+    6.5,
+    8.6
+   ],
+   "stop": 3.5,
+   "filled": true,
+   "fill_date": "2021-03-09",
+   "fill_price": 5.0,
+   "exits": [
+    {
+     "date": "2021-03-10",
+     "price": 6.5,
+     "fraction": 0.5,
+     "kind": "claimed"
+    },
+    {
+     "date": "2021-03-11",
+     "price": 8.0,
+     "fraction": 0.5,
+     "kind": "claimed"
+    }
+   ],
+   "claimed": "+30% and +60% halves (+45% overall)",
+   "source": "2021-03-09/10/11",
+   "computed": {
+    "id": "R41",
+    "S_alert": 233.78,
+    "alert_px_date": "2021-03-09",
+    "rv20": 0.2480542567038184,
+    "rv60": 0.24099611913573782,
+    "syn_iv": 0.2977,
+    "dte": 10,
+    "syn_delta": 0.554,
+    "syn_bs_value": 5.25,
+    "stated_premium": 5.0,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.554,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 10,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0159,
+      "expected_move": 0.0593,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 233.78,
+      "sma200": 213.76,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 5.0,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 6.5,
+       "ret_pct": 30.0,
+       "kind": "claimed",
+       "date": "2021-03-10"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 8.0,
+       "ret_pct": 60.0,
+       "kind": "claimed",
+       "date": "2021-03-11"
+      }
+     ],
+     "overall_ret_pct": 45.0
+    }
+   }
+  },
+  {
+   "id": "R42",
+   "alert_date": "2021-03-10",
+   "ticker": "COST",
+   "company": "Costco",
+   "otype": "call",
+   "strike": 322.5,
+   "expiry": "2021-03-19",
+   "occ": "COST210319C00322500",
+   "limit": 5.5,
+   "targets": [
+    7.15,
+    9.35
+   ],
+   "stop": 3.85,
+   "filled": true,
+   "fill_date": "2021-03-10",
+   "fill_price": 5.5,
+   "exits": [
+    {
+     "date": "2021-03-11",
+     "price": 8.45,
+     "fraction": 0.5,
+     "kind": "claimed"
+    },
+    {
+     "date": "2021-03-11",
+     "price": 9.35,
+     "fraction": 0.5,
+     "kind": "claimed"
+    }
+   ],
+   "claimed": "+53.6% and +70% halves",
+   "source": "2021-03-10/11",
+   "computed": {
+    "id": "R42",
+    "S_alert": 323.83,
+    "alert_px_date": "2021-03-10",
+    "rv20": 0.1915831976877736,
+    "rv60": 0.1702403246965023,
+    "syn_iv": 0.2299,
+    "dte": 9,
+    "syn_delta": 0.553,
+    "syn_bs_value": 5.35,
+    "stated_premium": 5.5,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.553,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 9,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-03-19",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0129,
+      "expected_move": 0.0434,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 323.83,
+      "sma200": 347.39,
+      "passed": false
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90",
+     "regime_200sma"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "filled",
+     "fill_price": 5.5,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 8.45,
+       "ret_pct": 53.6,
+       "kind": "claimed",
+       "date": "2021-03-11"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 9.35,
+       "ret_pct": 70.0,
+       "kind": "claimed",
+       "date": "2021-03-11"
+      }
+     ],
+     "overall_ret_pct": 61.8
+    }
+   }
+  },
+  {
+   "id": "R43",
+   "alert_date": "2021-03-11",
+   "ticker": "COST",
+   "company": "Costco",
+   "otype": "call",
+   "strike": 340.0,
+   "expiry": "2021-04-16",
+   "occ": "COST210416C00340000",
+   "limit": 4.4,
+   "targets": [
+    5.7,
+    7.5
+   ],
+   "stop": 3.1,
+   "filled": "unknown",
+   "source": "2021-03-11 (last letter in dataset - fill never observable)",
+   "flags": [
+    "dataset ends - fill unknown; outcome below is hypothetical-if-filled"
+   ],
+   "computed": {
+    "id": "R43",
+    "S_alert": 328.65,
+    "alert_px_date": "2021-03-11",
+    "rv20": 0.20340246385198082,
+    "rv60": 0.17299826816956435,
+    "syn_iv": 0.2441,
+    "dte": 36,
+    "syn_delta": 0.343,
+    "syn_bs_value": 5.54,
+    "stated_premium": 4.4,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.343,
+      "passed": false,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 36,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-04-16",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0479,
+      "expected_move": 0.0923,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 328.65,
+      "sma200": 347.51,
+      "passed": false
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "delta_060_075",
+     "dte_45_90",
+     "regime_200sma"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "HYPOTHETICAL (fill unverifiable)",
+     "fill_price": 4.4,
+     "legs": [
+      {
+       "fraction": 0.5,
+       "exit_price": 5.7,
+       "ret_pct": 29.5,
+       "kind": "SYNTHETIC",
+       "date": "2021-03-12",
+       "how": "target1"
+      },
+      {
+       "fraction": 0.5,
+       "exit_price": 3.1,
+       "ret_pct": -29.5,
+       "kind": "SYNTHETIC",
+       "date": "2021-03-18",
+       "how": "stop"
+      }
+     ],
+     "overall_ret_pct": 0.0
+    }
+   }
+  },
+  {
+   "id": "R44",
+   "alert_date": "2021-03-11",
+   "ticker": "FCX",
+   "company": "Freeport-McMoRan",
+   "otype": "call",
+   "strike": 33.0,
+   "expiry": "2021-04-16",
+   "occ": "FCX210416C00033000",
+   "limit": 5.0,
+   "targets": [
+    6.5,
+    8.5
+   ],
+   "stop": 3.5,
+   "filled": "unknown",
+   "source": "2021-03-11 (last letter in dataset)",
+   "flags": [
+    "dataset ends - fill unknown; outcome below is hypothetical-if-filled"
+   ],
+   "computed": {
+    "id": "R44",
+    "S_alert": 37.47,
+    "alert_px_date": "2021-03-11",
+    "rv20": 0.7003657264107288,
+    "rv60": 0.6143041146451633,
+    "syn_iv": 0.8404,
+    "dte": 36,
+    "syn_delta": 0.73,
+    "syn_bs_value": 6.35,
+    "stated_premium": 5.0,
+    "gates": {
+     "delta_060_075": {
+      "value": 0.73,
+      "passed": true,
+      "synthetic": true
+     },
+     "dte_45_90": {
+      "value": 36,
+      "passed": false
+     },
+     "monthly_expiry": {
+      "value": "2021-04-16",
+      "passed": true
+     },
+     "earnings_blackout": {
+      "earnings_in_window": [],
+      "passed": true
+     },
+     "breakeven_vs_expected_move": {
+      "breakeven_move": 0.0141,
+      "expected_move": 0.3177,
+      "passed": true,
+      "synthetic": true
+     },
+     "regime_200sma": {
+      "S": 37.47,
+      "sma200": 20.09,
+      "passed": true
+     },
+     "oi_spread": {
+      "passed": null,
+      "note": "NOT reconstructable from free data - known hole"
+     }
+    },
+    "gate_fails": [
+     "dte_45_90"
+    ],
+    "gate_unknowns": [
+     "oi_spread"
+    ],
+    "gate_overall": "FAIL",
+    "outcome": {
+     "status": "HYPOTHETICAL (fill unverifiable)",
+     "fill_price": 5.0,
+     "legs": [
+      {
+       "fraction": 1.0,
+       "exit_price": 3.5,
+       "ret_pct": -30.0,
+       "kind": "SYNTHETIC",
+       "date": "2021-03-23",
+       "how": "stop"
+      }
+     ],
+     "overall_ret_pct": -30.0
+    }
+   }
+  }
+ ]
+}
