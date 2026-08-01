@@ -133,6 +133,11 @@ rem hit + gated long 0-100 on poised-to-move BEFORE the compile, so the workbook
 rem Readiness column is filled. NON-FATAL: on failure the column reads "n/a" and
 rem the compiler will also try to compute it inline itself.
 python scripts\readiness_batch.py %TODAY% >> "%LOG%" 2>&1              || echo WARNING: readiness_batch failed - Readiness column will read n/a >> "%LOG%"
+rem rest_continuation_tracker (pre-registered 2026-08-01, Omar-adopted): tags every
+rem candidate as rest-continuation cohort member / control per the FROZEN rule in
+rem research\rest-continuation-preregistration.md. Measurement only - no trading
+rem power. Runs AFTER readiness_batch (needs the readiness stamp). NON-FATAL.
+python scripts\rest_continuation_tracker.py %TODAY% >> "%LOG%" 2>&1    || echo WARNING: rest_continuation_tracker failed - cohort not tagged tonight >> "%LOG%"
 python scripts\rotation_radar.py >> "%LOG%" 2>&1                       || echo WARNING: rotation_radar failed >> "%LOG%"
 python scripts\ignition_sweep.py >> "%LOG%" 2>&1                       || echo WARNING: ignition_sweep failed >> "%LOG%"
 if exist "%RAWSWEEP%" (
