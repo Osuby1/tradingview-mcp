@@ -61,3 +61,12 @@ re-appearances tracked but excluded from the primary comparison).
 
 Nothing changes: gates, sizing, vetoes, readiness label, no-chase — all
 unchanged. The cohort tag is measurement only. Nobody trades off it.
+
+## Addendum 2026-08-01 (display only — rule/metric/schedule untouched)
+
+Omar directed the cohort tag be SHOWN on recommendations under a
+self-explanatory name: **"RESTED LEADER — on trial"**. Appears as a column
+on the workbook's Fresh Buys / Gated Longs tabs and on per-pick recs in
+briefs. Presentation only: the tag carries zero weight in gates, sizing,
+ranking, or advice until the 2026-09-25 verdict. Ledger keys and the frozen
+rule above are unchanged.

@@ -588,6 +588,34 @@ READY_COL = Col("readiness", "Readiness 0-100", 42,
                 "the other's jersey. Graded in the Friday reviews; it earns "
                 "veto power only if the data proves it.")
 
+# RESTED LEADER tag (Omar 2026-08-01): the pre-registered rest-continuation
+# cohort, shown under a name that says what it is - a PROVEN leader (strong
+# trend, buyers in control) RESTING quietly (low readiness, calm volume),
+# the profile behind most of July's +15% winners. ON TRIAL until the frozen
+# 2026-09-25 verdict: display only, carries NO weight in gates/sizing/rank.
+REST_COL = Col("rest_tag", "Rested Leader", 20,
+               "RESTED LEADER = this name fits the pre-registered second-leg "
+               "profile tonight: proven trend (ADX 25+), buyers firmly in "
+               "control (DI margin 10+), RESTING (readiness <=30) on quiet "
+               "volume (RVOL <1.2). July's +15% winners were overwhelmingly "
+               "this shape - NOT coiled squeezes. ON TRIAL (an experiment, "
+               "verdict 2026-09-25): the tag carries ZERO weight in gates, "
+               "sizing or ranking until the forward test proves it. Blank = "
+               "does not fit the profile tonight - not a defect.")
+try:
+    _rest_led = json.load(open(os.path.join(
+        REPO, "research", "rest-continuation-ledger.json")))
+    REST_MEMBERS = {r["sym"] for r in _rest_led.get("entries", [])
+                    if r.get("date") == DATE and r.get("member")}
+except Exception:
+    REST_MEMBERS = set()
+
+
+def _inject_rest(rows_):
+    for _r in rows_:
+        _r["rest_tag"] = ("RESTED LEADER - on trial"
+                          if _r.get("sym") in REST_MEMBERS else None)
+
 
 def _readiness_cell(entry):
     """'62 - <driver>' from an augmented entry, or 'n/a' if the batch has not
@@ -804,7 +832,9 @@ def fresh_rows():
 _fresh = fresh_rows()
 ws = wb.create_sheet("2 - Fresh Buys")
 _inject_cat(_fresh)
-write_table(ws, FRESH_COLS + [CAT_COL, CATVIEW_COL], _fresh, row_fill=verdict_fill)
+_inject_rest(_fresh)
+write_table(ws, FRESH_COLS + [REST_COL, CAT_COL, CATVIEW_COL], _fresh,
+            row_fill=verdict_fill)
 
 # ---- sector-in-rotation highlight (Omar 2026-08-01): green Sector cell when a
 # radar group covering that TradingView sector is IGNITING today. Mapping is
@@ -832,7 +862,7 @@ SECTOR_RADAR_MAP = {
 _igniting = {tk for tk, st in radar_states.items() if st == "IGNITING"}
 _hot_sectors = {sec for sec, tks in SECTOR_RADAR_MAP.items()
                 if any(tk in _igniting for tk in tks)}
-_sector_col = next(i for i, c in enumerate(FRESH_COLS + [CAT_COL, CATVIEW_COL], 1)
+_sector_col = next(i for i, c in enumerate(FRESH_COLS + [REST_COL, CAT_COL, CATVIEW_COL], 1)
                    if c.key == "sector")
 for _r in range(2, ws.max_row + 1):
     _cell = ws.cell(row=_r, column=_sector_col)
@@ -879,8 +909,9 @@ for _i, _g in enumerate(_gated, 1):
                          + (_g.get("note") or "")),
     })
 _inject_cat(grows)
+_inject_rest(grows)
 ws = wb.create_sheet("2b - Gated Longs")
-write_table(ws, GATED_COLS + [CAT_COL, CATVIEW_COL], grows)
+write_table(ws, GATED_COLS + [REST_COL, CAT_COL, CATVIEW_COL], grows)
 ws.append([])
 ws.append([safe(f"GATED LONGS (all ages): {len(grows)} names currently in BUY mode that clear the "
                 "FULL gate stack - not just fresh flips (Fresh Buys is <=5 sessions). Ranked "
