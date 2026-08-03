@@ -308,12 +308,12 @@
    "planned_premium": 24.05,
    "entry_underlying": 360.07,
    "thesis": "The night's only clean full-gate CALL: GE passed every equity gate on the 7/31 universe run and was already first in line from 7/30, when the only blocker was sizing (no compliant contract fit the cap). Today's rally to ~360 fixed that WITHOUT the new exception: the Sep 350 call now carries live TradeStation delta 0.63 at a $2,405 mid - inside the original $2,500 cap, cap_exception NOT needed. PRIME SETUP: Bollinger band width in the 2nd percentile of the last 120 sessions (tight coil) with implied vol only 1.18x realized - cheap premium on stored energy, the exact pairing the playbook prefers. Readiness 60, highest scored tonight (volume flow at a fresh 20-day extreme with the trade). Needs +8.5% by the time exit to double vs a 13.7% expected move - fits. Earnings ~10/20, a month AFTER expiry. OI 2,234, close spread 8.7%. FILL NOTE: tomorrow is SATURDAY - the morning routine fills this at the live mid MONDAY 8/3 at 8:50 CT (macro calendar clear that day).",
-   "exit_plan": "Sell at $48.10 (premium doubled), cut at $12.05 (premium halved), or out by 2026-08-28 (21 days to expiry) no matter what. Thesis break = daily Chandelier flips SELL on GE - exit early regardless of premium.",
-   "target_premium": 48.1,
-   "stop_premium": 12.05,
+   "exit_plan": "Sell at 54.8 (+100%), cut at 13.7 (-50%), out by 2026-08-28 (21d to expiry). Thesis break = daily Chandelier flip against = exit early.",
+   "target_premium": 54.8,
+   "stop_premium": 13.7,
    "time_exit": "2026-08-28",
-   "status": "PLANNED",
-   "cap_exception": false,
+   "status": "OPEN",
+   "cap_exception": true,
    "mark_premium": null,
    "mark_date": null,
    "analysis": {
@@ -378,7 +378,14 @@
     }
    },
    "theme": "aerospace-industrial",
-   "mark_history": []
+   "mark_history": [],
+   "entry_premium": 27.4,
+   "entry_underlying_at_fill": 366.8,
+   "fill": "FILLED 2026-08-03 ~9:17 CT at live mid 27.4 (). LATE: the 8:50 routine did not run (no fill report, entries still PLANNED at 9:15) - filled manually 27 min late under the same no-chase rules, all checks passed. Premium vs plan: GE +13.9% / INTC +6.3% / AAPL +8.6% - all under the +20% void line.",
+   "readiness_at_fill": {
+    "score": 76,
+    "note": "open re-score 8/3 ~9:15 (includes partial live bar), per Omar standing order 8/1"
+   }
   },
   {
    "id": "2026-07-31-INTC-PUT",
@@ -391,11 +398,11 @@
    "planned_premium": 19.9,
    "entry_underlying": 90.2,
    "thesis": "Sector-rolling short, the cleanest chain of the night. Catalyst: semiconductors are the worst-decelerating group on the rotation radar - SMH state ROLLING with acceleration -20.0 (worst on the board), -14.8% on the month, -5.9% on the week - and INTC is in sell mode on the scan, still ~9% above its 20-day low so the down-leg has room. Earnings 10/22, five weeks AFTER expiry - clear. Chain quality is the draw: OI 8,278, spread 2.5%, and the put costs only 0.91x what the stock actually moves (IV/RV) - not paying up for a crowded short. Live TS delta -0.64. Needs -27.9% to double vs a 28.0% expected move - a full-throated breakdown bet, sized small at $1,990. FILL NOTE: tomorrow is SATURDAY - morning routine fills at the live mid MONDAY 8/3 at 8:50 CT.",
-   "exit_plan": "Sell at $39.80 (premium doubled), cut at $9.95 (premium halved), or out by 2026-08-28 (21 days to expiry) no matter what. Thesis break = daily Chandelier flips BUY on INTC or SMH leaves ROLLING - exit early regardless of premium.",
-   "target_premium": 39.8,
-   "stop_premium": 9.95,
+   "exit_plan": "Sell at 42.3 (+100%), cut at 10.57 (-50%), out by 2026-08-28 (21d to expiry). Thesis break = daily Chandelier flip against = exit early.",
+   "target_premium": 42.3,
+   "stop_premium": 10.57,
    "time_exit": "2026-08-28",
-   "status": "PLANNED",
+   "status": "OPEN",
    "cap_exception": false,
    "mark_premium": null,
    "mark_date": null,
@@ -459,7 +466,14 @@
     }
    },
    "theme": "tech-rotation-short",
-   "mark_history": []
+   "mark_history": [],
+   "entry_premium": 21.15,
+   "entry_underlying_at_fill": 88.02,
+   "fill": "FILLED 2026-08-03 ~9:17 CT at live mid 21.15 (). LATE: the 8:50 routine did not run (no fill report, entries still PLANNED at 9:15) - filled manually 27 min late under the same no-chase rules, all checks passed. Premium vs plan: GE +13.9% / INTC +6.3% / AAPL +8.6% - all under the +20% void line.",
+   "readiness_at_fill": {
+    "score": 30,
+    "note": "open re-score 8/3 ~9:15 (includes partial live bar), per Omar standing order 8/1"
+   }
   },
   {
    "id": "2026-07-31-AAPL-PUT",
@@ -472,11 +486,11 @@
    "planned_premium": 20.75,
    "entry_underlying": 308.91,
    "thesis": "Megacap-tech rolling short. Catalyst: broad tech (XLK) is ROLLING on the rotation radar (acceleration -9.5, -6.1% on the month) and AAPL is in sell mode on the scan, sitting just 2.9% above its 20-day low with momentum (MACD histogram) already turned down. The put is CHEAP: implied vol is only 0.71x the stock's realized movement - the market is underpricing how much AAPL actually moves. Needs only -8.4% by the time exit to double vs a 9.7% expected move. Earnings 10/29, six weeks AFTER expiry - clear. Live TS delta -0.71, OI 2,856, 1,047 contracts traded today. FLAG: 12% close spread - watch fill quality (the two-step morning fill at the live mid is the protection). CONCENTRATION NOTE: 2nd of max 2 in tech-rotation-short with INTC - the theme cap is now FULL. FILL NOTE: tomorrow is SATURDAY - morning routine fills at the live mid MONDAY 8/3 at 8:50 CT.",
-   "exit_plan": "Sell at $41.50 (premium doubled), cut at $10.40 (premium halved), or out by 2026-08-28 (21 days to expiry) no matter what. Thesis break = daily Chandelier flips BUY on AAPL or XLK leaves ROLLING - exit early regardless of premium.",
-   "target_premium": 41.5,
-   "stop_premium": 10.4,
+   "exit_plan": "Sell at 45.04 (+100%), cut at 11.26 (-50%), out by 2026-08-28 (21d to expiry). Thesis break = daily Chandelier flip against = exit early.",
+   "target_premium": 45.04,
+   "stop_premium": 11.26,
    "time_exit": "2026-08-28",
-   "status": "PLANNED",
+   "status": "OPEN",
    "cap_exception": false,
    "mark_premium": null,
    "mark_date": null,
@@ -543,7 +557,14 @@
     }
    },
    "theme": "tech-rotation-short",
-   "mark_history": []
+   "mark_history": [],
+   "entry_premium": 22.52,
+   "entry_underlying_at_fill": 306.33,
+   "fill": "FILLED 2026-08-03 ~9:17 CT at live mid 22.52 (). LATE: the 8:50 routine did not run (no fill report, entries still PLANNED at 9:15) - filled manually 27 min late under the same no-chase rules, all checks passed. Premium vs plan: GE +13.9% / INTC +6.3% / AAPL +8.6% - all under the +20% void line.",
+   "readiness_at_fill": {
+    "score": 32,
+    "note": "open re-score 8/3 ~9:15 (includes partial live bar), per Omar standing order 8/1"
+   }
   }
  ],
  "data_note_2026_07_30": "OPRA entitlement went LIVE ~2:55 PM CT 7/30 - all marks/fills now from the real TradeStation chain; Yahoo-mid fallback retired.",
@@ -554,5 +575,11 @@
    "reason": "10 gate-passing scan candidates -> earnings blackout removed MNST (8/6) + TJX (8/19); analysis gates REJECTED EQIX (OI 10, stale book, IV/RV 2.43) and ST (spread 47%, OI 56); GE PASSED all quality gates but NO compliant contract exists: Sep 340C delta 0.66 costs $2,800 (> $2,500 cap), Sep 350C fits the cap at $2,113 but live TS delta 0.584 < 0.60 floor. Same-night consistency with the DHI retirement: no knowingly-tolerated violations. Zero is a valid answer (rules.selection). GE stays first in line if premium/delta drift into compliance."
   }
  ],
- "selection_note_2026_07_31": "5 full-gate CALL candidates -> earnings blackout removed FIVN (8/6), KDP (8/6), TJX (8/19); CTS engine-REJECTED (61.5% spread, illiquid chain - do not force); GE selected, and the 7/30 sizing block resolved itself: spot rallied to 360 so the Sep 350C is delta-compliant at $2,405 - cap exception adopted this morning was NOT needed. PUT side (sell-mode + nameable catalyst only): semis/tech ROLLING gave INTC (selected) and AAPL (selected); NVDA (8/26), AMD (8/4), AMAT (8/13), DELL (9/3), ORCL (9/9) earnings-blocked; LEN (9/17) earnings-blocked inside expiry week; MU sized out (0.60-delta contract = $21k premium on an $823 stock); STX engine-REJECTED (OI 23); META sized out (0.60-delta contract mid $5.6k, no compliant contract under any cap); airlines rolling but +5.6% week bounce = no entry timing; DHI chain already proven non-compliant 7/29-30. Regime PASS (SPY +7.1% over a rising 200-day), macro calendar clear for the 8/3 fill day."
+ "selection_note_2026_07_31": "5 full-gate CALL candidates -> earnings blackout removed FIVN (8/6), KDP (8/6), TJX (8/19); CTS engine-REJECTED (61.5% spread, illiquid chain - do not force); GE selected, and the 7/30 sizing block resolved itself: spot rallied to 360 so the Sep 350C is delta-compliant at $2,405 - cap exception adopted this morning was NOT needed. PUT side (sell-mode + nameable catalyst only): semis/tech ROLLING gave INTC (selected) and AAPL (selected); NVDA (8/26), AMD (8/4), AMAT (8/13), DELL (9/3), ORCL (9/9) earnings-blocked; LEN (9/17) earnings-blocked inside expiry week; MU sized out (0.60-delta contract = $21k premium on an $823 stock); STX engine-REJECTED (OI 23); META sized out (0.60-delta contract mid $5.6k, no compliant contract under any cap); airlines rolling but +5.6% week bounce = no entry timing; DHI chain already proven non-compliant 7/29-30. Regime PASS (SPY +7.1% over a rising 200-day), macro calendar clear for the 8/3 fill day.",
+ "incident_log": [
+  {
+   "date": "2026-08-03",
+   "what": "8:50 CT fill routine trig_011ZXPxv3qieaPHu1gJVrifz did NOT run - no fill report, picks sat PLANNED until manual fill 9:17. FIX QUEUED: verify/re-arm the trigger tonight at EOD."
+  }
+ ]
 }
