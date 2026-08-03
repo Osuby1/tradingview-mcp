@@ -1,0 +1,6 @@
+[
+ {"sym": "NASDAQ:HQY", "exchange": "NASDAQ", "level": 102.60, "delete_id": 5285195440,
+  "message": "HQY 102.60 = ENTRY (amended 8/3 plan, was 100.61): limit sits here - BUY half 350sh if tape orderly, second 350 on hold/strength. Stop 98.79 (ratcheted Chandelier). Risk $2.7k. Gate-passer, readiness 60, Rested Leader alum. Earnings 9/1 - trim before."},
+ {"sym": "NASDAQ:HQY", "exchange": "NASDAQ", "level": 98.79, "delete_id": 5285195607,
+  "message": "HQY 98.79 = STOP (ratcheted Chandelier line, 8/3 amended plan): if filled 700sh from 102.60, exit ALL - same-day, no negotiation. If never filled, this fire = setup invalidated, cancel the resting limit."}
+]
