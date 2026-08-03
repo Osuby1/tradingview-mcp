@@ -302,6 +302,38 @@
     "label": "uncalibrated"
    },
    "rested_leader": true
+  },
+  {
+   "id": "2026-08-03-GE-call-REAL",
+   "date": "2026-08-03",
+   "sym": "GE",
+   "dir": "long-call-REAL",
+   "fill": "FILLED 2026-08-03 ~9:50 CT (Omar-reported): BOUGHT 1 GE Sep 18 2026 350 CALL @ 28.00 = $2,800. AT the recommended limit (28.00, ceiling 28.85) = zero slippage vs plan. GRADE: executed per plan.",
+   "override": "PAPER-ONLY OVERRIDE, Omar-authorized: the 7/29 standing order keeps the options overlay paper-only until the Friday scorecard proves it (overlay is 1 week old, +$190 realized). Omar chose to execute this one real after the risk was stated plainly. Flagged once per the anti-sycophancy contract, logged, not hidden. The paper GE call (2026-07-31-GE-CALL, filled 27.40) stays open as the control twin.",
+   "thesis": "Strongest name on the board by every layer: only clean full-gate pass 7/31, readiness 76 at the 8/3 open (max squeeze + volume extreme + momentum turned, coil resolving upward), earnings clear to late Oct, delta ~0.69, market tailwind. Cap-exception structure (one contract >$2.5k <=$3k).",
+   "plan": {
+    "contract": "GE 2026-09-18 350C x1",
+    "entry_premium": 28.0,
+    "cost": 2800,
+    "target_premium": 56.0,
+    "stop_premium": 14.0,
+    "time_exit": "2026-08-28 (21d to expiry)",
+    "thesis_break": "GE daily Chandelier flips SELL (line ~342) = exit early regardless of premium",
+    "max_loss": 2800,
+    "pct_of_account": 0.28
+   },
+   "readiness_at_fill": {
+    "score": 76,
+    "components": {
+     "squeeze": 20,
+     "trigger": 6,
+     "volume": 20,
+     "momentum": 20,
+     "rel_strength": 10
+    },
+    "label": "uncalibrated"
+   },
+   "grade_when_closed": null
   }
  ]
 }
