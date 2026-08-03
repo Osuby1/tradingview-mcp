@@ -268,6 +268,40 @@
    "thesis": "Midterm-correction insurance per research/spy-midterm-put-spread-plan.md (pre-registered July). Entered on the FINAL day of the tranche-1 window with the plan's own entry conditions back in compliance: VIX 17.4 (<20 abort line), SPY 742.55 (>735 line), Sept hike odds 56%.",
    "exits": "Per plan: sell into panic (VIX >28-30 or SPY -10% to -12%); reassess if hike odds collapse; FLAT BY EARLY NOVEMBER regardless (position is insurance, not a keeper). Tranche 2 window Aug 10-21 on VIX <15 - requires margin account or main-broker execution for the spread version.",
    "risk_note": "Max loss $1,487 (0.15% of acct). Held in TS cash acct - $513 cash remains there."
+  },
+  {
+   "id": "2026-08-03-HQY-long",
+   "date": "2026-08-03",
+   "sym": "HQY",
+   "dir": "long",
+   "fill": "STAGED premarket ~8:25 CT - limit order to be placed by Omar: BUY 700 HQY, limit 100.61 (plan level = Fri close), in halves 350+350, stop 96.90. NOT FILLED YET.",
+   "thesis": "Gated-long CANDIDATE passing every gate Fri 7/31 (regime PASS, ADX 34.6, DI margin +19, ZLSMA clear, liquid 7M/day). Fits the winner-study rest-continuation profile (adopted 8/1): proven trend RESTING on quiet volume (RVOL 0.55, readiness 26). RESTED LEADER cohort member (tag = on trial, carries no weight - the gate pass authorizes the trade, not the tag). Healthcare (HSA custodian) - defensive-adjacent, low overlap with book (consumer/staples/industrial) and with the semi/carry short exposure.",
+   "plan": {
+    "entry_limit": 100.61,
+    "halves": "350+350",
+    "shares": 700,
+    "notional": 70427,
+    "stop": 96.9,
+    "stop_basis": "Chandelier line 96.90 (3.7%)",
+    "risk_at_stop": 2597,
+    "exit_rule": "stop / thesis break / 20pct ratchet once well in profit - no fixed target (7/25 exit redesign)",
+    "earnings": "2026-09-01 - trim/decide before print"
+   },
+   "risk_context": "Sized to keep worst-case week at the breaker: existing 3-position stop-risk ~7.4k + 2.6k = ~10.0k = the -10k weekly breaker exactly. Full-size 990sh (3.7k risk) was offered and NOT chosen for this reason.",
+   "grade_when_closed": null,
+   "readiness_at_stage": {
+    "score": 26,
+    "components": {
+     "squeeze": 0,
+     "trigger": 6,
+     "volume": 10,
+     "momentum": 10,
+     "rel_strength": 0
+    },
+    "driver": "bands 62nd pctile; 4.5pct below 20-day high; volume leaning with; momentum turning against; no RS extreme",
+    "label": "uncalibrated"
+   },
+   "rested_leader": true
   }
  ]
 }
