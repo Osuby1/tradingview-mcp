@@ -565,6 +565,34 @@
     "score": 32,
     "note": "open re-score 8/3 ~9:15 (includes partial live bar), per Omar standing order 8/1"
    }
+  },
+  {
+   "id": "2026-08-03-DAL-CALL",
+   "date": "2026-08-03",
+   "sym": "DAL",
+   "direction": "CALL",
+   "expiry": "2026-09-18",
+   "strike": 87.5,
+   "contracts": 3,
+   "planned_premium": 7.65,
+   "entry_underlying": 87.02,
+   "status": "PLANNED",
+   "thesis": "PRIME SETUP (squeeze 2nd pctile + cheap premium - the one tagged pattern with published history) on a fresh full-gate pass; readiness 70; airlines just repaired off ROLLING on the radar (JETS state change today, UAL +5.8 confirming group turn); earnings clear to Oct 8. Delta .66, OI 1387, spread 7.8%.",
+   "exit_plan": "Sell 15.30 (+100%), cut 3.83 (-50%), out by 2026-08-28; thesis break = daily Chandelier SELL flip."
+  },
+  {
+   "id": "2026-08-03-UAL-CALL",
+   "date": "2026-08-03",
+   "sym": "UAL",
+   "direction": "CALL",
+   "expiry": "2026-09-18",
+   "strike": 120,
+   "contracts": 1,
+   "planned_premium": 13.6,
+   "entry_underlying": 128.39,
+   "status": "PLANNED",
+   "thesis": "Fresh full-gate pass tonight on OUR scan (independent of Markman, who is riding UAL Sep 130s +66%); airlines group repairing; readiness 46; earnings clear to Oct 21. Delta .69, OI 2579, spread 5.1%. Deliberate head-to-head: our 120C (delta .69) vs their 130C (delta ~.55) on the same thesis - the trial in miniature.",
+   "exit_plan": "Sell 27.20 (+100%), cut 6.80 (-50%), out by 2026-08-28; thesis break = daily Chandelier SELL flip."
   }
  ],
  "data_note_2026_07_30": "OPRA entitlement went LIVE ~2:55 PM CT 7/30 - all marks/fills now from the real TradeStation chain; Yahoo-mid fallback retired.",
