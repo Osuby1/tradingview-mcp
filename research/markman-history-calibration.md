@@ -191,3 +191,31 @@ subscription costs.**
 
 *Built 2026-08-03 from `research/markman-archive/markman-archive-2026-08-03.json`.
 Prior audit: `research/markman-ledger.json` (commit 23be6c7).*
+
+## Portfolio-page verification (2026-08-03 PM, Omar-requested)
+
+Checked app.markmancapital.net/portfolios/digital-leverage ("Million Dollar
+Portfolio" embed) row-by-row vs the newsletter reconstruction:
+- Arithmetic: every row's Total Chg % computes correctly from its own
+  Entry/Last (~15 spot-checks, all pass).
+- Losers ARE listed (unlike the newsletters' silence): IONQ/FCX/OKLO/USO/
+  RTX-May -100%, TOL -96%, CCJ -94%, HOOD/XEL -90%, TSLA back-half -97%,
+  ABBV third -98.28%, open MDB -97% and DELL third -93% shown.
+- ~25 of 28 comparable closed trades match our reconstruction exactly or as
+  half-averages (MAR 144, MO-Jan 53.05, PG 7.14, MP, WMT x2, ON, CCJ, INTC,
+  BA, APLD, TTWO, META, AMZN, DELL, MRNA, SBUX 0.0, BIDU-Dec 38.03).
+- THREE PROBLEMS: (1) AMD Feb: portfolio books exit 6.18 (+31.49%) but the
+  1/20 newsletter told subscribers "Sell at $5.50" (+17.0%) - the exit is
+  booked 12% better than the price subscribers were alerted to take, and
+  the same issue bragged "31% gain" same day. (2) MO Aug 70C: booked +38%
+  (exit 6.90) vs newsletter's only statement "closed MO for a small
+  profit" - no subscriber-visible exit price exists; unverifiable and
+  incongruent. (3) The worthless-expired BIDU tracked half (123.82 close
+  vs 130 strike) is absent from the table entirely. Also watch: today's
+  UAL half listed at exit 8.27 vs the morning alert "sell at 7.70" - same
+  better-than-alerted-fill pattern as AMD.
+- RTX-Dec listed LOWER than our reconstruction (+18.5 vs +26.4) -
+  errors run both directions on small stuff; the directional pattern is in
+  the exits they brag about.
+- Pre-archive rows (Jun-Nov 2025) arithmetic-checked only - no newsletters
+  held to verify against.
