@@ -1,0 +1,1922 @@
+{
+ "source": "research/markman-archive/markman-archive-2026-08-03.json",
+ "built": "2026-08-03",
+ "method": "see research/markman-history-calibration.md",
+ "option_trades": [
+  {
+   "id": "MAR-D25-290C",
+   "ticker": "MAR",
+   "type": "call",
+   "strike": 290,
+   "expiry": "2025-12-19",
+   "entry_date": "2025-11-21",
+   "entry_price": 6.3,
+   "dte_at_entry": 28,
+   "underlying_at_entry": 295.84,
+   "moneyness_pct": 2.0,
+   "entry_implied_vol": 0.07,
+   "est_delta": 0.85,
+   "stock_vs_200d_pct": 13.4,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 7.6,
+   "spy_drawdown_pct": -4.1,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2025-11-24",
+     "exit_price": 12.6,
+     "claimed_pct": 100.0,
+     "computed_pct": 100.0,
+     "status": "reported",
+     "note": "letter says 'Nov 22' (a Saturday); nearest session 11/24"
+    },
+    {
+     "fraction": 0.5,
+     "date": "2025-11-25",
+     "exit_price": 18.15,
+     "claimed_pct": 188.1,
+     "computed_pct": 188.1,
+     "status": "derived",
+     "note": "price implied from claimed +188.10%"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 144.05,
+   "realized_partial_pct": null,
+   "holding_days": 4,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "BIDU-D25-130C",
+   "ticker": "BIDU",
+   "type": "call",
+   "strike": 130,
+   "expiry": "2025-12-19",
+   "entry_date": "2025-11-06",
+   "entry_price": 6.89,
+   "dte_at_entry": 43,
+   "underlying_at_entry": 127.04,
+   "moneyness_pct": -2.3,
+   "entry_implied_vol": 0.47,
+   "est_delta": 0.48,
+   "stock_vs_200d_pct": 30.7,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 10.2,
+   "spy_drawdown_pct": -2.5,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2025-11-06",
+     "exit_price": 9.51,
+     "claimed_pct": 38.0,
+     "computed_pct": 38.03,
+     "status": "derived",
+     "note": "same-day sale, price implied from +38%"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 38.03,
+   "realized_partial_pct": null,
+   "holding_days": 0,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": "Official portfolio sold full position same day. An informally 'tracked' second half was never resolved; BIDU closed 123.82 on 12/19 expiry -> that half expired worthless (-100%), never reported. VANISHED LOSS (shadow, excluded from official stats)."
+  },
+  {
+   "id": "CVX-N25-165C",
+   "ticker": "CVX",
+   "type": "call",
+   "strike": 165,
+   "expiry": "2025-11-21",
+   "entry_date": "2025-09-24",
+   "entry_price": 3.48,
+   "dte_at_entry": 58,
+   "underlying_at_entry": 159.18,
+   "moneyness_pct": -3.5,
+   "entry_implied_vol": 0.23,
+   "est_delta": 0.37,
+   "stock_vs_200d_pct": 11.1,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 11.0,
+   "spy_drawdown_pct": -0.9,
+   "earnings_inside_hold": [
+    "2025-10-31"
+   ],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2025-11-21",
+     "exit_price": 0.0,
+     "claimed_pct": -100.0,
+     "computed_pct": -100.0,
+     "status": "reported",
+     "note": "'Calls expired worth $0'"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": -100.0,
+   "realized_partial_pct": null,
+   "holding_days": 58,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": "Entry predates archive start; reconstructed from ledger line."
+  },
+  {
+   "id": "IONQ-J26-50C",
+   "ticker": "IONQ",
+   "type": "call",
+   "strike": 50,
+   "expiry": "2026-01-16",
+   "entry_date": "2025-12-05",
+   "entry_price": 6.7,
+   "dte_at_entry": 42,
+   "underlying_at_entry": 52.69,
+   "moneyness_pct": 5.4,
+   "entry_implied_vol": 0.76,
+   "est_delta": 0.63,
+   "stock_vs_200d_pct": 24.2,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 11.3,
+   "spy_drawdown_pct": -0.2,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.667,
+     "date": "2025-12-10",
+     "exit_price": 8.59,
+     "claimed_pct": 28.21,
+     "computed_pct": 28.21,
+     "status": "reported",
+     "note": ""
+    },
+    {
+     "fraction": 0.333,
+     "date": "2026-01-16",
+     "exit_price": 1.16,
+     "claimed_pct": -83.0,
+     "computed_pct": -82.69,
+     "status": "reported",
+     "note": ""
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": -8.72,
+   "realized_partial_pct": null,
+   "holding_days": 42,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [
+    [
+     "2025-12-15",
+     -8.5
+    ],
+    [
+     "2025-12-16",
+     7.8
+    ],
+    [
+     "2025-12-17",
+     -7.7
+    ],
+    [
+     "2025-12-22",
+     11.1
+    ],
+    [
+     "2025-12-26",
+     -7.7
+    ]
+   ],
+   "note": ""
+  },
+  {
+   "id": "MO-J26-60P",
+   "ticker": "MO",
+   "type": "put",
+   "strike": 60,
+   "expiry": "2026-01-16",
+   "entry_date": "2025-12-08",
+   "entry_price": 3.28,
+   "dte_at_entry": 39,
+   "underlying_at_entry": 58.11,
+   "moneyness_pct": -3.1,
+   "entry_implied_vol": 0.29,
+   "est_delta": -0.62,
+   "stock_vs_200d_pct": 2.7,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 10.9,
+   "spy_drawdown_pct": -0.5,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-01-07",
+     "exit_price": 5.02,
+     "claimed_pct": 53.0,
+     "computed_pct": 53.05,
+     "status": "derived",
+     "note": "price implied from +53%"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 53.05,
+   "realized_partial_pct": null,
+   "holding_days": 30,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "RTX-D25-175C",
+   "ticker": "RTX",
+   "type": "call",
+   "strike": 175,
+   "expiry": "2025-12-19",
+   "entry_date": "2025-11-21",
+   "entry_price": 5.3,
+   "dte_at_entry": 28,
+   "underlying_at_entry": 169.68,
+   "moneyness_pct": -3.0,
+   "entry_implied_vol": 0.4,
+   "est_delta": 0.41,
+   "stock_vs_200d_pct": 17.4,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 7.6,
+   "spy_drawdown_pct": -4.1,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2025-12-15",
+     "exit_price": 6.7,
+     "claimed_pct": 18.52,
+     "computed_pct": 26.42,
+     "status": "reported",
+     "note": "claimed 18.52% but 6.70/5.30 = +26.4%; UNDER-claimed / arithmetic error"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 26.42,
+   "realized_partial_pct": null,
+   "holding_days": 24,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "ABBV-J26-230C",
+   "ticker": "ABBV",
+   "type": "call",
+   "strike": 230,
+   "expiry": "2026-01-16",
+   "entry_date": "2025-12-15",
+   "entry_price": 5.8,
+   "dte_at_entry": 32,
+   "underlying_at_entry": 227.45,
+   "moneyness_pct": -1.1,
+   "entry_implied_vol": 0.26,
+   "est_delta": 0.46,
+   "stock_vs_200d_pct": 14.7,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 10.0,
+   "spy_drawdown_pct": -1.2,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.667,
+     "date": "2026-01-07",
+     "exit_price": 7.8,
+     "claimed_pct": 34.48,
+     "computed_pct": 34.48,
+     "status": "reported",
+     "note": "GTC at 7.80 filled"
+    },
+    {
+     "fraction": 0.333,
+     "date": "2026-01-13",
+     "exit_price": 0.09,
+     "claimed_pct": null,
+     "computed_pct": -98.45,
+     "status": "estimated",
+     "note": "sold 'at the market' 1/13, ABBV 215.65, 3 DTE; fill never reported. UNREPORTED LOSING LEG"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": -9.78,
+   "realized_partial_pct": null,
+   "holding_days": 29,
+   "any_estimated_leg": true,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "SBUX-J26-85C",
+   "ticker": "SBUX",
+   "type": "call",
+   "strike": 85,
+   "expiry": "2026-01-16",
+   "entry_date": "2025-12-22",
+   "entry_price": 4.3,
+   "dte_at_entry": 25,
+   "underlying_at_entry": 86.17,
+   "moneyness_pct": 1.4,
+   "entry_implied_vol": 0.41,
+   "est_delta": 0.57,
+   "stock_vs_200d_pct": 0.5,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 10.5,
+   "spy_drawdown_pct": -0.3,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-01-06",
+     "exit_price": 4.3,
+     "claimed_pct": 0.0,
+     "computed_pct": 0.0,
+     "status": "inferred",
+     "note": "GTC sell at 4.30 (breakeven); SBUX blew through 87-90 by 1/6 so fill certain; never confirmed in letter"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 0.0,
+   "realized_partial_pct": null,
+   "holding_days": 15,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "WMT-F26-115C",
+   "ticker": "WMT",
+   "type": "call",
+   "strike": 115,
+   "expiry": "2026-02-20",
+   "entry_date": "2026-01-09",
+   "entry_price": 4.1,
+   "dte_at_entry": 42,
+   "underlying_at_entry": 114.53,
+   "moneyness_pct": -0.4,
+   "entry_implied_vol": 0.28,
+   "est_delta": 0.5,
+   "stock_vs_200d_pct": 14.4,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 10.6,
+   "spy_drawdown_pct": 0.0,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-01-12",
+     "exit_price": 7.0,
+     "claimed_pct": 70.73,
+     "computed_pct": 70.73,
+     "status": "reported",
+     "note": ""
+    },
+    {
+     "fraction": 0.5,
+     "date": "2026-01-15",
+     "exit_price": 7.45,
+     "claimed_pct": 81.71,
+     "computed_pct": 81.71,
+     "status": "reported",
+     "note": "'stopped out at 7.45'"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 76.22,
+   "realized_partial_pct": null,
+   "holding_days": 6,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": "Ledger says bought 'December 9th' but the buy order ran Jan 9 and position first listed Jan 12 -> Dec 9 is a date typo for Jan 9."
+  },
+  {
+   "id": "MP-F26-60C",
+   "ticker": "MP",
+   "type": "call",
+   "strike": 60,
+   "expiry": "2026-02-20",
+   "entry_date": "2026-01-07",
+   "entry_price": 6.6,
+   "dte_at_entry": 44,
+   "underlying_at_entry": 62.5,
+   "moneyness_pct": 4.2,
+   "entry_implied_vol": 0.62,
+   "est_delta": 0.62,
+   "stock_vs_200d_pct": 24.3,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 10.1,
+   "spy_drawdown_pct": -0.3,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-01-12",
+     "exit_price": 9.2,
+     "claimed_pct": 39.39,
+     "computed_pct": 39.39,
+     "status": "reported",
+     "note": "'closed MP yesterday at 9.20'"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 39.39,
+   "realized_partial_pct": null,
+   "holding_days": 5,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "AMD-F26-270C",
+   "ticker": "AMD",
+   "type": "call",
+   "strike": 270,
+   "expiry": "2026-02-20",
+   "entry_date": "2026-01-16",
+   "entry_price": 4.7,
+   "dte_at_entry": 35,
+   "underlying_at_entry": 231.83,
+   "moneyness_pct": -14.1,
+   "entry_implied_vol": 0.57,
+   "est_delta": 0.22,
+   "stock_vs_200d_pct": 37.4,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 9.7,
+   "spy_drawdown_pct": -0.5,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-01-20",
+     "exit_price": 5.5,
+     "claimed_pct": 31.49,
+     "computed_pct": 17.02,
+     "status": "reported",
+     "note": "claimed +31.49% but 5.50/4.70 = +17.0%. INFLATED CLAIM"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 17.02,
+   "realized_partial_pct": null,
+   "holding_days": 4,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "PG-F26-145C",
+   "ticker": "PG",
+   "type": "call",
+   "strike": 145,
+   "expiry": "2026-02-20",
+   "entry_date": "2026-01-22",
+   "entry_price": 5.6,
+   "dte_at_entry": 29,
+   "underlying_at_entry": 149.93,
+   "moneyness_pct": 3.4,
+   "entry_implied_vol": 0.14,
+   "est_delta": 0.8,
+   "stock_vs_200d_pct": 0.0,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 8.8,
+   "spy_drawdown_pct": -0.9,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [
+    "2026-01-22"
+   ],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-01-26",
+     "exit_price": 6.0,
+     "claimed_pct": 7.0,
+     "computed_pct": 7.14,
+     "status": "reported",
+     "note": "stop at 6.00"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 7.14,
+   "realized_partial_pct": null,
+   "holding_days": 4,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "AA-M26-60P",
+   "ticker": "AA",
+   "type": "put",
+   "strike": 60,
+   "expiry": "2026-03-20",
+   "entry_date": "2026-01-28",
+   "entry_price": 5.1,
+   "dte_at_entry": 51,
+   "underlying_at_entry": 60.01,
+   "moneyness_pct": 0.0,
+   "entry_implied_vol": 0.57,
+   "est_delta": -0.46,
+   "stock_vs_200d_pct": 67.9,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 9.2,
+   "spy_drawdown_pct": -0.0,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-02-05",
+     "exit_price": 7.04,
+     "claimed_pct": 37.84,
+     "computed_pct": 38.04,
+     "status": "reported",
+     "note": ""
+    },
+    {
+     "fraction": 0.5,
+     "date": "2026-02-17",
+     "exit_price": 6.5,
+     "claimed_pct": 27.45,
+     "computed_pct": 27.45,
+     "status": "reported",
+     "note": "claimed '27%'"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 32.75,
+   "realized_partial_pct": null,
+   "holding_days": 20,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "OKLO-M26-115C",
+   "ticker": "OKLO",
+   "type": "call",
+   "strike": 115,
+   "expiry": "2026-03-20",
+   "entry_date": "2026-01-28",
+   "entry_price": 5.5,
+   "dte_at_entry": 51,
+   "underlying_at_entry": 94.39,
+   "moneyness_pct": -17.9,
+   "entry_implied_vol": 0.86,
+   "est_delta": 0.33,
+   "stock_vs_200d_pct": 17.8,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 9.2,
+   "spy_drawdown_pct": -0.0,
+   "earnings_inside_hold": [
+    "2026-03-17"
+   ],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-03-20",
+     "exit_price": 0.0,
+     "claimed_pct": -100.0,
+     "computed_pct": -100.0,
+     "status": "reported",
+     "note": "'Position expired'; loss % never stated in ledger"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": -100.0,
+   "realized_partial_pct": null,
+   "holding_days": 51,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [
+    [
+     "2026-01-29",
+     -8.8
+    ],
+    [
+     "2026-01-30",
+     -7.5
+    ],
+    [
+     "2026-02-02",
+     -7.5
+    ],
+    [
+     "2026-02-04",
+     -12.5
+    ],
+    [
+     "2026-02-05",
+     -8.9
+    ],
+    [
+     "2026-02-06",
+     14.4
+    ],
+    [
+     "2026-02-10",
+     -7.4
+    ],
+    [
+     "2026-02-27",
+     -8.9
+    ]
+   ],
+   "note": ""
+  },
+  {
+   "id": "C-M26-115C",
+   "ticker": "C",
+   "type": "call",
+   "strike": 115,
+   "expiry": "2026-03-20",
+   "entry_date": "2026-01-30",
+   "entry_price": 5.41,
+   "dte_at_entry": 49,
+   "underlying_at_entry": 115.71,
+   "moneyness_pct": 0.6,
+   "entry_implied_vol": 0.3,
+   "est_delta": 0.54,
+   "stock_vs_200d_pct": 24.4,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 8.4,
+   "spy_drawdown_pct": -0.5,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-02-04",
+     "exit_price": 8.5,
+     "claimed_pct": 51.57,
+     "computed_pct": 57.12,
+     "status": "reported",
+     "note": "claimed 51.57% but 8.50/5.41 = +57.1%; arithmetic error (understated)"
+    },
+    {
+     "fraction": 0.5,
+     "date": "2026-02-05",
+     "exit_price": 6.1,
+     "claimed_pct": 12.75,
+     "computed_pct": 12.75,
+     "status": "reported",
+     "note": ""
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 34.94,
+   "realized_partial_pct": null,
+   "holding_days": 6,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "ON-M26-65C",
+   "ticker": "ON",
+   "type": "call",
+   "strike": 65,
+   "expiry": "2026-03-20",
+   "entry_date": "2026-02-10",
+   "entry_price": 5.2,
+   "dte_at_entry": 38,
+   "underlying_at_entry": 67.38,
+   "moneyness_pct": 3.7,
+   "entry_implied_vol": 0.46,
+   "est_delta": 0.62,
+   "stock_vs_200d_pct": 29.6,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 7.5,
+   "spy_drawdown_pct": -0.5,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-02-11",
+     "exit_price": 8.07,
+     "claimed_pct": 55.19,
+     "computed_pct": 55.19,
+     "status": "reported",
+     "note": ""
+    },
+    {
+     "fraction": 0.5,
+     "date": "2026-02-17",
+     "exit_price": 8.05,
+     "claimed_pct": 54.81,
+     "computed_pct": 54.81,
+     "status": "reported",
+     "note": "claimed '55%'"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 55.0,
+   "realized_partial_pct": null,
+   "holding_days": 7,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "CCJ-A26-130C-1",
+   "ticker": "CCJ",
+   "type": "call",
+   "strike": 130,
+   "expiry": "2026-04-17",
+   "entry_date": "2026-02-18",
+   "entry_price": 5.85,
+   "dte_at_entry": 58,
+   "underlying_at_entry": 116.5,
+   "moneyness_pct": -10.4,
+   "entry_implied_vol": 0.58,
+   "est_delta": 0.36,
+   "stock_vs_200d_pct": 38.7,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 6.0,
+   "spy_drawdown_pct": -1.3,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-02-23",
+     "exit_price": 6.5,
+     "claimed_pct": 11.11,
+     "computed_pct": 11.11,
+     "status": "reported",
+     "note": ""
+    },
+    {
+     "fraction": 0.5,
+     "date": "2026-02-24",
+     "exit_price": 8.0,
+     "claimed_pct": 36.75,
+     "computed_pct": 36.75,
+     "status": "reported",
+     "note": ""
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 23.93,
+   "realized_partial_pct": null,
+   "holding_days": 6,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "CCJ-A26-130C-2",
+   "ticker": "CCJ",
+   "type": "call",
+   "strike": 130,
+   "expiry": "2026-04-17",
+   "entry_date": "2026-02-27",
+   "entry_price": 5.35,
+   "dte_at_entry": 49,
+   "underlying_at_entry": 118.4,
+   "moneyness_pct": -8.9,
+   "entry_implied_vol": 0.56,
+   "est_delta": 0.36,
+   "stock_vs_200d_pct": 36.9,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 5.3,
+   "spy_drawdown_pct": -1.4,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-03-02",
+     "exit_price": 8.9,
+     "claimed_pct": 66.36,
+     "computed_pct": 66.36,
+     "status": "reported",
+     "note": "claimed 67.92%; 8.90/5.35 = +66.4%"
+    },
+    {
+     "fraction": 0.5,
+     "date": "2026-04-09",
+     "exit_price": 0.35,
+     "claimed_pct": null,
+     "computed_pct": -93.46,
+     "status": "estimated",
+     "note": "closed at market 'for a loss' 4/9, CCJ 115.54, 8 DTE; fill never reported. UNREPORTED LOSING LEG"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": -13.55,
+   "realized_partial_pct": null,
+   "holding_days": 41,
+   "any_estimated_leg": true,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "INTC-M26-45C",
+   "ticker": "INTC",
+   "type": "call",
+   "strike": 45,
+   "expiry": "2026-05-15",
+   "entry_date": "2026-03-19",
+   "entry_price": 5.1,
+   "dte_at_entry": 57,
+   "underlying_at_entry": 46.18,
+   "moneyness_pct": 2.6,
+   "entry_implied_vol": 0.63,
+   "est_delta": 0.59,
+   "stock_vs_200d_pct": 35.5,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 0.3,
+   "spy_drawdown_pct": -5.1,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-04-01",
+     "exit_price": 6.6,
+     "claimed_pct": 29.41,
+     "computed_pct": 29.41,
+     "status": "reported",
+     "note": "price implied from +29.41%"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 29.41,
+   "realized_partial_pct": null,
+   "holding_days": 13,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [
+    [
+     "2026-03-25",
+     7.1
+    ],
+    [
+     "2026-03-31",
+     7.1
+    ],
+    [
+     "2026-04-01",
+     8.8
+    ]
+   ],
+   "note": ""
+  },
+  {
+   "id": "BA-M26-185P",
+   "ticker": "BA",
+   "type": "put",
+   "strike": 185,
+   "expiry": "2026-05-15",
+   "entry_date": "2026-03-19",
+   "entry_price": 5.9,
+   "dte_at_entry": 57,
+   "underlying_at_entry": 201.18,
+   "moneyness_pct": 8.7,
+   "entry_implied_vol": 0.41,
+   "est_delta": -0.27,
+   "stock_vs_200d_pct": -8.2,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 0.3,
+   "spy_drawdown_pct": -5.1,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-03-20",
+     "exit_price": 7.2,
+     "claimed_pct": 22.03,
+     "computed_pct": 22.03,
+     "status": "reported",
+     "note": ""
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 22.03,
+   "realized_partial_pct": null,
+   "holding_days": 1,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "USO-M26-105P",
+   "ticker": "USO",
+   "type": "put",
+   "strike": 105,
+   "expiry": "2026-05-15",
+   "entry_date": "2026-03-26",
+   "entry_price": 7.6,
+   "dte_at_entry": 50,
+   "underlying_at_entry": 117.26,
+   "moneyness_pct": 11.7,
+   "entry_implied_vol": 0.78,
+   "est_delta": -0.3,
+   "stock_vs_200d_pct": 52.2,
+   "deep_fail": false,
+   "spy_above_200d": false,
+   "spy_vs_200d_pct": -1.9,
+   "spy_drawdown_pct": -7.0,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-05-15",
+     "exit_price": 0.0,
+     "claimed_pct": null,
+     "computed_pct": -100.0,
+     "status": "estimated",
+     "note": "sold at market on expiry day, USO 148.23 -> puts worthless. Loss % never reported. UNREPORTED LOSS"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": -100.0,
+   "realized_partial_pct": null,
+   "holding_days": 50,
+   "any_estimated_leg": true,
+   "big_daily_moves_in_hold": [
+    [
+     "2026-04-02",
+     11.1
+    ],
+    [
+     "2026-04-08",
+     -9.8
+    ],
+    [
+     "2026-04-17",
+     -7.8
+    ],
+    [
+     "2026-04-29",
+     7.9
+    ],
+    [
+     "2026-05-06",
+     -7.1
+    ]
+   ],
+   "note": ""
+  },
+  {
+   "id": "RTX-M26-210C",
+   "ticker": "RTX",
+   "type": "call",
+   "strike": 210,
+   "expiry": "2026-05-15",
+   "entry_date": "2026-04-08",
+   "entry_price": 5.5,
+   "dte_at_entry": 37,
+   "underlying_at_entry": 203.48,
+   "moneyness_pct": -3.1,
+   "entry_implied_vol": 0.32,
+   "est_delta": 0.4,
+   "stock_vs_200d_pct": 17.3,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 2.4,
+   "spy_drawdown_pct": -2.5,
+   "earnings_inside_hold": [
+    "2026-04-21"
+   ],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-05-15",
+     "exit_price": 0.0,
+     "claimed_pct": null,
+     "computed_pct": -100.0,
+     "status": "estimated",
+     "note": "sold at market on expiry day, RTX 170.47 -> calls worthless. Loss % never reported. UNREPORTED LOSS"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": -100.0,
+   "realized_partial_pct": null,
+   "holding_days": 37,
+   "any_estimated_leg": true,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "WMT-M26-125C",
+   "ticker": "WMT",
+   "type": "call",
+   "strike": 125,
+   "expiry": "2026-05-15",
+   "entry_date": "2026-04-10",
+   "entry_price": 4.9,
+   "dte_at_entry": 35,
+   "underlying_at_entry": 126.77,
+   "moneyness_pct": 1.4,
+   "entry_implied_vol": 0.25,
+   "est_delta": 0.59,
+   "stock_vs_200d_pct": 15.8,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 2.8,
+   "spy_drawdown_pct": -2.0,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-04-23",
+     "exit_price": 8.0,
+     "claimed_pct": 63.27,
+     "computed_pct": 63.27,
+     "status": "reported",
+     "note": "price implied"
+    },
+    {
+     "fraction": 0.5,
+     "date": "2026-04-29",
+     "exit_price": 6.9,
+     "claimed_pct": 40.82,
+     "computed_pct": 40.82,
+     "status": "reported",
+     "note": "price implied"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 52.04,
+   "realized_partial_pct": null,
+   "holding_days": 19,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "APLD-J26-30C",
+   "ticker": "APLD",
+   "type": "call",
+   "strike": 30,
+   "expiry": "2026-06-18",
+   "entry_date": "2026-04-14",
+   "entry_price": 5.3,
+   "dte_at_entry": 65,
+   "underlying_at_entry": 31.47,
+   "moneyness_pct": 4.9,
+   "entry_implied_vol": 0.88,
+   "est_delta": 0.62,
+   "stock_vs_200d_pct": 26.9,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 4.9,
+   "spy_drawdown_pct": 0.0,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-04-22",
+     "exit_price": 6.2,
+     "claimed_pct": 16.98,
+     "computed_pct": 16.98,
+     "status": "reported",
+     "note": ""
+    },
+    {
+     "fraction": 0.5,
+     "date": "2026-05-06",
+     "exit_price": 12.7,
+     "claimed_pct": 139.62,
+     "computed_pct": 139.62,
+     "status": "reported",
+     "note": ""
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 78.3,
+   "realized_partial_pct": null,
+   "holding_days": 22,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [
+    [
+     "2026-04-23",
+     12.1
+    ],
+    [
+     "2026-05-05",
+     11.9
+    ],
+    [
+     "2026-05-06",
+     10.9
+    ]
+   ],
+   "note": ""
+  },
+  {
+   "id": "HOOD-J26-105C",
+   "ticker": "HOOD",
+   "type": "call",
+   "strike": 105,
+   "expiry": "2026-06-18",
+   "entry_date": "2026-04-17",
+   "entry_price": 5.2,
+   "dte_at_entry": 62,
+   "underlying_at_entry": 90.75,
+   "moneyness_pct": -13.6,
+   "entry_implied_vol": 0.68,
+   "est_delta": 0.35,
+   "stock_vs_200d_pct": -15.5,
+   "deep_fail": true,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 7.1,
+   "spy_drawdown_pct": 0.0,
+   "earnings_inside_hold": [
+    "2026-04-28"
+   ],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-06-12",
+     "exit_price": 0.5,
+     "claimed_pct": -90.38,
+     "computed_pct": -90.38,
+     "status": "reported",
+     "note": ""
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": -90.38,
+   "realized_partial_pct": null,
+   "holding_days": 56,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [
+    [
+     "2026-04-29",
+     -13.2
+    ],
+    [
+     "2026-05-28",
+     11.3
+    ],
+    [
+     "2026-05-29",
+     11.2
+    ]
+   ],
+   "note": ""
+  },
+  {
+   "id": "XEL-J26-80C",
+   "ticker": "XEL",
+   "type": "call",
+   "strike": 80,
+   "expiry": "2026-06-18",
+   "entry_date": "2026-04-30",
+   "entry_price": 3.08,
+   "dte_at_entry": 49,
+   "underlying_at_entry": 82.95,
+   "moneyness_pct": 3.7,
+   "entry_implied_vol": 0.08,
+   "est_delta": 0.89,
+   "stock_vs_200d_pct": 9.4,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 7.7,
+   "spy_drawdown_pct": 0.0,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [
+    "2026-04-30"
+   ],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-06-12",
+     "exit_price": 0.3,
+     "claimed_pct": -90.26,
+     "computed_pct": -90.26,
+     "status": "reported",
+     "note": ""
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": -90.26,
+   "realized_partial_pct": null,
+   "holding_days": 43,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": "Ledger entry date 'April 31st' (nonexistent) -> order was 4/30."
+  },
+  {
+   "id": "TTWO-J26-250C",
+   "ticker": "TTWO",
+   "type": "call",
+   "strike": 250,
+   "expiry": "2026-06-18",
+   "entry_date": "2026-05-04",
+   "entry_price": 6.0,
+   "dte_at_entry": 45,
+   "underlying_at_entry": 225.18,
+   "moneyness_pct": -9.9,
+   "entry_implied_vol": 0.46,
+   "est_delta": 0.29,
+   "stock_vs_200d_pct": -2.8,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 7.4,
+   "spy_drawdown_pct": -0.4,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-05-11",
+     "exit_price": 8.0,
+     "claimed_pct": 33.33,
+     "computed_pct": 33.33,
+     "status": "reported",
+     "note": "letter says 'May 10' (a Sunday) -> 5/11"
+    },
+    {
+     "fraction": 0.5,
+     "date": "2026-05-14",
+     "exit_price": 11.14,
+     "claimed_pct": 85.67,
+     "computed_pct": 85.67,
+     "status": "derived",
+     "note": "price implied from +85.67%"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 59.5,
+   "realized_partial_pct": null,
+   "holding_days": 10,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "META-J26-700C",
+   "ticker": "META",
+   "type": "call",
+   "strike": 700,
+   "expiry": "2026-06-18",
+   "entry_date": "2026-05-14",
+   "entry_price": 5.0,
+   "dte_at_entry": 35,
+   "underlying_at_entry": 618.43,
+   "moneyness_pct": -11.7,
+   "entry_implied_vol": 0.36,
+   "est_delta": 0.15,
+   "stock_vs_200d_pct": -8.0,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 11.2,
+   "spy_drawdown_pct": 0.0,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-06-05",
+     "exit_price": 0.56,
+     "claimed_pct": -88.8,
+     "computed_pct": -88.8,
+     "status": "reported",
+     "note": ""
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": -88.8,
+   "realized_partial_pct": null,
+   "holding_days": 22,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "TSLA-JL26-530C-1",
+   "ticker": "TSLA",
+   "type": "call",
+   "strike": 530,
+   "expiry": "2026-07-17",
+   "entry_date": "2026-05-18",
+   "entry_price": 5.15,
+   "dte_at_entry": 60,
+   "underlying_at_entry": 409.99,
+   "moneyness_pct": -22.6,
+   "entry_implied_vol": 0.52,
+   "est_delta": 0.13,
+   "stock_vs_200d_pct": 0.5,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 9.6,
+   "spy_drawdown_pct": -1.3,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-05-27",
+     "exit_price": 9.1,
+     "claimed_pct": 76.7,
+     "computed_pct": 76.7,
+     "status": "reported",
+     "note": ""
+    },
+    {
+     "fraction": 0.5,
+     "date": "2026-05-28",
+     "exit_price": 8.44,
+     "claimed_pct": null,
+     "computed_pct": 63.88,
+     "status": "estimated",
+     "note": "'Sell remaining half' TLDR 5/28; fill never reported (TSLA 442.10). Estimated via BS"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 70.29,
+   "realized_partial_pct": null,
+   "holding_days": 10,
+   "any_estimated_leg": true,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "TSLA-JL26-530C-2",
+   "ticker": "TSLA",
+   "type": "call",
+   "strike": 530,
+   "expiry": "2026-07-17",
+   "entry_date": "2026-06-03",
+   "entry_price": 4.6,
+   "dte_at_entry": 44,
+   "underlying_at_entry": 423.7,
+   "moneyness_pct": -20.1,
+   "entry_implied_vol": 0.53,
+   "est_delta": 0.13,
+   "stock_vs_200d_pct": 2.5,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 10.8,
+   "spy_drawdown_pct": -0.7,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-07-08",
+     "exit_price": 0.0,
+     "claimed_pct": null,
+     "computed_pct": -100.0,
+     "status": "estimated",
+     "note": "half-size position; sold at market 7/8, TSLA 394.06, 9 DTE -> near worthless. Loss % never reported. UNREPORTED LOSS"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": -100.0,
+   "realized_partial_pct": null,
+   "holding_days": 35,
+   "any_estimated_leg": true,
+   "big_daily_moves_in_hold": [
+    [
+     "2026-06-29",
+     8.5
+    ],
+    [
+     "2026-07-02",
+     -7.5
+    ]
+   ],
+   "note": "Half-size re-entry of previously sold half."
+  },
+  {
+   "id": "MRNA-JL26-50C",
+   "ticker": "MRNA",
+   "type": "call",
+   "strike": 50,
+   "expiry": "2026-07-17",
+   "entry_date": "2026-06-05",
+   "entry_price": 4.45,
+   "dte_at_entry": 42,
+   "underlying_at_entry": 47.44,
+   "moneyness_pct": -5.1,
+   "entry_implied_vol": 0.86,
+   "est_delta": 0.49,
+   "stock_vs_200d_pct": 24.9,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 8.2,
+   "spy_drawdown_pct": -2.9,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-06-16",
+     "exit_price": 9.4,
+     "claimed_pct": 111.24,
+     "computed_pct": 111.24,
+     "status": "reported",
+     "note": ""
+    },
+    {
+     "fraction": 0.5,
+     "date": "2026-06-17",
+     "exit_price": 12.4,
+     "claimed_pct": 178.65,
+     "computed_pct": 178.65,
+     "status": "reported",
+     "note": ""
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 144.94,
+   "realized_partial_pct": null,
+   "holding_days": 12,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [
+    [
+     "2026-06-11",
+     7.9
+    ],
+    [
+     "2026-06-17",
+     11.6
+    ]
+   ],
+   "note": ""
+  },
+  {
+   "id": "MDB-A26-500C",
+   "ticker": "MDB",
+   "type": "call",
+   "strike": 500,
+   "expiry": "2026-08-21",
+   "entry_date": "2026-06-15",
+   "entry_price": 7.5,
+   "dte_at_entry": 67,
+   "underlying_at_entry": 354.18,
+   "moneyness_pct": -29.2,
+   "entry_implied_vol": 0.69,
+   "est_delta": 0.16,
+   "stock_vs_200d_pct": 6.6,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 10.3,
+   "spy_drawdown_pct": -0.6,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [],
+   "status": "open",
+   "pnl_pct": null,
+   "realized_partial_pct": null,
+   "holding_days": null,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [
+    [
+     "2026-06-29",
+     7.7
+    ]
+   ],
+   "note": "OPEN at archive end (8/3). MDB 359.59 vs 500 strike, 18 DTE -> near-certain total loss. 7/7 'sell half at 9.90 day order' never confirmed filled."
+  },
+  {
+   "id": "MO-A26-70C",
+   "ticker": "MO",
+   "type": "call",
+   "strike": 70,
+   "expiry": "2026-08-21",
+   "entry_date": "2026-06-25",
+   "entry_price": 5.0,
+   "dte_at_entry": 57,
+   "underlying_at_entry": 73.21,
+   "moneyness_pct": 4.6,
+   "entry_implied_vol": 0.28,
+   "est_delta": 0.68,
+   "stock_vs_200d_pct": 16.8,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 7.0,
+   "spy_drawdown_pct": -3.1,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-07-27",
+     "exit_price": 5.25,
+     "claimed_pct": 5.0,
+     "computed_pct": 5.0,
+     "status": "claimed-unquantified",
+     "note": "'closed MO for a small profit' 7/28; price never reported; +5% placeholder. BS estimate with entry IV would say ~-23%, i.e. 'small profit' claim is itself questionable"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 5.0,
+   "realized_partial_pct": null,
+   "holding_days": 32,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": ""
+  },
+  {
+   "id": "DELL-A26-600C-1",
+   "ticker": "DELL",
+   "type": "call",
+   "strike": 600,
+   "expiry": "2026-08-21",
+   "entry_date": "2026-07-06",
+   "entry_price": 8.22,
+   "dte_at_entry": 46,
+   "underlying_at_entry": 411.8,
+   "moneyness_pct": -31.4,
+   "entry_implied_vol": 0.87,
+   "est_delta": 0.14,
+   "stock_vs_200d_pct": 119.9,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 9.0,
+   "spy_drawdown_pct": -0.8,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-07-09",
+     "exit_price": 12.5,
+     "claimed_pct": 52.07,
+     "computed_pct": 52.07,
+     "status": "reported",
+     "note": "half-size position"
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 52.07,
+   "realized_partial_pct": null,
+   "holding_days": 3,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": "Half-size position. Stated premium (8.22 with DELL 411, 32% OTM, 46 DTE) implies IV ~90%+; chain history unavailable - price plausibility UNVERIFIED."
+  },
+  {
+   "id": "DELL-A26-600C-2",
+   "ticker": "DELL",
+   "type": "call",
+   "strike": 600,
+   "expiry": "2026-08-21",
+   "entry_date": "2026-07-13",
+   "entry_price": 7.5,
+   "dte_at_entry": 39,
+   "underlying_at_entry": 427.11,
+   "moneyness_pct": -28.8,
+   "entry_implied_vol": 0.85,
+   "est_delta": 0.14,
+   "stock_vs_200d_pct": 119.3,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 8.3,
+   "spy_drawdown_pct": -1.1,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-07-14",
+     "exit_price": 11.9,
+     "claimed_pct": 58.7,
+     "computed_pct": 58.67,
+     "status": "reported",
+     "note": ""
+    }
+   ],
+   "status": "open",
+   "pnl_pct": null,
+   "realized_partial_pct": 58.67,
+   "holding_days": 1,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [
+    [
+     "2026-07-14",
+     7.1
+    ]
+   ],
+   "note": "Second half OPEN at archive end (DELL 417.89 vs 600, 18 DTE, GTC 8.90 unfilled; 'winner became loser'). Premium plausibility UNVERIFIED (29% OTM)."
+  },
+  {
+   "id": "AMZN-A26-275C",
+   "ticker": "AMZN",
+   "type": "call",
+   "strike": 275,
+   "expiry": "2026-08-21",
+   "entry_date": "2026-07-16",
+   "entry_price": 5.5,
+   "dte_at_entry": 36,
+   "underlying_at_entry": 249.89,
+   "moneyness_pct": -9.1,
+   "entry_implied_vol": 0.45,
+   "est_delta": 0.27,
+   "stock_vs_200d_pct": 6.8,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 8.3,
+   "spy_drawdown_pct": -0.9,
+   "earnings_inside_hold": [
+    "2026-07-30"
+   ],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 1.0,
+     "date": "2026-07-31",
+     "exit_price": 6.5,
+     "claimed_pct": 18.18,
+     "computed_pct": 18.18,
+     "status": "reported",
+     "note": ""
+    }
+   ],
+   "status": "closed",
+   "pnl_pct": 18.18,
+   "realized_partial_pct": null,
+   "holding_days": 15,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [
+    [
+     "2026-07-31",
+     15.3
+    ]
+   ],
+   "note": ""
+  },
+  {
+   "id": "STZ-S26-130P",
+   "ticker": "STZ",
+   "type": "put",
+   "strike": 130,
+   "expiry": "2026-09-18",
+   "entry_date": "2026-07-22",
+   "entry_price": 5.75,
+   "dte_at_entry": 58,
+   "underlying_at_entry": 132.08,
+   "moneyness_pct": 1.6,
+   "entry_implied_vol": 0.32,
+   "est_delta": -0.43,
+   "stock_vs_200d_pct": -7.9,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 7.6,
+   "spy_drawdown_pct": -1.3,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [],
+   "status": "open",
+   "pnl_pct": null,
+   "realized_partial_pct": null,
+   "holding_days": null,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": "OPEN at archive end. STZ 131.27."
+  },
+  {
+   "id": "C-S26-130P",
+   "ticker": "C",
+   "type": "put",
+   "strike": 130,
+   "expiry": "2026-09-18",
+   "entry_date": "2026-07-29",
+   "entry_price": 6.4,
+   "dte_at_entry": 51,
+   "underlying_at_entry": 127.13,
+   "moneyness_pct": -2.2,
+   "entry_implied_vol": 0.25,
+   "est_delta": -0.58,
+   "stock_vs_200d_pct": 7.9,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 4.7,
+   "spy_drawdown_pct": -3.7,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [],
+   "status": "open",
+   "pnl_pct": null,
+   "realized_partial_pct": null,
+   "holding_days": null,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": "OPEN at archive end. C 132.01."
+  },
+  {
+   "id": "UAL-S26-130C",
+   "ticker": "UAL",
+   "type": "call",
+   "strike": 130,
+   "expiry": "2026-09-18",
+   "entry_date": "2026-07-31",
+   "entry_price": 5.1,
+   "dte_at_entry": 49,
+   "underlying_at_entry": 121.33,
+   "moneyness_pct": -6.7,
+   "entry_implied_vol": 0.48,
+   "est_delta": 0.38,
+   "stock_vs_200d_pct": 14.9,
+   "deep_fail": false,
+   "spy_above_200d": true,
+   "spy_vs_200d_pct": 7.1,
+   "spy_drawdown_pct": -1.4,
+   "earnings_inside_hold": [],
+   "earnings_on_entry_day": [],
+   "legs": [
+    {
+     "fraction": 0.5,
+     "date": "2026-08-03",
+     "exit_price": 8.27,
+     "claimed_pct": 62.11,
+     "computed_pct": 62.16,
+     "status": "reported",
+     "note": ""
+    }
+   ],
+   "status": "open",
+   "pnl_pct": null,
+   "realized_partial_pct": 62.16,
+   "holding_days": 3,
+   "any_estimated_leg": false,
+   "big_daily_moves_in_hold": [],
+   "note": "Ledger line says entry 'August 3rd at 4.75' but buy order ran 7/31 at 5.10 and their own +62.11% math implies 5.10 entry -> ledger line wrong. Half open with 6.10 stop."
+  }
+ ],
+ "stock_trade": {
+  "id": "RXRX-STOCK",
+  "tick": "RXRX",
+  "entry": "2026-01-22",
+  "eprice": 5.03,
+  "exit": "2026-05-18",
+  "xprice": 2.85,
+  "claimed": -34.0,
+  "computed": -43.3,
+  "note": "Stock, not options - excluded from options stats. Running ledger claimed -34% loss; body text 5/19 admitted -43%. Ledger understated the loss."
+ },
+ "summary": {
+  "issues_parsed": 160,
+  "archive_span": "2025-11-24..2026-08-03",
+  "option_trades_reconstructed": 39,
+  "closed": 34,
+  "open_at_archive_end": 5,
+  "stock_trades": 1,
+  "closed_record": "22W-11L-1push",
+  "avg_pnl_pct_computed": 8.2,
+  "median_pnl_pct": 23.0,
+  "fully_reported_subset": "n=28: 21W-6L-1P avg +19.0%",
+  "estimated_leg_subset": "n=6: 1W-5L avg -42.2% (losses concentrated exactly where exits were never quantified)",
+  "claimed_equity_curve": "$19,904.55 (11/24/25) -> $22,148.25 (8/3/26) = +11.3%; peak $26,162 (3/4), trough $18,974 (1/2); SPY same window +14.0%",
+  "position_sizing": "$2,000 per position (their statement)"
+ },
+ "never_filled_option_orders": {
+  "note": "Buy orders issued in letters that never appeared in CURRENT POSITIONS (day-order limits not reached, or superseded). Counted as recommendation events but not trades.",
+  "orders": [
+   "AXP Jan 380c (12/3)",
+   "RTX Jan 175c re-buy (12/12)",
+   "FBIN Feb 50c (1/9)",
+   "SNOW Feb 210p (1/13)",
+   "VRT Feb 190c (1/16)",
+   "PSTG Mar 80c (1/27)",
+   "AA Mar 60p at 0.70 (1/27, apparent typo, refiled 1/28 at 5.10 and filled)",
+   "C Mar 120c re-entry (2/6)",
+   "DG Mar 160c (2/13)",
+   "AVGO Apr 390c (3/9; letter later notes members who took an untracked AVGO 380c variant made 42% - excluded from portfolio by their own note)",
+   "INTC May 47c (3/10, refiled 3/19 at 45 and filled)",
+   "RBLX May 55p (3/10-3/11)",
+   "AMZN May 200p (3/17)",
+   "GLW May 165c (4/2, 4/6, 5/1 - three attempts)",
+   "IONQ Jun 35c (4/14)",
+   "WMT Jun 125c half (4/27)",
+   "CRWD Jun 600c (5/7)",
+   "TSLA Jun 500c (5/8)",
+   "TSLA Jun 520c (5/13)",
+   "P Jul 90c (5/22)",
+   "TEAM Jul 100c (5/28)",
+   "MSFT Jul 460c (5/29)",
+   "ETN Jul 480c (6/2)",
+   "ENT (6/2, TLDR only)",
+   "TSLA Jul 530c full-size attempt at 4.40 (6/2, refiled 6/3 half at 4.60 and filled)",
+   "MRNA Jul 55c (6/4, refiled as 50c and filled)",
+   "ARM Jul 500c (6/12)",
+   "NOC Aug 490p (6/18)",
+   "TOL Aug 170c (6/24)",
+   "SNOW Aug 300c (6/29, 6/30 - two attempts)",
+   "DDOG Aug 350c (6/30)",
+   "HOOD Aug 120c half (7/1)",
+   "DELL Aug 620c (7/9, refiled 7/10 as 600c 7.60 and filled 7/13)",
+   "AWI Aug 155p (7/8)",
+   "MS Sep 200p (7/20)"
+  ]
+ },
+ "honesty_findings": {
+  "inflated_claims": [
+   "AMD Feb 270c: claimed +31.49%, actual 5.50/4.70 = +17.0% (entry and exit prices are their own stated numbers)",
+   "RXRX stock: running ledger claimed -34% loss; actual 2.85/5.03 = -43.3% (their own 5/19 body text admits 'loss of 43%')"
+  ],
+  "understated_claims": [
+   "RTX Dec 175c: claimed +18.52%, actual 6.70/5.30 = +26.4%",
+   "C Mar 115c first half: claimed +51.57%, actual 8.50/5.41 = +57.1%",
+   "CCJ re-entry first half: claimed +67.92%, actual 8.90/5.35 = +66.4% (minor)"
+  ],
+  "unquantified_loser_legs": [
+   "USO May 105p: full position, sold at market on expiry day with USO at 148 -> ~-100%; % never reported",
+   "RTX May 210c: full position, sold at market on expiry day with RTX at 170 -> ~-100%; % never reported",
+   "TSLA Jul 530c re-entry: sold at market 7/8 with TSLA 394 (9 DTE) -> ~-100%; % never reported",
+   "CCJ Apr 130c re-entry back half: closed at market 4/9 'for a loss'; % never reported (~-85 to -90% est)",
+   "ABBV Jan 230c last third: sold at market 1/13 with ABBV 215.65 (3 DTE); % never reported (~-90%+ est)",
+   "MO Aug 70c: 'closed for a small profit' - no price, no %; BS estimate at their GTC/date suggests the 'small profit' claim itself is questionable",
+   "SBUX Jan 85c: GTC breakeven exit almost certainly filled ~1/5-1/6; never confirmed at all",
+   "BIDU Dec 130c 'tracked' second half: vanished; BIDU closed 123.82 at 12/19 expiry -> -100%, never mentioned again",
+   "OKLO Mar 115c: 'Position expired' noted but loss % never stated in ledger"
+  ],
+  "ledger_errors": [
+   "UAL Sep 130c: ledger entry line says 'August 3rd at $4.75' but their buy order ran 7/31 at $5.10 and their own +62.11% exit math implies the 5.10 entry",
+   "WMT Feb 115c: ledger says bought 'December 9th'; order ran Jan 9 (date typo, repeated for a week)",
+   "MAR half-sale dated 'Nov 22' (a Saturday); TTWO half-sale dated 'May 10' (a Sunday); XEL entry dated 'April 31st' (nonexistent)",
+   "AMZN ticker typo 'AMZM' for a week; various month typos (Jnauary, My 14th)"
+  ],
+  "equity_curve_check": "Sum of realized P&L on computed basis at their stated $2k/position sizing ~ +$6.6k over the archive window vs claimed equity change +$2.2k; difference is broadly explainable by open-position marks (MDB alone marks ~-$1.9k at archive end). Unlike the 2021 audit (2x inflated claims), the 2026 equity curve is roughly internally consistent - but it still trails SPY."
+ },
+ "criteria_tests": {
+  "earnings_inside_hold": {
+   "inside": "n=5: 1W-4L avg -74.4% (CVX, OKLO, RTX-May, HOOD all ~total losses; AMZN +18 the lone win)",
+   "clean": "n=29: 21W-7L-1P avg +22.4%",
+   "p_one_sided_hypergeom": 0.029,
+   "note": "HOOD was killed directly by its earnings gap (-13% on 4/28 report). CVX/OKLO/RTX were already near-dead before the report - earnings-in-window correlates with their worst habit: holding broken OTM contracts to expiry. Gate keeps you out of 4 of the 8 worst losses."
+  },
+  "regime_deep_fail": {
+   "deep_fail": "n=1: 0W-1L (HOOD, 15.5% below 200d at entry, -90.4%)",
+   "ok": "n=33: 22W-10L-1P avg +11.2%",
+   "note": "Directionally right, n=1 - cannot be called validated. Cheap to keep."
+  },
+  "spy_regime": {
+   "below_200d": "n=1: 0W-1L (USO -100%)",
+   "above": "n=33: 22W-10L-1P avg +11.5%",
+   "spy_dd_5pct": "entries during >=5% SPY drawdown n=3: 2W-1L",
+   "note": "Too few entries in down tape to test - they mostly stopped initiating during the Feb-Apr correction; the damage came from HOLDING through it."
+  },
+  "dte": {
+   "lt21": "n=0 (their 2021-era ~18-DTE habit is gone)",
+   "d21_45": "n=19: 13W-5L-1P avg +22.3%",
+   "gt45": "n=15: 9W-6L avg -9.7%",
+   "note": "Longer-dated cohort is worse because it contains the far-OTM lottery buys."
+  },
+  "delta": {
+   "lt030": "n=8: 6W-2L avg +6.3% (far-OTM lottos saved by fast trims)",
+   "d030_045": "n=8: 2W-6L avg -56.7% (the death zone)",
+   "d045_060": "n=9: 7W-1L-1P avg +44.3%",
+   "gt060": "n=9: 7W-2L avg +31.4%",
+   "combined": "|delta|>=0.45: n=18 14W-3L-1P ~+38% avg vs |delta|<0.45: n=16 8W-8L ~-25% avg; p~0.043",
+   "caveat": "Delta = Black-Scholes using IV implied by their own stated entry premium; crude but self-consistent"
+  },
+  "far_otm": {
+   "otm10": "n=9: 4W-5L avg -35.1% median -88.8",
+   "near": "n=25: 18W-6L-1P avg +23.8%",
+   "p": 0.095
+  },
+  "translation_sim": {
+   "result": "Same signals, same exit dates, synthetic 67-DTE 0.675-delta contract, same IV: 19W-14L avg -1.6% vs their literal +8.2%",
+   "note": "Their realized edge comes from fast partial profit-taking on convex OTM contracts, not from the directional signal itself. Mechanical translation without their trim discipline destroys the edge - the trial's dual-cohort design and our own exit rules matter more than the signal."
+  }
+ }
+}
