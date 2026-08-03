@@ -114,6 +114,22 @@ def screen(sym, kind, strike, expiry, their_prem=None):
     ext = card["stock"].get("ext_vs_200d_pct")
     if ext is not None and ext < -10:
         take = False; reasons.append("stock regime DEEP-FAIL (>10% below 200-day)")
+    # Finding #2 of the 8/3 calibration (Omar's emphasis): cheap OTM tickets
+    # are where their subscribers die - delta>=0.45 entries went 14W-3L ~+38%,
+    # sub-0.45/OTM went 8W-8L ~-25%, every near-total wipeout was OTM.
+    delta = tc.get("bs_delta")
+    spot = tc.get("spot")
+    otm_pct = None
+    if spot:
+        otm_pct = ((strike / spot - 1) * 100 if kind == "CALL"
+                   else (1 - strike / spot) * 100)
+    if delta is not None and abs(delta) < 0.45:
+        take = False; reasons.append(
+            f"delta {delta:+.2f} below the 0.45 floor - the OTM-lotto profile "
+            "(calibration: 8W-8L ~-25%, every wipeout was OTM)")
+    elif otm_pct is not None and otm_pct > 10:
+        take = False; reasons.append(
+            f"strike {otm_pct:.0f}% out of the money (>10% floor)")
     if isinstance(card["our_translation"], dict) and card["our_translation"].get("error"):
         take = False; reasons.append("no compliant 45-90 DTE delta .60-.75 translation exists")
     card["draft_verdict"] = {

@@ -51,3 +51,23 @@ Otherwise TAKE (as our translation, paper).
   17 filled trades). Historical data, if unlocked, informs design only.
 - The screener's card is fact (live chain, earnings, posture); its
   take/skip LINE is hypothesis until this trial grades it.
+
+## FROZEN 2026-08-03 (authority: Omar's order to operationalize the filter)
+
+The take/skip line is now BINDING for the 30-alert trial. SKIP if ANY of:
+1. Their contract fails the live-chain reality check (no bid / crossed or
+   stale book / OI+spread outside standards).
+2. Earnings or a known binary event inside the hold window.
+   [calibration: 1W-4L avg −74% in-window vs +22% clean, p≈.03]
+3. Stock regime DEEP-FAIL (>10% below its 200-day).
+   [n=1 historically, kept unvalidated]
+4. **Entry delta < 0.45 OR strike >10% out of the money.** [THE EMPHASIS
+   finding: ≥0.45 went 14W-3L-1P ~+38%; below went 8W-8L ~−25%; every
+   near-total loss was OTM]
+5. No compliant 45-90 DTE delta .60-.75 translation exists.
+Otherwise TAKE. Verdict quotes their contract; translation cohort uses OUR
+exits (+100%/−50%/21-days), which the calibration showed are load-bearing.
+No edits to these five lines until the 30-alert verdict. Kill criterion
+unchanged: takes must beat skips or the subscription is cancelled with
+evidence. p-values above are multiple-comparison-flattered; the trial is
+the test, this filter is the hypothesis.
