@@ -71,3 +71,19 @@ No edits to these five lines until the 30-alert verdict. Kill criterion
 unchanged: takes must beat skips or the subscription is cancelled with
 evidence. p-values above are multiple-comparison-flattered; the trial is
 the test, this filter is the hypothesis.
+
+## Amendment 2026-08-03 (pre-first-alert, Omar: "add line 6")
+
+Indicator-alignment study (34 closed archive trades vs our indicators at
+their entry dates): O.G Chandelier alignment separated strongest of all -
+aligned 18W-5L +22% avg (75% win) vs contradicting 4W-6L -26% (40%);
+4 of their 8 wipeouts were Chandelier-contradicting entries. HQ Swing v1
+mild (80% vs 58% win, n=10 aligned). Magical OB/OS BACKWARDS (entering
+stretched won 85% vs 52%) - explicitly EXCLUDED from the filter forever
+per the same evidence standard.
+
+**SKIP LINE 6 (binding): the trade direction must not contradict the O.G
+Chandelier daily mode (Heikin Ashi, CE 1/2) on the underlying at screen
+time** - call in SELL mode or put in BUY mode = SKIP. Computed via the
+og_shadow Python port (~84% chart fidelity; verify on the live chart when
+available). No further edits until the 30-alert verdict.

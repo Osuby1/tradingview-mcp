@@ -36,6 +36,43 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LEDGER = os.path.join(REPO, "research", "markman-trial-ledger.json")
 
 
+def _og_chandelier_dir(df, ce_len=1, ce_mult=2.0):
+    """O.G Chandelier daily mode on Heikin Ashi - copied from og_shadow.py
+    (CE 1/2, Everget ratchet) so importing that module's side effects is
+    avoided. Returns the direction array (+1 BUY / -1 SELL)."""
+    ha = pd.DataFrame(index=df.index)
+    ha["close"] = (df["Open"] + df["High"] + df["Low"] + df["Close"]) / 4
+    op = np.empty(len(df))
+    op[0] = (df["Open"].iloc[0] + df["Close"].iloc[0]) / 2
+    hc = ha["close"].to_numpy()
+    for i in range(1, len(df)):
+        op[i] = (op[i - 1] + hc[i - 1]) / 2
+    ha["open"] = op
+    ha["high"] = np.maximum.reduce([df["High"].to_numpy(), op, hc])
+    ha["low"] = np.minimum.reduce([df["Low"].to_numpy(), op, hc])
+    prev_close = ha["close"].shift(1)
+    tr = pd.concat([ha["high"] - ha["low"], (ha["high"] - prev_close).abs(),
+                    (ha["low"] - prev_close).abs()], axis=1).max(axis=1)
+    a = ce_mult * tr.ewm(alpha=1 / ce_len, adjust=False).mean()
+    hi = ha["high"].rolling(ce_len).max()
+    lo = ha["low"].rolling(ce_len).min()
+    lsb, ssb = (hi - a).to_numpy(), (lo + a).to_numpy()
+    c = ha["close"].to_numpy()
+    n = len(c)
+    ls, ss = lsb.copy(), ssb.copy()
+    dirn = np.ones(n, dtype=int)
+    for i in range(1, n):
+        ls[i] = max(lsb[i], ls[i - 1]) if c[i - 1] > ls[i - 1] else lsb[i]
+        ss[i] = min(ssb[i], ss[i - 1]) if c[i - 1] < ss[i - 1] else ssb[i]
+        if c[i] > ss[i - 1]:
+            dirn[i] = 1
+        elif c[i] < ls[i - 1]:
+            dirn[i] = -1
+        else:
+            dirn[i] = dirn[i - 1]
+    return dirn
+
+
 def stock_posture(sym, kind):
     h = yf.Ticker(sym).history(period="2y", auto_adjust=True)
     c, hi, lo = h.Close, h.High, h.Low
@@ -132,6 +169,23 @@ def screen(sym, kind, strike, expiry, their_prem=None):
             f"strike {otm_pct:.0f}% out of the money (>10% floor)")
     if isinstance(card["our_translation"], dict) and card["our_translation"].get("error"):
         take = False; reasons.append("no compliant 45-90 DTE delta .60-.75 translation exists")
+    # Line 6 (8/3 alignment study): direction must not contradict the O.G
+    # Chandelier daily mode. Aligned archive trades: 18W-5L +22%;
+    # contradicting: 4W-6L -26% - 4 of their 8 wipeouts were contra entries.
+    try:
+        # inlined from og_shadow (importing it triggers its module-level
+        # grading run, which needs repo-cwd files - learned 8/3)
+        hh = yf.Ticker(sym).history(period="2y", auto_adjust=True)
+        hh = hh.rename(columns=str.capitalize)
+        dirn = _og_chandelier_dir(hh)
+        ce_mode = "BUY" if int(dirn[-1]) == 1 else "SELL"
+        card["stock"]["og_chandelier_mode"] = ce_mode + " (shadow port ~84% chart fidelity)"
+        if (kind == "CALL") != (ce_mode == "BUY"):
+            take = False; reasons.append(
+                f"contradicts the O.G Chandelier - underlying is in {ce_mode} mode "
+                "(alignment study: contra entries 4W-6L, -26% avg)")
+    except Exception as e:
+        card["stock"]["og_chandelier_mode"] = "unavailable: " + str(e)[:60]
     card["draft_verdict"] = {
         "line": "TAKE (as OUR translation, paper)" if take else "SKIP",
         "reasons": reasons or ["passes all draft checks"],
