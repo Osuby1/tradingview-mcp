@@ -12968,6 +12968,15 @@
    "cci_proxy_corr": 0.992,
    "graded": 456,
    "grade_file": "shadow-og-grade-2026-07-31.md"
+  },
+  {
+   "name": "og-python-port-v1",
+   "date_graded": "2026-07-31",
+   "mode_match_pct": 84.2,
+   "fresh_match_pct": 84.6,
+   "cci_proxy_corr": 0.868,
+   "graded": 456,
+   "grade_file": "shadow-og-grade-2026-07-31.md"
   }
  ],
  "readiness_asof": "2026-07-31 22:49"
