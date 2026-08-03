@@ -183,6 +183,12 @@ echo [6/6] commit... >> "%LOG%"
 git add reports watchlists research >> "%LOG%" 2>&1
 git commit -m "EOD chain %TODAY% (full pipeline, automated)" >> "%LOG%" 2>&1
 if errorlevel 1 echo NOTE: nothing to commit or commit failed (non-fatal) >> "%LOG%"
+rem Push to the fork so the 15:45 CLOUD notifier routine can read tonight's log
+rem and brief state. Added 2026-08-03: local headless PushNotification proved
+rem structurally unreliable (suppresses itself whenever Omar is at the PC),
+rem so the phone leg now runs through a cloud routine reading the fork.
+git push fork add-watchlist-files:main >> "%LOG%" 2>&1
+if errorlevel 1 echo WARNING: fork push failed - cloud notifier will see stale state >> "%LOG%"
 
 rem -- 7. Brief check (added 2026-07-25) -------------------------
 rem The standing rule is that every EOD owes TWO artifacts: the workbook AND
