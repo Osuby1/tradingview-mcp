@@ -52,3 +52,17 @@ leg demanded $60k cash-secured; rejected order 1292217286 on the record).
 10:29 CT, final day of the entry window with entry conditions back in
 compliance (VIX 17.4, SPY 742.55). Exits per plan unchanged; flat by early Nov.
 Tranche 2 (Aug 10-21, VIX <15): use margin/main broker if the spread is wanted.
+
+## Amendment 2026-08-04 (Omar, pre-decided 3 days ahead): tranche-2 evaluation
+moved UP from Mon 8/10 to FRIDAY 8/7 IMMEDIATELY AFTER the jobs data.
+Decision framework, frozen now so Friday is execution not improvisation:
+- Jobs WEAK + VIX spiking (>18): NO add — that's chasing insurance into
+  panic; tranche 1 is the payer, exit ladder (VIX>28 = sell into fear) takes
+  over. Adding into a spike violates the plan's own buy-it-cheap principle.
+- Jobs benign/strong + VIX <15: original window condition met one day early
+  WITH the catalyst answered -> ADD tranche 2 (prefer the 710/600 spread if
+  margin/main-broker is ready; long-put fallback documented like tranche 1).
+- Muddle (VIX 15-16.5, mixed print): present live pricing + both cases,
+  Omar decides same-day.
+Prep still open before Friday: enable margin on TS or confirm main-broker
+routing so the SPREAD structure is actually placeable (7/31 rejection).
