@@ -336,7 +336,8 @@
     },
     "label": "uncalibrated"
    },
-   "grade_when_closed": null
+   "grade_when_closed": null,
+   "pre_decided_exit": "THURSDAY 8/6 (Omar, decided 8/4): sell into strength, limit-worked, flat by Thu close regardless - pre-jobs de-risk. Target/thesis-break supersede if earlier. Grade exit vs this pre-decision, not vs the original hold-to-target plan."
   },
   {
    "id": "2026-08-04-UAL-call-REAL",

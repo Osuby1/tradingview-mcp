@@ -66,3 +66,13 @@ Decision framework, frozen now so Friday is execution not improvisation:
   Omar decides same-day.
 Prep still open before Friday: enable margin on TS or confirm main-broker
 routing so the SPREAD structure is actually placeable (7/31 rejection).
+
+## Companion pre-decision 2026-08-04 (Omar): GE REAL CALL EXITS THURSDAY 8/6
+Pre-jobs de-risk, decided 2 days ahead: the real GE Sep 350 call (entry
+28.00) is SOLD on Thursday 8/6, worked as a limit into strength (never
+market into the wide spread), position flat by Thursday's close regardless
+of price. Rationale logged: banks the most coil-extended winner before the
+jobs binary, keeps the younger UAL call + the SPY put into Friday - put
+holds with banked profit behind it. Earlier triggers SUPERSEDE if they fire
+first (target 56 / thesis-break 342 / checkpoint-380 judgment). UAL call is
+explicitly NOT part of this - it runs on its own plan.
