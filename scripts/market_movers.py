@@ -90,21 +90,51 @@ def _fmt(x):
 
 
 def classify_untradeable(mover, side):
-    """Plain-English protocol verdict for a mover that failed the screen.
+    """Plain-English verdict for a mover shown without a full gate read.
 
-    side: 'gainer' or 'loser'. The verdict differs - a microcap SPIKE is a chase
-    trap, a microcap CRASH is a falling-knife/short-squeeze trap.
+    REWRITTEN 2026-08-04 (Omar order, after ATKR - a $3.2B mid-cap that
+    gapped +28% on EARNINGS - was stamped with the hard-coded 'microcap
+    pump' boilerplate): the text is now computed from the mover's actual
+    cap, liquidity and move size. Descriptions must be fresh and accurate.
     """
+    from math import isnan
+    def _num(x):
+        v = parse_num(x)
+        return v if v is not None else 0.0
+    cap = _num(mover.get("market_cap") or mover.get("market_cap_raw"))
+    px = _num(mover.get("price"))
+    vol = _num(mover.get("volume"))
+    pct = _num(mover.get("pct_change"))
+    dvol = px * vol
+    bucket = ("microcap" if cap < 3e8 else "small-cap" if cap < 2e9
+              else "mid-cap" if cap < 1e10 else "large-cap")
+    captxt = f"${cap/1e9:.1f}B" if cap >= 1e9 else f"${cap/1e6:.0f}M"
+    liquid = dvol >= MIN_DOLLAR_VOL and cap >= MIN_MCAP
     if side == "gainer":
+        if liquid:
+            return ("REVIEW - real move, do not chase",
+                    f"A {captxt} {bucket} up {pct:.0f}% on "
+                    f"${dvol/1e6:.0f}M traded is a REAL institutional move, "
+                    "almost always catalyst-driven (check earnings/news). Too "
+                    "extended to chase today - goes on the gap-hold watch: if "
+                    "it bases through the week, the nightly gates read it "
+                    "fresh and a sized plan becomes legitimate.")
         return ("SKIP - do not chase",
-                "A microcap up this much in a day is a momentum/pump move, not an "
-                "investable trend. No size fits, it can halt or reverse violently, "
-                "and it is not shortable either (no borrow, squeeze risk).")
+                f"A {bucket} ({captxt}) up {pct:.0f}% in a day on thin "
+                "dollar volume is a momentum/pump profile, not an investable "
+                "trend. No size fits, it can halt or reverse violently, and "
+                "borrow for a short is usually impossible (squeeze risk).")
+    if liquid:
+        return ("REVIEW - real damage, not a knife-catch",
+                f"A {captxt} {bucket} down {abs(pct):.0f}% on "
+                f"${dvol/1e6:.0f}M traded is a genuine repricing, usually a "
+                "catalyst (check earnings/guidance). Not a buy until a base "
+                "forms and the gates pass; shorting after the drop is chasing.")
     return ("SKIP - not a short",
-            "A microcap crashing this hard is a falling knife with squeeze risk and "
-            "usually no locate. The big red number looks like a short but it is the "
-            "most dangerous kind. Not a buy either - catching it needs a catalyst "
-            "read this scan does not have.")
+            f"A {bucket} ({captxt}) crashing this hard is a falling knife "
+            "with squeeze risk and usually no locate. The big red number "
+            "looks like a short but it is the most dangerous kind. Not a "
+            "buy either without a catalyst read this scan does not have.")
 
 
 def protocol_verdict(mover, gate_result=None, short_result=None):
