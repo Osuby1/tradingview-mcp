@@ -4,26 +4,6 @@
  "ratchet_pct": 0.2,
  "positions": [
   {
-   "sym": "HAS",
-   "shares": 500,
-   "entry": 88.17,
-   "stop": 83.76,
-   "opened": "2026-07-24",
-   "high_close": 96.34,
-   "ratchet_alert": null,
-   "notes": ""
-  },
-  {
-   "sym": "SJM",
-   "shares": 400,
-   "entry": 117.21,
-   "stop": 111.35,
-   "opened": "2026-07-24",
-   "high_close": 126.35,
-   "ratchet_alert": null,
-   "notes": ""
-  },
-  {
    "sym": "MLI",
    "shares": 900,
    "entry": 63.53,

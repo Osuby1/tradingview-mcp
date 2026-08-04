@@ -70,7 +70,8 @@
    "thesis": "Hasbro; regime PASS, ADX 36, +DI>-DI, HA Chandelier BUY. Stop under Chandelier line. Earnings ~10/22 (far).",
    "target_status": "RETIRED 2026-07-25 (kept for dual grading)",
    "rule_change_2026-07-25": "2:1 target retired mid-trade per pre-registered exit-redesign test (research/exit-redesign-results.md: no exit beats holding; targets cap the tail winners). New exit rule, Omar-approved 7/25: initial stop unchanged / thesis break / 20 pct ratchet below highest close once well in profit. Target alert rewired to CHECKPOINT-do-not-sell (new alert id 5226932954). GRADE BOTH WAYS at close: vs original stop+target plan AND vs new rule, so the scorecard shows what the change cost or earned.",
-   "stop_change_2026-07-26": "Stop moved to 5 pct below entry = 83.76 (was 84.3, CE line) at Omar direction per stop-sweep result (research/stop-sweep-results.md). Original stop kept in the stop field for dual grading. New stop alert id 5229084238. Total book risk now ~9.7k vs 10k weekly breaker - flagged."
+   "stop_change_2026-07-26": "Stop moved to 5 pct below entry = 83.76 (was 84.3, CE line) at Omar direction per stop-sweep result (research/stop-sweep-results.md). Original stop kept in the stop field for dual grading. New stop alert id 5229084238. Total book risk now ~9.7k vs 10k weekly breaker - flagged.",
+   "exit": "CLOSED 2026-08-04 ~8:55 CT (Omar-reported): SOLD 500 @ 89.66 = +$745 (+1.7%). Reason: daily SELL signal flashing on his chart = THESIS-BREAK exit per the exit rules (stop/thesis-break/ratchet). GRADE: executed per plan, signal-based - verify the CE flip against tonight chain scan. Context at exit: day 2 of accelerating decline, 8/3 insider-sale cluster (CFO ~$1M), -6.7%/month vs rising market."
   },
   {
    "id": "2026-07-24-SJM-long",
@@ -85,7 +86,8 @@
    "thesis": "J.M. Smucker; staples/defensive-rotation, regime PASS +14% vs 200d, ADX 26, fresh 2-bar Chandelier BUY. Stop under Chandelier line. Earnings ~9/1 (far).",
    "target_status": "RETIRED 2026-07-25 (kept for dual grading)",
    "rule_change_2026-07-25": "2:1 target retired mid-trade per pre-registered exit-redesign test (research/exit-redesign-results.md: no exit beats holding; targets cap the tail winners). New exit rule, Omar-approved 7/25: initial stop unchanged / thesis break / 20 pct ratchet below highest close once well in profit. Target alert rewired to CHECKPOINT-do-not-sell (new alert id 5226932961). GRADE BOTH WAYS at close: vs original stop+target plan AND vs new rule, so the scorecard shows what the change cost or earned.",
-   "stop_change_2026-07-26": "Stop moved to 5 pct below entry = 111.35 (was 112.5, CE line) at Omar direction per stop-sweep result (research/stop-sweep-results.md). Original stop kept in the stop field for dual grading. New stop alert id 5229084261. Total book risk now ~9.7k vs 10k weekly breaker - flagged."
+   "stop_change_2026-07-26": "Stop moved to 5 pct below entry = 111.35 (was 112.5, CE line) at Omar direction per stop-sweep result (research/stop-sweep-results.md). Original stop kept in the stop field for dual grading. New stop alert id 5229084261. Total book risk now ~9.7k vs 10k weekly breaker - flagged.",
+   "exit": "CLOSED 2026-08-04 ~8:55 CT (Omar-reported): SOLD 400 @ 115.85 = -$544 (-1.2%). Reason (his words): chart looked too beaten down, expected continued selling. GRADE: DISCRETIONARY exit - neither the 111.35 stop nor a Chandelier flip had fired (signal still BUY at last scan). Plan deviation, logged not hidden. Friday grades vs the counterfactual (hold to stop/flip): exit saves $1,800 further risk if 111.35 breaks, costs the recovery if staples turn. 7 red days in 8; the defensive-rotation macro leg was already dead."
   },
   {
    "id": "2026-07-24-MLI-long",
