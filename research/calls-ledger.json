@@ -343,7 +343,7 @@
    "date": "2026-08-04",
    "sym": "UAL",
    "dir": "long-call-REAL",
-   "fill": "FILLED 2026-08-04 ~9:0x CT (Omar-reported): BOUGHT 1 UAL Sep 18 2026 120 CALL @ 15.85 = $1,585. BELOW the recommended 16.20 limit and the 16.32 no-chase ceiling - GRADE: better than plan. Account: TradeStation assumed (same as GE/SPY put) - confirm.",
+   "fill": "FILLED 2026-08-04 ~9:0x CT (Omar-reported): BOUGHT 1 UAL Sep 18 2026 120 CALL @ 15.85 = $1,585. BELOW the recommended 16.20 limit and the 16.32 no-chase ceiling - GRADE: better than plan. Account: TradeStation CONFIRMED (same acct as GE call + SPY put).",
    "override": "Paper-only override #2 (pattern: Omar is live-trading selected overlay picks after seeing the card). Flagged per contract, logged not hidden. Paper twin (2026-08-03-UAL-CALL, planned 13.60) tracked separately for the real-vs-paper comparison.",
    "thesis": "Fresh full-gate pass 8/3 on our scan; airlines day 2 of radar-confirmed repair (UAL +3.5% at entry); delta ~0.73, OI 2577, earnings clear to 10/21. Head-to-head with Markman UAL Sep 130C.",
    "plan": {
