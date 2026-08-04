@@ -576,9 +576,14 @@
    "contracts": 3,
    "planned_premium": 7.65,
    "entry_underlying": 87.02,
-   "status": "PLANNED",
+   "status": "OPEN",
    "thesis": "PRIME SETUP (squeeze 2nd pctile + cheap premium - the one tagged pattern with published history) on a fresh full-gate pass; readiness 70; airlines just repaired off ROLLING on the radar (JETS state change today, UAL +5.8 confirming group turn); earnings clear to Oct 8. Delta .66, OI 1387, spread 7.8%.",
-   "exit_plan": "Sell 15.30 (+100%), cut 3.83 (-50%), out by 2026-08-28; thesis break = daily Chandelier SELL flip."
+   "exit_plan": "Sell 16.46 (+100%), cut 4.12 (-50%), out by 2026-08-28; CE flip = early exit.",
+   "entry_premium": 8.23,
+   "fill": "FILLED 2026-08-04 (marked ~9:12 CT session quote; 8:50 routine report pending review): live mid 8.23 (7.95/8.50, spread 6.7% - tightened from the 20% open), +7.5% vs plan 7.65 = inside all void rules. NOTE: plan was built on a stale Yahoo spot (87.02 vs real 91.59 close) - the premium ref happened to be sound; incident already logged.",
+   "target_premium": 16.46,
+   "stop_premium": 4.12,
+   "time_exit": "2026-08-28"
   },
   {
    "id": "2026-08-03-UAL-CALL",
@@ -590,9 +595,14 @@
    "contracts": 1,
    "planned_premium": 13.6,
    "entry_underlying": 128.39,
-   "status": "PLANNED",
+   "status": "OPEN",
    "thesis": "Fresh full-gate pass tonight on OUR scan (independent of Markman, who is riding UAL Sep 130s +66%); airlines group repairing; readiness 46; earnings clear to Oct 21. Delta .69, OI 2579, spread 5.1%. Deliberate head-to-head: our 120C (delta .69) vs their 130C (delta ~.55) on the same thesis - the trial in miniature.",
-   "exit_plan": "Sell 27.20 (+100%), cut 6.80 (-50%), out by 2026-08-28; thesis break = daily Chandelier SELL flip."
+   "exit_plan": "Sell 31.00 (+100%), cut 7.75 (-50%), out by 2026-08-28; CE flip = early exit.",
+   "entry_premium": 15.5,
+   "fill": "FILLED 2026-08-04 (marked ~9:12 CT): live mid 15.50 (15.00/16.00), +14.0% vs plan 13.60, inside void rules. Real twin filled by Omar @ 15.85 ~9:00 - paper vs real gap 0.35 logged for the Friday comparison.",
+   "target_premium": 31.0,
+   "stop_premium": 7.75,
+   "time_exit": "2026-08-28"
   }
  ],
  "data_note_2026_07_30": "OPRA entitlement went LIVE ~2:55 PM CT 7/30 - all marks/fills now from the real TradeStation chain; Yahoo-mid fallback retired.",
