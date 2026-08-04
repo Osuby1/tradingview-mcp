@@ -611,6 +611,11 @@
    "date": "2026-07-30",
    "picks": 0,
    "reason": "10 gate-passing scan candidates -> earnings blackout removed MNST (8/6) + TJX (8/19); analysis gates REJECTED EQIX (OI 10, stale book, IV/RV 2.43) and ST (spread 47%, OI 56); GE PASSED all quality gates but NO compliant contract exists: Sep 340C delta 0.66 costs $2,800 (> $2,500 cap), Sep 350C fits the cap at $2,113 but live TS delta 0.584 < 0.60 floor. Same-night consistency with the DHI retirement: no knowingly-tolerated violations. Zero is a valid answer (rules.selection). GE stays first in line if premium/delta drift into compliance."
+  },
+  {
+   "date": "2026-08-04",
+   "picks": 0,
+   "reason": "17 full-gate passers (broadest night yet - even IWM/QQQ/XLK passed) but ZERO new picks, deliberate: (1) book already holds 7 option positions incl 2 real, heavily aviation-clustered (GE/UAL/DAL); (2) three binaries inside 72h - Hormuz deal day Wed, GE pre-decided exit Thu, jobs+tranche-2 Fri; adding calls into a possible peace-pop reversal is poor sequencing; (3) CAT put framework fired at the close (<885) but DIED at the gates: Chandelier no longer SELL + only compliant contract has OI 7. Standby if Wed confirms: IWM Sep call (ready 65, stop 4.6pct, ultra-liquid, no earnings, diversifies)."
   }
  ],
  "selection_note_2026_07_31": "5 full-gate CALL candidates -> earnings blackout removed FIVN (8/6), KDP (8/6), TJX (8/19); CTS engine-REJECTED (61.5% spread, illiquid chain - do not force); GE selected, and the 7/30 sizing block resolved itself: spot rallied to 360 so the Sep 350C is delta-compliant at $2,405 - cap exception adopted this morning was NOT needed. PUT side (sell-mode + nameable catalyst only): semis/tech ROLLING gave INTC (selected) and AAPL (selected); NVDA (8/26), AMD (8/4), AMAT (8/13), DELL (9/3), ORCL (9/9) earnings-blocked; LEN (9/17) earnings-blocked inside expiry week; MU sized out (0.60-delta contract = $21k premium on an $823 stock); STX engine-REJECTED (OI 23); META sized out (0.60-delta contract mid $5.6k, no compliant contract under any cap); airlines rolling but +5.6% week bounce = no entry timing; DHI chain already proven non-compliant 7/29-30. Regime PASS (SPY +7.1% over a rising 200-day), macro calendar clear for the 8/3 fill day.",
