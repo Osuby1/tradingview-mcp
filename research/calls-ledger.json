@@ -358,6 +358,50 @@
     "pct_of_account": 0.16
    },
    "grade_when_closed": null
+  },
+  {
+   "id": "2026-08-04-RACE-long",
+   "date": "2026-08-04",
+   "sym": "RACE",
+   "dir": "long-starter",
+   "fill": "STAGED ~9:2x CT, Omar placed the limit LIVE: BUY 90 RACE @ 398.00 resting, stop 372.08. NOT FILLED YET.",
+   "thesis": "Starter (regime REPAIR - above 200d but not qualifying) from the 8/4 six-name protocol run: readiness 70 was the best on the board (squeeze + momentum + market-beating), earnings freshly passed 7/30, stop 6.5% below entry. NYSE listing in USD (Milan/EUR trap logged same morning).",
+   "plan": {
+    "entry_limit": 398.0,
+    "shares": 90,
+    "notional": 35820,
+    "stop": 372.08,
+    "risk_at_stop": 2333,
+    "exit_rule": "stop / thesis break / 20pct ratchet",
+    "earnings": "passed 7/30 - clear to late Oct"
+   },
+   "alerts": {
+    "entry": 5294559806,
+    "stop": 5294559951
+   },
+   "grade_when_closed": null
+  },
+  {
+   "id": "2026-08-04-SHW-long",
+   "date": "2026-08-04",
+   "sym": "SHW",
+   "dir": "long-starter",
+   "fill": "STAGED ~9:2x CT, Omar placed the limit LIVE: BUY 100 SHW @ 356.00 resting, stop 334.39. NOT FILLED YET.",
+   "thesis": "Starter (regime REPAIR) from the 8/4 protocol run: readiness 60, tightest stop of the repair names (5.6%), earnings far (10/27), green vs peers on the morning it was picked.",
+   "plan": {
+    "entry_limit": 356.0,
+    "shares": 100,
+    "notional": 35600,
+    "stop": 334.39,
+    "risk_at_stop": 2160,
+    "exit_rule": "stop / thesis break / 20pct ratchet",
+    "earnings": "2026-10-27 - far"
+   },
+   "alerts": {
+    "entry": 5294560603,
+    "stop": 5294561254
+   },
+   "grade_when_closed": null
   }
  ]
 }

@@ -1,0 +1,7 @@
+[
+ {"sym": "NASDAQ:PLTR", "exchange": "NASDAQ", "level": 153, "message": "PLTR 153 = 200-DAY RECLAIM DOOR (8/4 plan): fires only matters on a DAILY CLOSE above - intraday touch is not the signal. If it CLOSES >153 on the earnings catalyst, regime flips -> evaluate a 45-90 DTE call on post-print crushed IV per rules. Do NOT chase the +21% gap intraday."},
+ {"sym": "NYSE:RACE", "exchange": "NYSE", "level": 398.00, "message": "RACE 398 = ENTRY (live limit, 8/4 starter plan): 90sh resting. Stop 372.08 (Chandelier), risk $2,333. Regime REPAIR = starter only. Readiness 70 was the board's best. If filled, confirm to Claude for the book."},
+ {"sym": "NYSE:RACE", "exchange": "NYSE", "level": 372.08, "message": "RACE 372.08 = STOP (8/4 starter plan): if filled 90sh from 398, exit ALL same-day, no negotiation. If never filled, this fire = setup dead, cancel the resting limit."},
+ {"sym": "NYSE:SHW", "exchange": "NYSE", "level": 356.00, "message": "SHW 356 = ENTRY (live limit, 8/4 starter plan): 100sh resting. Stop 334.39 (Chandelier), risk $2,160. Regime REPAIR = starter only, readiness 60, earnings far (10/27). If filled, confirm to Claude."},
+ {"sym": "NYSE:SHW", "exchange": "NYSE", "level": 334.39, "message": "SHW 334.39 = STOP (8/4 starter plan): if filled 100sh from 356, exit ALL same-day. If never filled, this fire = setup dead, cancel the resting limit."}
+]
