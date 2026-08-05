@@ -615,11 +615,12 @@
    "contracts": 4,
    "planned_premium": 5.1,
    "entry_underlying": 48.7,
-   "status": "PLANNED",
+   "status": "SKIPPED",
    "thesis": "PRIME SETUP (squeeze 14th pctile + premium below realized vol - the tag that is 2-for-2 on this book) on a fresh full-gate pass; airlines wave 3; purest fuel-cost beneficiary of WTI 75. Delta .73, OI 5140, spread 3.9%. FLAGGED: 5th aviation-linked position - accepted by Omar with eyes open. Earnings clear to 10/21.",
    "exit_plan": "Sell 10.2 (+100%), cut 2.55 (-50%), out by 2026-08-28; CE flip = early exit.",
    "ts_crosscheck": "TS mids verified at staging (rule honored): LUV 5.00/5.20, IWM 13.49/13.76, AMZN 20.50/22.20 - all match plan refs.",
-   "fill_note": "8:40 check: mid 5.275 (+3.4% vs plan OK) but spread 16.1% > 15% cap - fill DEFERRED to the 8:50 routine re-check (DAL precedent: opening spreads tighten)."
+   "fill_note": "8:40 check: mid 5.275 (+3.4% vs plan OK) but spread 16.1% > 15% cap - fill DEFERRED to the 8:50 routine re-check (DAL precedent: opening spreads tighten).",
+   "skip": "SKIPPED 2026-08-05 ~4:15 PM CT, Omar's call on desk recommendation: no new long premium the day before the Friday jobs binary (same logic as the GE/UAL real-call exits today). Reference at skip: LUV close 49.20, planned premium was 5.10 (8/4 close basis). GRADE at Friday review: reconstruct what the 8/6 8:50 fill would have done - the skip's cost/save gets logged honestly either way. Re-entry = fresh gate pass Monday 8/10+."
   },
   {
    "id": "2026-08-04-IWM-CALL",
