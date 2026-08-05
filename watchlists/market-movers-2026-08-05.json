@@ -1,0 +1,326 @@
+{
+  "gainers": [
+    {
+      "sym": "YXT",
+      "company": "YXT.COM Group Holding Limited",
+      "price": 23.43,
+      "pct_change": 801.15,
+      "market_cap_raw": "139.65M",
+      "volume": "59,995,490"
+    },
+    {
+      "sym": "INLF",
+      "company": "INLIF Limited",
+      "price": 6.27,
+      "pct_change": 97.17,
+      "market_cap_raw": "432.82K",
+      "volume": "60,574,910"
+    },
+    {
+      "sym": "ZYBT",
+      "company": "Zhengye Biotechnology Holding Limited",
+      "price": 2.36,
+      "pct_change": 84.37,
+      "market_cap_raw": "111.84M",
+      "volume": "70,725,795"
+    },
+    {
+      "sym": "RITR",
+      "company": "Reitar Logtech Holdings Limited",
+      "price": 0.262,
+      "pct_change": 79.33,
+      "market_cap_raw": "16.36M",
+      "volume": "714,416,671"
+    },
+    {
+      "sym": "JLHL",
+      "company": "Julong Holding Limited",
+      "price": 9.35,
+      "pct_change": 72.51,
+      "market_cap_raw": "200.54M",
+      "volume": "33,010,355"
+    },
+    {
+      "sym": "OESX",
+      "company": "Orion Energy Systems, Inc.",
+      "price": 16.06,
+      "pct_change": 54.42,
+      "market_cap_raw": "65.15M",
+      "volume": "667,378"
+    },
+    {
+      "sym": "APPS",
+      "company": "Digital Turbine, Inc.",
+      "price": 13.17,
+      "pct_change": 38.49,
+      "market_cap_raw": "1.59B",
+      "volume": "20,638,570"
+    },
+    {
+      "sym": "GTE",
+      "company": "Gran Tierra Energy Inc.",
+      "price": 9.44,
+      "pct_change": 38.21,
+      "market_cap_raw": "333.80M",
+      "volume": "20,225,554"
+    },
+    {
+      "sym": "KLTR",
+      "company": "Kaltura, Inc.",
+      "price": 1.89,
+      "pct_change": 35.0,
+      "market_cap_raw": "284.21M",
+      "volume": "13,769,197"
+    },
+    {
+      "sym": "BLMN",
+      "company": "Bloomin' Brands, Inc.",
+      "price": 11.85,
+      "pct_change": 32.85,
+      "market_cap_raw": "1.01B",
+      "volume": "10,720,978"
+    },
+    {
+      "sym": "MTRN",
+      "company": "Materion Corporation",
+      "price": 297.08,
+      "pct_change": 30.81,
+      "market_cap_raw": "6.18B",
+      "volume": "922,843"
+    },
+    {
+      "sym": "CDTG",
+      "company": "CDT Environmental Technology Investment Holdings Limited",
+      "price": 1.52,
+      "pct_change": 29.91,
+      "market_cap_raw": "4.59M",
+      "volume": "1,095,162"
+    },
+    {
+      "sym": "ATTO",
+      "company": "Attovia Therapeutics, Inc.",
+      "price": 21.9,
+      "pct_change": 28.82,
+      "market_cap_raw": "942.34M",
+      "volume": "4,811,544"
+    },
+    {
+      "sym": "TBI",
+      "company": "TrueBlue, Inc.",
+      "price": 9.9,
+      "pct_change": 28.74,
+      "market_cap_raw": "301.00M",
+      "volume": "994,568"
+    },
+    {
+      "sym": "SWIM",
+      "company": "Latham Group, Inc.",
+      "price": 7.3,
+      "pct_change": 28.07,
+      "market_cap_raw": "858.01M",
+      "volume": "3,701,503"
+    },
+    {
+      "sym": "FTK",
+      "company": "Flotek Industries, Inc.",
+      "price": 36.07,
+      "pct_change": 27.86,
+      "market_cap_raw": "1.30B",
+      "volume": "1,547,660"
+    },
+    {
+      "sym": "SHPH",
+      "company": "Shuttle Pharmaceuticals Holdings, Inc.",
+      "price": 4.6,
+      "pct_change": 26.03,
+      "market_cap_raw": "2.69M",
+      "volume": "1,556,041"
+    },
+    {
+      "sym": "ANTA",
+      "company": "Antalpha Platform Holding Company",
+      "price": 4.0,
+      "pct_change": 25.91,
+      "market_cap_raw": "96.06M",
+      "volume": "21,878"
+    },
+    {
+      "sym": "ASTC",
+      "company": "Astrotech Corporation",
+      "price": 9.11,
+      "pct_change": 25.83,
+      "market_cap_raw": "15.28M",
+      "volume": "3,911,033"
+    },
+    {
+      "sym": "CTXR",
+      "company": "Citius Pharmaceuticals, Inc.",
+      "price": 0.781,
+      "pct_change": 25.45,
+      "market_cap_raw": "21.44M",
+      "volume": "5,027,090"
+    }
+  ],
+  "losers": [
+    {
+      "sym": "RCON",
+      "company": "Recon Technology, Ltd.",
+      "price": 0.0636,
+      "pct_change": -84.53,
+      "market_cap_raw": "5.76M",
+      "volume": "99,303,309"
+    },
+    {
+      "sym": "SUJA",
+      "company": "Suja Life, Inc.",
+      "price": 6.14,
+      "pct_change": -46.18,
+      "market_cap_raw": "236.96M",
+      "volume": "3,367,525"
+    },
+    {
+      "sym": "SXTC",
+      "company": "China SXT Pharmaceuticals, Inc.",
+      "price": 0.067,
+      "pct_change": -45.57,
+      "market_cap_raw": "2.16M",
+      "volume": "160,614,986"
+    },
+    {
+      "sym": "SPPL",
+      "company": "Simpple Ltd.",
+      "price": 2.02,
+      "pct_change": -42.78,
+      "market_cap_raw": "19.77M",
+      "volume": "528,062"
+    },
+    {
+      "sym": "VSEE",
+      "company": "VSee Health, Inc.",
+      "price": 0.0502,
+      "pct_change": -40.24,
+      "market_cap_raw": "2.44M",
+      "volume": "39,659,830"
+    },
+    {
+      "sym": "AMIX",
+      "company": "Autonomix Medical, Inc.",
+      "price": 12.1,
+      "pct_change": -37.95,
+      "market_cap_raw": "6.57M",
+      "volume": "14,039,391"
+    },
+    {
+      "sym": "TYGO",
+      "company": "Tigo Energy, Inc.",
+      "price": 1.29,
+      "pct_change": -36.76,
+      "market_cap_raw": "97.92M",
+      "volume": "9,866,739"
+    },
+    {
+      "sym": "LMB",
+      "company": "Limbach Holdings, Inc.",
+      "price": 49.73,
+      "pct_change": -35.51,
+      "market_cap_raw": "592.83M",
+      "volume": "1,693,945"
+    },
+    {
+      "sym": "IPW",
+      "company": "iPower Inc.",
+      "price": 0.365,
+      "pct_change": -34.86,
+      "market_cap_raw": "241.22K",
+      "volume": "4,915,882"
+    },
+    {
+      "sym": "USNA",
+      "company": "USANA Health Sciences, Inc.",
+      "price": 14.99,
+      "pct_change": -34.2,
+      "market_cap_raw": "276.76M",
+      "volume": "687,514"
+    },
+    {
+      "sym": "SEDG",
+      "company": "SolarEdge Technologies, Inc.",
+      "price": 33.9,
+      "pct_change": -30.48,
+      "market_cap_raw": "2.06B",
+      "volume": "16,742,455"
+    },
+    {
+      "sym": "FBGL",
+      "company": "FBS Global Limited",
+      "price": 0.41,
+      "pct_change": -30.22,
+      "market_cap_raw": "5.54M",
+      "volume": "323,083"
+    },
+    {
+      "sym": "TBLA",
+      "company": "Taboola.com Ltd.",
+      "price": 3.835,
+      "pct_change": -27.5,
+      "market_cap_raw": "1.05B",
+      "volume": "8,870,921"
+    },
+    {
+      "sym": "VPG",
+      "company": "Vishay Precision Group, Inc.",
+      "price": 73.56,
+      "pct_change": -27.17,
+      "market_cap_raw": "978.42M",
+      "volume": "1,979,499"
+    },
+    {
+      "sym": "QNME",
+      "company": "Quanome Technologies, Inc.",
+      "price": 0.51,
+      "pct_change": -26.36,
+      "market_cap_raw": "17.56M",
+      "volume": "3,220,319"
+    },
+    {
+      "sym": "VVOS",
+      "company": "Vivos Therapeutics, Inc.",
+      "price": 0.341,
+      "pct_change": -26.31,
+      "market_cap_raw": "4.73M",
+      "volume": "6,679,088"
+    },
+    {
+      "sym": "JUNS",
+      "company": "Jupiter Neurosciences, Inc.",
+      "price": 0.077,
+      "pct_change": -25.68,
+      "market_cap_raw": "3.34M",
+      "volume": "6,552,839"
+    },
+    {
+      "sym": "AEHL",
+      "company": "Antelope Enterprise Holdings Limited",
+      "price": 0.33,
+      "pct_change": -25.42,
+      "market_cap_raw": "5.29M",
+      "volume": "1,452,979"
+    },
+    {
+      "sym": "LMAT",
+      "company": "LeMaitre Vascular, Inc.",
+      "price": 79.0,
+      "pct_change": -25.32,
+      "market_cap_raw": "1.81B",
+      "volume": "2,178,252"
+    },
+    {
+      "sym": "GWAV",
+      "company": "Greenwave Technology Solutions, Inc.",
+      "price": 3.52,
+      "pct_change": -25.11,
+      "market_cap_raw": "2.92M",
+      "volume": "85,849"
+    }
+  ]
+}

@@ -9,7 +9,7 @@
    "entry": 381.49,
    "stop": 344.11,
    "opened": "2026-08-05",
-   "high_close": 381.49,
+   "high_close": 375.62,
    "ratchet_alert": null,
    "notes": "8/4 universe scan rank #9, readiness 80 (best stock passer); filled 2.28 BELOW plan limit 383.77; checkpoint 463.09 (no-sell milestone); options chain dead (OI 4) - equity only; risk $4,897"
   },
@@ -19,7 +19,7 @@
    "entry": 63.53,
    "stop": 60.35,
    "opened": "2026-07-24",
-   "high_close": 66.86,
+   "high_close": 69.26,
    "ratchet_alert": null,
    "notes": "bounce-flip entry (below 50d) - failed 50-day reclaim = thesis break"
   }
