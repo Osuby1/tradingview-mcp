@@ -17,6 +17,7 @@ Run daily (part of the EOD routine):
 """
 import datetime as dt
 import glob
+import json
 import os
 import re
 import shutil
@@ -28,6 +29,9 @@ import openpyxl
 from openpyxl.styles import Font
 
 DOWNLOADS = Path.home() / "Downloads"
+REPO = Path(__file__).resolve().parent.parent
+QUOTED_JSON = REPO / "research" / "crude-quoted-latest.json"
+BBL_PER_TONNE_GASOIL = 7.45  # ICE LS Gasoil is $/tonne; convert to $/bbl
 SCAN_URL = "https://scanner.tradingview.com/futures/scan"
 EIA_URL = "https://www.eia.gov/dnav/pet/hist/LeafHandler.ashx?n=PET&s={sid}&f=W"
 MONTH_CODES = "FGHJKMNQUVXZ"  # Jan..Dec
@@ -115,6 +119,37 @@ def main():
 
     wti = get_curve("CL", "NYMEX", "CL1!")
     brn = get_curve("BRN", "ICEEUR", "BRN1!")
+
+    # products + freight proxy (single scan; all confirmed-live symbols)
+    prod = tv_scan(["NYMEX:RB1!", "NYMEX:HO1!", "ICEEUR:ULS1!"])
+    rb = prod.get("NYMEX:RB1!", [None, None, None])[1]      # $/gal
+    ho = prod.get("NYMEX:HO1!", [None, None, None])[1]      # $/gal
+    uls = prod.get("ICEEUR:ULS1!", [None, None, None])[1]   # $/tonne
+    try:
+        r = requests.post("https://scanner.tradingview.com/america/scan",
+                          json={"symbols": {"tickers": ["AMEX:BWET"]},
+                                "columns": ["name", "close", "change"]}, timeout=30)
+        bwet = r.json()["data"][0]["d"] if r.ok and r.json().get("data") else None
+    except Exception:
+        bwet = None
+    cl1 = wti[0][1] if wti else None
+    brn1 = brn[0][1] if brn else None
+    cracks = {}
+    if rb and ho and cl1:
+        cracks["RBOB crack (RB*42 - WTI)"] = round(rb * 42 - cl1, 2)
+        cracks["ULSD crack (HO*42 - WTI)"] = round(ho * 42 - cl1, 2)
+        cracks["USGC 3-2-1 proxy ((2RB+HO)*42/3 - WTI)"] = round((2 * rb + ho) * 42 / 3 - cl1, 2)
+    if uls and brn1:
+        cracks["NWE gasoil crack (ULS/7.45 - Brent)"] = round(uls / BBL_PER_TONNE_GASOIL - brn1, 2)
+
+    # article-quoted physicals harvested from the morning brief (written at EOD
+    # by Claude from the draft's MACHINE BLOCK) - carried with source + as-of
+    quoted = []
+    if QUOTED_JSON.exists():
+        try:
+            quoted = json.loads(QUOTED_JSON.read_text(encoding="utf-8")).get("items", [])
+        except Exception as e:
+            quoted = [{"key": "PARSE ERROR", "value": str(e), "source": "", "asof": ""}]
     eia = []
     for label, sid, maps_to in EIA_SERIES:
         try:
@@ -168,6 +203,41 @@ def main():
         put(r, 2, round(wti[0][1] - brn[0][1], 2))
 
     r += 2
+    put(r, 1, "PRODUCTS & CRACKS (computed from TradingView futures - daily)", True)
+    r += 1
+    for col, h in enumerate(["Metric", "Value", "Maps to"], 1):
+        put(r, col, h, True)
+    for label, val, maps in [
+        ("RBOB M1 ($/gal)", rb, ""),
+        ("ULSD/HO M1 ($/gal)", ho, ""),
+        ("ICE LS Gasoil M1 ($/tonne)", uls, ""),
+    ]:
+        r += 1
+        put(r, 1, label); put(r, 2, val); put(r, 3, maps)
+    for label, val in cracks.items():
+        r += 1
+        put(r, 1, label); put(r, 2, val)
+        put(r, 3, "Crack Spreads tab market column (futures-based proxy)")
+    if bwet:
+        r += 1
+        put(r, 1, "BWET tanker ETF (freight DIRECTION proxy, not a rate)")
+        put(r, 2, f"{bwet[1]}  ({bwet[2]:+.1f}% today)")
+
+    r += 2
+    put(r, 1, "ARTICLE-QUOTED PHYSICALS (harvested from the morning brief - dated, not daily-guaranteed)", True)
+    r += 1
+    for col, h in enumerate(["Item", "Value", "Source", "As-of"], 1):
+        put(r, col, h, True)
+    if quoted:
+        for q in quoted:
+            r += 1
+            put(r, 1, q.get("key")); put(r, 2, q.get("value"))
+            put(r, 3, q.get("source")); put(r, 4, q.get("asof"))
+    else:
+        r += 1
+        put(r, 1, "(none harvested yet - populated from the daily brief's machine block)")
+
+    r += 2
     put(r, 1, "EIA WEEKLY (new data Wednesdays 9:30 CT)", True)
     r += 1
     for col, h in enumerate(["Series", "Latest w/e", "Value", "Prior", "WoW change", "Maps to (Inputs)"], 1):
@@ -197,6 +267,11 @@ def main():
         if latest[1] is not None and prior[1] is not None:
             wow = f" (WoW {latest[1]-prior[1]:+,.0f})"
         print(f"{label}: {latest[1]} w/e {latest[0]}{wow}")
+    for label, val in cracks.items():
+        print(f"{label}: {val}")
+    if bwet:
+        print(f"BWET freight proxy: {bwet[1]} ({bwet[2]:+.1f}% today)")
+    print(f"Quoted physicals carried: {len(quoted)}" + ("" if quoted else " (run the EOD harvest to populate)"))
 
 
 if __name__ == "__main__":
