@@ -403,6 +403,22 @@
     "stop": 5294561254
    },
    "grade_when_closed": null
+  },
+  {
+   "id": "2026-08-05-LUV-call-REAL",
+   "date": "2026-08-05",
+   "sym": "LUV",
+   "dir": "long-call-REAL-WORKING",
+   "fill": "WORKING, NOT FILLED: Omar bid 4.85 early (market ran away - contract +9% to 5.55/5.75 by 9:30 CT), raised to 5.35 ~9:35 CT, still below the 5.55 bid. Paper-plan ref 5.10; no-chase ceiling 6.12 (+20%). Chase-discipline note: raises stay sanctioned only inside the ceiling.",
+   "plan": {
+    "contract": "LUV 2026-09-18 45C",
+    "working_limit": 5.35,
+    "plan_ref": 5.1,
+    "ceiling": 6.12,
+    "exits_on_fill": "sell +100% / cut -50% / out 8-28 / CE flip",
+    "earnings": "2026-10-21 clear"
+   },
+   "grade_when_closed": null
   }
  ]
 }
