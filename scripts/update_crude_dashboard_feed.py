@@ -105,6 +105,40 @@ def month_label(contract):
     return f"{months[MONTH_CODES.index(m.group(1))]}{m.group(2)[2:]}" if m else code
 
 
+def tv_to_ts(contract):
+    """NYMEX:CLU2026 -> CLU26 (TradeStation futures format)."""
+    code = contract.split(":")[1]
+    m = re.match(r"([A-Z]+)([FGHJKMNQUVXZ])(\d{4})", code)
+    return f"{m.group(1)}{m.group(2)}{m.group(3)[2:]}" if m else code
+
+
+def ts_layer(wti):
+    """TradeStation cross-check / fallback for the US-listed legs.
+    Returns (note_line, wti_curve_or_None). Never raises."""
+    try:
+        sys.path.insert(0, str(Path(__file__).parent))
+        import ts_api
+        if not ts_api.available():
+            return ("TradeStation: key stored, awaiting one-time login (scripts/ts_auth.py)", None)
+        if wti:  # cross-check the front contract
+            sym = tv_to_ts(wti[0][0])
+            q = ts_api.ts_quotes([sym]).get(sym)
+            if q:
+                diff = abs(float(q["Last"]) - wti[0][1])
+                return (f"TradeStation cross-check {sym}: {q['Last']} vs TV {wti[0][1]} "
+                        f"(diff {diff:.2f}) {'OK' if diff < 0.25 else 'DIVERGENT - investigate'}", None)
+            return ("TradeStation cross-check: no quote returned", None)
+        # TV curve failed -> rebuild WTI strip from TS
+        cands = candidate_contracts("CL", "NYMEX")
+        ts_syms = [tv_to_ts(c) for c in cands]
+        quotes = ts_api.ts_quotes(ts_syms)
+        curve = [(cands[i], float(quotes[s]["Last"]), 0.0)
+                 for i, s in enumerate(ts_syms) if s in quotes][:4]
+        return ("TradeStation FALLBACK supplied the WTI curve (TV scan empty)", curve or None)
+    except Exception as e:
+        return (f"TradeStation layer unavailable: {e}", None)
+
+
 def newest_workbook():
     cands = [p for p in glob.glob(str(DOWNLOADS / "Crude_Fundamental_Dashboard*.xlsx"))
              if not os.path.basename(p).startswith("~$")]
@@ -119,6 +153,9 @@ def main():
 
     wti = get_curve("CL", "NYMEX", "CL1!")
     brn = get_curve("BRN", "ICEEUR", "BRN1!")
+    ts_note, ts_curve = ts_layer(wti)
+    if not wti and ts_curve:
+        wti = ts_curve
 
     # products + freight proxy (single scan; all confirmed-live symbols)
     prod = tv_scan(["NYMEX:RB1!", "NYMEX:HO1!", "ICEEUR:ULS1!"])
@@ -199,7 +236,8 @@ def main():
             c.font = bold
 
     put(1, 1, "AUTO FEED - written by scripts/update_crude_dashboard_feed.py", True)
-    put(2, 1, f"Updated: {now} (Houston). Sources: TradingView futures feed + EIA weekly.")
+    put(2, 1, f"Updated: {now} (Houston). Sources: TradingView futures feed + EIA weekly + TradeStation cross-check.")
+    put(2, 8, ts_note)
     put(3, 1, "This sheet is machine-owned and rewritten on every run. Reference these")
     put(4, 1, "cells from Inputs (or paste values) - nothing else in the file is touched.")
 
@@ -307,6 +345,7 @@ def main():
     if bwet:
         print(f"BWET freight proxy: {bwet[1]} ({bwet[2]:+.1f}% today)")
     print(f"Quoted physicals carried: {len(quoted)}" + ("" if quoted else " (run the EOD harvest to populate)"))
+    print(ts_note)
 
 
 if __name__ == "__main__":
