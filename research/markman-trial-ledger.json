@@ -1,5 +1,15 @@
 {
  "kind": "markman-30-alert-trial",
  "preregistration": "research/markman-trial-preregistration.md",
- "alerts": []
+ "alerts": [],
+ "issue_log": [
+  {
+   "date": "2026-08-05",
+   "sent": "9:13 AM CT",
+   "type": "management only - NO new buy (trial alert #1 still pending)",
+   "actions": "Sell UAL Sep 130C at 11.10+ GTC (closing back half near their 135 target; fillable immediately, 130C trading 11.38 = +118% on 5.10). DELL Aug 600C stop raised to 6.20.",
+   "preview": "Sept DELL add POSTPONED for a pullback; they cited the Sep $700 calls (~$13) with DELL at 482 = 45% OTM, delta ~0.15-0.2 - when that alert arrives, filter line 4 auto-SKIPs it. First prospective alert may demonstrate the emphasis finding.",
+   "honesty": "4.75 entry-price error persists in positions block (actual alerted 5.10). Account claim 22,651.34 (+633 on the day, plausible given UAL/DELL moves)."
+  }
+ ]
 }
