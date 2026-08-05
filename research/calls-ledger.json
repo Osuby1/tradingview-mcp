@@ -337,7 +337,9 @@
     "label": "uncalibrated"
    },
    "grade_when_closed": null,
-   "pre_decided_exit": "THURSDAY 8/6 (Omar, decided 8/4): sell into strength, limit-worked, flat by Thu close regardless - pre-jobs de-risk. Target/thesis-break supersede if earlier. Grade exit vs this pre-decision, not vs the original hold-to-target plan."
+   "pre_decided_exit": "THURSDAY 8/6 (Omar, decided 8/4): sell into strength, limit-worked, flat by Thu close regardless - pre-jobs de-risk. Target/thesis-break supersede if earlier. Grade exit vs this pre-decision, not vs the original hold-to-target plan.",
+   "close": "CLOSED 2026-08-05 ~13:4x CT (Omar-reported): SOLD 1 GE Sep 350C @ 37.05 = $3,705. P&L +$905 (+32.3%) in 2 sessions. ONE DAY EARLY vs the pre-decided Thu 8/6 exit - Omar's deliberate risk call: market softening intraday (SPY faded to flat, QQQ -0.5%, VIX 16.6 elevated 3rd day), jobs number Friday - bank ahead of the binary rather than give back into a selloff. Sold into strength with GE 381 near the 380 checkpoint. Fill 37.05 vs ~38 mid an hour earlier = tape softening, not slippage.",
+   "grade": "EXECUTION A- (plan deviation logged: -1 day vs pre-decided exit, direction of deviation = MORE conservative before a macro binary, consistent with trim-before-earnings doctrine). Trade grade A: entered on the coil at the limit (28.00), exited +32% at the checkpoint zone. The GE-vs-UAL strike-selection study (runway-vs-rent) uses this as the WIN template. Paper twin 2026-07-31-GE-CALL (@27.40) STAYS OPEN under paper rules for divergence tracking."
   },
   {
    "id": "2026-08-04-UAL-call-REAL",
