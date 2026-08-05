@@ -1,12 +1,9 @@
-# Rotation Radar — 2026-08-04
+# Rotation Radar — 2026-08-05
 
 accel = Perf.1M − Perf.6M/6 (excess vs own run-rate). Prev state: 2026-08-04.
 **NEW IGNITING ⇒ run the Early Ignition single-name screen on that group (drill column).**
 
-## ⚡ STATE CHANGES vs prior run
-· **Gold miners (GDX)**: WATCH → NEUTRAL (accel +3.2)
-· **Tech broad (XLK)**: ROLLING → NEUTRAL (accel -5.3)
-⚠ **Spec growth (ARKK)**: NEUTRAL → ROLLING (accel -8.8)
+## State changes: none vs prior run
 
 | Group | ETF | State | accel | 1W% | 1M% | 3M% | 6M% | rel1M | Drill-down |
 |-------|-----|-------|-------|-----|-----|-----|-----|-------|------------|
@@ -43,7 +40,7 @@ accel = Perf.1M − Perf.6M/6 (excess vs own run-rate). Prev state: 2026-08-04.
 
 ```json
 {
- "date": "2026-08-04",
+ "date": "2026-08-05",
  "states": {
   "AMEX:KWEB": "IGNITING",
   "AMEX:XLE": "WATCH",
