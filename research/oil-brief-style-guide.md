@@ -1,63 +1,157 @@
 # Oil Morning Brief — style guide (built from Omar's broker specimens)
-Specimens analyzed: 2026-07-30 (crisis day: CENTCOM/CPC) and 2026-06-17
-(data/analysis day: EIA Wed, post-deal repricing). The daily writer READS
-THIS FILE before composing and follows it.
+Specimens analyzed: 2026-07-30 (crisis day: CENTCOM/CPC), 2026-06-17
+(data/analysis day: EIA Wed, post-deal repricing), 2026-07-29 (escalation
+day: US/Saudi strikes + Iran rejects Oman proposal), 2026-07-13
+(acute-crisis day: Hormuz traffic collapse, Qatar maritime suspension).
+The daily writer READS THIS FILE before composing and follows it.
 
-## Skeleton (both specimens)
-1. "Morning Highlights: <two-clause headline with price level + top story>"
-2. "<Weekday>, <date> | 5:45 AM CT"
-3. Price line: "Brent (<month>) $X | WTI (<month>) $Y" with contract months
-   ALWAYS labeled; expiry flagged when near ("expires Friday").
-4. THE SIGNATURE: one dense digest paragraph - day changes with %, session
-   ranges/context ("steadying after two ~5% declines"), API/EIA numbers VS
-   EXPECTATIONS, then semicolon-chained top stories. Everything in one
-   breath. This paragraph IS the product for a skimming reader.
+## Skeleton (all specimens)
+1. Headline: two-to-four clauses chained with semicolons, price level +
+   top stories. Acute/data days may prefix "Morning Highlights:"; big
+   escalation days use a bare declarative headline ("Brent Jumps 5% to
+   $88.00 as ..."). Either way the headline alone must tell the day.
+2. "<Weekday>, <date> | 5:45 AM CT" (specimens ran 6:30-6:45 ET; ours
+   keeps its own dateline).
+3. Price line: "Brent (<month>) $X | WTI (<month>) $Y" with contract
+   months ALWAYS labeled; expiry flagged when near ("expires Friday");
+   day change in $ AND % for both benchmarks in the same breath.
+4. THE SIGNATURE: one dense digest paragraph - day changes with %,
+   session ranges/context ("steadying after two ~5% declines"), API/EIA
+   numbers VS EXPECTATIONS, then semicolon-chained top stories.
+   Everything in one breath. On data-pending days it ENDS with what's
+   due ("EIA figures are due later today"). This paragraph IS the
+   product for a skimming reader.
 
 ## Analytical hierarchy (the house's actual edge - replicate)
-- PHYSICAL SIGNALS OUTRANK HEADLINES: term structure and differentials are
-  "the most important signal" tier (Dubai contango flip, WTI Midland-Houston
-  basis, Oman/Murban differentials, floating storage). Flows/arbitrage
-  (VLCC fixtures, Murban-vs-WTI economics, 13-15mb moving west) are used as
-  CONFIRMATION of the structure story, never standalone trivia.
-- MECHANISM TRACING: "the mechanism is straightforward:" - every big claim
-  gets its causal chain spelled out, including downstream consequences
-  ("the basis flip is the downstream consequence of the same repricing").
+- PHYSICAL SIGNALS OUTRANK HEADLINES: term structure and differentials
+  are "the most important signal" tier (Dubai contango flip, WTI
+  Midland-Houston basis, Oman/Murban differentials, floating storage,
+  OSPs). Flows/arbitrage (VLCC fixtures, tender premiums, vessel counts)
+  are used as CONFIRMATION of the structure story, never standalone
+  trivia.
+- HEADLINE TRIAGE (7/29): when two big stories compete, explicitly rank
+  them and lead with the more consequential one even if it's the quieter
+  one - "Iran rejecting the Oman proposal is the more consequential
+  headline today, even though the strikes will get the attention." Say
+  WHY it outranks (it killed the only concrete diplomatic mechanism).
+- REVEALED PREFERENCE BEATS STATEMENTS (7/29, 7/13): what buyers PAY is
+  more reliable than what governments SAY - "buyers are paying up for
+  cargoes that can actually move, which is a more reliable signal than
+  either government's public statements." State official-claim-vs-data
+  contradictions bluntly: "Trump said Sunday the strait remains open to
+  commercial traffic, though the data shows otherwise."
+- MECHANISM TRACING: "the mechanism is straightforward:" - every big
+  claim gets its causal chain spelled out, including downstream
+  consequences. Include SECOND-ORDER mechanisms (7/13: not just outbound
+  loaded tankers - INBOUND EMPTY tankers, because without vessels
+  entering the Gulf to load, restarted production can't be sustained).
+- THE ONE-NUMBER ARC (7/13): when one number captures a whole cycle,
+  build a paragraph on it (Murban OSP $101.48 -> $80.01 in one month =
+  the full scarcity-to-glut-to-repricing arc). Then explain the LAG:
+  why the physical market can't reprice instantly (Asian refiners
+  already covered through August).
+- RUNNING TALLIES (7/29): carry cumulative counters day over day -
+  "seventh tender since June... total sales past 86 million barrels",
+  vessel counts by corridor with AIS/dark-mode status, "highest weekly
+  pace since July 19". Superlatives always dated: "first blanket
+  maritime suspension by any Gulf state since the conflict began",
+  "sharper deterioration than anything seen since the MOU was signed".
+- TIME-HORIZON TAGGING (7/29, 7/13): label each driver's clock. Fast =
+  strikes/traffic. Medium = "a slower-moving but important layer"
+  (OPEC+ policy). Slow = structural, tagged explicitly - "that is a
+  2027-2028 story, not today's" (pipeline bypass build-out). Products
+  tightness framed as a LAYER "on top of whatever the crude side does".
+- DATA-VS-NARRATIVE DIVERGENCE (7/29): when two datasets tell opposite
+  stories (Bab el-Mandeb traffic up vs Hormuz scant), name the
+  divergence as "a defining feature of this market" and mine it.
 - THE UNDERPRICED RISK: each edition names the risk "the market is not
   fully pricing yet" (6/17: Israel-in-Lebanon as deal-breaker variable).
 - NEXT CONCRETE MILESTONE + the variable that could destabilize it
   (6/17: "MOU signing Friday... but Israeli behavior is the variable").
+- ANALYST SCENARIO BANDS (7/29): quote named-analyst price paths with
+  floor/ceiling logic - DBS's Sarkar: Brent whipsaws $80-100 as conflict
+  ebbs and flows, stop-start negotiation cycles mean no clean
+  resolution, floor near $80 even in de-escalation.
 - FACT VS CHARACTERIZATION: attributions handled explicitly (7/30: CPC's
-  "terrorist attack" labeled as CPC's own characterization, unattributed).
+  "terrorist attack" labeled as CPC's own characterization).
 
 ## Day-type templates
 - CRISIS DAY (7/30 model): lead = the incident deserving most scrutiny,
   with sourcing caveats; analyst risk-premium framing (KCM Trade); a
   "small but genuine" counter-datapoint (the Qatari LNG transit).
+- ESCALATION DAY (7/29 model - strikes/rejections on top of an existing
+  crisis): lead = headline triage (which story actually matters and
+  why); analyst scenario band with floor logic; the data-vs-narrative
+  divergence block with tender/premium evidence; then the slower policy
+  layer (OPEC+); then the products layer (diesel ban) as a second
+  tightness source.
+- ACUTE-CRISIS DAY (7/13 model - physical flows breaking down): lead =
+  raw traffic data, corridor by corridor, with vessel counts and
+  AIS/dark-mode status; the second-order production risk (inbound
+  tankers); the one-number arc (OSP); close with the long-term
+  structural frame, explicitly time-tagged as not today's story.
 - DATA/ANALYSIS DAY (6/17 model): lead = price-action interpretation
   ("the price action over three sessions tells the story"), then the
-  agency-forecast anchor (IEA first-look), then the physical signal, then
-  flows-as-confirmation, then the underpriced risk.
+  agency-forecast anchor (IEA first-look), then the physical signal,
+  then flows-as-confirmation, then the underpriced risk.
 - EIA WEDNESDAYS: API recap with number-vs-consensus in the digest AND a
   titled block; "EIA data due today" always flagged.
+
+## Structure after the essay paragraphs (all specimens)
+"Top Developments" = 3-5 titled blocks, each title a full mini-headline
+with numbers ("Bab el-Mandeb Traffic Hits Highest Level Since Mid-July
+as ADNOC Sells 12 Million Barrels at Premium"), each block 3-6 sentences
+that can stand alone - a reader who only reads the blocks gets the day.
 
 ## Source rolodex (grow it)
 Wires: Reuters, Bloomberg, CNBC. Agencies: IEA/EIA/API/OPEC. Analytics:
 Kpler (flows - Naveen Das), Energy Aspects (balances), Sparta Commodities
 (arb/freight - James Noel-Beswick), KCM Trade (macro framing - Tim
-Waterer). Companies: ADNOC, Reliance/Jamnagar, Dynacom, CPC statements,
-TotalEnergies/Exxon fixtures. State media handled as state media (Fars).
+Waterer), Windward (maritime intelligence - dark-mode/AIS calls). Banks:
+UBS (Giovanni Staunovo - the house's most-quoted; flows + production
+risk), DBS (Suvro Sarkar - scenario bands), ING (de-escalation
+skepticism), ANZ (shipping caution). Companies: ADNOC (tenders + OSPs),
+Reliance/Jamnagar, Dynacom, CPC statements, TotalEnergies/Exxon
+fixtures. State media handled as state media (Fars).
 
 ## Phrasing conventions
-Volumes in bpd / million barrels with comparisons ("nearly double the 4.6mb
-expectation", "lowest since 2014", "first since January", "highest in ten
-months"); freight in $/ton with route economics; timelines concrete
-("weeks to months, citing mine clearance"). No filler adjectives - the
-drama comes from the numbers.
+Volumes in bpd / million barrels with comparisons ("nearly double the
+4.6mb expectation", "lowest since 2014", "first since January", "highest
+in ten months"); freight in $/ton with route economics; timelines
+concrete ("weeks to months, citing mine clearance"); tender premiums as
+"$3 to $4 over Dubai quotes". No filler adjectives - the drama comes
+from the numbers.
 
 ## Historical anchors (from specimens, for continuity)
 War began ~Feb 28 2026 (Brent 71->77). Crisis peak: March, Dubai premiums
 >$60, Brent >$109 intraday June. June 14 (Sun): deal announced, Brent -10%
 in 3 sessions to ~79. June 19 (Fri): MOU signed in Switzerland. July 7-8:
-ceasefire "over", oil resurged (Sep Brent $91 by 7/30, backwardated ~$3+
-over Oct). Aug 3-5: Hormuz corridor talks, WTI briefly <75. IEA 2027
-first-look: +8mbpd supply vs +2mbpd demand = structural surplus thesis.
+ceasefire "over", oil resurged. July 13 (Mon): Hormuz collapsed to six
+dark-mode vessels, Qatar issued first blanket Gulf maritime suspension of
+the conflict, IRGC hit US bases in Kuwait/Bahrain, ADNOC cut Aug Murban
+OSP to $80.01 from $101.48 (Brent ~78). Mid-July: Houthis announced Red
+Sea blockade ~July 19; Bab el-Mandeb became the working counter-corridor.
+July 29 (Wed): US/Saudi struck Iran-backed groups in Iraq, Iran rejected
+Oman's Hormuz proposal (Brent +4.5% to ~86); ADNOC tender sales since
+June passed 86mb at premiums; OPEC+ track = +188k bpd for September then
+hold through year-end pending capacity audit (~2mbpd cuts still in
+place); Russia diesel ban extended (loadings ~234k bpd early July vs
+400k June). July 30: Sep Brent $91, backwardated ~$3+ over Oct. Aug 3-5:
+Hormuz corridor talks, WTI briefly <75. Structural frames: IEA 2027
+first-look +8mbpd supply vs +2mbpd demand = surplus thesis; Mideast
+pipeline build-out = 3.8mbpd bypass by end-2027, 7.3mbpd by end-2028
+(>60% of pre-war Gulf exports insulated) = downward pressure on
+long-dated security premium, a 2027-28 story.
+
+## Delivery format — LARGE BOLD TYPE (Omar's standing order 2026-08-05)
+The emailed brief must be easy to read on a phone. Compose the Gmail
+draft body as HTML, not plain text:
+- Everything bold: wrap the whole body so ALL text renders bold
+  (font-weight:700).
+- Large type: body text ~18px; section titles (Top Developments, What
+  I'm Watching, Trends Watch, each development title) ~20px; the
+  headline ~24px.
+- Simple inline-styled divs/paragraphs only (Gmail-safe); no external
+  CSS, no images required.
+- The plain-text skeleton/order above is unchanged - this is purely how
+  it renders.
