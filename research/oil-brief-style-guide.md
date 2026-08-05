@@ -126,6 +126,41 @@ the fundamentals section) with data AND implications, never levels alone:
   like the headline crude number. On quiet days one tight paragraph is
   fine, but the block NEVER disappears.
 
+## Fundamental dashboard layer (Omar's standing order 2026-08-05)
+Omar maintains a quantitative fair-value model (Crude_Fundamental_
+Dashboard workbook, refreshed weekly). Its latest committed baseline
+lives at research/crude-dashboard-snapshot.md - READ IT every morning
+and carry a titled "DASHBOARD CHECK" block in the brief:
+- FAIR-VALUE GAP: the model's WTI M1-M2, Brent M1-M2 and WTI-Brent
+  fair values vs where the market trades THIS morning (use the day's
+  term-structure strip). State the mispricing direction in plain terms
+  ("the model says the WTI front spread is trading far below fair value
+  - structurally cheap") and whether today's move widened or closed the
+  gap. Thresholds: WTI M1-M2 ±$0.25, Brent M1-M2 ±$0.30, WTI-Brent
+  ±$0.50 - inside the band = no edge, say so.
+- DRIVER REFRESH: re-source what's fresh daily and compare to the
+  model's driver set - Cushing level/z-context and capacity %, OECD/
+  hub inventories (ARA, Singapore, Fujairah when quoted), floating
+  storage with the IRAN OVERHANG called out specifically, OPEC+ spare
+  capacity estimates, USGC/NWE 3-2-1 and Singapore gasoil-Dubai cracks,
+  Brent-Dubai EFS when quoted, refiner-margin procurement logic (fat
+  cracks = sour grades get bid - name the grades).
+- OSP WATCH: around Aramco OSP announcements (~5th of month), compare
+  actual vs the model's predicted direction; ADNOC Murban OSP same
+  treatment. An OSP surprise vs model = Aramco choosing share vs price
+  - say which.
+- STALENESS DISCIPLINE: the snapshot carries its as-of date. Label
+  model numbers with that date and today's sourced numbers as fresh -
+  never present week-old model inputs as today's market. If fresh data
+  contradicts a model signal, the FRESH data wins the narrative and the
+  divergence gets named.
+- SOURCE-TIER DISCIPLINE (from the dashboard's triangulation engine):
+  satellite/AIS trackers (Kpler, Vortexa, Kayrros) outrank official
+  aggregations (IEA/EIA/PPAC), which outrank surveys (teapot polls,
+  OPEC secondary sources), which outrank China NBS official prints
+  (cross-check only). When tiers disagree materially, flag the data
+  point as low-confidence rather than picking a side silently.
+
 ## Structure after the essay paragraphs (all specimens)
 "Top Developments" = 3-5 titled blocks, each title a full mini-headline
 with numbers ("Bab el-Mandeb Traffic Hits Highest Level Since Mid-July
