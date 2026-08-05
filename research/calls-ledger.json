@@ -358,7 +358,10 @@
     "max_loss": 1585,
     "pct_of_account": 0.16
    },
-   "grade_when_closed": null
+   "grade_when_closed": null,
+   "close": "CLOSED 2026-08-05 ~12:55 CT (Omar-reported): SOLD 1 UAL Sep 120C @ 16.98 = $1,698. P&L +$113 (+7.1%) in ~28h. Exit rationale: Omar's call, desk CONCURRED - theta ~$10.5/day, IV bleed (extrinsic 8.85 at entry -> ~5.1), stock tagged the 135 target zone and stalled at 133.9, peace-trade reversal base rate 2-of-3 in 4-27d, Markman exiting same day at target. Fill 16.98 vs 17.00 bid at rec time = clean.",
+   "grade": "EXECUTION A (entered below limit, exited into strength at target zone, no round-trip). HEAD-TO-HEAD FINAL: our deep-ITM 120C +7.1% vs Markman OTM 130C +62% banked half (8/3) + back-half exit working 11.10+ (+134%) - same thesis, same stock move (+5%); LESSON for lessons bank: on fast-catalyst trades the expensive low-leverage strike pays for safety with almost all of the upside; extrinsic paid at entry was the drag.",
+   "alerts_cleanup": "136.20 strength-checkpoint alert 5294314085 DELETED 8/5; 117.60 thesis-break alert 5294313943 KEPT (now serves the paper twin's Chandelier-flip exit)."
   },
   {
    "id": "2026-08-04-RACE-long",
