@@ -157,11 +157,32 @@ def main():
     if not wti and ts_curve:
         wti = ts_curve
 
-    # products + freight proxy (single scan; all confirmed-live symbols)
+    # TS is Omar's REAL-TIME entitled NYMEX feed; the public TV scanner is
+    # ~10-min delayed on CME (proven 8/5: 0.32 stable gap on a fast tape).
+    # So TS overrides the US legs when authenticated; TV keeps ICE legs.
+    ts_rb = ts_ho = None
+    try:
+        sys.path.insert(0, str(Path(__file__).parent))
+        import ts_api
+        if ts_api.available() and wti:
+            syms = [tv_to_ts(t) for t, _, _ in wti[:4]]
+            mcode = re.match(r"CL([FGHJKMNQUVXZ]\d{2})", syms[0]).group(1)
+            got = ts_api.ts_quotes(syms + [f"RB{mcode}", f"HO{mcode}"])
+            wti = [(t, float(got[tv_to_ts(t)]["Last"]), chg) if tv_to_ts(t) in got
+                   else (t, c, chg) for t, c, chg in wti]
+            if f"RB{mcode}" in got:
+                ts_rb = float(got[f"RB{mcode}"]["Last"])
+            if f"HO{mcode}" in got:
+                ts_ho = float(got[f"HO{mcode}"]["Last"])
+            ts_note = f"US legs = TradeStation REAL-TIME (WTI strip + RB/HO {mcode}); TV = ICE legs + fallback"
+    except Exception as e:
+        ts_note = f"TS override skipped ({e}); TV values in use"
+
+    # products + freight proxy (TS real-time overrides RB/HO when set above)
     prod = tv_scan(["NYMEX:RB1!", "NYMEX:HO1!", "ICEEUR:ULS1!"])
-    rb = prod.get("NYMEX:RB1!", [None, None, None])[1]      # $/gal
-    ho = prod.get("NYMEX:HO1!", [None, None, None])[1]      # $/gal
-    uls = prod.get("ICEEUR:ULS1!", [None, None, None])[1]   # $/tonne
+    rb = ts_rb or prod.get("NYMEX:RB1!", [None, None, None])[1]   # $/gal
+    ho = ts_ho or prod.get("NYMEX:HO1!", [None, None, None])[1]   # $/gal
+    uls = prod.get("ICEEUR:ULS1!", [None, None, None])[1]         # $/tonne (ICE - TV only)
     try:
         r = requests.post("https://scanner.tradingview.com/america/scan",
                           json={"symbols": {"tickers": ["AMEX:BWET"]},
