@@ -80,7 +80,13 @@ def main():
         "code": code_holder["code"],
         "redirect_uri": redirect,
     }, timeout=30)
-    r.raise_for_status()
+    if not r.ok:
+        # Auth0 error bodies are safe to show (no tokens in them)
+        print(f"Token exchange failed: HTTP {r.status_code} - {r.text[:300]}")
+        if len(creds.get("client_secret", "")) != 64:
+            print(f"NOTE: stored secret is {len(creds['client_secret'])} chars; "
+                  "TradeStation secrets are normally 64 - it may be truncated/line-wrapped from the email.")
+        raise SystemExit(1)
     tok = r.json()
     if "refresh_token" not in tok:
         raise SystemExit("No refresh token returned - was 'offline_access' scope granted?")
