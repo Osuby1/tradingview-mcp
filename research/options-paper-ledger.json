@@ -655,6 +655,22 @@
    "ts_crosscheck": "TS mids verified at staging (rule honored): LUV 5.00/5.20, IWM 13.49/13.76, AMZN 20.50/22.20 - all match plan refs.",
    "entry_premium": 21.5,
    "fill": "FILLED 2026-08-05 8:40 CT at mid 21.50 (21.20/21.80, spread 2.8%), +0.7% vs plan. All rules pass."
+  },
+  {
+   "id": "2026-08-05-BA-CALL",
+   "date": "2026-08-05",
+   "sym": "BA",
+   "direction": "CALL",
+   "expiry": "2026-10-16",
+   "strike": 235,
+   "contracts": 1,
+   "planned_premium": 18.45,
+   "entry_underlying": 240.19,
+   "status": "PLANNED - FILL MONDAY 8/10 POST-JOBS, NOT BEFORE",
+   "thesis": "Top options-viable passer of 8/5 scan: readiness 70 (momentum turned + volume at fresh 20d extreme - the GE-coil profile), ADX 21, $1.45B/day liquidity. Oct chain: C235 OI 950, mid 18.45. Runway-vs-rent 3.6x (plan target 288.48 = 48.3 runway vs 13.26 extrinsic). Delta est ~.62 (greeks pending TS MCP re-auth). Earnings passed late July - RE-VERIFY at fill.",
+   "fill_conditions": "Monday 8/10 8:50 CT at live mid ONLY IF BA re-passes gates + readiness re-score that morning; no-chase void if mid > 20.30 (+10%); void if Monday scan drops it.",
+   "exits_at_entry": "+100% / -50% / Chandelier daily flip / out by 21 DTE (Sep 25)",
+   "why_not_tomorrow": "No new long premium the day before the jobs binary - same doctrine as today's GE/UAL exits and the LUV skip."
   }
  ],
  "data_note_2026_07_30": "OPRA entitlement went LIVE ~2:55 PM CT 7/30 - all marks/fills now from the real TradeStation chain; Yahoo-mid fallback retired.",
