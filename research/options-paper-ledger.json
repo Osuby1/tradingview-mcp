@@ -125,7 +125,7 @@
    "target_premium": 9.85,
    "stop_premium": 2.45,
    "time_exit": "2026-08-28",
-   "status": "OPEN",
+   "status": "CLOSED 2026-08-05",
    "mark_premium": 5.45,
    "mark_date": "2026-07-31",
    "entry_provisional": false,
@@ -200,7 +200,8 @@
     }
    ],
    "restatement_note": "Morning-fill restatement 7/30: cloud routine report not accessible locally; entry STANDS at the 7/29 close-book mid 4.92 (TS OPRA prev-close marks validated the Yahoo close book within cents once entitlement went live 7/30 ~2:55 CT). Underlying moved <2% against at the open - fill valid, no void.",
-   "mark_note_2026_07_31": "7/31 mark = the day's last real print 5.45 (12:26 CT) rather than the closing-book mid: the after-hours book was 4.80/6.75 (33.8% spread = REJECT quality under the validation battery) and its 5.78 mid would have marked the position HIGHER - conservative side taken. Underlying closed 49.59 (+1.3% on the day)."
+   "mark_note_2026_07_31": "7/31 mark = the day's last real print 5.45 (12:26 CT) rather than the closing-book mid: the after-hours book was 4.80/6.75 (33.8% spread = REJECT quality under the validation battery) and its 5.78 mid would have marked the position HIGHER - conservative side taken. Underlying closed 49.59 (+1.3% on the day).",
+   "exit": "BANKED 2026-08-05 ~8:40 CT per the WTI-75 trigger playbook (fired overnight, low 74.24): exit at live mid 6.50 (5.80/7.20 book, no prints yet - spread noted). 5 contracts: 4.92 -> 6.50 = +$790 realized (+32%). The playbook step-1 exit, executed on the fire."
   },
   {
    "id": "2026-07-29-DHI-PUT",
@@ -617,7 +618,8 @@
    "status": "PLANNED",
    "thesis": "PRIME SETUP (squeeze 14th pctile + premium below realized vol - the tag that is 2-for-2 on this book) on a fresh full-gate pass; airlines wave 3; purest fuel-cost beneficiary of WTI 75. Delta .73, OI 5140, spread 3.9%. FLAGGED: 5th aviation-linked position - accepted by Omar with eyes open. Earnings clear to 10/21.",
    "exit_plan": "Sell 10.2 (+100%), cut 2.55 (-50%), out by 2026-08-28; CE flip = early exit.",
-   "ts_crosscheck": "TS mids verified at staging (rule honored): LUV 5.00/5.20, IWM 13.49/13.76, AMZN 20.50/22.20 - all match plan refs."
+   "ts_crosscheck": "TS mids verified at staging (rule honored): LUV 5.00/5.20, IWM 13.49/13.76, AMZN 20.50/22.20 - all match plan refs.",
+   "fill_note": "8:40 check: mid 5.275 (+3.4% vs plan OK) but spread 16.1% > 15% cap - fill DEFERRED to the 8:50 routine re-check (DAL precedent: opening spreads tighten)."
   },
   {
    "id": "2026-08-04-IWM-CALL",
@@ -629,10 +631,12 @@
    "contracts": 1,
    "planned_premium": 13.62,
    "entry_underlying": 301.71,
-   "status": "PLANNED",
+   "status": "OPEN",
    "thesis": "Breadth trade: small-caps passed the FULL gate stack as an index (broadest scan night yet, 17 passers); readiness 65 at 0.2% from trigger, tightest stop of the list (4.6%), falling-oil + fading-hike-odds = small-cap fuel. Delta .67, 2% spread, ZERO earnings risk. The diversifier.",
    "exit_plan": "Sell 27.24 (+100%), cut 6.81 (-50%), out by 2026-08-28; CE flip = early exit.",
-   "ts_crosscheck": "TS mids verified at staging (rule honored): LUV 5.00/5.20, IWM 13.49/13.76, AMZN 20.50/22.20 - all match plan refs."
+   "ts_crosscheck": "TS mids verified at staging (rule honored): LUV 5.00/5.20, IWM 13.49/13.76, AMZN 20.50/22.20 - all match plan refs.",
+   "entry_premium": 13.38,
+   "fill": "FILLED 2026-08-05 8:40 CT at mid 13.38 (13.27/13.48, spread 1.6%) - BELOW plan 13.62. All rules pass."
   },
   {
    "id": "2026-08-04-AMZN-CALL",
@@ -644,10 +648,12 @@
    "contracts": 1,
    "planned_premium": 21.35,
    "entry_underlying": 277.42,
-   "status": "PLANNED",
+   "status": "OPEN",
    "thesis": "Rested giant: winner-study shape (bands 79th pctile, DI +21.8 best of night, ADX 26) with the 7/30 blowout print BEHIND it (clear to 10/29). System buy-score #1 (85.3). Deepest chain (OI 6820). Caution noted: 8% spread, crowded story.",
    "exit_plan": "Sell 42.7 (+100%), cut 10.68 (-50%), out by 2026-08-28; CE flip = early exit.",
-   "ts_crosscheck": "TS mids verified at staging (rule honored): LUV 5.00/5.20, IWM 13.49/13.76, AMZN 20.50/22.20 - all match plan refs."
+   "ts_crosscheck": "TS mids verified at staging (rule honored): LUV 5.00/5.20, IWM 13.49/13.76, AMZN 20.50/22.20 - all match plan refs.",
+   "entry_premium": 21.5,
+   "fill": "FILLED 2026-08-05 8:40 CT at mid 21.50 (21.20/21.80, spread 2.8%), +0.7% vs plan. All rules pass."
   }
  ],
  "data_note_2026_07_30": "OPRA entitlement went LIVE ~2:55 PM CT 7/30 - all marks/fills now from the real TradeStation chain; Yahoo-mid fallback retired.",
