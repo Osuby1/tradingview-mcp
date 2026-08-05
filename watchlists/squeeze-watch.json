@@ -1,17 +1,293 @@
 {
  "note": "SQUEEZE IGNITION WATCH - Omar's standing order 2026-08-05: CAR-style short squeezes must reach him as phone alerts, never missed. Read by the Squeeze Ignition Watcher cloud routine (every 20 min during RTH). Alerts are LOOK-ONLY signals: squeeze trades stay spec-tier ($300 half-units, max 2-3 names) per the execution protocol; the buy gates will correctly show these names as regime-blocked - that is by design, not a malfunction.",
- "short_interest_asof": "2026-07-28 (main-watchlist-analysis refresh)",
+ "short_interest_asof": "2026-08-05 Russell-wide sweep (scripts/squeeze_sweep.py; 744/1202 names returned data - rerun Friday to fill Yahoo-throttled gaps)",
  "refresh_rule": "Short interest publishes ~bi-weekly; refresh SI figures + prune/add names at each Friday review from the latest published data (Gap-3 positioning sources). A name drops off below ~15% SI of float.",
  "tinder": [
-  {"sym": "NASDAQ:CAR", "si_pct_float": "54-62", "note": "the template - squeezed 158->190+ earlier this year; still #1 SI on the board"},
-  {"sym": "NASDAQ:LCID", "si_pct_float": "~53"},
-  {"sym": "NASDAQ:SOUN", "si_pct_float": "~38"},
-  {"sym": "NYSE:AI", "si_pct_float": "~33"},
-  {"sym": "NYSE:BBAI", "si_pct_float": "~27"},
-  {"sym": "NASDAQ:NVTS", "si_pct_float": "~21"},
-  {"sym": "NASDAQ:DFDV", "si_pct_float": "~21"},
-  {"sym": "NASDAQ:TGTX", "si_pct_float": "~19.5"},
-  {"sym": "NASDAQ:ASTS", "si_pct_float": "~18"}
+  {
+   "sym": "NYSE:NMAX",
+   "si_pct_float": 96.0,
+   "days_to_cover": 6.05,
+   "float_m": 30.9,
+   "pct_of_52wk_high": 52.8
+  },
+  {
+   "sym": "NASDAQ:GRPN",
+   "si_pct_float": 59.9,
+   "days_to_cover": 7.87,
+   "float_m": 17.9,
+   "pct_of_52wk_high": 63.3
+  },
+  {
+   "sym": "NASDAQ:CAR",
+   "si_pct_float": 56.5,
+   "days_to_cover": 8.0,
+   "float_m": 14.6,
+   "pct_of_52wk_high": 16.4,
+   "note": "the template - squeezed ~700% earlier this year; SI STILL 56.5% after round trip"
+  },
+  {
+   "sym": "NASDAQ:METC",
+   "si_pct_float": 56.0,
+   "days_to_cover": 8.43,
+   "float_m": 43.1,
+   "pct_of_52wk_high": 16.0
+  },
+  {
+   "sym": "NASDAQ:CHTR",
+   "si_pct_float": 45.5,
+   "days_to_cover": 5.35,
+   "float_m": 76.8,
+   "pct_of_52wk_high": 53.6
+  },
+  {
+   "sym": "NASDAQ:CLSK",
+   "si_pct_float": 42.5,
+   "days_to_cover": 3.53,
+   "float_m": 247.7,
+   "pct_of_52wk_high": 57.2
+  },
+  {
+   "sym": "NASDAQ:CBRL",
+   "si_pct_float": 41.9,
+   "days_to_cover": 4.96,
+   "float_m": 18.9,
+   "pct_of_52wk_high": 92.4
+  },
+  {
+   "sym": "NASDAQ:FLNC",
+   "si_pct_float": 40.4,
+   "days_to_cover": 2.9,
+   "float_m": 100.3,
+   "pct_of_52wk_high": 42.5
+  },
+  {
+   "sym": "NASDAQ:LCID",
+   "si_pct_float": 40.3,
+   "days_to_cover": 2.9,
+   "float_m": 172.3,
+   "pct_of_52wk_high": 26.6
+  },
+  {
+   "sym": "NYSE:ASAN",
+   "si_pct_float": 38.8,
+   "days_to_cover": 6.43,
+   "float_m": 92.1,
+   "pct_of_52wk_high": 56.5
+  },
+  {
+   "sym": "NASDAQ:SOUN",
+   "si_pct_float": "~38",
+   "note": "carried from 7/28 list - no fresh SI in 8/5 sweep (Yahoo throttle), re-verify Friday"
+  },
+  {
+   "sym": "NASDAQ:ANAB",
+   "si_pct_float": 37.6,
+   "days_to_cover": 6.75,
+   "float_m": 19.8,
+   "pct_of_52wk_high": 76.0
+  },
+  {
+   "sym": "NASDAQ:ACHC",
+   "si_pct_float": 37.3,
+   "days_to_cover": 6.05,
+   "float_m": 86.3,
+   "pct_of_52wk_high": 90.0
+  },
+  {
+   "sym": "NASDAQ:BTDR",
+   "si_pct_float": 36.8,
+   "days_to_cover": 5.9,
+   "float_m": 126.5,
+   "pct_of_52wk_high": 39.8
+  },
+  {
+   "sym": "NASDAQ:BEAM",
+   "si_pct_float": 35.0,
+   "days_to_cover": 8.56,
+   "float_m": 88.0,
+   "pct_of_52wk_high": 70.8
+  },
+  {
+   "sym": "NASDAQ:CELC",
+   "si_pct_float": 34.4,
+   "days_to_cover": 6.85,
+   "float_m": 29.9,
+   "pct_of_52wk_high": 61.5
+  },
+  {
+   "sym": "NASDAQ:CAKE",
+   "si_pct_float": 34.2,
+   "days_to_cover": 6.4,
+   "float_m": 45.7,
+   "pct_of_52wk_high": 97.6
+  },
+  {
+   "sym": "NASDAQ:NNE",
+   "si_pct_float": 33.4,
+   "days_to_cover": 5.04,
+   "float_m": 43.0,
+   "pct_of_52wk_high": 29.4
+  },
+  {
+   "sym": "NASDAQ:MARA",
+   "si_pct_float": 33.2,
+   "days_to_cover": 2.44,
+   "float_m": 373.0,
+   "pct_of_52wk_high": 47.9
+  },
+  {
+   "sym": "NASDAQ:INDI",
+   "si_pct_float": 33.1,
+   "days_to_cover": 10.94,
+   "float_m": 208.2,
+   "pct_of_52wk_high": 56.0
+  },
+  {
+   "sym": "NYSE:AI",
+   "si_pct_float": "~33",
+   "note": "carried from 7/28 list - no fresh SI in 8/5 sweep (Yahoo throttle), re-verify Friday"
+  },
+  {
+   "sym": "NYSE:HIMS",
+   "si_pct_float": 31.9,
+   "days_to_cover": 3.71,
+   "float_m": 210.6,
+   "pct_of_52wk_high": 48.5
+  },
+  {
+   "sym": "NYSE:MTN",
+   "si_pct_float": 31.9,
+   "days_to_cover": 8.16,
+   "float_m": 33.0,
+   "pct_of_52wk_high": 91.4
+  },
+  {
+   "sym": "NYSE:BBAI",
+   "si_pct_float": 30.6,
+   "days_to_cover": 5.06,
+   "float_m": 475.3,
+   "pct_of_52wk_high": 32.3
+  },
+  {
+   "sym": "NASDAQ:CSIQ",
+   "si_pct_float": 30.6,
+   "days_to_cover": 6.38,
+   "float_m": 43.6,
+   "pct_of_52wk_high": 44.5
+  },
+  {
+   "sym": "NASDAQ:EOSE",
+   "si_pct_float": 30.1,
+   "days_to_cover": 4.04,
+   "float_m": 332.8,
+   "pct_of_52wk_high": 19.2
+  },
+  {
+   "sym": "NASDAQ:CERT",
+   "si_pct_float": 29.6,
+   "days_to_cover": 6.13,
+   "float_m": 107.1,
+   "pct_of_52wk_high": 57.7
+  },
+  {
+   "sym": "NASDAQ:DBX",
+   "si_pct_float": 29.0,
+   "days_to_cover": 7.29,
+   "float_m": 138.9,
+   "pct_of_52wk_high": 99.5
+  },
+  {
+   "sym": "NASDAQ:LUNR",
+   "si_pct_float": 28.8,
+   "days_to_cover": 3.22,
+   "float_m": 118.8,
+   "pct_of_52wk_high": 29.9
+  },
+  {
+   "sym": "NYSE:FMC",
+   "si_pct_float": 28.7,
+   "days_to_cover": 5.28,
+   "float_m": 114.7,
+   "pct_of_52wk_high": 26.4
+  },
+  {
+   "sym": "NASDAQ:NBIS",
+   "si_pct_float": 28.0,
+   "days_to_cover": 3.42,
+   "float_m": 210.6,
+   "pct_of_52wk_high": 73.0
+  },
+  {
+   "sym": "NASDAQ:GIII",
+   "si_pct_float": 27.8,
+   "days_to_cover": 11.47,
+   "float_m": 36.5,
+   "pct_of_52wk_high": 97.1
+  },
+  {
+   "sym": "NASDAQ:ECHO",
+   "si_pct_float": 27.6,
+   "days_to_cover": 3.12,
+   "float_m": 137.2,
+   "pct_of_52wk_high": 59.6
+  },
+  {
+   "sym": "NASDAQ:ENVX",
+   "si_pct_float": 27.0,
+   "days_to_cover": 9.64,
+   "float_m": 188.4,
+   "pct_of_52wk_high": 30.2
+  },
+  {
+   "sym": "NYSE:LEU",
+   "si_pct_float": 26.5,
+   "days_to_cover": 5.32,
+   "float_m": 18.9,
+   "pct_of_52wk_high": 40.4
+  },
+  {
+   "sym": "NASDAQ:APLD",
+   "si_pct_float": 26.3,
+   "days_to_cover": 3.65,
+   "float_m": 267.4,
+   "pct_of_52wk_high": 58.9
+  },
+  {
+   "sym": "NASDAQ:ABSI",
+   "si_pct_float": 25.8,
+   "days_to_cover": 4.56,
+   "float_m": 148.7,
+   "pct_of_52wk_high": 69.7
+  },
+  {
+   "sym": "NYSE:EPAM",
+   "si_pct_float": 25.7,
+   "days_to_cover": 4.74,
+   "float_m": 50.3,
+   "pct_of_52wk_high": 49.4
+  },
+  {
+   "sym": "NASDAQ:NVTS",
+   "si_pct_float": "~21",
+   "note": "carried from 7/28 list - no fresh SI in 8/5 sweep (Yahoo throttle), re-verify Friday"
+  },
+  {
+   "sym": "NASDAQ:DFDV",
+   "si_pct_float": "~21",
+   "note": "carried from 7/28 list - no fresh SI in 8/5 sweep (Yahoo throttle), re-verify Friday"
+  },
+  {
+   "sym": "NASDAQ:ASTS",
+   "si_pct_float": 19.9,
+   "days_to_cover": 3.08,
+   "float_m": 266.0,
+   "pct_of_52wk_high": 51.1
+  },
+  {
+   "sym": "NASDAQ:TGTX",
+   "si_pct_float": "~19.5",
+   "note": "carried from 7/28 list - no fresh SI in 8/5 sweep (Yahoo throttle), re-verify Friday"
+  }
  ],
  "tinder_trigger": "day change >= +8% AND relative_volume_10d_calc >= 3, OR day change >= +15% alone",
  "blast_trigger": "market-wide catch-all for squeezes NOT on the list: change >= 18% AND rvol >= 4 AND close > $3 AND mcap > $500M AND exchange in NYSE/NASDAQ/AMEX (no OTC)",
@@ -22,5 +298,6 @@
   "sizing": "spec-tier per protocol: $300 half-unit per name (NOT the $2.5k overlay budget), max 2-3 squeeze tickets concurrent. A $300 ticket on a CAR-style run = potentially 10-50x; 10 straight duds = -$3k, survivable by design.",
   "exits_preregistered": "squeezes retrace violently: sell 1/2 at +100%, 1/4 at +300%, let the rest ride on house money with a close-below-prior-day-low kill; hard time exit 21 DTE; NO averaging down ever.",
   "validation": "PAPER-FIRST per the 7/29 standing order + rule freeze: every watcher fire gets an auto paper ticket in research/options-paper-ledger.json graded on the weekly scorecard; real $300 tickets only on Omar's per-signal go until the paper cohort proves the playbook (~10+ graded signals)."
- }
+ },
+ "sweep_findings_2026-08-05": "134 names met SI>=15%/cap>=500M/vol>=0.5M. Standouts: NMAX 96% SI(!), GRPN 59.9% w/ 17.9M float, METC 56% at 16% of 52wk high. KEY INSIGHT: several current RUNNERS are high-SI squeezes in disguise - CAKE 34.2% SI at 97.6% of high, CBRL 41.9%, JBLU 26.3%, GIII 27.8%, MTN 31.9%, DBX 29% at 99.5% of high, EAT-complex melt-up = partly a casual-dining short squeeze. Full ranked results archived in the sweep JSON."
 }
