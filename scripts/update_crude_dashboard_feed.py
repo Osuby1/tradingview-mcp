@@ -150,6 +150,27 @@ def main():
             quoted = json.loads(QUOTED_JSON.read_text(encoding="utf-8")).get("items", [])
         except Exception as e:
             quoted = [{"key": "PARSE ERROR", "value": str(e), "source": "", "asof": ""}]
+
+    # East-West spread proxies: TV Brent M1 minus the wrap-quoted Mideast
+    # outrights (exchange APIs are gated - CME ToS-blocked, ICE Cloudflare,
+    # DME unreachable - so Oman/Dubai/Murban ride the daily Reuters wrap)
+    def quoted_num(key):
+        for q in quoted:
+            if q.get("key") == key:
+                m = re.search(r"-?\d+(?:\.\d+)?", str(q.get("value", "")))
+                if m:
+                    return float(m.group()), q.get("asof", "")
+        return None, ""
+
+    ew_rows = []
+    if brn1:
+        for key, label in [("OMAN_M1", "Brent - Oman (EFS proxy via DME settle quote)"),
+                           ("DUBAI_M1", "Brent - Dubai (EFS via quoted Dubai M1)"),
+                           ("MURBAN_M1", "Brent - Murban (via quoted IFAD settle)")]:
+            val, asof = quoted_num(key)
+            if val is not None:
+                ew_rows.append((label, round(brn1 - val, 2),
+                                f"Brent {brn1} (TV live) - {val} (as-of {asof})"))
     eia = []
     for label, sid, maps_to in EIA_SERIES:
         try:
@@ -223,6 +244,18 @@ def main():
         put(r, 1, "BWET tanker ETF (freight DIRECTION proxy, not a rate)")
         put(r, 2, f"{bwet[1]}  ({bwet[2]:+.1f}% today)")
 
+    if ew_rows:
+        r += 2
+        put(r, 1, "EAST-WEST SPREADS (computed: TV Brent live minus wrap-quoted Mideast outrights)", True)
+        r += 1
+        for col, h in enumerate(["Spread", "Value ($/bbl)", "Legs"], 1):
+            put(r, col, h, True)
+        for label, val, legs in ew_rows:
+            r += 1
+            put(r, 1, label); put(r, 2, val); put(r, 3, legs)
+            if "Oman" in label or "Dubai" in label:
+                put(r, 4, "Maps to: East-West Arb tab, Brent-Dubai EFS market column")
+
     r += 2
     put(r, 1, "ARTICLE-QUOTED PHYSICALS (harvested from the morning brief - dated, not daily-guaranteed)", True)
     r += 1
@@ -269,6 +302,8 @@ def main():
         print(f"{label}: {latest[1]} w/e {latest[0]}{wow}")
     for label, val in cracks.items():
         print(f"{label}: {val}")
+    for label, val, legs in ew_rows:
+        print(f"{label}: {val}  [{legs}]")
     if bwet:
         print(f"BWET freight proxy: {bwet[1]} ({bwet[2]:+.1f}% today)")
     print(f"Quoted physicals carried: {len(quoted)}" + ("" if quoted else " (run the EOD harvest to populate)"))
