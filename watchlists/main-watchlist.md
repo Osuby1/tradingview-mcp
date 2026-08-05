@@ -19,3 +19,4 @@ AAPL, ABNB, AI, ALB, AMAT, AMCR, AMD, AMGN, AMZN, APP, ARM, AROC, ARQT, AVAXUSDT
 
 > Equities → full Steps 2–4 (earnings/catalysts + fundamentals/sentiment + regime/levels). Non-equity assets (crypto/FX/indices/commodities/ETFs) → adapted: regime/key levels + macro drivers + relevant sentiment (no earnings/short-interest/P-E).
 </content>
+ZETA
