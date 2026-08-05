@@ -15,6 +15,15 @@ The daily writer READS THIS FILE before composing and follows it.
 3. Price line: "Brent (<month>) $X | WTI (<month>) $Y" with contract
    months ALWAYS labeled; expiry flagged when near ("expires Friday");
    day change in $ AND % for both benchmarks in the same breath.
+3b. TERM STRUCTURE STRIP (mandatory, Omar's standing order 2026-08-05):
+   directly under the price line, both benchmarks' first three calendar
+   spreads - WTI M1-M2, M2-M3, M3-M4 and Brent M1-M2, M2-M3, M3-M4 - in
+   $/bbl with month labels (e.g., "WTI Sep-Oct +$1.05, Oct-Nov +$0.70,
+   Nov-Dec +$0.45"). Positive = backwardation (prompt tightness),
+   negative = contango (glut/storage economics). Flag the day-over-day
+   CHANGE in the front spread whenever sourced - the flip or steepening
+   is the story, not the level alone. If a leg can't be sourced that
+   morning, say so explicitly rather than silently dropping the strip.
 4. THE SIGNATURE: one dense digest paragraph - day changes with %,
    session ranges/context ("steadying after two ~5% declines"), API/EIA
    numbers VS EXPECTATIONS, then semicolon-chained top stories.
@@ -96,6 +105,26 @@ The daily writer READS THIS FILE before composing and follows it.
   then flows-as-confirmation, then the underpriced risk.
 - EIA WEDNESDAYS: API recap with number-vs-consensus in the digest AND a
   titled block; "EIA data due today" always flagged.
+
+## Mandatory inventory block — SPR & CUSHING (Omar's standing order 2026-08-05)
+Every edition carries a titled "SPR & Cushing" block (inside or beside
+the fundamentals section) with data AND implications, never levels alone:
+- CUSHING: latest EIA weekly stock level (million barrels) + week change
+  + vs the 5-year range, and the operational context - Cushing is the
+  WTI delivery point; sub-~20mb approaches tank bottoms (WTI prompt
+  spreads blow out, cash basis strengthens, backwardation steepens),
+  builds toward capacity (~78mb shell) do the reverse. Tie the read to
+  the WTI spread strip in the skeleton - they must tell the same story,
+  and if they diverge, SAY SO (that divergence is signal).
+- SPR: current level (million barrels) + week change, any announced
+  refill purchases/solicitations, exchanges, or releases with volumes
+  and delivery windows, and what it implies - refill bids = a soft floor
+  under prompt WTI; releases = temporary supply relief that later
+  reverses; a paused program = the floor is gone. Note days of import
+  cover or historical context when the level is at multi-decade extremes.
+- On API-Tuesday/EIA-Wednesday, run the Cushing number vs expectations
+  like the headline crude number. On quiet days one tight paragraph is
+  fine, but the block NEVER disappears.
 
 ## Structure after the essay paragraphs (all specimens)
 "Top Developments" = 3-5 titled blocks, each title a full mini-headline
