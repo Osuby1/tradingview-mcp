@@ -159,7 +159,11 @@ def main():
 
     # TS is Omar's REAL-TIME entitled NYMEX feed; the public TV scanner is
     # ~10-min delayed on CME (proven 8/5: 0.32 stable gap on a fast tape).
-    # So TS overrides the US legs when authenticated; TV keeps ICE legs.
+    # TS overrides US legs when authenticated. Brent: NYMEX BZ (Omar's 8/6
+    # teach) is TS-entitled but ILLIQUID - use bid/ask mid ONLY when the leg
+    # is demonstrably live (tight market + within 2% of the TV BRN leg);
+    # dead-month lasts print fantasy spreads (BZU26 90.12 while Oct was the
+    # real front). TV BRN stays the per-leg fallback.
     ts_rb = ts_ho = None
     try:
         sys.path.insert(0, str(Path(__file__).parent))
@@ -167,14 +171,29 @@ def main():
         if ts_api.available() and wti:
             syms = [tv_to_ts(t) for t, _, _ in wti[:4]]
             mcode = re.match(r"CL([FGHJKMNQUVXZ]\d{2})", syms[0]).group(1)
-            got = ts_api.ts_quotes(syms + [f"RB{mcode}", f"HO{mcode}"])
+            bz_syms = ["BZ" + tv_to_ts(t)[3:] for t, _, _ in brn[:4]] if brn else []
+            got = ts_api.ts_quotes(syms + [f"RB{mcode}", f"HO{mcode}"] + bz_syms)
             wti = [(t, float(got[tv_to_ts(t)]["Last"]), chg) if tv_to_ts(t) in got
                    else (t, c, chg) for t, c, chg in wti]
             if f"RB{mcode}" in got:
                 ts_rb = float(got[f"RB{mcode}"]["Last"])
             if f"HO{mcode}" in got:
                 ts_ho = float(got[f"HO{mcode}"]["Last"])
-            ts_note = f"US legs = TradeStation REAL-TIME (WTI strip + RB/HO {mcode}); TV = ICE legs + fallback"
+            brn_live = 0
+            new_brn = []
+            for (t, c, chg) in brn:
+                bz = got.get("BZ" + tv_to_ts(t)[3:])
+                use = c
+                if bz and bz.get("Bid") and bz.get("Ask"):
+                    b, a = float(bz["Bid"]), float(bz["Ask"])
+                    mid = (b + a) / 2
+                    if b > 0 and (a - b) <= 0.30 and abs(mid - c) / c <= 0.02:
+                        use = mid
+                        brn_live += 1
+                new_brn.append((t, use, chg))
+            brn = new_brn
+            ts_note = (f"US legs = TS REAL-TIME (WTI strip + RB/HO {mcode}); Brent = "
+                       f"{brn_live}/4 legs live via NYMEX BZ mids (guarded), rest TV BRN")
     except Exception as e:
         ts_note = f"TS override skipped ({e}); TV values in use"
 
@@ -345,6 +364,25 @@ def main():
         put(r, 6, maps_to)
 
     wb.save(wb_path)
+
+    # machine-readable curve for the 5:45 AM cloud brief writer (it cannot
+    # reach price feeds from its sandbox - it READS this committed file;
+    # strips computed Omar's way: individual contract legs subtracted)
+    curve_out = REPO / "research" / "crude-curve-latest.json"
+    def strip(curve):
+        if len(curve) < 4:
+            return None
+        cs = [c for _, c, _ in curve[:4]]
+        return {"months": [month_label(t) for t, _, _ in curve[:4]],
+                "outrights": [round(c, 2) for c in cs],
+                "m1_m2": round(cs[0] - cs[1], 2), "m2_m3": round(cs[1] - cs[2], 2),
+                "m3_m4": round(cs[2] - cs[3], 2)}
+    curve_out.write_text(json.dumps({
+        "asof": now, "source": ts_note,
+        "wti": strip(wti), "brent": strip(brn),
+        "cracks": cracks,
+        "note": "Written by update_crude_dashboard_feed.py at every run; the morning brief reads this instead of websearching for spreads."
+    }, indent=1), encoding="utf-8")
 
     # console summary for the chat / EOD log
     print(f"AUTO FEED written to {wb_path.name} (backup in {bdir.name}/)")
