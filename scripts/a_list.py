@@ -167,17 +167,34 @@ def main():
     # as a coil without the compression to prove it.)
     import re as _re
     def structure(h):
-        drv = str((h.get("readiness") or {}).get("driver", ""))
-        m = _re.search(r"band width in the (\d+)(?:st|nd|rd|th) percentile", drv)
-        if m:
-            p = int(m.group(1))
-            if p <= 25:
-                return f"COILED (band width {p}th pctile - GE-type compression)"
-            return f"NEITHER (band width {p}th pctile - middling)"
-        g = h.get("gates") or {}
-        di = (g.get("plus_di") or 0) - (g.get("minus_di") or 0)
-        return (f"POST-BREAKOUT (no compression component; DI margin {di:.1f} = "
-                f"{'move already mature' if di > 10 else 'momentum just turning'})")
+        """COILED / POST-BREAKOUT / NEITHER from the MEASURED band-width percentile.
+
+        2026-08-06 bug, found the same night this tag shipped: v1 parsed the
+        readiness DRIVER STRING for a band-width mention. The driver only names
+        the top two scoring components, so a name whose compression scored 15/20
+        but placed third got stamped "POST-BREAKOUT (no compression component)" -
+        factually false. RYTM was tagged post-breakout while sitting at the 11th
+        percentile with the squeeze ON, i.e. a textbook coil. A tag built to stop
+        me calling things coils without the number was itself guessing at the
+        number. Now it MEASURES, and says so honestly when it cannot.
+        """
+        sym = h["sym"]
+        try:
+            sys.path.insert(0, str(REPO / "scripts"))
+            import options_analysis as _oa
+            r = _oa.readiness(sym, "CALL")
+            p = r.get("squeeze_pctile")
+            on = r.get("squeeze_on")
+            if p is not None:
+                if p <= 25:
+                    return (f"COILED (band width {p}th pctile"
+                            f"{' + TTM squeeze ON' if on else ''} - GE-type compression)")
+                if p >= 60:
+                    return f"POST-BREAKOUT (band width {p}th pctile - expansion already underway)"
+                return f"NEITHER (band width {p}th pctile - middling)"
+        except Exception as e:
+            print(f"[structure] MEASUREMENT FAILED for {sym}: {e}")
+        return "UNKNOWN (band width could not be measured - do NOT call this a coil)"
 
     print(f"A-LIST {date} (from {src.name}): "
           + (", ".join(f"{h['sym']}(r{h['readiness']['score']})" for h in cards) or "EMPTY - no eligible passers"))
