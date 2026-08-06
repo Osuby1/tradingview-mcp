@@ -22,8 +22,15 @@ The daily writer READS THIS FILE before composing and follows it.
    Nov-Dec +$0.45"). Positive = backwardation (prompt tightness),
    negative = contango (glut/storage economics). Flag the day-over-day
    CHANGE in the front spread whenever sourced - the flip or steepening
-   is the story, not the level alone. If a leg can't be sourced that
-   morning, say so explicitly rather than silently dropping the strip.
+   is the story, not the level alone.
+   SOURCING (Omar's method, taught 8/6 after the first brief wrongly
+   claimed spreads were 'blocked'): spreads are COMPUTED, never quoted -
+   pull individual contract outrights and subtract adjacent months
+   (CL1!-CL2! / CLU-CLV for WTI; BZ or BRN legs for Brent). The desk
+   publishes them pre-computed in research/crude-curve-latest.json
+   (real-time TradeStation legs, liveness-guarded); the writer READS
+   that file and labels its as-of time. A strip is NEVER 'unavailable' -
+   the legs are always quotable one contract at a time.
 4. THE SIGNATURE: one dense digest paragraph - day changes with %,
    session ranges/context ("steadying after two ~5% declines"), API/EIA
    numbers VS EXPECTATIONS, then semicolon-chained top stories.
