@@ -1,8 +1,6 @@
 {
- "note": "SQUEEZE IGNITION WATCH - Omar's standing order 2026-08-05: CAR-style short squeezes must reach him as phone alerts, never missed. Read by the Squeeze Ignition Watcher cloud routine (every 20 min during RTH). Alerts are LOOK-ONLY signals: squeeze trades stay spec-tier ($300 half-units, max 2-3 names) per the execution protocol; the buy gates will correctly show these names as regime-blocked - that is by design, not a malfunction.",
- "short_interest_asof": "FINRA consolidated short interest, settlement 2026-07-15 (bulk, authoritative; Yahoo retired 8/6)",
- "refresh_rule": "Short interest publishes ~bi-weekly; refresh SI figures + prune/add names at each Friday review from the latest published data (Gap-3 positioning sources). A name drops off below ~15% SI of float.",
- "tinder": [
+ "swept": 1290,
+ "hits": [
   {
    "sym": "NYSE:WOLF",
    "si_pct_float": 70.7,
@@ -64,8 +62,7 @@
    "si_change_pct": 3.88,
    "float_m": 395.3,
    "pct_of_52wk_high": 32.3,
-   "si_asof": "2026-07-15",
-   "note": "carried from 7/28 list - no fresh SI in 8/5 sweep (Yahoo throttle), re-verify Friday"
+   "si_asof": "2026-07-15"
   },
   {
    "sym": "NASDAQ:LCID",
@@ -200,8 +197,7 @@
    "si_change_pct": -0.55,
    "float_m": 137.0,
    "pct_of_52wk_high": 43.0,
-   "si_asof": "2026-07-15",
-   "note": "carried from 7/28 list - no fresh SI in 8/5 sweep (Yahoo throttle), re-verify Friday"
+   "si_asof": "2026-07-15"
   },
   {
    "sym": "NASDAQ:QUBT",
@@ -615,8 +611,7 @@
    "si_change_pct": -0.63,
    "float_m": 387.9,
    "pct_of_52wk_high": 96.4,
-   "si_asof": "2026-07-15",
-   "note": "ADDED 8/6 - the 8/5 Russell sweep MISSED it (Yahoo throttled ~460 names); 23.9% SI qualifies. Ignited +41% 8/6 on Amtagvi revenue +66% + FDA Fast Track. Chain too thin for the options playbook (OI ~100-200, spreads 88-100%) = equity-only squeeze."
+   "si_asof": "2026-07-15"
   },
   {
    "sym": "NASDAQ:PGEN",
@@ -1057,8 +1052,7 @@
    "si_change_pct": 1.72,
    "float_m": 141.6,
    "pct_of_52wk_high": 84.0,
-   "si_asof": "2026-07-15",
-   "note": "carried from 7/28 list - no fresh SI in 8/5 sweep (Yahoo throttle), re-verify Friday"
+   "si_asof": "2026-07-15"
   },
   {
    "sym": "NYSE:TROX",
@@ -1724,8 +1718,7 @@
    "si_change_pct": 14.12,
    "float_m": 226.1,
    "pct_of_52wk_high": 37.2,
-   "si_asof": "2026-07-15",
-   "note": "carried from 7/28 list - no fresh SI in 8/5 sweep (Yahoo throttle), re-verify Friday"
+   "si_asof": "2026-07-15"
   },
   {
    "sym": "NASDAQ:ORKA",
@@ -2004,8 +1997,7 @@
    "si_change_pct": 3.54,
    "float_m": 34.8,
    "pct_of_52wk_high": 16.3,
-   "si_asof": "2026-07-15",
-   "note": "the template - squeezed ~700% earlier this year; SI STILL 56.5% after round trip"
+   "si_asof": "2026-07-15"
   },
   {
    "sym": "NYSE:ACI",
@@ -2178,17 +2170,5 @@
    "pct_of_52wk_high": 63.9,
    "si_asof": "2026-07-15"
   }
- ],
- "tinder_trigger": "day change >= +8% AND relative_volume_10d_calc >= 3, OR day change >= +15% alone",
- "blast_trigger": "market-wide catch-all for squeezes NOT on the list: change >= 18% AND rvol >= 4 AND close > $3 AND mcap > $500M AND exchange in NYSE/NASDAQ/AMEX (no OTC)",
- "push_format": "SQUEEZE WATCH: <sym> +X% RVOL Y, SI Z% float - CAR-style ignition. LOOK only: spec-tier $300 rules, no chase, verify news + borrow. (blast hits: 'SI unknown - verify')",
- "options_playbook": {
-  "why": "Omar 2026-08-05: CAR ran ~700% - the options expression of a squeeze is exponentially bigger. Convexity is real AND max loss = premium (solves the gap-risk problem stops can't). But squeeze-name IV is brutally expensive and most tinder names never ignite - so calls are bought ON IGNITION (watcher fire + RVOL confirmed), NEVER pre-positioned waiting.",
-  "structure": "OTM calls, ~15-25 delta, 30-45 DTE - the OPPOSITE of the GE/UAL deep-ITM lesson, because here the thesis IS the tail: max convexity per dollar, premium is the stop. Chain gate first: OI >= ~500 on the strike, spread <= ~10% of mid (AMG-style dead chains = auto-skip).",
-  "sizing": "spec-tier per protocol: $300 half-unit per name (NOT the $2.5k overlay budget), max 2-3 squeeze tickets concurrent. A $300 ticket on a CAR-style run = potentially 10-50x; 10 straight duds = -$3k, survivable by design.",
-  "exits_preregistered": "squeezes retrace violently: sell 1/2 at +100%, 1/4 at +300%, let the rest ride on house money with a close-below-prior-day-low kill; hard time exit 21 DTE; NO averaging down ever.",
-  "validation": "PAPER-FIRST per the 7/29 standing order + rule freeze: every watcher fire gets an auto paper ticket in research/options-paper-ledger.json graded on the weekly scorecard; real $300 tickets only on Omar's per-signal go until the paper cohort proves the playbook (~10+ graded signals)."
- },
- "sweep_findings_2026-08-05": "134 names met SI>=15%/cap>=500M/vol>=0.5M. Standouts: NMAX 96% SI(!), GRPN 59.9% w/ 17.9M float, METC 56% at 16% of 52wk high. KEY INSIGHT: several current RUNNERS are high-SI squeezes in disguise - CAKE 34.2% SI at 97.6% of high, CBRL 41.9%, JBLU 26.3%, GIII 27.8%, MTN 31.9%, DBX 29% at 99.5% of high, EAT-complex melt-up = partly a casual-dining short squeeze. Full ranked results archived in the sweep JSON.",
- "coverage_note_2026-08-06": "IOVA miss root-caused: (1) tinder sweep throttled by Yahoo -> rerun squeeze_sweep.py Friday to fill the ~460-name gap; (2) blast net rvol>=4 blocked it at rvol 3.38 -> second blast tier added (change>=30 AND rvol>=2.5)."
+ ]
 }
