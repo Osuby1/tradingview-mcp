@@ -118,11 +118,31 @@ def main():
                              "verdict": "PENDING", "reason": "",
                              "grade_at": "+1w and +1m vs plan entry"})
 
+    # STRUCTURE TAG (added 8/6 after the BA-vs-GE post-mortem: BA was called
+    # "the GE profile" when GE's defining trait - band width in the 2nd
+    # percentile - was absent from BA entirely. A card may never be described
+    # as a coil without the compression to prove it.)
+    import re as _re
+    def structure(h):
+        drv = str((h.get("readiness") or {}).get("driver", ""))
+        m = _re.search(r"band width in the (\d+)(?:st|nd|rd|th) percentile", drv)
+        if m:
+            p = int(m.group(1))
+            if p <= 25:
+                return f"COILED (band width {p}th pctile - GE-type compression)"
+            return f"NEITHER (band width {p}th pctile - middling)"
+        g = h.get("gates") or {}
+        di = (g.get("plus_di") or 0) - (g.get("minus_di") or 0)
+        return (f"POST-BREAKOUT (no compression component; DI margin {di:.1f} = "
+                f"{'move already mature' if di > 10 else 'momentum just turning'})")
+
     print(f"A-LIST {date} (from {src.name}): "
           + (", ".join(f"{h['sym']}(r{h['readiness']['score']})" for h in cards) or "EMPTY - no eligible passers"))
     for h in cards:
         print(f"  {h['sym']:<6} entry {h['plan_entry']} stop {round(h['plan_stop'],2)} "
-              f"target {round(h['plan_target'],2)} | {str(h['readiness'].get('driver',''))[:70]}")
+              f"target {round(h['plan_target'],2)} | STRUCTURE: {structure(h)}")
+        print(f"         driver: {str(h['readiness'].get('driver',''))[:88]}")
+    funnel["structure_tags"] = {h["sym"]: structure(h) for h in cards}
     if dry:
         print(f"[dry-run] would wire {sum(1 for a in actions if a['op']=='create')} door(s), "
               f"delete {sum(1 for a in actions if a['op']=='delete')}")
