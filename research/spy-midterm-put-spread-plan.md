@@ -103,6 +103,36 @@ execution not improvisation. Consequences, all deliberate:
   for insurance while simultaneously levering long, which nets to noise and
   costs two premiums. Friday must pick ONE of: add tranche 2 / rotate to SPXL /
   do neither. Whichever Omar picks, the OTHER one is logged as a graded skip.
+### OMAR'S THESIS + EXIT PLAN, pre-registered 2026-08-06 PM (grade in Sept/Oct)
+Stated in his words: SPX may see a steep correction **mid-Aug to mid-Sept**;
+he entered tranche 1 on the yen/USD carry unwind plus an expected bad jobs
+print; **if tomorrow's print beats, he EXITS the put** rather than let it decay,
+and **re-enters around the Sept FOMC (Sept 15-16, with dot plot)** as the next
+catalyst.
+- Reconciliation with the original plan: NOT a contradiction. Plan line 6 says
+  the midterm low forms late October; Omar's window is when the decline gets
+  STEEP. A correction that turns down mid-Aug and bottoms late Oct satisfies
+  both, and the Nov 20 expiry covers both.
+- Hindsight claim logged for honest grading: he says he should have skipped the
+  7/31 entry and bought today instead. TRUE in outcome - 14.87 then vs 8.75 now,
+  41% cheaper. But the premium fell BECAUSE the risk receded (VIX 17.4 -> 15.3);
+  insurance is always cheaper after the scare. The generalizable fix is a
+  volatility CONDITION on tranche entries, which tranche 2 already has ("ideally
+  on a VIX print <15") and tranche 1 lacked (time-boxed only). Fix the design,
+  don't grade the outcome. (Minor factual: the fill was Fri 7/31 10:29 CT, not
+  Monday.)
+- THE FLAW TO WEIGH, stated plainly: exiting now and re-entering 9/16 means
+  being UNINSURED through the first half of his own stated danger window, and
+  the re-entry price is asymmetric - cheap only if nothing happens, expensive
+  exactly when it's needed. Modelled Nov 710P at 9/16 (65d left, IV held 18.3):
+  SPY flat -> 3.76 (re-entry saves ~$500) | SPY -5% -> 11.76 (costs 34% MORE to
+  re-enter, and +$301 of gain forgone) | SPY -8% -> 20.70 (2.4x, +$1,195
+  forgone). **The exit plan is only profitable if his own thesis is wrong about
+  timing.** Desk recommendation if the print beats: cut HALF, not all - theta is
+  5.9%/week (~$52), which is not an emergency worth vacating the window for.
+- Thesis leg still alive as of 8/6: USDJPY 158.45, **-3.0% on the week**, broken
+  below its 50d (161.18) and sitting ON its 200d (158.02). The carry-unwind leg
+  has NOT been invalidated; a break of 158 is the confirmation to watch.
 - Process guard (this plan was missed once already — see 7/27 process note):
   one-shot cloud reminder trig_016kjtth2eemMP6JpneoWiiy fires 7:45 CT
   Fri 8/7, ~15 min after the print. Local session also owes it in the
