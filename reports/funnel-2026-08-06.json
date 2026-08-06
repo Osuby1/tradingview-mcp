@@ -1,0 +1,97 @@
+{
+ "date": "2026-08-06",
+ "scanned": 471,
+ "fresh": 107,
+ "full_passers": 19,
+ "eligible": 3,
+ "a_list": [
+  "RYTM",
+  "HSIC",
+  "SPXL"
+ ],
+ "doors_wired": 3,
+ "note": "selector: ready>=55, $vol>=20M, not-held, top 3 by readiness",
+ "eligible_cohort": [
+  {
+   "sym": "RYTM",
+   "readiness": 67,
+   "ref_price": 112.1,
+   "selected": true
+  },
+  {
+   "sym": "HSIC",
+   "readiness": 61,
+   "ref_price": 88.23,
+   "selected": true
+  },
+  {
+   "sym": "SPXL",
+   "readiness": 56,
+   "ref_price": 291.2,
+   "selected": true
+  }
+ ],
+ "passers_below_floor": [
+  {
+   "sym": "AAL",
+   "readiness": 28
+  },
+  {
+   "sym": "APH",
+   "readiness": 34
+  },
+  {
+   "sym": "BA",
+   "readiness": 36
+  },
+  {
+   "sym": "C",
+   "readiness": 28
+  },
+  {
+   "sym": "CRWD",
+   "readiness": 38
+  },
+  {
+   "sym": "CSCO",
+   "readiness": 42
+  },
+  {
+   "sym": "DOW",
+   "readiness": 40
+  },
+  {
+   "sym": "EME",
+   "readiness": 26
+  },
+  {
+   "sym": "IWM",
+   "readiness": 47
+  },
+  {
+   "sym": "LUV",
+   "readiness": 45
+  },
+  {
+   "sym": "PANW",
+   "readiness": 54
+  },
+  {
+   "sym": "SPHR",
+   "readiness": 38
+  },
+  {
+   "sym": "UAL",
+   "readiness": 44
+  },
+  {
+   "sym": "XLK",
+   "readiness": 32
+  }
+ ],
+ "structure_tags": {
+  "RYTM": "POST-BREAKOUT (no compression component; DI margin 5.1 = momentum just turning)",
+  "HSIC": "COILED (band width 12th pctile - GE-type compression)",
+  "SPXL": "NEITHER (band width 59th pctile - middling)"
+ }
+}

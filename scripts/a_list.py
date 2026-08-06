@@ -30,6 +30,36 @@ MIN_READY = 55
 MIN_DOLLAR_VOL = 20e6
 
 
+def _resolve_exchange(sym):
+    """Return the exchange-qualified ticker, ASKING rather than assuming.
+
+    2026-08-06: the first live A-List run failed to wire SPXL's door because
+    this defaulted to "NASDAQ:" for any bare ticker - SPXL is NYSE Arca. Same
+    class of bug as the EQR/SFL/FITB traps already in the notes: a guessed
+    prefix silently kills the alert, so the door that was supposed to ring
+    never exists. The scanner drops bad tickers, so submit all three US
+    listings and keep whichever one comes back.
+    """
+    if ":" in sym:
+        return sym
+    try:
+        import requests
+        cands = [f"{ex}:{sym}" for ex in ("NASDAQ", "NYSE", "AMEX")]
+        r = requests.post("https://scanner.tradingview.com/america/scan",
+                          json={"symbols": {"tickers": cands, "query": {"types": []}},
+                                "columns": ["close"]},
+                          timeout=20, headers={"User-Agent": "Mozilla/5.0"})
+        rows = [e["s"] for e in r.json().get("data", []) if e.get("d", [None])[0]]
+        if len(rows) == 1:
+            return rows[0]
+        if rows:                      # ambiguous - report it, never coin-flip
+            print(f"[doors] AMBIGUOUS exchange for {sym}: {rows} - using {rows[0]}")
+            return rows[0]
+    except Exception as e:
+        print(f"[doors] exchange lookup failed for {sym}: {e}")
+    return f"NASDAQ:{sym}"            # last resort, logged by the caller on failure
+
+
 def latest_results():
     files = sorted((REPO / "watchlists").glob("universe-results-*.json"))
     if not files:
@@ -99,7 +129,7 @@ def main():
                f"(${int((entry-stop)*shares)} risk), checkpoint {round(target,2)}. "
                f"VERIFY earnings + gate-recheck + sizing per protocol, then ACT or PASS - "
                f"verdict gets logged either way.")
-        exch_sym = h.get("full_sym") or ("NASDAQ:" + sym if ":" not in sym else sym)
+        exch_sym = h.get("full_sym") or _resolve_exchange(sym)
         actions.append({"op": "create", "sym": exch_sym, "level": entry, "msg": msg, "tag": sym})
     # audit fire-state of surviving doors (conversion tracking)
     for sym, door in state.get("doors", {}).items():
@@ -155,16 +185,20 @@ def main():
                             capture_output=True, text=True, timeout=180)
         print(rc.stdout.strip())
         if rc.returncode != 0:
-            print("DOOR WIRING FAILED:", rc.stderr.strip()[:300])
-        else:
-            results = json.loads(DOOR_ACTIONS.read_text()) if DOOR_ACTIONS.exists() else []
-            for r in results:
-                if r.get("op") == "create" and r.get("alert_id"):
-                    state["doors"][r["tag"]] = {"alert_id": r["alert_id"], "level": r["level"],
-                                                "wired": date}
-                    funnel["doors_wired"] += 1
-                if r.get("op") == "audit" and r.get("fired"):
-                    state["doors"].get(r["sym"], {})["fired"] = r["fired"]
+            print("DOOR WIRING PARTIAL/FAILED:", rc.stderr.strip()[:300])
+        # 2026-08-06: record whatever ACTUALLY got created, pass or fail. The
+        # first live run wired RYTM and HSIC, failed on SPXL, took the failure
+        # branch and saved NO state - so the re-run created duplicate alerts at
+        # the same levels on the same names (deleted by hand). One bad door must
+        # never erase the memory of the good ones.
+        results = json.loads(DOOR_ACTIONS.read_text()) if DOOR_ACTIONS.exists() else []
+        for r in results:
+            if r.get("op") == "create" and r.get("alert_id"):
+                state["doors"][r["tag"]] = {"alert_id": r["alert_id"], "level": r["level"],
+                                            "wired": date}
+                funnel["doors_wired"] += 1
+            if r.get("op") == "audit" and r.get("fired"):
+                state["doors"].get(r["sym"], {})["fired"] = r["fired"]
     state["date"] = date
     STATE.write_text(json.dumps(state, indent=1))
     (REPO / "reports" / f"funnel-{date}.json").write_text(json.dumps(funnel, indent=1))

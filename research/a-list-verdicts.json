@@ -1,0 +1,32 @@
+[
+ {
+  "date": "2026-08-06",
+  "sym": "RYTM",
+  "readiness": 67,
+  "plan_entry": 112.1,
+  "plan_stop": 99.7312,
+  "verdict": "PENDING",
+  "reason": "",
+  "grade_at": "+1w and +1m vs plan entry"
+ },
+ {
+  "date": "2026-08-06",
+  "sym": "HSIC",
+  "readiness": 61,
+  "plan_entry": 88.23,
+  "plan_stop": 83.1093,
+  "verdict": "PENDING",
+  "reason": "",
+  "grade_at": "+1w and +1m vs plan entry"
+ },
+ {
+  "date": "2026-08-06",
+  "sym": "SPXL",
+  "readiness": 56,
+  "plan_entry": 291.2,
+  "plan_stop": 273.8853,
+  "verdict": "PENDING",
+  "reason": "",
+  "grade_at": "+1w and +1m vs plan entry"
+ }
+]

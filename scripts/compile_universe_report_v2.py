@@ -1701,6 +1701,19 @@ def _actioned_rows():
             continue          # analysis-only call, never traded
         shares, entry = int(m.group(1).replace(",", "")), float(m.group(2))
         sym, cl = c.get("sym"), c.get("close") or {}
+        # 2026-08-06: some closes were logged as a prose STRING, not a block
+        # (HAS/SJM, booked late during the state-drift incident). That crashed
+        # the whole workbook build - step 5 of 6 - and shipped no report at all.
+        # Never let a formatting variation in the ledger cost a night's output.
+        if isinstance(cl, str):
+            cl = {"note": cl, "date": (re.search(r"CLOSED\s+(\d{4}-\d{2}-\d{2})", cl)
+                                       or [None, ""])[1],
+                  # anchor the decimal part so a sentence-ending period is not
+                  # swallowed into the number ("@ 89.66." -> 89.66, not a crash)
+                  "fill": float(m2.group(1)) if (m2 := re.search(
+                      r"SOLD\s+[\d,]+\s*@\s*\$?(\d+(?:\.\d+)?)", cl)) else None,
+                  "pnl": float(m3.group(1).replace(",", "")) if (m3 := re.search(
+                      r"P&L\s*([+-][\d,]+(?:\.\d+)?)", cl)) else None}
         if cl:                # closed - the ledger close block is the truth
             now, status, stop = cl.get("fill"), f"CLOSED {cl.get('date', '')}", "-"
             pnl = cl.get("pnl")

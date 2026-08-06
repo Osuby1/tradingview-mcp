@@ -1,0 +1,26 @@
+{
+ "date": "2026-08-06",
+ "parked": [
+  {
+   "sym": "KRO",
+   "chg": 38.1,
+   "rvol": 4.0,
+   "si": 6.5,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "INSM",
+   "chg": 33.1,
+   "rvol": 2.8,
+   "si": 6.1,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "CHYM",
+   "chg": 24.8,
+   "rvol": 4.1,
+   "si": 7.8,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  }
+ ]
+}

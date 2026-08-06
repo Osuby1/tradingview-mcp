@@ -1,43 +1,64 @@
-# Ignition Sweep — 2026-08-05 (market-wide, 400 pre-filtered)
+# Ignition Sweep — 2026-08-06 (market-wide, 400 pre-filtered)
 
-Prev state: 2026-08-04. FIRED = early_ignition.pine signal in last 5 sessions; LOADED = all structure lit except the RVOL>3 bar.
+Prev state: 2026-08-05. FIRED = early_ignition.pine signal in last 5 sessions; LOADED = all structure lit except the RVOL>3 bar.
 
 ## 🔥 NEW since prior run
-- **AMLX** LOADED @ 21.87 (Health Technology) — d60 +5.4%, ADX 49
-- **MBX** LOADED @ 70.70 (Health Technology) — d60 +6.4%, ADX 45
-- **ACRS** LOADED @ 5.98 (Health Technology) — d60 +4.7%, ADX 39
-- **S** LOADED @ 20.98 (Technology Services) — d60 +4.6%, ADX 25
-- **IVZ** LOADED @ 32.00 (Finance) — d60 +3.5%, ADX 22
+- **ACAD** LOADED @ 28.80 (Health Technology) — d60 +6.1%, ADX 52
+- **BLFS** LOADED @ 33.80 (Health Technology) — d60 +3.9%, ADX 51
+- **BVS** LOADED @ 15.26 (Health Technology) — d60 +13.3%, ADX 47
+- **SN** LOADED @ 182.11 (Consumer Durables) — d60 +8.3%, ADX 45
+- **URGN** LOADED @ 46.43 (Health Technology) — d60 +6.1%, ADX 44
+- **CRL** LOADED @ 260.72 (Commercial Services) — d60 +8.4%, ADX 39
+- **PGEN** LOADED @ 6.89 (Health Technology) — d60 +4.2%, ADX 33
+- **RNG** LOADED @ 61.48 (Technology Services) — d60 +1.3%, ADX 29
+- **TWST** LOADED @ 115.01 (Health Technology) — d60 +11.8%, ADX 28
+- **TVTX** LOADED @ 62.76 (Health Technology) — d60 +6.3%, ADX 28
+- **SNOW** LOADED @ 316.84 (Technology Services) — d60 +0.0%, ADX 22
+- **NSIT** LOADED @ 140.28 (Technology Services) — d60 +2.2%, ADX 21
 
 | Sym | State | Close | vs60dHi | ADX | fired | Sector |
 |-----|-------|-------|---------|-----|-------|--------|
-| CAKE | FIRED-Q | 105.83 | +0.9% | 61 | 07-29 | Consumer Services |
-| ATKR | FIRED-Q | 93.53 | -0.0% | 31 | 08-03 | Producer Manufacturi |
-| FBRX | FIRED-S | 76.56 | -0.5% | 76 | 07-29 | Health Technology |
-| ELVN | LOADED | 61.11 | +5.3% | 49 |  | Health Technology |
-| AMLX | LOADED | 21.87 | +5.4% | 49 |  | Health Technology |
-| LIND | LOADED | 34.09 | +2.9% | 47 |  | Consumer Services |
-| MBX | LOADED | 70.70 | +6.4% | 45 |  | Health Technology |
-| ACRS | LOADED | 5.98 | +4.7% | 39 |  | Health Technology |
-| S | LOADED | 20.98 | +4.6% | 25 |  | Technology Services |
-| NTAP | LOADED | 190.46 | +4.1% | 25 |  | Electronic Technolog |
-| IVZ | LOADED | 32.00 | +3.5% | 22 |  | Finance |
+| ATKR | FIRED-Q | 93.68 | +0.1% | 34 | 08-03 | Producer Manufacturi |
+| ACAD | LOADED | 28.80 | +6.1% | 52 |  | Health Technology |
+| BLFS | LOADED | 33.80 | +3.9% | 51 |  | Health Technology |
+| AMLX | LOADED | 21.85 | -0.1% | 50 |  | Health Technology |
+| LIND | LOADED | 34.11 | +0.1% | 48 |  | Consumer Services |
+| BVS | LOADED | 15.26 | +13.3% | 47 |  | Health Technology |
+| SN | LOADED | 182.11 | +8.3% | 45 |  | Consumer Durables |
+| URGN | LOADED | 46.43 | +6.1% | 44 |  | Health Technology |
+| ACRS | LOADED | 6.36 | +6.4% | 41 |  | Health Technology |
+| CRL | LOADED | 260.72 | +8.4% | 39 |  | Commercial Services |
+| PGEN | LOADED | 6.89 | +4.2% | 33 |  | Health Technology |
+| S | LOADED | 21.00 | +0.1% | 29 |  | Technology Services |
+| RNG | LOADED | 61.48 | +1.3% | 29 |  | Technology Services |
+| TWST | LOADED | 115.01 | +11.8% | 28 |  | Health Technology |
+| TVTX | LOADED | 62.76 | +6.3% | 28 |  | Health Technology |
+| IVZ | LOADED | 32.01 | +0.0% | 24 |  | Finance |
+| SNOW | LOADED | 316.84 | +0.0% | 22 |  | Technology Services |
+| NSIT | LOADED | 140.28 | +2.2% | 21 |  | Technology Services |
 
 ```json
 {
- "date": "2026-08-05",
+ "date": "2026-08-06",
  "states": {
-  "CAKE": "FIRED-Q",
   "ATKR": "FIRED-Q",
-  "FBRX": "FIRED-S",
-  "ELVN": "LOADED",
+  "ACAD": "LOADED",
+  "BLFS": "LOADED",
   "AMLX": "LOADED",
   "LIND": "LOADED",
-  "MBX": "LOADED",
+  "BVS": "LOADED",
+  "SN": "LOADED",
+  "URGN": "LOADED",
   "ACRS": "LOADED",
+  "CRL": "LOADED",
+  "PGEN": "LOADED",
   "S": "LOADED",
-  "NTAP": "LOADED",
-  "IVZ": "LOADED"
+  "RNG": "LOADED",
+  "TWST": "LOADED",
+  "TVTX": "LOADED",
+  "IVZ": "LOADED",
+  "SNOW": "LOADED",
+  "NSIT": "LOADED"
  }
 }
 ```

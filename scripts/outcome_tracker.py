@@ -55,6 +55,13 @@ def grade_call(call, prices, holding_days):
         return {**call, "status": "TOO NEW", "elapsed": 0}
 
     win = dates[:holding_days + 1]
+    # 2026-08-06: entries logged as real fills (options tickets, hedge tranches)
+    # carry no `ref` price - they were never a "called level to grade against".
+    # Crashing the whole tracker on them killed the EOD chain step silently for
+    # four sessions; skip them explicitly and say so instead.
+    if "ref" not in call:
+        return {**call, "status": "NOT GRADEABLE",
+                "note": "no ref level on this entry - real fill, not a called level"}
     ref = call["ref"]
     long = call["dir"] == "long"
     entry_close = ser[win[0]]["c"]
@@ -150,7 +157,7 @@ def main():
     out.append("| Call | Dir | Ref | Mark | Days | Return | vs SPY | MFE | MAE | Hit | Status | Verdict |")
     out.append("|---|---|---|---|---|---|---|---|---|---|---|---|")
     for g in graded:
-        if g["status"] in ("NO PRICE DATA", "TOO NEW"):
+        if g["status"] in ("NO PRICE DATA", "TOO NEW", "NOT GRADEABLE"):
             out.append(f"| {g['sym']} | {g['dir']} | {g.get('ref')} | - | - | - | - | - | - | - | {g['status']} | - |")
             continue
         se = f"{g['spy_excess']:+.1f}" if g["spy_excess"] is not None else "-"
