@@ -79,7 +79,12 @@ def main():
                     f"no chase, verify news+chain.")})
         state["alerted"][name] = close
 
-    # market-wide blast
+    # market-wide blast - with SHORT-INTEREST GATE (added 8/6 after five
+    # straight blast alerts (HNST/ASPN/AEVA/WPP/DCTH) all failed the squeeze
+    # test on SI: the net was catching big movers, not squeezes. Now the
+    # watcher does the verification BEFORE it interrupts Omar. Sub-bar names
+    # are logged for the EOD brief's mover section, never pushed.)
+    parked = []
     for row in scan({"columns": ["name", "close", "change", "relative_volume_10d_calc", "market_cap_basic"],
                      "sort": {"sortBy": "change", "sortOrder": "desc"}, "range": [0, 10],
                      "filter": [{"left": "change", "operation": "greater", "right": 18},
@@ -93,12 +98,34 @@ def main():
         last = state["alerted"].get(name)
         if last and close < last * REALERT_GAIN:
             continue
+        si = None
+        try:
+            import yfinance as yf
+            spf = yf.Ticker(name).info.get("shortPercentOfFloat")
+            si = round(spf * 100, 1) if spf is not None else None
+        except Exception:
+            si = None
+        if si is not None and si < 15:
+            parked.append({"sym": name, "chg": round(chg, 1), "rvol": round(rvol, 1), "si": si,
+                           "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"})
+            state["alerted"][name] = close  # don't re-evaluate all day
+            continue
+        si_txt = f"SI {si}% float - PASSES the squeeze bar" if si is not None else "SI unknown - verify"
         hits.append({
             "sym": row["s"],
             "price": close,
-            "msg": (f"SQUEEZE WATCH (blast): {name} +{chg:.1f}% RVOL {rvol:.1f} - market-wide "
-                    f"mover, SI unknown - verify news before the playbook.")})
+            "msg": (f"SQUEEZE WATCH (blast): {name} +{chg:.1f}% RVOL {rvol:.1f}, {si_txt}. "
+                    f"$300 OTM-call playbook applies if the catalyst checks out - verify news+chain.")})
         state["alerted"][name] = close
+    if parked:
+        pf = REPO / "watchlists" / "squeeze-parked.json"
+        prior = json.loads(pf.read_text()) if pf.exists() else {}
+        if prior.get("date") != today:
+            prior = {"date": today, "parked": []}
+        prior["parked"].extend(parked)
+        pf.write_text(json.dumps(prior, indent=1))
+        print(f"[squeeze] parked (big movers, sub-15% SI, NOT pushed): "
+              f"{[p['sym'] + ' SI' + str(p['si']) for p in parked]}")
 
     if test:
         hits.insert(0, {"sym": "AMEX:SPY", "price": None,
