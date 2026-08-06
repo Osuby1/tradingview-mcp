@@ -8,6 +8,19 @@ metrics so Friday reviews grade the conversion pipeline itself.
 Leaks this fixes (diagnosed 8/6): firehose without hierarchy, no forced
 decision, doors not pre-wired, funnel unmeasured.
 
+DESIGN DECISION 2026-08-06 (Omar, overruling me): NO BOOK AWARENESS. I
+proposed filtering cards that conflict with open positions after the first
+run surfaced SPXL (3x long S&P) while Omar holds a SPY put hedge. Omar
+overruled: "I want to see what is favored when it works." He is right - a
+card that contradicts an open position is not noise to suppress, it is the
+selector telling you your existing thesis may be wrong. Filtering it would
+hide precisely the signal worth having, and would have hidden the exact
+rotation Omar wants available (out of the put, into SPXL, on a benign jobs
+print). The ONLY book filter that stays is the existing "exclude what you
+already own" rule, which prevents duplicate cards, not contradictory ones.
+Consequence accepted: cards may argue against the book, and the human
+resolves it. Revisit only if the unfiltered version demonstrably misleads.
+
 Usage:
   python scripts/a_list.py              # full run (select + wire doors)
   python scripts/a_list.py --dry-run    # select + print only

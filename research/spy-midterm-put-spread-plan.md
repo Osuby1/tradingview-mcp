@@ -90,6 +90,19 @@ execution not improvisation. Consequences, all deliberate:
   and VIX 14 + SPY >765 = the pre-agreed CUT signal. SPY closed 768.86,
   already past 765. So the same rulebook can order an ADD and a CUT off
   the same tape. Jobs is the tiebreaker; do not resolve it by preference.
+- **DIRECT CONTRADICTION SURFACED 2026-08-06 PM — resolve it Friday, do not
+  let both run by default.** The A-List's first live run carded SPXL (3x long
+  S&P, readiness 56) the same evening. Omar's stated intent: "we may get a good
+  jobs report and SPY may continue to rally, in which case we would want to
+  switch into SPXL and out of the SPY put." That is the OPPOSITE of the
+  tranche-2 rule frozen on 8/4, which says a benign/strong print with VIX <15
+  = ADD a second put because insurance got cheap. Same print, same branch, two
+  opposite actions. Both are defensible on their own terms — the frozen rule
+  expresses the multi-month midterm-correction thesis (Oct low), the SPXL
+  instinct expresses a tactical momentum view — but running both means paying
+  for insurance while simultaneously levering long, which nets to noise and
+  costs two premiums. Friday must pick ONE of: add tranche 2 / rotate to SPXL /
+  do neither. Whichever Omar picks, the OTHER one is logged as a graded skip.
 - Process guard (this plan was missed once already — see 7/27 process note):
   one-shot cloud reminder trig_016kjtth2eemMP6JpneoWiiy fires 7:45 CT
   Fri 8/7, ~15 min after the print. Local session also owes it in the
