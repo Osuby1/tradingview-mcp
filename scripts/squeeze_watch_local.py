@@ -84,14 +84,25 @@ def main():
     # test on SI: the net was catching big movers, not squeezes. Now the
     # watcher does the verification BEFORE it interrupts Omar. Sub-bar names
     # are logged for the EOD brief's mover section, never pushed.)
+    # TWO BLAST TIERS (2nd added 8/6 after IOVA - up 40.6% with 23.9% SI, a
+    # textbook squeeze - was BLOCKED by the rvol>=4 filter at rvol 3.38.
+    # Big-float names carry high average volume, so a monster % move can
+    # print "only" 3x. Tier 2 catches size-of-move when volume is merely high.)
+    base = [{"left": "market_cap_basic", "operation": "greater", "right": 500000000},
+            {"left": "close", "operation": "greater", "right": 3},
+            {"left": "exchange", "operation": "in_range", "right": ["NYSE", "NASDAQ", "AMEX"]}]
+    blast_rows, seen_blast = [], set()
+    for chg_min, rvol_min in ((18, 4), (30, 2.5)):
+        for row in scan({"columns": ["name", "close", "change", "relative_volume_10d_calc", "market_cap_basic"],
+                         "sort": {"sortBy": "change", "sortOrder": "desc"}, "range": [0, 10],
+                         "filter": [{"left": "change", "operation": "greater", "right": chg_min},
+                                    {"left": "relative_volume_10d_calc", "operation": "greater", "right": rvol_min}] + base}):
+            if row["d"][0] not in seen_blast:
+                seen_blast.add(row["d"][0])
+                blast_rows.append(row)
+
     parked = []
-    for row in scan({"columns": ["name", "close", "change", "relative_volume_10d_calc", "market_cap_basic"],
-                     "sort": {"sortBy": "change", "sortOrder": "desc"}, "range": [0, 10],
-                     "filter": [{"left": "change", "operation": "greater", "right": 18},
-                                {"left": "relative_volume_10d_calc", "operation": "greater", "right": 4},
-                                {"left": "market_cap_basic", "operation": "greater", "right": 500000000},
-                                {"left": "close", "operation": "greater", "right": 3},
-                                {"left": "exchange", "operation": "in_range", "right": ["NYSE", "NASDAQ", "AMEX"]}]}):
+    for row in blast_rows:
         name, close, chg, rvol = row["d"][0], row["d"][1], row["d"][2] or 0, row["d"][3] or 0
         if name in tinder:
             continue  # tinder path already handled it with SI context

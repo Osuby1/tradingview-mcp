@@ -267,6 +267,14 @@
    "pct_of_52wk_high": 49.4
   },
   {
+   "sym": "NASDAQ:IOVA",
+   "si_pct_float": 23.9,
+   "days_to_cover": null,
+   "float_m": 387.9,
+   "pct_of_52wk_high": 108.0,
+   "note": "ADDED 8/6 - the 8/5 Russell sweep MISSED it (Yahoo throttled ~460 names); 23.9% SI qualifies. Ignited +41% 8/6 on Amtagvi revenue +66% + FDA Fast Track. Chain too thin for the options playbook (OI ~100-200, spreads 88-100%) = equity-only squeeze."
+  },
+  {
    "sym": "NASDAQ:NVTS",
    "si_pct_float": "~21",
    "note": "carried from 7/28 list - no fresh SI in 8/5 sweep (Yahoo throttle), re-verify Friday"
@@ -299,5 +307,6 @@
   "exits_preregistered": "squeezes retrace violently: sell 1/2 at +100%, 1/4 at +300%, let the rest ride on house money with a close-below-prior-day-low kill; hard time exit 21 DTE; NO averaging down ever.",
   "validation": "PAPER-FIRST per the 7/29 standing order + rule freeze: every watcher fire gets an auto paper ticket in research/options-paper-ledger.json graded on the weekly scorecard; real $300 tickets only on Omar's per-signal go until the paper cohort proves the playbook (~10+ graded signals)."
  },
- "sweep_findings_2026-08-05": "134 names met SI>=15%/cap>=500M/vol>=0.5M. Standouts: NMAX 96% SI(!), GRPN 59.9% w/ 17.9M float, METC 56% at 16% of 52wk high. KEY INSIGHT: several current RUNNERS are high-SI squeezes in disguise - CAKE 34.2% SI at 97.6% of high, CBRL 41.9%, JBLU 26.3%, GIII 27.8%, MTN 31.9%, DBX 29% at 99.5% of high, EAT-complex melt-up = partly a casual-dining short squeeze. Full ranked results archived in the sweep JSON."
+ "sweep_findings_2026-08-05": "134 names met SI>=15%/cap>=500M/vol>=0.5M. Standouts: NMAX 96% SI(!), GRPN 59.9% w/ 17.9M float, METC 56% at 16% of 52wk high. KEY INSIGHT: several current RUNNERS are high-SI squeezes in disguise - CAKE 34.2% SI at 97.6% of high, CBRL 41.9%, JBLU 26.3%, GIII 27.8%, MTN 31.9%, DBX 29% at 99.5% of high, EAT-complex melt-up = partly a casual-dining short squeeze. Full ranked results archived in the sweep JSON.",
+ "coverage_note_2026-08-06": "IOVA miss root-caused: (1) tinder sweep throttled by Yahoo -> rerun squeeze_sweep.py Friday to fill the ~460-name gap; (2) blast net rvol>=4 blocked it at rvol 3.38 -> second blast tier added (change>=30 AND rvol>=2.5)."
 }
