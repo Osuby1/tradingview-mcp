@@ -688,6 +688,25 @@
    "thesis": "Day-1 squeeze ignition: Q2 beat-and-raise (rev 61.9M vs 52.4M est, FY guide raised) + ~42% SI per press (up from 38% July) + tinder-list name. Chain gates passed: OI 1334, 10% spread, 43 DTE. Fill 0.28 vs 0.30 mid = grade A.",
    "exits_preregistered": "AMENDED 8/6 ~9:40 CT (Omar: reclaim cost but leave room; STOCK technicals/price-volume guide the rest) - TECHNICALS-GUIDED LADDER v2: (1) MECHANICAL COST-RECOVERY FLOOR: sell 4 @ 0.70 (+150%) = $280 back, ticket free. This rung stays premium-based because IV crush/theta are invisible in stock technicals - the one thing the tape can't guard. (2) REMAINING 6 = NO premium ceiling; STOCK TAPE RULES: HOLD while daily close > prior day's low AND (close in upper half of range OR RVOL >= 2). SELL HALF of remainder on first warning: close below prior day's low, OR 2 consecutive stalls under a level with RVOL < 1.5 (volume starvation = squeeze dying). SELL ALL remainder on: daily O.G Chandelier flip to SELL (his chart, read at midday + EOD checks), OR close below 6.43 pre-earnings close (thesis erased), OR premium trail once >2.00: exit if premium halves from peak. (3) HARD RAILS unchanged: ALL out by 2026-08-26 (21 DTE, theta cliff - mid-squeeze on 8/26 = ROLL as a NEW decision, never hold); never average down; max loss $280. MONITORING: kill-line + RVOL + CE-mode read at midday and EOD daily (SOUN added to open-position checks); alerts live: 10.00 milestone (5312388346), 6.40 failure (5312388491); 0.70 rung = manual watch at checks + the 10.00 alert as proxy (premium ~0.70 zone begins near stock ~9).",
    "milestones": "SOUN 10.00 = strike reached (alert wired); +100% trigger 0.56; CAR-math: stock 15 -> ~5.00 (~$5k), stock 20 -> ~$10k"
+  },
+  {
+   "id": "2026-08-06-HTZ-CALL-REAL-SQUEEZE2",
+   "date": "2026-08-06",
+   "sym": "HTZ",
+   "direction": "CALL - REAL - SQUEEZE PLAYBOOK TICKET #2",
+   "expiry": "2026-09-18",
+   "strike": 3.0,
+   "contracts": 10,
+   "fill_premium": 0.35,
+   "outlay": 350,
+   "entry_underlying": 2.1476,
+   "status": "OPEN-REAL",
+   "fill_grade": "A on price (0.35 vs 0.36 mid, under my 0.38 limit). SIZE NOTE: $350 outlay is $50 over the $300 spec-unit guide (+17%) - logged, not hidden; still 0.035% of account.",
+   "thesis": "Closest structural match to CAR yet: 28.7% SI (FINRA 7/15), 26% of 52wk high, -70% YTD into the print, +37.7% on 3.4x volume (89.7M shares). Catalyst = real operational turn: rev $2.40B +9.7% beat, RPD +9% (record Q2 ex-2022), adj corporate EBITDA $81M vs $18M prior year, above top end of revised guidance. First candidate this week whose CHAIN passes: Sep 3C OI 8,494, 3,607 traded today, 19% spread.",
+   "known_weaknesses": "(1) Days-to-cover only 3.94 - shortest fuse of the week (GCT 8.07, TROX 11.23, CAR 8.0); shorts can exit in ~4 sessions, so expect a shorter/shallower squeeze than CAR. (2) Still lossmaking (non-GAAP -$0.11) with a heavy debt load - the explicit bear case. (3) 340M float dilutes squeeze mechanics vs small-float names.",
+   "exits_preregistered": "Ladder v2 (Omar's technicals-guided design): (1) COST-RECOVERY: sell 4 @ 0.88 (+150%) = $350 back, ticket free, 6 ride on house money. (2) REMAINING 6 - NO premium ceiling, STOCK TAPE RULES: hold while daily close > prior day's low AND (upper-half close OR RVOL>=2); sell half of remainder on first warning (close below prior day's low, or 2 stalls w/ RVOL<1.5); ALL out on daily O.G Chandelier flip to SELL, or close below 1.56 (pre-earnings close = thesis erased), or premium halves from peak once >2.00. (3) HARD RAILS: all out by 2026-08-26 (21 DTE); never average down; max loss $350.",
+   "milestones": "HTZ 3.00 = strike reached (alert 5314611xxx); 1.56 = squeeze failed. CAR-math: HTZ $4 ~2.8x, $6 ~8x, $8 (old high) ~14x.",
+   "slot": "Spec ticket 2 of max 2-3 concurrent (SOUN = #1). Combined spec risk $630."
   }
  ],
  "data_note_2026_07_30": "OPRA entitlement went LIVE ~2:55 PM CT 7/30 - all marks/fills now from the real TradeStation chain; Yahoo-mid fallback retired.",
