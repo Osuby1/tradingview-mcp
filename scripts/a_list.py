@@ -61,6 +61,17 @@ def main():
         "full_passers": len(passers), "eligible": len(eligible),
         "a_list": [h["sym"] for h in cards],
         "doors_wired": 0, "note": f"selector: ready>={MIN_READY}, $vol>={MIN_DOLLAR_VOL/1e6:.0f}M, not-held, top {MAX_CARDS} by readiness",
+        # SELECTOR CONTROL GROUP (Omar's challenge 8/6: how do we KNOW the
+        # picks are right?): every eligible name is snapshotted with its
+        # entry reference so Friday reviews can grade SELECTED vs REJECTED
+        # vs random-3 vs a buy-score ordering - the selector must EARN its
+        # ranking or be demoted to "any 3 passers with doors".
+        "eligible_cohort": [{"sym": h["sym"], "readiness": h["readiness"]["score"],
+                             "ref_price": h.get("real_close"), "selected": h in cards}
+                            for h in eligible],
+        "passers_below_floor": [{"sym": h["sym"],
+                                 "readiness": (h.get("readiness") or {}).get("score")}
+                                for h in passers if h not in eligible and h["sym"] not in held],
     }
 
     state = {"date": "", "doors": {}}
