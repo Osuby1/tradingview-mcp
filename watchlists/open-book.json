@@ -1,8 +1,18 @@
 {
  "note": "Omar's REAL open book as machine-readable state. KEEP IN SYNC when he reports fills/closes (also update the open-positions memory). Consumed nightly by scripts/ratchet_watch.py (EOD chain step 4) which maintains the 20% trailing-ratchet alerts per the 2026-07-25 exit rule: exit line = max(initial stop, 0.8 x highest close since entry). Remove a position from this list when it closes.",
- "as_of": "2026-08-05",
+ "as_of": "2026-08-06",
  "ratchet_pct": 0.2,
  "positions": [
+  {
+   "sym": "ROBO",
+   "shares": 600,
+   "entry": 84.34,
+   "stop": 76.99,
+   "opened": "2026-08-05",
+   "high_close": 84.37,
+   "ratchet_alert": null,
+   "notes": "8/4 scan rank #8 readiness 75 (coil profile); Omar filled 600sh AT the plan limit (plan was 680) = grade A; risk $4,410; checkpoint 99.04 no-sell; robotics ETF = no earnings binary"
+  },
   {
    "sym": "AMG",
    "shares": 131,
