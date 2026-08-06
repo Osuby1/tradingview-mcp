@@ -671,6 +671,23 @@
    "fill_conditions": "Monday 8/10 8:50 CT at live mid ONLY IF BA re-passes gates + readiness re-score that morning; no-chase void if mid > 20.30 (+10%); void if Monday scan drops it.",
    "exits_at_entry": "+100% / -50% / Chandelier daily flip / out by 21 DTE (Sep 25)",
    "why_not_tomorrow": "No new long premium the day before the jobs binary - same doctrine as today's GE/UAL exits and the LUV skip."
+  },
+  {
+   "id": "2026-08-06-SOUN-CALL-REAL-SQUEEZE1",
+   "date": "2026-08-06",
+   "sym": "SOUN",
+   "direction": "CALL - REAL - SQUEEZE PLAYBOOK TICKET #1",
+   "expiry": "2026-09-18",
+   "strike": 10,
+   "contracts": 10,
+   "fill_premium": 0.28,
+   "outlay": 280,
+   "entry_underlying": 7.7,
+   "status": "OPEN-REAL",
+   "override": "Real-money override of paper-first (pattern #3 after GE/UAL calls) - Omar's explicit fill, logged not hidden. Playbook validation cohort still counts it (H3: ignition-day entry).",
+   "thesis": "Day-1 squeeze ignition: Q2 beat-and-raise (rev 61.9M vs 52.4M est, FY guide raised) + ~42% SI per press (up from 38% July) + tinder-list name. Chain gates passed: OI 1334, 10% spread, 43 DTE. Fill 0.28 vs 0.30 mid = grade A.",
+   "exits_preregistered": "SELL 5 at 0.56 (+100%) | SELL 2 at 1.12 (+300%) | remaining 3 ride on house money, KILL = SOUN daily close below prior day's low (line updated nightly at EOD) | HARD EXIT ALL by 2026-08-26 (21 DTE) | NEVER average down. Max loss = the $280.",
+   "milestones": "SOUN 10.00 = strike reached (alert wired); +100% trigger 0.56; CAR-math: stock 15 -> ~5.00 (~$5k), stock 20 -> ~$10k"
   }
  ],
  "data_note_2026_07_30": "OPRA entitlement went LIVE ~2:55 PM CT 7/30 - all marks/fills now from the real TradeStation chain; Yahoo-mid fallback retired.",
