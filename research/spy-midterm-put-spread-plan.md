@@ -67,6 +67,34 @@ Decision framework, frozen now so Friday is execution not improvisation:
 Prep still open before Friday: enable margin on TS or confirm main-broker
 routing so the SPREAD structure is actually placeable (7/31 rejection).
 
+### STRUCTURE DECIDED 2026-08-06 (Omar, pre-jobs): LONG PUT ONLY — no spread.
+Omar's call, made the evening before the tranche-2 decision so Friday is
+execution not improvisation. Consequences, all deliberate:
+- The margin/main-broker prep item above is CLOSED — not needed, no action.
+  The 7/31 spread rejection can no longer delay or reshape a tranche-2 fill.
+- Structure = 1x SPY Nov 20 2026 710 PUT, same contract as tranche 1
+  (14.87 fill). Plan line 13 already documents the naked 710 put as the
+  sanctioned structure when >20-25% coverage is wanted, so this is a
+  documented variant, not a deviation.
+- Payoff differs from the spread: no short leg means no $9,580 cap and no
+  premium offset — full premium at risk, unlimited-to-zero payoff below 710.
+  Cheaper to be wrong about timing, more expensive to be wrong about
+  direction.
+- Live pricing at the 8/6 close: Nov 710P mid 8.86 (bid 8.85 / ask 8.88,
+  OI 2,735) = ~$886, i.e. 40% CHEAPER than tranche 1's $1,487 six sessions
+  ago. VIX 15.31 (-21.7% on the week, below its 20d 17.18). The plan's
+  "buy it cheap on a VIX print <15" condition is essentially met — the
+  jobs print is the only open variable.
+- UNRESOLVED TENSION to settle Friday, flagged now: the hedge-board alert
+  spec says VIX 15 + SPY >760 = "thesis delayed, consider cutting half",
+  and VIX 14 + SPY >765 = the pre-agreed CUT signal. SPY closed 768.86,
+  already past 765. So the same rulebook can order an ADD and a CUT off
+  the same tape. Jobs is the tiebreaker; do not resolve it by preference.
+- Process guard (this plan was missed once already — see 7/27 process note):
+  one-shot cloud reminder trig_016kjtth2eemMP6JpneoWiiy fires 7:45 CT
+  Fri 8/7, ~15 min after the print. Local session also owes it in the
+  Friday brief. Two independent paths, because the cloud one failed before.
+
 ## Companion pre-decision 2026-08-04 (Omar): GE REAL CALL EXITS THURSDAY 8/6
 Pre-jobs de-risk, decided 2 days ahead: the real GE Sep 350 call (entry
 28.00) is SOLD on Thursday 8/6, worked as a limit into strength (never
