@@ -7,12 +7,19 @@ compelling stock." Quantify what our OWN winning flags shared at flag time.
 Which measurable flag-day traits separate flags that ran >= +15% within
 1 month from flags that went nowhere or died?
 
-## Sample
-Every graded flag we own: ignition-ledger entries, live-picks originations,
-og-chandelier scan signals, protocol picks — anything with a flag date,
-flag price, and >= 1 month of forward history as of each Friday review.
-HONEST LIMITS stated up front: ~3 months of history, one regime (melt-up),
-n likely 100-200 — label UNCALIBRATED until out-of-sample.
+## Sample (AMENDED 2026-08-06 pre-data, Omar's design: skipped-runner attributes drive selection)
+WINNER COHORT: the workbook's SKIPPED RUNNERS block (certified >=10%
+runners with rec-day snapshots) PLUS acted-on winners (GE, MLI, ...) —
+winners are winners regardless of whether we rode them.
+CONTROL COHORT (the part that keeps this from being astrology): all
+same-period flags that did NOT run (< +5% at +1m) from the same logs.
+A trait only counts if it SEPARATES the cohorts — traits shared with the
+duds are noise, however impressive they look on the winners alone.
+Rec-day attribute sources: recommendations_log CSVs (2026-07-22 onward),
+rec-day-dmi-cache.json, og-sweep raws. Pre-7/22 flags included only
+where sweeps carry their flag-day row; exclusions listed, not hidden.
+HONEST LIMITS: ~3 months, one regime (melt-up), winner n ~10-25 —
+label UNCALIBRATED until out-of-sample.
 
 ## Candidate traits (frozen list — no additions after first grading)
 band-width percentile at flag · RVOL at flag · % of 52wk high · ADX ·
