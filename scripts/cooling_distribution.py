@@ -34,7 +34,8 @@ import yfinance as yf
 
 REPO = Path(__file__).resolve().parent.parent
 SCANNER_LOG = Path.home() / "Documents" / "Equities_Scanner" / "recommendations_log.csv"
-HOLD = 21
+import os
+HOLD = int(os.environ.get("HOLD", "21"))
 
 
 def load(tabs):
@@ -99,6 +100,7 @@ def main():
     buy = load({"COILED", "FRESH IGNITION"})
     syms = sorted(set(cool["ticker"].astype(str).str.upper()) |
                   set(buy["ticker"].astype(str).str.upper()))
+    print(f"[HOLD = {HOLD} sessions]")
     print(f"COOLING rows {len(cool)} | buy-intent rows {len(buy)} | {len(syms)} symbols")
     px = yf.download(syms, start="2026-01-01", end="2026-08-07", progress=False,
                      auto_adjust=True, group_by="ticker", threads=True)

@@ -408,3 +408,57 @@ is more expensive than it looks.
 Exits modelled AT the stop price (optimistic - gaps are not simulated); 21-session
 cap; n=67 on the buy-intent control because fewer flags have a full month; one
 regime.
+
+---
+
+# HOLDING-PERIOD CHECK + CORRECTION — 2026-08-06 PM (Omar: "what is the holding
+# period we use?")
+
+**We do not have one. I asserted "21 sessions" and that was wrong — 21 is our
+MEASUREMENT convention, never a trading rule.**
+
+- `outcome_tracker.py` grades at `holding_days = 21`; the origination log carries
+  `fwd5`/`fwd21` and matures every recommendation at a fixed 22 days (median 22,
+  min 21, max 25, n=186). All grading, no holding.
+- **Actual exits are event-driven and open-ended:** Chandelier flip to SELL,
+  structure stop / ATR floor, the 20% trailing ratchet, thesis break. The ONLY
+  time-based rule anywhere in the system is the options 21-days-to-expiry exit.
+  The equity book has no time limit at all.
+- **Realized holds on the five closed trades: 1, 2, 4, 10, 10 calendar days —
+  median 4.** (UAL call 1d, GE call 2d, DVN 4d, HAS 10d, SJM 10d.) n=5, two were
+  options with their own rules, so this is an observation, not a statistic.
+
+### The correction this forces
+My claim "the scanner's stops destroy the edge over the holding period we use"
+was wrong on both halves. Re-run at every horizon:
+
+| Hold | COOLING b&h -> stopped (stop-out) | BUY-INTENT b&h -> stopped (stop-out) |
+|---|---|---|
+| 5 sessions | -2.53% -> -2.41% (51%) | -0.80% -> **-0.76%** (38%) |
+| 10 sessions | -4.20% -> -3.50% (67%) | -1.09% -> -1.03% (45%) |
+| 21 sessions | -5.41% -> -4.21% (84%) | **+1.03% -> -0.78%** (36%) |
+
+**At 5-10 sessions the stops are nearly neutral.** The damage I reported only
+appears at 21 sessions, a horizon we do not trade. The stop finding stands as
+"stop damage grows with hold length", not as "the stops destroy our edge."
+
+### The finding that replaces it — MATCHED cohort, identical flags at every horizon
+| Horizon | BUY-INTENT (n=67) | COOLING (n=112) |
+|---|--:|--:|
+| +5 sessions | **-0.01%** (median +0.60, win 57%) | -2.61% (win 29%) |
+| +10 sessions | +0.81% (win 60%) | -4.41% (win 30%) |
+| +21 sessions | **+1.03%** (win 58%) | -5.41% (win 31%) |
+
+**The buy-intent edge ACCUMULATES WITH TIME and is exactly zero at five sessions.
+Our observed exits cluster at ~4 days.** Same flags at every horizon, so this is
+not a sample-composition artifact.
+
+Chain of evidence, stated as a hypothesis for the Friday review rather than a
+conclusion: stops tight enough to fire on 38% of buy-intent flags inside five
+sessions mean positions rarely survive into the 10-21 day window where the mean
+turns positive. If that holds, the fix is stop WIDTH and hold discipline, not
+better selection - and it would be worth more than any detector change on the
+board.
+
+COOLING degrades monotonically at every horizon (-2.6 -> -4.4 -> -5.4). The veto
+is unaffected by any of this.
