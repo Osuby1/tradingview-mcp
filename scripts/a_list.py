@@ -39,7 +39,8 @@ DOOR_ACTIONS = REPO / "watchlists" / "door-actions.json"
 BOOK = REPO / "watchlists" / "open-book.json"
 
 MAX_CARDS = 3
-MIN_READY = 55
+MIN_READY = 45   # lowered from 55 (Omar 2026-08-07): the 55 floor excluded 14 of 20
+                 # actual runners (median runner readiness at rec = 48). On trial like everything else.
 MIN_DOLLAR_VOL = 20e6
 
 
@@ -159,8 +160,24 @@ def origination_candidates(date, held):
             print(f"[orig] readiness failed for {c['sym']}: {e} - EXCLUDED, not guessed")
             continue
         try:
-            h = _yf.Ticker(c["sym"]).history(period="1mo")
+            h = _yf.Ticker(c["sym"]).history(period="3mo")
             dv = float((h["Close"] * h["Volume"]).tail(20).mean())
+            # STOP REPLACEMENT (2026-08-07, from the cooling-distribution study):
+            # the scanner's own stops fire on 38% of buy-intent flags inside 5
+            # sessions - too tight to let the edge (which needs 10-21 sessions)
+            # arrive. Protocol stop = 2xATR(14) below entry, floored at the
+            # scanner's stop if the scanner's is already wider.
+            tr = (h["High"] - h["Low"]).combine(
+                (h["High"] - h["Close"].shift()).abs(), max).combine(
+                (h["Low"] - h["Close"].shift()).abs(), max)
+            atr = float(tr.ewm(alpha=1/14, adjust=False).mean().iloc[-1])
+            atr_stop = round(c["plan_entry"] - 2 * atr, 2)
+            if atr_stop < c["plan_stop"]:          # wider = smaller number
+                c["stop_method"] = f"2xATR14 ({atr:.2f}) - scanner stop {c['plan_stop']} was too tight"
+                c["plan_stop"] = atr_stop
+                c["plan_target"] = round(c["plan_entry"] + 2 * (c["plan_entry"] - atr_stop), 2)
+            else:
+                c["stop_method"] = "scanner stop (already wider than 2xATR)"
         except Exception:
             dv = 0.0
         c["gates"] = {"avg_dollar_vol": dv}
