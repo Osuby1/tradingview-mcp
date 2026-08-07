@@ -1,25 +1,102 @@
 {
- "date": "2026-08-06",
+ "date": "2026-08-07",
  "parked": [
   {
-   "sym": "KRO",
-   "chg": 38.1,
-   "rvol": 4.0,
-   "si": 6.5,
+   "sym": "HNST",
+   "chg": 40.8,
+   "rvol": 17.3,
+   "si": 9.4,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "ASPN",
+   "chg": 37.5,
+   "rvol": 13.3,
+   "si": 11.7,
    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
   },
   {
    "sym": "INSM",
-   "chg": 33.1,
-   "rvol": 2.8,
+   "chg": 33.9,
+   "rvol": 4.2,
    "si": 6.1,
    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
   },
   {
-   "sym": "CHYM",
-   "chg": 24.8,
-   "rvol": 4.1,
+   "sym": "KRO",
+   "chg": 32.5,
+   "rvol": 6.7,
+   "si": 6.5,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "PAYS",
+   "chg": 29.3,
+   "rvol": 6.1,
+   "si": 3.5,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "AEVA",
+   "chg": 28.8,
+   "rvol": 5.7,
+   "si": 10.2,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "WPP",
+   "chg": 25.9,
+   "rvol": 6.5,
+   "si": 1.2,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "PAYC",
+   "chg": 23.6,
+   "rvol": 4.3,
+   "si": 8.9,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "VAC",
+   "chg": 22.6,
+   "rvol": 4.4,
+   "si": 11.3,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "PUBM",
+   "chg": 35.7,
+   "rvol": 3.0,
    "si": 7.8,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "QNST",
+   "chg": 34.7,
+   "rvol": 2.9,
+   "si": 11.3,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "STLN",
+   "chg": 34.2,
+   "rvol": 2.5,
+   "si": 8.3,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "MTW",
+   "chg": 36.9,
+   "rvol": 2.7,
+   "si": 3.3,
+   "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+  },
+  {
+   "sym": "TEAM",
+   "chg": 33.2,
+   "rvol": 2.5,
+   "si": 11.1,
    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
   }
  ]

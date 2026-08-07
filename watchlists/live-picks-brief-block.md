@@ -1,26 +1,29 @@
-### Live Picks - what's running (2026-08-06)
+### Live Picks - what's running (2026-08-07)
 
-| Ticker | Industry | Reco px | Now | Gain | Read |
+| Ticker | First rec | Industry | Reco px | Now | Gain | Read |
 |---|---|--:|--:|--:|---|
-| AMLX | Pharmaceuticals: Major | 17.88 | 24.19 | +35% | DON'T CHASE - pullback only |
-| IOVA | Biotechnology | 5.00 | 6.21 | +24% | confirming - enter/add per plan |
-| EAT | Restaurants | 185.26 | 227.35 | +23% | confirming - enter/add per plan |
-| STGW | Miscellaneous Commercial Services | 7.59 | 9.12 | +20% | confirming - enter/add per plan |
-| VSXY | Apparel/Footwear Retail | 78.25 | 93.54 | +20% | confirming - enter/add per plan |
-| FTDR | Homebuilding | 75.99 | 89.92 | +18% | confirming - enter/add per plan |
-| ALNT | Electrical Products | 94.56 | 111.21 | +18% | confirming - enter/add per plan |
-| BLFS | Medical Specialties | 29.15 | 33.93 | +16% | confirming - enter/add per plan |
-| DGII | Telecommunications Equipment | 72.14 | 83.01 | +15% | confirming - enter/add per plan |
-| MNPR | Biotechnology | 106.60 | 120.21 | +13% | confirming - enter/add per plan |
-| UHAL | Finance/Rental/Leasing | 67.35 | 75.21 | +12% | confirming - enter/add per plan |
-| CHE | Hospital/Nursing Management | 492.65 | 548.91 | +11% | confirming - enter/add per plan |
-| PRAX | Pharmaceuticals: Major | 333.12 | 370.16 | +11% | confirming - enter/add per plan |
-| HALO | Biotechnology | 77.82 | 85.76 | +10% | confirming - enter/add per plan |
-| GDX | ? | 76.50 | 83.89 | +10% | confirming - enter/add per plan |
-| RELY | Miscellaneous Commercial Services | 23.68 | 25.93 | +10% | confirming - enter/add per plan |
-| MLI | Metal Fabrication | 63.53 | 69.45 | +9% | confirming - enter/add per plan |
-| SAIC | Information Technology Services | 114.04 | 124.28 | +9% | confirming - enter/add per plan |
-| PTGX | Pharmaceuticals: Major | 134.27 | 146.18 | +9% | confirming - enter/add per plan |
-| PH | Industrial Machinery | 985.48 | 1069.16 | +8% | confirming - enter/add per plan |
+| HALO | 2026-07-23 | Biotechnology | 77.82 | 103.12 | +33% | DON'T CHASE - pullback only |
+| AMLX | 2026-07-23 | Pharmaceuticals: Major | 17.88 | 22.82 | +28% | DON'T CHASE - pullback only |
+| IOVA | 2026-07-23 | Biotechnology | 5.00 | 6.34 | +27% | DON'T CHASE - pullback only |
+| TWST | 2026-07-23 | Biotechnology | 91.55 | 115.67 | +26% | DON'T CHASE - pullback only |
+| SNOW | 2026-07-23 | Packaged Software | 267.49 | 330.30 | +23% | confirming - enter/add per plan |
+| FIVN | 2026-07-31 | Packaged Software | 27.66 | 33.99 | +23% | confirming - enter/add per plan |
+| NTRA | 2026-07-23 | Biotechnology | 262.63 | 322.10 | +23% | confirming - enter/add per plan |
+| STGW | 2026-07-23 | Miscellaneous Commercial Services | 7.59 | 9.17 | +21% | confirming - enter/add per plan |
+| VSXY | 2026-07-23 | Apparel/Footwear Retail | 81.92 | 98.52 | +20% | confirming - enter/add per plan |
+| ALNT | 2026-08-06 | Electrical Products | 94.56 | 112.81 | +19% | confirming - enter/add per plan |
+| BLFS | 2026-07-23 | Medical Specialties | 29.15 | 34.66 | +19% | confirming - enter/add per plan |
+| GDX | 2026-07-23 | ? | 76.50 | 89.84 | +17% | confirming - enter/add per plan |
+| S | 2026-07-30 | Packaged Software | 18.52 | 21.40 | +16% | confirming - enter/add per plan |
+| CHE | 2026-07-23 | Hospital/Nursing Management | 492.65 | 552.43 | +12% | confirming - enter/add per plan |
+| MLKN | 2026-07-23 | Office Equipment/Supplies | 21.90 | 24.49 | +12% | confirming - enter/add per plan |
+| SAIC | 2026-07-23 | Information Technology Services | 114.04 | 126.54 | +11% | confirming - enter/add per plan |
+| PGEN | 2026-07-23 | Biotechnology | 6.53 | 7.23 | +11% | confirming - enter/add per plan |
+| RYTM | 2026-08-06 | Pharmaceuticals: Major | 105.78 | 115.63 | +9% | confirming - enter/add per plan |
+| APPS | 2026-08-07 | Packaged Software | 13.17 | 14.34 | +9% | confirming - enter/add per plan |
+| TXG | 2026-07-23 | Biotechnology | 47.86 | 52.03 | +9% | confirming - enter/add per plan |
+| HELE | 2026-07-23 | Home Furnishings | 27.43 | 29.77 | +9% | confirming - enter/add per plan |
+| TGT | 2026-07-23 | Specialty Stores | 138.29 | 149.70 | +8% | confirming - enter/add per plan |
+| MAN | 2026-07-23 | Personnel Services | 52.34 | 56.58 | +8% | confirming - enter/add per plan |
 
 _Watches OUR own recommendations; alerts once per confirm/extend transition. Post-earnings watch re-surfaces beat-and-hold names. Prices ~15min delayed - take entry/stop from the live feed._

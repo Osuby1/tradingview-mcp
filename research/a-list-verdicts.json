@@ -29,8 +29,10 @@
   "readiness": 56,
   "plan_entry": 291.2,
   "plan_stop": 273.8853,
-  "verdict": "PENDING",
-  "reason": "",
-  "grade_at": "+1w and +1m vs plan entry"
+  "verdict": "PASS",
+  "reason": "Omar 8/7 midday: skipping - put sold separately, no rotation taken; door retired",
+  "grade_at": "+1w and +1m vs plan entry",
+  "verdict_at": "2026-08-07 12:0x CT",
+  "ref_at_verdict": 295.31
  }
 ]
