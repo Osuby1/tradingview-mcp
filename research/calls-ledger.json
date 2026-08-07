@@ -486,6 +486,19 @@
    },
    "alerts": "84.00 (strike/stall check) + 95.00 (profit-zone check) - wired this session",
    "risk_note": "2 contracts $1,970, inside the $2.5k per-position cap."
+  },
+  {
+   "id": "2026-08-07-INDI-squeeze-NOFILL",
+   "date": "2026-08-07",
+   "sym": "INDI",
+   "dir": "long-call-NOFILL",
+   "fill": "NO FILL (Omar worked 0.33-0.35 limit per the discipline; never paid the 0.40 offer). Same phenomenon as Markman's unfilled PLTR 6.60 the same day - the no-chase limit held and the order died at the bell.",
+   "thesis": "Squeeze candidate: SI 33.2% building, DTC 11.7 (week's longest fuse), rev +24% beat. Chain thin (OI 113, ~30% spread) - the spread IS why the limit discipline mattered.",
+   "grade": "Grade the no-fill at +1w/+1m vs the 0.35 limit and vs the 0.40 offer: if INDI runs, the discipline cost the trade; if it fades, it saved 25% instant markdown. Stays on tinder - Monday re-check, fresh card if anatomy holds.",
+   "ref_at_close": {
+    "stock": "3.9908",
+    "option_mid": 0.35
+   }
   }
  ]
 }
