@@ -1,0 +1,23 @@
+{
+ "ARRIVE BUY ZONE": {
+  "n": 41
+ },
+ "ARRIVE COILED": {
+  "n": 224
+ },
+ "ARRIVE COOLING": {
+  "n": 245
+ },
+ "ARRIVE FRESH IGNITION": {
+  "n": 89
+ },
+ "DROPOFF (left all tabs)": {
+  "n": 18
+ },
+ "FIRE coiled->ignition": {
+  "n": 28
+ },
+ "PROMO cooling->buyzone": {
+  "n": 25
+ }
+}

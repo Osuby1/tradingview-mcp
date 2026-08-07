@@ -13,6 +13,9 @@ Usage:
     python scripts/build_extended_universe.py 2026-07-22
     python scripts/build_extended_universe.py 2026-07-22 --no-coiled
 """
+# SYMBOL_OVERRIDES (8/7): bare tickers that resolve to the WRONG listing on TV.
+# NOV -> Novo Nordisk XETR line (dropped 8/6 as a DQ blocker). Force the US listing.
+SYMBOL_OVERRIDES = {"NOV": "NYSE:NOV"}
 import json
 import os
 import re
@@ -158,6 +161,8 @@ def main():
             from_lists |= v
     tracked_only = sorted((tracked_syms - from_lists) - NON_EQUITY)
 
+    # apply wrong-listing overrides (NOV -> NYSE:NOV etc.)
+    symbols = [SYMBOL_OVERRIDES.get(x, x) for x in symbols]
     out = {
         'date': date,
         'total': len(symbols),

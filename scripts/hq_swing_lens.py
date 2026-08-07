@@ -142,7 +142,8 @@ def main():
             out.append(f"\n*(showing 30 of {len(hq_only)} by ADX)*")
     out.append("")
 
-    path = "watchlists/hq-swing-lens-2026-07-22.md"
+    import datetime as _dt
+    path = f"watchlists/hq-swing-lens-{_dt.date.today().isoformat()}.md"
     with open(path, "w", encoding="utf-8") as fh:
         fh.write("\n".join(out) + "\n")
     print("\n".join(out[:40]))

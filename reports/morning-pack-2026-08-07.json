@@ -1,0 +1,218 @@
+{
+ "built_at": "2026-08-07T15:37:55",
+ "date": "2026-08-07",
+ "open_book": {
+  "note": "Omar's REAL open book as machine-readable state. KEEP IN SYNC when he reports fills/closes (also update the open-positions memory). Consumed nightly by scripts/ratchet_watch.py (EOD chain step 4) which maintains the 20% trailing-ratchet alerts per the 2026-07-25 exit rule: exit line = max(initial stop, 0.8 x highest close since entry). Remove a position from this list when it closes.",
+  "as_of": "2026-08-06",
+  "ratchet_pct": 0.2,
+  "positions": [
+   {
+    "sym": "ROBO",
+    "shares": 600,
+    "entry": 84.34,
+    "stop": 76.99,
+    "opened": "2026-08-05",
+    "high_close": 84.37,
+    "ratchet_alert": null,
+    "notes": "8/4 scan rank #8 readiness 75 (coil profile); Omar filled 600sh AT the plan limit (plan was 680) = grade A; risk $4,410; checkpoint 99.04 no-sell; robotics ETF = no earnings binary"
+   },
+   {
+    "sym": "AMG",
+    "shares": 131,
+    "entry": 381.49,
+    "stop": 344.11,
+    "opened": "2026-08-05",
+    "high_close": 375.62,
+    "ratchet_alert": null,
+    "notes": "8/4 universe scan rank #9, readiness 80 (best stock passer); filled 2.28 BELOW plan limit 383.77; checkpoint 463.09 (no-sell milestone); options chain dead (OI 4) - equity only; risk $4,897"
+   },
+   {
+    "sym": "MLI",
+    "shares": 900,
+    "entry": 63.53,
+    "stop": 60.35,
+    "opened": "2026-07-24",
+    "high_close": 69.46,
+    "ratchet_alert": null,
+    "notes": "bounce-flip entry (below 50d) - failed 50-day reclaim = thesis break"
+   }
+  ]
+ },
+ "a_list_state": {
+  "date": "2026-08-06",
+  "doors": {}
+ },
+ "staged_tickets": [],
+ "squeeze_parked": {
+  "date": "2026-08-07",
+  "parked": [
+   {
+    "sym": "HNST",
+    "chg": 40.8,
+    "rvol": 17.3,
+    "si": 9.4,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "ASPN",
+    "chg": 37.5,
+    "rvol": 13.3,
+    "si": 11.7,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "INSM",
+    "chg": 33.9,
+    "rvol": 4.2,
+    "si": 6.1,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "KRO",
+    "chg": 32.5,
+    "rvol": 6.7,
+    "si": 6.5,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "PAYS",
+    "chg": 29.3,
+    "rvol": 6.1,
+    "si": 3.5,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "AEVA",
+    "chg": 28.8,
+    "rvol": 5.7,
+    "si": 10.2,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "WPP",
+    "chg": 25.9,
+    "rvol": 6.5,
+    "si": 1.2,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "PAYC",
+    "chg": 23.6,
+    "rvol": 4.3,
+    "si": 8.9,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "VAC",
+    "chg": 22.6,
+    "rvol": 4.4,
+    "si": 11.3,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "PUBM",
+    "chg": 35.7,
+    "rvol": 3.0,
+    "si": 7.8,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "QNST",
+    "chg": 34.7,
+    "rvol": 2.9,
+    "si": 11.3,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "STLN",
+    "chg": 34.2,
+    "rvol": 2.5,
+    "si": 8.3,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "MTW",
+    "chg": 36.9,
+    "rvol": 2.7,
+    "si": 3.3,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   },
+   {
+    "sym": "TEAM",
+    "chg": 33.2,
+    "rvol": 2.5,
+    "si": 11.1,
+    "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"
+   }
+  ]
+ },
+ "final_hour_marks": {
+  "INDI": {
+   "close_mid": 4.015,
+   "last": "3.9908",
+   "day_high": "4.12",
+   "day_low": "3.76"
+  },
+  "INDI 260918C4.5": {
+   "close_mid": 0.35,
+   "last": "0.36",
+   "day_high": "0.36",
+   "day_low": "0.3"
+  },
+  "PLTR 261016C160": {
+   "close_mid": 22.55,
+   "last": "22.56",
+   "day_high": "22.62",
+   "day_low": "15"
+  },
+  "GDX 261016C84": {
+   "close_mid": 10.325,
+   "last": "10.6",
+   "day_high": "10.74",
+   "day_low": "9.7"
+  },
+  "SOUN 260918C10": {
+   "close_mid": 0.3,
+   "last": "0.3",
+   "day_high": "0.33",
+   "day_low": "0.19"
+  },
+  "HTZ 260918C3": {
+   "close_mid": 0.32,
+   "last": "0.3",
+   "day_high": "0.49",
+   "day_low": "0.27"
+  }
+ },
+ "funnel": null,
+ "kill_lines_and_modes": {
+  "GDX": {
+   "ce": "BUY",
+   "adx": 19.519
+  },
+  "HTZ": {
+   "ce": "BUY",
+   "adx": 48.2275
+  },
+  "MLI": {
+   "ce": "BUY",
+   "adx": 37.1936
+  },
+  "PLTR": {
+   "ce": "BUY",
+   "adx": 25.0819
+  },
+  "ROBO": {
+   "ce": "BUY",
+   "adx": 27.3465
+  },
+  "SOUN": {
+   "ce": "BUY",
+   "adx": 16.4075
+  }
+ },
+ "scan_counts": {
+  "scanned": 466,
+  "fresh": 111
+ }
+}
