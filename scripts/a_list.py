@@ -80,6 +80,96 @@ def latest_results():
     return files[-1], json.loads(files[-1].read_text(encoding="utf-8"))
 
 
+SCANNER_LOG = Path.home() / "Documents" / "Equities_Scanner" / "recommendations_log.csv"
+BUY_TABS = {"COILED", "FRESH IGNITION", "BUY ZONE"}
+VETO_TAB = "COOLING"
+
+
+def origination_candidates(date, held):
+    """Second feed into the A-List: the origination scanner (Omar 2026-08-06).
+
+    WHY: the selector saw only the Chandelier sweep, while the Winner-DNA third
+    cut found the origination COILED tab is the ONLY source with a credible edge
+    (+2.72% vs IWM at 21 sessions, CI [+0.66,+5.14], stable across both halves).
+    The one source with measured evidence in its favour could not produce a card.
+
+    COOLING VETO: Omar confirmed COOLING means "this already ran, wait for it to
+    settle" - a watch state, not a buy list - and it measures -5.52% vs IWM over
+    112 flags with the interval excluding zero. Any name sitting in COOLING on
+    this date is dropped NO MATTER WHICH TAB ALSO SURFACED IT. That also cleans up
+    BUY ZONE, which is 94% contained inside COOLING.
+
+    Ranking currency: readiness, recomputed on the SAME 0-100 scale the sweep
+    uses, so the merged pool is ranked like-for-like. Source is recorded on every
+    card but does NOT yet alter the ranking - per the rule freeze the detector
+    weighting stays in the shadow lane until September grades it.
+    """
+    if not SCANNER_LOG.exists():
+        print(f"[orig] {SCANNER_LOG} not found - sweep-only tonight")
+        return []
+    try:
+        import pandas as pd
+        df = pd.read_csv(SCANNER_LOG)
+    except Exception as e:
+        print(f"[orig] could not read scanner log: {e}")
+        return []
+    day = df[df["date"].astype(str).str[:10] == date]
+    if day.empty:
+        print(f"[orig] no scanner rows dated {date} - sweep-only tonight")
+        return []
+
+    vetoed = {str(r["ticker"]).strip().upper()
+              for _, r in day.iterrows()
+              if str(r.get("tab", "")).strip().upper() == VETO_TAB}
+    out, seen = [], set()
+    for _, r in day.iterrows():
+        sym = str(r["ticker"]).strip().upper()
+        tab = str(r.get("tab", "")).strip().upper()
+        if tab not in BUY_TABS or sym in held or sym in seen:
+            continue
+        if sym in vetoed:
+            print(f"[orig] VETO {sym}: also in COOLING today (watch state)")
+            continue
+        try:
+            entry, stop = float(r["price"]), float(r["stop"])
+        except (TypeError, ValueError):
+            print(f"[orig] skip {sym}: no usable price/stop"); continue
+        if not (entry > 0 and 0 < stop < entry):
+            print(f"[orig] skip {sym}: price/stop not sane ({entry}/{stop})"); continue
+        seen.add(sym)
+        out.append({"sym": sym, "source": f"orig-{tab}",
+                    "grade": str(r.get("grade", "")).strip(),
+                    "plan_entry": round(entry, 2), "plan_stop": round(stop, 2),
+                    # protocol minimum: a plan must offer 2x its risk
+                    "plan_target": round(entry + 2 * (entry - stop), 2),
+                    "real_close": entry})
+
+    if not out:
+        print("[orig] no buy-intent candidates survived the COOLING veto")
+        return []
+
+    sys.path.insert(0, str(REPO / "scripts"))
+    import options_analysis as _oa
+    import yfinance as _yf
+    kept = []
+    for c in out:
+        try:
+            c["readiness"] = _oa.readiness(c["sym"], "CALL")
+        except Exception as e:
+            print(f"[orig] readiness failed for {c['sym']}: {e} - EXCLUDED, not guessed")
+            continue
+        try:
+            h = _yf.Ticker(c["sym"]).history(period="1mo")
+            dv = float((h["Close"] * h["Volume"]).tail(20).mean())
+        except Exception:
+            dv = 0.0
+        c["gates"] = {"avg_dollar_vol": dv}
+        kept.append(c)
+    print(f"[orig] {len(kept)} buy-intent candidates scored "
+          f"({len(vetoed)} names vetoed by COOLING)")
+    return kept
+
+
 def main():
     dry = "--dry-run" in sys.argv
     src, res = latest_results()
@@ -88,13 +178,38 @@ def main():
 
     passers = [h for h in res.get("hits", [])
                if "passes every gate" in str(h.get("verdict", "")).lower()]
-    eligible = []
     for h in passers:
+        h.setdefault("source", "sweep-CE")
+
+    # SECOND FEED (Omar 2026-08-06): the origination scanner ranks into the same
+    # pool. Both detectors compete on one readiness scale; COOLING vetoes across
+    # every source, including the sweep.
+    orig = origination_candidates(date, held)
+    cooling_today = set()
+    if SCANNER_LOG.exists():
+        try:
+            import pandas as _pd
+            _d = _pd.read_csv(SCANNER_LOG)
+            _day = _d[_d["date"].astype(str).str[:10] == date]
+            cooling_today = {str(r["ticker"]).strip().upper()
+                             for _, r in _day.iterrows()
+                             if str(r.get("tab", "")).strip().upper() == VETO_TAB}
+        except Exception:
+            pass
+
+    pool, vetoed_sweep = passers + orig, []
+    eligible = []
+    for h in pool:
         r = (h.get("readiness") or {}).get("score") or 0
         dv = (h.get("gates") or {}).get("avg_dollar_vol") or 0
         if h["sym"] in held or r < MIN_READY or dv < MIN_DOLLAR_VOL:
             continue
+        if h["sym"] in cooling_today:      # veto applies to sweep names too
+            vetoed_sweep.append(h["sym"]); continue
         eligible.append(h)
+    if vetoed_sweep:
+        print(f"[veto] COOLING blocked {len(vetoed_sweep)} otherwise-eligible "
+              f"name(s): {', '.join(sorted(set(vetoed_sweep)))}")
     eligible.sort(key=lambda h: -h["readiness"]["score"])
     cards = eligible[:MAX_CARDS]
 
@@ -109,7 +224,11 @@ def main():
         # entry reference so Friday reviews can grade SELECTED vs REJECTED
         # vs random-3 vs a buy-score ordering - the selector must EARN its
         # ranking or be demoted to "any 3 passers with doors".
+        "sources_in_pool": {src: sum(1 for h in pool if h.get("source") == src)
+                            for src in sorted({h.get("source", "?") for h in pool})},
+        "cooling_vetoed": sorted(set(vetoed_sweep)),
         "eligible_cohort": [{"sym": h["sym"], "readiness": h["readiness"]["score"],
+                             "source": h.get("source"), "grade": h.get("grade", ""),
                              "ref_price": h.get("real_close"), "selected": h in cards}
                             for h in eligible],
         "passers_below_floor": [{"sym": h["sym"],
@@ -156,6 +275,7 @@ def main():
     for h in cards:
         if (date, h["sym"]) not in existing:
             verdicts.append({"date": date, "sym": h["sym"],
+                             "source": h.get("source"), "grade": h.get("grade", ""),
                              "readiness": h["readiness"]["score"],
                              "plan_entry": h["plan_entry"], "plan_stop": h["plan_stop"],
                              "verdict": "PENDING", "reason": "",
@@ -196,12 +316,20 @@ def main():
             print(f"[structure] MEASUREMENT FAILED for {sym}: {e}")
         return "UNKNOWN (band width could not be measured - do NOT call this a coil)"
 
-    print(f"A-LIST {date} (from {src.name}): "
-          + (", ".join(f"{h['sym']}(r{h['readiness']['score']})" for h in cards) or "EMPTY - no eligible passers"))
+    print(f"A-LIST {date} | pool {len(pool)} from "
+          + ", ".join(f"{k}:{v}" for k, v in funnel["sources_in_pool"].items()))
+    print("  cards: " + (", ".join(f"{h['sym']}(r{h['readiness']['score']},{h.get('source','?')})"
+                                   for h in cards) or "EMPTY - no eligible candidates"))
     for h in cards:
-        print(f"  {h['sym']:<6} entry {h['plan_entry']} stop {round(h['plan_stop'],2)} "
+        print(f"  {h['sym']:<6} [{h.get('source','?')}{('/'+h['grade']) if h.get('grade') else ''}] "
+              f"entry {h['plan_entry']} stop {round(h['plan_stop'],2)} "
               f"target {round(h['plan_target'],2)} | STRUCTURE: {structure(h)}")
-        print(f"         driver: {str(h['readiness'].get('driver',''))[:88]}")
+        _drv = str(h["readiness"].get("driver") or
+                   "; ".join(h["readiness"].get("notes") or []))
+        print(f"         driver: {_drv[:110]}")
+        if h.get("source", "").startswith("orig-") and h.get("real_close") and                 abs(h["plan_entry"] - h["real_close"]) < 0.005 * h["real_close"]:
+            print("         NOTE: scanner level = today's close, so this door is "
+                  "AT MARKET, not a pullback limit - it will ring immediately.")
     funnel["structure_tags"] = {h["sym"]: structure(h) for h in cards}
     if dry:
         print(f"[dry-run] would wire {sum(1 for a in actions if a['op']=='create')} door(s), "
