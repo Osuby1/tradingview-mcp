@@ -273,10 +273,17 @@ def main():
                          f"RVOL {r['rvol']:.1f} -> {act_of(r)}")
         lines.append("")
     lines.append("## All active picks (ranked by what's running)")
-    lines.append("| Ticker | Industry | Tier | Ret | Now | Reco px | Source | RVOL |")
+    # first-recommended dates (Omar 8/7: every runners table shows WHEN we first called it)
+    import json as _json
+    from pathlib import Path as _P
+    try:
+        _seen = _json.loads((_P(__file__).resolve().parent.parent / "watchlists" / "live-picks-first-seen.json").read_text())
+    except Exception:
+        _seen = {}
+    lines.append("| Ticker | First rec | Industry | Tier | Ret | Now | Reco px | Source | RVOL |")
     lines.append("|---|---|---|--:|--:|--:|---|--:|")
     for r in rows:
-        lines.append(f"| {r['tkr']} | {r['industry']} | {r['tier']} | {r['ret']*100:+.0f}% | "
+        lines.append(f"| {r['tkr']} | {_seen.get(r['tkr'],'?')} | {r['industry']} | {r['tier']} | {r['ret']*100:+.0f}% | "
                      f"{r['cur']:.2f} | {r['flag']:.2f} | {r['source']} | {r['rvol']:.1f} |")
     if pe_results:
         lines += ["", "## Post-earnings watch (beat-and-hold = clean entry)"]
@@ -299,12 +306,12 @@ def main():
     if not movers:
         bb.append("_No active picks currently confirming a run._")
     else:
-        bb.append("| Ticker | Industry | Reco px | Now | Gain | Read |")
+        bb.append("| Ticker | First rec | Industry | Reco px | Now | Gain | Read |")
         bb.append("|---|---|--:|--:|--:|---|")
         for r in movers:
             read = ("DON'T CHASE - pullback only" if r["tier"] == "EXTENDED"
                     else "confirming - enter/add per plan")
-            bb.append(f"| {r['tkr']} | {r['industry']} | {r['flag']:.2f} | {r['cur']:.2f} | "
+            bb.append(f"| {r['tkr']} | {_seen.get(r['tkr'],'?')} | {r['industry']} | {r['flag']:.2f} | {r['cur']:.2f} | "
                       f"{r['ret']*100:+.0f}% | {read} |")
     pe_hold = [pr for pr in pe_results if pr["status"] == "BEAT-AND-HOLD"]
     if pe_hold:
