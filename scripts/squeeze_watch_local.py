@@ -41,6 +41,58 @@ def scan(body):
     return r.json().get("data", [])
 
 
+STAGED = REPO / "watchlists" / "staged-tickets.json"
+
+
+def final_hour_check(now, state):
+    """2026-08-07 timing-study workflow: a blast/tinder alert STAGES a candidate;
+    the fill window is the FINAL HOUR (14:00-15:00 CT), where spike premium has
+    deflated and the day-1 health verdict is readable (study: final-hour entry
+    beat our fills AND day-2 opens on both SOUN and HTZ, ~35% chase tax).
+    The 14:15/14:35/14:55 patrols push the window-open reminder with a live
+    health read so Omar gets the GO/NO-GO on his phone even with no session.
+    Detection pushes remain IMMEDIATE - only the fill waits.
+    Staged entries: [{"sym","note","card_price"}] - written when a card is staged.
+    """
+    if not (14 <= now.hour < 15) or not STAGED.exists():
+        return []
+    out = []
+    try:
+        staged = json.loads(STAGED.read_text())
+        syms = [s["sym"] if ":" in s["sym"] else None for s in staged]
+        import requests as rq
+        cands = [f"{ex}:{s['sym']}" for s in staged for ex in ("NASDAQ", "NYSE", "AMEX")
+                 if ":" not in s["sym"]] + [x for x in syms if x]
+        r = rq.post("https://scanner.tradingview.com/america/scan",
+                    json={"symbols": {"tickers": cands, "query": {"types": []}},
+                          "columns": ["close", "low", "high", "volume",
+                                      "average_volume_10d_calc", "change"]},
+                    timeout=25, headers={"User-Agent": "Mozilla/5.0"})
+        live = {e["s"].split(":")[1]: e["d"] for e in r.json().get("data", [])
+                if e.get("d", [None])[0] is not None}
+        for s in staged:
+            sym = s["sym"].split(":")[-1]
+            key = f"FINALHOUR:{sym}"
+            if state["alerted"].get(key):
+                continue                      # one window push per name per day
+            v = live.get(sym)
+            if not v:
+                continue
+            close, lo, hi, vol, avol, chg = v
+            rng = (close - lo) / max(hi - lo, 1e-9)
+            healthy = (chg > 0) and (rng >= 0.5 or (avol and vol >= 2 * avol))
+            out.append({"sym": sym, "px": close,
+                        "msg": (f"FINAL-HOUR WINDOW {sym}: health "
+                                f"{'PASS' if healthy else 'FAIL'} (day {chg:+.1f}%, "
+                                f"{rng*100:.0f}% of range, vol {vol/max(avol,1):.1f}x). "
+                                f"{'Fill per card, mid-or-better.' if healthy else 'Shadow rule says STAND DOWN - day-1 health failing.'} "
+                                f"Card: {s.get('note','')[:60]}")})
+            state["alerted"][key] = close
+    except Exception as e:
+        print(f"[squeeze] final-hour check failed: {e}")
+    return out
+
+
 def main():
     test = "--test" in sys.argv
     now = dt.datetime.now()
@@ -149,6 +201,7 @@ def main():
         return 0
 
     hits = hits[:3] if not test else hits[:4]  # push cap per patrol
+    hits += final_hour_check(now, state)       # staged-ticket window reminders
     HITS.write_text(json.dumps(hits, indent=1))
     STATE.write_text(json.dumps(state, indent=1))
     print(f"[squeeze] {now:%H:%M} {len(hits)} push(es): {[h['sym'] for h in hits]}")
