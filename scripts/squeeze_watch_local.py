@@ -54,11 +54,19 @@ def final_hour_check(now, state):
     Detection pushes remain IMMEDIATE - only the fill waits.
     Staged entries: [{"sym","note","card_price"}] - written when a card is staged.
     """
-    if not (14 <= now.hour < 15) or not STAGED.exists():
+    if not (14 <= now.hour < 15):
         return []
     out = []
     try:
-        staged = json.loads(STAGED.read_text())
+        staged = json.loads(STAGED.read_text()) if STAGED.exists() else []
+        if CANDIDATES.exists():   # auto-staged candidates join the window pings
+            today = now.strftime("%Y-%m-%d")
+            for r in json.loads(CANDIDATES.read_text()):
+                if r.get("date") == today and not any(
+                        s.get("sym","").split(":")[-1] == r["sym"] for s in staged):
+                    ch = r.get("chain") or {}
+                    staged.append({"sym": r["sym"],
+                                   "note": f"{ch.get('contract','?')} ~{ch.get('mid','?')} - trade ONLY if 1:45 verification said READY"})
         syms = [s["sym"] if ":" in s["sym"] else None for s in staged]
         import requests as rq
         cands = [f"{ex}:{s['sym']}" for s in staged for ex in ("NASDAQ", "NYSE", "AMEX")
@@ -93,6 +101,79 @@ def final_hour_check(now, state):
     return out
 
 
+
+CANDIDATES = REPO / "watchlists" / "squeeze-candidates-today.json"
+
+
+def chain_gate(sym, spot):
+    """MECHANICAL chain gate (Omar 2026-08-07: alerts must be pre-validated).
+    Finds the playbook contract - Sep 18 monthly, ~25-50% OTM, OI>=100,
+    spread<=30%, ticket <=$450 for 2-10 contracts. Returns dict or None.
+    Wrapped fully in try: a chain-check failure must never kill a patrol -
+    it returns None and the name is labeled 'chain unverified'.
+    """
+    try:
+        sys.path.insert(0, str(REPO / "scripts"))
+        from ts_api import ts_quotes
+        if spot >= 100: grid = [5, 10, 2.5]
+        elif spot >= 25: grid = [2.5, 5, 1]
+        elif spot >= 10: grid = [1, 2.5, 0.5]
+        else: grid = [0.5, 1, 2.5]
+        strikes = set()
+        for inc in grid:
+            for mult in (1.15, 1.25, 1.35, 1.5):
+                k = round(round(spot * mult / inc) * inc, 2)
+                strikes.add(int(k) if k == int(k) else k)
+        osyms = [f"{sym} 260918C{k}" for k in sorted(strikes)]
+        q = ts_quotes(osyms)
+        best = None
+        for c, x in q.items():
+            if not isinstance(x, dict):
+                continue
+            b, a = float(x.get("Bid") or 0), float(x.get("Ask") or 0)
+            oi = int(x.get("DailyOpenInterest") or 0)
+            if b <= 0 or a <= 0 or oi < 100:
+                continue
+            mid = (a + b) / 2
+            spread = (a - b) / mid * 100
+            if spread > 30 or not (0.05 <= mid <= 2.5):
+                continue
+            n = max(2, min(10, int(350 / (mid * 100))))
+            cand = {"contract": c, "mid": round(mid, 2), "spread_pct": round(spread),
+                    "oi": oi, "qty": n, "ticket_usd": int(n * mid * 100)}
+            if best is None or oi > best["oi"]:
+                best = cand
+        return best
+    except Exception as e:
+        print(f"[squeeze] chain gate failed for {sym}: {e}")
+        return None
+
+
+def stage_candidate(sym, close, chg, si, chain, state, today):
+    """Append a fully-mechanically-gated candidate to the staged file and push
+    the repo so the 1:45 PM cloud verifier can read it. One stage per name/day."""
+    try:
+        rows = json.loads(CANDIDATES.read_text()) if CANDIDATES.exists() else []
+    except Exception:
+        rows = []
+    if any(r.get("sym") == sym and r.get("date") == today for r in rows):
+        return False
+    rows.append({"date": today, "sym": sym, "detected_px": close, "day_chg_pct": chg,
+                 "si_pct_float": si, "chain": chain,
+                 "status": "MECHANICAL PASS - catalyst verification pending",
+                 "fill_window": "14:00-15:00 CT, mid-or-better, health must pass"})
+    CANDIDATES.write_text(json.dumps(rows, indent=1))
+    try:
+        subprocess.run(["git", "add", str(CANDIDATES)], cwd=REPO, capture_output=True, timeout=30)
+        subprocess.run(["git", "commit", "-q", "-m",
+                        f"squeeze candidate staged: {sym} (mechanical gates passed)"],
+                       cwd=REPO, capture_output=True, timeout=30)
+        subprocess.run(["git", "push", "origin", "HEAD"], cwd=REPO, capture_output=True, timeout=60)
+    except Exception as e:
+        print(f"[squeeze] candidate git push failed (cloud verifier may not see it): {e}")
+    return True
+
+
 def main():
     test = "--test" in sys.argv
     now = dt.datetime.now()
@@ -123,12 +204,16 @@ def main():
         if last and close < last * REALERT_GAIN:
             continue
         si = tinder.get(name, {}).get("si_pct_float", "?")
-        hits.append({
-            "sym": row["s"],
-            "price": close,
-            "msg": (f"SQUEEZE WATCH: {name} +{chg:.1f}% RVOL {rvol:.1f}, SI {si}% float - "
-                    f"CAR-style ignition. LOOK only: $300 OTM-call playbook (squeeze-watch.json), "
-                    f"no chase, verify news+chain.")})
+        chain = chain_gate(name, close)
+        if chain:
+            stage_candidate(name, close, chg, si, chain, state, today)
+            msg = (f"SQUEEZE CANDIDATE {name}: +{chg:.1f}% RVOL {rvol:.1f}, SI {si}%, "
+                   f"chain PASS ({chain['contract'].split()[-1]} mid {chain['mid']} OI {chain['oi']}, "
+                   f"~${chain['ticket_usd']}). Catalyst check ~1:45, fill window 2-3 PM if READY+health. NOT a buy yet.")
+        else:
+            msg = (f"SQUEEZE WATCH {name}: +{chg:.1f}% RVOL {rvol:.1f}, SI {si}% - anatomy fires "
+                   f"but NO tradeable chain (or check failed). Watch only - no ticket exists.")
+        hits.append({"sym": row["s"], "price": close, "msg": msg})
         state["alerted"][name] = close
 
     # market-wide blast - with SHORT-INTEREST GATE (added 8/6 after five
@@ -173,12 +258,17 @@ def main():
                            "why_parked": "SI below the 15% squeeze bar - big mover, not a squeeze"})
             state["alerted"][name] = close  # don't re-evaluate all day
             continue
-        si_txt = f"SI {si}% float - PASSES the squeeze bar" if si is not None else "SI unknown - verify"
-        hits.append({
-            "sym": row["s"],
-            "price": close,
-            "msg": (f"SQUEEZE WATCH (blast): {name} +{chg:.1f}% RVOL {rvol:.1f}, {si_txt}. "
-                    f"$300 OTM-call playbook applies if the catalyst checks out - verify news+chain.")})
+        si_txt = f"SI {si}%" if si is not None else "SI unknown - verify"
+        chain = chain_gate(name, close)
+        if chain:
+            stage_candidate(name, close, chg, si, chain, state, today)
+            msg = (f"SQUEEZE CANDIDATE (blast) {name}: +{chg:.1f}% RVOL {rvol:.1f}, {si_txt}, "
+                   f"chain PASS ({chain['contract'].split()[-1]} mid {chain['mid']} OI {chain['oi']}, "
+                   f"~${chain['ticket_usd']}). Catalyst check ~1:45, fill window 2-3 PM if READY+health. NOT a buy yet.")
+        else:
+            msg = (f"SQUEEZE WATCH (blast) {name}: +{chg:.1f}% RVOL {rvol:.1f}, {si_txt} - "
+                   f"anatomy fires but NO tradeable chain. Watch only - no ticket exists.")
+        hits.append({"sym": row["s"], "price": close, "msg": msg})
         state["alerted"][name] = close
     if parked:
         pf = REPO / "watchlists" / "squeeze-parked.json"
