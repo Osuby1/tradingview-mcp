@@ -5,9 +5,11 @@
   "readiness": 67,
   "plan_entry": 112.1,
   "plan_stop": 99.7312,
-  "verdict": "PENDING",
-  "reason": "",
-  "grade_at": "+1w and +1m vs plan entry"
+  "verdict": "PASS",
+  "reason": "desk 8/7 post-protocol: 2:1 gate FAILS - 8.5% room to 122.20 overhead vs 13.4% structure stop (0.6:1); re-opens on a base >105 or high-vol break of 122",
+  "grade_at": "+1w and +1m vs plan entry",
+  "verdict_at": "2026-08-07 08:4x CT",
+  "ref_at_verdict": 112.67
  },
  {
   "date": "2026-08-06",
@@ -15,9 +17,11 @@
   "readiness": 61,
   "plan_entry": 88.23,
   "plan_stop": 83.1093,
-  "verdict": "PENDING",
-  "reason": "",
-  "grade_at": "+1w and +1m vs plan entry"
+  "verdict": "PASS",
+  "reason": "Omar 8/7 post-protocol: skipping - post-earnings fade 3 days, 2:1 conditional on fresh blue sky, stock risk budget already $12.2k/$10k",
+  "grade_at": "+1w and +1m vs plan entry",
+  "verdict_at": "2026-08-07 08:4x CT",
+  "ref_at_verdict": 87.58
  },
  {
   "date": "2026-08-06",
