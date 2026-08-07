@@ -292,3 +292,56 @@ Band-width percentile keeps being **printed** on every card (it is a measured
 fact) but is **not** described as predictive, and no card is framed as compelling
 because it is coiled. Re-run: 2026-09-04, at the true +1m horizon, alongside the
 squeeze study.
+
+---
+
+# RUNNER RECALL BACKTEST — 2026-08-06 PM (Omar: "would it have caught the
+# stocks on the Runners list?")
+`research/runner-backtest-eligibility.json`. Readiness recomputed AS OF each
+runner's recommendation date (history truncated at that date, no look-ahead),
+then run through the live A-List floors: readiness >= 55, $20M dollar volume,
+plus tonight's COOLING veto.
+
+**ANSWER: 2 of 20. The methodology that produced ROKU/ECO/PH would have caught
+HALO and PH, and missed the other eighteen.**
+
+| Outcome | n | Names |
+|---|--:|---|
+| PASS (carded-eligible) | **2** | HALO (r67), PH (r92) |
+| Blocked by the COOLING veto | **10** | IOVA, FTDR, ALNT, BLFS, DGII, MNPR, UHAL, CHE, RELY, PTGX |
+| Failed the readiness / liquidity floor | **8** | AMLX, STGW, EAT, VSXY, PRAX, SAIC, GDX, MLI |
+
+### The floor is set above the median runner
+**Runners' readiness at recommendation: median 48, mean 48, range 10-92. Our
+A-List floor is 55 — 14 of the 20 scored BELOW it.** Five were under 30: AMLX
+(r20, went +35%), DGII (r10, +15%), VSXY (r25, +20%), PRAX (r20, +11%), SAIC
+(r24, +9%). **AMLX at readiness 20 is the single most damaging observation for
+readiness as a ranker anywhere in this study.**
+
+### The COOLING veto is the other half of the loss
+It blocked ten runners, four of them with readiness 70 and ample liquidity —
+**PTGX, BLFS, CHE and IOVA** — i.e. genuinely card-worthy by every other test.
+Removing the veto lifts recall from 2/20 to 6/20.
+
+**This does NOT mean the veto is wrong.** The runners list is survivorship: it
+shows the Cooling names that ran and hides the ones that didn't, while the
+detector study measured all 112 and found -5.52% vs IWM with the interval
+excluding zero. Both facts are true. The unresolved question is whether Cooling
+is a wide-but-real distribution (fat tails: a few big runners paying for many
+laggards) or a genuinely negative one. THAT is now the highest-value open
+question in the whole programme, because it decides whether we keep or drop half
+our historical winners.
+
+### Also confirmed here
+The compression component scored ZERO for 12 of the 20 runners — a third
+independent confirmation that band width does not mark our winners.
+
+### What this does NOT prove
+Recall only. It says nothing about precision — how many NON-runners also cleared
+the floors. A selector that carded everything would score 20/20 here. Precision
+comes from the eligible-cohort grading in September.
+
+### Consequence
+The readiness floor of 55 and the COOLING veto are BOTH now open questions with
+measured costs attached, not settled parameters. Neither should be treated as
+validated until September grades selected-vs-rejected.

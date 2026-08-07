@@ -1,0 +1,202 @@
+[
+ {
+  "sym": "AMLX",
+  "date": "2026-07-01",
+  "tab": "FRESH IGNITION",
+  "ready": 20,
+  "dvol_m": 30.4,
+  "cooling": false,
+  "passes_floors": false,
+  "verdict": "below floor"
+ },
+ {
+  "sym": "STGW",
+  "date": "2026-07-02",
+  "tab": "FRESH IGNITION",
+  "ready": 54,
+  "dvol_m": 10.5,
+  "cooling": false,
+  "passes_floors": false,
+  "verdict": "below floor"
+ },
+ {
+  "sym": "EAT",
+  "date": "2026-07-07",
+  "tab": "COILED",
+  "ready": 46,
+  "dvol_m": 160.1,
+  "cooling": false,
+  "passes_floors": false,
+  "verdict": "below floor"
+ },
+ {
+  "sym": "FTDR",
+  "date": "2026-07-07",
+  "tab": "COOLING",
+  "ready": 52,
+  "dvol_m": 54.9,
+  "cooling": true,
+  "passes_floors": false,
+  "verdict": "VETO(cool)"
+ },
+ {
+  "sym": "DGII",
+  "date": "2026-07-07",
+  "tab": "COOLING",
+  "ready": 10,
+  "dvol_m": 30.1,
+  "cooling": true,
+  "passes_floors": false,
+  "verdict": "VETO(cool)"
+ },
+ {
+  "sym": "UHAL",
+  "date": "2026-07-07",
+  "tab": "COOLING",
+  "ready": 40,
+  "dvol_m": 18.5,
+  "cooling": true,
+  "passes_floors": false,
+  "verdict": "VETO(cool)"
+ },
+ {
+  "sym": "RELY",
+  "date": "2026-07-07",
+  "tab": "COOLING",
+  "ready": 52,
+  "dvol_m": 97.2,
+  "cooling": true,
+  "passes_floors": false,
+  "verdict": "VETO(cool)"
+ },
+ {
+  "sym": "PTGX",
+  "date": "2026-07-07",
+  "tab": "COOLING",
+  "ready": 70,
+  "dvol_m": 105.6,
+  "cooling": true,
+  "passes_floors": true,
+  "verdict": "VETO(cool)"
+ },
+ {
+  "sym": "VSXY",
+  "date": "2026-07-08",
+  "tab": "BUY ZONE",
+  "ready": 25,
+  "dvol_m": 159.2,
+  "cooling": false,
+  "passes_floors": false,
+  "verdict": "below floor"
+ },
+ {
+  "sym": "MNPR",
+  "date": "2026-07-10",
+  "tab": "COOLING",
+  "ready": 50,
+  "dvol_m": 15.6,
+  "cooling": true,
+  "passes_floors": false,
+  "verdict": "VETO(cool)"
+ },
+ {
+  "sym": "PRAX",
+  "date": "2026-07-10",
+  "tab": "COILED",
+  "ready": 20,
+  "dvol_m": 193.9,
+  "cooling": false,
+  "passes_floors": false,
+  "verdict": "below floor"
+ },
+ {
+  "sym": "SAIC",
+  "date": "2026-07-10",
+  "tab": "COILED",
+  "ready": 24,
+  "dvol_m": 68.3,
+  "cooling": false,
+  "passes_floors": false,
+  "verdict": "below floor"
+ },
+ {
+  "sym": "BLFS",
+  "date": "2026-07-16",
+  "tab": "COOLING",
+  "ready": 70,
+  "dvol_m": 30.2,
+  "cooling": true,
+  "passes_floors": true,
+  "verdict": "VETO(cool)"
+ },
+ {
+  "sym": "CHE",
+  "date": "2026-07-16",
+  "tab": "COOLING",
+  "ready": 70,
+  "dvol_m": 90.3,
+  "cooling": true,
+  "passes_floors": true,
+  "verdict": "VETO(cool)"
+ },
+ {
+  "sym": "IOVA",
+  "date": "2026-07-17",
+  "tab": "COOLING",
+  "ready": 70,
+  "dvol_m": 74.9,
+  "cooling": true,
+  "passes_floors": true,
+  "verdict": "VETO(cool)"
+ },
+ {
+  "sym": "GDX",
+  "date": "2026-07-21",
+  "tab": "sweep-CE(only)",
+  "ready": 40,
+  "dvol_m": 1536.2,
+  "cooling": false,
+  "passes_floors": false,
+  "verdict": "below floor"
+ },
+ {
+  "sym": "HALO",
+  "date": "2026-07-23",
+  "tab": "COILED",
+  "ready": 67,
+  "dvol_m": 141.9,
+  "cooling": false,
+  "passes_floors": true,
+  "verdict": "PASS"
+ },
+ {
+  "sym": "PH",
+  "date": "2026-07-24",
+  "tab": "COILED",
+  "ready": 92,
+  "dvol_m": 557.1,
+  "cooling": false,
+  "passes_floors": true,
+  "verdict": "PASS"
+ },
+ {
+  "sym": "MLI",
+  "date": "2026-07-29",
+  "tab": "COILED",
+  "ready": 42,
+  "dvol_m": 105.0,
+  "cooling": false,
+  "passes_floors": false,
+  "verdict": "below floor"
+ },
+ {
+  "sym": "ALNT",
+  "date": "2026-08-05",
+  "tab": "COOLING",
+  "ready": 44,
+  "dvol_m": 22.3,
+  "cooling": true,
+  "passes_floors": false,
+  "verdict": "VETO(cool)"
+ }
+]
