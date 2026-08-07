@@ -8,5 +8,10 @@
   "sym": "INDI",
   "card_price": 0.35,
   "note": "Sep 4.5C ~0.35 x10=~$350. READY (SI 33.2% building, DTC 11.7, rev+24% beat). NEEDS SLOT: cap full - only if IOVA kills at close or Omar overrides"
+ },
+ {
+  "sym": "GDX",
+  "card_price": 9.8,
+  "note": "Oct16 $84C ~9.80, 1-2 contracts - rotation trade #1 (miners IGNITING +21). Fill mid-or-better if GDX still green & sector holding. Exits: +50-100% prem / radar decel / 5 sessions / -50%"
  }
 ]
