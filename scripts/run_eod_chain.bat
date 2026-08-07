@@ -147,6 +147,8 @@ if exist "%RAWSWEEP%" (
 )
 python scripts\track_record.py %TODAY% >> "%LOG%" 2>&1                 || echo WARNING: track_record failed >> "%LOG%"
 python scripts\build_morning_pack.py %TODAY% >> "%LOG%" 2>&1           || echo WARNING: morning pack failed >> "%LOG%"
+python scripts\gate_recheck.py >> "%LOG%" 2>&1                         || echo WARNING: gate recheck failed >> "%LOG%"
+python scripts\rebreak_detector.py >> "%LOG%" 2>&1                     || echo WARNING: rebreak detector failed >> "%LOG%"
 python scripts\dump_call_prices.py %TODAY% >> "%LOG%" 2>&1             || echo WARNING: dump_call_prices failed >> "%LOG%"
 python scripts\outcome_tracker.py %TODAY% >> "%LOG%" 2>&1              || echo WARNING: outcome_tracker failed >> "%LOG%"
 rem gate_outcomes: forward-grades the scan's OWN cull (passed vs blocked). Added

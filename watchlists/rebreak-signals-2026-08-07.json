@@ -1,0 +1,26 @@
+[
+ {
+  "sym": "AUGO",
+  "gap_day": "2026-08-05",
+  "gap_pct": 13.8,
+  "gap_high": 66.14,
+  "close": 74.13,
+  "base_days": 1
+ },
+ {
+  "sym": "PLTR",
+  "gap_day": "2026-08-04",
+  "gap_pct": 29.5,
+  "gap_high": 164.52,
+  "close": 172.01,
+  "base_days": 2
+ },
+ {
+  "sym": "ZBRA",
+  "gap_day": "2026-08-04",
+  "gap_pct": 26.5,
+  "gap_high": 369.79,
+  "close": 376.49,
+  "base_days": 2
+ }
+]
