@@ -241,6 +241,52 @@ belongs in the Friday review at the top, not in a footnote.
   the clearest demonstration in the study of why raw returns mislead. Our flags
   went up; the market went up more.
 
+---
+
+# CORRECTION + THE ACTUAL DEFECT — 2026-08-06 PM (Omar: "the cooling tab is
+# 'this already ran, wait for it to settle'... it is not a buy list")
+
+**My third-cut headline was WRONG and is withdrawn.** I pooled a watch state in
+with buy recommendations and called the result "our flags."
+
+### Recomputed, excess over IWM, buy-intent sources only
+| Cut | +5 | +10 | +21 |
+|---|---|---|---|
+| BUY-INTENT only (COILED, FRESH IGNITION, BUY ZONE, sweep-CE) | -0.74% (n=498) | -0.74% (n=364) | **+0.98% (n=74), CI [-1.38, +3.55]** |
+| ...also excluding BUY ZONE | -0.59% | -0.51% | **+1.64% (n=67), CI [-0.72, +4.06]** |
+| COOLING (watch state) | -1.57% | -3.09% | **-5.52% (n=112), CI excludes 0** |
+| what I wrongly reported as "our flags" | -0.99% | -1.55% | -2.94% |
+
+**Correct statement: at one month our buy-intent flags are roughly INDEX-MATCHING —
+the interval spans zero, so they are not proven better or worse than the index.**
+Not "they failed to beat it." The -2.94% was manufactured by including a list whose
+entire purpose is to identify names that will lag next.
+
+**COOLING is fully exonerated and PROMOTED to a validated negative signal:** -5.52%
+vs IWM at 21 sessions, 31% beat rate, interval excludes zero, negative in both
+halves. It does exactly what Omar says it does. It belongs in the Winner-DNA score
+as a VETO input, not as a candidate source.
+
+### THE DEFECT THIS EXPOSED — the watch state is being served to Omar as picks
+- Across all live-picks files, **`origination:Cooling` is the LARGEST single source:
+  1,952 entries.** 180 of the 403 tickers ever surfaced as a live pick (45%) came
+  from it. Today: 129 of 347 active picks.
+- **6 of the 20 runners in tonight's EOD brief came from COOLING** — IOVA, EAT,
+  ALNT, BLFS, MNPR, CHE — every one printed as "confirming - enter/add per plan."
+- The 9:00 and 11:45 phone pushes carry the same mapping: the radar's CONFIRMING
+  tag is rendered as "enter/add per plan". CONFIRMING describes PRICE ACTION (the
+  name is still running); it says nothing about buy intent. Fusing the two turns
+  "this already ran, wait" into "buy it."
+- The cost is now measured, not theoretical: **5.5 points of underperformance
+  versus small caps over the following month.**
+
+### Proposed fix (needs Omar's go — it changes what the radar says, not just how it computes)
+1. live-picks carries the source tab on every row and NEVER renders a
+   COOLING-sourced name as "enter/add per plan" — it reads "already ran, wait to
+   settle" per the tab's own definition.
+2. The runners table in all three briefs marks COOLING-sourced rows explicitly.
+3. Winner-DNA score: COILED tab positive weight, COOLING tab a veto.
+
 ### Standing consequence until the September cut
 Band-width percentile keeps being **printed** on every card (it is a measured
 fact) but is **not** described as predictive, and no card is framed as compelling
