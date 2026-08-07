@@ -1,0 +1,142 @@
+{
+ "date": "2026-08-07",
+ "scanned": 466,
+ "fresh": 111,
+ "full_passers": 17,
+ "eligible": 8,
+ "a_list": [
+  "HNGE",
+  "SPXL",
+  "AMGN"
+ ],
+ "doors_wired": 3,
+ "note": "selector: ready>=45, $vol>=20M, not-held, top 3 by readiness",
+ "sources_in_pool": {
+  "og-chandelier": 17,
+  "orig-BUY ZONE": 3,
+  "orig-COILED": 5,
+  "orig-FRESH IGNITION": 7
+ },
+ "cooling_vetoed": [],
+ "eligible_cohort": [
+  {
+   "sym": "HNGE",
+   "readiness": 70,
+   "source": "orig-BUY ZONE",
+   "grade": "B",
+   "ref_price": 89.33,
+   "selected": true
+  },
+  {
+   "sym": "SPXL",
+   "readiness": 62,
+   "source": "og-chandelier",
+   "grade": "",
+   "ref_price": 296.33,
+   "selected": true
+  },
+  {
+   "sym": "AMGN",
+   "readiness": 62,
+   "source": "orig-FRESH IGNITION",
+   "grade": "B",
+   "ref_price": 410.94,
+   "selected": true
+  },
+  {
+   "sym": "CRWD",
+   "readiness": 60,
+   "source": "og-chandelier",
+   "grade": "",
+   "ref_price": 214.42,
+   "selected": false
+  },
+  {
+   "sym": "PANW",
+   "readiness": 54,
+   "source": "og-chandelier",
+   "grade": "",
+   "ref_price": 363.86,
+   "selected": false
+  },
+  {
+   "sym": "HSIC",
+   "readiness": 51,
+   "source": "og-chandelier",
+   "grade": "",
+   "ref_price": 88.13,
+   "selected": false
+  },
+  {
+   "sym": "NOVT",
+   "readiness": 50,
+   "source": "orig-FRESH IGNITION",
+   "grade": "B",
+   "ref_price": 166.37,
+   "selected": false
+  },
+  {
+   "sym": "VSEC",
+   "readiness": 45,
+   "source": "orig-COILED",
+   "grade": "B",
+   "ref_price": 218.18,
+   "selected": false
+  }
+ ],
+ "passers_below_floor": [
+  {
+   "sym": "AAL",
+   "readiness": 25
+  },
+  {
+   "sym": "BA",
+   "readiness": 32
+  },
+  {
+   "sym": "CSCO",
+   "readiness": 42
+  },
+  {
+   "sym": "EME",
+   "readiness": 22
+  },
+  {
+   "sym": "FTNT",
+   "readiness": 18
+  },
+  {
+   "sym": "OKTA",
+   "readiness": 25
+  },
+  {
+   "sym": "QQQ",
+   "readiness": 40
+  },
+  {
+   "sym": "SPHR",
+   "readiness": 42
+  },
+  {
+   "sym": "TSHA",
+   "readiness": 58
+  },
+  {
+   "sym": "UAL",
+   "readiness": 34
+  },
+  {
+   "sym": "WST",
+   "readiness": 38
+  },
+  {
+   "sym": "XLK",
+   "readiness": 40
+  }
+ ],
+ "structure_tags": {
+  "HNGE": "NEITHER (band width 32th pctile - middling)",
+  "SPXL": "POST-BREAKOUT (band width 63th pctile - expansion already underway)",
+  "AMGN": "POST-BREAKOUT (band width 98th pctile - expansion already underway)"
+ }
+}

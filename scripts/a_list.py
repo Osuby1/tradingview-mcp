@@ -152,8 +152,23 @@ def origination_candidates(date, held):
     sys.path.insert(0, str(REPO / "scripts"))
     import options_analysis as _oa
     import yfinance as _yf
+    # LIVE closes from the TV scanner (8/7 fix: yfinance's daily bar LAGS at the
+    # 3:50 run - HNGE's "latest close" was YESTERDAY's 80.08 vs a real 89.33
+    # close. Entry basis must be the real-time scanner close, never a lagging bar.)
+    try:
+        from squeeze_sweep import tv_fundamentals
+        _live = tv_fundamentals([c["sym"] for c in out])
+    except Exception:
+        _live = {}
     kept = []
     for c in out:
+        lv = (_live.get(c["sym"]) or {}).get("close")
+        if lv and abs(lv - c["plan_entry"]) / c["plan_entry"] > 0.002:
+            d0 = c["plan_entry"] - c["plan_stop"]
+            c["plan_entry"] = round(float(lv), 2)
+            c["plan_stop"] = round(c["plan_entry"] - d0, 2)   # keep stop distance
+            c["plan_target"] = round(c["plan_entry"] + 2 * d0, 2)
+            c["real_close"] = c["plan_entry"]
         try:
             c["readiness"] = _oa.readiness(c["sym"], "CALL")
         except Exception as e:

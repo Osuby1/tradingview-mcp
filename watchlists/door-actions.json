@@ -1,26 +1,26 @@
 [
  {
   "op": "create",
-  "sym": "NASDAQ:RYTM",
-  "level": 112.1,
-  "msg": "A-LIST DOOR: RYTM at plan entry 112.1 (readiness 67). Plan: ~403sh, stop 99.73 ($4984 risk), checkpoint 136.84. VERIFY earnings + gate-recheck + sizing per protocol, then ACT or PASS - verdict gets logged either way.",
-  "tag": "RYTM",
-  "alert_id": 5315448693
- },
- {
-  "op": "create",
-  "sym": "NASDAQ:HSIC",
-  "level": 88.23,
-  "msg": "A-LIST DOOR: HSIC at plan entry 88.23 (readiness 61). Plan: ~976sh, stop 83.11 ($4997 risk), checkpoint 98.47. VERIFY earnings + gate-recheck + sizing per protocol, then ACT or PASS - verdict gets logged either way.",
-  "tag": "HSIC",
-  "alert_id": 5315448713
+  "sym": "NYSE:HNGE",
+  "level": 89.33,
+  "msg": "A-LIST DOOR: HNGE at plan entry 89.33 (readiness 70). Plan: ~512sh, stop 79.57 ($4997 risk), checkpoint 108.85. VERIFY earnings + gate-recheck + sizing per protocol, then ACT or PASS - verdict gets logged either way.",
+  "tag": "HNGE",
+  "alert_id": 5323471140
  },
  {
   "op": "create",
   "sym": "AMEX:SPXL",
-  "level": 291.2,
-  "msg": "A-LIST DOOR: SPXL at plan entry 291.2 (readiness 56). Plan: ~288sh, stop 273.89 ($4986 risk), checkpoint 325.83. VERIFY earnings + gate-recheck + sizing per protocol, then ACT or PASS - verdict gets logged either way.",
+  "level": 296.33,
+  "msg": "A-LIST DOOR: SPXL at plan entry 296.33 (readiness 62). Plan: ~337sh, stop 282.17 ($4772 risk), checkpoint 324.65. VERIFY earnings + gate-recheck + sizing per protocol, then ACT or PASS - verdict gets logged either way.",
   "tag": "SPXL",
-  "alert_id": 5315448732
+  "alert_id": 5323471152
+ },
+ {
+  "op": "create",
+  "sym": "NASDAQ:AMGN",
+  "level": 410.94,
+  "msg": "A-LIST DOOR: AMGN at plan entry 410.94 (readiness 62). Plan: ~211sh, stop 387.28 ($4992 risk), checkpoint 458.26. VERIFY earnings + gate-recheck + sizing per protocol, then ACT or PASS - verdict gets logged either way.",
+  "tag": "AMGN",
+  "alert_id": 5323471165
  }
 ]

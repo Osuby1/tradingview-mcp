@@ -34,5 +34,41 @@
   "grade_at": "+1w and +1m vs plan entry",
   "verdict_at": "2026-08-07 12:0x CT",
   "ref_at_verdict": 295.31
+ },
+ {
+  "date": "2026-08-07",
+  "sym": "HNGE",
+  "source": "orig-BUY ZONE",
+  "grade": "B",
+  "readiness": 70,
+  "plan_entry": 80.08,
+  "plan_stop": 70.32,
+  "verdict": "PENDING",
+  "reason": "",
+  "grade_at": "+1w and +1m vs plan entry"
+ },
+ {
+  "date": "2026-08-07",
+  "sym": "SPXL",
+  "source": "og-chandelier",
+  "grade": "",
+  "readiness": 62,
+  "plan_entry": 296.33,
+  "plan_stop": 282.1675,
+  "verdict": "PENDING",
+  "reason": "",
+  "grade_at": "+1w and +1m vs plan entry"
+ },
+ {
+  "date": "2026-08-07",
+  "sym": "AMGN",
+  "source": "orig-FRESH IGNITION",
+  "grade": "B",
+  "readiness": 62,
+  "plan_entry": 404.85,
+  "plan_stop": 381.19,
+  "verdict": "PENDING",
+  "reason": "",
+  "grade_at": "+1w and +1m vs plan entry"
  }
 ]
