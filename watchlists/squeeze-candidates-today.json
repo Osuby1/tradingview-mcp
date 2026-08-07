@@ -1,0 +1,19 @@
+[
+ {
+  "date": "2026-08-07",
+  "sym": "INDI",
+  "detected_px": 3.985,
+  "day_chg_pct": 16.180758017492703,
+  "si_pct_float": 33.2,
+  "chain": {
+   "contract": "INDI 260918C4.5",
+   "mid": 0.35,
+   "spread_pct": 29,
+   "oi": 113,
+   "qty": 10,
+   "ticket_usd": 350
+  },
+  "status": "MECHANICAL PASS - catalyst verification pending",
+  "fill_window": "14:00-15:00 CT, mid-or-better, health must pass"
+ }
+]
