@@ -139,6 +139,7 @@ rem research\rest-continuation-preregistration.md. Measurement only - no trading
 rem power. Runs AFTER readiness_batch (needs the readiness stamp). NON-FATAL.
 python scripts\rest_continuation_tracker.py %TODAY% >> "%LOG%" 2>&1    || echo WARNING: rest_continuation_tracker failed - cohort not tagged tonight >> "%LOG%"
 python scripts\rotation_radar.py >> "%LOG%" 2>&1                       || echo WARNING: rotation_radar failed >> "%LOG%"
+python scripts\rotation_drilldown.py >> "%LOG%" 2>&1                   || echo WARNING: rotation drilldown failed >> "%LOG%"
 python scripts\ignition_sweep.py >> "%LOG%" 2>&1                       || echo WARNING: ignition_sweep failed >> "%LOG%"
 if exist "%RAWSWEEP%" (
     python scripts\hq_swing_lens.py "%RAWSWEEP%" >> "%LOG%" 2>&1       || echo WARNING: hq_swing_lens failed >> "%LOG%"

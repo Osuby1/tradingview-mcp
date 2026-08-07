@@ -106,9 +106,14 @@ def main():
         _pf = os.path.join(REPO, "watchlists", "radar-prev-states.json")
         if os.path.exists(_pf):
             _prev_states = _json.load(open(_pf))
-        _due = [{"group": r["label"], "ticker": r["tk"], "accel": round(r["accel"], 1)}
-                for r in rows if r.get("state") == "IGNITING"
-                and _prev_states.get(r["tk"]) != "IGNITING"]
+        _due = ([{"group": r["label"], "ticker": r["tk"], "accel": round(r["accel"], 1),
+                  "direction": "CALL"}
+                 for r in rows if r.get("state") == "IGNITING"
+                 and _prev_states.get(r["tk"]) != "IGNITING"]
+                + [{"group": r["label"], "ticker": r["tk"], "accel": round(r["accel"], 1),
+                    "direction": "PUT"}
+                   for r in rows if r.get("state") == "ROLLING"
+                   and _prev_states.get(r["tk"]) != "ROLLING"])
         if _due:
             _json.dump(_due, open(os.path.join(REPO, "watchlists", "radar-cards-due.json"), "w"), indent=1)
             print("[radar] CARDS DUE (protocol before next brief): "

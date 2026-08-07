@@ -1,0 +1,53 @@
+[
+ {
+  "date": "2026-08-07",
+  "group": "AMEX:GDX",
+  "vehicle": "AMEX:GDX",
+  "direction": "CALL",
+  "accel": null,
+  "candidates": [
+   {
+    "sym": "NEM",
+    "close": 112.98,
+    "day": 7.2,
+    "week": 19.6,
+    "adx": 16,
+    "di_margin": 28.7,
+    "dvol_m": 798,
+    "mcap_b": 119.0,
+    "next_earn": 1792670400,
+    "direction_ok": true,
+    "liquid": true
+   }
+  ],
+  "all_ranked": [
+   {
+    "sym": "NEM",
+    "close": 112.98,
+    "day": 7.2,
+    "week": 19.6,
+    "adx": 16,
+    "di_margin": 28.7,
+    "dvol_m": 798,
+    "mcap_b": 119.0,
+    "next_earn": 1792670400,
+    "direction_ok": true,
+    "liquid": true
+   },
+   {
+    "sym": "GOLD",
+    "close": 43.51,
+    "day": 3.5,
+    "week": 4.5,
+    "adx": 15,
+    "di_margin": 7.5,
+    "dvol_m": 17,
+    "mcap_b": 1.3,
+    "next_earn": 1787832000,
+    "direction_ok": true,
+    "liquid": false
+   }
+  ],
+  "status": "PROTOCOL PENDING - card in next brief is MANDATORY"
+ }
+]
