@@ -26,7 +26,7 @@ passed 1-3 and failed 4. The two systems disagree in BOTH directions, so neither
 substitutes for the other.
 """
 
-ADX_MIN = 20.0
+ADX_MIN = 27.0  # raised from 20 (Omar decision 8/7): winner-traits scan found runners at ADX ~36 vs duds ~29; 20 was set below BOTH populations. PLTR counterexample logged; gate re-checker (also built 8/7) surfaces names that later clear 27.
 DEEP_FAIL_PCT = -10.0
 ADV_MULTIPLE = 10.0          # position must be <= ADV / this
 DEFAULT_POSITION = 85_000.0  # sizing assumption for the liquidity test

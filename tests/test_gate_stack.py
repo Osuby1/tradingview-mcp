@@ -31,7 +31,8 @@ def row(**over):
     the 85k default.
     """
     base = {"sym": "TEST", "last": 100.0, "zlsma": 90.0, "regime": "PASS",
-            "pct_vs_200": 15.0, "adx": 25.0, "plus_di": 25.0, "minus_di": 10.0,
+            # adx fixture 25 -> 30 with the 8/7 ADX_MIN=27 decision
+            "pct_vs_200": 15.0, "adx": 30.0, "plus_di": 25.0, "minus_di": 10.0,
             "avg_dollar_vol": 100_000_000.0, "atr": 5.0, "long_stop": 92.0}
     base.update(over)
     return base
@@ -170,7 +171,7 @@ class TestFunnel(unittest.TestCase):
                 row(sym="NOADX", adx=10.0)]
         stages, survivors = gs.funnel(rows)
         self.assertEqual(stages[0], ("fresh signals", 3))
-        self.assertEqual(dict(stages)["ADX >= 20"], 2)
+        self.assertEqual(dict(stages)[f"ADX >= {gs.ADX_MIN:.0f}"], 2)
         self.assertEqual([r["sym"] for r in survivors], ["GOOD"])
 
     def test_funnel_drops_repair_names_that_evaluate_only_starter_sizes(self):

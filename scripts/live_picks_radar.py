@@ -259,6 +259,8 @@ def main():
     pe_results, pe_fires = post_earnings_check(state)
 
     def act_of(r):
+        if "cooling" in str(r.get("source", "")).lower():
+            return "Cooling tab = already ran, WAIT to settle (measured -3.2% vs IWM/10d) - NOT a buy"
         return ("do NOT chase - wait for a pullback" if r["tier"] == "EXTENDED"
                 else "confirming its run - enter/add per plan")
 
@@ -309,8 +311,11 @@ def main():
         bb.append("| Ticker | First rec | Industry | Reco px | Now | Gain | Read |")
         bb.append("|---|---|--:|--:|--:|---|")
         for r in movers:
-            read = ("DON'T CHASE - pullback only" if r["tier"] == "EXTENDED"
-                    else "confirming - enter/add per plan")
+            if "cooling" in str(r.get("source", "")).lower():
+                read = "COOLING (watch state) - already ran, wait to settle - NOT a buy"
+            else:
+                read = ("DON'T CHASE - pullback only" if r["tier"] == "EXTENDED"
+                        else "confirming - enter/add per plan")
             bb.append(f"| {r['tkr']} | {_seen.get(r['tkr'],'?')} | {r['industry']} | {r['flag']:.2f} | {r['cur']:.2f} | "
                       f"{r['ret']*100:+.0f}% | {read} |")
     pe_hold = [pr for pr in pe_results if pr["status"] == "BEAT-AND-HOLD"]

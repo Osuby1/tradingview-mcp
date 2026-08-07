@@ -18,7 +18,7 @@ Weights were chosen for one reason each, stated in RANK_RATIONALE below, so they
 can be criticised individually rather than defended as a black box.
 """
 
-ADX_MIN = 20.0
+ADX_MIN = 27.0  # raised from 20 (Omar decision 8/7): winner-traits scan found runners at ADX ~36 vs duds ~29; 20 was set below BOTH populations. PLTR counterexample logged; gate re-checker (also built 8/7) surfaces names that later clear 27.
 
 RANK_RATIONALE = {
     "risk_quality": "How tight the stop is in ATR terms. Dominant weight because "
