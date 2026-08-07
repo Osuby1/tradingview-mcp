@@ -345,3 +345,66 @@ comes from the eligible-cohort grading in September.
 The readiness floor of 55 and the COOLING veto are BOTH now open questions with
 measured costs attached, not settled parameters. Neither should be treated as
 validated until September grades selected-vs-rejected.
+
+---
+
+# COOLING DISTRIBUTION TEST — 2026-08-06 PM (`scripts/cooling_distribution.py`)
+Omar: "test the cooling distribution across all 112 flags."
+
+**VERDICT: COOLING is BROADLY NEGATIVE, not fat-tailed-positive. The veto stands.
+But the test surfaced a bigger problem than COOLING — the scanner's STOPS.**
+
+### Test 1+2 — full distribution, buy and hold 21 sessions
+| | COOLING (n=112) | BUY-INTENT control (n=67) |
+|---|---|---|
+| mean | **-5.41%** | +1.03% |
+| median | -3.81% | +1.03% |
+| win rate | 31% | 58% |
+| deciles | -73 -24 -19 -11 -8 -4 -2 +0 +6 +13 | -32 -13 -6 -3 -0 +1 +2 +4 +7 +14 |
+| >= +15% | 9 (8%) | 4 (6%) |
+| <= -15% | **25 (22%)** | 3 (4%) |
+| best / worst | +56.6% / -73.4% | +41.4% / -32.0% |
+
+**Only 2 of COOLING's 10 deciles are positive**, and there are nearly three times
+as many -15% disasters (25) as +15% winners (9).
+
+**Tail arithmetic settles it:** COOLING's top decile contributes +2.49 points of
+the mean while the other 90% contribute **-7.91** points. The tail is real but
+nowhere near large enough to fund the body. Strip the top decile and the mean is
+-8.86%.
+
+**This also EXPLAINS the runners-list tension.** 8% of COOLING flags really do
+reach +15%, and the best returned +56.6% — the ten COOLING names on the runners
+list are that visible 8%. They exist; buying all of them still loses money. The
+runners list was survivorship, exactly as suspected.
+
+### Test 3 — the way we actually trade (scanner entry, SCANNER'S OWN STOP, 21-day cap)
+| | COOLING | BUY-INTENT |
+|---|---|---|
+| buy & hold mean | -5.41% | **+1.03%** |
+| **with the scanner's stop** | -4.21% | **-0.78%** |
+| stop-out rate | **84%** (94 of 112) | 36% (24 of 67) |
+| win rate after stops | 15% | 39% |
+
+**THE BIGGER FINDING: the scanner's stops destroy the buy-intent edge.** They turn
+a +1.03% mean into -0.78% — the only positive expectancy in the whole study,
+erased by its own risk management. The stops are too tight to survive normal
+noise over a 21-session hold: one in three buy-intent trades is stopped out, and
+in COOLING names five in six are.
+
+**IMMEDIATE CONSEQUENCE — tonight's cards.** The dual-feed A-List I wired hours
+ago takes entry AND STOP straight from the scanner. ROKU's stop is 2.2% away.
+Those cards inherit the exact stops measured here to destroy expectancy. Before
+any origination card is actionable its stop must be replaced with a structure or
+ATR-based level per our own execution protocol, sized off that instead.
+
+### Third confirmation of a standing theme
+The buy-intent group's entire +1.03% is its top decile too — without it, -1.45%.
+Every edge we have is tail-carried, which is exactly what the exit-redesign study
+concluded for stocks. Anything that amputates tails (a tight stop, a fixed target)
+is more expensive than it looks.
+
+### Limits
+Exits modelled AT the stop price (optimistic - gaps are not simulated); 21-session
+cap; n=67 on the buy-intent control because fewer flags have a full month; one
+regime.
