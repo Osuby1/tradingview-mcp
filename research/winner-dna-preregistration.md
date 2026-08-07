@@ -183,6 +183,64 @@ sturdiest of them and the one most worth acting on early.
 4. **COOLING tab flagged for review** at -4.24% over 112 flags — the largest
    negative cell in the study.
 
+---
+
+# THIRD CUT — DETECTOR SOURCE AS LEAD VARIABLE — 2026-08-06 PM
+`scripts/winner_dna_detector.py`. Everything market-adjusted (raw returns confound
+the detector with WHEN it fired), bootstrap 95% intervals on every cell, split-half
+stability, and source overlap reported.
+
+**VERDICT: detector source is a REAL variable — the first thing in this study to
+produce an interval that excludes zero. Two findings survive every control, and
+one of them is about our whole operation, not a tab.**
+
+### +21 sessions, excess over IWM (the right benchmark — our flags are not S&P names)
+| Source | n | mean vs IWM | 95% CI | beat IWM | split-half |
+|---|--:|--:|---|--:|---|
+| **orig-COILED** | 36 | **+2.72%** | **[+0.66, +5.14]** | 56% | consistent (+1.32 / +0.21) |
+| orig-FRESH IGNITION | 31 | +0.38% | [-4.06, +5.22] | 48% | too few |
+| orig-BUY ZONE | 7 | -5.34% | [-15.92, +5.68] | 43% | too few |
+| **orig-COOLING** | 112 | **-5.52%** | **[-8.63, -2.32]** | 31% | consistent (-6.66 / -9.63) |
+| **ALL FLAGS POOLED** | 186 | **-2.94%** | — | **39%** | — |
+
+Versus SPY the same cells read COILED +1.04%, COOLING **-7.22%** [-10.43, -4.03],
+pooled **-4.75%** with 34% beating.
+
+### The three things that survive
+1. **The COILED tab has a credible edge: +2.72% over small caps in a month, the
+   interval excludes zero, 56% beat rate, and the sign holds in both halves of the
+   sample.** Note the irony: the tab is named for compression and the previous cut
+   proved its edge is NOT compression. We have found a source that works and we do
+   not know why. That is the next question.
+2. **The COOLING tab is credibly harmful: -5.52% vs IWM, -7.22% vs SPY, over 112
+   flags, negative in both halves, only 31% beating.** The largest and sturdiest
+   negative cell anywhere in this study. CAVEAT BEFORE ACTING: confirm with Omar
+   what that tab is FOR — "cooling" may be a watch state, not a buy list, in which
+   case this is a labelling problem, not a broken detector. It is also 94%
+   overlapped with BUY ZONE, so those two are nearly the same population.
+3. **Grade A underperformed grade B: -7.17% vs -4.23% excess over SPY, both
+   credibly negative.** The scanner's own conviction ranking is inverted over this
+   sample. That deserves its own investigation.
+
+### The uncomfortable headline
+**Pooled across every detector, our flags returned -2.94% versus small caps over
+the following month, and only 39% of them beat the index.** Detection is not
+merely running ahead of capture — over this window the flags themselves did not
+beat buying the index. This is the first hard measurement of that claim and it
+belongs in the Friday review at the top, not in a footnote.
+
+### Limits, stated not buried
+- The +21 sample is 186 flags and **sweep-CE contributes ZERO of them** (the sweep
+  archive starts 7/18, so nothing has a full month). Every +21 conclusion is about
+  the ORIGINATION scanner, not our Chandelier sweep. The sweep's own +21 verdict
+  arrives in September.
+- Five weeks of flag dates, one regime.
+- Sources overlap heavily (BUY ZONE is 94% inside COOLING; COILED and FRESH
+  IGNITION share 70%), so these are not five independent detectors.
+- At +10, sweep-CE is **-1.89% excess [CI excludes 0] despite a +0.93% RAW mean** —
+  the clearest demonstration in the study of why raw returns mislead. Our flags
+  went up; the market went up more.
+
 ### Standing consequence until the September cut
 Band-width percentile keeps being **printed** on every card (it is a measured
 fact) but is **not** described as predictive, and no card is framed as compelling
