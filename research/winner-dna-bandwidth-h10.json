@@ -1,0 +1,1676 @@
+{
+ "horizon": 10,
+ "rows": [
+  {
+   "sym": "ACTG",
+   "flag": "2026-07-22",
+   "bw_pctile": 52,
+   "fwd": -0.66,
+   "mfe": 9.19
+  },
+  {
+   "sym": "ALKS",
+   "flag": "2026-07-21",
+   "bw_pctile": 18,
+   "fwd": -6.02,
+   "mfe": 1.95
+  },
+  {
+   "sym": "ALSN",
+   "flag": "2026-07-23",
+   "bw_pctile": 18,
+   "fwd": -2.84,
+   "mfe": 4.46
+  },
+  {
+   "sym": "AMCR",
+   "flag": "2026-07-22",
+   "bw_pctile": 0,
+   "fwd": 10.51,
+   "mfe": 10.97
+  },
+  {
+   "sym": "AMGN",
+   "flag": "2026-07-22",
+   "bw_pctile": 16,
+   "fwd": 11.41,
+   "mfe": 13.71
+  },
+  {
+   "sym": "AMT",
+   "flag": "2026-07-18",
+   "bw_pctile": 52,
+   "fwd": 1.94,
+   "mfe": 6.06
+  },
+  {
+   "sym": "ASB",
+   "flag": "2026-07-22",
+   "bw_pctile": 3,
+   "fwd": 2.7,
+   "mfe": 4.23
+  },
+  {
+   "sym": "ATLC",
+   "flag": "2026-07-21",
+   "bw_pctile": 25,
+   "fwd": 14.48,
+   "mfe": 17.64
+  },
+  {
+   "sym": "AVT",
+   "flag": "2026-07-23",
+   "bw_pctile": 32,
+   "fwd": 7.65,
+   "mfe": 11.21
+  },
+  {
+   "sym": "BCBP",
+   "flag": "2026-07-22",
+   "bw_pctile": 18,
+   "fwd": -14.87,
+   "mfe": 4.37
+  },
+  {
+   "sym": "BG",
+   "flag": "2026-07-20",
+   "bw_pctile": 77,
+   "fwd": -12.52,
+   "mfe": 4.37
+  },
+  {
+   "sym": "BHP",
+   "flag": "2026-07-20",
+   "bw_pctile": 3,
+   "fwd": 3.74,
+   "mfe": 7.13
+  },
+  {
+   "sym": "BHRB",
+   "flag": "2026-07-22",
+   "bw_pctile": 26,
+   "fwd": 4.38,
+   "mfe": 5.75
+  },
+  {
+   "sym": "BRKR",
+   "flag": "2026-07-21",
+   "bw_pctile": 0,
+   "fwd": -16.76,
+   "mfe": 8.06
+  },
+  {
+   "sym": "BUD",
+   "flag": "2026-07-23",
+   "bw_pctile": 19,
+   "fwd": 4.34,
+   "mfe": 7.6
+  },
+  {
+   "sym": "BX",
+   "flag": "2026-07-22",
+   "bw_pctile": 53,
+   "fwd": 11.89,
+   "mfe": 15.04
+  },
+  {
+   "sym": "BY",
+   "flag": "2026-07-22",
+   "bw_pctile": 21,
+   "fwd": 5.06,
+   "mfe": 6.41
+  },
+  {
+   "sym": "CB",
+   "flag": "2026-07-21",
+   "bw_pctile": 73,
+   "fwd": -1.83,
+   "mfe": 3.13
+  },
+  {
+   "sym": "CBL",
+   "flag": "2026-07-21",
+   "bw_pctile": 52,
+   "fwd": 1.85,
+   "mfe": 8.77
+  },
+  {
+   "sym": "CBSH",
+   "flag": "2026-07-22",
+   "bw_pctile": 0,
+   "fwd": 1.64,
+   "mfe": 3.78
+  },
+  {
+   "sym": "CCJ",
+   "flag": "2026-07-22",
+   "bw_pctile": 92,
+   "fwd": 4.32,
+   "mfe": 6.12
+  },
+  {
+   "sym": "CEG",
+   "flag": "2026-07-18",
+   "bw_pctile": 31,
+   "fwd": 4.1,
+   "mfe": 10.78
+  },
+  {
+   "sym": "CHRD",
+   "flag": "2026-07-20",
+   "bw_pctile": 47,
+   "fwd": 8.18,
+   "mfe": 10.12
+  },
+  {
+   "sym": "CMP",
+   "flag": "2026-07-22",
+   "bw_pctile": 0,
+   "fwd": -0.36,
+   "mfe": 1.36
+  },
+  {
+   "sym": "CNOB",
+   "flag": "2026-07-20",
+   "bw_pctile": 32,
+   "fwd": 0.03,
+   "mfe": 0.63
+  },
+  {
+   "sym": "COCO",
+   "flag": "2026-07-20",
+   "bw_pctile": 69,
+   "fwd": -14.19,
+   "mfe": 8.28
+  },
+  {
+   "sym": "COKE",
+   "flag": "2026-07-22",
+   "bw_pctile": 35,
+   "fwd": 0.35,
+   "mfe": 8.64
+  },
+  {
+   "sym": "COLB",
+   "flag": "2026-07-22",
+   "bw_pctile": 23,
+   "fwd": -3.92,
+   "mfe": -1.01
+  },
+  {
+   "sym": "COST",
+   "flag": "2026-07-18",
+   "bw_pctile": 39,
+   "fwd": 1.33,
+   "mfe": 5.13
+  },
+  {
+   "sym": "CRCL",
+   "flag": "2026-07-22",
+   "bw_pctile": 0,
+   "fwd": -4.35,
+   "mfe": 0.12
+  },
+  {
+   "sym": "CTRE",
+   "flag": "2026-07-21",
+   "bw_pctile": 40,
+   "fwd": -5.9,
+   "mfe": 0.51
+  },
+  {
+   "sym": "CVNA",
+   "flag": "2026-07-20",
+   "bw_pctile": 8,
+   "fwd": 3.1,
+   "mfe": 8.21
+  },
+  {
+   "sym": "CYRX",
+   "flag": "2026-07-21",
+   "bw_pctile": 10,
+   "fwd": -6.28,
+   "mfe": 3.08
+  },
+  {
+   "sym": "DE",
+   "flag": "2026-07-22",
+   "bw_pctile": 28,
+   "fwd": 0.77,
+   "mfe": 6.04
+  },
+  {
+   "sym": "DELL",
+   "flag": "2026-07-22",
+   "bw_pctile": 29,
+   "fwd": 4.73,
+   "mfe": 9.94
+  },
+  {
+   "sym": "DGX",
+   "flag": "2026-07-23",
+   "bw_pctile": 57,
+   "fwd": 4.65,
+   "mfe": 5.37
+  },
+  {
+   "sym": "DIS",
+   "flag": "2026-07-22",
+   "bw_pctile": 1,
+   "fwd": 6.14,
+   "mfe": 7.66
+  },
+  {
+   "sym": "ECVT",
+   "flag": "2026-07-20",
+   "bw_pctile": 51,
+   "fwd": -2.82,
+   "mfe": 7.1
+  },
+  {
+   "sym": "EQR",
+   "flag": "2026-07-22",
+   "bw_pctile": 31,
+   "fwd": -0.81,
+   "mfe": 1.73
+  },
+  {
+   "sym": "ESQ",
+   "flag": "2026-07-21",
+   "bw_pctile": 22,
+   "fwd": 6.09,
+   "mfe": 9.11
+  },
+  {
+   "sym": "EXTR",
+   "flag": "2026-07-21",
+   "bw_pctile": 38,
+   "fwd": 6.24,
+   "mfe": 6.47
+  },
+  {
+   "sym": "F",
+   "flag": "2026-07-22",
+   "bw_pctile": 18,
+   "fwd": -2.01,
+   "mfe": 12.97
+  },
+  {
+   "sym": "FCX",
+   "flag": "2026-07-22",
+   "bw_pctile": 3,
+   "fwd": 6.75,
+   "mfe": 8.55
+  },
+  {
+   "sym": "FFIV",
+   "flag": "2026-07-21",
+   "bw_pctile": 70,
+   "fwd": 0.86,
+   "mfe": 2.41
+  },
+  {
+   "sym": "FHB",
+   "flag": "2026-07-22",
+   "bw_pctile": 34,
+   "fwd": -3.61,
+   "mfe": 0.5
+  },
+  {
+   "sym": "FITB",
+   "flag": "2026-07-22",
+   "bw_pctile": 6,
+   "fwd": -0.12,
+   "mfe": 1.42
+  },
+  {
+   "sym": "FLEX",
+   "flag": "2026-07-21",
+   "bw_pctile": 78,
+   "fwd": -0.53,
+   "mfe": 3.37
+  },
+  {
+   "sym": "FLG",
+   "flag": "2026-07-20",
+   "bw_pctile": 1,
+   "fwd": -4.18,
+   "mfe": 0.67
+  },
+  {
+   "sym": "FNB",
+   "flag": "2026-07-18",
+   "bw_pctile": 28,
+   "fwd": -1.36,
+   "mfe": 0.78
+  },
+  {
+   "sym": "FRT",
+   "flag": "2026-07-21",
+   "bw_pctile": 17,
+   "fwd": -2.21,
+   "mfe": 2.09
+  },
+  {
+   "sym": "FUTU",
+   "flag": "2026-07-23",
+   "bw_pctile": 25,
+   "fwd": 5.62,
+   "mfe": 13.02
+  },
+  {
+   "sym": "GBCI",
+   "flag": "2026-07-22",
+   "bw_pctile": 16,
+   "fwd": -2.29,
+   "mfe": 0.57
+  },
+  {
+   "sym": "GDX",
+   "flag": "2026-07-21",
+   "bw_pctile": 0,
+   "fwd": 5.03,
+   "mfe": 6.29
+  },
+  {
+   "sym": "GLD",
+   "flag": "2026-07-22",
+   "bw_pctile": 1,
+   "fwd": 2.77,
+   "mfe": 3.27
+  },
+  {
+   "sym": "GM",
+   "flag": "2026-07-22",
+   "bw_pctile": 11,
+   "fwd": 8.56,
+   "mfe": 11.83
+  },
+  {
+   "sym": "GS",
+   "flag": "2026-07-20",
+   "bw_pctile": 63,
+   "fwd": -2.65,
+   "mfe": 4.89
+  },
+  {
+   "sym": "HAS",
+   "flag": "2026-07-20",
+   "bw_pctile": 68,
+   "fwd": 12.11,
+   "mfe": 18.89
+  },
+  {
+   "sym": "HBNC",
+   "flag": "2026-07-22",
+   "bw_pctile": 9,
+   "fwd": 2.18,
+   "mfe": 4.11
+  },
+  {
+   "sym": "HCSG",
+   "flag": "2026-07-21",
+   "bw_pctile": 15,
+   "fwd": -6.65,
+   "mfe": 0.4
+  },
+  {
+   "sym": "HELE",
+   "flag": "2026-07-21",
+   "bw_pctile": 2,
+   "fwd": 3.52,
+   "mfe": 9.75
+  },
+  {
+   "sym": "HLX",
+   "flag": "2026-07-20",
+   "bw_pctile": 53,
+   "fwd": -1.8,
+   "mfe": 6.68
+  },
+  {
+   "sym": "HOMB",
+   "flag": "2026-07-21",
+   "bw_pctile": 80,
+   "fwd": 3.25,
+   "mfe": 4.21
+  },
+  {
+   "sym": "HON",
+   "flag": "2026-07-21",
+   "bw_pctile": 35,
+   "fwd": 8.24,
+   "mfe": 9.63
+  },
+  {
+   "sym": "HOPE",
+   "flag": "2026-07-22",
+   "bw_pctile": 3,
+   "fwd": 5.39,
+   "mfe": 6.94
+  },
+  {
+   "sym": "HSIC",
+   "flag": "2026-07-22",
+   "bw_pctile": 5,
+   "fwd": 5.64,
+   "mfe": 8.69
+  },
+  {
+   "sym": "HTZ",
+   "flag": "2026-07-22",
+   "bw_pctile": 75,
+   "fwd": -19.17,
+   "mfe": 5.44
+  },
+  {
+   "sym": "IRM",
+   "flag": "2026-07-23",
+   "bw_pctile": 50,
+   "fwd": -2.08,
+   "mfe": 6.68
+  },
+  {
+   "sym": "KRE",
+   "flag": "2026-07-22",
+   "bw_pctile": 7,
+   "fwd": 2.3,
+   "mfe": 3.64
+  },
+  {
+   "sym": "KWEB",
+   "flag": "2026-07-21",
+   "bw_pctile": 95,
+   "fwd": 6.92,
+   "mfe": 6.92
+  },
+  {
+   "sym": "LCID",
+   "flag": "2026-07-20",
+   "bw_pctile": 88,
+   "fwd": 8.3,
+   "mfe": 19.55
+  },
+  {
+   "sym": "LHX",
+   "flag": "2026-07-23",
+   "bw_pctile": 38,
+   "fwd": -3.38,
+   "mfe": 3.08
+  },
+  {
+   "sym": "LQDA",
+   "flag": "2026-07-21",
+   "bw_pctile": 10,
+   "fwd": 9.26,
+   "mfe": 12.62
+  },
+  {
+   "sym": "LSTR",
+   "flag": "2026-07-23",
+   "bw_pctile": 2,
+   "fwd": -14.86,
+   "mfe": -2.35
+  },
+  {
+   "sym": "LZB",
+   "flag": "2026-07-22",
+   "bw_pctile": 11,
+   "fwd": 5.47,
+   "mfe": 7.05
+  },
+  {
+   "sym": "M",
+   "flag": "2026-07-20",
+   "bw_pctile": 42,
+   "fwd": 11.33,
+   "mfe": 12.18
+  },
+  {
+   "sym": "MAC",
+   "flag": "2026-07-20",
+   "bw_pctile": 25,
+   "fwd": 1.09,
+   "mfe": 4.26
+  },
+  {
+   "sym": "MFA",
+   "flag": "2026-07-22",
+   "bw_pctile": 5,
+   "fwd": -2.48,
+   "mfe": 0.32
+  },
+  {
+   "sym": "MLI",
+   "flag": "2026-07-23",
+   "bw_pctile": 62,
+   "fwd": 10.03,
+   "mfe": 12.66
+  },
+  {
+   "sym": "MSFT",
+   "flag": "2026-07-21",
+   "bw_pctile": 40,
+   "fwd": 23.9,
+   "mfe": 25.57
+  },
+  {
+   "sym": "MU",
+   "flag": "2026-07-21",
+   "bw_pctile": 53,
+   "fwd": -8.05,
+   "mfe": 4.22
+  },
+  {
+   "sym": "NAT",
+   "flag": "2026-07-21",
+   "bw_pctile": 49,
+   "fwd": -3.25,
+   "mfe": 4.02
+  },
+  {
+   "sym": "NEE",
+   "flag": "2026-07-22",
+   "bw_pctile": 0,
+   "fwd": -3.91,
+   "mfe": 1.77
+  },
+  {
+   "sym": "NEM",
+   "flag": "2026-07-22",
+   "bw_pctile": 0,
+   "fwd": 8.92,
+   "mfe": 10.3
+  },
+  {
+   "sym": "NKE",
+   "flag": "2026-07-21",
+   "bw_pctile": 29,
+   "fwd": -3.33,
+   "mfe": 1.7
+  },
+  {
+   "sym": "NOV",
+   "flag": "2026-07-20",
+   "bw_pctile": 37,
+   "fwd": -0.36,
+   "mfe": 8.44
+  },
+  {
+   "sym": "NUE",
+   "flag": "2026-07-18",
+   "bw_pctile": 38,
+   "fwd": 8.74,
+   "mfe": 14.12
+  },
+  {
+   "sym": "NVRI",
+   "flag": "2026-07-21",
+   "bw_pctile": 55,
+   "fwd": 9.1,
+   "mfe": 10.06
+  },
+  {
+   "sym": "NWPX",
+   "flag": "2026-07-21",
+   "bw_pctile": 23,
+   "fwd": -6.29,
+   "mfe": -0.22
+  },
+  {
+   "sym": "OCFC",
+   "flag": "2026-07-22",
+   "bw_pctile": 32,
+   "fwd": 1.02,
+   "mfe": 2.19
+  },
+  {
+   "sym": "ODFL",
+   "flag": "2026-07-20",
+   "bw_pctile": 5,
+   "fwd": -8.73,
+   "mfe": 2.33
+  },
+  {
+   "sym": "OSCR",
+   "flag": "2026-07-21",
+   "bw_pctile": 0,
+   "fwd": -1.27,
+   "mfe": 3.8
+  },
+  {
+   "sym": "PANW",
+   "flag": "2026-07-22",
+   "bw_pctile": 59,
+   "fwd": 8.17,
+   "mfe": 12.44
+  },
+  {
+   "sym": "PB",
+   "flag": "2026-07-22",
+   "bw_pctile": 18,
+   "fwd": 2.14,
+   "mfe": 3.85
+  },
+  {
+   "sym": "PFE",
+   "flag": "2026-07-18",
+   "bw_pctile": 62,
+   "fwd": 1.59,
+   "mfe": 3.58
+  },
+  {
+   "sym": "PLD",
+   "flag": "2026-07-23",
+   "bw_pctile": 78,
+   "fwd": -4.12,
+   "mfe": 2.78
+  },
+  {
+   "sym": "PM",
+   "flag": "2026-07-21",
+   "bw_pctile": 42,
+   "fwd": -0.6,
+   "mfe": 10.49
+  },
+  {
+   "sym": "PNC",
+   "flag": "2026-07-21",
+   "bw_pctile": 19,
+   "fwd": 1.5,
+   "mfe": 2.32
+  },
+  {
+   "sym": "POWL",
+   "flag": "2026-07-22",
+   "bw_pctile": 64,
+   "fwd": -13.44,
+   "mfe": 2.99
+  },
+  {
+   "sym": "PRLB",
+   "flag": "2026-07-22",
+   "bw_pctile": 18,
+   "fwd": 13.27,
+   "mfe": 13.58
+  },
+  {
+   "sym": "RACE",
+   "flag": "2026-07-22",
+   "bw_pctile": 12,
+   "fwd": 9.47,
+   "mfe": 10.04
+  },
+  {
+   "sym": "RCL",
+   "flag": "2026-07-22",
+   "bw_pctile": 51,
+   "fwd": 14.54,
+   "mfe": 16.84
+  },
+  {
+   "sym": "RHP",
+   "flag": "2026-07-23",
+   "bw_pctile": 7,
+   "fwd": -3.62,
+   "mfe": 6.65
+  },
+  {
+   "sym": "RSPU",
+   "flag": "2026-07-22",
+   "bw_pctile": 2,
+   "fwd": -5.24,
+   "mfe": 1.21
+  },
+  {
+   "sym": "RYZ",
+   "flag": "2026-07-20",
+   "bw_pctile": 68,
+   "fwd": -3.3,
+   "mfe": 10.08
+  },
+  {
+   "sym": "SAIC",
+   "flag": "2026-07-22",
+   "bw_pctile": 32,
+   "fwd": 3.75,
+   "mfe": 5.74
+  },
+  {
+   "sym": "SHAK",
+   "flag": "2026-07-20",
+   "bw_pctile": 28,
+   "fwd": 13.71,
+   "mfe": 15.67
+  },
+  {
+   "sym": "SION",
+   "flag": "2026-07-21",
+   "bw_pctile": 24,
+   "fwd": 5.78,
+   "mfe": 9.57
+  },
+  {
+   "sym": "SJM",
+   "flag": "2026-07-22",
+   "bw_pctile": 16,
+   "fwd": 0.98,
+   "mfe": 8.13
+  },
+  {
+   "sym": "SKK",
+   "flag": "2026-07-22",
+   "bw_pctile": 5,
+   "fwd": -9.33,
+   "mfe": 2.3
+  },
+  {
+   "sym": "SKYY",
+   "flag": "2026-07-21",
+   "bw_pctile": 38,
+   "fwd": 12.8,
+   "mfe": 13.23
+  },
+  {
+   "sym": "SMCI",
+   "flag": "2026-07-22",
+   "bw_pctile": 38,
+   "fwd": -0.79,
+   "mfe": 6.64
+  },
+  {
+   "sym": "SNOW",
+   "flag": "2026-07-21",
+   "bw_pctile": 44,
+   "fwd": 16.58,
+   "mfe": 18.25
+  },
+  {
+   "sym": "SON",
+   "flag": "2026-07-22",
+   "bw_pctile": 7,
+   "fwd": 6.0,
+   "mfe": 10.01
+  },
+  {
+   "sym": "SPG",
+   "flag": "2026-07-20",
+   "bw_pctile": 31,
+   "fwd": 0.43,
+   "mfe": 4.52
+  },
+  {
+   "sym": "SPXL",
+   "flag": "2026-07-20",
+   "bw_pctile": 28,
+   "fwd": 5.72,
+   "mfe": 6.09
+  },
+  {
+   "sym": "SSB",
+   "flag": "2026-07-22",
+   "bw_pctile": 8,
+   "fwd": 6.85,
+   "mfe": 8.1
+  },
+  {
+   "sym": "STRL",
+   "flag": "2026-07-22",
+   "bw_pctile": 78,
+   "fwd": -25.48,
+   "mfe": 2.59
+  },
+  {
+   "sym": "STX",
+   "flag": "2026-07-22",
+   "bw_pctile": 38,
+   "fwd": -7.76,
+   "mfe": 3.13
+  },
+  {
+   "sym": "TBLA",
+   "flag": "2026-07-21",
+   "bw_pctile": 59,
+   "fwd": 3.52,
+   "mfe": 5.68
+  },
+  {
+   "sym": "TDY",
+   "flag": "2026-07-22",
+   "bw_pctile": 41,
+   "fwd": 5.11,
+   "mfe": 6.61
+  },
+  {
+   "sym": "TFIN",
+   "flag": "2026-07-21",
+   "bw_pctile": 0,
+   "fwd": 0.81,
+   "mfe": 5.47
+  },
+  {
+   "sym": "TGTX",
+   "flag": "2026-07-21",
+   "bw_pctile": 12,
+   "fwd": -9.67,
+   "mfe": 6.72
+  },
+  {
+   "sym": "TJX",
+   "flag": "2026-07-22",
+   "bw_pctile": 49,
+   "fwd": 2.9,
+   "mfe": 4.91
+  },
+  {
+   "sym": "TLN",
+   "flag": "2026-07-20",
+   "bw_pctile": 36,
+   "fwd": -4.39,
+   "mfe": 5.88
+  },
+  {
+   "sym": "TPL",
+   "flag": "2026-07-22",
+   "bw_pctile": 18,
+   "fwd": -11.83,
+   "mfe": 0.97
+  },
+  {
+   "sym": "TPR",
+   "flag": "2026-07-22",
+   "bw_pctile": 18,
+   "fwd": 10.74,
+   "mfe": 12.42
+  },
+  {
+   "sym": "TRNS",
+   "flag": "2026-07-20",
+   "bw_pctile": 16,
+   "fwd": 4.05,
+   "mfe": 4.7
+  },
+  {
+   "sym": "TVTX",
+   "flag": "2026-07-21",
+   "bw_pctile": 0,
+   "fwd": -0.99,
+   "mfe": 6.04
+  },
+  {
+   "sym": "TXNM",
+   "flag": "2026-07-22",
+   "bw_pctile": 85,
+   "fwd": -0.89,
+   "mfe": 0.43
+  },
+  {
+   "sym": "URA",
+   "flag": "2026-07-22",
+   "bw_pctile": 30,
+   "fwd": 4.69,
+   "mfe": 5.74
+  },
+  {
+   "sym": "URI",
+   "flag": "2026-07-23",
+   "bw_pctile": 38,
+   "fwd": 2.01,
+   "mfe": 3.01
+  },
+  {
+   "sym": "USB",
+   "flag": "2026-07-22",
+   "bw_pctile": 26,
+   "fwd": -0.4,
+   "mfe": 0.59
+  },
+  {
+   "sym": "VCYT",
+   "flag": "2026-07-21",
+   "bw_pctile": 13,
+   "fwd": -22.04,
+   "mfe": 0.72
+  },
+  {
+   "sym": "VST",
+   "flag": "2026-07-22",
+   "bw_pctile": 5,
+   "fwd": -15.69,
+   "mfe": 1.81
+  },
+  {
+   "sym": "VVV",
+   "flag": "2026-07-20",
+   "bw_pctile": 8,
+   "fwd": -1.9,
+   "mfe": 3.29
+  },
+  {
+   "sym": "VZ",
+   "flag": "2026-07-20",
+   "bw_pctile": 74,
+   "fwd": 8.87,
+   "mfe": 12.67
+  },
+  {
+   "sym": "WPC",
+   "flag": "2026-07-20",
+   "bw_pctile": 58,
+   "fwd": -3.01,
+   "mfe": 2.73
+  },
+  {
+   "sym": "XPO",
+   "flag": "2026-07-18",
+   "bw_pctile": 2,
+   "fwd": -6.53,
+   "mfe": 0.6
+  },
+  {
+   "sym": "ZD",
+   "flag": "2026-07-21",
+   "bw_pctile": 23,
+   "fwd": 5.71,
+   "mfe": 5.86
+  }
+ ],
+ "skipped": [
+  [
+   "AAL",
+   "only 2d forward"
+  ],
+  [
+   "ABNB",
+   "only 6d forward"
+  ],
+  [
+   "ACGL",
+   "only 8d forward"
+  ],
+  [
+   "AGNC",
+   "only 7d forward"
+  ],
+  [
+   "AI",
+   "only 7d forward"
+  ],
+  [
+   "AJG",
+   "only 7d forward"
+  ],
+  [
+   "ALB",
+   "only 0d forward"
+  ],
+  [
+   "ALGT",
+   "only 1d forward"
+  ],
+  [
+   "AMG",
+   "only 3d forward"
+  ],
+  [
+   "AMZN",
+   "only 4d forward"
+  ],
+  [
+   "APD",
+   "only 5d forward"
+  ],
+  [
+   "APEI",
+   "only 2d forward"
+  ],
+  [
+   "APH",
+   "only 4d forward"
+  ],
+  [
+   "ASTS",
+   "only 2d forward"
+  ],
+  [
+   "ATRO",
+   "only 1d forward"
+  ],
+  [
+   "AXON",
+   "only 7d forward"
+  ],
+  [
+   "BA",
+   "only 2d forward"
+  ],
+  [
+   "BABA",
+   "only 4d forward"
+  ],
+  [
+   "BELFB",
+   "only 1d forward"
+  ],
+  [
+   "BFC",
+   "only 6d forward"
+  ],
+  [
+   "BIDU",
+   "only 0d forward"
+  ],
+  [
+   "BLMN",
+   "only 2d forward"
+  ],
+  [
+   "BOTZ",
+   "only 2d forward"
+  ],
+  [
+   "BSTZ",
+   "only 0d forward"
+  ],
+  [
+   "BTCS",
+   "only 1d forward"
+  ],
+  [
+   "C",
+   "only 1d forward"
+  ],
+  [
+   "CACC",
+   "only 0d forward"
+  ],
+  [
+   "CAT",
+   "only 2d forward"
+  ],
+  [
+   "CCL",
+   "only 7d forward"
+  ],
+  [
+   "CENX",
+   "only 2d forward"
+  ],
+  [
+   "CHTR",
+   "only 7d forward"
+  ],
+  [
+   "CLX",
+   "only 7d forward"
+  ],
+  [
+   "CMG",
+   "only 6d forward"
+  ],
+  [
+   "CNP",
+   "only 9d forward"
+  ],
+  [
+   "CPRT",
+   "only 8d forward"
+  ],
+  [
+   "CPT",
+   "only 6d forward"
+  ],
+  [
+   "CRWD",
+   "only 3d forward"
+  ],
+  [
+   "CRWV",
+   "only 2d forward"
+  ],
+  [
+   "CSCO",
+   "only 2d forward"
+  ],
+  [
+   "CTM",
+   "only 7d forward"
+  ],
+  [
+   "CTS",
+   "only 7d forward"
+  ],
+  [
+   "DAL",
+   "only 7d forward"
+  ],
+  [
+   "DASH",
+   "only 7d forward"
+  ],
+  [
+   "DAVE",
+   "only 2d forward"
+  ],
+  [
+   "DGII",
+   "only 3d forward"
+  ],
+  [
+   "DLR",
+   "only 9d forward"
+  ],
+  [
+   "DOW",
+   "only 3d forward"
+  ],
+  [
+   "DRTS",
+   "only 1d forward"
+  ],
+  [
+   "DUOL",
+   "only 7d forward"
+  ],
+  [
+   "EGBN",
+   "only 9d forward"
+  ],
+  [
+   "ELV",
+   "only 0d forward"
+  ],
+  [
+   "EME",
+   "only 4d forward"
+  ],
+  [
+   "EMN",
+   "only 3d forward"
+  ],
+  [
+   "EPC",
+   "only 1d forward"
+  ],
+  [
+   "EQIX",
+   "only 9d forward"
+  ],
+  [
+   "ERIE",
+   "only 7d forward"
+  ],
+  [
+   "ET",
+   "only 0d forward"
+  ],
+  [
+   "ETN",
+   "only 3d forward"
+  ],
+  [
+   "FIVN",
+   "only 4d forward"
+  ],
+  [
+   "FLYW",
+   "only 0d forward"
+  ],
+  [
+   "FSLR",
+   "only 3d forward"
+  ],
+  [
+   "FTDR",
+   "only 2d forward"
+  ],
+  [
+   "GE",
+   "only 9d forward"
+  ],
+  [
+   "GH",
+   "only 4d forward"
+  ],
+  [
+   "GIII",
+   "only 1d forward"
+  ],
+  [
+   "GME",
+   "only 6d forward"
+  ],
+  [
+   "GOOG",
+   "only 4d forward"
+  ],
+  [
+   "GOOGL",
+   "only 0d forward"
+  ],
+  [
+   "GRND",
+   "only 6d forward"
+  ],
+  [
+   "HD",
+   "only 7d forward"
+  ],
+  [
+   "HIMX",
+   "only 2d forward"
+  ],
+  [
+   "HNGE",
+   "only 1d forward"
+  ],
+  [
+   "HNST",
+   "only 0d forward"
+  ],
+  [
+   "HUBB",
+   "only 1d forward"
+  ],
+  [
+   "IBM",
+   "only 6d forward"
+  ],
+  [
+   "IGV",
+   "only 4d forward"
+  ],
+  [
+   "INOD",
+   "only 2d forward"
+  ],
+  [
+   "IRDM",
+   "only 1d forward"
+  ],
+  [
+   "IWM",
+   "only 2d forward"
+  ],
+  [
+   "JBLU",
+   "only 6d forward"
+  ],
+  [
+   "JETS",
+   "only 7d forward"
+  ],
+  [
+   "JNJ",
+   "only 9d forward"
+  ],
+  [
+   "KDP",
+   "only 6d forward"
+  ],
+  [
+   "LAES",
+   "only 2d forward"
+  ],
+  [
+   "LASR",
+   "only 0d forward"
+  ],
+  [
+   "LDOS",
+   "only 9d forward"
+  ],
+  [
+   "LIND",
+   "only 9d forward"
+  ],
+  [
+   "LLY",
+   "only 7d forward"
+  ],
+  [
+   "LOW",
+   "only 7d forward"
+  ],
+  [
+   "LUNR",
+   "only 2d forward"
+  ],
+  [
+   "LUV",
+   "only 2d forward"
+  ],
+  [
+   "LYV",
+   "only 5d forward"
+  ],
+  [
+   "MAMA",
+   "only 3d forward"
+  ],
+  [
+   "MAR",
+   "only 8d forward"
+  ],
+  [
+   "MATX",
+   "only 2d forward"
+  ],
+  [
+   "MCD",
+   "only 7d forward"
+  ],
+  [
+   "MDB",
+   "only 1d forward"
+  ],
+  [
+   "MDT",
+   "only 7d forward"
+  ],
+  [
+   "MIDD",
+   "only 5d forward"
+  ],
+  [
+   "MLAB",
+   "only 3d forward"
+  ],
+  [
+   "MNST",
+   "only 7d forward"
+  ],
+  [
+   "MP",
+   "only 2d forward"
+  ],
+  [
+   "MRCY",
+   "only 1d forward"
+  ],
+  [
+   "MRK",
+   "only 9d forward"
+  ],
+  [
+   "MTCH",
+   "only 2d forward"
+  ],
+  [
+   "NCLH",
+   "only 7d forward"
+  ],
+  [
+   "NEO",
+   "only 6d forward"
+  ],
+  [
+   "NFLX",
+   "only 7d forward"
+  ],
+  [
+   "NIO",
+   "only 6d forward"
+  ],
+  [
+   "NMAX",
+   "only 1d forward"
+  ],
+  [
+   "NOVT",
+   "only 2d forward"
+  ],
+  [
+   "NOW",
+   "only 7d forward"
+  ],
+  [
+   "NPO",
+   "only 1d forward"
+  ],
+  [
+   "NTRA",
+   "only 1d forward"
+  ],
+  [
+   "NVDA",
+   "only 2d forward"
+  ],
+  [
+   "NVST",
+   "only 6d forward"
+  ],
+  [
+   "OPY",
+   "only 2d forward"
+  ],
+  [
+   "ORCL",
+   "only 3d forward"
+  ],
+  [
+   "ORKA",
+   "only 9d forward"
+  ],
+  [
+   "PEP",
+   "only 7d forward"
+  ],
+  [
+   "PGR",
+   "only 8d forward"
+  ],
+  [
+   "PH",
+   "only 9d forward"
+  ],
+  [
+   "PL",
+   "only 2d forward"
+  ],
+  [
+   "PLPC",
+   "only 4d forward"
+  ],
+  [
+   "PLTR",
+   "only 2d forward"
+  ],
+  [
+   "PRAX",
+   "only 0d forward"
+  ],
+  [
+   "PRMB",
+   "only 0d forward"
+  ],
+  [
+   "PWR",
+   "only 4d forward"
+  ],
+  [
+   "QQQ",
+   "only 2d forward"
+  ],
+  [
+   "RGTI",
+   "only 2d forward"
+  ],
+  [
+   "RKLB",
+   "only 2d forward"
+  ],
+  [
+   "RMD",
+   "only 7d forward"
+  ],
+  [
+   "ROBO",
+   "only 2d forward"
+  ],
+  [
+   "ROKU",
+   "only 6d forward"
+  ],
+  [
+   "ROP",
+   "only 9d forward"
+  ],
+  [
+   "RYTM",
+   "only 0d forward"
+  ],
+  [
+   "S",
+   "only 3d forward"
+  ],
+  [
+   "SE",
+   "only 2d forward"
+  ],
+  [
+   "SEZL",
+   "only 2d forward"
+  ],
+  [
+   "SFM",
+   "only 5d forward"
+  ],
+  [
+   "SHW",
+   "only 7d forward"
+  ],
+  [
+   "SLAB",
+   "only 0d forward"
+  ],
+  [
+   "SLB",
+   "only 8d forward"
+  ],
+  [
+   "SMR",
+   "only 2d forward"
+  ],
+  [
+   "SOFI",
+   "only 2d forward"
+  ],
+  [
+   "SOUN",
+   "only 0d forward"
+  ],
+  [
+   "SPHR",
+   "only 1d forward"
+  ],
+  [
+   "SSD",
+   "only 7d forward"
+  ],
+  [
+   "ST",
+   "only 5d forward"
+  ],
+  [
+   "STGW",
+   "only 7d forward"
+  ],
+  [
+   "SXI",
+   "only 2d forward"
+  ],
+  [
+   "SYM",
+   "only 3d forward"
+  ],
+  [
+   "TIGO",
+   "only 0d forward"
+  ],
+  [
+   "TOST",
+   "only 7d forward"
+  ],
+  [
+   "TSHA",
+   "only 0d forward"
+  ],
+  [
+   "TSLA",
+   "only 2d forward"
+  ],
+  [
+   "TT",
+   "only 1d forward"
+  ],
+  [
+   "TWST",
+   "only 2d forward"
+  ],
+  [
+   "TYL",
+   "only 7d forward"
+  ],
+  [
+   "UAL",
+   "only 3d forward"
+  ],
+  [
+   "URGN",
+   "only 1d forward"
+  ],
+  [
+   "VISN",
+   "only 2d forward"
+  ],
+  [
+   "VRSN",
+   "only 8d forward"
+  ],
+  [
+   "VSAT",
+   "only 2d forward"
+  ],
+  [
+   "VSEC",
+   "only 2d forward"
+  ],
+  [
+   "WMS",
+   "only 2d forward"
+  ],
+  [
+   "WRBY",
+   "only 3d forward"
+  ],
+  [
+   "WST",
+   "only 1d forward"
+  ],
+  [
+   "WWD",
+   "only 8d forward"
+  ],
+  [
+   "XLI",
+   "only 9d forward"
+  ],
+  [
+   "XLK",
+   "only 2d forward"
+  ],
+  [
+   "XLY",
+   "only 4d forward"
+  ],
+  [
+   "XMTR",
+   "only 0d forward"
+  ],
+  [
+   "ZTS",
+   "only 7d forward"
+  ]
+ ]
+}
