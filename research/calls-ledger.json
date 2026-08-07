@@ -273,7 +273,13 @@
    "structure_deviation": "Plan specified a 710/600 bear put SPREAD (~$1,420). The spread was staged at 10.70 net ($1,070) and REJECTED (order 1292217286): cash account requires the short 600 leg cash-secured ($60k) - spreads need margin. Omar authorized the fallback: LONG 710 PUT ONLY at $1,487 vs plan budget $1,420 (+$67, +4.7%). Same thesis, same defined risk (premium = max loss), uncapped payoff, faster theta bleed - deviation documented, not hidden.",
    "thesis": "Midterm-correction insurance per research/spy-midterm-put-spread-plan.md (pre-registered July). Entered on the FINAL day of the tranche-1 window with the plan's own entry conditions back in compliance: VIX 17.4 (<20 abort line), SPY 742.55 (>735 line), Sept hike odds 56%.",
    "exits": "Per plan: sell into panic (VIX >28-30 or SPY -10% to -12%); reassess if hike odds collapse; FLAT BY EARLY NOVEMBER regardless (position is insurance, not a keeper). Tranche 2 window Aug 10-21 on VIX <15 - requires margin account or main-broker execution for the spread version.",
-   "risk_note": "Max loss $1,487 (0.15% of acct). Held in TS cash acct - $513 cash remains there."
+   "risk_note": "Max loss $1,487 (0.15% of acct). Held in TS cash acct - $513 cash remains there.",
+   "close": {
+    "date": "2026-08-07",
+    "fill": 8.52,
+    "pnl": -635,
+    "note": "CLOSED 2026-08-07 ~08:5x CT (Omar-reported): SOLD 1 SPY Nov 710P @ 8.52 = $852. P&L -$635 (-42.7%, 7 days). Omar's rationale: 'didn't want to ride it down anymore with no meaningful hurdles for market to react negatively to.' Context: jobs MISSED (57k vs ~83k) but tape rallied and VIX fell to ~15.1-15.3 - the thesis required a negative reaction and the market refused. Rulebook alignment: the hedge-board VIX-15 alert spec said 'VIX 15 + SPY>760 = thesis delayed, consider cutting half'; the pre-agreed FULL cut line was VIX 14 + SPY>765. Omar cut all at VIX ~15.3 / SPY ~770.8 - earlier and fuller than the letter, inside the spirit. Fill 8.52 vs 8.73/8.77 pre-market mid = acceptable, ~2% inside. RE-ENTRY pre-registered 8/6: around the Sept 15-16 FOMC (dot-plot meeting) as the next catalyst, or earlier on VIX 20 up-cross + breadth break per the hedge board. Grade at Nov 20 expiry: below 701.48 the exit cost money vs holding; above, it saved the remaining $852."
+   }
   },
   {
    "id": "2026-08-03-HQY-long",

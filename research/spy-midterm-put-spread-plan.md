@@ -147,3 +147,15 @@ jobs binary, keeps the younger UAL call + the SPY put into Friday - put
 holds with banked profit behind it. Earlier triggers SUPERSEDE if they fire
 first (target 56 / thesis-break 342 / checkpoint-380 judgment). UAL call is
 explicitly NOT part of this - it runs on its own plan.
+
+## EXECUTION RECORD - Tranche 1 CLOSED (2026-08-07)
+SOLD 1 SPY Nov 20 710P @ 8.52 (~08:5x CT, Omar-reported). P&L -$635 (-42.7%,
+7 days). Jobs missed (57k vs ~83k) but the tape rallied and VIX fell - Omar:
+"no meaningful hurdles for market to react negatively to." Tranche 2 = NOT
+ADDED (same logic). The 8/6 "one decision" resolved as: EXIT the put, no SPXL
+rotation decided yet. BOOK IS NOW UNHEDGED.
+RE-ENTRY (pre-registered 8/6, stands): around the Sept 15-16 FOMC as the next
+catalyst - or EARLIER if the hedge board fires (VIX 20 up-cross + SPY <735
+breadth break = thesis working without us; re-underwrite, don't chase).
+The VIX 15/14 hedge-board alerts now read as RE-ENTRY timing signals, not
+cut signals - no position to cut.
