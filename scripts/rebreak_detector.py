@@ -4,7 +4,9 @@ first-class nightly screen. Pattern: a big earnings gap (>= +12% close-to-close)
 then 2-5 sessions basing WITHOUT closing below the gap day's midpoint, then a
 CLOSE above the gap day's HIGH = the re-break. That close IS the signal; the
 morning brief presents it with the full protocol (per the standing order).
-Validation case: PLTR gapped 8/4, based 8/5-8/6, re-broke 8/7 (+10%)."""
+CREDIT + honest status: OMAR found the PLTR pattern (8/7 AM, asking why it was
+never recommended); this detector reproduces his catch retroactively. It is NOT
+validated until signals it finds FIRST (ZBRA/AUGO forward) are graded."""
 import json, sys, datetime as dt
 from pathlib import Path
 import requests

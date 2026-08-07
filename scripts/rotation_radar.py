@@ -94,6 +94,28 @@ def main():
         r["rel1m"] = r["m1"] - spy["m1"]
         r["state"] = classify(r["accel"], r["rel1m"], r["w"], r["m6"]) if r["tk"] != "AMEX:SPY" else "-"
     rows.sort(key=lambda r: -r["accel"])
+    # PROACTIVITY HOOK (Omar 8/7: "you should have done GDX proactively" - the
+    # radar showed miners promoted->igniting for 2 days and no card was ever
+    # presented until he demanded one). Any group NEWLY promoted to IGNITING is
+    # written to watchlists/radar-cards-due.json. The next brief OWES each entry
+    # a full protocol-run options card (with the ignition-backtest caveat
+    # attached) - presenting is mandatory, trading stays Omar's call.
+    try:
+        import json as _json
+        _prev_states = {}
+        _pf = os.path.join(REPO, "watchlists", "radar-prev-states.json")
+        if os.path.exists(_pf):
+            _prev_states = _json.load(open(_pf))
+        _due = [{"group": r["label"], "ticker": r["tk"], "accel": round(r["accel"], 1)}
+                for r in rows if r.get("state") == "IGNITING"
+                and _prev_states.get(r["tk"]) != "IGNITING"]
+        if _due:
+            _json.dump(_due, open(os.path.join(REPO, "watchlists", "radar-cards-due.json"), "w"), indent=1)
+            print("[radar] CARDS DUE (protocol before next brief): "
+                  + ", ".join(f"{d['group']} ({d['ticker'].split(':')[1]})" for d in _due))
+        _json.dump({r["tk"]: r.get("state") for r in rows}, open(_pf, "w"), indent=1)
+    except Exception as _e:
+        print(f"[radar] cards-due hook failed: {_e}")
 
     prev, prev_date = load_prev()
     deltas = []

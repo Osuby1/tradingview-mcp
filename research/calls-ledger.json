@@ -457,7 +457,8 @@
     "fill": 0.33,
     "pnl": -60,
     "note": "CLOSED 2026-08-07 ~13:0x CT (Omar-reported): SOLD 5x Sep 7.5C @ 0.33. P&L -$60 (-26.7%, ~4.5h). DISCRETIONARY exit AHEAD of the registered rules - none had fired (kill = daily CLOSE below prior low; that check was tonight's). Omar: 'didn't like it testing the downside of our thesis so soon.' Context at exit: stock ~6.05 after failing the 6.92 high test, day low 5.88 probing under yesterday's low - the first-warning ZONE intraday; the rule waits for the close. NOTE for exit-redesign: option printed 0.69 high this morning (+53% over the 0.45 fill) before reversing - no trim rung existed below +150%. GRADE vs tonight's close: close below prior low = early-but-right (saved theta); hold-and-run = the SJM pattern. Tracked in the discretion-vs-rules cohort."
-   }
+   },
+   "idea_source": "SYSTEM (squeeze watcher)"
   },
   {
    "id": "2026-08-07-PLTR-call-REAL",
@@ -471,7 +472,8 @@
     "thesis_break": "daily CLOSE below 162.66 = re-break failed - exit review same day"
    },
    "alerts": "162.50 (re-break fail check) + 195.00 (profit-zone check) - wired this session",
-   "risk_note": "options premium, no stock-budget impact. Options book after fill: SOUN 280 + HTZ 350 + PLTR 2,170 + GDX 1,970 = $4,770 defined risk."
+   "risk_note": "options premium, no stock-budget impact. Options book after fill: SOUN 280 + HTZ 350 + PLTR 2,170 + GDX 1,970 = $4,770 defined risk.",
+   "idea_source": "OMAR (asked why PLTR was never recommended; system had ADX-blocked it 8/4 and readiness-floored it after)"
   },
   {
    "id": "2026-08-07-GDX-call-REAL",
@@ -485,7 +487,8 @@
     "note": "this lane is days-not-weeks by design - the backtest running tonight grades the pattern"
    },
    "alerts": "84.00 (strike/stall check) + 95.00 (profit-zone check) - wired this session",
-   "risk_note": "2 contracts $1,970, inside the $2.5k per-position cap."
+   "risk_note": "2 contracts $1,970, inside the $2.5k per-position cap.",
+   "idea_source": "OMAR (challenged why we were not in gold miners; radar had shown miners promoted->igniting for 2 days with no card presented)"
   },
   {
    "id": "2026-08-07-INDI-squeeze-NOFILL",

@@ -181,3 +181,14 @@ INDI no-fill logged · staged tickets cleared for the weekend.
 re-check · 8/19 WOLF earnings · 8/26 SOUN/HTZ hard exit + HTZ roll check ·
 8/28 rest-continuation first read · 9/4 squeeze study final + selector first
 read · 9/15-16 FOMC (put re-entry window) · 9/25 PLTR/GDX option hard exits.
+
+
+## CORRECTION (8/7 evening, Omar): credit and the proactivity gap
+The re-break detector did NOT catch PLTR - OMAR did, by asking the question
+that exposed it; the detector reproduced his catch retroactively and is
+unvalidated until its FORWARD signals (ZBRA, AUGO) are graded. GDX was also
+Omar-initiated: the radar showed miners promoted-then-igniting for two days
+and no card was ever presented until he demanded one. Idea-source tags now on
+every ledger entry - this week: 2 of 4 winning entries were OMAR-sourced.
+The structural fix (below) makes radar promotions OWE a protocol card in the
+next brief instead of a mention in a paragraph.
