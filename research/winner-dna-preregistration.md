@@ -103,6 +103,86 @@ fresh Chandelier BUY in the sweep archive, first flag per symbol.
    other detectors, so this archive does not cover them. Widening the flag source
    is required before the sample represents "our flags."
 
+---
+
+# SECOND CUT — ALL DETECTORS + HISTORY ARM — 2026-08-06 PM
+`scripts/winner_dna_bandwidth_v2.py` (Omar: "widen the flag source... and use a
+wider data set if useful")
+
+**VERDICT: band-width compression is DEAD as a predictor. Not underpowered —
+answered. And the study found a replacement lead variable that is roughly eight
+times larger: WHICH DETECTOR flagged it.**
+
+Sources merged: sweep-CE 313 (7/18+), orig-COILED 225, orig-COOLING 250,
+orig-FRESH IGNITION 90, orig-BUY ZONE 42 (7/1+). **920 flag records, 566 symbols,
+719 gradeable.** Plus a history arm of **41,347 observations** over ~2 years on
+the same 564 names — the power the flag archive cannot supply this year.
+
+### ARM 2 — history, 41,347 observations, forward 21 sessions
+| Band width at observation | n | mean fwd21 | >= +15% |
+|---|--:|--:|--:|
+| 0-10th (extreme coil) | 4,578 | +2.92% | 14.4% |
+| 11-25th (coiled) | 4,968 | +2.96% | 14.3% |
+| 26-59th (middle) | 12,972 | +3.03% | 14.6% |
+| 60-89th (expanded) | 11,670 | +3.50% | 15.9% |
+| 90-100th (blown out) | 5,212 | **+3.98%** | **16.8%** |
+| baseline | 41,347 | +3.27% | 15.2% |
+
+Monotonic — and pointing the WRONG WAY. The most blown-out names beat the most
+compressed ones. The spread is small (about 1 point over 21 sessions) but it is
+consistent across 41k observations and it is the opposite of the hypothesis.
+**Compression does not predict direction. It never did; we never checked.**
+
+### ARM 1 — our own flags, all detectors
+| Horizon | COILED | MIDDLE | EXPANDED |
+|---|---|---|---|
+| +5 (n=719) | -0.11% (n=231) | -1.24% (n=245) | -1.51% (n=243) |
+| +10 (n=556) | -0.45% (n=165) | -0.69% (n=180) | -2.82% (n=211) |
+| +21 (n=186) | +0.59% (n=35) | +0.41% (n=43) | **-3.91%** (n=108) |
+
+**The single cleanest number in the whole study: at +21 sessions the median
+RUNNER (>= +15%) had a band width of 72nd percentile — and the median DUD had a
+band width of 72nd percentile. Identical. Zero separation.**
+
+v1's "avoid expanded" rule ALSO does not survive as stated: expanded flags have
+the worst mean (-3.91%) but produce MORE big winners (12/108 = 11%) than coiled
+(3/35 = 9%). Expansion is a fat-tailed state, not a bad one — more of both. The
+honest reframe: our detectors catch expansion LATE (the history arm shows
+expanded states are fine in general; only OUR expanded flags underperform), which
+is a chasing problem in the detectors, not a property of expanded stocks.
+
+### THE FINDING THAT MATTERS — detector source, +21 sessions
+| Source | mean fwd21 | n |
+|---|--:|--:|
+| **orig-COILED tab** | **+4.03%** | 36 |
+| orig-FRESH IGNITION | -0.87% | 31 |
+| **orig-COOLING tab** | **-4.24%** | 112 |
+
+An **8-point spread between detector tabs**, versus roughly 1 point for band
+width across 41k observations. Which detector fires is worth far more than any
+trait measured afterwards.
+
+And the twist that kills the trait outright: **inside the origination COILED tab
+— the best-performing source — my band-width buckets rank BACKWARDS** (its
+"expanded" names returned +8.08%, its coiled +4.18%). Whatever that tab is
+capturing, it is demonstrably NOT band-width compression.
+
+Sample honesty: the +21 arm has only 186 flags and the per-detector cells are
+n=31-112. These are suggestive, not settled. COOLING at -4.24% on n=112 is the
+sturdiest of them and the one most worth acting on early.
+
+### Consequences, effective now
+1. **Band-width percentile is DEMOTED from lead hypothesis.** It stays printed on
+   cards as a description. It is never again offered as a reason to buy, and the
+   phrase "GE-type compression" is retired from briefs.
+2. **The GE-vs-BA story loses its explanation.** GE (2nd pctile) paid and BA (78th)
+   did not, but with runners and duds sharing an identical median band width, that
+   pair was an anecdote, not a mechanism. Something else drove GE.
+3. **New lead hypothesis: detector source / tab.** The Winner-DNA score's first
+   input becomes which detector fired, not what the chart looked like.
+4. **COOLING tab flagged for review** at -4.24% over 112 flags — the largest
+   negative cell in the study.
+
 ### Standing consequence until the September cut
 Band-width percentile keeps being **printed** on every card (it is a measured
 fact) but is **not** described as predictive, and no card is framed as compelling
