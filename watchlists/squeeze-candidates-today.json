@@ -15,5 +15,22 @@
   },
   "status": "MECHANICAL PASS - catalyst verification pending",
   "fill_window": "14:00-15:00 CT, mid-or-better, health must pass"
+ },
+ {
+  "date": "2026-08-07",
+  "sym": "WOLF",
+  "detected_px": 31.76,
+  "day_chg_pct": 15.114171801377315,
+  "si_pct_float": 70.7,
+  "chain": {
+   "contract": "WOLF 260918C45",
+   "mid": 1.91,
+   "spread_pct": 10,
+   "oi": 7112,
+   "qty": 2,
+   "ticket_usd": 382
+  },
+  "status": "MECHANICAL PASS - catalyst verification pending",
+  "fill_window": "14:00-15:00 CT, mid-or-better, health must pass"
  }
 ]
