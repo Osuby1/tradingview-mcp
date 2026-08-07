@@ -434,6 +434,24 @@
     "earnings": "2026-10-21 clear"
    },
    "grade_when_closed": null
+  },
+  {
+   "id": "2026-08-07-IOVA-squeeze-call-REAL",
+   "date": "2026-08-07",
+   "sym": "IOVA",
+   "dir": "long-call-REAL",
+   "fill": "FILLED 5x IOVA Sep 18 2026 $7.50 call @ 0.45 = $225 total (Omar-reported ~09:4x CT). Grade A+: 0.10 under the 0.55 mid, 0.13 under the carded 0.58 limit. Spec ticket #3 of max 3 - SLOTS NOW FULL (SOUN $280, HTZ $350, IOVA $225 = $855 combined premium at risk).",
+   "thesis": "Squeeze playbook ticket #3. FINRA: 25.8% of float short (~100M shares to cover), DTC 5.9, settle 7/15. Catalyst verified: Q2 revenue +66% (Amtagvi), FDA Fast Track (lifileucel sarcoma), guidance under upward review. Day-2 CONFIRMED entry: held the full +43% and added +3.5%, testing 52wk high 6.92. Chain: Sep 7.5C OI 13,821, 18% spread - deepest chain of the three tickets. Weaknesses logged: DTC 5.9 moderate fuse, 388M float (big-absolute-cover, not small-float), shorts flat into 7/15 (not building).",
+   "exits": {
+    "ladder_v2": "sell 2 @ 1.13 (+150%) = full $225 back, 3 ride free with NO ceiling",
+    "tape_rules": "alive while daily closes hold above prior day's low with upper-half close OR heavy volume; first warning = close below prior low -> trim half of remainder",
+    "kill": "daily Chandelier flip to SELL, or close below 4.35 (pre-earnings = catalyst erased), or premium halves from peak once above 2.00",
+    "biotech_kill": "ANY announced share offering = exit same day (AEVA precedent - dilution ends squeezes instantly)",
+    "hard_exit": "2026-08-26 everything out (21 DTE theta cliff, same date as SOUN/HTZ) - roll is a NEW decision",
+    "never": "average down; the $225 is the whole bet"
+   },
+   "alerts": "TV 5321115462 @ 7.50 (strike/ladder check) + 5321115597 @ 4.35 (thesis erased); prior-day-low kill line maintained nightly by EOD process (tonight: 6.36)",
+   "risk_note": "options premium - does NOT touch the $12,169/$10k stock stop-risk freeze. Combined spec exposure $855 = 0.09% of account."
   }
  ]
 }
