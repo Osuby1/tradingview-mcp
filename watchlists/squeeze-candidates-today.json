@@ -49,5 +49,22 @@
   },
   "status": "MECHANICAL PASS - catalyst verification pending",
   "fill_window": "14:00-15:00 CT, mid-or-better, health must pass"
+ },
+ {
+  "date": "2026-08-07",
+  "sym": "CELH",
+  "detected_px": 27.585,
+  "day_chg_pct": 16.04964240639462,
+  "si_pct_float": 21.2,
+  "chain": {
+   "contract": "CELH 260918C35",
+   "mid": 0.43,
+   "spread_pct": 23,
+   "oi": 5447,
+   "qty": 8,
+   "ticket_usd": 344
+  },
+  "status": "MECHANICAL PASS - catalyst verification pending",
+  "fill_window": "14:00-15:00 CT, mid-or-better, health must pass"
  }
 ]
