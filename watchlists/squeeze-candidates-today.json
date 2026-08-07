@@ -32,5 +32,22 @@
   },
   "status": "MECHANICAL PASS - catalyst verification pending",
   "fill_window": "14:00-15:00 CT, mid-or-better, health must pass"
+ },
+ {
+  "date": "2026-08-07",
+  "sym": "OKLO",
+  "detected_px": 48.69,
+  "day_chg_pct": 15.406494429959707,
+  "si_pct_float": 19.1,
+  "chain": {
+   "contract": "OKLO 260918C75",
+   "mid": 0.88,
+   "spread_pct": 14,
+   "oi": 2022,
+   "qty": 3,
+   "ticket_usd": 263
+  },
+  "status": "MECHANICAL PASS - catalyst verification pending",
+  "fill_window": "14:00-15:00 CT, mid-or-better, health must pass"
  }
 ]
