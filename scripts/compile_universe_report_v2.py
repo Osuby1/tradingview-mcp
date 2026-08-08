@@ -2073,6 +2073,54 @@ def _dq_polish(d):
     return d
 
 
+
+# ------------------------------------------------- MIDAS SELECTOR PICKS ---
+# Omar 2026-08-07: the new selector (Winner Score v1, christened MIDAS) gets
+# its own tab + a running tally vs the live selector. SHADOW ONLY until the
+# promotion decision (prereg c19b0a4) - this tab measures, it never trades.
+ws = wb.create_sheet("MIDAS SELECTOR PICKS")
+MIDAS_COLS = [
+    Col("rank", "Rank", 6, "MIDAS's own ordering of tonight's eligible pool (1 = its top pick)."),
+    Col("sym", "Ticker", 9, "The stock symbol."),
+    Col("ws_full", "MIDAS Score", 12, "0-9. Traits score (0-6: trend strength, buyer margin, above the "
+        "200-day, right size) plus detector-source points. Higher = more like past winners."),
+    Col("ws_traits", "Traits Part", 11, "The 0-6 chart-traits portion alone (comparable across eras)."),
+    Col("source", "Found By", 18, "Which detector surfaced it (the Coiled tab is the only source "
+        "with a validated positive edge)."),
+    Col("readiness", "Old Score", 10, "What the CURRENT live selector scored it (readiness). The two "
+        "columns disagreeing is the experiment."),
+    Col("ref_price", "Ref Price", 10, "Tonight's reference close - the tally grades from here.", FMT_PRICE),
+    Col("live_pick", "Live System Picked It?", 18, "YES = tonight's real A-List also chose it. "
+        "Rows where MIDAS says yes and the live system said no (or vice versa) are the head-to-head."),
+]
+try:
+    _shadow = json.load(open(os.path.join(REPO, "research", f"shadow-ws-{DATE}.json"), encoding="utf-8"))
+    _mrows = [{"rank": _i + 1, "sym": _r["sym"], "ws_full": _r["ws_full"],
+               "ws_traits": _r["ws_traits"], "source": _r.get("source") or "-",
+               "readiness": _r.get("readiness"), "ref_price": _r.get("ref_price"),
+               "live_pick": "YES" if _r.get("selected_by_live") else "no"}
+              for _i, _r in enumerate(_shadow.get("rankings", []))]
+    write_table(ws, MIDAS_COLS, _mrows,
+                row_fill=lambda r: GREEN if r.get("rank", 99) <= 3 else None)
+except Exception as _e:
+    style_header_row(ws, ["MIDAS Selector"], ["No shadow run tonight."], [40], freeze=None, autofilter=False)
+    ws.append([safe(f"shadow-ws-{DATE}.json not found ({_e}) - winner_score_shadow.py has not run for this date.")])
+ws.append([])
+try:
+    _tal = json.load(open(os.path.join(REPO, "research", "midas-tally.json"), encoding="utf-8"))
+    ws.append([safe("RUNNING TALLY - MIDAS top-3 vs the live system's top-3, both graded from their "
+                    "own pick-night reference prices to the latest close:")])
+    ws.append([safe(f"   Days compared: {_tal['days_compared']}   |   MIDAS average: {_tal['midas_mean_pct']}%   |   "
+                    f"Live system average: {_tal['live_mean_pct']}%   |   MIDAS ahead on {_tal['midas_days_ahead']} "
+                    f"of {_tal['days_compared']} day(s)")])
+    for _d in _tal.get("days", [])[-10:]:
+        ws.append([safe(f"   {_d['date']}: MIDAS {_d['midas_ret_pct']:+.2f}% ({', '.join(_d['midas_picks'])})  vs  "
+                        f"live {_d['live_ret_pct']:+.2f}% ({', '.join(_d['live_picks'])})"
+                        + ("   << MIDAS ahead" if _d["midas_ahead"] else ""))])
+    ws.append([safe("   " + _tal.get("note", ""))])
+except Exception:
+    ws.append([safe("Tally not built yet - midas_tally.py runs nightly from 8/8.")])
+
 dq = [_dq_polish(classify(q) if isinstance(q, str) else q)
       for q in res.get("data_quality", [])]
 if _TV_METRICS_NOTE:

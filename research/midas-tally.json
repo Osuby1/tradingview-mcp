@@ -1,0 +1,26 @@
+{
+ "as_of": "2026-08-07",
+ "days_compared": 1,
+ "midas_mean_pct": 0.0,
+ "live_mean_pct": 0.0,
+ "midas_days_ahead": 1,
+ "days": [
+  {
+   "date": "2026-08-07",
+   "midas_picks": [
+    "HNGE",
+    "AMGN",
+    "CRWD"
+   ],
+   "live_picks": [
+    "HNGE",
+    "AMGN",
+    "SPXL"
+   ],
+   "midas_ret_pct": 0.0,
+   "live_ret_pct": 0.0,
+   "midas_ahead": true
+  }
+ ],
+ "note": "SHADOW ONLY - MIDAS ranks nothing live until the promotion decision (prereg c19b0a4)"
+}
