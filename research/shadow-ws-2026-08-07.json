@@ -1,0 +1,91 @@
+{
+ "date": "2026-08-07",
+ "rankings": [
+  {
+   "sym": "HNGE",
+   "ws_traits": 5,
+   "ws_full": 5,
+   "readiness": 70,
+   "source": "orig-BUY ZONE",
+   "selected_by_live": true,
+   "ref_price": 89.33
+  },
+  {
+   "sym": "AMGN",
+   "ws_traits": 4,
+   "ws_full": 5,
+   "readiness": 62,
+   "source": "orig-FRESH IGNITION",
+   "selected_by_live": true,
+   "ref_price": 410.94
+  },
+  {
+   "sym": "CRWD",
+   "ws_traits": 4,
+   "ws_full": 5,
+   "readiness": 60,
+   "source": "og-chandelier",
+   "selected_by_live": false,
+   "ref_price": 214.42
+  },
+  {
+   "sym": "HSIC",
+   "ws_traits": 4,
+   "ws_full": 5,
+   "readiness": 51,
+   "source": "og-chandelier",
+   "selected_by_live": false,
+   "ref_price": 88.13
+  },
+  {
+   "sym": "NOVT",
+   "ws_traits": 4,
+   "ws_full": 5,
+   "readiness": 50,
+   "source": "orig-FRESH IGNITION",
+   "selected_by_live": false,
+   "ref_price": 166.37
+  },
+  {
+   "sym": "VSEC",
+   "ws_traits": 3,
+   "ws_full": 5,
+   "readiness": 45,
+   "source": "orig-COILED",
+   "selected_by_live": false,
+   "ref_price": 218.18
+  },
+  {
+   "sym": "PANW",
+   "ws_traits": 3,
+   "ws_full": 4,
+   "readiness": 54,
+   "source": "og-chandelier",
+   "selected_by_live": false,
+   "ref_price": 363.86
+  },
+  {
+   "sym": "SPXL",
+   "ws_traits": 2,
+   "ws_full": 3,
+   "readiness": 62,
+   "source": "og-chandelier",
+   "selected_by_live": true,
+   "ref_price": 296.33
+  }
+ ],
+ "live_top3": [
+  "HNGE",
+  "AMGN",
+  "SPXL"
+ ],
+ "ws_top3": [
+  "HNGE",
+  "AMGN",
+  "CRWD"
+ ],
+ "agreement": [
+  "AMGN",
+  "HNGE"
+ ]
+}
