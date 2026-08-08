@@ -24,7 +24,9 @@ resolves it. Revisit only if the unfiltered version demonstrably misleads.
 Usage:
   python scripts/a_list.py              # full run (select + wire doors)
   python scripts/a_list.py --dry-run    # select + print only
-Scheduled: Task 'AListNightly' daily 15:50 CT (after the 15:15 chain).
+Scheduled: IN-CHAIN since 8/8 (run_eod_chain.bat step 4, before the MIDAS shadow
+and the workbook compile - they consume this script's funnel output). The old
+separate 15:50 task 'AListNightly' is DISABLED; re-enabling it would double-run.
 """
 import datetime as dt
 import json

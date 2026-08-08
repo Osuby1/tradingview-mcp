@@ -124,7 +124,22 @@ def chain_gate(sym, spot):
             for mult in (1.15, 1.25, 1.35, 1.5):
                 k = round(round(spot * mult / inc) * inc, 2)
                 strikes.add(int(k) if k == int(k) else k)
-        osyms = [f"{sym} 260918C{k}" for k in sorted(strikes)]
+        # 8/8 audit fix: expiry was hardcoded '260918' - dead code after Sep.
+        # Pick the nearest MONTHLY (3rd Friday) 25-55 days out, per the playbook.
+        import datetime as _dt
+        _today = _dt.date.today()
+        _exp = None
+        for _m in range(0, 4):
+            _y = _today.year + (_today.month - 1 + _m) // 12
+            _mo = (_today.month - 1 + _m) % 12 + 1
+            _first = _dt.date(_y, _mo, 1)
+            _third_fri = _first + _dt.timedelta(days=((4 - _first.weekday()) % 7) + 14)
+            if 25 <= (_third_fri - _today).days <= 55:
+                _exp = _third_fri; break
+        if _exp is None:
+            print(f"[squeeze] chain gate: no monthly 25-55d out (?)"); return None
+        _tag = _exp.strftime("%y%m%d")
+        osyms = [f"{sym} {_tag}C{k}" for k in sorted(strikes)]
         q = ts_quotes(osyms)
         best = None
         for c, x in q.items():
@@ -138,7 +153,7 @@ def chain_gate(sym, spot):
             spread = (a - b) / mid * 100
             if spread > 30 or not (0.05 <= mid <= 2.5):
                 continue
-            n = max(2, min(10, int(350 / (mid * 100))))
+            n = max(1, min(10, int(350 / (mid * 100))))
             cand = {"contract": c, "mid": round(mid, 2), "spread_pct": round(spread),
                     "oi": oi, "qty": n, "ticket_usd": int(n * mid * 100)}
             if best is None or oi > best["oi"]:
@@ -168,7 +183,7 @@ def stage_candidate(sym, close, chg, si, chain, state, today):
         subprocess.run(["git", "commit", "-q", "-m",
                         f"squeeze candidate staged: {sym} (mechanical gates passed)"],
                        cwd=REPO, capture_output=True, timeout=30)
-        subprocess.run(["git", "push", "origin", "HEAD"], cwd=REPO, capture_output=True, timeout=60)
+        subprocess.run(["git", "push", "fork", "add-watchlist-files:main"], cwd=REPO, capture_output=True, timeout=60)  # 8/8 audit: origin is 403; the cloud verifier reads the FORK
     except Exception as e:
         print(f"[squeeze] candidate git push failed (cloud verifier may not see it): {e}")
     return True

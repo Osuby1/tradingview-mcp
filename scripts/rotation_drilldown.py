@@ -65,6 +65,10 @@ def main():
     if out:
         (REPO / "watchlists" / "rotation-drilldown-cards.json").write_text(json.dumps(out, indent=1))
         print(f"[drilldown] wrote {len(out)} group card-set(s)")
+    # 8/8 audit: consume the due-file so yesterday's promotions cannot re-owe
+    # cards every night until the next state change overwrites them.
+    if "--force" not in sys.argv and due_p.exists():
+        due_p.rename(REPO / "watchlists" / f"radar-cards-due-done-{today}.json")
     return 0
 
 if __name__ == "__main__":

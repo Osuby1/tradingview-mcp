@@ -147,12 +147,17 @@ if exist "%RAWSWEEP%" (
     echo WARNING: raw sweep file not found, skipping HQ Swing lens >> "%LOG%"
 )
 python scripts\track_record.py %TODAY% >> "%LOG%" 2>&1                 || echo WARNING: track_record failed >> "%LOG%"
-python scripts\build_morning_pack.py %TODAY% >> "%LOG%" 2>&1           || echo WARNING: morning pack failed >> "%LOG%"
+rem ORDER FIXED 8/8 audit: a_list must run IN-CHAIN - it writes the funnel that
+rem the MIDAS shadow + tally + workbook tab consume; the old separate 3:50 task
+rem ran AFTER the compile, so the MIDAS tab would have been empty every night.
+rem The morning pack runs LAST so it captures everything. AListNightly task DISABLED.
 python scripts\gate_recheck.py >> "%LOG%" 2>&1                         || echo WARNING: gate recheck failed >> "%LOG%"
 python scripts\rebreak_detector.py >> "%LOG%" 2>&1                     || echo WARNING: rebreak detector failed >> "%LOG%"
 python scripts\cooling_put_paper.py >> "%LOG%" 2>&1                    || echo WARNING: cooling-put paper tracker failed >> "%LOG%"
+python scripts\a_list.py >> "%LOG%" 2>&1                               || echo WARNING: A-List failed - no cards or doors tonight >> "%LOG%"
 python scripts\winner_score_shadow.py %TODAY% >> "%LOG%" 2>&1          || echo WARNING: MIDAS shadow failed >> "%LOG%"
 python scripts\midas_tally.py >> "%LOG%" 2>&1                          || echo WARNING: MIDAS tally failed >> "%LOG%"
+python scripts\build_morning_pack.py %TODAY% >> "%LOG%" 2>&1           || echo WARNING: morning pack failed >> "%LOG%"
 python scripts\dump_call_prices.py %TODAY% >> "%LOG%" 2>&1             || echo WARNING: dump_call_prices failed >> "%LOG%"
 python scripts\outcome_tracker.py %TODAY% >> "%LOG%" 2>&1              || echo WARNING: outcome_tracker failed >> "%LOG%"
 rem gate_outcomes: forward-grades the scan's OWN cull (passed vs blocked). Added
